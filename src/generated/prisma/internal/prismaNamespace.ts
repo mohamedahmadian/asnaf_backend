@@ -407,6 +407,7 @@ export const ModelName = {
   JobType: 'JobType',
   InquiryCenter: 'InquiryCenter',
   JobGroup: 'JobGroup',
+  JobGroupRepresentative: 'JobGroupRepresentative',
   Job: 'Job',
   JobInquiryCenter: 'JobInquiryCenter',
   JobDocument: 'JobDocument',
@@ -476,7 +477,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "job" | "jobInquiryCenter" | "jobDocument" | "document" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "jobDocument" | "document" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1217,6 +1218,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.JobGroupCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.JobGroupCountAggregateOutputType> | number
+        }
+      }
+    }
+    JobGroupRepresentative: {
+      payload: Prisma.$JobGroupRepresentativePayload<ExtArgs>
+      fields: Prisma.JobGroupRepresentativeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JobGroupRepresentativeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JobGroupRepresentativeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>
+        }
+        findFirst: {
+          args: Prisma.JobGroupRepresentativeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JobGroupRepresentativeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>
+        }
+        findMany: {
+          args: Prisma.JobGroupRepresentativeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>[]
+        }
+        create: {
+          args: Prisma.JobGroupRepresentativeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>
+        }
+        createMany: {
+          args: Prisma.JobGroupRepresentativeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JobGroupRepresentativeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>[]
+        }
+        delete: {
+          args: Prisma.JobGroupRepresentativeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>
+        }
+        update: {
+          args: Prisma.JobGroupRepresentativeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>
+        }
+        deleteMany: {
+          args: Prisma.JobGroupRepresentativeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JobGroupRepresentativeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JobGroupRepresentativeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>[]
+        }
+        upsert: {
+          args: Prisma.JobGroupRepresentativeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JobGroupRepresentativePayload>
+        }
+        aggregate: {
+          args: Prisma.JobGroupRepresentativeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJobGroupRepresentative>
+        }
+        groupBy: {
+          args: Prisma.JobGroupRepresentativeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobGroupRepresentativeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JobGroupRepresentativeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JobGroupRepresentativeCountAggregateOutputType> | number
         }
       }
     }
@@ -5411,6 +5486,15 @@ export const JobGroupScalarFieldEnum = {
 export type JobGroupScalarFieldEnum = (typeof JobGroupScalarFieldEnum)[keyof typeof JobGroupScalarFieldEnum]
 
 
+export const JobGroupRepresentativeScalarFieldEnum = {
+  jobGroupId: 'jobGroupId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type JobGroupRepresentativeScalarFieldEnum = (typeof JobGroupRepresentativeScalarFieldEnum)[keyof typeof JobGroupRepresentativeScalarFieldEnum]
+
+
 export const JobScalarFieldEnum = {
   id: 'id',
   groupId: 'groupId',
@@ -6855,6 +6939,7 @@ export type GlobalOmitConfig = {
   jobType?: Prisma.JobTypeOmit
   inquiryCenter?: Prisma.InquiryCenterOmit
   jobGroup?: Prisma.JobGroupOmit
+  jobGroupRepresentative?: Prisma.JobGroupRepresentativeOmit
   job?: Prisma.JobOmit
   jobInquiryCenter?: Prisma.JobInquiryCenterOmit
   jobDocument?: Prisma.JobDocumentOmit

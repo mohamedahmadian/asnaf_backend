@@ -61,6 +61,7 @@ export const ModelName = {
   JobType: 'JobType',
   InquiryCenter: 'InquiryCenter',
   JobGroup: 'JobGroup',
+  JobGroupRepresentative: 'JobGroupRepresentative',
   Job: 'Job',
   JobInquiryCenter: 'JobInquiryCenter',
   JobDocument: 'JobDocument',
@@ -287,6 +288,15 @@ export const JobGroupScalarFieldEnum = {
 } as const
 
 export type JobGroupScalarFieldEnum = (typeof JobGroupScalarFieldEnum)[keyof typeof JobGroupScalarFieldEnum]
+
+
+export const JobGroupRepresentativeScalarFieldEnum = {
+  jobGroupId: 'jobGroupId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type JobGroupRepresentativeScalarFieldEnum = (typeof JobGroupRepresentativeScalarFieldEnum)[keyof typeof JobGroupRepresentativeScalarFieldEnum]
 
 
 export const JobScalarFieldEnum = {

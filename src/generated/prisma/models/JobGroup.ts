@@ -207,6 +207,7 @@ export type JobGroupWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"JobGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"JobGroup"> | Date | string
   jobs?: Prisma.JobListRelationFilter
+  representatives?: Prisma.JobGroupRepresentativeListRelationFilter
 }
 
 export type JobGroupOrderByWithRelationInput = {
@@ -219,6 +220,7 @@ export type JobGroupOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   jobs?: Prisma.JobOrderByRelationAggregateInput
+  representatives?: Prisma.JobGroupRepresentativeOrderByRelationAggregateInput
 }
 
 export type JobGroupWhereUniqueInput = Prisma.AtLeast<{
@@ -234,6 +236,7 @@ export type JobGroupWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"JobGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"JobGroup"> | Date | string
   jobs?: Prisma.JobListRelationFilter
+  representatives?: Prisma.JobGroupRepresentativeListRelationFilter
 }, "id" | "title" | "titleEn" | "code">
 
 export type JobGroupOrderByWithAggregationInput = {
@@ -274,6 +277,7 @@ export type JobGroupCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobCreateNestedManyWithoutGroupInput
+  representatives?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutJobGroupInput
 }
 
 export type JobGroupUncheckedCreateInput = {
@@ -286,6 +290,7 @@ export type JobGroupUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutGroupInput
+  representatives?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutJobGroupInput
 }
 
 export type JobGroupUpdateInput = {
@@ -298,6 +303,7 @@ export type JobGroupUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobUpdateManyWithoutGroupNestedInput
+  representatives?: Prisma.JobGroupRepresentativeUpdateManyWithoutJobGroupNestedInput
 }
 
 export type JobGroupUncheckedUpdateInput = {
@@ -310,6 +316,7 @@ export type JobGroupUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobUncheckedUpdateManyWithoutGroupNestedInput
+  representatives?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutJobGroupNestedInput
 }
 
 export type JobGroupCreateManyInput = {
@@ -383,6 +390,20 @@ export type JobGroupScalarRelationFilter = {
   isNot?: Prisma.JobGroupWhereInput
 }
 
+export type JobGroupCreateNestedOneWithoutRepresentativesInput = {
+  create?: Prisma.XOR<Prisma.JobGroupCreateWithoutRepresentativesInput, Prisma.JobGroupUncheckedCreateWithoutRepresentativesInput>
+  connectOrCreate?: Prisma.JobGroupCreateOrConnectWithoutRepresentativesInput
+  connect?: Prisma.JobGroupWhereUniqueInput
+}
+
+export type JobGroupUpdateOneRequiredWithoutRepresentativesNestedInput = {
+  create?: Prisma.XOR<Prisma.JobGroupCreateWithoutRepresentativesInput, Prisma.JobGroupUncheckedCreateWithoutRepresentativesInput>
+  connectOrCreate?: Prisma.JobGroupCreateOrConnectWithoutRepresentativesInput
+  upsert?: Prisma.JobGroupUpsertWithoutRepresentativesInput
+  connect?: Prisma.JobGroupWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JobGroupUpdateToOneWithWhereWithoutRepresentativesInput, Prisma.JobGroupUpdateWithoutRepresentativesInput>, Prisma.JobGroupUncheckedUpdateWithoutRepresentativesInput>
+}
+
 export type JobGroupCreateNestedOneWithoutJobsInput = {
   create?: Prisma.XOR<Prisma.JobGroupCreateWithoutJobsInput, Prisma.JobGroupUncheckedCreateWithoutJobsInput>
   connectOrCreate?: Prisma.JobGroupCreateOrConnectWithoutJobsInput
@@ -397,6 +418,70 @@ export type JobGroupUpdateOneRequiredWithoutJobsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.JobGroupUpdateToOneWithWhereWithoutJobsInput, Prisma.JobGroupUpdateWithoutJobsInput>, Prisma.JobGroupUncheckedUpdateWithoutJobsInput>
 }
 
+export type JobGroupCreateWithoutRepresentativesInput = {
+  id?: string
+  title: string
+  titleEn?: string | null
+  description?: string | null
+  code?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobCreateNestedManyWithoutGroupInput
+}
+
+export type JobGroupUncheckedCreateWithoutRepresentativesInput = {
+  id?: string
+  title: string
+  titleEn?: string | null
+  description?: string | null
+  code?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobUncheckedCreateNestedManyWithoutGroupInput
+}
+
+export type JobGroupCreateOrConnectWithoutRepresentativesInput = {
+  where: Prisma.JobGroupWhereUniqueInput
+  create: Prisma.XOR<Prisma.JobGroupCreateWithoutRepresentativesInput, Prisma.JobGroupUncheckedCreateWithoutRepresentativesInput>
+}
+
+export type JobGroupUpsertWithoutRepresentativesInput = {
+  update: Prisma.XOR<Prisma.JobGroupUpdateWithoutRepresentativesInput, Prisma.JobGroupUncheckedUpdateWithoutRepresentativesInput>
+  create: Prisma.XOR<Prisma.JobGroupCreateWithoutRepresentativesInput, Prisma.JobGroupUncheckedCreateWithoutRepresentativesInput>
+  where?: Prisma.JobGroupWhereInput
+}
+
+export type JobGroupUpdateToOneWithWhereWithoutRepresentativesInput = {
+  where?: Prisma.JobGroupWhereInput
+  data: Prisma.XOR<Prisma.JobGroupUpdateWithoutRepresentativesInput, Prisma.JobGroupUncheckedUpdateWithoutRepresentativesInput>
+}
+
+export type JobGroupUpdateWithoutRepresentativesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobUpdateManyWithoutGroupNestedInput
+}
+
+export type JobGroupUncheckedUpdateWithoutRepresentativesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobUncheckedUpdateManyWithoutGroupNestedInput
+}
+
 export type JobGroupCreateWithoutJobsInput = {
   id?: string
   title: string
@@ -406,6 +491,7 @@ export type JobGroupCreateWithoutJobsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  representatives?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutJobGroupInput
 }
 
 export type JobGroupUncheckedCreateWithoutJobsInput = {
@@ -417,6 +503,7 @@ export type JobGroupUncheckedCreateWithoutJobsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  representatives?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutJobGroupInput
 }
 
 export type JobGroupCreateOrConnectWithoutJobsInput = {
@@ -444,6 +531,7 @@ export type JobGroupUpdateWithoutJobsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  representatives?: Prisma.JobGroupRepresentativeUpdateManyWithoutJobGroupNestedInput
 }
 
 export type JobGroupUncheckedUpdateWithoutJobsInput = {
@@ -455,6 +543,7 @@ export type JobGroupUncheckedUpdateWithoutJobsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  representatives?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutJobGroupNestedInput
 }
 
 
@@ -464,10 +553,12 @@ export type JobGroupUncheckedUpdateWithoutJobsInput = {
 
 export type JobGroupCountOutputType = {
   jobs: number
+  representatives: number
 }
 
 export type JobGroupCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | JobGroupCountOutputTypeCountJobsArgs
+  representatives?: boolean | JobGroupCountOutputTypeCountRepresentativesArgs
 }
 
 /**
@@ -487,6 +578,13 @@ export type JobGroupCountOutputTypeCountJobsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.JobWhereInput
 }
 
+/**
+ * JobGroupCountOutputType without action
+ */
+export type JobGroupCountOutputTypeCountRepresentativesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JobGroupRepresentativeWhereInput
+}
+
 
 export type JobGroupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -498,6 +596,7 @@ export type JobGroupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   jobs?: boolean | Prisma.JobGroup$jobsArgs<ExtArgs>
+  representatives?: boolean | Prisma.JobGroup$representativesArgs<ExtArgs>
   _count?: boolean | Prisma.JobGroupCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jobGroup"]>
 
@@ -537,6 +636,7 @@ export type JobGroupSelectScalar = {
 export type JobGroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "titleEn" | "description" | "code" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["jobGroup"]>
 export type JobGroupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | Prisma.JobGroup$jobsArgs<ExtArgs>
+  representatives?: boolean | Prisma.JobGroup$representativesArgs<ExtArgs>
   _count?: boolean | Prisma.JobGroupCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type JobGroupIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -546,6 +646,7 @@ export type $JobGroupPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "JobGroup"
   objects: {
     jobs: Prisma.$JobPayload<ExtArgs>[]
+    representatives: Prisma.$JobGroupRepresentativePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -951,6 +1052,7 @@ readonly fields: JobGroupFieldRefs;
 export interface Prisma__JobGroupClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   jobs<T extends Prisma.JobGroup$jobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobGroup$jobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  representatives<T extends Prisma.JobGroup$representativesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobGroup$representativesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobGroupRepresentativePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1402,6 +1504,30 @@ export type JobGroup$jobsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.JobScalarFieldEnum | Prisma.JobScalarFieldEnum[]
+}
+
+/**
+ * JobGroup.representatives
+ */
+export type JobGroup$representativesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobGroupRepresentative
+   */
+  select?: Prisma.JobGroupRepresentativeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobGroupRepresentative
+   */
+  omit?: Prisma.JobGroupRepresentativeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobGroupRepresentativeInclude<ExtArgs> | null
+  where?: Prisma.JobGroupRepresentativeWhereInput
+  orderBy?: Prisma.JobGroupRepresentativeOrderByWithRelationInput | Prisma.JobGroupRepresentativeOrderByWithRelationInput[]
+  cursor?: Prisma.JobGroupRepresentativeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JobGroupRepresentativeScalarFieldEnum | Prisma.JobGroupRepresentativeScalarFieldEnum[]
 }
 
 /**

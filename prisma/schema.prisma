@@ -293,6 +293,7 @@ model JobGroup {
   code        String?  @unique
   isActive    Boolean  @default(true)
   jobs        Job[]
+  representatives JobGroupRepresentative[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -302,6 +303,20 @@ model JobGroup {
   @@index([isActive])
   @@index([createdAt])
   @@map("job_groups")
+}
+
+/// نمایندهٔ یک گروه شغلی؛ همان کاربر با نقش نماینده گروه وارد سامانه می‌شود
+model JobGroupRepresentative {
+  jobGroupId String
+  jobGroup   JobGroup @relation(fields: [jobGroupId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@id([jobGroupId, userId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("job_group_representatives")
 }
 
 model Job {
@@ -432,6 +447,7 @@ model User {
   staffPost          StaffPost?            @relation(fields: [staffPostId], references: [id], onDelete: SetNull)
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   inquiryCenters     InquiryCenter[]       @relation("InquiryCenterOfficer")
+  jobGroupRepresentations JobGroupRepresentative[]
   foodReservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
   userRoles          UserRole[]

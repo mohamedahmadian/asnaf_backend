@@ -2,6 +2,7 @@ import { PrismaClient } from '../generated/prisma/client';
 
 export const ADMIN_ROLE_CODE = 'ADMIN';
 export const EMPLOYEE_ROLE_CODE = 'EMPLOYEE';
+export const JOB_GROUP_REP_ROLE_CODE = 'JOB_GROUP_REP';
 
 export const SYSTEM_ROLES = [
   {
@@ -13,6 +14,11 @@ export const SYSTEM_ROLES = [
     code: EMPLOYEE_ROLE_CODE,
     name: 'کارمند',
     description: 'نقش پیش‌فرض کارکنان سامانه',
+  },
+  {
+    code: JOB_GROUP_REP_ROLE_CODE,
+    name: 'نماینده گروه',
+    description: 'نماینده یک گروه شغلی؛ با کد ملی و رمز عبور وارد سامانه می‌شود',
   },
 ] as const;
 
@@ -50,6 +56,21 @@ export async function ensureSystemRoles(
       },
     });
   }
+}
+
+export async function ensureJobGroupRepRole(prisma: PrismaClient) {
+  const role = SYSTEM_ROLES.find((item) => item.code === JOB_GROUP_REP_ROLE_CODE)!;
+  return prisma.role.upsert({
+    where: { code: role.code },
+    update: { isSystem: true },
+    create: {
+      code: role.code,
+      name: role.name,
+      description: role.description,
+      isSystem: true,
+    },
+    select: { id: true },
+  });
 }
 
 export async function ensureEmployeeRole(prisma: PrismaClient) {

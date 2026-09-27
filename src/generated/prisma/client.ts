@@ -90,6 +90,11 @@ export type InquiryCenter = Prisma.InquiryCenterModel
  */
 export type JobGroup = Prisma.JobGroupModel
 /**
+ * Model JobGroupRepresentative
+ * نمایندهٔ یک گروه شغلی؛ همان کاربر با نقش نماینده گروه وارد سامانه می‌شود
+ */
+export type JobGroupRepresentative = Prisma.JobGroupRepresentativeModel
+/**
  * Model Job
  * 
  */
