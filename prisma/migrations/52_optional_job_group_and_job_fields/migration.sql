@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "job_groups" ALTER COLUMN "titleEn" DROP NOT NULL;
+ALTER TABLE "job_groups" ALTER COLUMN "code" DROP NOT NULL;
+ALTER TABLE "jobs" ALTER COLUMN "title" DROP NOT NULL;

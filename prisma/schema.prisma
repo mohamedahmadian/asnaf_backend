@@ -1,0 +1,1480 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum UserGender {
+  MALE
+  FEMALE
+}
+
+enum DocumentGender {
+  MALE
+  FEMALE
+  BOTH
+}
+
+enum Religion {
+  ISLAM
+  CHRISTIANITY
+  JUDAISM
+  ZOROASTRIANISM
+  OTHER
+}
+
+enum LocationSource {
+  MANUAL
+  APP
+  STATION
+}
+
+enum ProjectImportance {
+  VERY_HIGH
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum ProjectStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  SUSPENDED
+  COMPLETED
+}
+
+enum FoodReservationStatus {
+  PENDING
+  CONFIRMED
+}
+
+enum VehicleType {
+  SEDAN
+  PICKUP
+  TRUCK
+  MINIBUS
+  MOTORCYCLE
+  OTHER
+}
+
+enum VehicleStatus {
+  ACTIVE
+  IN_REPAIR
+  SCRAPPED
+  TRANSFERRED
+  MISSING
+}
+
+enum VehicleAssignmentType {
+  UNIT
+  PERSON
+}
+
+enum VehicleAssignmentStatus {
+  LENT
+  RETURNED
+}
+
+enum ProjectProgressProcessingMode {
+  IMMEDIATE
+  DEFERRED
+}
+
+enum ProjectProgressTranscriptionStatus {
+  NONE
+  PENDING
+  PROCESSING
+  READY
+  FAILED
+}
+
+model StoredImage {
+  id           String   @id @default(uuid())
+  mimeType     String
+  data         Bytes
+  byteSize     Int
+  width        Int?
+  height       Int?
+  originalName String?
+  photoUsers             User[] @relation("UserPhoto")
+  nationalCardUsers      User[] @relation("UserNationalCard")
+  passportUsers          User[] @relation("UserPassport")
+  identityBookletUsers   User[] @relation("UserIdentityBooklet")
+  foodPhotos             Food[] @relation("FoodPhoto")
+  restaurantLogos        Restaurant[] @relation("RestaurantLogo")
+  progressImages         ProjectProgressImage[]
+  singardAttachments     SingardAttachment[]
+  boardAttachments       BoardAttachment[]
+  boardMinutesAttachments BoardMinutesAttachment[]
+  createdAt              DateTime @default(now())
+
+  @@map("stored_images")
+}
+
+model Country {
+  id        String     @id @default(uuid())
+  iso2      String     @unique
+  iso3      String?    @unique
+  phoneCode String?
+  nameFa    String
+  nameEn    String
+  isActive  Boolean    @default(true)
+  sortOrder Int        @default(0)
+  provinces Province[]
+  users     User[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([isActive, sortOrder])
+  @@map("countries")
+}
+
+model Province {
+  id                String                @id @default(uuid())
+  countryId         String
+  country           Country               @relation(fields: [countryId], references: [id], onDelete: Restrict)
+  code              String
+  nameFa            String
+  nameEn            String
+  neshanAddress     String?
+  latitude          Decimal?              @db.Decimal(10, 7)
+  longitude         Decimal?              @db.Decimal(10, 7)
+  hasRailway        Boolean               @default(false)
+  hasAirport        Boolean               @default(false)
+  isActive          Boolean               @default(true)
+  sortOrder         Int                   @default(0)
+  cities            City[]
+  users             User[]                @relation("UserHomeProvince")
+  locatedUsers      User[]                @relation("UserLocationProvince")
+  locationHistories UserLocationHistory[] @relation("UserLocationHistoryProvince")
+  createdAt         DateTime              @default(now())
+  updatedAt         DateTime              @updatedAt
+
+  @@unique([countryId, code])
+  @@index([countryId, isActive, sortOrder])
+  @@map("provinces")
+}
+
+model City {
+  id                 String                @id @default(uuid())
+  provinceId         String
+  province           Province              @relation(fields: [provinceId], references: [id], onDelete: Restrict)
+  code               String
+  nameFa             String
+  nameEn             String
+  neshanAddress      String?
+  latitude           Decimal?              @db.Decimal(10, 7)
+  longitude          Decimal?              @db.Decimal(10, 7)
+  isProvinceCapital  Boolean               @default(false)
+  hasRailway         Boolean               @default(false)
+  hasAirport         Boolean               @default(false)
+  isActive           Boolean               @default(true)
+  sortOrder          Int                   @default(0)
+  users              User[]                @relation("UserHomeCity")
+  locatedUsers       User[]                @relation("UserLocationCity")
+  locationHistories  UserLocationHistory[] @relation("UserLocationHistoryCity")
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+
+  @@unique([provinceId, code])
+  @@index([provinceId, isActive, sortOrder])
+  @@map("cities")
+}
+
+model BankAccount {
+  id            String   @id @default(uuid())
+  bankName      String
+  accountNumber String
+  cardNumber    String?  @unique
+  iban          String?  @unique
+  description   String?
+  isActive      Boolean  @default(true)
+  municipalFees MunicipalFee[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([bankName, accountNumber])
+  @@index([bankName])
+  @@index([accountNumber])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("bank_accounts")
+}
+
+model MunicipalFee {
+  id            String      @id @default(uuid())
+  title         String      @unique
+  bankAccountId String
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  description   String?
+  isActive      Boolean     @default(true)
+  amount        Decimal     @db.Decimal(18, 0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([bankAccountId])
+  @@index([title])
+  @@index([amount])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("municipal_fees")
+}
+
+model Discount {
+  id          String   @id @default(uuid())
+  year        Int
+  title       String
+  percent     Decimal  @db.Decimal(5, 2)
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([year, title])
+  @@index([year])
+  @@index([title])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("discounts")
+}
+
+model JobType {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?
+  /// عوارض سالیانه؛ برای شغل‌هایی که عوارض جداگانه ندارند در محاسبه استفاده می‌شود
+  annualFee   Decimal? @db.Decimal(18, 0)
+  jobs        Job[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title])
+  @@index([annualFee])
+  @@index([createdAt])
+  @@map("job_types")
+}
+
+model InquiryCenter {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  phone       String?
+  officerId   String?
+  officer     User?    @relation("InquiryCenterOfficer", fields: [officerId], references: [id], onDelete: SetNull)
+  letterTitle String?
+  letterBody  String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  jobs        JobInquiryCenter[]
+
+  @@index([name])
+  @@index([phone])
+  @@index([officerId])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("inquiry_centers")
+}
+
+model JobGroup {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  titleEn     String?  @unique
+  description String?
+  code        String?  @unique
+  isActive    Boolean  @default(true)
+  jobs        Job[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title])
+  @@index([titleEn])
+  @@index([code])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("job_groups")
+}
+
+model Job {
+  id          String             @id @default(uuid())
+  groupId     String
+  group       JobGroup           @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  title       String
+  titleEn     String?
+  taxIntaCode String?  @unique
+  description String?
+  code        String
+  jobTypeId   String
+  jobType     JobType            @relation(fields: [jobTypeId], references: [id], onDelete: Restrict)
+  /// عوارض شغل؛ پیش‌فرض از نوع فعالیت می‌آید و جداگانه قابل ویرایش است
+  annualFee   Decimal? @db.Decimal(18, 0)
+  isActive    Boolean            @default(true)
+  inquiryCenters JobInquiryCenter[]
+  documents   JobDocument[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@unique([groupId, code])
+  @@unique([groupId, title])
+  @@unique([groupId, titleEn])
+  @@index([groupId])
+  @@index([jobTypeId])
+  @@index([annualFee])
+  @@index([title])
+  @@index([titleEn])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("jobs")
+}
+
+model JobInquiryCenter {
+  jobId           String
+  job             Job           @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  inquiryCenterId String
+  inquiryCenter   InquiryCenter @relation(fields: [inquiryCenterId], references: [id], onDelete: Cascade)
+
+  @@id([jobId, inquiryCenterId])
+  @@index([inquiryCenterId])
+  @@map("job_inquiry_centers")
+}
+
+model JobDocument {
+  jobId      String
+  job        Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  documentId String
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@id([jobId, documentId])
+  @@index([documentId])
+  @@map("job_documents")
+}
+
+model Document {
+  id         String          @id @default(uuid())
+  title      String          @unique
+  isRequired Boolean         @default(true)
+  gender     DocumentGender  @default(BOTH)
+  isFixed    Boolean         @default(false)
+  jobs       JobDocument[]
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  @@index([title])
+  @@index([isRequired])
+  @@index([gender])
+  @@index([isFixed])
+  @@index([createdAt])
+  @@map("documents")
+}
+
+model User {
+  id                 String                @id @default(uuid())
+  username           String                @unique
+  passwordHash       String
+  firstName          String
+  lastName           String
+  fullName           String
+  locale             String                @default("fa")
+  status             UserStatus            @default(ACTIVE)
+  nationalId         String?               @unique
+  phone              String?               @unique
+  email              String?               @unique
+  gender             UserGender?
+  address            String?
+  notes              String?
+  religion           Religion?
+  religionOther      String?
+  telegram           String?
+  bale               String?
+  eitaa              String?
+  whatsapp           String?
+  otherSocial        String?
+  vehiclePlates      String[]              @default([])
+  countryId          String?
+  country            Country?              @relation(fields: [countryId], references: [id], onDelete: SetNull)
+  provinceId         String?
+  province           Province?             @relation("UserHomeProvince", fields: [provinceId], references: [id], onDelete: SetNull)
+  cityId             String?
+  city               City?                 @relation("UserHomeCity", fields: [cityId], references: [id], onDelete: SetNull)
+  locationProvinceId String?
+  locationProvince   Province?             @relation("UserLocationProvince", fields: [locationProvinceId], references: [id], onDelete: SetNull)
+  locationCityId     String?
+  locationCity       City?                 @relation("UserLocationCity", fields: [locationCityId], references: [id], onDelete: SetNull)
+  latitude           Decimal?              @db.Decimal(10, 7)
+  longitude          Decimal?              @db.Decimal(10, 7)
+  locationNotes      String?
+  locationUpdatedAt  DateTime?
+  photoId                  String?
+  photo                    StoredImage?          @relation("UserPhoto", fields: [photoId], references: [id], onDelete: SetNull)
+  nationalCardPhotoId      String?
+  nationalCardPhoto        StoredImage?          @relation("UserNationalCard", fields: [nationalCardPhotoId], references: [id], onDelete: SetNull)
+  passportPhotoId          String?
+  passportPhoto            StoredImage?          @relation("UserPassport", fields: [passportPhotoId], references: [id], onDelete: SetNull)
+  identityBookletPhotoId   String?
+  identityBookletPhoto     StoredImage?          @relation("UserIdentityBooklet", fields: [identityBookletPhotoId], references: [id], onDelete: SetNull)
+  locationHistories        UserLocationHistory[]
+  orgUnitId          String?
+  orgUnit            OrganizationUnit?     @relation("UnitEmployees", fields: [orgUnitId], references: [id], onDelete: SetNull)
+  positionId         String?
+  position           OrganizationPosition? @relation(fields: [positionId], references: [id], onDelete: SetNull)
+  workUnitId         String?
+  workUnit           WorkUnit?             @relation(fields: [workUnitId], references: [id], onDelete: SetNull)
+  staffPostId        String?
+  staffPost          StaffPost?            @relation(fields: [staffPostId], references: [id], onDelete: SetNull)
+  nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
+  inquiryCenters     InquiryCenter[]       @relation("InquiryCenterOfficer")
+  foodReservations   FoodReservation[]
+  vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
+  userRoles          UserRole[]
+  singardFeedbacks   SingardFeedback[]     @relation("SingardFeedbackAuthor")
+  singardReplies     SingardFeedback[]     @relation("SingardFeedbackReplier")
+  singardActivities  SingardActivity[]
+  boardRequestsCreated    BoardRequest[] @relation("BoardRequestAuthor")
+  boardRequestsRejected   BoardRequest[] @relation("BoardRequestRejecter")
+  boardManagementReviews  BoardRequest[] @relation("BoardManagementReviewer")
+  boardLegalReviews       BoardRequest[] @relation("BoardLegalReviewer")
+  boardBudgetReviews      BoardRequest[] @relation("BoardBudgetReviewer")
+  boardSecretaryReviews   BoardRequest[] @relation("BoardSecretaryReviewer")
+  boardMinutesCreated     BoardMinutes[] @relation("BoardMinutesAuthor")
+  boardMinutesMemberships BoardMinutesMember[]
+  createdAt          DateTime              @default(now())
+  updatedAt          DateTime              @updatedAt
+
+  @@index([status])
+  @@index([fullName])
+  @@index([createdAt])
+  @@index([countryId])
+  @@index([provinceId])
+  @@index([cityId])
+  @@index([locationProvinceId])
+  @@index([locationCityId])
+  @@index([orgUnitId])
+  @@index([positionId])
+  @@index([workUnitId])
+  @@index([staffPostId])
+  @@map("users")
+}
+
+model UserLocationHistory {
+  id         String         @id @default(uuid())
+  userId     String
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provinceId String?
+  province   Province?      @relation("UserLocationHistoryProvince", fields: [provinceId], references: [id], onDelete: SetNull)
+  cityId     String?
+  city       City?          @relation("UserLocationHistoryCity", fields: [cityId], references: [id], onDelete: SetNull)
+  latitude   Decimal?       @db.Decimal(10, 7)
+  longitude  Decimal?       @db.Decimal(10, 7)
+  notes      String?
+  source     LocationSource @default(MANUAL)
+  createdAt  DateTime       @default(now())
+
+  @@index([userId, createdAt])
+  @@index([provinceId])
+  @@index([cityId])
+  @@map("user_location_histories")
+}
+
+model ProjectGroup {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  color       String?
+  projects    Project[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("project_groups")
+}
+
+model Project {
+  id                   String             @id @default(uuid())
+  systemName           String
+  code                 String             @unique
+  isActive             Boolean            @default(true)
+  status               ProjectStatus      @default(NOT_STARTED)
+  progressPercent      Int?
+  startDate            DateTime?          @db.Date
+  endDate              DateTime?          @db.Date
+  latitude             Decimal?           @db.Decimal(10, 7)
+  longitude            Decimal?           @db.Decimal(10, 7)
+  boundary             Json?
+  address              String?
+  companyName          String?
+  systemUrl            String?
+  launchYear           Int?
+  isSupportActive      Boolean            @default(true)
+  replacementProjectId String?
+  replacementProject   Project?           @relation("ProjectReplacement", fields: [replacementProjectId], references: [id], onDelete: SetNull)
+  replacedBy           Project[]          @relation("ProjectReplacement")
+  description          String?
+  color                String?
+  showOnLiveBoard      Boolean            @default(true)
+  showOnHomePage       Boolean            @default(true)
+  importance           ProjectImportance  @default(HIGH)
+  orgUnitId            String?
+  orgUnit              OrganizationUnit?  @relation("ProjectOrgUnit", fields: [orgUnitId], references: [id], onDelete: SetNull)
+  groupId              String?
+  group                ProjectGroup?      @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  operators            ProjectOperator[]
+  contractors          ProjectContractor[]
+  contractorLinks      ProjectContractorProject[]
+  phases               ProjectPhase[]
+  progressEntries      ProjectProgressEntry[]
+  documents            ProjectDocument[]
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@index([systemName])
+  @@index([code])
+  @@index([isActive])
+  @@index([status])
+  @@index([startDate])
+  @@index([endDate])
+  @@index([isSupportActive])
+  @@index([showOnLiveBoard])
+  @@index([showOnHomePage])
+  @@index([importance])
+  @@index([orgUnitId])
+  @@index([groupId])
+  @@index([createdAt])
+  @@map("projects")
+}
+
+model ProjectDocument {
+  id           String   @id @default(uuid())
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?
+  originalName String
+  mimeType     String
+  byteSize     Int
+  storageKey   String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([projectId, createdAt])
+  @@index([title])
+  @@map("project_documents")
+}
+
+model ProjectOperator {
+  projectId          String
+  organizationUnitId String
+  project            Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  organizationUnit   OrganizationUnit @relation(fields: [organizationUnitId], references: [id], onDelete: Restrict)
+  createdAt          DateTime         @default(now())
+
+  @@id([projectId, organizationUnitId])
+  @@index([organizationUnitId])
+  @@map("project_operators")
+}
+
+model ProjectPhase {
+  id              String         @id @default(uuid())
+  projectId       String
+  project         Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name            String
+  startDate       DateTime?      @db.Date
+  endDate         DateTime?      @db.Date
+  status          ProjectStatus?
+  progressPercent Int?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([projectId, name])
+  @@index([projectId, startDate])
+  @@index([status])
+  @@index([createdAt])
+  @@map("project_phases")
+}
+
+model StoredFile {
+  id           String                 @id @default(uuid())
+  mimeType     String
+  data         Bytes
+  byteSize     Int
+  originalName String?
+  durationMs   Int?
+  createdAt    DateTime               @default(now())
+  progressEntries ProjectProgressEntry[]
+  singardAttachments SingardAttachment[]
+  boardAttachments   BoardAttachment[]
+  boardMinutesAttachments BoardMinutesAttachment[]
+
+  @@map("stored_files")
+}
+
+model ProjectProgressEntry {
+  id                  String                              @id @default(uuid())
+  projectId           String
+  project             Project                             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  occurredAt          DateTime                            @db.Date
+  body                String?
+  transcript          String?
+  summary             String?
+  progressPercent     Int?
+  processingMode      ProjectProgressProcessingMode       @default(DEFERRED)
+  transcriptionStatus ProjectProgressTranscriptionStatus  @default(NONE)
+  transcriptionError  String?
+  audioId             String?
+  audio               StoredFile?                         @relation(fields: [audioId], references: [id], onDelete: SetNull)
+  images              ProjectProgressImage[]
+  createdAt           DateTime                            @default(now())
+  updatedAt           DateTime                            @updatedAt
+
+  @@index([projectId, occurredAt])
+  @@index([projectId, createdAt])
+  @@index([transcriptionStatus])
+  @@index([audioId])
+  @@map("project_progress_entries")
+}
+
+model ProjectProgressImage {
+  id        String               @id @default(uuid())
+  entryId   String
+  entry     ProjectProgressEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  imageId   String
+  image     StoredImage          @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  sortOrder Int                  @default(0)
+  createdAt DateTime             @default(now())
+
+  @@index([entryId, sortOrder])
+  @@index([imageId])
+  @@map("project_progress_images")
+}
+
+model ProjectContractor {
+  id           String   @id @default(uuid())
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name         String
+  nationalId   String?
+  description  String?
+  ceoName      String?
+  timeEstimate String?
+  costEstimate Decimal? @db.Decimal(18, 0)
+  members      ProjectContractorMember[]
+  phases       ProjectContractorPhase[]
+  payments     ProjectContractorPayment[]
+  projectLinks ProjectContractorProject[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([projectId, name])
+  @@index([nationalId])
+  @@index([createdAt])
+  @@map("project_contractors")
+}
+
+model ProjectContractorProject {
+  id           String            @id @default(uuid())
+  contractorId String
+  contractor   ProjectContractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  projectId    String
+  project      Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@unique([contractorId, projectId])
+  @@index([contractorId])
+  @@index([projectId])
+  @@index([createdAt])
+  @@map("project_contractor_projects")
+}
+
+model ProjectContractorMember {
+  id           String            @id @default(uuid())
+  contractorId String
+  contractor   ProjectContractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  firstName    String
+  lastName     String
+  phone        String?
+  role         String?
+  description  String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([contractorId])
+  @@index([lastName, firstName])
+  @@map("project_contractor_members")
+}
+
+model ProjectContractorPhase {
+  id           String            @id @default(uuid())
+  contractorId String
+  contractor   ProjectContractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  name         String
+  startDate    DateTime          @db.Date
+  endDate      DateTime          @db.Date
+  goals        String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([contractorId, startDate])
+  @@map("project_contractor_phases")
+}
+
+model ProjectContractorPayment {
+  id           String            @id @default(uuid())
+  contractorId String
+  contractor   ProjectContractor @relation(fields: [contractorId], references: [id], onDelete: Cascade)
+  paidAt       DateTime          @db.Date
+  amount       Decimal           @db.Decimal(18, 0)
+  description  String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([contractorId, paidAt])
+  @@map("project_contractor_payments")
+}
+
+model Food {
+  id          String       @id @default(uuid())
+  name        String
+  description String?
+  photoId     String?
+  photo       StoredImage? @relation("FoodPhoto", fields: [photoId], references: [id], onDelete: SetNull)
+  menuItems     RestaurantMenuItem[]
+  reservations  FoodReservation[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("foods")
+}
+
+model Restaurant {
+  id        String       @id @default(uuid())
+  name      String
+  phone     String?
+  address   String?
+  logoId    String?
+  logo      StoredImage? @relation("RestaurantLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  menuItems    RestaurantMenuItem[]
+  orgUnits     OrganizationUnitRestaurant[]
+  reservations FoodReservation[]
+  createdAt    DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([name])
+  @@index([phone])
+  @@index([createdAt])
+  @@map("restaurants")
+}
+
+model RestaurantMenuItem {
+  id           String     @id @default(uuid())
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  foodId       String
+  food         Food       @relation(fields: [foodId], references: [id], onDelete: Restrict)
+  offeredAt    DateTime   @db.Date
+  price        Decimal    @db.Decimal(18, 0)
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([restaurantId, foodId, offeredAt])
+  @@index([restaurantId])
+  @@index([foodId])
+  @@index([offeredAt])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("restaurant_menu_items")
+}
+
+model Organization {
+  id           String              @id @default(uuid())
+  singletonKey String              @unique @default("default")
+  name         String
+  address      String?
+  latitude     Decimal?            @db.Decimal(10, 7)
+  longitude    Decimal?            @db.Decimal(10, 7)
+  eitaa        String?
+  bale         String?
+  rubika       String?
+  instagram    String?
+  telegram     String?
+  whatsapp     String?
+  phones       OrganizationPhone[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  @@map("organizations")
+}
+
+model OrganizationPhone {
+  id             String       @id @default(uuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  title          String
+  phone          String
+  description    String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@index([title])
+  @@index([phone])
+  @@index([createdAt])
+  @@map("organization_phones")
+}
+
+model OrganizationPosition {
+  id                  String               @id @default(uuid())
+  code                String?              @unique
+  name                String               @unique
+  isSystem            Boolean              @default(false)
+  users               User[]
+  boardStagePositions BoardStagePosition[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+
+  @@index([name])
+  @@index([isSystem])
+  @@index([createdAt])
+  @@map("organization_positions")
+}
+
+model OrganizationUnitKind {
+  id        String             @id @default(uuid())
+  name      String             @unique
+  units     OrganizationUnit[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("organization_unit_kinds")
+}
+
+model OrganizationUnit {
+  id             String               @id @default(uuid())
+  name           String
+  kindId         String
+  kind           OrganizationUnitKind @relation(fields: [kindId], references: [id], onDelete: Restrict)
+  parentId       String?
+  parent         OrganizationUnit?    @relation("UnitTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children       OrganizationUnit[]   @relation("UnitTree")
+  phone          String?
+  address        String?
+  latitude       Decimal?             @db.Decimal(10, 7)
+  longitude      Decimal?             @db.Decimal(10, 7)
+  eitaa          String?
+  bale           String?
+  rubika         String?
+  instagram      String?
+  telegram       String?
+  whatsapp       String?
+  nutritionRepId String?
+  nutritionRep   User?                @relation("UnitNutritionRep", fields: [nutritionRepId], references: [id], onDelete: SetNull)
+  maxMeals       Int?
+  employees      User[]               @relation("UnitEmployees")
+  restaurants    OrganizationUnitRestaurant[]
+  reservations   FoodReservation[]
+  vehicleAssignments VehicleAssignment[]
+  projectOperators ProjectOperator[]
+  projects         Project[]          @relation("ProjectOrgUnit")
+  boardRequests    BoardRequest[]
+  boardStageUnits  BoardStageUnit[]
+  boardMinutesResolutions BoardMinutesResolution[]
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+
+  @@index([name])
+  @@index([kindId])
+  @@index([parentId])
+  @@index([phone])
+  @@index([nutritionRepId])
+  @@index([createdAt])
+  @@map("organization_units")
+}
+
+model OrganizationUnitRestaurant {
+  id           String           @id @default(uuid())
+  unitId       String
+  unit         OrganizationUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  restaurantId String
+  restaurant   Restaurant       @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@unique([unitId, restaurantId])
+  @@index([unitId])
+  @@index([restaurantId])
+  @@index([createdAt])
+  @@map("organization_unit_restaurants")
+}
+
+model FoodReservation {
+  id           String                @id @default(uuid())
+  reservedAt   DateTime              @db.Date
+  restaurantId String
+  restaurant   Restaurant            @relation(fields: [restaurantId], references: [id], onDelete: Restrict)
+  foodId       String
+  food         Food                  @relation(fields: [foodId], references: [id], onDelete: Restrict)
+  userId       String
+  user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orgUnitId    String
+  orgUnit      OrganizationUnit      @relation(fields: [orgUnitId], references: [id], onDelete: Restrict)
+  quantity     Int
+  unitPrice    Decimal               @db.Decimal(18, 0)
+  status       FoodReservationStatus @default(PENDING)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  @@index([userId, reservedAt])
+  @@index([orgUnitId, reservedAt])
+  @@index([restaurantId, reservedAt])
+  @@index([foodId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("food_reservations")
+}
+
+model VehicleBrand {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  vehicles  Vehicle[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("vehicle_brands")
+}
+
+model Vehicle {
+  id            String        @id @default(uuid())
+  assetCode     String        @unique
+  plate         String        @unique
+  type          VehicleType
+  brandId       String
+  brand         VehicleBrand  @relation(fields: [brandId], references: [id], onDelete: Restrict)
+  model         String
+  color         String?
+  year          Int?
+  chassisNumber String?
+  engineNumber  String?
+  status        VehicleStatus @default(ACTIVE)
+  description   String?
+  assignments   VehicleAssignment[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([brandId])
+  @@index([createdAt])
+  @@map("vehicles")
+}
+
+model VehicleAssignment {
+  id                 String                 @id @default(uuid())
+  vehicleId          String
+  vehicle            Vehicle                @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  organizationUnitId String?
+  organizationUnit   OrganizationUnit?      @relation(fields: [organizationUnitId], references: [id], onDelete: Restrict)
+  personId           String?
+  person             User?                  @relation("VehicleAssignmentPerson", fields: [personId], references: [id], onDelete: Restrict)
+  startDate          DateTime                 @db.Date
+  endDate            DateTime?                @db.Date
+  returnedAt         DateTime?                @db.Date
+  type               VehicleAssignmentType
+  status             VehicleAssignmentStatus  @default(LENT)
+  description        String?
+  createdAt          DateTime                 @default(now())
+  updatedAt          DateTime                 @updatedAt
+
+  @@index([vehicleId, startDate])
+  @@index([organizationUnitId])
+  @@index([personId])
+  @@index([endDate])
+  @@index([status])
+  @@index([returnedAt])
+  @@map("vehicle_assignments")
+}
+
+model Role {
+  id          String           @id @default(uuid())
+  code        String           @unique
+  name        String
+  description String?
+  isSystem    Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@index([name])
+  @@index([createdAt])
+  @@map("roles")
+}
+
+model UserRole {
+  userId String
+  roleId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId String
+  code   String
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, code])
+  @@index([code])
+  @@map("role_permissions")
+}
+
+enum SingardFeedbackKind {
+  SUGGESTION
+  COMPLAINT
+  CRITICISM
+  REPORT
+}
+
+enum SingardFeedbackStatus {
+  NEW
+  IN_PROGRESS
+  ANSWERED
+  CLOSED
+}
+
+enum SingardAttachmentKind {
+  IMAGE
+  AUDIO
+  VIDEO
+}
+
+enum SingardActivityKind {
+  NOTE
+  CONTACT
+  REPLY
+}
+
+model SingardCategory {
+  id          String            @id @default(uuid())
+  parentId    String?
+  parent      SingardCategory?  @relation("SingardCategoryTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children    SingardCategory[] @relation("SingardCategoryTree")
+  name        String
+  description String?
+  sortOrder   Int               @default(0)
+  isActive    Boolean           @default(true)
+  feedbacks   SingardFeedback[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([parentId, sortOrder])
+  @@index([isActive])
+  @@index([name])
+  @@index([createdAt])
+  @@map("singard_categories")
+}
+
+model SingardFeedback {
+  id           String                @id @default(uuid())
+  trackingCode String                @unique
+  kind         SingardFeedbackKind
+  status       SingardFeedbackStatus @default(NEW)
+  categoryId   String
+  category     SingardCategory       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  userId       String?
+  user         User?                 @relation("SingardFeedbackAuthor", fields: [userId], references: [id], onDelete: SetNull)
+  isAnonymous  Boolean               @default(true)
+  firstName    String?
+  lastName     String?
+  phone        String?
+  body         String?
+  address      String?
+  latitude     Decimal?              @db.Decimal(10, 7)
+  longitude    Decimal?              @db.Decimal(10, 7)
+  replyBody    String?
+  repliedAt    DateTime?
+  repliedById  String?
+  repliedBy    User?                 @relation("SingardFeedbackReplier", fields: [repliedById], references: [id], onDelete: SetNull)
+  attachments  SingardAttachment[]
+  activities   SingardActivity[]
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  @@index([kind, status])
+  @@index([categoryId])
+  @@index([userId])
+  @@index([phone])
+  @@index([createdAt])
+  @@map("singard_feedbacks")
+}
+
+model SingardAttachment {
+  id         String                @id @default(uuid())
+  feedbackId String
+  feedback   SingardFeedback       @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  kind       SingardAttachmentKind
+  imageId    String?
+  image      StoredImage?          @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  fileId     String?
+  file       StoredFile?           @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  sortOrder  Int                   @default(0)
+  createdAt  DateTime              @default(now())
+
+  @@index([feedbackId, sortOrder])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("singard_attachments")
+}
+
+model SingardActivity {
+  id          String             @id @default(uuid())
+  feedbackId  String
+  feedback    SingardFeedback    @relation(fields: [feedbackId], references: [id], onDelete: Cascade)
+  kind        SingardActivityKind @default(NOTE)
+  occurredAt  DateTime           @db.Date
+  title       String
+  body        String?
+  createdById String
+  createdBy   User               @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@index([feedbackId, occurredAt])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("singard_activities")
+}
+
+enum BoardRequestStatus {
+  PENDING_REVIEW
+  PENDING_LEGAL
+  PENDING_BUDGET
+  PENDING_SECRETARY
+  APPROVED
+  REJECTED
+}
+
+enum BoardStage {
+  REQUEST
+  MANAGEMENT
+  LEGAL
+  BUDGET
+  SECRETARY
+}
+
+enum BoardAttachmentKind {
+  IMAGE
+  FILE
+}
+
+model BoardRequest {
+  id              String             @id @default(uuid())
+  status          BoardRequestStatus @default(PENDING_REVIEW)
+  requestedAt     DateTime           @db.Date
+  unitId          String
+  unit            OrganizationUnit   @relation(fields: [unitId], references: [id], onDelete: Restrict)
+  orgPositionText String
+  subject         String
+  justification   String?
+  topicHistory    String?
+  description     String?
+  createdById     String
+  createdBy       User               @relation("BoardRequestAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  managementComment String?
+  managementAt      DateTime?        @db.Date
+  managementById    String?
+  managementBy      User?            @relation("BoardManagementReviewer", fields: [managementById], references: [id], onDelete: SetNull)
+  legalOrgMatch            Boolean?
+  legalRegulationsMatch    Boolean?
+  legalComment             String?
+  legalAt                  DateTime? @db.Date
+  legalById                String?
+  legalBy                  User?     @relation("BoardLegalReviewer", fields: [legalById], references: [id], onDelete: SetNull)
+  budgetProgramHistory       Boolean?
+  budgetCurrentYearFunding   Boolean?
+  budgetComment              String?
+  budgetAt                   DateTime? @db.Date
+  budgetById                 String?
+  budgetBy                   User?     @relation("BoardBudgetReviewer", fields: [budgetById], references: [id], onDelete: SetNull)
+  secretaryComment String?
+  secretaryAt      DateTime?         @db.Date
+  secretaryById    String?
+  secretaryBy      User?             @relation("BoardSecretaryReviewer", fields: [secretaryById], references: [id], onDelete: SetNull)
+  rejectedStage    BoardStage?
+  rejectedComment  String?
+  rejectedAt       DateTime?         @db.Date
+  rejectedById     String?
+  rejectedBy       User?             @relation("BoardRequestRejecter", fields: [rejectedById], references: [id], onDelete: SetNull)
+  attachments      BoardAttachment[]
+  minutes          BoardMinutes[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@index([status])
+  @@index([unitId])
+  @@index([createdById])
+  @@index([requestedAt])
+  @@index([subject])
+  @@index([createdAt])
+  @@map("board_requests")
+}
+
+model BoardAttachment {
+  id           String               @id @default(uuid())
+  requestId    String
+  request      BoardRequest         @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  stage        BoardStage
+  kind         BoardAttachmentKind
+  imageId      String?
+  image        StoredImage?         @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  fileId       String?
+  file         StoredFile?          @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  originalName String?
+  sortOrder    Int                  @default(0)
+  createdAt    DateTime             @default(now())
+
+  @@index([requestId, sortOrder])
+  @@index([stage])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("board_attachments")
+}
+
+model BoardStageUnit {
+  stage     BoardStage
+  unitId    String
+  unit      OrganizationUnit @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  createdAt DateTime         @default(now())
+
+  @@id([stage, unitId])
+  @@index([unitId])
+  @@map("board_stage_units")
+}
+
+model BoardStagePosition {
+  stage      BoardStage
+  positionId String
+  position   OrganizationPosition @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  createdAt  DateTime             @default(now())
+
+  @@id([stage, positionId])
+  @@index([positionId])
+  @@map("board_stage_positions")
+}
+
+enum BoardMinutesAttendance {
+  PRESENT
+  ABSENT
+}
+
+enum BoardMinutesAttachmentKind {
+  IMAGE
+  AUDIO
+}
+
+model BoardMinutes {
+  id          String                     @id @default(uuid())
+  requestId   String?
+  request     BoardRequest?              @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  heldAt      DateTime                   @db.Date
+  subject     String
+  body        String?
+  createdById String
+  createdBy   User                       @relation("BoardMinutesAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  members     BoardMinutesMember[]
+  attachments BoardMinutesAttachment[]
+  resolutions BoardMinutesResolution[]
+  createdAt   DateTime                   @default(now())
+  updatedAt   DateTime                   @updatedAt
+
+  @@index([requestId])
+  @@index([heldAt])
+  @@index([subject])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("board_minutes")
+}
+
+model BoardMinutesMember {
+  id          String                   @id @default(uuid())
+  minutesId   String
+  minutes     BoardMinutes             @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User                     @relation(fields: [userId], references: [id], onDelete: Restrict)
+  attendance  BoardMinutesAttendance   @default(PRESENT)
+  createdAt   DateTime                 @default(now())
+
+  @@unique([minutesId, userId])
+  @@index([userId])
+  @@index([minutesId])
+  @@map("board_minutes_members")
+}
+
+model BoardMinutesAttachment {
+  id           String                      @id @default(uuid())
+  minutesId    String
+  minutes      BoardMinutes                @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  kind         BoardMinutesAttachmentKind
+  imageId      String?
+  image        StoredImage?                @relation(fields: [imageId], references: [id], onDelete: Restrict)
+  fileId       String?
+  file         StoredFile?                 @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  originalName String?
+  sortOrder    Int                         @default(0)
+  createdAt    DateTime                    @default(now())
+
+  @@index([minutesId, sortOrder])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("board_minutes_attachments")
+}
+
+model BoardMinutesResolution {
+  id          String           @id @default(uuid())
+  minutesId   String
+  minutes     BoardMinutes     @relation(fields: [minutesId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  unitId      String?
+  unit        OrganizationUnit? @relation(fields: [unitId], references: [id], onDelete: SetNull)
+  dueDate     DateTime?        @db.Date
+  notes       String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([minutesId])
+  @@index([unitId])
+  @@index([dueDate])
+  @@index([title])
+  @@index([createdAt])
+  @@map("board_minutes_resolutions")
+}
+
+model CommercialComplex {
+  id         String            @id @default(uuid())
+  name       String
+  nameEn     String
+  address    String?
+  postalCode String?
+  isActive   Boolean           @default(true)
+  floors     CommercialFloor[]
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  @@index([isActive])
+  @@index([name])
+  @@map("commercial_complexes")
+}
+
+model CommercialFloor {
+  id          String            @id @default(uuid())
+  complexId   String
+  complex     CommercialComplex @relation(fields: [complexId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  code        String
+  lanes       CommercialLane[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([complexId, code])
+  @@index([complexId])
+  @@index([title])
+  @@map("commercial_floors")
+}
+
+model CommercialLane {
+  id          String           @id @default(uuid())
+  floorId     String
+  floor       CommercialFloor  @relation(fields: [floorId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  code        String
+  units       CommercialUnit[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@unique([floorId, code])
+  @@index([floorId])
+  @@index([title])
+  @@map("commercial_lanes")
+}
+
+model CommercialUnit {
+  id          String         @id @default(uuid())
+  laneId      String
+  lane        CommercialLane @relation(fields: [laneId], references: [id], onDelete: Cascade)
+  plaque      String
+  description String?
+  code        String
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@unique([laneId, code])
+  @@index([laneId, isActive])
+  @@index([plaque])
+  @@map("commercial_units")
+}
+
+model WorkUnit {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  users       User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("work_units")
+}
+
+model StaffPost {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  users       User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("staff_posts")
+}
+
+model ViolationType {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("violation_types")
+}
