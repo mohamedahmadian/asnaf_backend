@@ -223,7 +223,7 @@ export type JobGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type JobGroupByOutputType = {
   id: string
-  groupId: string
+  groupId: string | null
   title: string
   titleEn: string | null
   taxIntaCode: string | null
@@ -261,7 +261,7 @@ export type JobWhereInput = {
   OR?: Prisma.JobWhereInput[]
   NOT?: Prisma.JobWhereInput | Prisma.JobWhereInput[]
   id?: Prisma.StringFilter<"Job"> | string
-  groupId?: Prisma.StringFilter<"Job"> | string
+  groupId?: Prisma.StringNullableFilter<"Job"> | string | null
   title?: Prisma.StringFilter<"Job"> | string
   titleEn?: Prisma.StringNullableFilter<"Job"> | string | null
   taxIntaCode?: Prisma.StringNullableFilter<"Job"> | string | null
@@ -272,7 +272,7 @@ export type JobWhereInput = {
   isActive?: Prisma.BoolFilter<"Job"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Job"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Job"> | Date | string
-  group?: Prisma.XOR<Prisma.JobGroupScalarRelationFilter, Prisma.JobGroupWhereInput>
+  group?: Prisma.XOR<Prisma.JobGroupNullableScalarRelationFilter, Prisma.JobGroupWhereInput> | null
   jobType?: Prisma.XOR<Prisma.JobTypeScalarRelationFilter, Prisma.JobTypeWhereInput>
   inquiryCenters?: Prisma.JobInquiryCenterListRelationFilter
   documents?: Prisma.JobDocumentListRelationFilter
@@ -280,7 +280,7 @@ export type JobWhereInput = {
 
 export type JobOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   titleEn?: Prisma.SortOrderInput | Prisma.SortOrder
   taxIntaCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -306,7 +306,7 @@ export type JobWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.JobWhereInput | Prisma.JobWhereInput[]
   OR?: Prisma.JobWhereInput[]
   NOT?: Prisma.JobWhereInput | Prisma.JobWhereInput[]
-  groupId?: Prisma.StringFilter<"Job"> | string
+  groupId?: Prisma.StringNullableFilter<"Job"> | string | null
   title?: Prisma.StringFilter<"Job"> | string
   titleEn?: Prisma.StringNullableFilter<"Job"> | string | null
   description?: Prisma.StringNullableFilter<"Job"> | string | null
@@ -316,7 +316,7 @@ export type JobWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"Job"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Job"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Job"> | Date | string
-  group?: Prisma.XOR<Prisma.JobGroupScalarRelationFilter, Prisma.JobGroupWhereInput>
+  group?: Prisma.XOR<Prisma.JobGroupNullableScalarRelationFilter, Prisma.JobGroupWhereInput> | null
   jobType?: Prisma.XOR<Prisma.JobTypeScalarRelationFilter, Prisma.JobTypeWhereInput>
   inquiryCenters?: Prisma.JobInquiryCenterListRelationFilter
   documents?: Prisma.JobDocumentListRelationFilter
@@ -324,7 +324,7 @@ export type JobWhereUniqueInput = Prisma.AtLeast<{
 
 export type JobOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  groupId?: Prisma.SortOrder
+  groupId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   titleEn?: Prisma.SortOrderInput | Prisma.SortOrder
   taxIntaCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -347,7 +347,7 @@ export type JobScalarWhereWithAggregatesInput = {
   OR?: Prisma.JobScalarWhereWithAggregatesInput[]
   NOT?: Prisma.JobScalarWhereWithAggregatesInput | Prisma.JobScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Job"> | string
-  groupId?: Prisma.StringWithAggregatesFilter<"Job"> | string
+  groupId?: Prisma.StringNullableWithAggregatesFilter<"Job"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Job"> | string
   titleEn?: Prisma.StringNullableWithAggregatesFilter<"Job"> | string | null
   taxIntaCode?: Prisma.StringNullableWithAggregatesFilter<"Job"> | string | null
@@ -371,7 +371,7 @@ export type JobCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  group: Prisma.JobGroupCreateNestedOneWithoutJobsInput
+  group?: Prisma.JobGroupCreateNestedOneWithoutJobsInput
   jobType: Prisma.JobTypeCreateNestedOneWithoutJobsInput
   inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
@@ -379,7 +379,7 @@ export type JobCreateInput = {
 
 export type JobUncheckedCreateInput = {
   id?: string
-  groupId: string
+  groupId?: string | null
   title: string
   titleEn?: string | null
   taxIntaCode?: string | null
@@ -405,7 +405,7 @@ export type JobUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  group?: Prisma.JobGroupUpdateOneRequiredWithoutJobsNestedInput
+  group?: Prisma.JobGroupUpdateOneWithoutJobsNestedInput
   jobType?: Prisma.JobTypeUpdateOneRequiredWithoutJobsNestedInput
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
@@ -413,7 +413,7 @@ export type JobUpdateInput = {
 
 export type JobUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -430,7 +430,7 @@ export type JobUncheckedUpdateInput = {
 
 export type JobCreateManyInput = {
   id?: string
-  groupId: string
+  groupId?: string | null
   title: string
   titleEn?: string | null
   taxIntaCode?: string | null
@@ -458,7 +458,7 @@ export type JobUpdateManyMutationInput = {
 
 export type JobUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -677,14 +677,14 @@ export type JobCreateWithoutJobTypeInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  group: Prisma.JobGroupCreateNestedOneWithoutJobsInput
+  group?: Prisma.JobGroupCreateNestedOneWithoutJobsInput
   inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
 }
 
 export type JobUncheckedCreateWithoutJobTypeInput = {
   id?: string
-  groupId: string
+  groupId?: string | null
   title: string
   titleEn?: string | null
   taxIntaCode?: string | null
@@ -729,7 +729,7 @@ export type JobScalarWhereInput = {
   OR?: Prisma.JobScalarWhereInput[]
   NOT?: Prisma.JobScalarWhereInput | Prisma.JobScalarWhereInput[]
   id?: Prisma.StringFilter<"Job"> | string
-  groupId?: Prisma.StringFilter<"Job"> | string
+  groupId?: Prisma.StringNullableFilter<"Job"> | string | null
   title?: Prisma.StringFilter<"Job"> | string
   titleEn?: Prisma.StringNullableFilter<"Job"> | string | null
   taxIntaCode?: Prisma.StringNullableFilter<"Job"> | string | null
@@ -811,14 +811,14 @@ export type JobCreateWithoutInquiryCentersInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  group: Prisma.JobGroupCreateNestedOneWithoutJobsInput
+  group?: Prisma.JobGroupCreateNestedOneWithoutJobsInput
   jobType: Prisma.JobTypeCreateNestedOneWithoutJobsInput
   documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
 }
 
 export type JobUncheckedCreateWithoutInquiryCentersInput = {
   id?: string
-  groupId: string
+  groupId?: string | null
   title: string
   titleEn?: string | null
   taxIntaCode?: string | null
@@ -859,14 +859,14 @@ export type JobUpdateWithoutInquiryCentersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  group?: Prisma.JobGroupUpdateOneRequiredWithoutJobsNestedInput
+  group?: Prisma.JobGroupUpdateOneWithoutJobsNestedInput
   jobType?: Prisma.JobTypeUpdateOneRequiredWithoutJobsNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutInquiryCentersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -891,14 +891,14 @@ export type JobCreateWithoutDocumentsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  group: Prisma.JobGroupCreateNestedOneWithoutJobsInput
+  group?: Prisma.JobGroupCreateNestedOneWithoutJobsInput
   jobType: Prisma.JobTypeCreateNestedOneWithoutJobsInput
   inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
 }
 
 export type JobUncheckedCreateWithoutDocumentsInput = {
   id?: string
-  groupId: string
+  groupId?: string | null
   title: string
   titleEn?: string | null
   taxIntaCode?: string | null
@@ -939,14 +939,14 @@ export type JobUpdateWithoutDocumentsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  group?: Prisma.JobGroupUpdateOneRequiredWithoutJobsNestedInput
+  group?: Prisma.JobGroupUpdateOneWithoutJobsNestedInput
   jobType?: Prisma.JobTypeUpdateOneRequiredWithoutJobsNestedInput
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -962,7 +962,7 @@ export type JobUncheckedUpdateWithoutDocumentsInput = {
 
 export type JobCreateManyJobTypeInput = {
   id?: string
-  groupId: string
+  groupId?: string | null
   title: string
   titleEn?: string | null
   taxIntaCode?: string | null
@@ -985,14 +985,14 @@ export type JobUpdateWithoutJobTypeInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  group?: Prisma.JobGroupUpdateOneRequiredWithoutJobsNestedInput
+  group?: Prisma.JobGroupUpdateOneWithoutJobsNestedInput
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutJobTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1008,7 +1008,7 @@ export type JobUncheckedUpdateWithoutJobTypeInput = {
 
 export type JobUncheckedUpdateManyWithoutJobTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  groupId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1133,7 +1133,7 @@ export type JobSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  group?: boolean | Prisma.JobGroupDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.Job$groupArgs<ExtArgs>
   jobType?: boolean | Prisma.JobTypeDefaultArgs<ExtArgs>
   inquiryCenters?: boolean | Prisma.Job$inquiryCentersArgs<ExtArgs>
   documents?: boolean | Prisma.Job$documentsArgs<ExtArgs>
@@ -1153,7 +1153,7 @@ export type JobSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  group?: boolean | Prisma.JobGroupDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.Job$groupArgs<ExtArgs>
   jobType?: boolean | Prisma.JobTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["job"]>
 
@@ -1170,7 +1170,7 @@ export type JobSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  group?: boolean | Prisma.JobGroupDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.Job$groupArgs<ExtArgs>
   jobType?: boolean | Prisma.JobTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["job"]>
 
@@ -1191,32 +1191,35 @@ export type JobSelectScalar = {
 
 export type JobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "groupId" | "title" | "titleEn" | "taxIntaCode" | "description" | "code" | "jobTypeId" | "annualFee" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["job"]>
 export type JobInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  group?: boolean | Prisma.JobGroupDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.Job$groupArgs<ExtArgs>
   jobType?: boolean | Prisma.JobTypeDefaultArgs<ExtArgs>
   inquiryCenters?: boolean | Prisma.Job$inquiryCentersArgs<ExtArgs>
   documents?: boolean | Prisma.Job$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.JobCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type JobIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  group?: boolean | Prisma.JobGroupDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.Job$groupArgs<ExtArgs>
   jobType?: boolean | Prisma.JobTypeDefaultArgs<ExtArgs>
 }
 export type JobIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  group?: boolean | Prisma.JobGroupDefaultArgs<ExtArgs>
+  group?: boolean | Prisma.Job$groupArgs<ExtArgs>
   jobType?: boolean | Prisma.JobTypeDefaultArgs<ExtArgs>
 }
 
 export type $JobPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Job"
   objects: {
-    group: Prisma.$JobGroupPayload<ExtArgs>
+    group: Prisma.$JobGroupPayload<ExtArgs> | null
     jobType: Prisma.$JobTypePayload<ExtArgs>
     inquiryCenters: Prisma.$JobInquiryCenterPayload<ExtArgs>[]
     documents: Prisma.$JobDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    groupId: string
+    /**
+     * گروه شغلی؛ خالی یعنی شغل به گروهی وصل نیست
+     */
+    groupId: string | null
     title: string
     titleEn: string | null
     taxIntaCode: string | null
@@ -1624,7 +1627,7 @@ readonly fields: JobFieldRefs;
  */
 export interface Prisma__JobClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  group<T extends Prisma.JobGroupDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobGroupDefaultArgs<ExtArgs>>): Prisma.Prisma__JobGroupClient<runtime.Types.Result.GetResult<Prisma.$JobGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  group<T extends Prisma.Job$groupArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$groupArgs<ExtArgs>>): Prisma.Prisma__JobGroupClient<runtime.Types.Result.GetResult<Prisma.$JobGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   jobType<T extends Prisma.JobTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JobTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__JobTypeClient<runtime.Types.Result.GetResult<Prisma.$JobTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   inquiryCenters<T extends Prisma.Job$inquiryCentersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$inquiryCentersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobInquiryCenterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Job$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2067,6 +2070,25 @@ export type JobDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Limit how many Jobs to delete.
    */
   limit?: number
+}
+
+/**
+ * Job.group
+ */
+export type Job$groupArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JobGroup
+   */
+  select?: Prisma.JobGroupSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JobGroup
+   */
+  omit?: Prisma.JobGroupOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JobGroupInclude<ExtArgs> | null
+  where?: Prisma.JobGroupWhereInput
 }
 
 /**

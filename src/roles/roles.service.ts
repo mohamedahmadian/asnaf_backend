@@ -12,6 +12,7 @@ import {
   isReservedRoleCode,
   isRolePermissionsLocked,
 } from '../access/access.constants';
+import { migrateFinanceMenuPermissions } from '../access/finance-menu-migration';
 import { isKnownPermissionCode } from '../access/permissions-catalog';
 import {
   containsInsensitive,
@@ -66,6 +67,7 @@ export class RolesService implements OnModuleInit {
 
   async onModuleInit() {
     await ensureSystemRoles(this.prisma);
+    await migrateFinanceMenuPermissions(this.prisma);
   }
 
   async findAll(query: FindRolesQueryDto) {

@@ -342,3 +342,8 @@ export type StaffPost = Prisma.StaffPostModel
  * 
  */
 export type ViolationType = Prisma.ViolationTypeModel
+/**
+ * Model RegistrationPlace
+ * 
+ */
+export type RegistrationPlace = Prisma.RegistrationPlaceModel

@@ -115,7 +115,8 @@ export const ModelName = {
   CommercialUnit: 'CommercialUnit',
   WorkUnit: 'WorkUnit',
   StaffPost: 'StaffPost',
-  ViolationType: 'ViolationType'
+  ViolationType: 'ViolationType',
+  RegistrationPlace: 'RegistrationPlace'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1107,6 +1108,18 @@ export const ViolationTypeScalarFieldEnum = {
 } as const
 
 export type ViolationTypeScalarFieldEnum = (typeof ViolationTypeScalarFieldEnum)[keyof typeof ViolationTypeScalarFieldEnum]
+
+
+export const RegistrationPlaceScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RegistrationPlaceScalarFieldEnum = (typeof RegistrationPlaceScalarFieldEnum)[keyof typeof RegistrationPlaceScalarFieldEnum]
 
 
 export const SortOrder = {

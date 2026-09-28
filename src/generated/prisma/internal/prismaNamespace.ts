@@ -461,7 +461,8 @@ export const ModelName = {
   CommercialUnit: 'CommercialUnit',
   WorkUnit: 'WorkUnit',
   StaffPost: 'StaffPost',
-  ViolationType: 'ViolationType'
+  ViolationType: 'ViolationType',
+  RegistrationPlace: 'RegistrationPlace'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -477,7 +478,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "jobDocument" | "document" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "jobDocument" | "document" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5291,6 +5292,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RegistrationPlace: {
+      payload: Prisma.$RegistrationPlacePayload<ExtArgs>
+      fields: Prisma.RegistrationPlaceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RegistrationPlaceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RegistrationPlaceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>
+        }
+        findFirst: {
+          args: Prisma.RegistrationPlaceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RegistrationPlaceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>
+        }
+        findMany: {
+          args: Prisma.RegistrationPlaceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>[]
+        }
+        create: {
+          args: Prisma.RegistrationPlaceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>
+        }
+        createMany: {
+          args: Prisma.RegistrationPlaceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RegistrationPlaceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>[]
+        }
+        delete: {
+          args: Prisma.RegistrationPlaceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>
+        }
+        update: {
+          args: Prisma.RegistrationPlaceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>
+        }
+        deleteMany: {
+          args: Prisma.RegistrationPlaceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RegistrationPlaceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RegistrationPlaceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>[]
+        }
+        upsert: {
+          args: Prisma.RegistrationPlaceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RegistrationPlacePayload>
+        }
+        aggregate: {
+          args: Prisma.RegistrationPlaceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRegistrationPlace>
+        }
+        groupBy: {
+          args: Prisma.RegistrationPlaceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RegistrationPlaceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RegistrationPlaceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RegistrationPlaceCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6305,6 +6380,18 @@ export const ViolationTypeScalarFieldEnum = {
 export type ViolationTypeScalarFieldEnum = (typeof ViolationTypeScalarFieldEnum)[keyof typeof ViolationTypeScalarFieldEnum]
 
 
+export const RegistrationPlaceScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RegistrationPlaceScalarFieldEnum = (typeof RegistrationPlaceScalarFieldEnum)[keyof typeof RegistrationPlaceScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6994,6 +7081,7 @@ export type GlobalOmitConfig = {
   workUnit?: Prisma.WorkUnitOmit
   staffPost?: Prisma.StaffPostOmit
   violationType?: Prisma.ViolationTypeOmit
+  registrationPlace?: Prisma.RegistrationPlaceOmit
 }
 
 /* Types for Logging */

@@ -86,7 +86,7 @@ export class JobTypesService {
       select: jobTypeSelect,
     });
     if (!item) {
-      throw new NotFoundException('نوع فعالیت یافت نشد');
+      throw new NotFoundException('نوع خدمات یافت نشد');
     }
     return withFee(item);
   }
@@ -145,7 +145,7 @@ export class JobTypesService {
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === 'P2002'
     ) {
-      throw new ConflictException('این نوع فعالیت قبلاً ثبت شده است');
+      throw new ConflictException('این نوع خدمات قبلاً ثبت شده است');
     }
     throw error;
   }

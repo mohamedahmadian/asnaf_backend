@@ -191,6 +191,38 @@ export class JobsService {
     return { ok: true };
   }
 
+  async assignToGroup(jobId: string, groupId: string) {
+    const current = await this.findCatalogOne(jobId);
+    if (current.groupId === groupId) {
+      return current;
+    }
+    await this.groups.findOne(groupId);
+    const code = await this.codeForGroup(groupId, current.code);
+    try {
+      const item = await this.prisma.job.update({
+        where: { id: jobId },
+        data: { groupId, code },
+        select: jobSelect,
+      });
+      return this.mapJob(item);
+    } catch (error) {
+      this.rethrowUnique(error);
+    }
+  }
+
+  async removeFromGroup(jobId: string, groupId: string) {
+    const current = await this.findCatalogOne(jobId);
+    if (current.groupId !== groupId) {
+      throw new NotFoundException('شغل در این گروه نیست');
+    }
+    const item = await this.prisma.job.update({
+      where: { id: jobId },
+      data: { groupId: null },
+      select: jobSelect,
+    });
+    return this.mapJob(item);
+  }
+
   async findCatalog(query: FindJobsCatalogQueryDto) {
     const where: Prisma.JobWhereInput = {
       jobTypeId: query.jobTypeId,
@@ -283,7 +315,9 @@ export class JobsService {
     const documentIds =
       dto.documentIds === undefined ? undefined : await this.assertJobDocuments(dto.documentIds);
     const code =
-      groupId === current.groupId ? undefined : await this.codeForGroup(groupId, current.code);
+      !groupId || groupId === current.groupId
+        ? undefined
+        : await this.codeForGroup(groupId, current.code);
     try {
       const item = await this.prisma.job.update({
         where: { id },
@@ -402,7 +436,7 @@ export class JobsService {
       select: { id: true },
     });
     if (!jobType) {
-      throw new NotFoundException('نوع فعالیت یافت نشد');
+      throw new NotFoundException('نوع خدمات یافت نشد');
     }
   }
 

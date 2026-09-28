@@ -321,8 +321,9 @@ model JobGroupRepresentative {
 
 model Job {
   id          String             @id @default(uuid())
-  groupId     String
-  group       JobGroup           @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  /// گروه شغلی؛ خالی یعنی شغل به گروهی وصل نیست
+  groupId     String?
+  group       JobGroup?          @relation(fields: [groupId], references: [id], onDelete: Restrict)
   title       String
   titleEn     String?
   taxIntaCode String?  @unique
@@ -1493,4 +1494,18 @@ model ViolationType {
   @@index([isActive])
   @@index([createdAt])
   @@map("violation_types")
+}
+
+model RegistrationPlace {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("registration_places")
 }

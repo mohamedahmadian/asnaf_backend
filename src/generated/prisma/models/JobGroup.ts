@@ -390,6 +390,11 @@ export type JobGroupScalarRelationFilter = {
   isNot?: Prisma.JobGroupWhereInput
 }
 
+export type JobGroupNullableScalarRelationFilter = {
+  is?: Prisma.JobGroupWhereInput | null
+  isNot?: Prisma.JobGroupWhereInput | null
+}
+
 export type JobGroupCreateNestedOneWithoutRepresentativesInput = {
   create?: Prisma.XOR<Prisma.JobGroupCreateWithoutRepresentativesInput, Prisma.JobGroupUncheckedCreateWithoutRepresentativesInput>
   connectOrCreate?: Prisma.JobGroupCreateOrConnectWithoutRepresentativesInput
@@ -410,10 +415,12 @@ export type JobGroupCreateNestedOneWithoutJobsInput = {
   connect?: Prisma.JobGroupWhereUniqueInput
 }
 
-export type JobGroupUpdateOneRequiredWithoutJobsNestedInput = {
+export type JobGroupUpdateOneWithoutJobsNestedInput = {
   create?: Prisma.XOR<Prisma.JobGroupCreateWithoutJobsInput, Prisma.JobGroupUncheckedCreateWithoutJobsInput>
   connectOrCreate?: Prisma.JobGroupCreateOrConnectWithoutJobsInput
   upsert?: Prisma.JobGroupUpsertWithoutJobsInput
+  disconnect?: Prisma.JobGroupWhereInput | boolean
+  delete?: Prisma.JobGroupWhereInput | boolean
   connect?: Prisma.JobGroupWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.JobGroupUpdateToOneWithWhereWithoutJobsInput, Prisma.JobGroupUpdateWithoutJobsInput>, Prisma.JobGroupUncheckedUpdateWithoutJobsInput>
 }

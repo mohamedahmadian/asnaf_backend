@@ -18,6 +18,7 @@ import { JobTypesModule } from './job-types/job-types.module';
 import { MunicipalFeesModule } from './municipal-fees/municipal-fees.module';
 import { OrganizationModule } from './organization/organization.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { RegistrationPlacesModule } from './registration-places/registration-places.module';
 import { RolesModule } from './roles/roles.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
@@ -39,6 +40,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     JobTypesModule,
     InquiryCentersModule,
     JobGroupsModule,
+    RegistrationPlacesModule,
     DocumentsModule,
     WorkUnitsModule,
     StaffPostsModule,

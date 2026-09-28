@@ -21,6 +21,18 @@ export const PERMISSION_TREE: PermissionNode[] = [
     kind: 'MODULE',
     nameKey: 'modules.baseInfo',
     children: [
+      { code: 'base-info.job-types', kind: 'MENU', nameKey: 'menus.jobTypes' },
+      {
+        code: 'base-info.job-groups',
+        kind: 'MENU',
+        nameKey: 'menus.jobGroups',
+      },
+      { code: 'base-info.jobs', kind: 'MENU', nameKey: 'menus.jobs' },
+      {
+        code: 'base-info.registration-places',
+        kind: 'MENU',
+        nameKey: 'menus.registrationPlaces',
+      },
       { code: 'base-info.countries', kind: 'MENU', nameKey: 'menus.countries' },
       { code: 'base-info.provinces', kind: 'MENU', nameKey: 'menus.provinces' },
       { code: 'base-info.cities', kind: 'MENU', nameKey: 'menus.cities' },
@@ -29,24 +41,24 @@ export const PERMISSION_TREE: PermissionNode[] = [
         kind: 'MENU',
         nameKey: 'menus.commercialComplexes',
       },
-      { code: 'base-info.bank-accounts', kind: 'MENU', nameKey: 'menus.bankAccounts' },
-      { code: 'base-info.municipal-fees', kind: 'MENU', nameKey: 'menus.municipalFees' },
-      { code: 'base-info.discounts', kind: 'MENU', nameKey: 'menus.discounts' },
-      { code: 'base-info.job-types', kind: 'MENU', nameKey: 'menus.jobTypes' },
       {
         code: 'base-info.inquiry-centers',
         kind: 'MENU',
         nameKey: 'menus.inquiryCenters',
       },
-      {
-        code: 'base-info.job-groups',
-        kind: 'MENU',
-        nameKey: 'menus.jobGroups',
-      },
-      { code: 'base-info.jobs', kind: 'MENU', nameKey: 'menus.jobs' },
       { code: 'base-info.documents', kind: 'MENU', nameKey: 'menus.documents' },
       { code: 'base-info.work-units', kind: 'MENU', nameKey: 'menus.workUnits' },
       { code: 'base-info.staff-posts', kind: 'MENU', nameKey: 'menus.staffPosts' },
+    ],
+  },
+  {
+    code: 'finance',
+    kind: 'MODULE',
+    nameKey: 'modules.finance',
+    children: [
+      { code: 'finance.bank-accounts', kind: 'MENU', nameKey: 'menus.bankAccounts' },
+      { code: 'finance.municipal-fees', kind: 'MENU', nameKey: 'menus.municipalFees' },
+      { code: 'finance.discounts', kind: 'MENU', nameKey: 'menus.discounts' },
     ],
   },
   {

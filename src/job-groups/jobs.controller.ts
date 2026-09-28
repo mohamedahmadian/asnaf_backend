@@ -30,6 +30,16 @@ export class JobsController {
     return this.jobs.create(groupId, dto);
   }
 
+  @Post(':id/membership')
+  assign(@Param('groupId') groupId: string, @Param('id') id: string) {
+    return this.jobs.assignToGroup(id, groupId);
+  }
+
+  @Delete(':id/membership')
+  unassign(@Param('groupId') groupId: string, @Param('id') id: string) {
+    return this.jobs.removeFromGroup(id, groupId);
+  }
+
   @Get(':id')
   findOne(@Param('groupId') groupId: string, @Param('id') id: string) {
     return this.jobs.findOne(groupId, id);
