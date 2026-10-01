@@ -190,6 +190,7 @@ export type ViolationTypeWhereInput = {
   isActive?: Prisma.BoolFilter<"ViolationType"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ViolationType"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ViolationType"> | Date | string
+  violations?: Prisma.ViolationListRelationFilter
 }
 
 export type ViolationTypeOrderByWithRelationInput = {
@@ -199,6 +200,7 @@ export type ViolationTypeOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  violations?: Prisma.ViolationOrderByRelationAggregateInput
 }
 
 export type ViolationTypeWhereUniqueInput = Prisma.AtLeast<{
@@ -211,6 +213,7 @@ export type ViolationTypeWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"ViolationType"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ViolationType"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ViolationType"> | Date | string
+  violations?: Prisma.ViolationListRelationFilter
 }, "id" | "title">
 
 export type ViolationTypeOrderByWithAggregationInput = {
@@ -244,6 +247,7 @@ export type ViolationTypeCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  violations?: Prisma.ViolationCreateNestedManyWithoutViolationTypeInput
 }
 
 export type ViolationTypeUncheckedCreateInput = {
@@ -253,6 +257,7 @@ export type ViolationTypeUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutViolationTypeInput
 }
 
 export type ViolationTypeUpdateInput = {
@@ -262,6 +267,7 @@ export type ViolationTypeUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  violations?: Prisma.ViolationUpdateManyWithoutViolationTypeNestedInput
 }
 
 export type ViolationTypeUncheckedUpdateInput = {
@@ -271,6 +277,7 @@ export type ViolationTypeUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutViolationTypeNestedInput
 }
 
 export type ViolationTypeCreateManyInput = {
@@ -327,6 +334,106 @@ export type ViolationTypeMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type ViolationTypeScalarRelationFilter = {
+  is?: Prisma.ViolationTypeWhereInput
+  isNot?: Prisma.ViolationTypeWhereInput
+}
+
+export type ViolationTypeCreateNestedOneWithoutViolationsInput = {
+  create?: Prisma.XOR<Prisma.ViolationTypeCreateWithoutViolationsInput, Prisma.ViolationTypeUncheckedCreateWithoutViolationsInput>
+  connectOrCreate?: Prisma.ViolationTypeCreateOrConnectWithoutViolationsInput
+  connect?: Prisma.ViolationTypeWhereUniqueInput
+}
+
+export type ViolationTypeUpdateOneRequiredWithoutViolationsNestedInput = {
+  create?: Prisma.XOR<Prisma.ViolationTypeCreateWithoutViolationsInput, Prisma.ViolationTypeUncheckedCreateWithoutViolationsInput>
+  connectOrCreate?: Prisma.ViolationTypeCreateOrConnectWithoutViolationsInput
+  upsert?: Prisma.ViolationTypeUpsertWithoutViolationsInput
+  connect?: Prisma.ViolationTypeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ViolationTypeUpdateToOneWithWhereWithoutViolationsInput, Prisma.ViolationTypeUpdateWithoutViolationsInput>, Prisma.ViolationTypeUncheckedUpdateWithoutViolationsInput>
+}
+
+export type ViolationTypeCreateWithoutViolationsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ViolationTypeUncheckedCreateWithoutViolationsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ViolationTypeCreateOrConnectWithoutViolationsInput = {
+  where: Prisma.ViolationTypeWhereUniqueInput
+  create: Prisma.XOR<Prisma.ViolationTypeCreateWithoutViolationsInput, Prisma.ViolationTypeUncheckedCreateWithoutViolationsInput>
+}
+
+export type ViolationTypeUpsertWithoutViolationsInput = {
+  update: Prisma.XOR<Prisma.ViolationTypeUpdateWithoutViolationsInput, Prisma.ViolationTypeUncheckedUpdateWithoutViolationsInput>
+  create: Prisma.XOR<Prisma.ViolationTypeCreateWithoutViolationsInput, Prisma.ViolationTypeUncheckedCreateWithoutViolationsInput>
+  where?: Prisma.ViolationTypeWhereInput
+}
+
+export type ViolationTypeUpdateToOneWithWhereWithoutViolationsInput = {
+  where?: Prisma.ViolationTypeWhereInput
+  data: Prisma.XOR<Prisma.ViolationTypeUpdateWithoutViolationsInput, Prisma.ViolationTypeUncheckedUpdateWithoutViolationsInput>
+}
+
+export type ViolationTypeUpdateWithoutViolationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ViolationTypeUncheckedUpdateWithoutViolationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type ViolationTypeCountOutputType
+ */
+
+export type ViolationTypeCountOutputType = {
+  violations: number
+}
+
+export type ViolationTypeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  violations?: boolean | ViolationTypeCountOutputTypeCountViolationsArgs
+}
+
+/**
+ * ViolationTypeCountOutputType without action
+ */
+export type ViolationTypeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ViolationTypeCountOutputType
+   */
+  select?: Prisma.ViolationTypeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ViolationTypeCountOutputType without action
+ */
+export type ViolationTypeCountOutputTypeCountViolationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ViolationWhereInput
+}
 
 
 export type ViolationTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -336,6 +443,8 @@ export type ViolationTypeSelect<ExtArgs extends runtime.Types.Extensions.Interna
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  violations?: boolean | Prisma.ViolationType$violationsArgs<ExtArgs>
+  _count?: boolean | Prisma.ViolationTypeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["violationType"]>
 
 export type ViolationTypeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -366,10 +475,18 @@ export type ViolationTypeSelectScalar = {
 }
 
 export type ViolationTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["violationType"]>
+export type ViolationTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  violations?: boolean | Prisma.ViolationType$violationsArgs<ExtArgs>
+  _count?: boolean | Prisma.ViolationTypeCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type ViolationTypeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ViolationTypeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $ViolationTypePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ViolationType"
-  objects: {}
+  objects: {
+    violations: Prisma.$ViolationPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
@@ -771,6 +888,7 @@ readonly fields: ViolationTypeFieldRefs;
  */
 export interface Prisma__ViolationTypeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  violations<T extends Prisma.ViolationType$violationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ViolationType$violationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -823,6 +941,10 @@ export type ViolationTypeFindUniqueArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
+  /**
    * Filter, which ViolationType to fetch.
    */
   where: Prisma.ViolationTypeWhereUniqueInput
@@ -841,6 +963,10 @@ export type ViolationTypeFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Ext
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
+  /**
    * Filter, which ViolationType to fetch.
    */
   where: Prisma.ViolationTypeWhereUniqueInput
@@ -858,6 +984,10 @@ export type ViolationTypeFindFirstArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the ViolationType
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
   /**
    * Filter, which ViolationType to fetch.
    */
@@ -907,6 +1037,10 @@ export type ViolationTypeFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
+  /**
    * Filter, which ViolationType to fetch.
    */
   where?: Prisma.ViolationTypeWhereInput
@@ -954,6 +1088,10 @@ export type ViolationTypeFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the ViolationType
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
   /**
    * Filter, which ViolationTypes to fetch.
    */
@@ -1003,6 +1141,10 @@ export type ViolationTypeCreateArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
+  /**
    * The data needed to create a ViolationType.
    */
   data: Prisma.XOR<Prisma.ViolationTypeCreateInput, Prisma.ViolationTypeUncheckedCreateInput>
@@ -1050,6 +1192,10 @@ export type ViolationTypeUpdateArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the ViolationType
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
   /**
    * The data needed to update a ViolationType.
    */
@@ -1117,6 +1263,10 @@ export type ViolationTypeUpsertArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
+  /**
    * The filter to search for the ViolationType to update in case it exists.
    */
   where: Prisma.ViolationTypeWhereUniqueInput
@@ -1143,6 +1293,10 @@ export type ViolationTypeDeleteArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
+  /**
    * Filter which ViolationType to delete.
    */
   where: Prisma.ViolationTypeWhereUniqueInput
@@ -1163,6 +1317,30 @@ export type ViolationTypeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * ViolationType.violations
+ */
+export type ViolationType$violationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Violation
+   */
+  select?: Prisma.ViolationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Violation
+   */
+  omit?: Prisma.ViolationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationInclude<ExtArgs> | null
+  where?: Prisma.ViolationWhereInput
+  orderBy?: Prisma.ViolationOrderByWithRelationInput | Prisma.ViolationOrderByWithRelationInput[]
+  cursor?: Prisma.ViolationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ViolationScalarFieldEnum | Prisma.ViolationScalarFieldEnum[]
+}
+
+/**
  * ViolationType without action
  */
 export type ViolationTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1174,4 +1352,8 @@ export type ViolationTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the ViolationType
    */
   omit?: Prisma.ViolationTypeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationTypeInclude<ExtArgs> | null
 }

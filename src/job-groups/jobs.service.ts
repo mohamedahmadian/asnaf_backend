@@ -11,7 +11,7 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { Prisma } from '../generated/prisma/client';
+import { DocumentGender, Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateJobCatalogDto } from './dto/create-job-catalog.dto';
 import { CreateJobDto } from './dto/create-job.dto';
@@ -44,6 +44,8 @@ const jobSelect = {
   },
   documents: {
     select: {
+      gender: true,
+      isRequired: true,
       document: {
         select: { id: true, title: true, isRequired: true, gender: true, isFixed: true },
       },
@@ -312,8 +314,8 @@ export class JobsService {
       dto.inquiryCenterIds === undefined
         ? undefined
         : await this.assertInquiryCenters(dto.inquiryCenterIds);
-    const documentIds =
-      dto.documentIds === undefined ? undefined : await this.assertJobDocuments(dto.documentIds);
+    const jobDocuments =
+      dto.jobDocuments === undefined ? undefined : await this.assertJobDocuments(dto.jobDocuments);
     const code =
       !groupId || groupId === current.groupId
         ? undefined
@@ -340,11 +342,15 @@ export class JobsService {
                   })),
                 },
           documents:
-            documentIds === undefined
+            jobDocuments === undefined
               ? undefined
               : {
                   deleteMany: {},
-                  create: documentIds.map((documentId) => ({ documentId })),
+                  create: jobDocuments.map((item) => ({
+                    documentId: item.documentId,
+                    gender: item.gender,
+                    isRequired: item.isRequired,
+                  })),
                 },
         },
         select: jobSelect,
@@ -366,7 +372,11 @@ export class JobsService {
       ...item,
       annualFee: toFeeNumber(item.annualFee),
       inquiryCenters: item.inquiryCenters.map((row) => row.inquiryCenter),
-      documents: item.documents.map((row) => row.document),
+      documents: item.documents.map((row) => ({
+        ...row.document,
+        gender: row.gender,
+        isRequired: row.isRequired,
+      })),
     };
   }
 
@@ -455,22 +465,35 @@ export class JobsService {
     return uniqueIds;
   }
 
-  private async assertJobDocuments(ids?: string[]) {
-    const uniqueIds = [...new Set(ids ?? [])];
+  private async assertJobDocuments(
+    links?: { documentId: string; gender: DocumentGender; isRequired: boolean }[],
+  ) {
+    const byId = new Map<string, { gender: DocumentGender; isRequired: boolean }>();
+    for (const link of links ?? []) {
+      byId.set(link.documentId, { gender: link.gender, isRequired: link.isRequired });
+    }
+    const uniqueIds = [...byId.keys()];
     if (uniqueIds.length === 0) {
-      return uniqueIds;
+      return [] as { documentId: string; gender: DocumentGender; isRequired: boolean }[];
     }
     const found = await this.prisma.document.findMany({
       where: { id: { in: uniqueIds } },
-      select: { id: true, isFixed: true },
+      select: { id: true, isFixed: true, isRequired: true },
     });
     if (found.length !== uniqueIds.length) {
       throw new NotFoundException('مدرک یافت نشد');
     }
-    if (found.some((item) => item.isFixed)) {
-      throw new BadRequestException('مدرک ثابت به شغل وصل نمی‌شود');
+    if (found.some((item) => item.isFixed && item.isRequired)) {
+      throw new BadRequestException('مدرک ثابت الزامی به شغل وصل نمی‌شود');
     }
-    return uniqueIds;
+    return uniqueIds.map((documentId) => {
+      const link = byId.get(documentId);
+      return {
+        documentId,
+        gender: link?.gender ?? DocumentGender.BOTH,
+        isRequired: link?.isRequired ?? true,
+      };
+    });
   }
 
   private rethrowUnique(error: unknown): never {

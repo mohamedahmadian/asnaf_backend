@@ -34,6 +34,86 @@ export const DocumentGender = {
 export type DocumentGender = (typeof DocumentGender)[keyof typeof DocumentGender]
 
 
+export const ResidencyStatus = {
+  RESIDENT: 'RESIDENT',
+  NON_RESIDENT: 'NON_RESIDENT'
+} as const
+
+export type ResidencyStatus = (typeof ResidencyStatus)[keyof typeof ResidencyStatus]
+
+
+export const EducationLevel = {
+  ILLITERATE: 'ILLITERATE',
+  ELEMENTARY: 'ELEMENTARY',
+  MIDDLE_SCHOOL: 'MIDDLE_SCHOOL',
+  DIPLOMA: 'DIPLOMA',
+  ASSOCIATE: 'ASSOCIATE',
+  BACHELOR: 'BACHELOR',
+  MASTER: 'MASTER',
+  DOCTORATE: 'DOCTORATE',
+  SEMINARY: 'SEMINARY',
+  OTHER: 'OTHER'
+} as const
+
+export type EducationLevel = (typeof EducationLevel)[keyof typeof EducationLevel]
+
+
+export const DocumentSource = {
+  MANUAL: 'MANUAL',
+  CITIZEN_SYSTEM: 'CITIZEN_SYSTEM',
+  CIVIL_REGISTRY: 'CIVIL_REGISTRY'
+} as const
+
+export type DocumentSource = (typeof DocumentSource)[keyof typeof DocumentSource]
+
+
+export const PreviousOccupation = {
+  OTHER: 'OTHER',
+  ACTIVE_MILITARY: 'ACTIVE_MILITARY',
+  RETIRED_MILITARY: 'RETIRED_MILITARY',
+  ACTIVE_EMPLOYEE: 'ACTIVE_EMPLOYEE',
+  RETIRED_EMPLOYEE: 'RETIRED_EMPLOYEE'
+} as const
+
+export type PreviousOccupation = (typeof PreviousOccupation)[keyof typeof PreviousOccupation]
+
+
+export const PremiseEstablishment = {
+  INDEPENDENT: 'INDEPENDENT',
+  COMMERCIAL_COMPLEX: 'COMMERCIAL_COMPLEX',
+  RESIDENTIAL_COMPLEX: 'RESIDENTIAL_COMPLEX'
+} as const
+
+export type PremiseEstablishment = (typeof PremiseEstablishment)[keyof typeof PremiseEstablishment]
+
+
+export const PremiseGeoPosition = {
+  MAIN_FRONTAGE: 'MAIN_FRONTAGE',
+  SIDE_FRONTAGE: 'SIDE_FRONTAGE',
+  ALLEY: 'ALLEY'
+} as const
+
+export type PremiseGeoPosition = (typeof PremiseGeoPosition)[keyof typeof PremiseGeoPosition]
+
+
+export const PremisePublicAccess = {
+  MEN: 'MEN',
+  WOMEN: 'WOMEN',
+  PUBLIC: 'PUBLIC',
+  SEPARATE: 'SEPARATE'
+} as const
+
+export type PremisePublicAccess = (typeof PremisePublicAccess)[keyof typeof PremisePublicAccess]
+
+
+export const PremiseOwnership = {
+  OWNED: 'OWNED',
+  RENTED: 'RENTED'
+} as const
+
+export type PremiseOwnership = (typeof PremiseOwnership)[keyof typeof PremiseOwnership]
+
+
 export const Religion = {
   ISLAM: 'ISLAM',
   CHRISTIANITY: 'CHRISTIANITY',
@@ -140,6 +220,23 @@ export const ProjectProgressTranscriptionStatus = {
 export type ProjectProgressTranscriptionStatus = (typeof ProjectProgressTranscriptionStatus)[keyof typeof ProjectProgressTranscriptionStatus]
 
 
+export const CaseInquiryStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type CaseInquiryStatus = (typeof CaseInquiryStatus)[keyof typeof CaseInquiryStatus]
+
+
+export const CaseInquiryChannel = {
+  MANUAL: 'MANUAL',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type CaseInquiryChannel = (typeof CaseInquiryChannel)[keyof typeof CaseInquiryChannel]
+
+
 export const SingardFeedbackKind = {
   SUGGESTION: 'SUGGESTION',
   COMPLAINT: 'COMPLAINT',
@@ -223,3 +320,24 @@ export const BoardMinutesAttachmentKind = {
 } as const
 
 export type BoardMinutesAttachmentKind = (typeof BoardMinutesAttachmentKind)[keyof typeof BoardMinutesAttachmentKind]
+
+
+export const ViolationStatus = {
+  REGISTERED: 'REGISTERED',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  NOTICE: 'NOTICE',
+  REFERRED: 'REFERRED',
+  VERDICT_ISSUED: 'VERDICT_ISSUED',
+  CLOSED: 'CLOSED',
+  DISMISSED: 'DISMISSED'
+} as const
+
+export type ViolationStatus = (typeof ViolationStatus)[keyof typeof ViolationStatus]
+
+
+export const ViolationAttachmentKind = {
+  IMAGE: 'IMAGE',
+  FILE: 'FILE'
+} as const
+
+export type ViolationAttachmentKind = (typeof ViolationAttachmentKind)[keyof typeof ViolationAttachmentKind]

@@ -114,7 +114,17 @@ export class ViolationTypesService {
 
   async remove(id: string) {
     await this.findOne(id);
-    await this.prisma.violationType.delete({ where: { id } });
+    try {
+      await this.prisma.violationType.delete({ where: { id } });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        (error.code === 'P2003' || error.code === 'P2014')
+      ) {
+        throw new ConflictException('این نوع تخلف در پرونده‌های تخلف استفاده شده است');
+      }
+      throw error;
+    }
     return { ok: true };
   }
 

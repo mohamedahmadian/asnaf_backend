@@ -258,6 +258,8 @@ export type StoredImageWhereInput = {
   singardAttachments?: Prisma.SingardAttachmentListRelationFilter
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
+  violationAttachments?: Prisma.ViolationAttachmentListRelationFilter
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentListRelationFilter
 }
 
 export type StoredImageOrderByWithRelationInput = {
@@ -279,6 +281,8 @@ export type StoredImageOrderByWithRelationInput = {
   singardAttachments?: Prisma.SingardAttachmentOrderByRelationAggregateInput
   boardAttachments?: Prisma.BoardAttachmentOrderByRelationAggregateInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentOrderByRelationAggregateInput
+  violationAttachments?: Prisma.ViolationAttachmentOrderByRelationAggregateInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentOrderByRelationAggregateInput
 }
 
 export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
@@ -303,6 +307,8 @@ export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
   singardAttachments?: Prisma.SingardAttachmentListRelationFilter
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
+  violationAttachments?: Prisma.ViolationAttachmentListRelationFilter
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentListRelationFilter
 }, "id">
 
 export type StoredImageOrderByWithAggregationInput = {
@@ -354,6 +360,8 @@ export type StoredImageCreateInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateInput = {
@@ -375,6 +383,8 @@ export type StoredImageUncheckedCreateInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUpdateInput = {
@@ -396,6 +406,8 @@ export type StoredImageUpdateInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateInput = {
@@ -417,6 +429,8 @@ export type StoredImageUncheckedUpdateInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateManyInput = {
@@ -697,6 +711,38 @@ export type StoredImageUpdateOneWithoutBoardMinutesAttachmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutBoardMinutesAttachmentsInput, Prisma.StoredImageUpdateWithoutBoardMinutesAttachmentsInput>, Prisma.StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput>
 }
 
+export type StoredImageCreateNestedOneWithoutViolationAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationAttachmentsInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutViolationAttachmentsInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+}
+
+export type StoredImageUpdateOneWithoutViolationAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationAttachmentsInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutViolationAttachmentsInput
+  upsert?: Prisma.StoredImageUpsertWithoutViolationAttachmentsInput
+  disconnect?: Prisma.StoredImageWhereInput | boolean
+  delete?: Prisma.StoredImageWhereInput | boolean
+  connect?: Prisma.StoredImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutViolationAttachmentsInput, Prisma.StoredImageUpdateWithoutViolationAttachmentsInput>, Prisma.StoredImageUncheckedUpdateWithoutViolationAttachmentsInput>
+}
+
+export type StoredImageCreateNestedOneWithoutViolationProceedingAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutViolationProceedingAttachmentsInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+}
+
+export type StoredImageUpdateOneWithoutViolationProceedingAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutViolationProceedingAttachmentsInput
+  upsert?: Prisma.StoredImageUpsertWithoutViolationProceedingAttachmentsInput
+  disconnect?: Prisma.StoredImageWhereInput | boolean
+  delete?: Prisma.StoredImageWhereInput | boolean
+  connect?: Prisma.StoredImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUpdateWithoutViolationProceedingAttachmentsInput>, Prisma.StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput>
+}
+
 export type StoredImageCreateWithoutPhotoUsersInput = {
   id?: string
   mimeType: string
@@ -715,6 +761,8 @@ export type StoredImageCreateWithoutPhotoUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
@@ -735,6 +783,8 @@ export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutPhotoUsersInput = {
@@ -760,6 +810,8 @@ export type StoredImageCreateWithoutNationalCardUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutNationalCardUsersInput = {
@@ -780,6 +832,8 @@ export type StoredImageUncheckedCreateWithoutNationalCardUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutNationalCardUsersInput = {
@@ -805,6 +859,8 @@ export type StoredImageCreateWithoutPassportUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutPassportUsersInput = {
@@ -825,6 +881,8 @@ export type StoredImageUncheckedCreateWithoutPassportUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutPassportUsersInput = {
@@ -850,6 +908,8 @@ export type StoredImageCreateWithoutIdentityBookletUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutIdentityBookletUsersInput = {
@@ -870,6 +930,8 @@ export type StoredImageUncheckedCreateWithoutIdentityBookletUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutIdentityBookletUsersInput = {
@@ -906,6 +968,8 @@ export type StoredImageUpdateWithoutPhotoUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
@@ -926,6 +990,8 @@ export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUpsertWithoutNationalCardUsersInput = {
@@ -957,6 +1023,8 @@ export type StoredImageUpdateWithoutNationalCardUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutNationalCardUsersInput = {
@@ -977,6 +1045,8 @@ export type StoredImageUncheckedUpdateWithoutNationalCardUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUpsertWithoutPassportUsersInput = {
@@ -1008,6 +1078,8 @@ export type StoredImageUpdateWithoutPassportUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPassportUsersInput = {
@@ -1028,6 +1100,8 @@ export type StoredImageUncheckedUpdateWithoutPassportUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUpsertWithoutIdentityBookletUsersInput = {
@@ -1059,6 +1133,8 @@ export type StoredImageUpdateWithoutIdentityBookletUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput = {
@@ -1079,6 +1155,8 @@ export type StoredImageUncheckedUpdateWithoutIdentityBookletUsersInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutProgressImagesInput = {
@@ -1099,6 +1177,8 @@ export type StoredImageCreateWithoutProgressImagesInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
@@ -1119,6 +1199,8 @@ export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutProgressImagesInput = {
@@ -1155,6 +1237,8 @@ export type StoredImageUpdateWithoutProgressImagesInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
@@ -1175,6 +1259,8 @@ export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutFoodPhotosInput = {
@@ -1195,6 +1281,8 @@ export type StoredImageCreateWithoutFoodPhotosInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
@@ -1215,6 +1303,8 @@ export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutFoodPhotosInput = {
@@ -1251,6 +1341,8 @@ export type StoredImageUpdateWithoutFoodPhotosInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
@@ -1271,6 +1363,8 @@ export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutRestaurantLogosInput = {
@@ -1291,6 +1385,8 @@ export type StoredImageCreateWithoutRestaurantLogosInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
@@ -1311,6 +1407,8 @@ export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutRestaurantLogosInput = {
@@ -1347,6 +1445,8 @@ export type StoredImageUpdateWithoutRestaurantLogosInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
@@ -1367,6 +1467,8 @@ export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutSingardAttachmentsInput = {
@@ -1387,6 +1489,8 @@ export type StoredImageCreateWithoutSingardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutSingardAttachmentsInput = {
@@ -1407,6 +1511,8 @@ export type StoredImageUncheckedCreateWithoutSingardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutSingardAttachmentsInput = {
@@ -1443,6 +1549,8 @@ export type StoredImageUpdateWithoutSingardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutSingardAttachmentsInput = {
@@ -1463,6 +1571,8 @@ export type StoredImageUncheckedUpdateWithoutSingardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutBoardAttachmentsInput = {
@@ -1483,6 +1593,8 @@ export type StoredImageCreateWithoutBoardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutBoardAttachmentsInput = {
@@ -1503,6 +1615,8 @@ export type StoredImageUncheckedCreateWithoutBoardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutBoardAttachmentsInput = {
@@ -1539,6 +1653,8 @@ export type StoredImageUpdateWithoutBoardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutBoardAttachmentsInput = {
@@ -1559,6 +1675,8 @@ export type StoredImageUncheckedUpdateWithoutBoardAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutBoardMinutesAttachmentsInput = {
@@ -1579,6 +1697,8 @@ export type StoredImageCreateWithoutBoardMinutesAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
@@ -1599,6 +1719,8 @@ export type StoredImageUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutBoardMinutesAttachmentsInput = {
@@ -1635,6 +1757,8 @@ export type StoredImageUpdateWithoutBoardMinutesAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
@@ -1655,6 +1779,216 @@ export type StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
   progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageCreateWithoutViolationAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageUncheckedCreateWithoutViolationAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageCreateOrConnectWithoutViolationAttachmentsInput = {
+  where: Prisma.StoredImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationAttachmentsInput>
+}
+
+export type StoredImageUpsertWithoutViolationAttachmentsInput = {
+  update: Prisma.XOR<Prisma.StoredImageUpdateWithoutViolationAttachmentsInput, Prisma.StoredImageUncheckedUpdateWithoutViolationAttachmentsInput>
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationAttachmentsInput>
+  where?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageUpdateToOneWithWhereWithoutViolationAttachmentsInput = {
+  where?: Prisma.StoredImageWhereInput
+  data: Prisma.XOR<Prisma.StoredImageUpdateWithoutViolationAttachmentsInput, Prisma.StoredImageUncheckedUpdateWithoutViolationAttachmentsInput>
+}
+
+export type StoredImageUpdateWithoutViolationAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageUncheckedUpdateWithoutViolationAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageCreateWithoutViolationProceedingAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
+  nationalCardUsers?: Prisma.UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput
+  passportUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPassportPhotoInput
+  identityBookletUsers?: Prisma.UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput
+  foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageCreateOrConnectWithoutViolationProceedingAttachmentsInput = {
+  where: Prisma.StoredImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+}
+
+export type StoredImageUpsertWithoutViolationProceedingAttachmentsInput = {
+  update: Prisma.XOR<Prisma.StoredImageUpdateWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput>
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+  where?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageUpdateToOneWithWhereWithoutViolationProceedingAttachmentsInput = {
+  where?: Prisma.StoredImageWhereInput
+  data: Prisma.XOR<Prisma.StoredImageUpdateWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput>
+}
+
+export type StoredImageUpdateWithoutViolationProceedingAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUpdateManyWithoutIdentityBookletPhotoNestedInput
+  foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
+  nationalCardUsers?: Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput
+  passportUsers?: Prisma.UserUncheckedUpdateManyWithoutPassportPhotoNestedInput
+  identityBookletUsers?: Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput
+  foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
 }
 
 
@@ -1673,6 +2007,8 @@ export type StoredImageCountOutputType = {
   singardAttachments: number
   boardAttachments: number
   boardMinutesAttachments: number
+  violationAttachments: number
+  violationProceedingAttachments: number
 }
 
 export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1686,6 +2022,8 @@ export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   singardAttachments?: boolean | StoredImageCountOutputTypeCountSingardAttachmentsArgs
   boardAttachments?: boolean | StoredImageCountOutputTypeCountBoardAttachmentsArgs
   boardMinutesAttachments?: boolean | StoredImageCountOutputTypeCountBoardMinutesAttachmentsArgs
+  violationAttachments?: boolean | StoredImageCountOutputTypeCountViolationAttachmentsArgs
+  violationProceedingAttachments?: boolean | StoredImageCountOutputTypeCountViolationProceedingAttachmentsArgs
 }
 
 /**
@@ -1768,6 +2106,20 @@ export type StoredImageCountOutputTypeCountBoardMinutesAttachmentsArgs<ExtArgs e
   where?: Prisma.BoardMinutesAttachmentWhereInput
 }
 
+/**
+ * StoredImageCountOutputType without action
+ */
+export type StoredImageCountOutputTypeCountViolationAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ViolationAttachmentWhereInput
+}
+
+/**
+ * StoredImageCountOutputType without action
+ */
+export type StoredImageCountOutputTypeCountViolationProceedingAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ViolationProceedingAttachmentWhereInput
+}
+
 
 export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1788,6 +2140,8 @@ export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   singardAttachments?: boolean | Prisma.StoredImage$singardAttachmentsArgs<ExtArgs>
   boardAttachments?: boolean | Prisma.StoredImage$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs>
+  violationAttachments?: boolean | Prisma.StoredImage$violationAttachmentsArgs<ExtArgs>
+  violationProceedingAttachments?: boolean | Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["storedImage"]>
 
@@ -1836,6 +2190,8 @@ export type StoredImageInclude<ExtArgs extends runtime.Types.Extensions.Internal
   singardAttachments?: boolean | Prisma.StoredImage$singardAttachmentsArgs<ExtArgs>
   boardAttachments?: boolean | Prisma.StoredImage$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs>
+  violationAttachments?: boolean | Prisma.StoredImage$violationAttachmentsArgs<ExtArgs>
+  violationProceedingAttachments?: boolean | Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoredImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1854,6 +2210,8 @@ export type $StoredImagePayload<ExtArgs extends runtime.Types.Extensions.Interna
     singardAttachments: Prisma.$SingardAttachmentPayload<ExtArgs>[]
     boardAttachments: Prisma.$BoardAttachmentPayload<ExtArgs>[]
     boardMinutesAttachments: Prisma.$BoardMinutesAttachmentPayload<ExtArgs>[]
+    violationAttachments: Prisma.$ViolationAttachmentPayload<ExtArgs>[]
+    violationProceedingAttachments: Prisma.$ViolationProceedingAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2268,6 +2626,8 @@ export interface Prisma__StoredImageClient<T, Null = never, ExtArgs extends runt
   singardAttachments<T extends Prisma.StoredImage$singardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$singardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SingardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardAttachments<T extends Prisma.StoredImage$boardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$boardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesAttachments<T extends Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$boardMinutesAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  violationAttachments<T extends Prisma.StoredImage$violationAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$violationAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  violationProceedingAttachments<T extends Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationProceedingAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2935,6 +3295,54 @@ export type StoredImage$boardMinutesAttachmentsArgs<ExtArgs extends runtime.Type
   take?: number
   skip?: number
   distinct?: Prisma.BoardMinutesAttachmentScalarFieldEnum | Prisma.BoardMinutesAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredImage.violationAttachments
+ */
+export type StoredImage$violationAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ViolationAttachment
+   */
+  select?: Prisma.ViolationAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ViolationAttachment
+   */
+  omit?: Prisma.ViolationAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationAttachmentInclude<ExtArgs> | null
+  where?: Prisma.ViolationAttachmentWhereInput
+  orderBy?: Prisma.ViolationAttachmentOrderByWithRelationInput | Prisma.ViolationAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.ViolationAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ViolationAttachmentScalarFieldEnum | Prisma.ViolationAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredImage.violationProceedingAttachments
+ */
+export type StoredImage$violationProceedingAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ViolationProceedingAttachment
+   */
+  select?: Prisma.ViolationProceedingAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ViolationProceedingAttachment
+   */
+  omit?: Prisma.ViolationProceedingAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationProceedingAttachmentInclude<ExtArgs> | null
+  where?: Prisma.ViolationProceedingAttachmentWhereInput
+  orderBy?: Prisma.ViolationProceedingAttachmentOrderByWithRelationInput | Prisma.ViolationProceedingAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.ViolationProceedingAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ViolationProceedingAttachmentScalarFieldEnum | Prisma.ViolationProceedingAttachmentScalarFieldEnum[]
 }
 
 /**

@@ -1,19 +1,23 @@
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsArray,
   IsBoolean,
+  IsEnum,
   IsInt,
   IsOptional,
   IsString,
   IsUUID,
+  Matches,
   Max,
   MaxLength,
   Min,
   MinLength,
   ValidateIf,
+  ValidateNested,
 } from 'class-validator';
 import { emptyToNull } from '../../common/dto-transform';
 import { toLatinDigits } from '../../common/national-id';
+import { DocumentGender } from '../../generated/prisma/client';
 
 function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
@@ -83,6 +87,19 @@ export class CreateJobCatalogDto {
 
   @IsOptional()
   @IsArray()
-  @IsUUID('4', { each: true })
-  documentIds?: string[];
+  @ValidateNested({ each: true })
+  @Type(() => JobDocumentLinkDto)
+  jobDocuments?: JobDocumentLinkDto[];
+}
+
+export class JobDocumentLinkDto {
+  @IsString()
+  @Matches(/^[A-Za-z0-9-]{1,64}$/)
+  documentId: string;
+
+  @IsEnum(DocumentGender)
+  gender: DocumentGender;
+
+  @IsBoolean()
+  isRequired: boolean;
 }

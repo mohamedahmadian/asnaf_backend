@@ -27,16 +27,22 @@ export type AggregateJobDocument = {
 export type JobDocumentMinAggregateOutputType = {
   jobId: string | null
   documentId: string | null
+  gender: $Enums.DocumentGender | null
+  isRequired: boolean | null
 }
 
 export type JobDocumentMaxAggregateOutputType = {
   jobId: string | null
   documentId: string | null
+  gender: $Enums.DocumentGender | null
+  isRequired: boolean | null
 }
 
 export type JobDocumentCountAggregateOutputType = {
   jobId: number
   documentId: number
+  gender: number
+  isRequired: number
   _all: number
 }
 
@@ -44,16 +50,22 @@ export type JobDocumentCountAggregateOutputType = {
 export type JobDocumentMinAggregateInputType = {
   jobId?: true
   documentId?: true
+  gender?: true
+  isRequired?: true
 }
 
 export type JobDocumentMaxAggregateInputType = {
   jobId?: true
   documentId?: true
+  gender?: true
+  isRequired?: true
 }
 
 export type JobDocumentCountAggregateInputType = {
   jobId?: true
   documentId?: true
+  gender?: true
+  isRequired?: true
   _all?: true
 }
 
@@ -132,6 +144,8 @@ export type JobDocumentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type JobDocumentGroupByOutputType = {
   jobId: string
   documentId: string
+  gender: $Enums.DocumentGender
+  isRequired: boolean
   _count: JobDocumentCountAggregateOutputType | null
   _min: JobDocumentMinAggregateOutputType | null
   _max: JobDocumentMaxAggregateOutputType | null
@@ -158,6 +172,8 @@ export type JobDocumentWhereInput = {
   NOT?: Prisma.JobDocumentWhereInput | Prisma.JobDocumentWhereInput[]
   jobId?: Prisma.StringFilter<"JobDocument"> | string
   documentId?: Prisma.StringFilter<"JobDocument"> | string
+  gender?: Prisma.EnumDocumentGenderFilter<"JobDocument"> | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFilter<"JobDocument"> | boolean
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
 }
@@ -165,6 +181,8 @@ export type JobDocumentWhereInput = {
 export type JobDocumentOrderByWithRelationInput = {
   jobId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
   job?: Prisma.JobOrderByWithRelationInput
   document?: Prisma.DocumentOrderByWithRelationInput
 }
@@ -176,6 +194,8 @@ export type JobDocumentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.JobDocumentWhereInput | Prisma.JobDocumentWhereInput[]
   jobId?: Prisma.StringFilter<"JobDocument"> | string
   documentId?: Prisma.StringFilter<"JobDocument"> | string
+  gender?: Prisma.EnumDocumentGenderFilter<"JobDocument"> | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFilter<"JobDocument"> | boolean
   job?: Prisma.XOR<Prisma.JobScalarRelationFilter, Prisma.JobWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
 }, "jobId_documentId">
@@ -183,6 +203,8 @@ export type JobDocumentWhereUniqueInput = Prisma.AtLeast<{
 export type JobDocumentOrderByWithAggregationInput = {
   jobId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
   _count?: Prisma.JobDocumentCountOrderByAggregateInput
   _max?: Prisma.JobDocumentMaxOrderByAggregateInput
   _min?: Prisma.JobDocumentMinOrderByAggregateInput
@@ -194,9 +216,13 @@ export type JobDocumentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.JobDocumentScalarWhereWithAggregatesInput | Prisma.JobDocumentScalarWhereWithAggregatesInput[]
   jobId?: Prisma.StringWithAggregatesFilter<"JobDocument"> | string
   documentId?: Prisma.StringWithAggregatesFilter<"JobDocument"> | string
+  gender?: Prisma.EnumDocumentGenderWithAggregatesFilter<"JobDocument"> | $Enums.DocumentGender
+  isRequired?: Prisma.BoolWithAggregatesFilter<"JobDocument"> | boolean
 }
 
 export type JobDocumentCreateInput = {
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
   job: Prisma.JobCreateNestedOneWithoutDocumentsInput
   document: Prisma.DocumentCreateNestedOneWithoutJobsInput
 }
@@ -204,9 +230,13 @@ export type JobDocumentCreateInput = {
 export type JobDocumentUncheckedCreateInput = {
   jobId: string
   documentId: string
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
 }
 
 export type JobDocumentUpdateInput = {
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutDocumentsNestedInput
   document?: Prisma.DocumentUpdateOneRequiredWithoutJobsNestedInput
 }
@@ -214,20 +244,27 @@ export type JobDocumentUpdateInput = {
 export type JobDocumentUncheckedUpdateInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type JobDocumentCreateManyInput = {
   jobId: string
   documentId: string
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
 }
 
 export type JobDocumentUpdateManyMutationInput = {
-
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type JobDocumentUncheckedUpdateManyInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type JobDocumentListRelationFilter = {
@@ -248,16 +285,22 @@ export type JobDocumentJobIdDocumentIdCompoundUniqueInput = {
 export type JobDocumentCountOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
 }
 
 export type JobDocumentMaxOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
 }
 
 export type JobDocumentMinOrderByAggregateInput = {
   jobId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
 }
 
 export type JobDocumentCreateNestedManyWithoutJobInput = {
@@ -300,6 +343,10 @@ export type JobDocumentUncheckedUpdateManyWithoutJobNestedInput = {
   update?: Prisma.JobDocumentUpdateWithWhereUniqueWithoutJobInput | Prisma.JobDocumentUpdateWithWhereUniqueWithoutJobInput[]
   updateMany?: Prisma.JobDocumentUpdateManyWithWhereWithoutJobInput | Prisma.JobDocumentUpdateManyWithWhereWithoutJobInput[]
   deleteMany?: Prisma.JobDocumentScalarWhereInput | Prisma.JobDocumentScalarWhereInput[]
+}
+
+export type EnumDocumentGenderFieldUpdateOperationsInput = {
+  set?: $Enums.DocumentGender
 }
 
 export type JobDocumentCreateNestedManyWithoutDocumentInput = {
@@ -345,11 +392,15 @@ export type JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput = {
 }
 
 export type JobDocumentCreateWithoutJobInput = {
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
   document: Prisma.DocumentCreateNestedOneWithoutJobsInput
 }
 
 export type JobDocumentUncheckedCreateWithoutJobInput = {
   documentId: string
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
 }
 
 export type JobDocumentCreateOrConnectWithoutJobInput = {
@@ -384,14 +435,20 @@ export type JobDocumentScalarWhereInput = {
   NOT?: Prisma.JobDocumentScalarWhereInput | Prisma.JobDocumentScalarWhereInput[]
   jobId?: Prisma.StringFilter<"JobDocument"> | string
   documentId?: Prisma.StringFilter<"JobDocument"> | string
+  gender?: Prisma.EnumDocumentGenderFilter<"JobDocument"> | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFilter<"JobDocument"> | boolean
 }
 
 export type JobDocumentCreateWithoutDocumentInput = {
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
   job: Prisma.JobCreateNestedOneWithoutDocumentsInput
 }
 
 export type JobDocumentUncheckedCreateWithoutDocumentInput = {
   jobId: string
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
 }
 
 export type JobDocumentCreateOrConnectWithoutDocumentInput = {
@@ -422,34 +479,50 @@ export type JobDocumentUpdateManyWithWhereWithoutDocumentInput = {
 
 export type JobDocumentCreateManyJobInput = {
   documentId: string
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
 }
 
 export type JobDocumentUpdateWithoutJobInput = {
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   document?: Prisma.DocumentUpdateOneRequiredWithoutJobsNestedInput
 }
 
 export type JobDocumentUncheckedUpdateWithoutJobInput = {
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type JobDocumentUncheckedUpdateManyWithoutJobInput = {
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type JobDocumentCreateManyDocumentInput = {
   jobId: string
+  gender?: $Enums.DocumentGender
+  isRequired?: boolean
 }
 
 export type JobDocumentUpdateWithoutDocumentInput = {
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   job?: Prisma.JobUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
 export type JobDocumentUncheckedUpdateWithoutDocumentInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type JobDocumentUncheckedUpdateManyWithoutDocumentInput = {
   jobId?: Prisma.StringFieldUpdateOperationsInput | string
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -457,6 +530,8 @@ export type JobDocumentUncheckedUpdateManyWithoutDocumentInput = {
 export type JobDocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   jobId?: boolean
   documentId?: boolean
+  gender?: boolean
+  isRequired?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jobDocument"]>
@@ -464,6 +539,8 @@ export type JobDocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type JobDocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   jobId?: boolean
   documentId?: boolean
+  gender?: boolean
+  isRequired?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jobDocument"]>
@@ -471,6 +548,8 @@ export type JobDocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type JobDocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   jobId?: boolean
   documentId?: boolean
+  gender?: boolean
+  isRequired?: boolean
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jobDocument"]>
@@ -478,9 +557,11 @@ export type JobDocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type JobDocumentSelectScalar = {
   jobId?: boolean
   documentId?: boolean
+  gender?: boolean
+  isRequired?: boolean
 }
 
-export type JobDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"jobId" | "documentId", ExtArgs["result"]["jobDocument"]>
+export type JobDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"jobId" | "documentId" | "gender" | "isRequired", ExtArgs["result"]["jobDocument"]>
 export type JobDocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   job?: boolean | Prisma.JobDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
@@ -503,6 +584,8 @@ export type $JobDocumentPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     jobId: string
     documentId: string
+    gender: $Enums.DocumentGender
+    isRequired: boolean
   }, ExtArgs["result"]["jobDocument"]>
   composites: {}
 }
@@ -930,6 +1013,8 @@ export interface Prisma__JobDocumentClient<T, Null = never, ExtArgs extends runt
 export interface JobDocumentFieldRefs {
   readonly jobId: Prisma.FieldRef<"JobDocument", 'String'>
   readonly documentId: Prisma.FieldRef<"JobDocument", 'String'>
+  readonly gender: Prisma.FieldRef<"JobDocument", 'DocumentGender'>
+  readonly isRequired: Prisma.FieldRef<"JobDocument", 'Boolean'>
 }
     
 

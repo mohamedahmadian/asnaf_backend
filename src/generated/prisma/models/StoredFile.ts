@@ -240,6 +240,8 @@ export type StoredFileWhereInput = {
   singardAttachments?: Prisma.SingardAttachmentListRelationFilter
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
+  violationAttachments?: Prisma.ViolationAttachmentListRelationFilter
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentListRelationFilter
 }
 
 export type StoredFileOrderByWithRelationInput = {
@@ -254,6 +256,8 @@ export type StoredFileOrderByWithRelationInput = {
   singardAttachments?: Prisma.SingardAttachmentOrderByRelationAggregateInput
   boardAttachments?: Prisma.BoardAttachmentOrderByRelationAggregateInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentOrderByRelationAggregateInput
+  violationAttachments?: Prisma.ViolationAttachmentOrderByRelationAggregateInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentOrderByRelationAggregateInput
 }
 
 export type StoredFileWhereUniqueInput = Prisma.AtLeast<{
@@ -271,6 +275,8 @@ export type StoredFileWhereUniqueInput = Prisma.AtLeast<{
   singardAttachments?: Prisma.SingardAttachmentListRelationFilter
   boardAttachments?: Prisma.BoardAttachmentListRelationFilter
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentListRelationFilter
+  violationAttachments?: Prisma.ViolationAttachmentListRelationFilter
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentListRelationFilter
 }, "id">
 
 export type StoredFileOrderByWithAggregationInput = {
@@ -313,6 +319,8 @@ export type StoredFileCreateInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateInput = {
@@ -327,6 +335,8 @@ export type StoredFileUncheckedCreateInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUpdateInput = {
@@ -341,6 +351,8 @@ export type StoredFileUpdateInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateInput = {
@@ -355,6 +367,8 @@ export type StoredFileUncheckedUpdateInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileCreateManyInput = {
@@ -496,6 +510,38 @@ export type StoredFileUpdateOneWithoutBoardMinutesAttachmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutBoardMinutesAttachmentsInput, Prisma.StoredFileUpdateWithoutBoardMinutesAttachmentsInput>, Prisma.StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput>
 }
 
+export type StoredFileCreateNestedOneWithoutViolationAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutViolationAttachmentsInput
+  connect?: Prisma.StoredFileWhereUniqueInput
+}
+
+export type StoredFileUpdateOneWithoutViolationAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutViolationAttachmentsInput
+  upsert?: Prisma.StoredFileUpsertWithoutViolationAttachmentsInput
+  disconnect?: Prisma.StoredFileWhereInput | boolean
+  delete?: Prisma.StoredFileWhereInput | boolean
+  connect?: Prisma.StoredFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutViolationAttachmentsInput, Prisma.StoredFileUpdateWithoutViolationAttachmentsInput>, Prisma.StoredFileUncheckedUpdateWithoutViolationAttachmentsInput>
+}
+
+export type StoredFileCreateNestedOneWithoutViolationProceedingAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutViolationProceedingAttachmentsInput
+  connect?: Prisma.StoredFileWhereUniqueInput
+}
+
+export type StoredFileUpdateOneWithoutViolationProceedingAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+  connectOrCreate?: Prisma.StoredFileCreateOrConnectWithoutViolationProceedingAttachmentsInput
+  upsert?: Prisma.StoredFileUpsertWithoutViolationProceedingAttachmentsInput
+  disconnect?: Prisma.StoredFileWhereInput | boolean
+  delete?: Prisma.StoredFileWhereInput | boolean
+  connect?: Prisma.StoredFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredFileUpdateToOneWithWhereWithoutViolationProceedingAttachmentsInput, Prisma.StoredFileUpdateWithoutViolationProceedingAttachmentsInput>, Prisma.StoredFileUncheckedUpdateWithoutViolationProceedingAttachmentsInput>
+}
+
 export type StoredFileCreateWithoutProgressEntriesInput = {
   id?: string
   mimeType: string
@@ -507,6 +553,8 @@ export type StoredFileCreateWithoutProgressEntriesInput = {
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateWithoutProgressEntriesInput = {
@@ -520,6 +568,8 @@ export type StoredFileUncheckedCreateWithoutProgressEntriesInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileCreateOrConnectWithoutProgressEntriesInput = {
@@ -549,6 +599,8 @@ export type StoredFileUpdateWithoutProgressEntriesInput = {
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateWithoutProgressEntriesInput = {
@@ -562,6 +614,8 @@ export type StoredFileUncheckedUpdateWithoutProgressEntriesInput = {
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileCreateWithoutSingardAttachmentsInput = {
@@ -575,6 +629,8 @@ export type StoredFileCreateWithoutSingardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateWithoutSingardAttachmentsInput = {
@@ -588,6 +644,8 @@ export type StoredFileUncheckedCreateWithoutSingardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileCreateOrConnectWithoutSingardAttachmentsInput = {
@@ -617,6 +675,8 @@ export type StoredFileUpdateWithoutSingardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateWithoutSingardAttachmentsInput = {
@@ -630,6 +690,8 @@ export type StoredFileUncheckedUpdateWithoutSingardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileCreateWithoutBoardAttachmentsInput = {
@@ -643,6 +705,8 @@ export type StoredFileCreateWithoutBoardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateWithoutBoardAttachmentsInput = {
@@ -656,6 +720,8 @@ export type StoredFileUncheckedCreateWithoutBoardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileCreateOrConnectWithoutBoardAttachmentsInput = {
@@ -685,6 +751,8 @@ export type StoredFileUpdateWithoutBoardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateWithoutBoardAttachmentsInput = {
@@ -698,6 +766,8 @@ export type StoredFileUncheckedUpdateWithoutBoardAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileCreateWithoutBoardMinutesAttachmentsInput = {
@@ -711,6 +781,8 @@ export type StoredFileCreateWithoutBoardMinutesAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
   singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
@@ -724,6 +796,8 @@ export type StoredFileUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutFileInput
 }
 
 export type StoredFileCreateOrConnectWithoutBoardMinutesAttachmentsInput = {
@@ -753,6 +827,8 @@ export type StoredFileUpdateWithoutBoardMinutesAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
   singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutFileNestedInput
 }
 
 export type StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
@@ -766,6 +842,160 @@ export type StoredFileUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
   progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
   singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
   boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileCreateWithoutViolationAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileUncheckedCreateWithoutViolationAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileCreateOrConnectWithoutViolationAttachmentsInput = {
+  where: Prisma.StoredFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationAttachmentsInput>
+}
+
+export type StoredFileUpsertWithoutViolationAttachmentsInput = {
+  update: Prisma.XOR<Prisma.StoredFileUpdateWithoutViolationAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutViolationAttachmentsInput>
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationAttachmentsInput>
+  where?: Prisma.StoredFileWhereInput
+}
+
+export type StoredFileUpdateToOneWithWhereWithoutViolationAttachmentsInput = {
+  where?: Prisma.StoredFileWhereInput
+  data: Prisma.XOR<Prisma.StoredFileUpdateWithoutViolationAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutViolationAttachmentsInput>
+}
+
+export type StoredFileUpdateWithoutViolationAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileUncheckedUpdateWithoutViolationAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileCreateWithoutViolationProceedingAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileUncheckedCreateWithoutViolationProceedingAttachmentsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  originalName?: string | null
+  durationMs?: number | null
+  createdAt?: Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedCreateNestedManyWithoutAudioInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutFileInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutFileInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutFileInput
+}
+
+export type StoredFileCreateOrConnectWithoutViolationProceedingAttachmentsInput = {
+  where: Prisma.StoredFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+}
+
+export type StoredFileUpsertWithoutViolationProceedingAttachmentsInput = {
+  update: Prisma.XOR<Prisma.StoredFileUpdateWithoutViolationProceedingAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutViolationProceedingAttachmentsInput>
+  create: Prisma.XOR<Prisma.StoredFileCreateWithoutViolationProceedingAttachmentsInput, Prisma.StoredFileUncheckedCreateWithoutViolationProceedingAttachmentsInput>
+  where?: Prisma.StoredFileWhereInput
+}
+
+export type StoredFileUpdateToOneWithWhereWithoutViolationProceedingAttachmentsInput = {
+  where?: Prisma.StoredFileWhereInput
+  data: Prisma.XOR<Prisma.StoredFileUpdateWithoutViolationProceedingAttachmentsInput, Prisma.StoredFileUncheckedUpdateWithoutViolationProceedingAttachmentsInput>
+}
+
+export type StoredFileUpdateWithoutViolationProceedingAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutFileNestedInput
+}
+
+export type StoredFileUncheckedUpdateWithoutViolationProceedingAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  durationMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  progressEntries?: Prisma.ProjectProgressEntryUncheckedUpdateManyWithoutAudioNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutFileNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutFileNestedInput
 }
 
 
@@ -778,6 +1008,8 @@ export type StoredFileCountOutputType = {
   singardAttachments: number
   boardAttachments: number
   boardMinutesAttachments: number
+  violationAttachments: number
+  violationProceedingAttachments: number
 }
 
 export type StoredFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -785,6 +1017,8 @@ export type StoredFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   singardAttachments?: boolean | StoredFileCountOutputTypeCountSingardAttachmentsArgs
   boardAttachments?: boolean | StoredFileCountOutputTypeCountBoardAttachmentsArgs
   boardMinutesAttachments?: boolean | StoredFileCountOutputTypeCountBoardMinutesAttachmentsArgs
+  violationAttachments?: boolean | StoredFileCountOutputTypeCountViolationAttachmentsArgs
+  violationProceedingAttachments?: boolean | StoredFileCountOutputTypeCountViolationProceedingAttachmentsArgs
 }
 
 /**
@@ -825,6 +1059,20 @@ export type StoredFileCountOutputTypeCountBoardMinutesAttachmentsArgs<ExtArgs ex
   where?: Prisma.BoardMinutesAttachmentWhereInput
 }
 
+/**
+ * StoredFileCountOutputType without action
+ */
+export type StoredFileCountOutputTypeCountViolationAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ViolationAttachmentWhereInput
+}
+
+/**
+ * StoredFileCountOutputType without action
+ */
+export type StoredFileCountOutputTypeCountViolationProceedingAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ViolationProceedingAttachmentWhereInput
+}
+
 
 export type StoredFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -838,6 +1086,8 @@ export type StoredFileSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   singardAttachments?: boolean | Prisma.StoredFile$singardAttachmentsArgs<ExtArgs>
   boardAttachments?: boolean | Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>
+  violationAttachments?: boolean | Prisma.StoredFile$violationAttachmentsArgs<ExtArgs>
+  violationProceedingAttachments?: boolean | Prisma.StoredFile$violationProceedingAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredFileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["storedFile"]>
 
@@ -877,6 +1127,8 @@ export type StoredFileInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   singardAttachments?: boolean | Prisma.StoredFile$singardAttachmentsArgs<ExtArgs>
   boardAttachments?: boolean | Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>
   boardMinutesAttachments?: boolean | Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>
+  violationAttachments?: boolean | Prisma.StoredFile$violationAttachmentsArgs<ExtArgs>
+  violationProceedingAttachments?: boolean | Prisma.StoredFile$violationProceedingAttachmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredFileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoredFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -889,6 +1141,8 @@ export type $StoredFilePayload<ExtArgs extends runtime.Types.Extensions.Internal
     singardAttachments: Prisma.$SingardAttachmentPayload<ExtArgs>[]
     boardAttachments: Prisma.$BoardAttachmentPayload<ExtArgs>[]
     boardMinutesAttachments: Prisma.$BoardMinutesAttachmentPayload<ExtArgs>[]
+    violationAttachments: Prisma.$ViolationAttachmentPayload<ExtArgs>[]
+    violationProceedingAttachments: Prisma.$ViolationProceedingAttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1296,6 +1550,8 @@ export interface Prisma__StoredFileClient<T, Null = never, ExtArgs extends runti
   singardAttachments<T extends Prisma.StoredFile$singardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$singardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SingardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardAttachments<T extends Prisma.StoredFile$boardAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$boardAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boardMinutesAttachments<T extends Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$boardMinutesAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoardMinutesAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  violationAttachments<T extends Prisma.StoredFile$violationAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$violationAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  violationProceedingAttachments<T extends Prisma.StoredFile$violationProceedingAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredFile$violationProceedingAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationProceedingAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1818,6 +2074,54 @@ export type StoredFile$boardMinutesAttachmentsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.BoardMinutesAttachmentScalarFieldEnum | Prisma.BoardMinutesAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredFile.violationAttachments
+ */
+export type StoredFile$violationAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ViolationAttachment
+   */
+  select?: Prisma.ViolationAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ViolationAttachment
+   */
+  omit?: Prisma.ViolationAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationAttachmentInclude<ExtArgs> | null
+  where?: Prisma.ViolationAttachmentWhereInput
+  orderBy?: Prisma.ViolationAttachmentOrderByWithRelationInput | Prisma.ViolationAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.ViolationAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ViolationAttachmentScalarFieldEnum | Prisma.ViolationAttachmentScalarFieldEnum[]
+}
+
+/**
+ * StoredFile.violationProceedingAttachments
+ */
+export type StoredFile$violationProceedingAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ViolationProceedingAttachment
+   */
+  select?: Prisma.ViolationProceedingAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ViolationProceedingAttachment
+   */
+  omit?: Prisma.ViolationProceedingAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ViolationProceedingAttachmentInclude<ExtArgs> | null
+  where?: Prisma.ViolationProceedingAttachmentWhereInput
+  orderBy?: Prisma.ViolationProceedingAttachmentOrderByWithRelationInput | Prisma.ViolationProceedingAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.ViolationProceedingAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ViolationProceedingAttachmentScalarFieldEnum | Prisma.ViolationProceedingAttachmentScalarFieldEnum[]
 }
 
 /**

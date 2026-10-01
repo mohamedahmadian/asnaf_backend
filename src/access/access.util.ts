@@ -32,6 +32,14 @@ export async function loadUserAccess(
           rows.flatMap((row) => row.role.permissions.map((item) => item.code)),
         ),
       ];
+  if (!isAdmin) {
+    const officerCenters = await prisma.inquiryCenter.count({
+      where: { officerId: userId, isActive: true },
+    });
+    if (officerCenters > 0 && !permissionCodes.includes('cases.inquiries')) {
+      permissionCodes.push('cases.inquiries');
+    }
+  }
   return { isAdmin, roleCodes, permissionCodes };
 }
 

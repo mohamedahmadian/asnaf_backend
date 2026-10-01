@@ -1,0 +1,740 @@
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import {
+  containsInsensitive,
+  normalizeSearchDigits,
+  paginatedResult,
+  paginationArgs,
+  wantsPagination,
+} from '../common/pagination';
+import { resolveSortOrder } from '../common/sort-query';
+import { Prisma, ViolationStatus } from '../generated/prisma/client';
+import { ImagesService } from '../images/images.service';
+import { PrismaService } from '../prisma/prisma.service';
+import {
+  calendarParts,
+  currentCalendarYear,
+  formatDateOnly,
+  parseDateOnly,
+  reportCalendar,
+} from './calendar';
+import { CreateProceedingDto } from './dto/create-proceeding.dto';
+import { CreateViolationDto } from './dto/create-violation.dto';
+import { FindProceedingsQueryDto } from './dto/find-proceedings-query.dto';
+import { FindViolationsQueryDto } from './dto/find-violations-query.dto';
+import { UpdateProceedingDto } from './dto/update-proceeding.dto';
+import { UpdateViolationDto } from './dto/update-violation.dto';
+import { ViolationReportQueryDto } from './dto/violation-report-query.dto';
+import { violationStatuses } from './violation-status';
+import {
+  purgeUploads,
+  storeUploads,
+  type UploadFile,
+} from './stored-uploads';
+
+const attachmentSelect = {
+  id: true,
+  kind: true,
+  originalName: true,
+  sortOrder: true,
+  imageId: true,
+  fileId: true,
+} satisfies Prisma.ViolationAttachmentSelect;
+
+const caseFileSelect = {
+  id: true,
+  fullName: true,
+  caseTrackingCode: true,
+  businessUnitTitle: true,
+  formationStep: true,
+  economicJob: { select: { title: true } },
+} satisfies Prisma.UserSelect;
+
+const violationSelect = {
+  id: true,
+  nationalId: true,
+  violationTypeId: true,
+  violationType: { select: { id: true, title: true } },
+  occurredAt: true,
+  description: true,
+  status: true,
+  caseUser: { select: caseFileSelect },
+  createdAt: true,
+  updatedAt: true,
+  attachments: { orderBy: { sortOrder: 'asc' as const }, select: attachmentSelect },
+  _count: { select: { proceedings: true } },
+} satisfies Prisma.ViolationSelect;
+
+@Injectable()
+export class ViolationsService {
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly images: ImagesService,
+  ) {}
+
+  async findAll(query: FindViolationsQueryDto) {
+    const where = await this.listWhere(query);
+    const orderBy = resolveSortOrder<Prisma.ViolationOrderByWithRelationInput>(
+      query.sortBy,
+      query.sortDir,
+      {
+        nationalId: (dir) => ({ nationalId: dir }),
+        violationType: (dir) => ({ violationType: { title: dir } }),
+        occurredAt: (dir) => ({ occurredAt: dir }),
+        status: (dir) => ({ status: dir }),
+        caseTrackingCode: (dir) => ({ caseUser: { caseTrackingCode: dir } }),
+        createdAt: (dir) => ({ createdAt: dir }),
+      },
+      [{ createdAt: 'desc' }, { id: 'asc' }],
+    );
+    if (!wantsPagination(query)) {
+      const items = await this.prisma.violation.findMany({
+        where,
+        orderBy,
+        select: violationSelect,
+      });
+      return this.withPeople(items);
+    }
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const [items, total] = await Promise.all([
+      this.prisma.violation.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        select: violationSelect,
+      }),
+      this.prisma.violation.count({ where }),
+    ]);
+    return paginatedResult(await this.withPeople(items), total, page, pageSize);
+  }
+
+  async report(query: ViolationReportQueryDto) {
+    const calendar = reportCalendar();
+    const rows = await this.prisma.violation.findMany({
+      select: { occurredAt: true, status: true },
+    });
+    const parts = rows.map((row) => ({
+      status: row.status,
+      ...calendarParts(row.occurredAt, calendar),
+    }));
+    const current = currentCalendarYear(calendar);
+    const span = query.span === 'all' ? 'all' : 'year';
+    const year = query.year ?? current;
+    const month = span === 'year' ? (query.month ?? null) : null;
+    const scoped = parts.filter((item) => {
+      if (span === 'all') return true;
+      if (item.year !== year) return false;
+      if (month && item.month !== month) return false;
+      return true;
+    });
+    const yearSet = new Set(parts.map((item) => item.year));
+    yearSet.add(current);
+    if (span === 'year') yearSet.add(year);
+    const years = [...yearSet].sort((left, right) => right - left);
+    return {
+      calendar,
+      span,
+      year,
+      month,
+      total: scoped.length,
+      byStatus: violationStatuses.map((status) => ({
+        status,
+        count: scoped.filter((item) => item.status === status).length,
+      })),
+      monthly: Array.from({ length: 12 }, (_, index) => ({
+        month: index + 1,
+        count: parts.filter(
+          (item) => item.year === year && item.month === index + 1,
+        ).length,
+      })),
+      yearly: years.map((itemYear) => ({
+        year: itemYear,
+        count: parts.filter((item) => item.year === itemYear).length,
+      })),
+      years,
+    };
+  }
+
+  async findPerson(nationalId: string) {
+    const people = await this.prisma.user.findMany({
+      where: { nationalId },
+      orderBy: [{ formationStep: 'desc' }, { createdAt: 'desc' }],
+      select: caseFileSelect,
+    });
+    return {
+      nationalId,
+      fullName: people.find((person) => person.fullName)?.fullName ?? null,
+      cases: people.filter((person) => person.formationStep > 0).map(mapCaseFile),
+    };
+  }
+
+  async findOne(id: string) {
+    const item = await this.prisma.violation.findUnique({
+      where: { id },
+      select: violationSelect,
+    });
+    if (!item) throw new NotFoundException('تخلف یافت نشد');
+    const [mapped] = await this.withPeople([item]);
+    return mapped;
+  }
+
+  async create(dto: CreateViolationDto, userId: string, files?: UploadFile[]) {
+    await this.ensureType(dto.violationTypeId);
+    await this.ensureCase(dto.nationalId, dto.caseUserId);
+    const occurredAt = this.requireDate(dto.occurredAt);
+    const uploads = await storeUploads(files, this.images, this.prisma);
+    try {
+      const item = await this.prisma.violation.create({
+        data: {
+          nationalId: dto.nationalId,
+          violationTypeId: dto.violationTypeId,
+          occurredAt,
+          description: dto.description,
+          status: dto.status ?? ViolationStatus.REGISTERED,
+          caseUserId: dto.caseUserId ?? null,
+          createdById: userId,
+          attachments: {
+            create: uploads.map((file, index) => ({
+              kind: file.kind,
+              imageId: file.imageId,
+              fileId: file.fileId,
+              originalName: file.originalName,
+              sortOrder: index,
+            })),
+          },
+        },
+        select: violationSelect,
+      });
+      const [mapped] = await this.withPeople([item]);
+      return mapped;
+    } catch (error) {
+      await purgeUploads(this.prisma, uploads);
+      throw error;
+    }
+  }
+
+  async update(
+    id: string,
+    dto: UpdateViolationDto,
+    files?: UploadFile[],
+  ) {
+    const current = await this.findOne(id);
+    if (dto.violationTypeId) await this.ensureType(dto.violationTypeId);
+    await this.ensureCase(dto.nationalId ?? current.nationalId, dto.caseUserId);
+    const occurredAt = dto.occurredAt
+      ? this.requireDate(dto.occurredAt)
+      : undefined;
+    const uploads = await storeUploads(files, this.images, this.prisma);
+    const nextSort = nextAttachmentSort(current.attachments, dto.removeAttachmentIds);
+    let saved = false;
+    try {
+      await this.prisma.violation.update({
+        where: { id },
+        data: {
+          nationalId: dto.nationalId,
+          violationTypeId: dto.violationTypeId,
+          occurredAt,
+          description: dto.description,
+          status: dto.status,
+          caseUserId: dto.caseUserId,
+          attachments: uploads.length
+            ? {
+                create: uploads.map((file, index) => ({
+                  kind: file.kind,
+                  imageId: file.imageId,
+                  fileId: file.fileId,
+                  originalName: file.originalName,
+                  sortOrder: nextSort + index,
+                })),
+              }
+            : undefined,
+        },
+      });
+      saved = true;
+      await this.removeViolationAttachments(id, dto.removeAttachmentIds);
+      return this.findOne(id);
+    } catch (error) {
+      if (!saved) await purgeUploads(this.prisma, uploads);
+      throw error;
+    }
+  }
+
+  async remove(id: string) {
+    const item = await this.prisma.violation.findUnique({
+      where: { id },
+      select: {
+        attachments: { select: { imageId: true, fileId: true } },
+        proceedings: {
+          select: {
+            attachments: { select: { imageId: true, fileId: true } },
+          },
+        },
+      },
+    });
+    if (!item) throw new NotFoundException('تخلف یافت نشد');
+    const blobs = [
+      ...item.attachments,
+      ...item.proceedings.flatMap((proceeding) => proceeding.attachments),
+    ];
+    await this.prisma.violation.delete({ where: { id } });
+    await purgeUploads(this.prisma, blobs);
+    return { ok: true };
+  }
+
+  async readViolationAttachment(violationId: string, attachmentId: string) {
+    const attachment = await this.prisma.violationAttachment.findFirst({
+      where: { id: attachmentId, violationId },
+      select: {
+        originalName: true,
+        image: true,
+        file: true,
+      },
+    });
+    if (!attachment) throw new NotFoundException('پیوست یافت نشد');
+    return this.blobResponse(attachment);
+  }
+
+  async findProceedings(violationId: string, query: FindProceedingsQueryDto) {
+    await this.ensureViolation(violationId);
+    const where: Prisma.ViolationProceedingWhereInput = {
+      violationId,
+      OR: query.q
+        ? [
+            { title: containsInsensitive(query.q) },
+            { description: containsInsensitive(query.q) },
+          ]
+        : undefined,
+    };
+    const orderBy =
+      resolveSortOrder<Prisma.ViolationProceedingOrderByWithRelationInput>(
+        query.sortBy,
+        query.sortDir,
+        {
+          occurredAt: (dir) => ({ occurredAt: dir }),
+          title: (dir) => ({ title: dir }),
+          description: (dir) => ({ description: dir }),
+          attachmentCount: (dir) => ({ attachments: { _count: dir } }),
+        },
+        [{ occurredAt: 'desc' }, { id: 'asc' }],
+      );
+    const select = {
+      id: true,
+      violationId: true,
+      occurredAt: true,
+      title: true,
+      description: true,
+      createdAt: true,
+      updatedAt: true,
+      _count: { select: { attachments: true } },
+    } satisfies Prisma.ViolationProceedingSelect;
+    if (!wantsPagination(query)) {
+      const items = await this.prisma.violationProceeding.findMany({
+        where,
+        orderBy,
+        select,
+      });
+      return items.map((item) => this.mapProceeding(item));
+    }
+    const { page, pageSize, skip, take } = paginationArgs(query);
+    const [items, total] = await Promise.all([
+      this.prisma.violationProceeding.findMany({
+        where,
+        orderBy,
+        skip,
+        take,
+        select,
+      }),
+      this.prisma.violationProceeding.count({ where }),
+    ]);
+    return paginatedResult(
+      items.map((item) => this.mapProceeding(item)),
+      total,
+      page,
+      pageSize,
+    );
+  }
+
+  async findProceeding(violationId: string, id: string) {
+    const item = await this.prisma.violationProceeding.findFirst({
+      where: { id, violationId },
+      select: {
+        id: true,
+        violationId: true,
+        occurredAt: true,
+        title: true,
+        description: true,
+        createdAt: true,
+        updatedAt: true,
+        attachments: { orderBy: { sortOrder: 'asc' }, select: attachmentSelect },
+      },
+    });
+    if (!item) throw new NotFoundException('رسیدگی یافت نشد');
+    return this.mapProceeding(item);
+  }
+
+  async createProceeding(
+    violationId: string,
+    dto: CreateProceedingDto,
+    userId: string,
+    files?: UploadFile[],
+  ) {
+    await this.ensureViolation(violationId);
+    const uploads = await storeUploads(files, this.images, this.prisma);
+    try {
+      const item = await this.prisma.violationProceeding.create({
+        data: {
+          violationId,
+          occurredAt: this.requireDate(dto.occurredAt),
+          title: dto.title,
+          description: dto.description,
+          createdById: userId,
+          attachments: {
+            create: uploads.map((file, index) => ({
+              kind: file.kind,
+              imageId: file.imageId,
+              fileId: file.fileId,
+              originalName: file.originalName,
+              sortOrder: index,
+            })),
+          },
+        },
+        select: {
+          id: true,
+          violationId: true,
+          occurredAt: true,
+          title: true,
+          description: true,
+          createdAt: true,
+          updatedAt: true,
+          attachments: { orderBy: { sortOrder: 'asc' }, select: attachmentSelect },
+        },
+      });
+      return this.mapProceeding(item);
+    } catch (error) {
+      await purgeUploads(this.prisma, uploads);
+      throw error;
+    }
+  }
+
+  async updateProceeding(
+    violationId: string,
+    id: string,
+    dto: UpdateProceedingDto,
+    files?: UploadFile[],
+  ) {
+    const current = await this.findProceeding(violationId, id);
+    const uploads = await storeUploads(files, this.images, this.prisma);
+    const nextSort = nextAttachmentSort(
+      current.attachments ?? [],
+      dto.removeAttachmentIds,
+    );
+    let saved = false;
+    try {
+      await this.prisma.violationProceeding.update({
+        where: { id },
+        data: {
+          occurredAt: dto.occurredAt
+            ? this.requireDate(dto.occurredAt)
+            : undefined,
+          title: dto.title,
+          description: dto.description,
+          attachments: uploads.length
+            ? {
+                create: uploads.map((file, index) => ({
+                  kind: file.kind,
+                  imageId: file.imageId,
+                  fileId: file.fileId,
+                  originalName: file.originalName,
+                  sortOrder: nextSort + index,
+                })),
+              }
+            : undefined,
+        },
+        select: {
+          id: true,
+          violationId: true,
+          occurredAt: true,
+          title: true,
+          description: true,
+          createdAt: true,
+          updatedAt: true,
+          attachments: { orderBy: { sortOrder: 'asc' }, select: attachmentSelect },
+        },
+      });
+      saved = true;
+      await this.removeProceedingAttachments(id, dto.removeAttachmentIds);
+      return this.findProceeding(violationId, id);
+    } catch (error) {
+      if (!saved) await purgeUploads(this.prisma, uploads);
+      throw error;
+    }
+  }
+
+  async removeProceeding(violationId: string, id: string) {
+    const item = await this.prisma.violationProceeding.findFirst({
+      where: { id, violationId },
+      select: {
+        attachments: { select: { imageId: true, fileId: true } },
+      },
+    });
+    if (!item) throw new NotFoundException('رسیدگی یافت نشد');
+    await this.prisma.violationProceeding.delete({ where: { id } });
+    await purgeUploads(this.prisma, item.attachments);
+    return { ok: true };
+  }
+
+  async readProceedingAttachment(
+    violationId: string,
+    proceedingId: string,
+    attachmentId: string,
+  ) {
+    const attachment = await this.prisma.violationProceedingAttachment.findFirst({
+      where: {
+        id: attachmentId,
+        proceedingId,
+        proceeding: { violationId },
+      },
+      select: { originalName: true, image: true, file: true },
+    });
+    if (!attachment) throw new NotFoundException('پیوست یافت نشد');
+    return this.blobResponse(attachment);
+  }
+
+  private async listWhere(query: FindViolationsQueryDto) {
+    const from = query.from ? this.requireDate(query.from) : undefined;
+    const to = query.to ? this.requireDate(query.to) : undefined;
+    if (from && to && from.getTime() > to.getTime()) {
+      throw new BadRequestException('بازه تاریخ نامعتبر است');
+    }
+    const where: Prisma.ViolationWhereInput = {
+      status: query.status,
+      violationTypeId: query.violationTypeId,
+      occurredAt: from || to ? { gte: from, lte: to } : undefined,
+    };
+    const q = query.q?.trim();
+    if (!q) return where;
+    const digits = normalizeSearchDigits(q);
+    const people = await this.prisma.user.findMany({
+      where: {
+        nationalId: { not: null },
+        fullName: containsInsensitive(q),
+      },
+      select: { nationalId: true },
+      take: 100,
+    });
+    const nationalIds = people
+      .map((person) => person.nationalId)
+      .filter((id): id is string => Boolean(id));
+    where.OR = [
+      { description: containsInsensitive(q) },
+      { violationType: { title: containsInsensitive(q) } },
+      digits
+        ? { nationalId: { contains: digits } }
+        : { nationalId: containsInsensitive(q) },
+      {
+        caseUser: {
+          OR: [
+            {
+              caseTrackingCode: digits
+                ? { contains: digits }
+                : containsInsensitive(q),
+            },
+            { businessUnitTitle: containsInsensitive(q) },
+            { economicJob: { title: containsInsensitive(q) } },
+          ],
+        },
+      },
+      ...(nationalIds.length ? [{ nationalId: { in: nationalIds } }] : []),
+    ];
+    return where;
+  }
+
+  private async withPeople<T extends { nationalId: string; occurredAt: Date; createdAt: Date; updatedAt: Date; attachments: AttachmentRow[] }>(
+    items: T[],
+  ) {
+    const nationalIds = [...new Set(items.map((item) => item.nationalId))];
+    const people = nationalIds.length
+      ? await this.prisma.user.findMany({
+          where: { nationalId: { in: nationalIds } },
+          select: { id: true, nationalId: true, fullName: true },
+        })
+      : [];
+    const byNationalId = new Map(
+      people
+        .filter((person) => person.nationalId)
+        .map((person) => [person.nationalId as string, person]),
+    );
+    return items.map((item) => {
+      const person = byNationalId.get(item.nationalId);
+      return {
+        ...this.mapDates(item),
+        person: person
+          ? { id: person.id, fullName: person.fullName }
+          : null,
+      };
+    });
+  }
+
+  private mapDates<
+    T extends {
+      occurredAt: Date;
+      createdAt: Date;
+      updatedAt: Date;
+      attachments: AttachmentRow[];
+      caseUser?: CaseFileRow | null;
+    },
+  >(item: T) {
+    const { caseUser, ...rest } = item;
+    return {
+      ...rest,
+      caseFile: mapCaseFile(caseUser),
+      occurredAt: formatDateOnly(item.occurredAt),
+      createdAt: item.createdAt.toISOString(),
+      updatedAt: item.updatedAt.toISOString(),
+      attachments: item.attachments.map(this.publicAttachment),
+    };
+  }
+
+  private mapProceeding<
+    T extends {
+      occurredAt: Date;
+      createdAt: Date;
+      updatedAt: Date;
+      attachments?: AttachmentRow[];
+    },
+  >(item: T) {
+    return {
+      ...item,
+      occurredAt: formatDateOnly(item.occurredAt),
+      createdAt: item.createdAt.toISOString(),
+      updatedAt: item.updatedAt.toISOString(),
+      attachments: item.attachments?.map(this.publicAttachment),
+    };
+  }
+
+  private publicAttachment = (item: AttachmentRow) => ({
+    id: item.id,
+    kind: item.kind,
+    originalName: item.originalName,
+    sortOrder: item.sortOrder,
+  });
+
+  private async ensureType(id: string) {
+    const type = await this.prisma.violationType.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!type) throw new BadRequestException('نوع تخلف یافت نشد');
+  }
+
+  private async ensureCase(nationalId: string, caseUserId?: string | null) {
+    if (!caseUserId) return;
+    const row = await this.prisma.user.findFirst({
+      where: { id: caseUserId, nationalId, formationStep: { gt: 0 } },
+      select: { id: true },
+    });
+    if (!row) {
+      throw new BadRequestException('پرونده انتخاب‌شده متعلق به این کد ملی نیست');
+    }
+  }
+
+  private async ensureViolation(id: string) {
+    const item = await this.prisma.violation.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!item) throw new NotFoundException('تخلف یافت نشد');
+  }
+
+  private requireDate(value: string) {
+    const date = parseDateOnly(value);
+    if (!date) throw new BadRequestException('تاریخ نامعتبر است');
+    return date;
+  }
+
+  private async removeViolationAttachments(violationId: string, ids?: string[]) {
+    if (!ids?.length) return;
+    const rows = await this.prisma.violationAttachment.findMany({
+      where: { violationId, id: { in: ids } },
+      select: { id: true, imageId: true, fileId: true },
+    });
+    if (!rows.length) return;
+    await this.prisma.violationAttachment.deleteMany({
+      where: { id: { in: rows.map((row) => row.id) } },
+    });
+    await purgeUploads(this.prisma, rows);
+  }
+
+  private async removeProceedingAttachments(proceedingId: string, ids?: string[]) {
+    if (!ids?.length) return;
+    const rows = await this.prisma.violationProceedingAttachment.findMany({
+      where: { proceedingId, id: { in: ids } },
+      select: { id: true, imageId: true, fileId: true },
+    });
+    if (!rows.length) return;
+    await this.prisma.violationProceedingAttachment.deleteMany({
+      where: { id: { in: rows.map((row) => row.id) } },
+    });
+    await purgeUploads(this.prisma, rows);
+  }
+
+  private blobResponse(attachment: {
+    originalName: string | null;
+    image: { mimeType: string; data: Uint8Array; originalName: string | null } | null;
+    file: { mimeType: string; data: Uint8Array; originalName: string | null } | null;
+  }) {
+    const blob = attachment.image ?? attachment.file;
+    if (!blob) throw new NotFoundException('پیوست یافت نشد');
+    return {
+      mimeType: blob.mimeType,
+      data: Buffer.from(blob.data),
+      name: attachment.originalName || blob.originalName || 'file',
+    };
+  }
+}
+
+type AttachmentRow = {
+  id: string;
+  kind: string;
+  originalName: string | null;
+  sortOrder: number;
+  imageId: string | null;
+  fileId: string | null;
+};
+
+function nextAttachmentSort(
+  attachments: { id: string; sortOrder: number }[],
+  removeIds?: string[],
+) {
+  const removed = new Set(removeIds ?? []);
+  return (
+    attachments
+      .filter((item) => !removed.has(item.id))
+      .reduce((max, item) => Math.max(max, item.sortOrder), -1) + 1
+  );
+}
+
+type CaseFileRow = {
+  id: string;
+  fullName: string;
+  caseTrackingCode: string | null;
+  businessUnitTitle: string | null;
+  formationStep: number;
+  economicJob: { title: string } | null;
+};
+
+function mapCaseFile(row?: CaseFileRow | null) {
+  if (!row || row.formationStep <= 0) return null;
+  return {
+    id: row.id,
+    fullName: row.fullName,
+    caseTrackingCode: row.caseTrackingCode,
+    businessUnitTitle: row.businessUnitTitle,
+    jobTitle: row.economicJob?.title ?? null,
+    formationStep: row.formationStep,
+  };
+}

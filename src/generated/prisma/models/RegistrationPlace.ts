@@ -190,6 +190,7 @@ export type RegistrationPlaceWhereInput = {
   isActive?: Prisma.BoolFilter<"RegistrationPlace"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
+  premiseUsers?: Prisma.UserListRelationFilter
 }
 
 export type RegistrationPlaceOrderByWithRelationInput = {
@@ -199,6 +200,7 @@ export type RegistrationPlaceOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  premiseUsers?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
@@ -211,6 +213,7 @@ export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"RegistrationPlace"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
+  premiseUsers?: Prisma.UserListRelationFilter
 }, "id" | "title">
 
 export type RegistrationPlaceOrderByWithAggregationInput = {
@@ -244,6 +247,7 @@ export type RegistrationPlaceCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  premiseUsers?: Prisma.UserCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceUncheckedCreateInput = {
@@ -253,6 +257,7 @@ export type RegistrationPlaceUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceUpdateInput = {
@@ -262,6 +267,7 @@ export type RegistrationPlaceUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseUsers?: Prisma.UserUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 export type RegistrationPlaceUncheckedUpdateInput = {
@@ -271,6 +277,7 @@ export type RegistrationPlaceUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 export type RegistrationPlaceCreateManyInput = {
@@ -300,6 +307,11 @@ export type RegistrationPlaceUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type RegistrationPlaceNullableScalarRelationFilter = {
+  is?: Prisma.RegistrationPlaceWhereInput | null
+  isNot?: Prisma.RegistrationPlaceWhereInput | null
+}
+
 export type RegistrationPlaceCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -327,6 +339,103 @@ export type RegistrationPlaceMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type RegistrationPlaceCreateNestedOneWithoutPremiseUsersInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseUsersInput
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+}
+
+export type RegistrationPlaceUpdateOneWithoutPremiseUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseUsersInput
+  upsert?: Prisma.RegistrationPlaceUpsertWithoutPremiseUsersInput
+  disconnect?: Prisma.RegistrationPlaceWhereInput | boolean
+  delete?: Prisma.RegistrationPlaceWhereInput | boolean
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutPremiseUsersInput, Prisma.RegistrationPlaceUpdateWithoutPremiseUsersInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput>
+}
+
+export type RegistrationPlaceCreateWithoutPremiseUsersInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type RegistrationPlaceCreateOrConnectWithoutPremiseUsersInput = {
+  where: Prisma.RegistrationPlaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
+}
+
+export type RegistrationPlaceUpsertWithoutPremiseUsersInput = {
+  update: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput>
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
+  where?: Prisma.RegistrationPlaceWhereInput
+}
+
+export type RegistrationPlaceUpdateToOneWithWhereWithoutPremiseUsersInput = {
+  where?: Prisma.RegistrationPlaceWhereInput
+  data: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput>
+}
+
+export type RegistrationPlaceUpdateWithoutPremiseUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type RegistrationPlaceCountOutputType
+ */
+
+export type RegistrationPlaceCountOutputType = {
+  premiseUsers: number
+}
+
+export type RegistrationPlaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  premiseUsers?: boolean | RegistrationPlaceCountOutputTypeCountPremiseUsersArgs
+}
+
+/**
+ * RegistrationPlaceCountOutputType without action
+ */
+export type RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RegistrationPlaceCountOutputType
+   */
+  select?: Prisma.RegistrationPlaceCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * RegistrationPlaceCountOutputType without action
+ */
+export type RegistrationPlaceCountOutputTypeCountPremiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
 
 
 export type RegistrationPlaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -336,6 +445,8 @@ export type RegistrationPlaceSelect<ExtArgs extends runtime.Types.Extensions.Int
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  premiseUsers?: boolean | Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs>
+  _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["registrationPlace"]>
 
 export type RegistrationPlaceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -366,10 +477,18 @@ export type RegistrationPlaceSelectScalar = {
 }
 
 export type RegistrationPlaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["registrationPlace"]>
+export type RegistrationPlaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  premiseUsers?: boolean | Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs>
+  _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type RegistrationPlaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type RegistrationPlaceIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $RegistrationPlacePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RegistrationPlace"
-  objects: {}
+  objects: {
+    premiseUsers: Prisma.$UserPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
@@ -771,6 +890,7 @@ readonly fields: RegistrationPlaceFieldRefs;
  */
 export interface Prisma__RegistrationPlaceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  premiseUsers<T extends Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -823,6 +943,10 @@ export type RegistrationPlaceFindUniqueArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
+  /**
    * Filter, which RegistrationPlace to fetch.
    */
   where: Prisma.RegistrationPlaceWhereUniqueInput
@@ -841,6 +965,10 @@ export type RegistrationPlaceFindUniqueOrThrowArgs<ExtArgs extends runtime.Types
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
+  /**
    * Filter, which RegistrationPlace to fetch.
    */
   where: Prisma.RegistrationPlaceWhereUniqueInput
@@ -858,6 +986,10 @@ export type RegistrationPlaceFindFirstArgs<ExtArgs extends runtime.Types.Extensi
    * Omit specific fields from the RegistrationPlace
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
   /**
    * Filter, which RegistrationPlace to fetch.
    */
@@ -907,6 +1039,10 @@ export type RegistrationPlaceFindFirstOrThrowArgs<ExtArgs extends runtime.Types.
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
+  /**
    * Filter, which RegistrationPlace to fetch.
    */
   where?: Prisma.RegistrationPlaceWhereInput
@@ -954,6 +1090,10 @@ export type RegistrationPlaceFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Omit specific fields from the RegistrationPlace
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
   /**
    * Filter, which RegistrationPlaces to fetch.
    */
@@ -1003,6 +1143,10 @@ export type RegistrationPlaceCreateArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
+  /**
    * The data needed to create a RegistrationPlace.
    */
   data: Prisma.XOR<Prisma.RegistrationPlaceCreateInput, Prisma.RegistrationPlaceUncheckedCreateInput>
@@ -1050,6 +1194,10 @@ export type RegistrationPlaceUpdateArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the RegistrationPlace
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
   /**
    * The data needed to update a RegistrationPlace.
    */
@@ -1117,6 +1265,10 @@ export type RegistrationPlaceUpsertArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
+  /**
    * The filter to search for the RegistrationPlace to update in case it exists.
    */
   where: Prisma.RegistrationPlaceWhereUniqueInput
@@ -1143,6 +1295,10 @@ export type RegistrationPlaceDeleteArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
+  /**
    * Filter which RegistrationPlace to delete.
    */
   where: Prisma.RegistrationPlaceWhereUniqueInput
@@ -1163,6 +1319,30 @@ export type RegistrationPlaceDeleteManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
+ * RegistrationPlace.premiseUsers
+ */
+export type RegistrationPlace$premiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
  * RegistrationPlace without action
  */
 export type RegistrationPlaceDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1174,4 +1354,8 @@ export type RegistrationPlaceDefaultArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the RegistrationPlace
    */
   omit?: Prisma.RegistrationPlaceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
 }

@@ -70,12 +70,28 @@ const userSelect = {
   positionId: true,
   workUnitId: true,
   staffPostId: true,
+  fatherName: true,
+  lastNameEn: true,
+  birthDate: true,
+  passportNumber: true,
+  nationalCardExpiresAt: true,
+  passportExpiresAt: true,
+  identityCertificateNo: true,
+  birthPlace: true,
+  identityIssuedIn: true,
+  residencyStatus: true,
+  postalCode: true,
+  homePhone: true,
+  educationLevel: true,
+  citizenGroup: true,
+  jobId: true,
   createdAt: true,
   updatedAt: true,
   orgUnit: { select: { id: true, name: true } },
   position: { select: { id: true, name: true } },
   workUnit: { select: { id: true, title: true } },
   staffPost: { select: { id: true, title: true } },
+  economicJob: { select: { id: true, title: true, groupId: true } },
   userRoles: {
     select: {
       role: { select: { id: true, code: true, name: true } },
@@ -98,20 +114,31 @@ function optionalConnect(id: string | null | undefined) {
   return id ? { connect: { id } } : { disconnect: true };
 }
 
+function formatDateOnly(value: Date | string | null | undefined) {
+  if (value == null) return null;
+  if (typeof value === 'string') return value.slice(0, 10);
+  return value.toISOString().slice(0, 10);
+}
+
 function mapUser<
   T extends {
     latitude: Prisma.Decimal | null;
     longitude: Prisma.Decimal | null;
     userRoles?: { role: { id: string; code: string; name: string } }[];
+    birthDate?: Date | null;
+    nationalCardExpiresAt?: Date | null;
+    passportExpiresAt?: Date | null;
   },
 >(user: T) {
-  const { userRoles, ...rest } = user;
+  const { userRoles, birthDate, nationalCardExpiresAt, passportExpiresAt, ...rest } = user;
   return {
     ...rest,
     latitude: toCoord(user.latitude),
     longitude: toCoord(user.longitude),
     roles: userRoles?.map((item) => item.role) ?? [],
-    birthDate: null,
+    birthDate: formatDateOnly(birthDate),
+    nationalCardExpiresAt: formatDateOnly(nationalCardExpiresAt),
+    passportExpiresAt: formatDateOnly(passportExpiresAt),
     activityStartYear: null,
     issuingOrganizationId: null,
     issuingOrganization: null,

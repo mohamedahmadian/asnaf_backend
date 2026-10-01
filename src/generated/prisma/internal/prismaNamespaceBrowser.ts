@@ -64,8 +64,13 @@ export const ModelName = {
   JobGroupRepresentative: 'JobGroupRepresentative',
   Job: 'Job',
   JobInquiryCenter: 'JobInquiryCenter',
+  CaseInquiry: 'CaseInquiry',
+  CaseInquiryFile: 'CaseInquiryFile',
   JobDocument: 'JobDocument',
   Document: 'Document',
+  CaseIdentityDocument: 'CaseIdentityDocument',
+  PersonDocument: 'PersonDocument',
+  PersonDocumentVersion: 'PersonDocumentVersion',
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
@@ -116,7 +121,11 @@ export const ModelName = {
   WorkUnit: 'WorkUnit',
   StaffPost: 'StaffPost',
   ViolationType: 'ViolationType',
-  RegistrationPlace: 'RegistrationPlace'
+  RegistrationPlace: 'RegistrationPlace',
+  Violation: 'Violation',
+  ViolationAttachment: 'ViolationAttachment',
+  ViolationProceeding: 'ViolationProceeding',
+  ViolationProceedingAttachment: 'ViolationProceedingAttachment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -326,9 +335,41 @@ export const JobInquiryCenterScalarFieldEnum = {
 export type JobInquiryCenterScalarFieldEnum = (typeof JobInquiryCenterScalarFieldEnum)[keyof typeof JobInquiryCenterScalarFieldEnum]
 
 
+export const CaseInquiryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  inquiryCenterId: 'inquiryCenterId',
+  status: 'status',
+  channel: 'channel',
+  note: 'note',
+  decidedById: 'decidedById',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseInquiryScalarFieldEnum = (typeof CaseInquiryScalarFieldEnum)[keyof typeof CaseInquiryScalarFieldEnum]
+
+
+export const CaseInquiryFileScalarFieldEnum = {
+  id: 'id',
+  caseInquiryId: 'caseInquiryId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseInquiryFileScalarFieldEnum = (typeof CaseInquiryFileScalarFieldEnum)[keyof typeof CaseInquiryFileScalarFieldEnum]
+
+
 export const JobDocumentScalarFieldEnum = {
   jobId: 'jobId',
-  documentId: 'documentId'
+  documentId: 'documentId',
+  gender: 'gender',
+  isRequired: 'isRequired'
 } as const
 
 export type JobDocumentScalarFieldEnum = (typeof JobDocumentScalarFieldEnum)[keyof typeof JobDocumentScalarFieldEnum]
@@ -340,11 +381,46 @@ export const DocumentScalarFieldEnum = {
   isRequired: 'isRequired',
   gender: 'gender',
   isFixed: 'isFixed',
+  code: 'code',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
+export const CaseIdentityDocumentScalarFieldEnum = {
+  documentId: 'documentId',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseIdentityDocumentScalarFieldEnum = (typeof CaseIdentityDocumentScalarFieldEnum)[keyof typeof CaseIdentityDocumentScalarFieldEnum]
+
+
+export const PersonDocumentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  documentId: 'documentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PersonDocumentScalarFieldEnum = (typeof PersonDocumentScalarFieldEnum)[keyof typeof PersonDocumentScalarFieldEnum]
+
+
+export const PersonDocumentVersionScalarFieldEnum = {
+  id: 'id',
+  personDocumentId: 'personDocumentId',
+  version: 'version',
+  source: 'source',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type PersonDocumentVersionScalarFieldEnum = (typeof PersonDocumentVersionScalarFieldEnum)[keyof typeof PersonDocumentVersionScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -387,6 +463,48 @@ export const UserScalarFieldEnum = {
   positionId: 'positionId',
   workUnitId: 'workUnitId',
   staffPostId: 'staffPostId',
+  fatherName: 'fatherName',
+  lastNameEn: 'lastNameEn',
+  birthDate: 'birthDate',
+  passportNumber: 'passportNumber',
+  nationalCardExpiresAt: 'nationalCardExpiresAt',
+  passportExpiresAt: 'passportExpiresAt',
+  identityCertificateNo: 'identityCertificateNo',
+  birthPlace: 'birthPlace',
+  identityIssuedIn: 'identityIssuedIn',
+  residencyStatus: 'residencyStatus',
+  postalCode: 'postalCode',
+  homePhone: 'homePhone',
+  educationLevel: 'educationLevel',
+  citizenGroup: 'citizenGroup',
+  formationStep: 'formationStep',
+  caseTrackingCode: 'caseTrackingCode',
+  businessUnitTitle: 'businessUnitTitle',
+  activityJobId: 'activityJobId',
+  previousOccupation: 'previousOccupation',
+  posDeviceCount: 'posDeviceCount',
+  premiseCityId: 'premiseCityId',
+  premiseEstablishment: 'premiseEstablishment',
+  premiseComplexId: 'premiseComplexId',
+  premiseAddress: 'premiseAddress',
+  premisePlaque: 'premisePlaque',
+  premisePlaqueSeries: 'premisePlaqueSeries',
+  premiseFloor: 'premiseFloor',
+  premiseUnitNo: 'premiseUnitNo',
+  premisePostalCode: 'premisePostalCode',
+  premisePhone: 'premisePhone',
+  premiseFax: 'premiseFax',
+  premiseGeoPosition: 'premiseGeoPosition',
+  premisePublicAccess: 'premisePublicAccess',
+  registrationPlaceId: 'registrationPlaceId',
+  premiseOwnership: 'premiseOwnership',
+  premiseDeedNo: 'premiseDeedNo',
+  premiseArea: 'premiseArea',
+  leaseIssuedAt: 'leaseIssuedAt',
+  leaseExpiresAt: 'leaseExpiresAt',
+  leaseAgency: 'leaseAgency',
+  premiseOwnerName: 'premiseOwnerName',
+  jobId: 'jobId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1120,6 +1238,64 @@ export const RegistrationPlaceScalarFieldEnum = {
 } as const
 
 export type RegistrationPlaceScalarFieldEnum = (typeof RegistrationPlaceScalarFieldEnum)[keyof typeof RegistrationPlaceScalarFieldEnum]
+
+
+export const ViolationScalarFieldEnum = {
+  id: 'id',
+  nationalId: 'nationalId',
+  violationTypeId: 'violationTypeId',
+  occurredAt: 'occurredAt',
+  description: 'description',
+  status: 'status',
+  caseUserId: 'caseUserId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ViolationScalarFieldEnum = (typeof ViolationScalarFieldEnum)[keyof typeof ViolationScalarFieldEnum]
+
+
+export const ViolationAttachmentScalarFieldEnum = {
+  id: 'id',
+  violationId: 'violationId',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type ViolationAttachmentScalarFieldEnum = (typeof ViolationAttachmentScalarFieldEnum)[keyof typeof ViolationAttachmentScalarFieldEnum]
+
+
+export const ViolationProceedingScalarFieldEnum = {
+  id: 'id',
+  violationId: 'violationId',
+  occurredAt: 'occurredAt',
+  title: 'title',
+  description: 'description',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ViolationProceedingScalarFieldEnum = (typeof ViolationProceedingScalarFieldEnum)[keyof typeof ViolationProceedingScalarFieldEnum]
+
+
+export const ViolationProceedingAttachmentScalarFieldEnum = {
+  id: 'id',
+  proceedingId: 'proceedingId',
+  kind: 'kind',
+  imageId: 'imageId',
+  fileId: 'fileId',
+  originalName: 'originalName',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type ViolationProceedingAttachmentScalarFieldEnum = (typeof ViolationProceedingAttachmentScalarFieldEnum)[keyof typeof ViolationProceedingAttachmentScalarFieldEnum]
 
 
 export const SortOrder = {

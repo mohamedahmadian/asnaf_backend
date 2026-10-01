@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -22,6 +23,7 @@ const documentSelect = {
   isRequired: true,
   gender: true,
   isFixed: true,
+  code: true,
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.DocumentSelect;
@@ -115,7 +117,10 @@ export class DocumentsService {
   }
 
   async remove(id: string) {
-    await this.findOne(id);
+    const current = await this.findOne(id);
+    if (current.code) {
+      throw new BadRequestException('این مدرک سیستمی است و حذف نمی‌شود');
+    }
     await this.prisma.document.delete({ where: { id } });
     return { ok: true };
   }

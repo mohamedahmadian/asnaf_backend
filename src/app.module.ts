@@ -6,6 +6,7 @@ import { PermissionsGuard } from './access/permissions.guard';
 import { AuthModule } from './auth/auth.module';
 import { JwtUserGuard } from './auth/jwt-user.guard';
 import { BankAccountsModule } from './bank-accounts/bank-accounts.module';
+import { CasesModule } from './cases/cases.module';
 import { CommercialComplexesModule } from './commercial-complexes/commercial-complexes.module';
 import { DiscountsModule } from './discounts/discounts.module';
 import { DocumentsModule } from './documents/documents.module';
@@ -23,6 +24,7 @@ import { RolesModule } from './roles/roles.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
 import { ViolationTypesModule } from './violation-types/violation-types.module';
+import { ViolationsModule } from './violations/violations.module';
 import { WorkUnitsModule } from './work-units/work-units.module';
 
 @Module({
@@ -35,6 +37,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     RolesModule,
     GeoModule,
     BankAccountsModule,
+    CasesModule,
     MunicipalFeesModule,
     DiscountsModule,
     JobTypesModule,
@@ -45,6 +48,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     WorkUnitsModule,
     StaffPostsModule,
     ViolationTypesModule,
+    ViolationsModule,
     CommercialComplexesModule,
     OrganizationModule,
     ImagesModule,

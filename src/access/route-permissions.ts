@@ -37,6 +37,10 @@ type RoutePermission = {
 };
 
 const ROUTE_PERMISSIONS: RoutePermission[] = [
+  { prefix: '/cases/inquiries', permissions: ['cases.inquiries', 'cases.formation'] },
+  { prefix: '/cases/settings', permissions: ['cases.settings'] },
+  { prefix: '/cases/formation', permissions: ['cases.formation'] },
+  { prefix: '/cases', permissions: ['cases.management'] },
   { prefix: '/roles', permissions: ['management.roles'] },
   { prefix: '/countries', permissions: ['base-info.countries'] },
   { prefix: '/provinces', permissions: ['base-info.provinces'] },
@@ -60,6 +64,14 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/work-units', permissions: ['base-info.work-units'] },
   { prefix: '/staff-posts', permissions: ['base-info.staff-posts'] },
   { prefix: '/violation-types', permissions: ['inspection.violation-types'] },
+  {
+    prefix: '/violations/report',
+    permissions: ['inspection.violations.reports'],
+  },
+  {
+    prefix: '/violations',
+    permissions: ['inspection.violations', 'inspection.violations.register'],
+  },
   { prefix: '/users', permissions: ['management.users'] },
   {
     prefix: '/organization/positions',

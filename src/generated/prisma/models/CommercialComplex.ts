@@ -207,6 +207,7 @@ export type CommercialComplexWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CommercialComplex"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CommercialComplex"> | Date | string
   floors?: Prisma.CommercialFloorListRelationFilter
+  premiseUsers?: Prisma.UserListRelationFilter
 }
 
 export type CommercialComplexOrderByWithRelationInput = {
@@ -219,6 +220,7 @@ export type CommercialComplexOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   floors?: Prisma.CommercialFloorOrderByRelationAggregateInput
+  premiseUsers?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type CommercialComplexWhereUniqueInput = Prisma.AtLeast<{
@@ -234,6 +236,7 @@ export type CommercialComplexWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CommercialComplex"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CommercialComplex"> | Date | string
   floors?: Prisma.CommercialFloorListRelationFilter
+  premiseUsers?: Prisma.UserListRelationFilter
 }, "id">
 
 export type CommercialComplexOrderByWithAggregationInput = {
@@ -274,6 +277,7 @@ export type CommercialComplexCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   floors?: Prisma.CommercialFloorCreateNestedManyWithoutComplexInput
+  premiseUsers?: Prisma.UserCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexUncheckedCreateInput = {
@@ -286,6 +290,7 @@ export type CommercialComplexUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   floors?: Prisma.CommercialFloorUncheckedCreateNestedManyWithoutComplexInput
+  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexUpdateInput = {
@@ -298,6 +303,7 @@ export type CommercialComplexUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   floors?: Prisma.CommercialFloorUpdateManyWithoutComplexNestedInput
+  premiseUsers?: Prisma.UserUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexUncheckedUpdateInput = {
@@ -310,6 +316,7 @@ export type CommercialComplexUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   floors?: Prisma.CommercialFloorUncheckedUpdateManyWithoutComplexNestedInput
+  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexCreateManyInput = {
@@ -343,6 +350,11 @@ export type CommercialComplexUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CommercialComplexNullableScalarRelationFilter = {
+  is?: Prisma.CommercialComplexWhereInput | null
+  isNot?: Prisma.CommercialComplexWhereInput | null
 }
 
 export type CommercialComplexCountOrderByAggregateInput = {
@@ -383,6 +395,22 @@ export type CommercialComplexScalarRelationFilter = {
   isNot?: Prisma.CommercialComplexWhereInput
 }
 
+export type CommercialComplexCreateNestedOneWithoutPremiseUsersInput = {
+  create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseUsersInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseUsersInput>
+  connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutPremiseUsersInput
+  connect?: Prisma.CommercialComplexWhereUniqueInput
+}
+
+export type CommercialComplexUpdateOneWithoutPremiseUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseUsersInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseUsersInput>
+  connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutPremiseUsersInput
+  upsert?: Prisma.CommercialComplexUpsertWithoutPremiseUsersInput
+  disconnect?: Prisma.CommercialComplexWhereInput | boolean
+  delete?: Prisma.CommercialComplexWhereInput | boolean
+  connect?: Prisma.CommercialComplexWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommercialComplexUpdateToOneWithWhereWithoutPremiseUsersInput, Prisma.CommercialComplexUpdateWithoutPremiseUsersInput>, Prisma.CommercialComplexUncheckedUpdateWithoutPremiseUsersInput>
+}
+
 export type CommercialComplexCreateNestedOneWithoutFloorsInput = {
   create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutFloorsInput, Prisma.CommercialComplexUncheckedCreateWithoutFloorsInput>
   connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutFloorsInput
@@ -397,6 +425,70 @@ export type CommercialComplexUpdateOneRequiredWithoutFloorsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CommercialComplexUpdateToOneWithWhereWithoutFloorsInput, Prisma.CommercialComplexUpdateWithoutFloorsInput>, Prisma.CommercialComplexUncheckedUpdateWithoutFloorsInput>
 }
 
+export type CommercialComplexCreateWithoutPremiseUsersInput = {
+  id?: string
+  name: string
+  nameEn: string
+  address?: string | null
+  postalCode?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  floors?: Prisma.CommercialFloorCreateNestedManyWithoutComplexInput
+}
+
+export type CommercialComplexUncheckedCreateWithoutPremiseUsersInput = {
+  id?: string
+  name: string
+  nameEn: string
+  address?: string | null
+  postalCode?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  floors?: Prisma.CommercialFloorUncheckedCreateNestedManyWithoutComplexInput
+}
+
+export type CommercialComplexCreateOrConnectWithoutPremiseUsersInput = {
+  where: Prisma.CommercialComplexWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseUsersInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseUsersInput>
+}
+
+export type CommercialComplexUpsertWithoutPremiseUsersInput = {
+  update: Prisma.XOR<Prisma.CommercialComplexUpdateWithoutPremiseUsersInput, Prisma.CommercialComplexUncheckedUpdateWithoutPremiseUsersInput>
+  create: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseUsersInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseUsersInput>
+  where?: Prisma.CommercialComplexWhereInput
+}
+
+export type CommercialComplexUpdateToOneWithWhereWithoutPremiseUsersInput = {
+  where?: Prisma.CommercialComplexWhereInput
+  data: Prisma.XOR<Prisma.CommercialComplexUpdateWithoutPremiseUsersInput, Prisma.CommercialComplexUncheckedUpdateWithoutPremiseUsersInput>
+}
+
+export type CommercialComplexUpdateWithoutPremiseUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  floors?: Prisma.CommercialFloorUpdateManyWithoutComplexNestedInput
+}
+
+export type CommercialComplexUncheckedUpdateWithoutPremiseUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  floors?: Prisma.CommercialFloorUncheckedUpdateManyWithoutComplexNestedInput
+}
+
 export type CommercialComplexCreateWithoutFloorsInput = {
   id?: string
   name: string
@@ -406,6 +498,7 @@ export type CommercialComplexCreateWithoutFloorsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  premiseUsers?: Prisma.UserCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexUncheckedCreateWithoutFloorsInput = {
@@ -417,6 +510,7 @@ export type CommercialComplexUncheckedCreateWithoutFloorsInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexCreateOrConnectWithoutFloorsInput = {
@@ -444,6 +538,7 @@ export type CommercialComplexUpdateWithoutFloorsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseUsers?: Prisma.UserUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexUncheckedUpdateWithoutFloorsInput = {
@@ -455,6 +550,7 @@ export type CommercialComplexUncheckedUpdateWithoutFloorsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutPremiseComplexNestedInput
 }
 
 
@@ -464,10 +560,12 @@ export type CommercialComplexUncheckedUpdateWithoutFloorsInput = {
 
 export type CommercialComplexCountOutputType = {
   floors: number
+  premiseUsers: number
 }
 
 export type CommercialComplexCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   floors?: boolean | CommercialComplexCountOutputTypeCountFloorsArgs
+  premiseUsers?: boolean | CommercialComplexCountOutputTypeCountPremiseUsersArgs
 }
 
 /**
@@ -487,6 +585,13 @@ export type CommercialComplexCountOutputTypeCountFloorsArgs<ExtArgs extends runt
   where?: Prisma.CommercialFloorWhereInput
 }
 
+/**
+ * CommercialComplexCountOutputType without action
+ */
+export type CommercialComplexCountOutputTypeCountPremiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
 
 export type CommercialComplexSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -498,6 +603,7 @@ export type CommercialComplexSelect<ExtArgs extends runtime.Types.Extensions.Int
   createdAt?: boolean
   updatedAt?: boolean
   floors?: boolean | Prisma.CommercialComplex$floorsArgs<ExtArgs>
+  premiseUsers?: boolean | Prisma.CommercialComplex$premiseUsersArgs<ExtArgs>
   _count?: boolean | Prisma.CommercialComplexCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["commercialComplex"]>
 
@@ -537,6 +643,7 @@ export type CommercialComplexSelectScalar = {
 export type CommercialComplexOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "nameEn" | "address" | "postalCode" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["commercialComplex"]>
 export type CommercialComplexInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   floors?: boolean | Prisma.CommercialComplex$floorsArgs<ExtArgs>
+  premiseUsers?: boolean | Prisma.CommercialComplex$premiseUsersArgs<ExtArgs>
   _count?: boolean | Prisma.CommercialComplexCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CommercialComplexIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -546,6 +653,7 @@ export type $CommercialComplexPayload<ExtArgs extends runtime.Types.Extensions.I
   name: "CommercialComplex"
   objects: {
     floors: Prisma.$CommercialFloorPayload<ExtArgs>[]
+    premiseUsers: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -951,6 +1059,7 @@ readonly fields: CommercialComplexFieldRefs;
 export interface Prisma__CommercialComplexClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   floors<T extends Prisma.CommercialComplex$floorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommercialComplex$floorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommercialFloorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  premiseUsers<T extends Prisma.CommercialComplex$premiseUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommercialComplex$premiseUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1402,6 +1511,30 @@ export type CommercialComplex$floorsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.CommercialFloorScalarFieldEnum | Prisma.CommercialFloorScalarFieldEnum[]
+}
+
+/**
+ * CommercialComplex.premiseUsers
+ */
+export type CommercialComplex$premiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

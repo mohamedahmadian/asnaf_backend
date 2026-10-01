@@ -24,6 +24,62 @@ enum DocumentGender {
   BOTH
 }
 
+enum ResidencyStatus {
+  RESIDENT
+  NON_RESIDENT
+}
+
+enum EducationLevel {
+  ILLITERATE
+  ELEMENTARY
+  MIDDLE_SCHOOL
+  DIPLOMA
+  ASSOCIATE
+  BACHELOR
+  MASTER
+  DOCTORATE
+  SEMINARY
+  OTHER
+}
+
+enum DocumentSource {
+  MANUAL
+  CITIZEN_SYSTEM
+  CIVIL_REGISTRY
+}
+
+enum PreviousOccupation {
+  OTHER
+  ACTIVE_MILITARY
+  RETIRED_MILITARY
+  ACTIVE_EMPLOYEE
+  RETIRED_EMPLOYEE
+}
+
+enum PremiseEstablishment {
+  INDEPENDENT
+  COMMERCIAL_COMPLEX
+  RESIDENTIAL_COMPLEX
+}
+
+enum PremiseGeoPosition {
+  MAIN_FRONTAGE
+  SIDE_FRONTAGE
+  ALLEY
+}
+
+enum PremisePublicAccess {
+  MEN
+  WOMEN
+  PUBLIC
+  SEPARATE
+}
+
+enum PremiseOwnership {
+  OWNED
+  RENTED
+}
+
 enum Religion {
   ISLAM
   CHRISTIANITY
@@ -115,6 +171,8 @@ model StoredImage {
   singardAttachments     SingardAttachment[]
   boardAttachments       BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
+  violationAttachments    ViolationAttachment[] @relation("ViolationAttachmentImage")
+  violationProceedingAttachments ViolationProceedingAttachment[] @relation("ViolationProceedingAttachmentImage")
   createdAt              DateTime @default(now())
 
   @@map("stored_images")
@@ -181,6 +239,7 @@ model City {
   sortOrder          Int                   @default(0)
   users              User[]                @relation("UserHomeCity")
   locatedUsers       User[]                @relation("UserLocationCity")
+  premiseUsers       User[]                @relation("UserPremiseCity")
   locationHistories  UserLocationHistory[] @relation("UserLocationHistoryCity")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
@@ -276,6 +335,7 @@ model InquiryCenter {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   jobs        JobInquiryCenter[]
+  caseInquiries CaseInquiry[]
 
   @@index([name])
   @@index([phone])
@@ -336,6 +396,8 @@ model Job {
   isActive    Boolean            @default(true)
   inquiryCenters JobInquiryCenter[]
   documents   JobDocument[]
+  identityUsers User[] @relation("UserEconomicJob")
+  activityUsers User[] @relation("UserActivityJob")
   createdAt   DateTime           @default(now())
   updatedAt   DateTime           @updatedAt
 
@@ -363,11 +425,66 @@ model JobInquiryCenter {
   @@map("job_inquiry_centers")
 }
 
+enum CaseInquiryStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum CaseInquiryChannel {
+  MANUAL
+  SYSTEM
+}
+
+model CaseInquiry {
+  id              String              @id @default(uuid())
+  userId          String
+  user            User                @relation("CaseInquirySubject", fields: [userId], references: [id], onDelete: Cascade)
+  inquiryCenterId String
+  inquiryCenter   InquiryCenter       @relation(fields: [inquiryCenterId], references: [id], onDelete: Restrict)
+  status          CaseInquiryStatus   @default(PENDING)
+  channel         CaseInquiryChannel?
+  note            String?
+  decidedById     String?
+  decidedBy       User?               @relation("CaseInquiryDecider", fields: [decidedById], references: [id], onDelete: SetNull)
+  decidedAt       DateTime?
+  files           CaseInquiryFile[]
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@unique([userId, inquiryCenterId])
+  @@index([userId])
+  @@index([inquiryCenterId])
+  @@index([status])
+  @@index([decidedById])
+  @@index([createdAt])
+  @@map("case_inquiries")
+}
+
+model CaseInquiryFile {
+  id            String      @id @default(uuid())
+  caseInquiryId String
+  caseInquiry   CaseInquiry @relation(fields: [caseInquiryId], references: [id], onDelete: Cascade)
+  storageKey    String
+  originalName  String?
+  mimeType      String
+  byteSize      Int
+  uploadedById  String?
+  uploadedBy    User?       @relation("CaseInquiryFileUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt     DateTime    @default(now())
+
+  @@index([caseInquiryId])
+  @@index([uploadedById])
+  @@map("case_inquiry_files")
+}
+
 model JobDocument {
   jobId      String
-  job        Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  job        Job            @relation(fields: [jobId], references: [id], onDelete: Cascade)
   documentId String
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  document   Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  gender     DocumentGender @default(BOTH)
+  isRequired Boolean        @default(true)
 
   @@id([jobId, documentId])
   @@index([documentId])
@@ -380,7 +497,11 @@ model Document {
   isRequired Boolean         @default(true)
   gender     DocumentGender  @default(BOTH)
   isFixed    Boolean         @default(false)
+  /// کد پایدار مدرک سیستمی؛ اگر پر باشد حذف و تغییر کد ممنوع است
+  code       String?         @unique
   jobs       JobDocument[]
+  personDocuments PersonDocument[]
+  caseIdentityDocument CaseIdentityDocument?
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @updatedAt
 
@@ -389,7 +510,52 @@ model Document {
   @@index([gender])
   @@index([isFixed])
   @@index([createdAt])
+  @@index([code])
   @@map("documents")
+}
+
+/// مدارکی که در تب اطلاعات هویتی تشکیل پرونده نشان داده می‌شوند
+model CaseIdentityDocument {
+  documentId String   @id
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("case_identity_documents")
+}
+
+model PersonDocument {
+  id         String                  @id @default(uuid())
+  userId     String
+  user       User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documentId String
+  document   Document                @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  versions   PersonDocumentVersion[]
+  createdAt  DateTime                @default(now())
+  updatedAt  DateTime                @updatedAt
+
+  @@unique([userId, documentId])
+  @@index([userId])
+  @@index([documentId])
+  @@map("person_documents")
+}
+
+model PersonDocumentVersion {
+  id               String          @id @default(uuid())
+  personDocumentId String
+  personDocument   PersonDocument  @relation(fields: [personDocumentId], references: [id], onDelete: Cascade)
+  version          Int
+  source           DocumentSource  @default(MANUAL)
+  storageKey       String
+  originalName     String?
+  mimeType         String
+  byteSize         Int
+  createdAt        DateTime        @default(now())
+
+  @@unique([personDocumentId, version])
+  @@index([personDocumentId])
+  @@index([createdAt])
+  @@map("person_document_versions")
 }
 
 model User {
@@ -446,8 +612,61 @@ model User {
   workUnit           WorkUnit?             @relation(fields: [workUnitId], references: [id], onDelete: SetNull)
   staffPostId        String?
   staffPost          StaffPost?            @relation(fields: [staffPostId], references: [id], onDelete: SetNull)
+  fatherName         String?
+  lastNameEn         String?
+  birthDate          DateTime?             @db.Date
+  passportNumber     String?
+  nationalCardExpiresAt DateTime?          @db.Date
+  passportExpiresAt  DateTime?             @db.Date
+  identityCertificateNo String?
+  birthPlace         String?
+  identityIssuedIn   String?
+  residencyStatus    ResidencyStatus?
+  postalCode         String?
+  homePhone          String?
+  educationLevel     EducationLevel?
+  citizenGroup       String?
+  /// دورترین مرحلهٔ تشکیل پرونده که این شخص به آن رسیده؛ ۰ یعنی هنوز روی اطلاعات هویتی است
+  formationStep      Int                   @default(0)
+  /// شماره ثابت پرونده؛ بعد از رد شدن اطلاعات هویتی صادر می‌شود
+  caseTrackingCode   String?               @unique
+  businessUnitTitle  String?
+  activityJobId      String?
+  activityJob        Job?                  @relation("UserActivityJob", fields: [activityJobId], references: [id], onDelete: SetNull)
+  previousOccupation PreviousOccupation?
+  posDeviceCount     Int?
+  premiseCityId      String?
+  premiseCity        City?                 @relation("UserPremiseCity", fields: [premiseCityId], references: [id], onDelete: SetNull)
+  premiseEstablishment PremiseEstablishment?
+  premiseComplexId   String?
+  premiseComplex     CommercialComplex?    @relation(fields: [premiseComplexId], references: [id], onDelete: SetNull)
+  premiseAddress     String?
+  premisePlaque      String?
+  premisePlaqueSeries String?
+  premiseFloor       String?
+  premiseUnitNo      String?
+  premisePostalCode  String?
+  premisePhone       String?
+  premiseFax         String?
+  premiseGeoPosition PremiseGeoPosition?
+  premisePublicAccess PremisePublicAccess?
+  registrationPlaceId String?
+  registrationPlace  RegistrationPlace?    @relation(fields: [registrationPlaceId], references: [id], onDelete: SetNull)
+  premiseOwnership   PremiseOwnership?
+  premiseDeedNo      String?
+  premiseArea        Decimal?              @db.Decimal(12, 2)
+  leaseIssuedAt      DateTime?             @db.Date
+  leaseExpiresAt     DateTime?             @db.Date
+  leaseAgency        String?
+  premiseOwnerName   String?
+  jobId              String?
+  economicJob        Job?                  @relation("UserEconomicJob", fields: [jobId], references: [id], onDelete: SetNull)
+  personDocuments    PersonDocument[]
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   inquiryCenters     InquiryCenter[]       @relation("InquiryCenterOfficer")
+  caseInquiries      CaseInquiry[]         @relation("CaseInquirySubject")
+  caseInquiriesDecided CaseInquiry[]       @relation("CaseInquiryDecider")
+  caseInquiryFiles   CaseInquiryFile[]     @relation("CaseInquiryFileUploader")
   jobGroupRepresentations JobGroupRepresentative[]
   foodReservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
@@ -463,6 +682,9 @@ model User {
   boardSecretaryReviews   BoardRequest[] @relation("BoardSecretaryReviewer")
   boardMinutesCreated     BoardMinutes[] @relation("BoardMinutesAuthor")
   boardMinutesMemberships BoardMinutesMember[]
+  violationsCreated       Violation[] @relation("ViolationAuthor")
+  violationCases          Violation[] @relation("ViolationCase")
+  violationProceedingsCreated ViolationProceeding[] @relation("ViolationProceedingAuthor")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
@@ -478,6 +700,11 @@ model User {
   @@index([positionId])
   @@index([workUnitId])
   @@index([staffPostId])
+  @@index([activityJobId])
+  @@index([premiseCityId])
+  @@index([premiseComplexId])
+  @@index([registrationPlaceId])
+  @@index([jobId])
   @@map("users")
 }
 
@@ -630,6 +857,8 @@ model StoredFile {
   singardAttachments SingardAttachment[]
   boardAttachments   BoardAttachment[]
   boardMinutesAttachments BoardMinutesAttachment[]
+  violationAttachments ViolationAttachment[] @relation("ViolationAttachmentFile")
+  violationProceedingAttachments ViolationProceedingAttachment[] @relation("ViolationProceedingAttachmentFile")
 
   @@map("stored_files")
 }
@@ -1392,8 +1621,9 @@ model CommercialComplex {
   address    String?
   postalCode String?
   isActive   Boolean           @default(true)
-  floors     CommercialFloor[]
-  createdAt  DateTime          @default(now())
+  floors       CommercialFloor[]
+  premiseUsers User[]
+  createdAt    DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
 
   @@index([isActive])
@@ -1483,12 +1713,13 @@ model StaffPost {
 }
 
 model ViolationType {
-  id          String   @id @default(uuid())
-  title       String   @unique
+  id          String      @id @default(uuid())
+  title       String      @unique
   description String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  isActive    Boolean     @default(true)
+  violations  Violation[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 
   @@index([title])
   @@index([isActive])
@@ -1500,12 +1731,113 @@ model RegistrationPlace {
   id          String   @id @default(uuid())
   title       String   @unique
   description String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  isActive     Boolean  @default(true)
+  premiseUsers User[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([title])
   @@index([isActive])
   @@index([createdAt])
   @@map("registration_places")
+}
+
+enum ViolationStatus {
+  REGISTERED
+  UNDER_REVIEW
+  NOTICE
+  REFERRED
+  VERDICT_ISSUED
+  CLOSED
+  DISMISSED
+}
+
+enum ViolationAttachmentKind {
+  IMAGE
+  FILE
+}
+
+model Violation {
+  id              String                 @id @default(uuid())
+  nationalId      String
+  violationTypeId String
+  violationType   ViolationType          @relation(fields: [violationTypeId], references: [id], onDelete: Restrict)
+  occurredAt      DateTime               @db.Date
+  description     String?
+  status          ViolationStatus        @default(REGISTERED)
+  caseUserId      String?
+  caseUser        User?                  @relation("ViolationCase", fields: [caseUserId], references: [id], onDelete: SetNull)
+  createdById     String
+  createdBy       User                   @relation("ViolationAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  attachments     ViolationAttachment[]
+  proceedings     ViolationProceeding[]
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+
+  @@index([nationalId])
+  @@index([violationTypeId])
+  @@index([status])
+  @@index([caseUserId])
+  @@index([occurredAt])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("violations")
+}
+
+model ViolationAttachment {
+  id           String                  @id @default(uuid())
+  violationId  String
+  violation    Violation               @relation(fields: [violationId], references: [id], onDelete: Cascade)
+  kind         ViolationAttachmentKind
+  imageId      String?
+  image        StoredImage?            @relation("ViolationAttachmentImage", fields: [imageId], references: [id], onDelete: Restrict)
+  fileId       String?
+  file         StoredFile?             @relation("ViolationAttachmentFile", fields: [fileId], references: [id], onDelete: Restrict)
+  originalName String?
+  sortOrder    Int                     @default(0)
+  createdAt    DateTime                @default(now())
+
+  @@index([violationId, sortOrder])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("violation_attachments")
+}
+
+model ViolationProceeding {
+  id           String                          @id @default(uuid())
+  violationId  String
+  violation    Violation                       @relation(fields: [violationId], references: [id], onDelete: Cascade)
+  occurredAt   DateTime                        @db.Date
+  title        String
+  description  String?
+  createdById  String
+  createdBy    User                            @relation("ViolationProceedingAuthor", fields: [createdById], references: [id], onDelete: Restrict)
+  attachments  ViolationProceedingAttachment[]
+  createdAt    DateTime                        @default(now())
+  updatedAt    DateTime                        @updatedAt
+
+  @@index([violationId, occurredAt])
+  @@index([title])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("violation_proceedings")
+}
+
+model ViolationProceedingAttachment {
+  id           String                  @id @default(uuid())
+  proceedingId String
+  proceeding   ViolationProceeding     @relation(fields: [proceedingId], references: [id], onDelete: Cascade)
+  kind         ViolationAttachmentKind
+  imageId      String?
+  image        StoredImage?            @relation("ViolationProceedingAttachmentImage", fields: [imageId], references: [id], onDelete: Restrict)
+  fileId       String?
+  file         StoredFile?             @relation("ViolationProceedingAttachmentFile", fields: [fileId], references: [id], onDelete: Restrict)
+  originalName String?
+  sortOrder    Int                     @default(0)
+  createdAt    DateTime                @default(now())
+
+  @@index([proceedingId, sortOrder])
+  @@index([imageId])
+  @@index([fileId])
+  @@map("violation_proceeding_attachments")
 }

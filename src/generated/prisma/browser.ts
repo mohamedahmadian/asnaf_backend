@@ -83,6 +83,16 @@ export type Job = Prisma.JobModel
  */
 export type JobInquiryCenter = Prisma.JobInquiryCenterModel
 /**
+ * Model CaseInquiry
+ * 
+ */
+export type CaseInquiry = Prisma.CaseInquiryModel
+/**
+ * Model CaseInquiryFile
+ * 
+ */
+export type CaseInquiryFile = Prisma.CaseInquiryFileModel
+/**
  * Model JobDocument
  * 
  */
@@ -92,6 +102,21 @@ export type JobDocument = Prisma.JobDocumentModel
  * 
  */
 export type Document = Prisma.DocumentModel
+/**
+ * Model CaseIdentityDocument
+ * مدارکی که در تب اطلاعات هویتی تشکیل پرونده نشان داده می‌شوند
+ */
+export type CaseIdentityDocument = Prisma.CaseIdentityDocumentModel
+/**
+ * Model PersonDocument
+ * 
+ */
+export type PersonDocument = Prisma.PersonDocumentModel
+/**
+ * Model PersonDocumentVersion
+ * 
+ */
+export type PersonDocumentVersion = Prisma.PersonDocumentVersionModel
 /**
  * Model User
  * 
@@ -347,3 +372,23 @@ export type ViolationType = Prisma.ViolationTypeModel
  * 
  */
 export type RegistrationPlace = Prisma.RegistrationPlaceModel
+/**
+ * Model Violation
+ * 
+ */
+export type Violation = Prisma.ViolationModel
+/**
+ * Model ViolationAttachment
+ * 
+ */
+export type ViolationAttachment = Prisma.ViolationAttachmentModel
+/**
+ * Model ViolationProceeding
+ * 
+ */
+export type ViolationProceeding = Prisma.ViolationProceedingModel
+/**
+ * Model ViolationProceedingAttachment
+ * 
+ */
+export type ViolationProceedingAttachment = Prisma.ViolationProceedingAttachmentModel
