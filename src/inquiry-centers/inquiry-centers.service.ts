@@ -3,6 +3,9 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
+import { ensureEmployeeRole } from '../access/access.constants';
+import { toLatinDigits } from '../common/national-id';
 import {
   containsInsensitive,
   normalizeSearchDigits,
@@ -11,9 +14,11 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { Prisma } from '../generated/prisma/client';
+import { Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { joinFullName } from '../users/user-profile.util';
 import { CreateInquiryCenterDto } from './dto/create-inquiry-center.dto';
+import { CreateInquiryCenterOfficerDto } from './dto/create-inquiry-center-officer.dto';
 import { FindInquiryCentersQueryDto } from './dto/find-inquiry-centers-query.dto';
 import { UpdateInquiryCenterDto } from './dto/update-inquiry-center.dto';
 
@@ -124,6 +129,41 @@ export class InquiryCentersService {
     return { ok: true };
   }
 
+  async createOfficer(dto: CreateInquiryCenterOfficerDto) {
+    const existing = await this.prisma.user.findFirst({
+      where: { OR: [{ phone: dto.phone }, { username: dto.phone }] },
+      select: { phone: true },
+    });
+    if (existing) {
+      throw new ConflictException(
+        existing.phone === dto.phone
+          ? 'این تلفن همراه قبلاً ثبت شده است'
+          : 'این تلفن همراه قبلاً به‌عنوان نام کاربری ثبت شده است',
+      );
+    }
+
+    const role = await ensureEmployeeRole(this.prisma);
+    const passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
+    try {
+      return await this.prisma.user.create({
+        data: {
+          username: dto.phone,
+          passwordHash,
+          firstName: dto.firstName,
+          lastName: dto.lastName,
+          fullName: joinFullName(dto.firstName, dto.lastName),
+          phone: dto.phone,
+          status: UserStatus.ACTIVE,
+          locale: 'fa',
+          userRoles: { create: { roleId: role.id } },
+        },
+        select: officerSelect,
+      });
+    } catch (error) {
+      this.rethrowOfficerUnique(error);
+    }
+  }
+
   private searchFilter(
     q?: string,
   ): Prisma.InquiryCenterWhereInput[] | undefined {
@@ -176,6 +216,23 @@ export class InquiryCentersService {
       error.code === 'P2002'
     ) {
       throw new ConflictException('این مرکز استعلام قبلاً ثبت شده است');
+    }
+    throw error;
+  }
+
+  private rethrowOfficerUnique(error: unknown): never {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === 'P2002'
+    ) {
+      const target = error.meta?.target;
+      const fields = Array.isArray(target) ? target.join(' ') : String(target ?? '');
+      if (fields.includes('phone')) {
+        throw new ConflictException('این تلفن همراه قبلاً ثبت شده است');
+      }
+      if (fields.includes('username')) {
+        throw new ConflictException('این تلفن همراه قبلاً به‌عنوان نام کاربری ثبت شده است');
+      }
     }
     throw error;
   }

@@ -17,6 +17,7 @@ import {
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
 import {
+  CaseInquiryStatus,
   DocumentGender,
   DocumentSource,
   PremiseEstablishment,
@@ -437,6 +438,34 @@ export class CasesService {
     return this.prisma.user.update({
       where: { id: user.id },
       data: { formationStep },
+      select: { id: true, formationStep: true },
+    });
+  }
+
+  /** بعد از ثبت آخرین نتیجهٔ استعلام، اگر مدارک شغل هم آماده باشد پرونده به اماکن می‌رود. */
+  async advanceToPlacesAfterInquiry(inquiryId: string) {
+    const inquiry = await this.prisma.caseInquiry.findUnique({
+      where: { id: inquiryId },
+      select: { userId: true },
+    });
+    if (!inquiry) return null;
+    const user = await this.prisma.user.findUnique({
+      where: { id: inquiry.userId },
+      select: { id: true, formationStep: true },
+    });
+    if (!user || user.formationStep !== PLACES_FORMATION_STEP - 1) return null;
+    const [total, pending] = await Promise.all([
+      this.prisma.caseInquiry.count({ where: { userId: user.id } }),
+      this.prisma.caseInquiry.count({
+        where: { userId: user.id, status: CaseInquiryStatus.PENDING },
+      }),
+    ]);
+    if (total === 0 || pending > 0) return null;
+    await this.assertActivityDocumentsDelivered(user.id);
+    await this.inquiries.assertDelivered(user.id);
+    return this.prisma.user.update({
+      where: { id: user.id },
+      data: { formationStep: PLACES_FORMATION_STEP },
       select: { id: true, formationStep: true },
     });
   }

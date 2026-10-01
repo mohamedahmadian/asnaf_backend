@@ -9,6 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { CreateInquiryCenterDto } from './dto/create-inquiry-center.dto';
+import { CreateInquiryCenterOfficerDto } from './dto/create-inquiry-center-officer.dto';
 import { FindInquiryCentersQueryDto } from './dto/find-inquiry-centers-query.dto';
 import { UpdateInquiryCenterDto } from './dto/update-inquiry-center.dto';
 import { InquiryCentersService } from './inquiry-centers.service';
@@ -25,6 +26,11 @@ export class InquiryCentersController {
   @Post()
   create(@Body() dto: CreateInquiryCenterDto) {
     return this.centers.create(dto);
+  }
+
+  @Post('officers')
+  createOfficer(@Body() dto: CreateInquiryCenterOfficerDto) {
+    return this.centers.createOfficer(dto);
   }
 
   @Get(':id')

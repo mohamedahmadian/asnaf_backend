@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -17,6 +18,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { hasPermission } from '../access/access.util';
 import { CaseInquiryChannel } from '../generated/prisma/client';
 import { CaseInquiriesService, type InquiryActor } from './case-inquiries.service';
+import { CasesService } from './cases.service';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
 
 type UploadFile = {
@@ -47,7 +49,10 @@ function actorOf(user: RequestUser | undefined): InquiryActor {
 
 @Controller('cases/inquiries')
 export class CaseInquiriesController {
-  constructor(private readonly inquiries: CaseInquiriesService) {}
+  constructor(
+    private readonly inquiries: CaseInquiriesService,
+    private readonly cases: CasesService,
+  ) {}
 
   @Get()
   inbox(@CurrentUser() user: RequestUser | undefined, @Query() query: FindCaseInquiriesQueryDto) {
@@ -74,6 +79,27 @@ export class CaseInquiriesController {
     return this.inquiries.letter(id, actorOf(user));
   }
 
+  @Get(':id/dossier')
+  dossier(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
+    return this.inquiries.dossier(id, actorOf(user));
+  }
+
+  @Get(':id/documents/:versionId')
+  async dossierFile(
+    @Param('id') id: string,
+    @Param('versionId') versionId: string,
+    @CurrentUser() user: RequestUser | undefined,
+    @Res() res: Response,
+  ) {
+    const file = await this.inquiries.readDossierFile(id, versionId, actorOf(user));
+    res.setHeader('Content-Type', file.mimeType);
+    res.setHeader('Content-Length', String(file.byteSize));
+    if (file.originalName) {
+      res.setHeader('Content-Disposition', `inline; filename="${encodeURIComponent(file.originalName)}"`);
+    }
+    res.send(file.data);
+  }
+
   @Get(':id')
   detail(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
     return this.inquiries.detail(id, actorOf(user));
@@ -86,14 +112,14 @@ export class CaseInquiriesController {
       limits: { fileSize: 8 * 1024 * 1024 },
     }),
   )
-  decide(
+  async decide(
     @Param('id') id: string,
     @CurrentUser() user: RequestUser | undefined,
     @UploadedFile() file: UploadFile | undefined,
     @Body('status') status = '',
     @Body('note') note?: string,
   ) {
-    return this.inquiries.decide(id, actorOf(user), {
+    const saved = await this.inquiries.decide(id, actorOf(user), {
       status,
       note,
       channel: CaseInquiryChannel.SYSTEM,
@@ -101,5 +127,11 @@ export class CaseInquiriesController {
         ? { buffer: file.buffer, mimeType: file.mimetype, originalName: file.originalname }
         : undefined,
     });
+    try {
+      await this.cases.advanceToPlacesAfterInquiry(id);
+    } catch (error) {
+      if (!(error instanceof BadRequestException)) throw error;
+    }
+    return saved;
   }
 }

@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -87,7 +88,7 @@ export class CasesController {
     @Body('status') status = '',
     @Body('note') note?: string,
   ) {
-    return this.inquiries.decide(id, formationActor(user), {
+    const saved = await this.inquiries.decide(id, formationActor(user), {
       status,
       note,
       channel: CaseInquiryChannel.MANUAL,
@@ -95,11 +96,22 @@ export class CasesController {
         ? { buffer: file.buffer, mimeType: file.mimetype, originalName: file.originalname }
         : undefined,
     });
+    await this.advancePlacesQuietly(id);
+    return saved;
   }
 
   @Post('inquiries/:id/reopen')
   reopenInquiry(@Param('id') id: string) {
     return this.inquiries.reopen(id);
+  }
+
+  private async advancePlacesQuietly(inquiryId: string) {
+    try {
+      await this.cases.advanceToPlacesAfterInquiry(inquiryId);
+    } catch (error) {
+      if (error instanceof BadRequestException) return;
+      throw error;
+    }
   }
 
   @Get('document-types')

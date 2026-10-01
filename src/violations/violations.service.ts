@@ -50,7 +50,7 @@ const caseFileSelect = {
   caseTrackingCode: true,
   businessUnitTitle: true,
   formationStep: true,
-  economicJob: { select: { title: true } },
+  activityJob: { select: { title: true, group: { select: { title: true } } } },
 } satisfies Prisma.UserSelect;
 
 const violationSelect = {
@@ -115,10 +115,17 @@ export class ViolationsService {
   async report(query: ViolationReportQueryDto) {
     const calendar = reportCalendar();
     const rows = await this.prisma.violation.findMany({
-      select: { occurredAt: true, status: true },
+      select: {
+        occurredAt: true,
+        status: true,
+        violationTypeId: true,
+        violationType: { select: { title: true } },
+      },
     });
     const parts = rows.map((row) => ({
       status: row.status,
+      violationTypeId: row.violationTypeId,
+      violationTypeTitle: row.violationType.title,
       ...calendarParts(row.occurredAt, calendar),
     }));
     const current = currentCalendarYear(calendar);
@@ -145,6 +152,7 @@ export class ViolationsService {
         status,
         count: scoped.filter((item) => item.status === status).length,
       })),
+      byType: typeCounts(scoped),
       monthly: Array.from({ length: 12 }, (_, index) => ({
         month: index + 1,
         count: parts.filter(
@@ -544,7 +552,8 @@ export class ViolationsService {
                 : containsInsensitive(q),
             },
             { businessUnitTitle: containsInsensitive(q) },
-            { economicJob: { title: containsInsensitive(q) } },
+            { activityJob: { title: containsInsensitive(q) } },
+            { activityJob: { group: { title: containsInsensitive(q) } } },
           ],
         },
       },
@@ -724,8 +733,28 @@ type CaseFileRow = {
   caseTrackingCode: string | null;
   businessUnitTitle: string | null;
   formationStep: number;
-  economicJob: { title: string } | null;
+  activityJob: { title: string; group: { title: string } | null } | null;
 };
+
+function typeCounts(
+  rows: { violationTypeId: string; violationTypeTitle: string }[],
+) {
+  const counts = new Map<string, { id: string; title: string; count: number }>();
+  for (const row of rows) {
+    const current = counts.get(row.violationTypeId);
+    if (current) current.count += 1;
+    else {
+      counts.set(row.violationTypeId, {
+        id: row.violationTypeId,
+        title: row.violationTypeTitle,
+        count: 1,
+      });
+    }
+  }
+  return [...counts.values()].sort(
+    (left, right) => right.count - left.count || left.title.localeCompare(right.title, 'fa'),
+  );
+}
 
 function mapCaseFile(row?: CaseFileRow | null) {
   if (!row || row.formationStep <= 0) return null;
@@ -734,7 +763,8 @@ function mapCaseFile(row?: CaseFileRow | null) {
     fullName: row.fullName,
     caseTrackingCode: row.caseTrackingCode,
     businessUnitTitle: row.businessUnitTitle,
-    jobTitle: row.economicJob?.title ?? null,
+    jobGroupTitle: row.activityJob?.group?.title ?? null,
+    jobTitle: row.activityJob?.title ?? null,
     formationStep: row.formationStep,
   };
 }

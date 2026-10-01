@@ -72,6 +72,14 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     prefix: '/violations',
     permissions: ['inspection.violations', 'inspection.violations.register'],
   },
+  {
+    prefix: '/users/register-check',
+    permissions: ['management.userRegister', 'management.users'],
+  },
+  {
+    prefix: '/users/register',
+    permissions: ['management.userRegister', 'management.users'],
+  },
   { prefix: '/users', permissions: ['management.users'] },
   {
     prefix: '/organization/positions',

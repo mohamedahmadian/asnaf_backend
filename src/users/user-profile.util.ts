@@ -1,3 +1,13 @@
+export function normalizePersonName(value: string) {
+  return value
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/ي/g, 'ی')
+    .replace(/ك/g, 'ک')
+    .replace(/ة/g, 'ه')
+    .toLowerCase();
+}
+
 export function joinFullName(firstName: string, lastName: string) {
   return `${firstName.trim()} ${lastName.trim()}`.trim();
 }

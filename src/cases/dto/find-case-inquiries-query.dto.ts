@@ -5,7 +5,15 @@ import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 import { CaseInquiryStatus } from '../../generated/prisma/client';
 
-export const caseInquirySortFields = ['applicant', 'nationalId', 'center', 'job', 'status', 'createdAt'] as const;
+export const caseInquirySortFields = [
+  'applicant',
+  'nationalId',
+  'center',
+  'job',
+  'status',
+  'createdAt',
+  'decidedAt',
+] as const;
 export type CaseInquirySortField = (typeof caseInquirySortFields)[number];
 
 export class FindCaseInquiriesQueryDto extends PaginationQueryDto {

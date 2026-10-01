@@ -16,6 +16,7 @@ import { resolveSortOrder } from '../common/sort-query';
 import {
   CaseInquiryChannel,
   CaseInquiryStatus,
+  DocumentGender,
   Prisma,
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
@@ -60,12 +61,17 @@ export type InquiryActor = {
   formation?: boolean;
 };
 
+function dateOnly(value: Date | null) {
+  return value ? value.toISOString().slice(0, 10) : null;
+}
+
 function mapInquiry(row: InquiryRecord) {
   return {
     id: row.id,
     status: row.status,
     channel: row.channel,
     note: row.note,
+    createdAt: row.createdAt,
     decidedAt: row.decidedAt,
     decidedBy: row.decidedBy,
     center: {
@@ -274,6 +280,7 @@ export class CaseInquiriesService {
         job: (dir) => ({ user: { activityJob: { title: dir } } }),
         status: (dir) => ({ status: dir }),
         createdAt: (dir) => ({ createdAt: dir }),
+        decidedAt: (dir) => ({ decidedAt: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -282,6 +289,7 @@ export class CaseInquiriesService {
       status: true,
       channel: true,
       createdAt: true,
+      decidedAt: true,
       inquiryCenter: { select: { id: true, name: true } },
       user: {
         select: {
@@ -300,6 +308,7 @@ export class CaseInquiriesService {
       status: row.status,
       channel: row.channel,
       createdAt: row.createdAt,
+      decidedAt: row.decidedAt,
       centerName: row.inquiryCenter.name,
       applicantName: row.user.fullName,
       nationalId: row.user.nationalId,
@@ -313,11 +322,285 @@ export class CaseInquiriesService {
       return items.map(mapRow);
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
-    const [items, total] = await Promise.all([
+    const [items, total, assignedCenters] = await Promise.all([
       this.prisma.caseInquiry.findMany({ where, orderBy, skip, take, select }),
       this.prisma.caseInquiry.count({ where }),
+      this.actorCenters(actor),
     ]);
-    return paginatedResult(items.map(mapRow), total, page, pageSize);
+    return {
+      ...paginatedResult(items.map(mapRow), total, page, pageSize),
+      centers: assignedCenters,
+    };
+  }
+
+  async summary(actor: InquiryActor) {
+    const where: Prisma.CaseInquiryWhereInput = actor.isAdmin
+      ? {}
+      : { inquiryCenter: { officerId: actor.id } };
+    const [rows, centers] = await Promise.all([
+      this.prisma.caseInquiry.groupBy({
+        by: ['userId', 'status'],
+        where,
+        _count: { _all: true },
+      }),
+      this.prisma.inquiryCenter.findMany({
+        where: { officerId: actor.id },
+        select: { id: true, name: true },
+        orderBy: [{ name: 'asc' }, { id: 'asc' }],
+      }),
+    ]);
+    const pendingUsers = new Set<string>();
+    const users = new Set<string>();
+    for (const row of rows) {
+      users.add(row.userId);
+      if (row.status === CaseInquiryStatus.PENDING) pendingUsers.add(row.userId);
+    }
+    const total = users.size;
+    const pending = pendingUsers.size;
+    return {
+      total,
+      pending,
+      reviewed: total - pending,
+      centers,
+    };
+  }
+
+  private async actorCenters(actor: InquiryActor) {
+    const assigned = await this.prisma.inquiryCenter.findMany({
+      where: { officerId: actor.id },
+      select: { id: true, name: true },
+      orderBy: [{ name: 'asc' }, { id: 'asc' }],
+    });
+    if (assigned.length > 0 || !actor.isAdmin) return assigned;
+    return this.prisma.inquiryCenter.findMany({
+      where: { isActive: true },
+      select: { id: true, name: true },
+      orderBy: [{ name: 'asc' }, { id: 'asc' }],
+    });
+  }
+
+  async dossier(id: string, actor: InquiryActor) {
+    const inquiry = await this.findReadable(id, actor);
+    const user = await this.prisma.user.findUnique({
+      where: { id: inquiry.userId },
+      select: {
+        id: true,
+        gender: true,
+        firstName: true,
+        lastName: true,
+        fatherName: true,
+        lastNameEn: true,
+        religion: true,
+        religionOther: true,
+        nationalId: true,
+        birthDate: true,
+        birthPlace: true,
+        identityCertificateNo: true,
+        identityIssuedIn: true,
+        residencyStatus: true,
+        passportNumber: true,
+        nationalCardExpiresAt: true,
+        passportExpiresAt: true,
+        phone: true,
+        homePhone: true,
+        postalCode: true,
+        email: true,
+        address: true,
+        educationLevel: true,
+        citizenGroup: true,
+        businessUnitTitle: true,
+        premiseAddress: true,
+        premisePlaque: true,
+        premisePlaqueSeries: true,
+        premiseFloor: true,
+        premiseUnitNo: true,
+        premisePostalCode: true,
+        premisePhone: true,
+        premiseFax: true,
+        premiseEstablishment: true,
+        premiseGeoPosition: true,
+        premisePublicAccess: true,
+        premiseOwnership: true,
+        premiseDeedNo: true,
+        premiseArea: true,
+        leaseIssuedAt: true,
+        leaseExpiresAt: true,
+        leaseAgency: true,
+        premiseOwnerName: true,
+        country: { select: { nameFa: true, nameEn: true } },
+        economicJob: { select: { title: true } },
+        activityJob: {
+          select: {
+            title: true,
+            documents: {
+              select: {
+                isRequired: true,
+                gender: true,
+                document: { select: { id: true, title: true } },
+              },
+            },
+          },
+        },
+        premiseCity: {
+          select: {
+            nameFa: true,
+            nameEn: true,
+            province: { select: { nameFa: true, nameEn: true } },
+          },
+        },
+        premiseComplex: { select: { name: true, nameEn: true } },
+        registrationPlace: { select: { title: true } },
+      },
+    });
+    if (!user) throw new NotFoundException('پرونده یافت نشد');
+
+    const [fixedDocs, stored] = await Promise.all([
+      this.prisma.document.findMany({
+        where: { isFixed: true, isRequired: true },
+        select: { id: true, title: true, gender: true },
+        orderBy: { title: 'asc' },
+      }),
+      this.prisma.personDocument.findMany({
+        where: { userId: user.id },
+        select: {
+          documentId: true,
+          versions: {
+            orderBy: { version: 'desc' },
+            take: 1,
+            select: { id: true, originalName: true, mimeType: true },
+          },
+        },
+      }),
+    ]);
+
+    const currentFile = (documentId: string) => {
+      const version = stored.find((row) => row.documentId === documentId)?.versions[0];
+      if (!version) return null;
+      return {
+        id: version.id,
+        originalName: version.originalName,
+        mimeType: version.mimeType,
+      };
+    };
+    const seen = new Set<string>();
+    const documents: {
+      id: string;
+      title: string;
+      group: 'FIXED' | 'JOB';
+      isRequired: boolean;
+      file: { id: string; originalName: string | null; mimeType: string } | null;
+    }[] = [];
+    let fixedTotal = 0;
+    let jobTotal = 0;
+    for (const doc of fixedDocs) {
+      if (!this.matchesDocumentGender(doc.gender, user.gender)) continue;
+      fixedTotal += 1;
+      seen.add(doc.id);
+      documents.push({
+        id: doc.id,
+        title: doc.title,
+        group: 'FIXED',
+        isRequired: true,
+        file: currentFile(doc.id),
+      });
+    }
+    for (const link of user.activityJob?.documents ?? []) {
+      if (!this.matchesDocumentGender(link.gender, user.gender)) continue;
+      jobTotal += 1;
+      if (seen.has(link.document.id)) continue;
+      seen.add(link.document.id);
+      documents.push({
+        id: link.document.id,
+        title: link.document.title,
+        group: 'JOB',
+        isRequired: link.isRequired,
+        file: currentFile(link.document.id),
+      });
+    }
+    documents.sort((left, right) => {
+      if (left.group !== right.group) return left.group === 'FIXED' ? -1 : 1;
+      return left.title.localeCompare(right.title, 'fa');
+    });
+    const uploaded = documents.filter((item) => item.file).length;
+    const remaining = documents.filter((item) => item.isRequired && !item.file).length;
+
+    return {
+      person: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        fatherName: user.fatherName,
+        lastNameEn: user.lastNameEn,
+        gender: user.gender,
+        religion: user.religion,
+        religionOther: user.religionOther,
+        nationalId: user.nationalId,
+        birthDate: dateOnly(user.birthDate),
+        birthPlace: user.birthPlace,
+        identityCertificateNo: user.identityCertificateNo,
+        identityIssuedIn: user.identityIssuedIn,
+        country: user.country,
+        residencyStatus: user.residencyStatus,
+        passportNumber: user.passportNumber,
+        nationalCardExpiresAt: dateOnly(user.nationalCardExpiresAt),
+        passportExpiresAt: dateOnly(user.passportExpiresAt),
+        phone: user.phone,
+        homePhone: user.homePhone,
+        postalCode: user.postalCode,
+        email: user.email,
+        address: user.address,
+        educationLevel: user.educationLevel,
+        citizenGroup: user.citizenGroup,
+        jobTitle: user.economicJob?.title ?? null,
+        activityJobTitle: user.activityJob?.title ?? null,
+        unitTitle: user.businessUnitTitle,
+      },
+      documents,
+      documentStats: { fixedTotal, jobTotal, uploaded, remaining },
+      location: {
+        city: user.premiseCity
+          ? { nameFa: user.premiseCity.nameFa, nameEn: user.premiseCity.nameEn }
+          : null,
+        province: user.premiseCity?.province ?? null,
+        complex: user.premiseComplex,
+        establishment: user.premiseEstablishment,
+        address: user.premiseAddress,
+        plaque: user.premisePlaque,
+        plaqueSeries: user.premisePlaqueSeries,
+        floor: user.premiseFloor,
+        unitNo: user.premiseUnitNo,
+        postalCode: user.premisePostalCode,
+        phone: user.premisePhone,
+        fax: user.premiseFax,
+        geoPosition: user.premiseGeoPosition,
+        publicAccess: user.premisePublicAccess,
+        registrationPlace: user.registrationPlace?.title ?? null,
+        ownership: user.premiseOwnership,
+        deedNo: user.premiseDeedNo,
+        area: user.premiseArea == null ? null : user.premiseArea.toString(),
+        leaseIssuedAt: dateOnly(user.leaseIssuedAt),
+        leaseExpiresAt: dateOnly(user.leaseExpiresAt),
+        leaseAgency: user.leaseAgency,
+        ownerName: user.premiseOwnerName,
+      },
+    };
+  }
+
+  async readDossierFile(inquiryId: string, versionId: string, actor: InquiryActor) {
+    const inquiry = await this.findReadable(inquiryId, actor);
+    const version = await this.prisma.personDocumentVersion.findUnique({
+      where: { id: versionId },
+      include: { personDocument: { select: { userId: true } } },
+    });
+    if (!version || version.personDocument.userId !== inquiry.userId) {
+      throw new NotFoundException('فایل مدرک یافت نشد');
+    }
+    const data = await this.files.read(version.storageKey);
+    return {
+      mimeType: version.mimeType,
+      byteSize: version.byteSize,
+      originalName: version.originalName,
+      data,
+    };
   }
 
   async detail(id: string, actor: InquiryActor) {
@@ -326,6 +609,7 @@ export class CaseInquiriesService {
       where: { id: row.userId },
       select: {
         fullName: true,
+        gender: true,
         nationalId: true,
         caseTrackingCode: true,
         phone: true,
@@ -338,6 +622,7 @@ export class CaseInquiriesService {
       applicant: person
         ? {
             fullName: person.fullName,
+            gender: person.gender,
             nationalId: person.nationalId,
             trackingCode: person.caseTrackingCode,
             phone: person.phone,
@@ -369,6 +654,13 @@ export class CaseInquiriesService {
     if (!row) throw new NotFoundException('استعلام یافت نشد');
     this.assertReadable(row, actor);
     return row;
+  }
+
+  private matchesDocumentGender(
+    gender: DocumentGender,
+    personGender: 'MALE' | 'FEMALE' | null,
+  ) {
+    return gender === DocumentGender.BOTH || !personGender || gender === personGender;
   }
 
   private assertReadable(row: InquiryRecord, actor: InquiryActor) {

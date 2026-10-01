@@ -22,9 +22,10 @@ import { ensureEmployeeRole } from '../access/access.constants';
 import { Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
-import { joinFullName } from './user-profile.util';
+import { joinFullName, normalizePersonName } from './user-profile.util';
 import { CITY_ID_NONE, FindUsersQueryDto } from './dto/find-users-query.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { RegisterUserDto } from './dto/register-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { UpdateUserLocationDto } from './dto/update-user-location.dto';
@@ -623,6 +624,70 @@ export class UsersService {
       usernameTaken: Boolean(usernameHit),
       emailTaken: Boolean(emailHit),
     };
+  }
+
+  async checkRegister(dto: {
+    phone?: string;
+    lastName?: string;
+    nationalId?: string;
+  }) {
+    const phone = dto.phone?.trim() ?? '';
+    const lastName = dto.lastName?.trim() ?? '';
+    const nationalId = dto.nationalId?.trim() ?? '';
+    const phoneReady = /^09\d{9}$/.test(phone);
+    if (!phoneReady && !lastName && !nationalId) {
+      throw new BadRequestException('تلفن، نام خانوادگی یا کد ملی لازم است');
+    }
+
+    const phoneHit = phoneReady
+      ? await this.prisma.user.findFirst({
+          where: { phone: { in: phoneLookupValues(phone) } },
+          select: { id: true, lastName: true, fullName: true },
+        })
+      : null;
+    const phoneLastNameTaken = Boolean(
+      phoneHit &&
+        lastName &&
+        normalizePersonName(phoneHit.lastName) === normalizePersonName(lastName),
+    );
+    const nationalIdHit =
+      nationalId && /^\d{10}$/.test(nationalId)
+        ? await this.prisma.user.findFirst({
+            where: { nationalId },
+            select: { id: true, fullName: true },
+          })
+        : null;
+
+    return {
+      phoneLastNameTaken,
+      phoneTaken: Boolean(phoneHit),
+      nationalIdTaken: Boolean(nationalIdHit),
+      nationalIdOwnerName: nationalIdHit?.fullName?.trim() || null,
+    };
+  }
+
+  async register(dto: RegisterUserDto) {
+    const check = await this.checkRegister({
+      phone: dto.phone,
+      lastName: dto.lastName,
+      nationalId: dto.nationalId,
+    });
+    if (check.phoneLastNameTaken) {
+      throw new ConflictException('کاربری با این تلفن و نام خانوادگی قبلاً ثبت شده است');
+    }
+    if (check.phoneTaken) {
+      throw new ConflictException('این تلفن همراه قبلاً ثبت شده است');
+    }
+    return this.create({
+      username: dto.nationalId,
+      password: dto.password,
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+      nationalId: dto.nationalId,
+      phone: dto.phone,
+      locale: 'fa',
+      status: UserStatus.ACTIVE,
+    });
   }
 
   private async assertUnique(

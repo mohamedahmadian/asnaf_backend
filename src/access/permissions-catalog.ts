@@ -105,6 +105,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
     kind: 'MODULE',
     nameKey: 'modules.management',
     children: [
+      {
+        code: 'management.userRegister',
+        kind: 'MENU',
+        nameKey: 'menus.userRegister',
+      },
       { code: 'management.users', kind: 'MENU', nameKey: 'menus.users' },
       { code: 'management.roles', kind: 'MENU', nameKey: 'menus.roles' },
     ],

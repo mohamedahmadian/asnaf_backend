@@ -9,7 +9,9 @@ import {
   Query,
 } from '@nestjs/common';
 import { CheckIdentityDto } from './dto/check-identity.dto';
+import { CheckRegisterDto } from './dto/check-register.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { RegisterUserDto } from './dto/register-user.dto';
 import { FindLocationHistoryQueryDto } from './dto/find-location-history-query.dto';
 import { FindUsersQueryDto } from './dto/find-users-query.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -28,6 +30,16 @@ export class UsersController {
   @Post('identity-check')
   checkIdentity(@Body() dto: CheckIdentityDto) {
     return this.users.checkIdentityTaken(dto);
+  }
+
+  @Post('register-check')
+  checkRegister(@Body() dto: CheckRegisterDto) {
+    return this.users.checkRegister(dto);
+  }
+
+  @Post('register')
+  register(@Body() dto: RegisterUserDto) {
+    return this.users.register(dto);
   }
 
   @Get(':id')
