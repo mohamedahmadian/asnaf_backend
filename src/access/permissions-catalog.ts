@@ -24,6 +24,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
       { code: 'cases.formation', kind: 'MENU', nameKey: 'menus.caseFormation' },
       { code: 'cases.management', kind: 'MENU', nameKey: 'menus.caseManagement' },
       { code: 'cases.inquiries', kind: 'MENU', nameKey: 'menus.caseInquiries' },
+      { code: 'cases.places', kind: 'MENU', nameKey: 'menus.casePlaces' },
       { code: 'cases.reports', kind: 'MENU', nameKey: 'menus.caseReports' },
       { code: 'cases.settings', kind: 'MENU', nameKey: 'menus.caseSettings' },
     ],

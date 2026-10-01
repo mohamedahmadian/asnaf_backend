@@ -38,6 +38,7 @@ type RoutePermission = {
 
 const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/cases/inquiries', permissions: ['cases.inquiries', 'cases.formation'] },
+  { prefix: '/cases/places', permissions: ['cases.places', 'cases.formation'] },
   { prefix: '/cases/settings', permissions: ['cases.settings'] },
   { prefix: '/cases/formation', permissions: ['cases.formation'] },
   { prefix: '/cases', permissions: ['cases.management'] },

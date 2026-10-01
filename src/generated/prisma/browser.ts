@@ -93,6 +93,21 @@ export type CaseInquiry = Prisma.CaseInquiryModel
  */
 export type CaseInquiryFile = Prisma.CaseInquiryFileModel
 /**
+ * Model CasePlacesOffice
+ * تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
+ */
+export type CasePlacesOffice = Prisma.CasePlacesOfficeModel
+/**
+ * Model CasePlacesReview
+ * 
+ */
+export type CasePlacesReview = Prisma.CasePlacesReviewModel
+/**
+ * Model CasePlacesFile
+ * 
+ */
+export type CasePlacesFile = Prisma.CasePlacesFileModel
+/**
  * Model JobDocument
  * 
  */
@@ -107,6 +122,11 @@ export type Document = Prisma.DocumentModel
  * مدارکی که در تب اطلاعات هویتی تشکیل پرونده نشان داده می‌شوند
  */
 export type CaseIdentityDocument = Prisma.CaseIdentityDocumentModel
+/**
+ * Model CaseManagementApprover
+ * واحد و نقشی که در مرحلهٔ تاییدهای مدیریتی باید پرونده را تایید کنند
+ */
+export type CaseManagementApprover = Prisma.CaseManagementApproverModel
 /**
  * Model PersonDocument
  * 

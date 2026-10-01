@@ -200,6 +200,7 @@ export type RoleWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Role"> | Date | string
   users?: Prisma.UserRoleListRelationFilter
   permissions?: Prisma.RolePermissionListRelationFilter
+  caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
 }
 
 export type RoleOrderByWithRelationInput = {
@@ -212,6 +213,7 @@ export type RoleOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   users?: Prisma.UserRoleOrderByRelationAggregateInput
   permissions?: Prisma.RolePermissionOrderByRelationAggregateInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverOrderByRelationAggregateInput
 }
 
 export type RoleWhereUniqueInput = Prisma.AtLeast<{
@@ -227,6 +229,7 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Role"> | Date | string
   users?: Prisma.UserRoleListRelationFilter
   permissions?: Prisma.RolePermissionListRelationFilter
+  caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
 }, "id" | "code">
 
 export type RoleOrderByWithAggregationInput = {
@@ -265,6 +268,7 @@ export type RoleCreateInput = {
   updatedAt?: Date | string
   users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
 }
 
 export type RoleUncheckedCreateInput = {
@@ -277,6 +281,7 @@ export type RoleUncheckedCreateInput = {
   updatedAt?: Date | string
   users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type RoleUpdateInput = {
@@ -289,6 +294,7 @@ export type RoleUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
 }
 
 export type RoleUncheckedUpdateInput = {
@@ -301,6 +307,7 @@ export type RoleUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 export type RoleCreateManyInput = {
@@ -333,6 +340,11 @@ export type RoleUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type RoleScalarRelationFilter = {
+  is?: Prisma.RoleWhereInput
+  isNot?: Prisma.RoleWhereInput
+}
+
 export type RoleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
@@ -363,9 +375,18 @@ export type RoleMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type RoleScalarRelationFilter = {
-  is?: Prisma.RoleWhereInput
-  isNot?: Prisma.RoleWhereInput
+export type RoleCreateNestedOneWithoutCaseManagementApproversInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutCaseManagementApproversInput, Prisma.RoleUncheckedCreateWithoutCaseManagementApproversInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutCaseManagementApproversInput
+  connect?: Prisma.RoleWhereUniqueInput
+}
+
+export type RoleUpdateOneRequiredWithoutCaseManagementApproversNestedInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutCaseManagementApproversInput, Prisma.RoleUncheckedCreateWithoutCaseManagementApproversInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutCaseManagementApproversInput
+  upsert?: Prisma.RoleUpsertWithoutCaseManagementApproversInput
+  connect?: Prisma.RoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutCaseManagementApproversInput, Prisma.RoleUpdateWithoutCaseManagementApproversInput>, Prisma.RoleUncheckedUpdateWithoutCaseManagementApproversInput>
 }
 
 export type RoleCreateNestedOneWithoutUsersInput = {
@@ -396,6 +417,70 @@ export type RoleUpdateOneRequiredWithoutPermissionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutPermissionsInput, Prisma.RoleUpdateWithoutPermissionsInput>, Prisma.RoleUncheckedUpdateWithoutPermissionsInput>
 }
 
+export type RoleCreateWithoutCaseManagementApproversInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
+}
+
+export type RoleUncheckedCreateWithoutCaseManagementApproversInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+}
+
+export type RoleCreateOrConnectWithoutCaseManagementApproversInput = {
+  where: Prisma.RoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoleCreateWithoutCaseManagementApproversInput, Prisma.RoleUncheckedCreateWithoutCaseManagementApproversInput>
+}
+
+export type RoleUpsertWithoutCaseManagementApproversInput = {
+  update: Prisma.XOR<Prisma.RoleUpdateWithoutCaseManagementApproversInput, Prisma.RoleUncheckedUpdateWithoutCaseManagementApproversInput>
+  create: Prisma.XOR<Prisma.RoleCreateWithoutCaseManagementApproversInput, Prisma.RoleUncheckedCreateWithoutCaseManagementApproversInput>
+  where?: Prisma.RoleWhereInput
+}
+
+export type RoleUpdateToOneWithWhereWithoutCaseManagementApproversInput = {
+  where?: Prisma.RoleWhereInput
+  data: Prisma.XOR<Prisma.RoleUpdateWithoutCaseManagementApproversInput, Prisma.RoleUncheckedUpdateWithoutCaseManagementApproversInput>
+}
+
+export type RoleUpdateWithoutCaseManagementApproversInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
+}
+
+export type RoleUncheckedUpdateWithoutCaseManagementApproversInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+}
+
 export type RoleCreateWithoutUsersInput = {
   id?: string
   code: string
@@ -405,6 +490,7 @@ export type RoleCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
 }
 
 export type RoleUncheckedCreateWithoutUsersInput = {
@@ -416,6 +502,7 @@ export type RoleUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type RoleCreateOrConnectWithoutUsersInput = {
@@ -443,6 +530,7 @@ export type RoleUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutUsersInput = {
@@ -454,6 +542,7 @@ export type RoleUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 export type RoleCreateWithoutPermissionsInput = {
@@ -465,6 +554,7 @@ export type RoleCreateWithoutPermissionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
 }
 
 export type RoleUncheckedCreateWithoutPermissionsInput = {
@@ -476,6 +566,7 @@ export type RoleUncheckedCreateWithoutPermissionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
 }
 
 export type RoleCreateOrConnectWithoutPermissionsInput = {
@@ -503,6 +594,7 @@ export type RoleUpdateWithoutPermissionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutPermissionsInput = {
@@ -514,6 +606,7 @@ export type RoleUncheckedUpdateWithoutPermissionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
 }
 
 
@@ -524,11 +617,13 @@ export type RoleUncheckedUpdateWithoutPermissionsInput = {
 export type RoleCountOutputType = {
   users: number
   permissions: number
+  caseManagementApprovers: number
 }
 
 export type RoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | RoleCountOutputTypeCountUsersArgs
   permissions?: boolean | RoleCountOutputTypeCountPermissionsArgs
+  caseManagementApprovers?: boolean | RoleCountOutputTypeCountCaseManagementApproversArgs
 }
 
 /**
@@ -555,6 +650,13 @@ export type RoleCountOutputTypeCountPermissionsArgs<ExtArgs extends runtime.Type
   where?: Prisma.RolePermissionWhereInput
 }
 
+/**
+ * RoleCountOutputType without action
+ */
+export type RoleCountOutputTypeCountCaseManagementApproversArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseManagementApproverWhereInput
+}
+
 
 export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -566,6 +668,7 @@ export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   users?: boolean | Prisma.Role$usersArgs<ExtArgs>
   permissions?: boolean | Prisma.Role$permissionsArgs<ExtArgs>
+  caseManagementApprovers?: boolean | Prisma.Role$caseManagementApproversArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["role"]>
 
@@ -603,6 +706,7 @@ export type RoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type RoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Role$usersArgs<ExtArgs>
   permissions?: boolean | Prisma.Role$permissionsArgs<ExtArgs>
+  caseManagementApprovers?: boolean | Prisma.Role$caseManagementApproversArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RoleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -613,6 +717,7 @@ export type $RolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     users: Prisma.$UserRolePayload<ExtArgs>[]
     permissions: Prisma.$RolePermissionPayload<ExtArgs>[]
+    caseManagementApprovers: Prisma.$CaseManagementApproverPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1018,6 +1123,7 @@ export interface Prisma__RoleClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.Role$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissions<T extends Prisma.Role$permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  caseManagementApprovers<T extends Prisma.Role$caseManagementApproversArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseManagementApproversArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementApproverPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1492,6 +1598,30 @@ export type Role$permissionsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.RolePermissionScalarFieldEnum | Prisma.RolePermissionScalarFieldEnum[]
+}
+
+/**
+ * Role.caseManagementApprovers
+ */
+export type Role$caseManagementApproversArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseManagementApprover
+   */
+  select?: Prisma.CaseManagementApproverSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseManagementApprover
+   */
+  omit?: Prisma.CaseManagementApproverOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseManagementApproverInclude<ExtArgs> | null
+  where?: Prisma.CaseManagementApproverWhereInput
+  orderBy?: Prisma.CaseManagementApproverOrderByWithRelationInput | Prisma.CaseManagementApproverOrderByWithRelationInput[]
+  cursor?: Prisma.CaseManagementApproverWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseManagementApproverScalarFieldEnum | Prisma.CaseManagementApproverScalarFieldEnum[]
 }
 
 /**

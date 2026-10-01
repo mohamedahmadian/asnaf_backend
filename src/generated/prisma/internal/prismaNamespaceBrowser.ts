@@ -66,9 +66,13 @@ export const ModelName = {
   JobInquiryCenter: 'JobInquiryCenter',
   CaseInquiry: 'CaseInquiry',
   CaseInquiryFile: 'CaseInquiryFile',
+  CasePlacesOffice: 'CasePlacesOffice',
+  CasePlacesReview: 'CasePlacesReview',
+  CasePlacesFile: 'CasePlacesFile',
   JobDocument: 'JobDocument',
   Document: 'Document',
   CaseIdentityDocument: 'CaseIdentityDocument',
+  CaseManagementApprover: 'CaseManagementApprover',
   PersonDocument: 'PersonDocument',
   PersonDocumentVersion: 'PersonDocumentVersion',
   User: 'User',
@@ -365,6 +369,47 @@ export const CaseInquiryFileScalarFieldEnum = {
 export type CaseInquiryFileScalarFieldEnum = (typeof CaseInquiryFileScalarFieldEnum)[keyof typeof CaseInquiryFileScalarFieldEnum]
 
 
+export const CasePlacesOfficeScalarFieldEnum = {
+  id: 'id',
+  phone: 'phone',
+  officerId: 'officerId',
+  letterTitle: 'letterTitle',
+  letterBody: 'letterBody',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CasePlacesOfficeScalarFieldEnum = (typeof CasePlacesOfficeScalarFieldEnum)[keyof typeof CasePlacesOfficeScalarFieldEnum]
+
+
+export const CasePlacesReviewScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  channel: 'channel',
+  note: 'note',
+  decidedById: 'decidedById',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CasePlacesReviewScalarFieldEnum = (typeof CasePlacesReviewScalarFieldEnum)[keyof typeof CasePlacesReviewScalarFieldEnum]
+
+
+export const CasePlacesFileScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CasePlacesFileScalarFieldEnum = (typeof CasePlacesFileScalarFieldEnum)[keyof typeof CasePlacesFileScalarFieldEnum]
+
+
 export const JobDocumentScalarFieldEnum = {
   jobId: 'jobId',
   documentId: 'documentId',
@@ -395,6 +440,16 @@ export const CaseIdentityDocumentScalarFieldEnum = {
 } as const
 
 export type CaseIdentityDocumentScalarFieldEnum = (typeof CaseIdentityDocumentScalarFieldEnum)[keyof typeof CaseIdentityDocumentScalarFieldEnum]
+
+
+export const CaseManagementApproverScalarFieldEnum = {
+  id: 'id',
+  workUnitId: 'workUnitId',
+  roleId: 'roleId',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseManagementApproverScalarFieldEnum = (typeof CaseManagementApproverScalarFieldEnum)[keyof typeof CaseManagementApproverScalarFieldEnum]
 
 
 export const PersonDocumentScalarFieldEnum = {

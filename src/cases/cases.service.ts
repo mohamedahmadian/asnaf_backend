@@ -37,9 +37,11 @@ import { SaveCaseIdentityDto } from './dto/save-case-identity.dto';
 import { SaveFormationStepDto } from './dto/save-formation-step.dto';
 import { PersonFileStorage } from './person-file.storage';
 import { CaseInquiriesService } from './case-inquiries.service';
+import { CasePlacesService } from './case-places.service';
 
 /** 0 هویت، 1 فعالیت، 2 محل، 3 استعلام، 4 اماکن، 5 بررسی مدیریت، 6 صدور */
 const PLACES_FORMATION_STEP = 4;
+const MANAGEMENT_FORMATION_STEP = 5;
 
 const identitySelect = {
   id: true,
@@ -205,6 +207,7 @@ export class CasesService {
     private readonly prisma: PrismaService,
     private readonly files: PersonFileStorage,
     private readonly inquiries: CaseInquiriesService,
+    private readonly places: CasePlacesService,
   ) {}
 
   private async ensureTrackingCode(userId: string, current: string | null, formationStep: number) {
@@ -434,6 +437,9 @@ export class CasesService {
       await this.assertActivityDocumentsDelivered(user.id);
       await this.inquiries.assertDelivered(user.id);
     }
+    if (user.formationStep < MANAGEMENT_FORMATION_STEP && requested >= MANAGEMENT_FORMATION_STEP) {
+      await this.places.assertDelivered(user.id);
+    }
     const formationStep = Math.max(user.formationStep, requested);
     return this.prisma.user.update({
       where: { id: user.id },
@@ -463,6 +469,7 @@ export class CasesService {
     if (total === 0 || pending > 0) return null;
     await this.assertActivityDocumentsDelivered(user.id);
     await this.inquiries.assertDelivered(user.id);
+    await this.places.ensureForUser(user.id);
     return this.prisma.user.update({
       where: { id: user.id },
       data: { formationStep: PLACES_FORMATION_STEP },

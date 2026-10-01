@@ -191,6 +191,7 @@ export type WorkUnitWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"WorkUnit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WorkUnit"> | Date | string
   users?: Prisma.UserListRelationFilter
+  caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
 }
 
 export type WorkUnitOrderByWithRelationInput = {
@@ -201,6 +202,7 @@ export type WorkUnitOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   users?: Prisma.UserOrderByRelationAggregateInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverOrderByRelationAggregateInput
 }
 
 export type WorkUnitWhereUniqueInput = Prisma.AtLeast<{
@@ -214,6 +216,7 @@ export type WorkUnitWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"WorkUnit"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WorkUnit"> | Date | string
   users?: Prisma.UserListRelationFilter
+  caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
 }, "id" | "title">
 
 export type WorkUnitOrderByWithAggregationInput = {
@@ -248,6 +251,7 @@ export type WorkUnitCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutWorkUnitInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutWorkUnitInput
 }
 
 export type WorkUnitUncheckedCreateInput = {
@@ -258,6 +262,7 @@ export type WorkUnitUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutWorkUnitInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutWorkUnitInput
 }
 
 export type WorkUnitUpdateInput = {
@@ -268,6 +273,7 @@ export type WorkUnitUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutWorkUnitNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutWorkUnitNestedInput
 }
 
 export type WorkUnitUncheckedUpdateInput = {
@@ -278,6 +284,7 @@ export type WorkUnitUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutWorkUnitNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutWorkUnitNestedInput
 }
 
 export type WorkUnitCreateManyInput = {
@@ -305,6 +312,11 @@ export type WorkUnitUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type WorkUnitScalarRelationFilter = {
+  is?: Prisma.WorkUnitWhereInput
+  isNot?: Prisma.WorkUnitWhereInput
 }
 
 export type WorkUnitNullableScalarRelationFilter = {
@@ -339,6 +351,20 @@ export type WorkUnitMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type WorkUnitCreateNestedOneWithoutCaseManagementApproversInput = {
+  create?: Prisma.XOR<Prisma.WorkUnitCreateWithoutCaseManagementApproversInput, Prisma.WorkUnitUncheckedCreateWithoutCaseManagementApproversInput>
+  connectOrCreate?: Prisma.WorkUnitCreateOrConnectWithoutCaseManagementApproversInput
+  connect?: Prisma.WorkUnitWhereUniqueInput
+}
+
+export type WorkUnitUpdateOneRequiredWithoutCaseManagementApproversNestedInput = {
+  create?: Prisma.XOR<Prisma.WorkUnitCreateWithoutCaseManagementApproversInput, Prisma.WorkUnitUncheckedCreateWithoutCaseManagementApproversInput>
+  connectOrCreate?: Prisma.WorkUnitCreateOrConnectWithoutCaseManagementApproversInput
+  upsert?: Prisma.WorkUnitUpsertWithoutCaseManagementApproversInput
+  connect?: Prisma.WorkUnitWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WorkUnitUpdateToOneWithWhereWithoutCaseManagementApproversInput, Prisma.WorkUnitUpdateWithoutCaseManagementApproversInput>, Prisma.WorkUnitUncheckedUpdateWithoutCaseManagementApproversInput>
+}
+
 export type WorkUnitCreateNestedOneWithoutUsersInput = {
   create?: Prisma.XOR<Prisma.WorkUnitCreateWithoutUsersInput, Prisma.WorkUnitUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.WorkUnitCreateOrConnectWithoutUsersInput
@@ -355,6 +381,62 @@ export type WorkUnitUpdateOneWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkUnitUpdateToOneWithWhereWithoutUsersInput, Prisma.WorkUnitUpdateWithoutUsersInput>, Prisma.WorkUnitUncheckedUpdateWithoutUsersInput>
 }
 
+export type WorkUnitCreateWithoutCaseManagementApproversInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserCreateNestedManyWithoutWorkUnitInput
+}
+
+export type WorkUnitUncheckedCreateWithoutCaseManagementApproversInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutWorkUnitInput
+}
+
+export type WorkUnitCreateOrConnectWithoutCaseManagementApproversInput = {
+  where: Prisma.WorkUnitWhereUniqueInput
+  create: Prisma.XOR<Prisma.WorkUnitCreateWithoutCaseManagementApproversInput, Prisma.WorkUnitUncheckedCreateWithoutCaseManagementApproversInput>
+}
+
+export type WorkUnitUpsertWithoutCaseManagementApproversInput = {
+  update: Prisma.XOR<Prisma.WorkUnitUpdateWithoutCaseManagementApproversInput, Prisma.WorkUnitUncheckedUpdateWithoutCaseManagementApproversInput>
+  create: Prisma.XOR<Prisma.WorkUnitCreateWithoutCaseManagementApproversInput, Prisma.WorkUnitUncheckedCreateWithoutCaseManagementApproversInput>
+  where?: Prisma.WorkUnitWhereInput
+}
+
+export type WorkUnitUpdateToOneWithWhereWithoutCaseManagementApproversInput = {
+  where?: Prisma.WorkUnitWhereInput
+  data: Prisma.XOR<Prisma.WorkUnitUpdateWithoutCaseManagementApproversInput, Prisma.WorkUnitUncheckedUpdateWithoutCaseManagementApproversInput>
+}
+
+export type WorkUnitUpdateWithoutCaseManagementApproversInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUpdateManyWithoutWorkUnitNestedInput
+}
+
+export type WorkUnitUncheckedUpdateWithoutCaseManagementApproversInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutWorkUnitNestedInput
+}
+
 export type WorkUnitCreateWithoutUsersInput = {
   id?: string
   title: string
@@ -362,6 +444,7 @@ export type WorkUnitCreateWithoutUsersInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutWorkUnitInput
 }
 
 export type WorkUnitUncheckedCreateWithoutUsersInput = {
@@ -371,6 +454,7 @@ export type WorkUnitUncheckedCreateWithoutUsersInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutWorkUnitInput
 }
 
 export type WorkUnitCreateOrConnectWithoutUsersInput = {
@@ -396,6 +480,7 @@ export type WorkUnitUpdateWithoutUsersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutWorkUnitNestedInput
 }
 
 export type WorkUnitUncheckedUpdateWithoutUsersInput = {
@@ -405,6 +490,7 @@ export type WorkUnitUncheckedUpdateWithoutUsersInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutWorkUnitNestedInput
 }
 
 
@@ -414,10 +500,12 @@ export type WorkUnitUncheckedUpdateWithoutUsersInput = {
 
 export type WorkUnitCountOutputType = {
   users: number
+  caseManagementApprovers: number
 }
 
 export type WorkUnitCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | WorkUnitCountOutputTypeCountUsersArgs
+  caseManagementApprovers?: boolean | WorkUnitCountOutputTypeCountCaseManagementApproversArgs
 }
 
 /**
@@ -437,6 +525,13 @@ export type WorkUnitCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * WorkUnitCountOutputType without action
+ */
+export type WorkUnitCountOutputTypeCountCaseManagementApproversArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseManagementApproverWhereInput
+}
+
 
 export type WorkUnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -446,6 +541,7 @@ export type WorkUnitSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   users?: boolean | Prisma.WorkUnit$usersArgs<ExtArgs>
+  caseManagementApprovers?: boolean | Prisma.WorkUnit$caseManagementApproversArgs<ExtArgs>
   _count?: boolean | Prisma.WorkUnitCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workUnit"]>
 
@@ -479,6 +575,7 @@ export type WorkUnitSelectScalar = {
 export type WorkUnitOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["workUnit"]>
 export type WorkUnitInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.WorkUnit$usersArgs<ExtArgs>
+  caseManagementApprovers?: boolean | Prisma.WorkUnit$caseManagementApproversArgs<ExtArgs>
   _count?: boolean | Prisma.WorkUnitCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WorkUnitIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -488,6 +585,7 @@ export type $WorkUnitPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "WorkUnit"
   objects: {
     users: Prisma.$UserPayload<ExtArgs>[]
+    caseManagementApprovers: Prisma.$CaseManagementApproverPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -891,6 +989,7 @@ readonly fields: WorkUnitFieldRefs;
 export interface Prisma__WorkUnitClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.WorkUnit$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkUnit$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  caseManagementApprovers<T extends Prisma.WorkUnit$caseManagementApproversArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkUnit$caseManagementApproversArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementApproverPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1340,6 +1439,30 @@ export type WorkUnit$usersArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * WorkUnit.caseManagementApprovers
+ */
+export type WorkUnit$caseManagementApproversArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseManagementApprover
+   */
+  select?: Prisma.CaseManagementApproverSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseManagementApprover
+   */
+  omit?: Prisma.CaseManagementApproverOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseManagementApproverInclude<ExtArgs> | null
+  where?: Prisma.CaseManagementApproverWhereInput
+  orderBy?: Prisma.CaseManagementApproverOrderByWithRelationInput | Prisma.CaseManagementApproverOrderByWithRelationInput[]
+  cursor?: Prisma.CaseManagementApproverWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseManagementApproverScalarFieldEnum | Prisma.CaseManagementApproverScalarFieldEnum[]
 }
 
 /**

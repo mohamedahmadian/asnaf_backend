@@ -478,6 +478,57 @@ model CaseInquiryFile {
   @@map("case_inquiry_files")
 }
 
+/// تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
+model CasePlacesOffice {
+  id          String   @id @default("default")
+  phone       String?
+  officerId   String?  @unique
+  officer     User?    @relation("CasePlacesOfficer", fields: [officerId], references: [id], onDelete: SetNull)
+  letterTitle String?
+  letterBody  String?
+  updatedAt   DateTime @updatedAt
+
+  @@index([officerId])
+  @@map("case_places_office")
+}
+
+model CasePlacesReview {
+  id          String              @id @default(uuid())
+  userId      String              @unique
+  user        User                @relation("CasePlacesSubject", fields: [userId], references: [id], onDelete: Cascade)
+  status      CaseInquiryStatus   @default(PENDING)
+  channel     CaseInquiryChannel?
+  note        String?
+  decidedById String?
+  decidedBy   User?               @relation("CasePlacesDecider", fields: [decidedById], references: [id], onDelete: SetNull)
+  decidedAt   DateTime?
+  files       CasePlacesFile[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([status])
+  @@index([decidedById])
+  @@index([createdAt])
+  @@map("case_places_reviews")
+}
+
+model CasePlacesFile {
+  id           String           @id @default(uuid())
+  reviewId     String
+  review       CasePlacesReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  uploadedById String?
+  uploadedBy   User?            @relation("CasePlacesFileUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime         @default(now())
+
+  @@index([reviewId])
+  @@index([uploadedById])
+  @@map("case_places_files")
+}
+
 model JobDocument {
   jobId      String
   job        Job            @relation(fields: [jobId], references: [id], onDelete: Cascade)
@@ -522,6 +573,22 @@ model CaseIdentityDocument {
 
   @@index([createdAt])
   @@map("case_identity_documents")
+}
+
+/// واحد و نقشی که در مرحلهٔ تاییدهای مدیریتی باید پرونده را تایید کنند
+model CaseManagementApprover {
+  id         String   @id @default(uuid())
+  workUnitId String
+  workUnit   WorkUnit @relation(fields: [workUnitId], references: [id], onDelete: Cascade)
+  roleId     String
+  role       Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([workUnitId, roleId])
+  @@index([workUnitId])
+  @@index([roleId])
+  @@index([createdAt])
+  @@map("case_management_approvers")
 }
 
 model PersonDocument {
@@ -667,6 +734,10 @@ model User {
   caseInquiries      CaseInquiry[]         @relation("CaseInquirySubject")
   caseInquiriesDecided CaseInquiry[]       @relation("CaseInquiryDecider")
   caseInquiryFiles   CaseInquiryFile[]     @relation("CaseInquiryFileUploader")
+  placesOffice       CasePlacesOffice?     @relation("CasePlacesOfficer")
+  casePlacesReviews  CasePlacesReview[]    @relation("CasePlacesSubject")
+  casePlacesDecided  CasePlacesReview[]    @relation("CasePlacesDecider")
+  casePlacesFiles    CasePlacesFile[]      @relation("CasePlacesFileUploader")
   jobGroupRepresentations JobGroupRepresentative[]
   foodReservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
@@ -1265,6 +1336,7 @@ model Role {
   updatedAt   DateTime         @updatedAt
   users       UserRole[]
   permissions RolePermission[]
+  caseManagementApprovers CaseManagementApprover[]
 
   @@index([name])
   @@index([createdAt])
@@ -1688,6 +1760,7 @@ model WorkUnit {
   description String?
   isActive    Boolean  @default(true)
   users       User[]
+  caseManagementApprovers CaseManagementApprover[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

@@ -75,6 +75,33 @@ export class PersonFileStorage {
     };
   }
 
+  async savePlaces(input: {
+    personId: string;
+    reviewId: string;
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = await this.prepare(input.buffer, input.mimeType);
+    const storageKey = [
+      'persons',
+      input.personId,
+      'places',
+      input.reviewId,
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
   async read(storageKey: string) {
     return readFile(this.resolve(storageKey));
   }

@@ -381,8 +381,12 @@ export class CaseInquiriesService {
 
   async dossier(id: string, actor: InquiryActor) {
     const inquiry = await this.findReadable(id, actor);
+    return this.personDossier(inquiry.userId);
+  }
+
+  async personDossier(userId: string) {
     const user = await this.prisma.user.findUnique({
-      where: { id: inquiry.userId },
+      where: { id: userId },
       select: {
         id: true,
         gender: true,
@@ -587,11 +591,15 @@ export class CaseInquiriesService {
 
   async readDossierFile(inquiryId: string, versionId: string, actor: InquiryActor) {
     const inquiry = await this.findReadable(inquiryId, actor);
+    return this.readPersonDocument(inquiry.userId, versionId);
+  }
+
+  async readPersonDocument(userId: string, versionId: string) {
     const version = await this.prisma.personDocumentVersion.findUnique({
       where: { id: versionId },
       include: { personDocument: { select: { userId: true } } },
     });
-    if (!version || version.personDocument.userId !== inquiry.userId) {
+    if (!version || version.personDocument.userId !== userId) {
       throw new NotFoundException('فایل مدرک یافت نشد');
     }
     const data = await this.files.read(version.storageKey);

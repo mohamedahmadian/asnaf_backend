@@ -39,6 +39,12 @@ export async function loadUserAccess(
     if (officerCenters > 0 && !permissionCodes.includes('cases.inquiries')) {
       permissionCodes.push('cases.inquiries');
     }
+    const placesOfficer = await prisma.casePlacesOffice.count({
+      where: { officerId: userId },
+    });
+    if (placesOfficer > 0 && !permissionCodes.includes('cases.places')) {
+      permissionCodes.push('cases.places');
+    }
   }
   return { isAdmin, roleCodes, permissionCodes };
 }

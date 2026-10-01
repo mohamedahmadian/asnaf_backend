@@ -17,6 +17,7 @@ import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CaseInquiryChannel } from '../generated/prisma/client';
 import { CaseInquiriesService } from './case-inquiries.service';
+import { CasePlacesService } from './case-places.service';
 import { CasesService } from './cases.service';
 import { SaveCaseActivityDto } from './dto/save-case-activity.dto';
 import { SaveCaseLocationDto } from './dto/save-case-location.dto';
@@ -47,6 +48,7 @@ export class CasesController {
   constructor(
     private readonly cases: CasesService,
     private readonly inquiries: CaseInquiriesService,
+    private readonly places: CasePlacesService,
   ) {}
 
   @Get('identity')
@@ -79,9 +81,49 @@ export class CasesController {
     return this.inquiries.listForCase(userId);
   }
 
+  @Get('places')
+  casePlaces(@Query('userId') userId = '') {
+    return this.places.listForCase(userId);
+  }
+
+  @Get('places/:id/letter')
+  placesLetter(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
+    return this.places.letter(id, formationActor(user));
+  }
+
+  @Post('places/:id/decision')
+  @UseInterceptors(inquiryFile)
+  async decidePlaces(
+    @Param('id') id: string,
+    @CurrentUser() user: RequestUser | undefined,
+    @UploadedFile() file: UploadFile | undefined,
+    @Body('status') status = '',
+    @Body('note') note?: string,
+  ) {
+    const saved = await this.places.decide(id, formationActor(user), {
+      status,
+      note,
+      channel: CaseInquiryChannel.MANUAL,
+      file: file?.buffer
+        ? { buffer: file.buffer, mimeType: file.mimetype, originalName: file.originalname }
+        : undefined,
+    });
+    try {
+      await this.places.advanceAfterDecision(id);
+    } catch (error) {
+      if (!(error instanceof BadRequestException)) throw error;
+    }
+    return saved;
+  }
+
+  @Post('places/:id/reopen')
+  reopenPlaces(@Param('id') id: string) {
+    return this.places.reopen(id);
+  }
+
   @Post('inquiries/:id/decision')
   @UseInterceptors(inquiryFile)
-  decideInquiry(
+  async decideInquiry(
     @Param('id') id: string,
     @CurrentUser() user: RequestUser | undefined,
     @UploadedFile() file: UploadFile | undefined,
