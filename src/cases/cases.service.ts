@@ -95,6 +95,7 @@ const caseFileSelect = {
   premiseEstablishment: true,
   premiseComplexId: true,
   premiseAddress: true,
+  premiseAddressEn: true,
   premisePlaque: true,
   premisePlaqueSeries: true,
   premiseFloor: true,
@@ -127,6 +128,7 @@ function mapLocation(user: CaseFileRow) {
     establishment: user.premiseEstablishment,
     complexId: user.premiseComplexId,
     address: user.premiseAddress,
+    addressEn: user.premiseAddressEn,
     plaque: user.premisePlaque,
     plaqueSeries: user.premisePlaqueSeries,
     floor: user.premiseFloor,
@@ -442,8 +444,8 @@ export class CasesService {
     });
     if (!city) throw new BadRequestException('شهر معتبر نیست');
     const complex =
-      dto.establishment === 'RESIDENTIAL_COMPLEX' ? dto.complexId ?? null : null;
-    if (dto.establishment === 'RESIDENTIAL_COMPLEX' && !complex) {
+      dto.establishment === 'COMMERCIAL_COMPLEX' ? dto.complexId ?? null : null;
+    if (dto.establishment === 'COMMERCIAL_COMPLEX' && !complex) {
       throw new BadRequestException('مجتمع را انتخاب کنید');
     }
     if (complex) {
@@ -469,6 +471,7 @@ export class CasesService {
         premiseEstablishment: dto.establishment as PremiseEstablishment,
         premiseComplexId: complex,
         premiseAddress: dto.address?.trim() || null,
+        premiseAddressEn: dto.addressEn?.trim() || null,
         premisePlaque: dto.plaque?.trim() || null,
         premisePlaqueSeries: dto.plaqueSeries?.trim() || null,
         premiseFloor: dto.floor?.trim() || null,

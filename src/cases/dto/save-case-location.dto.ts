@@ -47,6 +47,12 @@ export class SaveCaseLocationDto {
   @Transform(({ value }) => textOrNull(value))
   @ValidateIf((_, value) => value != null)
   @IsString()
+  addressEn?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => textOrNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
   plaque?: string | null;
 
   @IsOptional()

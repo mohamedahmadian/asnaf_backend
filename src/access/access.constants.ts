@@ -2,6 +2,7 @@ import { PrismaClient } from '../generated/prisma/client';
 
 export const ADMIN_ROLE_CODE = 'ADMIN';
 export const EMPLOYEE_ROLE_CODE = 'EMPLOYEE';
+export const INQUIRY_OFFICER_ROLE_CODE = 'INQUIRY_OFFICER';
 export const JOB_GROUP_REP_ROLE_CODE = 'JOB_GROUP_REP';
 export const ECONOMIC_ACTOR_ROLE_CODE = 'ECONOMIC_ACTOR';
 
@@ -15,6 +16,11 @@ export const SYSTEM_ROLES = [
     code: EMPLOYEE_ROLE_CODE,
     name: 'کارمند',
     description: 'نقش پیش‌فرض کارکنان سامانه',
+  },
+  {
+    code: INQUIRY_OFFICER_ROLE_CODE,
+    name: 'کارمند صدور استعلام',
+    description: 'پاسخ به استعلام پرونده از طرف مرکز استعلام؛ جدا از نقش کارمند',
   },
   {
     code: JOB_GROUP_REP_ROLE_CODE,
@@ -92,6 +98,26 @@ export async function ensureEconomicActorRole(prisma: PrismaClient) {
     },
     select: { id: true },
   });
+}
+
+export async function ensureInquiryOfficerRole(prisma: PrismaClient) {
+  const role = SYSTEM_ROLES.find((item) => item.code === INQUIRY_OFFICER_ROLE_CODE)!;
+  const saved = await prisma.role.upsert({
+    where: { code: role.code },
+    update: { isSystem: true },
+    create: {
+      code: role.code,
+      name: role.name,
+      description: role.description,
+      isSystem: true,
+    },
+    select: { id: true },
+  });
+  await prisma.rolePermission.createMany({
+    data: [{ roleId: saved.id, code: 'cases.inquiries' }],
+    skipDuplicates: true,
+  });
+  return saved;
 }
 
 export async function ensureEmployeeRole(prisma: PrismaClient) {

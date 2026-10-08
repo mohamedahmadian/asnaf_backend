@@ -674,6 +674,7 @@ model CaseFile {
   premiseComplexId     String?
   premiseComplex       CommercialComplex?     @relation("CasePremiseComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
   premiseAddress       String?
+  premiseAddressEn     String?
   premisePlaque        String?
   premisePlaqueSeries  String?
   premiseFloor         String?

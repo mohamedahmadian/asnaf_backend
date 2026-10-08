@@ -1,10 +1,11 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { ensureEmployeeRole } from '../access/access.constants';
+import { INQUIRY_OFFICER_ROLE_CODE, ensureInquiryOfficerRole } from '../access/access.constants';
 import { toLatinDigits } from '../common/national-id';
 import {
   containsInsensitive,
@@ -110,8 +111,8 @@ export class InquiryCentersService {
   }
 
   async update(id: string, dto: UpdateInquiryCenterDto) {
-    await this.findOne(id);
-    await this.assertOfficer(dto.officerId);
+    const current = await this.findOne(id);
+    await this.assertOfficer(dto.officerId, current.officerId);
     try {
       return await this.prisma.inquiryCenter.update({
         where: { id },
@@ -142,7 +143,7 @@ export class InquiryCentersService {
       );
     }
 
-    const role = await ensureEmployeeRole(this.prisma);
+    const role = await ensureInquiryOfficerRole(this.prisma);
     const passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
     try {
       return await this.prisma.user.create({
@@ -197,16 +198,23 @@ export class InquiryCentersService {
     };
   }
 
-  private async assertOfficer(officerId?: string | null) {
-    if (!officerId) {
+  private async assertOfficer(officerId?: string | null, currentOfficerId?: string | null) {
+    if (!officerId || officerId === currentOfficerId) {
       return;
     }
     const user = await this.prisma.user.findUnique({
       where: { id: officerId },
-      select: { id: true },
+      select: {
+        id: true,
+        userRoles: { select: { role: { select: { code: true } } } },
+      },
     });
     if (!user) {
       throw new NotFoundException('مسئول مربوطه یافت نشد');
+    }
+    const isInquiryOfficer = user.userRoles.some((row) => row.role.code === INQUIRY_OFFICER_ROLE_CODE);
+    if (!isInquiryOfficer) {
+      throw new BadRequestException('مسئول مرکز باید نقش کارمند صدور استعلام داشته باشد');
     }
   }
 

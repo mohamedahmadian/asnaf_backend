@@ -380,6 +380,7 @@ export class CaseInquiriesService {
       select: {
         businessUnitTitle: true,
         premiseAddress: true,
+        premiseAddressEn: true,
         premisePlaque: true,
         premisePlaqueSeries: true,
         premiseFloor: true,
@@ -455,6 +456,7 @@ export class CaseInquiriesService {
       ...dossier.user,
       businessUnitTitle: dossier.businessUnitTitle,
       premiseAddress: dossier.premiseAddress,
+      premiseAddressEn: dossier.premiseAddressEn,
       premisePlaque: dossier.premisePlaque,
       premisePlaqueSeries: dossier.premisePlaqueSeries,
       premiseFloor: dossier.premiseFloor,
@@ -588,6 +590,7 @@ export class CaseInquiriesService {
         complex: user.premiseComplex,
         establishment: user.premiseEstablishment,
         address: user.premiseAddress,
+        addressEn: user.premiseAddressEn,
         plaque: user.premisePlaque,
         plaqueSeries: user.premisePlaqueSeries,
         floor: user.premiseFloor,

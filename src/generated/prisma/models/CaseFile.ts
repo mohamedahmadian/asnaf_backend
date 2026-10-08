@@ -54,6 +54,7 @@ export type CaseFileMinAggregateOutputType = {
   premiseEstablishment: $Enums.PremiseEstablishment | null
   premiseComplexId: string | null
   premiseAddress: string | null
+  premiseAddressEn: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -91,6 +92,7 @@ export type CaseFileMaxAggregateOutputType = {
   premiseEstablishment: $Enums.PremiseEstablishment | null
   premiseComplexId: string | null
   premiseAddress: string | null
+  premiseAddressEn: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -128,6 +130,7 @@ export type CaseFileCountAggregateOutputType = {
   premiseEstablishment: number
   premiseComplexId: number
   premiseAddress: number
+  premiseAddressEn: number
   premisePlaque: number
   premisePlaqueSeries: number
   premiseFloor: number
@@ -179,6 +182,7 @@ export type CaseFileMinAggregateInputType = {
   premiseEstablishment?: true
   premiseComplexId?: true
   premiseAddress?: true
+  premiseAddressEn?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -216,6 +220,7 @@ export type CaseFileMaxAggregateInputType = {
   premiseEstablishment?: true
   premiseComplexId?: true
   premiseAddress?: true
+  premiseAddressEn?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -253,6 +258,7 @@ export type CaseFileCountAggregateInputType = {
   premiseEstablishment?: true
   premiseComplexId?: true
   premiseAddress?: true
+  premiseAddressEn?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -377,6 +383,7 @@ export type CaseFileGroupByOutputType = {
   premiseEstablishment: $Enums.PremiseEstablishment | null
   premiseComplexId: string | null
   premiseAddress: string | null
+  premiseAddressEn: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -437,6 +444,7 @@ export type CaseFileWhereInput = {
   premiseEstablishment?: Prisma.EnumPremiseEstablishmentNullableFilter<"CaseFile"> | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  premiseAddressEn?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -484,6 +492,7 @@ export type CaseFileOrderByWithRelationInput = {
   premiseEstablishment?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseComplexId?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  premiseAddressEn?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaque?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseFloor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -534,6 +543,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   premiseEstablishment?: Prisma.EnumPremiseEstablishmentNullableFilter<"CaseFile"> | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  premiseAddressEn?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -581,6 +591,7 @@ export type CaseFileOrderByWithAggregationInput = {
   premiseEstablishment?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseComplexId?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  premiseAddressEn?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaque?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseFloor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -626,6 +637,7 @@ export type CaseFileScalarWhereWithAggregatesInput = {
   premiseEstablishment?: Prisma.EnumPremiseEstablishmentNullableWithAggregatesFilter<"CaseFile"> | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
+  premiseAddressEn?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
@@ -659,6 +671,7 @@ export type CaseFileCreateInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -705,6 +718,7 @@ export type CaseFileUncheckedCreateInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -743,6 +757,7 @@ export type CaseFileUpdateInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -789,6 +804,7 @@ export type CaseFileUncheckedUpdateInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -831,6 +847,7 @@ export type CaseFileCreateManyInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -864,6 +881,7 @@ export type CaseFileUpdateManyMutationInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -900,6 +918,7 @@ export type CaseFileUncheckedUpdateManyInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -952,6 +971,7 @@ export type CaseFileCountOrderByAggregateInput = {
   premiseEstablishment?: Prisma.SortOrder
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
+  premiseAddressEn?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -995,6 +1015,7 @@ export type CaseFileMaxOrderByAggregateInput = {
   premiseEstablishment?: Prisma.SortOrder
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
+  premiseAddressEn?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -1032,6 +1053,7 @@ export type CaseFileMinOrderByAggregateInput = {
   premiseEstablishment?: Prisma.SortOrder
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
+  premiseAddressEn?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -1378,6 +1400,7 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1422,6 +1445,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1493,6 +1517,7 @@ export type CaseFileScalarWhereInput = {
   premiseEstablishment?: Prisma.EnumPremiseEstablishmentNullableFilter<"CaseFile"> | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  premiseAddressEn?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -1526,6 +1551,7 @@ export type CaseFileCreateWithoutActivityJobInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1570,6 +1596,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1634,6 +1661,7 @@ export type CaseFileCreateWithoutInquiriesInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1679,6 +1707,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1732,6 +1761,7 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1777,6 +1807,7 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1814,6 +1845,7 @@ export type CaseFileCreateWithoutPlacesReviewInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1859,6 +1891,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1912,6 +1945,7 @@ export type CaseFileUpdateWithoutPlacesReviewInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1957,6 +1991,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1994,6 +2029,7 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2039,6 +2075,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2092,6 +2129,7 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2137,6 +2175,7 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2174,6 +2213,7 @@ export type CaseFileCreateWithoutRequestsInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2219,6 +2259,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2272,6 +2313,7 @@ export type CaseFileUpdateWithoutRequestsInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2317,6 +2359,7 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2354,6 +2397,7 @@ export type CaseFileCreateWithoutUserInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2398,6 +2442,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2462,6 +2507,7 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2506,6 +2552,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   premiseCityId?: string | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2570,6 +2617,7 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2615,6 +2663,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2678,6 +2727,7 @@ export type CaseFileCreateWithoutViolationsInput = {
   posDeviceCount?: number | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2723,6 +2773,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2776,6 +2827,7 @@ export type CaseFileUpdateWithoutViolationsInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2821,6 +2873,7 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2861,6 +2914,7 @@ export type CaseFileCreateManyPremiseCityInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2894,6 +2948,7 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2938,6 +2993,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2979,6 +3035,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3015,6 +3072,7 @@ export type CaseFileCreateManyActivityJobInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3048,6 +3106,7 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3092,6 +3151,7 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3133,6 +3193,7 @@ export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3169,6 +3230,7 @@ export type CaseFileCreateManyUserInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3202,6 +3264,7 @@ export type CaseFileUpdateWithoutUserInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3246,6 +3309,7 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3287,6 +3351,7 @@ export type CaseFileUncheckedUpdateManyWithoutUserInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3323,6 +3388,7 @@ export type CaseFileCreateManyPremiseComplexInput = {
   premiseCityId?: string | null
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3356,6 +3422,7 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3400,6 +3467,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3441,6 +3509,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
   premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3478,6 +3547,7 @@ export type CaseFileCreateManyRegistrationPlaceInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseComplexId?: string | null
   premiseAddress?: string | null
+  premiseAddressEn?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3510,6 +3580,7 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3555,6 +3626,7 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3596,6 +3668,7 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3690,6 +3763,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   premiseEstablishment?: boolean
   premiseComplexId?: boolean
   premiseAddress?: boolean
+  premiseAddressEn?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -3738,6 +3812,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   premiseEstablishment?: boolean
   premiseComplexId?: boolean
   premiseAddress?: boolean
+  premiseAddressEn?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -3780,6 +3855,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   premiseEstablishment?: boolean
   premiseComplexId?: boolean
   premiseAddress?: boolean
+  premiseAddressEn?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -3822,6 +3898,7 @@ export type CaseFileSelectScalar = {
   premiseEstablishment?: boolean
   premiseComplexId?: boolean
   premiseAddress?: boolean
+  premiseAddressEn?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -3843,7 +3920,7 @@ export type CaseFileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
+export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
 export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
@@ -3908,6 +3985,7 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     premiseEstablishment: $Enums.PremiseEstablishment | null
     premiseComplexId: string | null
     premiseAddress: string | null
+    premiseAddressEn: string | null
     premisePlaque: string | null
     premisePlaqueSeries: string | null
     premiseFloor: string | null
@@ -4375,6 +4453,7 @@ export interface CaseFileFieldRefs {
   readonly premiseEstablishment: Prisma.FieldRef<"CaseFile", 'PremiseEstablishment'>
   readonly premiseComplexId: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premiseAddress: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly premiseAddressEn: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premisePlaque: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premisePlaqueSeries: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premiseFloor: Prisma.FieldRef<"CaseFile", 'String'>

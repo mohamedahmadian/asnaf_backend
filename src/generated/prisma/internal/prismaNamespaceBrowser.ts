@@ -505,6 +505,7 @@ export const CaseFileScalarFieldEnum = {
   premiseEstablishment: 'premiseEstablishment',
   premiseComplexId: 'premiseComplexId',
   premiseAddress: 'premiseAddress',
+  premiseAddressEn: 'premiseAddressEn',
   premisePlaque: 'premisePlaque',
   premisePlaqueSeries: 'premisePlaqueSeries',
   premiseFloor: 'premiseFloor',
