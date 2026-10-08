@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import {
+  IsBoolean,
   IsEmail,
   IsEnum,
   IsOptional,
@@ -174,4 +175,14 @@ export class SaveCaseIdentityDto {
   @ValidateIf((_, value) => value != null)
   @IsEnum(UserGender)
   gender?: UserGender | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
+  caseId?: string | null;
+
+  @IsOptional()
+  @IsBoolean()
+  startNew?: boolean;
 }

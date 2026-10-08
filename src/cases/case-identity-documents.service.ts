@@ -38,7 +38,7 @@ export class CaseIdentityDocumentsService {
       {
         title: (dir) => ({ document: { title: dir } }),
         isRequired: (dir) => ({ document: { isRequired: dir } }),
-        gender: (dir) => ({ document: { gender: dir } }),
+        gender: (dir) => ({ gender: dir }),
       },
       [{ createdAt: 'desc' }, { documentId: 'asc' }],
     );
@@ -51,6 +51,7 @@ export class CaseIdentityDocumentsService {
         take,
         select: {
           documentId: true,
+          gender: true,
           createdAt: true,
           document: { select: documentSelect },
         },
@@ -62,7 +63,7 @@ export class CaseIdentityDocumentsService {
         documentId: row.documentId,
         title: row.document.title,
         isRequired: row.document.isRequired,
-        gender: row.document.gender,
+        gender: row.gender,
         isFixed: row.document.isFixed,
         createdAt: row.createdAt,
       })),
@@ -76,7 +77,7 @@ export class CaseIdentityDocumentsService {
     return this.prisma.document.findMany({
       where: { caseIdentityDocument: null },
       orderBy: { title: 'asc' },
-      select: { id: true, title: true },
+      select: { id: true, title: true, gender: true },
     });
   }
 
@@ -90,7 +91,7 @@ export class CaseIdentityDocumentsService {
     }
     try {
       await this.prisma.caseIdentityDocument.create({
-        data: { documentId: dto.documentId },
+        data: { documentId: dto.documentId, gender: dto.gender },
       });
     } catch (error) {
       if (

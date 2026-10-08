@@ -21,6 +21,7 @@ import {
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CaseInquiriesService, type InquiryActor } from './case-inquiries.service';
+import { PLACES_FORMATION_STEP, rewindFormationStep, syncIssuanceRequest } from './formation-steps';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
 import { SaveCasePlacesOfficeDto } from './dto/save-case-places-office.dto';
 import { PersonFileStorage } from './person-file.storage';
@@ -107,23 +108,23 @@ export class CasePlacesService {
     return this.office();
   }
 
-  async ensureForUser(userId: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
+  async ensureForUser(caseFileId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
       select: { id: true },
     });
-    if (!user) return null;
+    if (!file) return null;
     return this.prisma.casePlacesReview.upsert({
-      where: { userId },
-      create: { userId },
+      where: { caseFileId },
+      create: { caseFileId },
       update: {},
       include: reviewInclude,
     });
   }
 
-  async assertDelivered(userId: string) {
+  async assertDelivered(caseFileId: string) {
     const row = await this.prisma.casePlacesReview.findUnique({
-      where: { userId },
+      where: { caseFileId },
       select: { status: true },
     });
     if (!row || row.status === CaseInquiryStatus.PENDING) {
@@ -131,26 +132,15 @@ export class CasePlacesService {
     }
   }
 
-  async listForCase(userId: string) {
-    const row = await this.ensureForUser(userId);
+  async listForCase(caseFileId: string) {
+    const row = await this.ensureForUser(caseFileId);
     if (!row) return null;
     return this.mapReview(row);
   }
 
   async letter(id: string, actor: InquiryActor) {
     const row = await this.findReadable(id, actor);
-    const person = await this.prisma.user.findUnique({
-      where: { id: row.userId },
-      select: {
-        fullName: true,
-        nationalId: true,
-        caseTrackingCode: true,
-        phone: true,
-        businessUnitTitle: true,
-        premiseAddress: true,
-        activityJob: { select: { title: true } },
-      },
-    });
+    const person = await this.letterSubject(row.caseFileId);
     if (!person) throw new NotFoundException('شخص یافت نشد');
     const office = await this.ensureOffice();
     const fields = {
@@ -205,7 +195,7 @@ export class CasePlacesService {
     if (input.file?.buffer?.length) {
       const fileId = randomUUID();
       const stored = await this.files.savePlaces({
-        personId: row.userId,
+        personId: (await this.ownerId(row.caseFileId)) ?? row.caseFileId,
         reviewId: row.id,
         fileId,
         buffer: input.file.buffer,
@@ -252,6 +242,7 @@ export class CasePlacesService {
       },
       include: reviewInclude,
     });
+    await rewindFormationStep(this.prisma, saved.caseFileId, PLACES_FORMATION_STEP);
     return this.mapReview(saved);
   }
 
@@ -263,13 +254,13 @@ export class CasePlacesService {
       status: query.status,
       OR: q
         ? [
-            { user: { fullName: containsInsensitive(q) } },
-            { user: { businessUnitTitle: containsInsensitive(q) } },
-            { user: { activityJob: { title: containsInsensitive(q) } } },
+            { caseFile: { user: { fullName: containsInsensitive(q) } } },
+            { caseFile: { businessUnitTitle: containsInsensitive(q) } },
+            { caseFile: { activityJob: { title: containsInsensitive(q) } } },
             ...(digits
               ? [
-                  { user: { nationalId: { contains: digits } } },
-                  { user: { caseTrackingCode: { contains: digits } } },
+                  { caseFile: { user: { nationalId: { contains: digits } } } },
+                  { caseFile: { trackingCode: { contains: digits } } },
                 ]
               : []),
           ]
@@ -279,10 +270,10 @@ export class CasePlacesService {
       query.sortBy,
       query.sortDir,
       {
-        applicant: (dir) => ({ user: { fullName: dir } }),
-        nationalId: (dir) => ({ user: { nationalId: dir } }),
+        applicant: (dir) => ({ caseFile: { user: { fullName: dir } } }),
+        nationalId: (dir) => ({ caseFile: { user: { nationalId: dir } } }),
         center: (dir) => ({ createdAt: dir }),
-        job: (dir) => ({ user: { activityJob: { title: dir } } }),
+        job: (dir) => ({ caseFile: { activityJob: { title: dir } } }),
         status: (dir) => ({ status: dir }),
         createdAt: (dir) => ({ createdAt: dir }),
         decidedAt: (dir) => ({ decidedAt: dir }),
@@ -295,14 +286,13 @@ export class CasePlacesService {
       channel: true,
       createdAt: true,
       decidedAt: true,
-      user: {
+      caseFile: {
         select: {
           id: true,
-          fullName: true,
-          nationalId: true,
-          caseTrackingCode: true,
+          trackingCode: true,
           businessUnitTitle: true,
           activityJob: { select: { title: true } },
+          user: { select: { fullName: true, nationalId: true } },
         },
       },
     } satisfies Prisma.CasePlacesReviewSelect;
@@ -314,11 +304,11 @@ export class CasePlacesService {
       createdAt: row.createdAt,
       decidedAt: row.decidedAt,
       centerName: PLACES_NAME,
-      applicantName: row.user.fullName,
-      nationalId: row.user.nationalId,
-      trackingCode: row.user.caseTrackingCode,
-      unitTitle: row.user.businessUnitTitle,
-      jobTitle: row.user.activityJob?.title ?? null,
+      applicantName: row.caseFile.user.fullName,
+      nationalId: row.caseFile.user.nationalId,
+      trackingCode: row.caseFile.trackingCode,
+      unitTitle: row.caseFile.businessUnitTitle,
+      jobTitle: row.caseFile.activityJob?.title ?? null,
     });
 
     const centers = [{ id: OFFICE_ID, name: PLACES_NAME }];
@@ -339,28 +329,19 @@ export class CasePlacesService {
 
   async dossier(id: string, actor: InquiryActor) {
     const row = await this.findReadable(id, actor);
-    return this.inquiries.personDossier(row.userId);
+    return this.inquiries.personDossier(row.caseFileId);
   }
 
   async readDossierFile(id: string, versionId: string, actor: InquiryActor) {
     const row = await this.findReadable(id, actor);
-    return this.inquiries.readPersonDocument(row.userId, versionId);
+    const userId = await this.ownerId(row.caseFileId);
+    if (!userId) throw new NotFoundException('شخص یافت نشد');
+    return this.inquiries.readPersonDocument(userId, versionId);
   }
 
   async detail(id: string, actor: InquiryActor) {
     const row = await this.findReadable(id, actor);
-    const person = await this.prisma.user.findUnique({
-      where: { id: row.userId },
-      select: {
-        fullName: true,
-        gender: true,
-        nationalId: true,
-        caseTrackingCode: true,
-        phone: true,
-        businessUnitTitle: true,
-        activityJob: { select: { title: true } },
-      },
-    });
+    const person = await this.letterSubject(row.caseFileId);
     return {
       ...this.mapReview(row),
       applicant: person
@@ -396,19 +377,53 @@ export class CasePlacesService {
   async advanceAfterDecision(reviewId: string) {
     const review = await this.prisma.casePlacesReview.findUnique({
       where: { id: reviewId },
-      select: { userId: true, status: true },
+      select: { caseFileId: true, status: true },
     });
     if (!review || review.status === CaseInquiryStatus.PENDING) return null;
-    const user = await this.prisma.user.findUnique({
-      where: { id: review.userId },
+    const user = await this.prisma.caseFile.findUnique({
+      where: { id: review.caseFileId },
       select: { id: true, formationStep: true },
     });
     if (!user || user.formationStep !== 4) return null;
-    return this.prisma.user.update({
+    const saved = await this.prisma.caseFile.update({
       where: { id: user.id },
       data: { formationStep: 5 },
       select: { id: true, formationStep: true },
     });
+    await syncIssuanceRequest(this.prisma, saved.id);
+    return saved;
+  }
+
+  private async ownerId(caseFileId: string) {
+    const row = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
+      select: { userId: true },
+    });
+    return row?.userId ?? null;
+  }
+
+  private async letterSubject(caseFileId: string) {
+    const row = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
+      select: {
+        trackingCode: true,
+        businessUnitTitle: true,
+        premiseAddress: true,
+        activityJob: { select: { title: true } },
+        user: { select: { fullName: true, nationalId: true, phone: true, gender: true } },
+      },
+    });
+    if (!row) return null;
+    return {
+      fullName: row.user.fullName,
+      gender: row.user.gender,
+      nationalId: row.user.nationalId,
+      phone: row.user.phone,
+      caseTrackingCode: row.trackingCode,
+      businessUnitTitle: row.businessUnitTitle,
+      premiseAddress: row.premiseAddress,
+      activityJob: row.activityJob,
+    };
   }
 
   private async mapReview(row: ReviewRecord) {

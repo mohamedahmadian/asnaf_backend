@@ -190,7 +190,7 @@ export type RegistrationPlaceWhereInput = {
   isActive?: Prisma.BoolFilter<"RegistrationPlace"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
-  premiseUsers?: Prisma.UserListRelationFilter
+  premiseCases?: Prisma.CaseFileListRelationFilter
 }
 
 export type RegistrationPlaceOrderByWithRelationInput = {
@@ -200,7 +200,7 @@ export type RegistrationPlaceOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  premiseUsers?: Prisma.UserOrderByRelationAggregateInput
+  premiseCases?: Prisma.CaseFileOrderByRelationAggregateInput
 }
 
 export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
@@ -213,7 +213,7 @@ export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"RegistrationPlace"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
-  premiseUsers?: Prisma.UserListRelationFilter
+  premiseCases?: Prisma.CaseFileListRelationFilter
 }, "id" | "title">
 
 export type RegistrationPlaceOrderByWithAggregationInput = {
@@ -247,7 +247,7 @@ export type RegistrationPlaceCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  premiseUsers?: Prisma.UserCreateNestedManyWithoutRegistrationPlaceInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceUncheckedCreateInput = {
@@ -257,7 +257,7 @@ export type RegistrationPlaceUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceUpdateInput = {
@@ -267,7 +267,7 @@ export type RegistrationPlaceUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  premiseUsers?: Prisma.UserUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 export type RegistrationPlaceUncheckedUpdateInput = {
@@ -277,7 +277,7 @@ export type RegistrationPlaceUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 export type RegistrationPlaceCreateManyInput = {
@@ -339,23 +339,23 @@ export type RegistrationPlaceMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type RegistrationPlaceCreateNestedOneWithoutPremiseUsersInput = {
-  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
-  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseUsersInput
+export type RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseCasesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseCasesInput
   connect?: Prisma.RegistrationPlaceWhereUniqueInput
 }
 
-export type RegistrationPlaceUpdateOneWithoutPremiseUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
-  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseUsersInput
-  upsert?: Prisma.RegistrationPlaceUpsertWithoutPremiseUsersInput
+export type RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseCasesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseCasesInput
+  upsert?: Prisma.RegistrationPlaceUpsertWithoutPremiseCasesInput
   disconnect?: Prisma.RegistrationPlaceWhereInput | boolean
   delete?: Prisma.RegistrationPlaceWhereInput | boolean
   connect?: Prisma.RegistrationPlaceWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutPremiseUsersInput, Prisma.RegistrationPlaceUpdateWithoutPremiseUsersInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutPremiseCasesInput, Prisma.RegistrationPlaceUpdateWithoutPremiseCasesInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput>
 }
 
-export type RegistrationPlaceCreateWithoutPremiseUsersInput = {
+export type RegistrationPlaceCreateWithoutPremiseCasesInput = {
   id?: string
   title: string
   description?: string | null
@@ -364,7 +364,7 @@ export type RegistrationPlaceCreateWithoutPremiseUsersInput = {
   updatedAt?: Date | string
 }
 
-export type RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput = {
+export type RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput = {
   id?: string
   title: string
   description?: string | null
@@ -373,23 +373,23 @@ export type RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput = {
   updatedAt?: Date | string
 }
 
-export type RegistrationPlaceCreateOrConnectWithoutPremiseUsersInput = {
+export type RegistrationPlaceCreateOrConnectWithoutPremiseCasesInput = {
   where: Prisma.RegistrationPlaceWhereUniqueInput
-  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseCasesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput>
 }
 
-export type RegistrationPlaceUpsertWithoutPremiseUsersInput = {
-  update: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput>
-  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseUsersInput>
+export type RegistrationPlaceUpsertWithoutPremiseCasesInput = {
+  update: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseCasesInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput>
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseCasesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput>
   where?: Prisma.RegistrationPlaceWhereInput
 }
 
-export type RegistrationPlaceUpdateToOneWithWhereWithoutPremiseUsersInput = {
+export type RegistrationPlaceUpdateToOneWithWhereWithoutPremiseCasesInput = {
   where?: Prisma.RegistrationPlaceWhereInput
-  data: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseUsersInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput>
+  data: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseCasesInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput>
 }
 
-export type RegistrationPlaceUpdateWithoutPremiseUsersInput = {
+export type RegistrationPlaceUpdateWithoutPremiseCasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -398,7 +398,7 @@ export type RegistrationPlaceUpdateWithoutPremiseUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput = {
+export type RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -413,11 +413,11 @@ export type RegistrationPlaceUncheckedUpdateWithoutPremiseUsersInput = {
  */
 
 export type RegistrationPlaceCountOutputType = {
-  premiseUsers: number
+  premiseCases: number
 }
 
 export type RegistrationPlaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  premiseUsers?: boolean | RegistrationPlaceCountOutputTypeCountPremiseUsersArgs
+  premiseCases?: boolean | RegistrationPlaceCountOutputTypeCountPremiseCasesArgs
 }
 
 /**
@@ -433,8 +433,8 @@ export type RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs extends runtime.
 /**
  * RegistrationPlaceCountOutputType without action
  */
-export type RegistrationPlaceCountOutputTypeCountPremiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserWhereInput
+export type RegistrationPlaceCountOutputTypeCountPremiseCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseFileWhereInput
 }
 
 
@@ -445,7 +445,7 @@ export type RegistrationPlaceSelect<ExtArgs extends runtime.Types.Extensions.Int
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  premiseUsers?: boolean | Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs>
+  premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
   _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["registrationPlace"]>
 
@@ -478,7 +478,7 @@ export type RegistrationPlaceSelectScalar = {
 
 export type RegistrationPlaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["registrationPlace"]>
 export type RegistrationPlaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  premiseUsers?: boolean | Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs>
+  premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
   _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RegistrationPlaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -487,7 +487,7 @@ export type RegistrationPlaceIncludeUpdateManyAndReturn<ExtArgs extends runtime.
 export type $RegistrationPlacePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RegistrationPlace"
   objects: {
-    premiseUsers: Prisma.$UserPayload<ExtArgs>[]
+    premiseCases: Prisma.$CaseFilePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -890,7 +890,7 @@ readonly fields: RegistrationPlaceFieldRefs;
  */
 export interface Prisma__RegistrationPlaceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  premiseUsers<T extends Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$premiseUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  premiseCases<T extends Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1319,27 +1319,27 @@ export type RegistrationPlaceDeleteManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
- * RegistrationPlace.premiseUsers
+ * RegistrationPlace.premiseCases
  */
-export type RegistrationPlace$premiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type RegistrationPlace$premiseCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the CaseFile
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.CaseFileSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the CaseFile
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.CaseFileOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
-  cursor?: Prisma.UserWhereUniqueInput
+  include?: Prisma.CaseFileInclude<ExtArgs> | null
+  where?: Prisma.CaseFileWhereInput
+  orderBy?: Prisma.CaseFileOrderByWithRelationInput | Prisma.CaseFileOrderByWithRelationInput[]
+  cursor?: Prisma.CaseFileWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+  distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
 }
 
 /**

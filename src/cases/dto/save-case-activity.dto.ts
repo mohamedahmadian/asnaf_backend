@@ -12,7 +12,7 @@ export const previousOccupations = [
 
 export class SaveCaseActivityDto {
   @IsUUID('4')
-  userId: string;
+  caseId: string;
 
   @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()

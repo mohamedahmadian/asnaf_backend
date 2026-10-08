@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -17,6 +18,7 @@ import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CaseInquiryChannel } from '../generated/prisma/client';
 import { CaseInquiriesService } from './case-inquiries.service';
+import { CaseManagementApproversService } from './case-management-approvers.service';
 import { CasePlacesService } from './case-places.service';
 import { CasesService } from './cases.service';
 import { SaveCaseActivityDto } from './dto/save-case-activity.dto';
@@ -49,11 +51,12 @@ export class CasesController {
     private readonly cases: CasesService,
     private readonly inquiries: CaseInquiriesService,
     private readonly places: CasePlacesService,
+    private readonly managementApprovers: CaseManagementApproversService,
   ) {}
 
   @Get('identity')
-  findIdentity(@Query('nationalId') nationalId = '') {
-    return this.cases.findIdentity(nationalId);
+  findIdentity(@Query('nationalId') nationalId = '', @Query('caseId') caseId = '') {
+    return this.cases.findIdentity(nationalId, caseId || undefined);
   }
 
   @Post('identity')
@@ -77,13 +80,54 @@ export class CasesController {
   }
 
   @Get('inquiries')
-  caseInquiries(@Query('userId') userId = '') {
-    return this.inquiries.listForCase(userId);
+  caseInquiries(@Query('caseId') caseId = '') {
+    return this.inquiries.listForCase(caseId);
   }
 
   @Get('places')
-  casePlaces(@Query('userId') userId = '') {
-    return this.places.listForCase(userId);
+  casePlaces(@Query('caseId') caseId = '') {
+    return this.places.listForCase(caseId);
+  }
+
+  @Get('management-approvers')
+  caseManagementApprovers(@Query('caseId') caseId = '') {
+    return this.managementApprovers.listForCase(caseId);
+  }
+
+  @Get('management-reviews/files/:fileId')
+  async managementReviewFile(@Param('fileId') fileId: string, @Res() res: Response) {
+    const file = await this.managementApprovers.readFile(fileId);
+    res.setHeader('Content-Type', file.mimeType);
+    res.setHeader('Content-Length', String(file.byteSize));
+    if (file.originalName) {
+      res.setHeader('Content-Disposition', `inline; filename="${encodeURIComponent(file.originalName)}"`);
+    }
+    res.send(file.data);
+  }
+
+  @Post('management-reviews/:id/decision')
+  @UseInterceptors(inquiryFile)
+  decideManagementReview(
+    @Param('id') id: string,
+    @CurrentUser() user: RequestUser | undefined,
+    @UploadedFile() file: UploadFile | undefined,
+    @Body('status') status = '',
+    @Body('note') note?: string,
+  ) {
+    const actor = formationActor(user);
+    return this.managementApprovers.decide(id, actor.id, {
+      status,
+      note,
+      channel: CaseInquiryChannel.MANUAL,
+      file: file?.buffer
+        ? { buffer: file.buffer, mimeType: file.mimetype, originalName: file.originalname }
+        : undefined,
+    });
+  }
+
+  @Post('management-reviews/:id/reopen')
+  reopenManagementReview(@Param('id') id: string) {
+    return this.managementApprovers.reopen(id);
   }
 
   @Get('places/:id/letter')
@@ -187,6 +231,11 @@ export class CasesController {
       mimeType: file?.mimetype,
       originalName: file?.originalname,
     });
+  }
+
+  @Delete('documents/:documentId')
+  removeDocument(@Param('documentId') documentId: string, @Query('userId') userId = '') {
+    return this.cases.removeDocument(userId, documentId);
   }
 
   @Get('documents/:versionId/file')

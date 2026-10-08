@@ -18,6 +18,7 @@ export const caseSortFields = [
   'residencyStatus',
   'educationLevel',
   'job',
+  'jobTitle',
   'formationStep',
 ] as const;
 

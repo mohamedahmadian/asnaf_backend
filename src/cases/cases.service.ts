@@ -4,8 +4,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { randomBytes } from 'crypto';
 import * as bcrypt from 'bcrypt';
+import { ECONOMIC_ACTOR_ROLE_CODE, ensureEconomicActorRole } from '../access/access.constants';
 import { normalizeNationalId } from '../common/national-id';
 import { normalizeMobile } from '../common/phone';
 import {
@@ -18,6 +18,7 @@ import {
 import { resolveSortOrder } from '../common/sort-query';
 import {
   CaseInquiryStatus,
+  CaseRequestType,
   DocumentGender,
   DocumentSource,
   PremiseEstablishment,
@@ -38,12 +39,18 @@ import { SaveFormationStepDto } from './dto/save-formation-step.dto';
 import { PersonFileStorage } from './person-file.storage';
 import { CaseInquiriesService } from './case-inquiries.service';
 import { CasePlacesService } from './case-places.service';
+import { CaseManagementApproversService } from './case-management-approvers.service';
+import {
+  ISSUANCE_FORMATION_STEP,
+  MANAGEMENT_FORMATION_STEP,
+  PLACES_FORMATION_STEP,
+  syncIssuanceRequest,
+} from './formation-steps';
 
-/** 0 هویت، 1 فعالیت، 2 محل، 3 استعلام، 4 اماکن، 5 بررسی مدیریت، 6 صدور */
-const PLACES_FORMATION_STEP = 4;
-const MANAGEMENT_FORMATION_STEP = 5;
+/** رمز اولیهٔ فعال اقتصادی؛ فقط هنگام ساخت حساب تازه از تشکیل پرونده */
+const ECONOMIC_ACTOR_INITIAL_PASSWORD = '11111111';
 
-const identitySelect = {
+const personSelect = {
   id: true,
   firstName: true,
   lastName: true,
@@ -70,8 +77,16 @@ const identitySelect = {
   email: true,
   educationLevel: true,
   citizenGroup: true,
+  jobId: true,
+  country: { select: { id: true, nameFa: true, nameEn: true } },
+  economicJob: { select: { id: true, title: true, groupId: true } },
+} satisfies Prisma.UserSelect;
+
+const caseFileSelect = {
+  id: true,
+  userId: true,
   formationStep: true,
-  caseTrackingCode: true,
+  trackingCode: true,
   businessUnitTitle: true,
   previousOccupation: true,
   posDeviceCount: true,
@@ -97,18 +112,16 @@ const identitySelect = {
   leaseExpiresAt: true,
   leaseAgency: true,
   premiseOwnerName: true,
-  jobId: true,
-  country: { select: { id: true, nameFa: true, nameEn: true } },
-  economicJob: { select: { id: true, title: true, groupId: true } },
-} satisfies Prisma.UserSelect;
+} satisfies Prisma.CaseFileSelect;
 
-type IdentityRow = Prisma.UserGetPayload<{ select: typeof identitySelect }>;
+type PersonRow = Prisma.UserGetPayload<{ select: typeof personSelect }>;
+type CaseFileRow = Prisma.CaseFileGetPayload<{ select: typeof caseFileSelect }>;
 
 function decimalText(value: Prisma.Decimal | null) {
   return value == null ? null : value.toString();
 }
 
-function mapLocation(user: IdentityRow) {
+function mapLocation(user: CaseFileRow) {
   return {
     cityId: user.premiseCityId,
     establishment: user.premiseEstablishment,
@@ -134,7 +147,7 @@ function mapLocation(user: IdentityRow) {
   };
 }
 
-function mapActivity(user: Pick<IdentityRow, 'businessUnitTitle' | 'previousOccupation' | 'posDeviceCount' | 'activityJob'>) {
+function mapActivity(user: Pick<CaseFileRow, 'businessUnitTitle' | 'previousOccupation' | 'posDeviceCount' | 'activityJob'>) {
   return {
     businessUnitTitle: user.businessUnitTitle,
     jobGroupId: user.activityJob?.groupId ?? null,
@@ -153,43 +166,23 @@ function parseDate(value: string | null | undefined) {
   return new Date(`${value}T00:00:00.000Z`);
 }
 
-function mapIdentity(user: IdentityRow) {
-  const {
-    businessUnitTitle: _businessUnitTitle,
-    previousOccupation: _previousOccupation,
-    posDeviceCount: _posDeviceCount,
-    activityJob: _activityJob,
-    premiseCityId: _premiseCityId,
-    premiseEstablishment: _premiseEstablishment,
-    premiseComplexId: _premiseComplexId,
-    premiseAddress: _premiseAddress,
-    premisePlaque: _premisePlaque,
-    premisePlaqueSeries: _premisePlaqueSeries,
-    premiseFloor: _premiseFloor,
-    premiseUnitNo: _premiseUnitNo,
-    premisePostalCode: _premisePostalCode,
-    premisePhone: _premisePhone,
-    premiseFax: _premiseFax,
-    premiseGeoPosition: _premiseGeoPosition,
-    premisePublicAccess: _premisePublicAccess,
-    registrationPlaceId: _registrationPlaceId,
-    premiseOwnership: _premiseOwnership,
-    premiseDeedNo: _premiseDeedNo,
-    premiseArea: _premiseArea,
-    leaseIssuedAt: _leaseIssuedAt,
-    leaseExpiresAt: _leaseExpiresAt,
-    leaseAgency: _leaseAgency,
-    premiseOwnerName: _premiseOwnerName,
-    birthDate,
-    nationalCardExpiresAt,
-    passportExpiresAt,
-    ...rest
-  } = user;
+function mapIdentity(user: PersonRow) {
+  const { birthDate, nationalCardExpiresAt, passportExpiresAt, ...rest } = user;
   return {
     ...rest,
     birthDate: dateOnly(birthDate),
     nationalCardExpiresAt: dateOnly(nationalCardExpiresAt),
     passportExpiresAt: dateOnly(passportExpiresAt),
+  };
+}
+
+function mapCase(file: CaseFileRow) {
+  return {
+    id: file.id,
+    formationStep: file.formationStep,
+    trackingCode: file.trackingCode,
+    activity: mapActivity(file),
+    location: mapLocation(file),
   };
 }
 
@@ -208,27 +201,28 @@ export class CasesService {
     private readonly files: PersonFileStorage,
     private readonly inquiries: CaseInquiriesService,
     private readonly places: CasePlacesService,
+    private readonly managementApprovers: CaseManagementApproversService,
   ) {}
 
-  private async ensureTrackingCode(userId: string, current: string | null, formationStep: number) {
+  private async ensureTrackingCode(caseFileId: string, current: string | null, formationStep: number) {
     if (current || formationStep < 1) return current;
     const prefix = `CASE-${jalaliYear()}-`;
     for (let attempt = 0; attempt < 6; attempt++) {
-      const count = await this.prisma.user.count({
-        where: { caseTrackingCode: { startsWith: prefix } },
+      const count = await this.prisma.caseFile.count({
+        where: { trackingCode: { startsWith: prefix } },
       });
       const code = `${prefix}${String(count + 1 + attempt).padStart(6, '0')}`;
       try {
-        const updated = await this.prisma.user.updateMany({
-          where: { id: userId, caseTrackingCode: null },
-          data: { caseTrackingCode: code },
+        const updated = await this.prisma.caseFile.updateMany({
+          where: { id: caseFileId, trackingCode: null },
+          data: { trackingCode: code },
         });
         if (updated.count === 1) return code;
-        const row = await this.prisma.user.findUnique({
-          where: { id: userId },
-          select: { caseTrackingCode: true },
+        const row = await this.prisma.caseFile.findUnique({
+          where: { id: caseFileId },
+          select: { trackingCode: true },
         });
-        return row?.caseTrackingCode ?? null;
+        return row?.trackingCode ?? null;
       } catch (error) {
         if (!(error instanceof Prisma.PrismaClientKnownRequestError) || error.code !== 'P2002') {
           throw error;
@@ -238,32 +232,42 @@ export class CasesService {
     throw new ConflictException('صدور کد رهگیری انجام نشد');
   }
 
-  private async withTrackingCode(user: IdentityRow) {
-    const caseTrackingCode = await this.ensureTrackingCode(
-      user.id,
-      user.caseTrackingCode,
-      user.formationStep,
-    );
-    if (!caseTrackingCode || caseTrackingCode === user.caseTrackingCode) return user;
-    return { ...user, caseTrackingCode };
+  private async attachTrackingCode(file: { id: string; formationStep: number; trackingCode: string | null }) {
+    const trackingCode = await this.ensureTrackingCode(file.id, file.trackingCode, file.formationStep);
+    return { ...file, trackingCode };
   }
 
-  async findIdentity(nationalIdRaw: string) {
+  async findIdentity(nationalIdRaw: string, caseId?: string) {
     const nationalId = normalizeNationalId(nationalIdRaw || '');
     if (!/^\d{10}$/.test(nationalId)) {
       throw new BadRequestException('کد ملی معتبر نیست');
     }
     const user = await this.prisma.user.findUnique({
       where: { nationalId },
-      select: identitySelect,
+      select: personSelect,
     });
-    if (!user) return { found: false as const, person: null, activity: null, location: null };
-    const tracked = await this.withTrackingCode(user);
+    if (!user) {
+      return {
+        found: false as const,
+        person: null,
+        openCase: null,
+        requestedCase: null,
+        hasIssuedCase: false,
+      };
+    }
+    const files = await this.prisma.caseFile.findMany({
+      where: { userId: user.id },
+      orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],
+      select: caseFileSelect,
+    });
+    const open = files.find((file) => file.formationStep < ISSUANCE_FORMATION_STEP) ?? null;
+    const requested = caseId ? files.find((file) => file.id === caseId) ?? null : null;
     return {
       found: true as const,
-      person: mapIdentity(tracked),
-      activity: mapActivity(tracked),
-      location: mapLocation(tracked),
+      person: mapIdentity(user),
+      openCase: open ? mapCase(open) : null,
+      requestedCase: requested ? mapCase(requested) : null,
+      hasIssuedCase: files.some((file) => file.formationStep >= ISSUANCE_FORMATION_STEP),
     };
   }
 
@@ -307,40 +311,99 @@ export class CasesService {
 
     const existing = await this.prisma.user.findUnique({
       where: { nationalId },
-      select: { id: true, formationStep: true },
+      select: { id: true },
     });
-    const formationStep = Math.max(existing?.formationStep ?? 0, 1);
-    if (existing) {
-      const user = await this.prisma.user.update({
-        where: { id: existing.id },
-        data: { ...data, formationStep },
-        select: identitySelect,
-      });
-      return mapIdentity(await this.withTrackingCode(user));
-    }
+    const user = existing
+      ? await this.prisma.user.update({
+          where: { id: existing.id },
+          data,
+          select: personSelect,
+        })
+      : await this.createEconomicActor(nationalId, data);
+    const file = await this.resolveCaseFile(user.id, dto.caseId, dto.startNew === true);
+    return {
+      ...mapIdentity(user),
+      caseId: file.id,
+      formationStep: file.formationStep,
+      caseTrackingCode: file.trackingCode,
+    };
+  }
 
-    const passwordHash = await bcrypt.hash(randomBytes(18).toString('hex'), 10);
-    const user = await this.prisma.user.create({
+  private async createEconomicActor(
+    nationalId: string,
+    data: Prisma.UserUpdateInput,
+  ) {
+    const takenUsername = await this.prisma.user.findUnique({
+      where: { username: nationalId },
+      select: { id: true },
+    });
+    if (takenUsername) {
+      throw new ConflictException('این کد ملی قبلاً به‌عنوان نام کاربری ثبت شده است');
+    }
+    const role = await ensureEconomicActorRole(this.prisma);
+    const passwordHash = await bcrypt.hash(ECONOMIC_ACTOR_INITIAL_PASSWORD, 10);
+    return this.prisma.user.create({
       data: {
-        ...data,
-        formationStep,
-        username: `nid${nationalId}`,
+        ...(data as Prisma.UserCreateInput),
+        username: nationalId,
         passwordHash,
         nationalId,
         locale: 'fa',
         status: UserStatus.ACTIVE,
+        userRoles: { create: { roleId: role.id } },
       },
-      select: identitySelect,
+      select: personSelect,
     });
-    return mapIdentity(await this.withTrackingCode(user));
+  }
+
+  private async resolveCaseFile(userId: string, caseId: string | null | undefined, startNew: boolean) {
+    if (caseId) {
+      const row = await this.prisma.caseFile.findFirst({
+        where: { id: caseId, userId },
+        select: { id: true, formationStep: true, trackingCode: true },
+      });
+      if (!row) throw new BadRequestException('پرونده متعلق به این شخص نیست');
+      return this.bumpIdentityStep(row);
+    }
+    if (!startNew) {
+      const open = await this.prisma.caseFile.findFirst({
+        where: { userId, formationStep: { lt: ISSUANCE_FORMATION_STEP } },
+        orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],
+        select: { id: true, formationStep: true, trackingCode: true },
+      });
+      if (open) return this.bumpIdentityStep(open);
+    }
+    const created = await this.prisma.caseFile.create({
+      data: { userId, formationStep: 1 },
+      select: { id: true, formationStep: true, trackingCode: true },
+    });
+    const tracked = await this.attachTrackingCode(created);
+    await syncIssuanceRequest(this.prisma, tracked.id);
+    return tracked;
+  }
+
+  private async bumpIdentityStep(row: { id: string; formationStep: number; trackingCode: string | null }) {
+    const formationStep = Math.max(row.formationStep, 1);
+    if (formationStep !== row.formationStep) {
+      await this.prisma.caseFile.update({
+        where: { id: row.id },
+        data: { formationStep },
+      });
+    }
+    const tracked = await this.attachTrackingCode({ ...row, formationStep });
+    await syncIssuanceRequest(this.prisma, tracked.id);
+    return tracked;
   }
 
   async saveActivity(dto: SaveCaseActivityDto) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: dto.userId },
-      select: { id: true, formationStep: true },
+    const user = await this.prisma.caseFile.findUnique({
+      where: { id: dto.caseId },
+      select: { id: true, formationStep: true, licenseNumber: true },
     });
-    if (!user) throw new NotFoundException('شخص یافت نشد');
+    if (!user) throw new NotFoundException('پرونده یافت نشد');
+    if (user.licenseNumber) {
+      throw new BadRequestException('مجوز فعالیت اقتصادی این پرونده صادر شده است');
+    }
     const job = await this.prisma.job.findUnique({
       where: { id: dto.jobId },
       select: { id: true, groupId: true },
@@ -349,7 +412,7 @@ export class CasesService {
     if (dto.jobGroupId && job.groupId !== dto.jobGroupId) {
       throw new BadRequestException('شغل با گروه شغلی انتخاب‌شده هم‌خوان نیست');
     }
-    const saved = await this.prisma.user.update({
+    const saved = await this.prisma.caseFile.update({
       where: { id: user.id },
       data: {
         businessUnitTitle: dto.businessUnitTitle.trim(),
@@ -358,17 +421,21 @@ export class CasesService {
         posDeviceCount: dto.posDeviceCount ?? null,
         formationStep: Math.max(user.formationStep, 2),
       },
-      select: identitySelect,
+      select: caseFileSelect,
     });
+    await syncIssuanceRequest(this.prisma, saved.id);
     return { formationStep: saved.formationStep, activity: mapActivity(saved) };
   }
 
   async saveLocation(dto: SaveCaseLocationDto) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: dto.userId },
-      select: { id: true, formationStep: true },
+    const user = await this.prisma.caseFile.findUnique({
+      where: { id: dto.caseId },
+      select: { id: true, formationStep: true, licenseNumber: true },
     });
-    if (!user) throw new NotFoundException('شخص یافت نشد');
+    if (!user) throw new NotFoundException('پرونده یافت نشد');
+    if (user.licenseNumber) {
+      throw new BadRequestException('مجوز فعالیت اقتصادی این پرونده صادر شده است');
+    }
     const city = await this.prisma.city.findUnique({
       where: { id: dto.cityId },
       select: { id: true },
@@ -395,7 +462,7 @@ export class CasesService {
     }
     const rented = dto.ownership === 'RENTED';
     const digits = (value?: string | null) => value?.replace(/\D/g, '') || null;
-    const saved = await this.prisma.user.update({
+    const saved = await this.prisma.caseFile.update({
       where: { id: user.id },
       data: {
         premiseCityId: dto.cityId,
@@ -421,17 +488,18 @@ export class CasesService {
         premiseOwnerName: rented ? dto.ownerName?.trim() || null : null,
         formationStep: Math.max(user.formationStep, 3),
       },
-      select: identitySelect,
+      select: caseFileSelect,
     });
+    await syncIssuanceRequest(this.prisma, saved.id);
     return { formationStep: saved.formationStep, location: mapLocation(saved) };
   }
 
   async advanceStep(dto: SaveFormationStepDto) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: dto.userId },
+    const user = await this.prisma.caseFile.findUnique({
+      where: { id: dto.caseId },
       select: { id: true, formationStep: true },
     });
-    if (!user) throw new NotFoundException('شخص یافت نشد');
+    if (!user) throw new NotFoundException('پرونده یافت نشد');
     const requested = Math.min(dto.step, user.formationStep + 1);
     if (user.formationStep < PLACES_FORMATION_STEP && requested >= PLACES_FORMATION_STEP) {
       await this.assertActivityDocumentsDelivered(user.id);
@@ -440,126 +508,386 @@ export class CasesService {
     if (user.formationStep < MANAGEMENT_FORMATION_STEP && requested >= MANAGEMENT_FORMATION_STEP) {
       await this.places.assertDelivered(user.id);
     }
+    if (user.formationStep < ISSUANCE_FORMATION_STEP && requested >= ISSUANCE_FORMATION_STEP) {
+      await this.managementApprovers.assertDelivered(user.id);
+    }
     const formationStep = Math.max(user.formationStep, requested);
-    return this.prisma.user.update({
+    const saved = await this.prisma.caseFile.update({
       where: { id: user.id },
       data: { formationStep },
       select: { id: true, formationStep: true },
     });
+    await syncIssuanceRequest(this.prisma, saved.id);
+    return saved;
   }
 
   /** بعد از ثبت آخرین نتیجهٔ استعلام، اگر مدارک شغل هم آماده باشد پرونده به اماکن می‌رود. */
   async advanceToPlacesAfterInquiry(inquiryId: string) {
     const inquiry = await this.prisma.caseInquiry.findUnique({
       where: { id: inquiryId },
-      select: { userId: true },
+      select: { caseFileId: true },
     });
     if (!inquiry) return null;
-    const user = await this.prisma.user.findUnique({
-      where: { id: inquiry.userId },
+    const user = await this.prisma.caseFile.findUnique({
+      where: { id: inquiry.caseFileId },
       select: { id: true, formationStep: true },
     });
     if (!user || user.formationStep !== PLACES_FORMATION_STEP - 1) return null;
     const [total, pending] = await Promise.all([
-      this.prisma.caseInquiry.count({ where: { userId: user.id } }),
+      this.prisma.caseInquiry.count({ where: { caseFileId: user.id } }),
       this.prisma.caseInquiry.count({
-        where: { userId: user.id, status: CaseInquiryStatus.PENDING },
+        where: { caseFileId: user.id, status: CaseInquiryStatus.PENDING },
       }),
     ]);
     if (total === 0 || pending > 0) return null;
     await this.assertActivityDocumentsDelivered(user.id);
     await this.inquiries.assertDelivered(user.id);
     await this.places.ensureForUser(user.id);
-    return this.prisma.user.update({
+    const saved = await this.prisma.caseFile.update({
       where: { id: user.id },
       data: { formationStep: PLACES_FORMATION_STEP },
       select: { id: true, formationStep: true },
     });
+    await syncIssuanceRequest(this.prisma, saved.id);
+    return saved;
   }
 
   async list(query: FindCasesQueryDto) {
     const q = query.q?.trim();
     const digits = q ? normalizeSearchDigits(q) : '';
-    const where: Prisma.UserWhereInput = {
+    const where: Prisma.CaseFileWhereInput = {
       formationStep: query.step != null ? query.step : { gt: 0 },
-      gender: query.gender,
-      residencyStatus: query.residencyStatus,
-      educationLevel: query.educationLevel,
-      jobId: query.jobId,
-      OR: q
-        ? [
-            { fullName: containsInsensitive(q) },
-            { firstName: containsInsensitive(q) },
-            { lastName: containsInsensitive(q) },
-            { fatherName: containsInsensitive(q) },
-            ...(digits
-              ? [
-                  { nationalId: { contains: digits } },
-                  { phone: { contains: digits } },
-                ]
-              : []),
-          ]
-        : undefined,
+      activityJobId: query.jobId,
+      user: {
+        gender: query.gender,
+        residencyStatus: query.residencyStatus,
+        educationLevel: query.educationLevel,
+        OR: q
+          ? [
+              { fullName: containsInsensitive(q) },
+              { firstName: containsInsensitive(q) },
+              { lastName: containsInsensitive(q) },
+              { fatherName: containsInsensitive(q) },
+              ...(digits
+                ? [
+                    { nationalId: { contains: digits } },
+                    { phone: { contains: digits } },
+                  ]
+                : []),
+            ]
+          : undefined,
+      },
     };
-    const orderBy = resolveSortOrder<Prisma.UserOrderByWithRelationInput>(
+    const orderBy = resolveSortOrder<Prisma.CaseFileOrderByWithRelationInput>(
       query.sortBy,
       query.sortDir,
       {
-        fullName: (dir) => ({ fullName: dir }),
-        fatherName: (dir) => ({ fatherName: dir }),
-        nationalId: (dir) => ({ nationalId: dir }),
-        phone: (dir) => ({ phone: dir }),
-        gender: (dir) => ({ gender: dir }),
-        residencyStatus: (dir) => ({ residencyStatus: dir }),
-        educationLevel: (dir) => ({ educationLevel: dir }),
-        job: (dir) => ({ economicJob: { title: dir } }),
+        fullName: (dir) => ({ user: { fullName: dir } }),
+        fatherName: (dir) => ({ user: { fatherName: dir } }),
+        nationalId: (dir) => ({ user: { nationalId: dir } }),
+        phone: (dir) => ({ user: { phone: dir } }),
+        gender: (dir) => ({ user: { gender: dir } }),
+        residencyStatus: (dir) => ({ user: { residencyStatus: dir } }),
+        educationLevel: (dir) => ({ user: { educationLevel: dir } }),
+        job: (dir) => ({ activityJob: { title: dir } }),
+        jobTitle: (dir) => ({ businessUnitTitle: dir }),
         formationStep: (dir) => ({ formationStep: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
     const select = {
       id: true,
-      fullName: true,
-      fatherName: true,
-      nationalId: true,
-      gender: true,
-      phone: true,
-      residencyStatus: true,
-      educationLevel: true,
       formationStep: true,
-      economicJob: { select: { id: true, title: true } },
-    } satisfies Prisma.UserSelect;
+      businessUnitTitle: true,
+      licenseNumber: true,
+      licenseIssuedAt: true,
+      licenseExpiresAt: true,
+      activityJob: { select: { id: true, title: true } },
+      user: {
+        select: {
+          fullName: true,
+          fatherName: true,
+          nationalId: true,
+          gender: true,
+          phone: true,
+          residencyStatus: true,
+          educationLevel: true,
+        },
+      },
+    } satisfies Prisma.CaseFileSelect;
 
-    const mapRow = <T extends { economicJob: { id: string; title: string } | null }>(row: T) => {
-      const { economicJob, ...rest } = row;
-      return { ...rest, job: economicJob };
-    };
+    const mapRow = (row: Prisma.CaseFileGetPayload<{ select: typeof select }>) => ({
+      id: row.id,
+      formationStep: row.formationStep,
+      licenseNumber: row.licenseNumber,
+      licenseIssuedAt: dateOnly(row.licenseIssuedAt),
+      licenseExpiresAt: dateOnly(row.licenseExpiresAt),
+      fullName: row.user.fullName,
+      fatherName: row.user.fatherName,
+      nationalId: row.user.nationalId,
+      gender: row.user.gender,
+      phone: row.user.phone,
+      residencyStatus: row.user.residencyStatus,
+      educationLevel: row.user.educationLevel,
+      job: row.activityJob,
+      jobTitle: row.businessUnitTitle,
+    });
 
     if (!wantsPagination(query)) {
-      const items = await this.prisma.user.findMany({ where, orderBy, select });
+      const items = await this.prisma.caseFile.findMany({ where, orderBy, select });
       return items.map(mapRow);
     }
     const { page, pageSize, skip, take } = paginationArgs(query);
     const [items, total] = await Promise.all([
-      this.prisma.user.findMany({ where, orderBy, skip, take, select }),
-      this.prisma.user.count({ where }),
+      this.prisma.caseFile.findMany({ where, orderBy, skip, take, select }),
+      this.prisma.caseFile.count({ where }),
     ]);
     return paginatedResult(items.map(mapRow), total, page, pageSize);
   }
 
-  async documentTypes() {
-    return this.prisma.document.findMany({
-      where: { code: { not: null } },
-      orderBy: { title: 'asc' },
+  async findOne(id: string) {
+    await syncIssuanceRequest(this.prisma, id);
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id },
       select: {
         id: true,
-        code: true,
-        title: true,
-        isRequired: true,
-        gender: true,
-        isFixed: true,
+        formationStep: true,
+        trackingCode: true,
+        businessUnitTitle: true,
+        licenseNumber: true,
+        licenseIssuedAt: true,
+        licenseExpiresAt: true,
+        activityJob: {
+          select: { id: true, title: true, group: { select: { id: true, title: true } } },
+        },
+        user: {
+          select: {
+            id: true,
+            fullName: true,
+            firstName: true,
+            lastName: true,
+            nationalId: true,
+            phone: true,
+          },
+        },
+        requests: {
+          orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+          select: {
+            id: true,
+            number: true,
+            type: true,
+            status: true,
+            formationStep: true,
+            completedAt: true,
+            createdAt: true,
+          },
+        },
       },
     });
+    if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    return {
+      id: file.id,
+      formationStep: file.formationStep,
+      trackingCode: file.trackingCode,
+      businessUnitTitle: file.businessUnitTitle,
+      licenseNumber: file.licenseNumber,
+      licenseIssuedAt: dateOnly(file.licenseIssuedAt),
+      licenseExpiresAt: dateOnly(file.licenseExpiresAt),
+      job: file.activityJob,
+      person: file.user,
+      requests: file.requests.map((request) => ({
+        ...request,
+        completedAt: request.completedAt?.toISOString() ?? null,
+        createdAt: request.createdAt.toISOString(),
+      })),
+    };
+  }
+
+  async licenseDocument(id: string) {
+    await syncIssuanceRequest(this.prisma, id);
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        formationStep: true,
+        trackingCode: true,
+        licenseNumber: true,
+        licenseIssuedAt: true,
+        licenseExpiresAt: true,
+        businessUnitTitle: true,
+        premiseAddress: true,
+        premisePlaque: true,
+        premiseFloor: true,
+        premiseUnitNo: true,
+        premisePostalCode: true,
+        premisePhone: true,
+        activityJob: { select: { title: true, titleEn: true } },
+        premiseCity: { select: { nameFa: true, nameEn: true } },
+        premiseComplex: { select: { name: true, nameEn: true } },
+        requests: {
+          where: { type: CaseRequestType.ISSUANCE },
+          take: 1,
+          select: { number: true },
+        },
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            lastNameEn: true,
+            fatherName: true,
+            birthDate: true,
+            passportNumber: true,
+            photoId: true,
+            country: { select: { nameFa: true, nameEn: true } },
+          },
+        },
+      },
+    });
+    if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    if (!file.licenseNumber) {
+      throw new NotFoundException('مجوز فعالیت اقتصادی هنوز صادر نشده است');
+    }
+    return {
+      licenseNumber: file.licenseNumber,
+      issuedAt: dateOnly(file.licenseIssuedAt),
+      expiresAt: dateOnly(file.licenseExpiresAt),
+      requestNumber: file.requests[0]?.number ?? null,
+      trackingCode: file.trackingCode,
+      firstName: file.user.firstName,
+      lastName: file.user.lastName,
+      lastNameEn: file.user.lastNameEn,
+      fatherName: file.user.fatherName,
+      birthDate: dateOnly(file.user.birthDate),
+      nationalityFa: file.user.country?.nameFa ?? null,
+      nationalityEn: file.user.country?.nameEn ?? null,
+      passportNumber: file.user.passportNumber,
+      phone: file.premisePhone,
+      tradeName: file.businessUnitTitle,
+      activityTitle: file.activityJob?.title ?? null,
+      activityTitleEn: file.activityJob?.titleEn ?? null,
+      photoId: file.user.photoId,
+      address: file.premiseAddress,
+      plaque: file.premisePlaque,
+      floor: file.premiseFloor,
+      unitNo: file.premiseUnitNo,
+      postalCode: file.premisePostalCode,
+      cityNameFa: file.premiseCity?.nameFa ?? null,
+      cityNameEn: file.premiseCity?.nameEn ?? null,
+      complexName: file.premiseComplex?.name ?? null,
+      complexNameEn: file.premiseComplex?.nameEn ?? null,
+    };
+  }
+
+  async remove(id: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id },
+      select: { id: true, userId: true, formationStep: true },
+    });
+    if (!file || file.formationStep < 1) {
+      throw new NotFoundException('پرونده یافت نشد');
+    }
+    await this.prisma.caseFile.delete({ where: { id: file.id } });
+    const remaining = await this.prisma.caseFile.count({ where: { userId: file.userId } });
+    if (remaining > 0) return { ok: true };
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: file.userId },
+      select: {
+        id: true,
+        orgUnitId: true,
+        positionId: true,
+        workUnitId: true,
+        staffPostId: true,
+        photoId: true,
+        nationalCardPhotoId: true,
+        passportPhotoId: true,
+        identityBookletPhotoId: true,
+        userRoles: { select: { role: { select: { code: true } } } },
+      },
+    });
+    if (!user) return { ok: true };
+
+    const roleCodes = user.userRoles.map((item) => item.role.code);
+    const caseAccountOnly =
+      roleCodes.length > 0 &&
+      roleCodes.every((code) => code === ECONOMIC_ACTOR_ROLE_CODE) &&
+      !user.orgUnitId &&
+      !user.positionId &&
+      !user.workUnitId &&
+      !user.staffPostId &&
+      (await this.countCaseDeleteBlockers(user.id)) === 0;
+    if (!caseAccountOnly) return { ok: true };
+
+    const imageIds = [
+      user.photoId,
+      user.nationalCardPhotoId,
+      user.passportPhotoId,
+      user.identityBookletPhotoId,
+    ];
+    try {
+      await this.prisma.user.delete({ where: { id: user.id } });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        (error.code === 'P2003' || error.code === 'P2014')
+      ) {
+        return { ok: true };
+      }
+      throw error;
+    }
+    await this.files.removePerson(user.id);
+    await this.deleteStoredImages(imageIds);
+    return { ok: true };
+  }
+
+  private async countCaseDeleteBlockers(userId: string) {
+    const [vehicles, activities, boardRequests, minutes, memberships, violations, proceedings] =
+      await Promise.all([
+        this.prisma.vehicleAssignment.count({ where: { personId: userId } }),
+        this.prisma.singardActivity.count({ where: { createdById: userId } }),
+        this.prisma.boardRequest.count({ where: { createdById: userId } }),
+        this.prisma.boardMinutes.count({ where: { createdById: userId } }),
+        this.prisma.boardMinutesMember.count({ where: { userId } }),
+        this.prisma.violation.count({ where: { createdById: userId } }),
+        this.prisma.violationProceeding.count({ where: { createdById: userId } }),
+      ]);
+    return vehicles + activities + boardRequests + minutes + memberships + violations + proceedings;
+  }
+
+  private async deleteStoredImages(ids: Array<string | null>) {
+    const unique = [...new Set(ids.filter((item): item is string => Boolean(item)))];
+    for (const imageId of unique) {
+      try {
+        await this.prisma.storedImage.delete({ where: { id: imageId } });
+      } catch (error) {
+        if (
+          error instanceof Prisma.PrismaClientKnownRequestError &&
+          (error.code === 'P2003' || error.code === 'P2025')
+        ) {
+          continue;
+        }
+        throw error;
+      }
+    }
+  }
+
+  async documentTypes() {
+    const rows = await this.prisma.caseIdentityDocument.findMany({
+      orderBy: { document: { title: 'asc' } },
+      select: {
+        gender: true,
+        document: {
+          select: {
+            id: true,
+            code: true,
+            title: true,
+            isRequired: true,
+            isFixed: true,
+          },
+        },
+      },
+    });
+    return rows.map((row) => ({ ...row.document, gender: row.gender }));
   }
 
   async personDocuments(userId: string) {
@@ -601,14 +929,18 @@ export class CasesService {
     await this.assertPerson(input.userId);
     const document = await this.prisma.document.findUnique({
       where: { id: input.documentId },
-      select: { id: true, code: true, isFixed: true, isRequired: true },
+      select: { id: true, isFixed: true, isRequired: true },
     });
     if (!document) throw new NotFoundException('مدرک یافت نشد');
     if (input.jobId) {
       const allowed = await this.isActivityDocument(document, input.jobId);
       if (!allowed) throw new NotFoundException('این مدرک برای شغل انتخاب‌شده نیست');
-    } else if (!document.code) {
-      throw new NotFoundException('نوع مدرک هویتی یافت نشد');
+    } else {
+      const linked = await this.prisma.caseIdentityDocument.findUnique({
+        where: { documentId: document.id },
+        select: { documentId: true },
+      });
+      if (!linked) throw new NotFoundException('این مدرک در فهرست مدارک اطلاعات هویتی نیست');
     }
 
     const personDocument = await this.prisma.personDocument.upsert({
@@ -654,6 +986,25 @@ export class CasesService {
     return { documentId: document.id, current: created };
   }
 
+  async removeDocument(userId: string, documentId: string) {
+    await this.assertPerson(userId);
+    const row = await this.prisma.personDocument.findUnique({
+      where: { userId_documentId: { userId, documentId } },
+      select: {
+        id: true,
+        versions: { select: { storageKey: true } },
+      },
+    });
+    if (!row || row.versions.length === 0) {
+      throw new NotFoundException('مدرک بارگذاری‌شده‌ای یافت نشد');
+    }
+    await this.prisma.personDocument.delete({ where: { id: row.id } });
+    for (const version of row.versions) {
+      await this.files.remove(version.storageKey);
+    }
+    return { ok: true };
+  }
+
   async readDocumentFile(versionId: string) {
     const version = await this.prisma.personDocumentVersion.findUnique({
       where: { id: versionId },
@@ -682,14 +1033,15 @@ export class CasesService {
     return Boolean(link);
   }
 
-  private async assertActivityDocumentsDelivered(userId: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-      select: { activityJobId: true, gender: true },
+  private async assertActivityDocumentsDelivered(caseFileId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
+      select: { userId: true, activityJobId: true, user: { select: { gender: true } } },
     });
-    if (!user?.activityJobId) {
+    if (!file?.activityJobId) {
       throw new BadRequestException('قبل از مرحله اماکن باید شغل و مدارک آن تکمیل شود');
     }
+    const user = { activityJobId: file.activityJobId, gender: file.user.gender, id: file.userId };
     const [fixed, links, stored] = await Promise.all([
       this.prisma.document.findMany({
         where: { isFixed: true, isRequired: true },
@@ -700,7 +1052,7 @@ export class CasesService {
         select: { documentId: true, gender: true, isRequired: true },
       }),
       this.prisma.personDocument.findMany({
-        where: { userId },
+        where: { userId: user.id },
         select: {
           documentId: true,
           versions: { select: { id: true }, take: 1 },

@@ -419,6 +419,10 @@ export const ModelName = {
   Document: 'Document',
   CaseIdentityDocument: 'CaseIdentityDocument',
   CaseManagementApprover: 'CaseManagementApprover',
+  CaseManagementReview: 'CaseManagementReview',
+  CaseManagementReviewFile: 'CaseManagementReviewFile',
+  CaseFile: 'CaseFile',
+  CaseRequest: 'CaseRequest',
   PersonDocument: 'PersonDocument',
   PersonDocumentVersion: 'PersonDocumentVersion',
   User: 'User',
@@ -475,7 +479,8 @@ export const ModelName = {
   Violation: 'Violation',
   ViolationAttachment: 'ViolationAttachment',
   ViolationProceeding: 'ViolationProceeding',
-  ViolationProceedingAttachment: 'ViolationProceedingAttachment'
+  ViolationProceedingAttachment: 'ViolationProceedingAttachment',
+  SmsSettings: 'SmsSettings'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -491,7 +496,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "personDocument" | "personDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseRequest" | "personDocument" | "personDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2120,6 +2125,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseManagementApproverCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseManagementApproverCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseManagementReview: {
+      payload: Prisma.$CaseManagementReviewPayload<ExtArgs>
+      fields: Prisma.CaseManagementReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseManagementReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseManagementReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseManagementReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseManagementReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>
+        }
+        findMany: {
+          args: Prisma.CaseManagementReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>[]
+        }
+        create: {
+          args: Prisma.CaseManagementReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>
+        }
+        createMany: {
+          args: Prisma.CaseManagementReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseManagementReviewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseManagementReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>
+        }
+        update: {
+          args: Prisma.CaseManagementReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseManagementReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseManagementReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseManagementReviewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseManagementReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseManagementReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseManagementReview>
+        }
+        groupBy: {
+          args: Prisma.CaseManagementReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseManagementReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseManagementReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseManagementReviewCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseManagementReviewFile: {
+      payload: Prisma.$CaseManagementReviewFilePayload<ExtArgs>
+      fields: Prisma.CaseManagementReviewFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseManagementReviewFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseManagementReviewFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>
+        }
+        findFirst: {
+          args: Prisma.CaseManagementReviewFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseManagementReviewFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>
+        }
+        findMany: {
+          args: Prisma.CaseManagementReviewFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>[]
+        }
+        create: {
+          args: Prisma.CaseManagementReviewFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>
+        }
+        createMany: {
+          args: Prisma.CaseManagementReviewFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseManagementReviewFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>[]
+        }
+        delete: {
+          args: Prisma.CaseManagementReviewFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>
+        }
+        update: {
+          args: Prisma.CaseManagementReviewFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseManagementReviewFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseManagementReviewFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseManagementReviewFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseManagementReviewFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseManagementReviewFilePayload>
+        }
+        aggregate: {
+          args: Prisma.CaseManagementReviewFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseManagementReviewFile>
+        }
+        groupBy: {
+          args: Prisma.CaseManagementReviewFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseManagementReviewFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseManagementReviewFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseManagementReviewFileCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseFile: {
+      payload: Prisma.$CaseFilePayload<ExtArgs>
+      fields: Prisma.CaseFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>
+        }
+        findFirst: {
+          args: Prisma.CaseFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>
+        }
+        findMany: {
+          args: Prisma.CaseFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>[]
+        }
+        create: {
+          args: Prisma.CaseFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>
+        }
+        createMany: {
+          args: Prisma.CaseFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>[]
+        }
+        delete: {
+          args: Prisma.CaseFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>
+        }
+        update: {
+          args: Prisma.CaseFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseFilePayload>
+        }
+        aggregate: {
+          args: Prisma.CaseFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseFile>
+        }
+        groupBy: {
+          args: Prisma.CaseFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseFileCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseRequest: {
+      payload: Prisma.$CaseRequestPayload<ExtArgs>
+      fields: Prisma.CaseRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>
+        }
+        findMany: {
+          args: Prisma.CaseRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>[]
+        }
+        create: {
+          args: Prisma.CaseRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>
+        }
+        createMany: {
+          args: Prisma.CaseRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>
+        }
+        update: {
+          args: Prisma.CaseRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseRequest>
+        }
+        groupBy: {
+          args: Prisma.CaseRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRequestCountAggregateOutputType> | number
         }
       }
     }
@@ -6341,6 +6642,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SmsSettings: {
+      payload: Prisma.$SmsSettingsPayload<ExtArgs>
+      fields: Prisma.SmsSettingsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SmsSettingsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SmsSettingsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>
+        }
+        findFirst: {
+          args: Prisma.SmsSettingsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SmsSettingsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>
+        }
+        findMany: {
+          args: Prisma.SmsSettingsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>[]
+        }
+        create: {
+          args: Prisma.SmsSettingsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>
+        }
+        createMany: {
+          args: Prisma.SmsSettingsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SmsSettingsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>[]
+        }
+        delete: {
+          args: Prisma.SmsSettingsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>
+        }
+        update: {
+          args: Prisma.SmsSettingsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>
+        }
+        deleteMany: {
+          args: Prisma.SmsSettingsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SmsSettingsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SmsSettingsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>[]
+        }
+        upsert: {
+          args: Prisma.SmsSettingsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsSettingsPayload>
+        }
+        aggregate: {
+          args: Prisma.SmsSettingsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSmsSettings>
+        }
+        groupBy: {
+          args: Prisma.SmsSettingsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmsSettingsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SmsSettingsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmsSettingsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -6573,7 +6948,7 @@ export type JobInquiryCenterScalarFieldEnum = (typeof JobInquiryCenterScalarFiel
 
 export const CaseInquiryScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  caseFileId: 'caseFileId',
   inquiryCenterId: 'inquiryCenterId',
   status: 'status',
   channel: 'channel',
@@ -6615,7 +6990,7 @@ export type CasePlacesOfficeScalarFieldEnum = (typeof CasePlacesOfficeScalarFiel
 
 export const CasePlacesReviewScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  caseFileId: 'caseFileId',
   status: 'status',
   channel: 'channel',
   note: 'note',
@@ -6668,6 +7043,7 @@ export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typ
 
 export const CaseIdentityDocumentScalarFieldEnum = {
   documentId: 'documentId',
+  gender: 'gender',
   createdAt: 'createdAt'
 } as const
 
@@ -6682,6 +7058,92 @@ export const CaseManagementApproverScalarFieldEnum = {
 } as const
 
 export type CaseManagementApproverScalarFieldEnum = (typeof CaseManagementApproverScalarFieldEnum)[keyof typeof CaseManagementApproverScalarFieldEnum]
+
+
+export const CaseManagementReviewScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  workUnitId: 'workUnitId',
+  roleId: 'roleId',
+  status: 'status',
+  channel: 'channel',
+  note: 'note',
+  decidedById: 'decidedById',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseManagementReviewScalarFieldEnum = (typeof CaseManagementReviewScalarFieldEnum)[keyof typeof CaseManagementReviewScalarFieldEnum]
+
+
+export const CaseManagementReviewFileScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseManagementReviewFileScalarFieldEnum = (typeof CaseManagementReviewFileScalarFieldEnum)[keyof typeof CaseManagementReviewFileScalarFieldEnum]
+
+
+export const CaseFileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  formationStep: 'formationStep',
+  trackingCode: 'trackingCode',
+  licenseNumber: 'licenseNumber',
+  licenseIssuedAt: 'licenseIssuedAt',
+  licenseExpiresAt: 'licenseExpiresAt',
+  businessUnitTitle: 'businessUnitTitle',
+  activityJobId: 'activityJobId',
+  previousOccupation: 'previousOccupation',
+  posDeviceCount: 'posDeviceCount',
+  premiseCityId: 'premiseCityId',
+  premiseEstablishment: 'premiseEstablishment',
+  premiseComplexId: 'premiseComplexId',
+  premiseAddress: 'premiseAddress',
+  premisePlaque: 'premisePlaque',
+  premisePlaqueSeries: 'premisePlaqueSeries',
+  premiseFloor: 'premiseFloor',
+  premiseUnitNo: 'premiseUnitNo',
+  premisePostalCode: 'premisePostalCode',
+  premisePhone: 'premisePhone',
+  premiseFax: 'premiseFax',
+  premiseGeoPosition: 'premiseGeoPosition',
+  premisePublicAccess: 'premisePublicAccess',
+  registrationPlaceId: 'registrationPlaceId',
+  premiseOwnership: 'premiseOwnership',
+  premiseDeedNo: 'premiseDeedNo',
+  premiseArea: 'premiseArea',
+  leaseIssuedAt: 'leaseIssuedAt',
+  leaseExpiresAt: 'leaseExpiresAt',
+  leaseAgency: 'leaseAgency',
+  premiseOwnerName: 'premiseOwnerName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseFileScalarFieldEnum = (typeof CaseFileScalarFieldEnum)[keyof typeof CaseFileScalarFieldEnum]
+
+
+export const CaseRequestScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  type: 'type',
+  number: 'number',
+  status: 'status',
+  formationStep: 'formationStep',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRequestScalarFieldEnum = (typeof CaseRequestScalarFieldEnum)[keyof typeof CaseRequestScalarFieldEnum]
 
 
 export const PersonDocumentScalarFieldEnum = {
@@ -6764,33 +7226,6 @@ export const UserScalarFieldEnum = {
   homePhone: 'homePhone',
   educationLevel: 'educationLevel',
   citizenGroup: 'citizenGroup',
-  formationStep: 'formationStep',
-  caseTrackingCode: 'caseTrackingCode',
-  businessUnitTitle: 'businessUnitTitle',
-  activityJobId: 'activityJobId',
-  previousOccupation: 'previousOccupation',
-  posDeviceCount: 'posDeviceCount',
-  premiseCityId: 'premiseCityId',
-  premiseEstablishment: 'premiseEstablishment',
-  premiseComplexId: 'premiseComplexId',
-  premiseAddress: 'premiseAddress',
-  premisePlaque: 'premisePlaque',
-  premisePlaqueSeries: 'premisePlaqueSeries',
-  premiseFloor: 'premiseFloor',
-  premiseUnitNo: 'premiseUnitNo',
-  premisePostalCode: 'premisePostalCode',
-  premisePhone: 'premisePhone',
-  premiseFax: 'premiseFax',
-  premiseGeoPosition: 'premiseGeoPosition',
-  premisePublicAccess: 'premisePublicAccess',
-  registrationPlaceId: 'registrationPlaceId',
-  premiseOwnership: 'premiseOwnership',
-  premiseDeedNo: 'premiseDeedNo',
-  premiseArea: 'premiseArea',
-  leaseIssuedAt: 'leaseIssuedAt',
-  leaseExpiresAt: 'leaseExpiresAt',
-  leaseAgency: 'leaseAgency',
-  premiseOwnerName: 'premiseOwnerName',
   jobId: 'jobId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -7535,6 +7970,7 @@ export const ViolationScalarFieldEnum = {
   description: 'description',
   status: 'status',
   caseUserId: 'caseUserId',
+  caseFileId: 'caseFileId',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -7583,6 +8019,21 @@ export const ViolationProceedingAttachmentScalarFieldEnum = {
 } as const
 
 export type ViolationProceedingAttachmentScalarFieldEnum = (typeof ViolationProceedingAttachmentScalarFieldEnum)[keyof typeof ViolationProceedingAttachmentScalarFieldEnum]
+
+
+export const SmsSettingsScalarFieldEnum = {
+  id: 'id',
+  singletonKey: 'singletonKey',
+  isActive: 'isActive',
+  endpoint: 'endpoint',
+  senderNumber: 'senderNumber',
+  username: 'username',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SmsSettingsScalarFieldEnum = (typeof SmsSettingsScalarFieldEnum)[keyof typeof SmsSettingsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -7752,6 +8203,104 @@ export type ListEnumDocumentGenderFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'PreviousOccupation'
+ */
+export type EnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation'>
+    
+
+
+/**
+ * Reference to a field of type 'PreviousOccupation[]'
+ */
+export type ListEnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PremiseEstablishment'
+ */
+export type EnumPremiseEstablishmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseEstablishment'>
+    
+
+
+/**
+ * Reference to a field of type 'PremiseEstablishment[]'
+ */
+export type ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseEstablishment[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PremiseGeoPosition'
+ */
+export type EnumPremiseGeoPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseGeoPosition'>
+    
+
+
+/**
+ * Reference to a field of type 'PremiseGeoPosition[]'
+ */
+export type ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseGeoPosition[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PremisePublicAccess'
+ */
+export type EnumPremisePublicAccessFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremisePublicAccess'>
+    
+
+
+/**
+ * Reference to a field of type 'PremisePublicAccess[]'
+ */
+export type ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremisePublicAccess[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PremiseOwnership'
+ */
+export type EnumPremiseOwnershipFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseOwnership'>
+    
+
+
+/**
+ * Reference to a field of type 'PremiseOwnership[]'
+ */
+export type ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseOwnership[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRequestType'
+ */
+export type EnumCaseRequestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRequestType'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRequestType[]'
+ */
+export type ListEnumCaseRequestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRequestType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRequestStatus'
+ */
+export type EnumCaseRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRequestStatus[]'
+ */
+export type ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRequestStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'DocumentSource'
  */
 export type EnumDocumentSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentSource'>
@@ -7832,76 +8381,6 @@ export type EnumEducationLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'EducationLevel[]'
  */
 export type ListEnumEducationLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EducationLevel[]'>
-    
-
-
-/**
- * Reference to a field of type 'PreviousOccupation'
- */
-export type EnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation'>
-    
-
-
-/**
- * Reference to a field of type 'PreviousOccupation[]'
- */
-export type ListEnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation[]'>
-    
-
-
-/**
- * Reference to a field of type 'PremiseEstablishment'
- */
-export type EnumPremiseEstablishmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseEstablishment'>
-    
-
-
-/**
- * Reference to a field of type 'PremiseEstablishment[]'
- */
-export type ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseEstablishment[]'>
-    
-
-
-/**
- * Reference to a field of type 'PremiseGeoPosition'
- */
-export type EnumPremiseGeoPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseGeoPosition'>
-    
-
-
-/**
- * Reference to a field of type 'PremiseGeoPosition[]'
- */
-export type ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseGeoPosition[]'>
-    
-
-
-/**
- * Reference to a field of type 'PremisePublicAccess'
- */
-export type EnumPremisePublicAccessFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremisePublicAccess'>
-    
-
-
-/**
- * Reference to a field of type 'PremisePublicAccess[]'
- */
-export type ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremisePublicAccess[]'>
-    
-
-
-/**
- * Reference to a field of type 'PremiseOwnership'
- */
-export type EnumPremiseOwnershipFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseOwnership'>
-    
-
-
-/**
- * Reference to a field of type 'PremiseOwnership[]'
- */
-export type ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PremiseOwnership[]'>
     
 
 
@@ -8399,6 +8878,10 @@ export type GlobalOmitConfig = {
   document?: Prisma.DocumentOmit
   caseIdentityDocument?: Prisma.CaseIdentityDocumentOmit
   caseManagementApprover?: Prisma.CaseManagementApproverOmit
+  caseManagementReview?: Prisma.CaseManagementReviewOmit
+  caseManagementReviewFile?: Prisma.CaseManagementReviewFileOmit
+  caseFile?: Prisma.CaseFileOmit
+  caseRequest?: Prisma.CaseRequestOmit
   personDocument?: Prisma.PersonDocumentOmit
   personDocumentVersion?: Prisma.PersonDocumentVersionOmit
   user?: Prisma.UserOmit
@@ -8456,6 +8939,7 @@ export type GlobalOmitConfig = {
   violationAttachment?: Prisma.ViolationAttachmentOmit
   violationProceeding?: Prisma.ViolationProceedingOmit
   violationProceedingAttachment?: Prisma.ViolationProceedingAttachmentOmit
+  smsSettings?: Prisma.SmsSettingsOmit
 }
 
 /* Types for Logging */

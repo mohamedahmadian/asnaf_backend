@@ -21,6 +21,7 @@ import {
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
+import { INQUIRIES_FORMATION_STEP, rewindFormationStep } from './formation-steps';
 import { PersonFileStorage } from './person-file.storage';
 
 const inquiryInclude = {
@@ -91,40 +92,40 @@ export class CaseInquiriesService {
     private readonly files: PersonFileStorage,
   ) {}
 
-  async ensureForUser(userId: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
+  async ensureForUser(caseFileId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
       select: { id: true, activityJobId: true },
     });
-    if (!user?.activityJobId) return;
+    if (!file?.activityJobId) return;
     const links = await this.prisma.jobInquiryCenter.findMany({
-      where: { jobId: user.activityJobId, inquiryCenter: { isActive: true } },
+      where: { jobId: file.activityJobId, inquiryCenter: { isActive: true } },
       select: { inquiryCenterId: true },
     });
     if (!links.length) return;
     await this.prisma.caseInquiry.createMany({
       data: links.map((link) => ({
-        userId: user.id,
+        caseFileId: file.id,
         inquiryCenterId: link.inquiryCenterId,
       })),
       skipDuplicates: true,
     });
   }
 
-  async assertDelivered(userId: string) {
-    await this.ensureForUser(userId);
+  async assertDelivered(caseFileId: string) {
+    await this.ensureForUser(caseFileId);
     const pending = await this.prisma.caseInquiry.count({
-      where: { userId, status: CaseInquiryStatus.PENDING },
+      where: { caseFileId, status: CaseInquiryStatus.PENDING },
     });
     if (pending > 0) {
       throw new BadRequestException('قبل از مرحله اماکن باید نتیجه همه استعلام‌ها ثبت شود');
     }
   }
 
-  async listForCase(userId: string) {
-    await this.ensureForUser(userId);
+  async listForCase(caseFileId: string) {
+    await this.ensureForUser(caseFileId);
     const rows = await this.prisma.caseInquiry.findMany({
-      where: { userId },
+      where: { caseFileId },
       include: inquiryInclude,
       orderBy: [{ inquiryCenter: { name: 'asc' } }, { id: 'asc' }],
     });
@@ -133,18 +134,7 @@ export class CaseInquiriesService {
 
   async letter(id: string, actor: InquiryActor) {
     const row = await this.findReadable(id, actor);
-    const person = await this.prisma.user.findUnique({
-      where: { id: row.userId },
-      select: {
-        fullName: true,
-        nationalId: true,
-        caseTrackingCode: true,
-        phone: true,
-        businessUnitTitle: true,
-        premiseAddress: true,
-        activityJob: { select: { title: true } },
-      },
-    });
+    const person = await this.letterSubject(row.caseFileId);
     if (!person) throw new NotFoundException('شخص یافت نشد');
     const fields = {
       fullName: person.fullName,
@@ -199,7 +189,7 @@ export class CaseInquiriesService {
     if (input.file?.buffer?.length) {
       const fileId = randomUUID();
       const stored = await this.files.saveInquiry({
-        personId: row.userId,
+        personId: (await this.ownerId(row.caseFileId)) ?? row.caseFileId,
         inquiryId: row.id,
         fileId,
         buffer: input.file.buffer,
@@ -246,6 +236,7 @@ export class CaseInquiriesService {
       },
       include: inquiryInclude,
     });
+    await rewindFormationStep(this.prisma, saved.caseFileId, INQUIRIES_FORMATION_STEP);
     return mapInquiry(saved);
   }
 
@@ -257,14 +248,14 @@ export class CaseInquiriesService {
       ...(actor.isAdmin ? {} : { inquiryCenter: { officerId: actor.id } }),
       OR: q
         ? [
-            { user: { fullName: containsInsensitive(q) } },
-            { user: { businessUnitTitle: containsInsensitive(q) } },
+            { caseFile: { user: { fullName: containsInsensitive(q) } } },
+            { caseFile: { businessUnitTitle: containsInsensitive(q) } },
             { inquiryCenter: { name: containsInsensitive(q) } },
-            { user: { activityJob: { title: containsInsensitive(q) } } },
+            { caseFile: { activityJob: { title: containsInsensitive(q) } } },
             ...(digits
               ? [
-                  { user: { nationalId: { contains: digits } } },
-                  { user: { caseTrackingCode: { contains: digits } } },
+                  { caseFile: { user: { nationalId: { contains: digits } } } },
+                  { caseFile: { trackingCode: { contains: digits } } },
                 ]
               : []),
           ]
@@ -274,10 +265,10 @@ export class CaseInquiriesService {
       query.sortBy,
       query.sortDir,
       {
-        applicant: (dir) => ({ user: { fullName: dir } }),
-        nationalId: (dir) => ({ user: { nationalId: dir } }),
+        applicant: (dir) => ({ caseFile: { user: { fullName: dir } } }),
+        nationalId: (dir) => ({ caseFile: { user: { nationalId: dir } } }),
         center: (dir) => ({ inquiryCenter: { name: dir } }),
-        job: (dir) => ({ user: { activityJob: { title: dir } } }),
+        job: (dir) => ({ caseFile: { activityJob: { title: dir } } }),
         status: (dir) => ({ status: dir }),
         createdAt: (dir) => ({ createdAt: dir }),
         decidedAt: (dir) => ({ decidedAt: dir }),
@@ -291,14 +282,13 @@ export class CaseInquiriesService {
       createdAt: true,
       decidedAt: true,
       inquiryCenter: { select: { id: true, name: true } },
-      user: {
+      caseFile: {
         select: {
           id: true,
-          fullName: true,
-          nationalId: true,
-          caseTrackingCode: true,
+          trackingCode: true,
           businessUnitTitle: true,
           activityJob: { select: { title: true } },
+          user: { select: { fullName: true, nationalId: true } },
         },
       },
     } satisfies Prisma.CaseInquirySelect;
@@ -310,11 +300,11 @@ export class CaseInquiriesService {
       createdAt: row.createdAt,
       decidedAt: row.decidedAt,
       centerName: row.inquiryCenter.name,
-      applicantName: row.user.fullName,
-      nationalId: row.user.nationalId,
-      trackingCode: row.user.caseTrackingCode,
-      unitTitle: row.user.businessUnitTitle,
-      jobTitle: row.user.activityJob?.title ?? null,
+      applicantName: row.caseFile.user.fullName,
+      nationalId: row.caseFile.user.nationalId,
+      trackingCode: row.caseFile.trackingCode,
+      unitTitle: row.caseFile.businessUnitTitle,
+      jobTitle: row.caseFile.activityJob?.title ?? null,
     });
 
     if (!wantsPagination(query)) {
@@ -339,7 +329,7 @@ export class CaseInquiriesService {
       : { inquiryCenter: { officerId: actor.id } };
     const [rows, centers] = await Promise.all([
       this.prisma.caseInquiry.groupBy({
-        by: ['userId', 'status'],
+        by: ['caseFileId', 'status'],
         where,
         _count: { _all: true },
       }),
@@ -352,8 +342,8 @@ export class CaseInquiriesService {
     const pendingUsers = new Set<string>();
     const users = new Set<string>();
     for (const row of rows) {
-      users.add(row.userId);
-      if (row.status === CaseInquiryStatus.PENDING) pendingUsers.add(row.userId);
+      users.add(row.caseFileId);
+      if (row.status === CaseInquiryStatus.PENDING) pendingUsers.add(row.caseFileId);
     }
     const total = users.size;
     const pending = pendingUsers.size;
@@ -381,37 +371,13 @@ export class CaseInquiriesService {
 
   async dossier(id: string, actor: InquiryActor) {
     const inquiry = await this.findReadable(id, actor);
-    return this.personDossier(inquiry.userId);
+    return this.personDossier(inquiry.caseFileId);
   }
 
-  async personDossier(userId: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
+  async personDossier(caseFileId: string) {
+    const dossier = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
       select: {
-        id: true,
-        gender: true,
-        firstName: true,
-        lastName: true,
-        fatherName: true,
-        lastNameEn: true,
-        religion: true,
-        religionOther: true,
-        nationalId: true,
-        birthDate: true,
-        birthPlace: true,
-        identityCertificateNo: true,
-        identityIssuedIn: true,
-        residencyStatus: true,
-        passportNumber: true,
-        nationalCardExpiresAt: true,
-        passportExpiresAt: true,
-        phone: true,
-        homePhone: true,
-        postalCode: true,
-        email: true,
-        address: true,
-        educationLevel: true,
-        citizenGroup: true,
         businessUnitTitle: true,
         premiseAddress: true,
         premisePlaque: true,
@@ -431,8 +397,6 @@ export class CaseInquiriesService {
         leaseExpiresAt: true,
         leaseAgency: true,
         premiseOwnerName: true,
-        country: { select: { nameFa: true, nameEn: true } },
-        economicJob: { select: { title: true } },
         activityJob: {
           select: {
             title: true,
@@ -454,9 +418,65 @@ export class CaseInquiriesService {
         },
         premiseComplex: { select: { name: true, nameEn: true } },
         registrationPlace: { select: { title: true } },
+        user: {
+          select: {
+            id: true,
+            gender: true,
+            firstName: true,
+            lastName: true,
+            fatherName: true,
+            lastNameEn: true,
+            religion: true,
+            religionOther: true,
+            nationalId: true,
+            birthDate: true,
+            birthPlace: true,
+            identityCertificateNo: true,
+            identityIssuedIn: true,
+            residencyStatus: true,
+            passportNumber: true,
+            nationalCardExpiresAt: true,
+            passportExpiresAt: true,
+            phone: true,
+            homePhone: true,
+            postalCode: true,
+            email: true,
+            address: true,
+            educationLevel: true,
+            citizenGroup: true,
+            country: { select: { nameFa: true, nameEn: true } },
+            economicJob: { select: { title: true } },
+          },
+        },
       },
     });
-    if (!user) throw new NotFoundException('پرونده یافت نشد');
+    if (!dossier) throw new NotFoundException('پرونده یافت نشد');
+    const user = {
+      ...dossier.user,
+      businessUnitTitle: dossier.businessUnitTitle,
+      premiseAddress: dossier.premiseAddress,
+      premisePlaque: dossier.premisePlaque,
+      premisePlaqueSeries: dossier.premisePlaqueSeries,
+      premiseFloor: dossier.premiseFloor,
+      premiseUnitNo: dossier.premiseUnitNo,
+      premisePostalCode: dossier.premisePostalCode,
+      premisePhone: dossier.premisePhone,
+      premiseFax: dossier.premiseFax,
+      premiseEstablishment: dossier.premiseEstablishment,
+      premiseGeoPosition: dossier.premiseGeoPosition,
+      premisePublicAccess: dossier.premisePublicAccess,
+      premiseOwnership: dossier.premiseOwnership,
+      premiseDeedNo: dossier.premiseDeedNo,
+      premiseArea: dossier.premiseArea,
+      leaseIssuedAt: dossier.leaseIssuedAt,
+      leaseExpiresAt: dossier.leaseExpiresAt,
+      leaseAgency: dossier.leaseAgency,
+      premiseOwnerName: dossier.premiseOwnerName,
+      activityJob: dossier.activityJob,
+      premiseCity: dossier.premiseCity,
+      premiseComplex: dossier.premiseComplex,
+      registrationPlace: dossier.registrationPlace,
+    };
 
     const [fixedDocs, stored] = await Promise.all([
       this.prisma.document.findMany({
@@ -591,7 +611,9 @@ export class CaseInquiriesService {
 
   async readDossierFile(inquiryId: string, versionId: string, actor: InquiryActor) {
     const inquiry = await this.findReadable(inquiryId, actor);
-    return this.readPersonDocument(inquiry.userId, versionId);
+    const userId = await this.ownerId(inquiry.caseFileId);
+    if (!userId) throw new NotFoundException('شخص یافت نشد');
+    return this.readPersonDocument(userId, versionId);
   }
 
   async readPersonDocument(userId: string, versionId: string) {
@@ -613,18 +635,7 @@ export class CaseInquiriesService {
 
   async detail(id: string, actor: InquiryActor) {
     const row = await this.findReadable(id, actor);
-    const person = await this.prisma.user.findUnique({
-      where: { id: row.userId },
-      select: {
-        fullName: true,
-        gender: true,
-        nationalId: true,
-        caseTrackingCode: true,
-        phone: true,
-        businessUnitTitle: true,
-        activityJob: { select: { title: true } },
-      },
-    });
+    const person = await this.letterSubject(row.caseFileId);
     return {
       ...mapInquiry(row),
       applicant: person
@@ -654,6 +665,38 @@ export class CaseInquiriesService {
       byteSize: file.byteSize,
       originalName: file.originalName,
       data,
+    };
+  }
+
+  private async ownerId(caseFileId: string) {
+    const row = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
+      select: { userId: true },
+    });
+    return row?.userId ?? null;
+  }
+
+  private async letterSubject(caseFileId: string) {
+    const row = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
+      select: {
+        trackingCode: true,
+        businessUnitTitle: true,
+        premiseAddress: true,
+        activityJob: { select: { title: true } },
+        user: { select: { fullName: true, nationalId: true, phone: true, gender: true } },
+      },
+    });
+    if (!row) return null;
+    return {
+      fullName: row.user.fullName,
+      gender: row.user.gender,
+      nationalId: row.user.nationalId,
+      phone: row.user.phone,
+      caseTrackingCode: row.trackingCode,
+      businessUnitTitle: row.businessUnitTitle,
+      premiseAddress: row.premiseAddress,
+      activityJob: row.activityJob,
     };
   }
 

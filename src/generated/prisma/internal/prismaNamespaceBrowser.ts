@@ -73,6 +73,10 @@ export const ModelName = {
   Document: 'Document',
   CaseIdentityDocument: 'CaseIdentityDocument',
   CaseManagementApprover: 'CaseManagementApprover',
+  CaseManagementReview: 'CaseManagementReview',
+  CaseManagementReviewFile: 'CaseManagementReviewFile',
+  CaseFile: 'CaseFile',
+  CaseRequest: 'CaseRequest',
   PersonDocument: 'PersonDocument',
   PersonDocumentVersion: 'PersonDocumentVersion',
   User: 'User',
@@ -129,7 +133,8 @@ export const ModelName = {
   Violation: 'Violation',
   ViolationAttachment: 'ViolationAttachment',
   ViolationProceeding: 'ViolationProceeding',
-  ViolationProceedingAttachment: 'ViolationProceedingAttachment'
+  ViolationProceedingAttachment: 'ViolationProceedingAttachment',
+  SmsSettings: 'SmsSettings'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -341,7 +346,7 @@ export type JobInquiryCenterScalarFieldEnum = (typeof JobInquiryCenterScalarFiel
 
 export const CaseInquiryScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  caseFileId: 'caseFileId',
   inquiryCenterId: 'inquiryCenterId',
   status: 'status',
   channel: 'channel',
@@ -383,7 +388,7 @@ export type CasePlacesOfficeScalarFieldEnum = (typeof CasePlacesOfficeScalarFiel
 
 export const CasePlacesReviewScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  caseFileId: 'caseFileId',
   status: 'status',
   channel: 'channel',
   note: 'note',
@@ -436,6 +441,7 @@ export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typ
 
 export const CaseIdentityDocumentScalarFieldEnum = {
   documentId: 'documentId',
+  gender: 'gender',
   createdAt: 'createdAt'
 } as const
 
@@ -450,6 +456,92 @@ export const CaseManagementApproverScalarFieldEnum = {
 } as const
 
 export type CaseManagementApproverScalarFieldEnum = (typeof CaseManagementApproverScalarFieldEnum)[keyof typeof CaseManagementApproverScalarFieldEnum]
+
+
+export const CaseManagementReviewScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  workUnitId: 'workUnitId',
+  roleId: 'roleId',
+  status: 'status',
+  channel: 'channel',
+  note: 'note',
+  decidedById: 'decidedById',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseManagementReviewScalarFieldEnum = (typeof CaseManagementReviewScalarFieldEnum)[keyof typeof CaseManagementReviewScalarFieldEnum]
+
+
+export const CaseManagementReviewFileScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseManagementReviewFileScalarFieldEnum = (typeof CaseManagementReviewFileScalarFieldEnum)[keyof typeof CaseManagementReviewFileScalarFieldEnum]
+
+
+export const CaseFileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  formationStep: 'formationStep',
+  trackingCode: 'trackingCode',
+  licenseNumber: 'licenseNumber',
+  licenseIssuedAt: 'licenseIssuedAt',
+  licenseExpiresAt: 'licenseExpiresAt',
+  businessUnitTitle: 'businessUnitTitle',
+  activityJobId: 'activityJobId',
+  previousOccupation: 'previousOccupation',
+  posDeviceCount: 'posDeviceCount',
+  premiseCityId: 'premiseCityId',
+  premiseEstablishment: 'premiseEstablishment',
+  premiseComplexId: 'premiseComplexId',
+  premiseAddress: 'premiseAddress',
+  premisePlaque: 'premisePlaque',
+  premisePlaqueSeries: 'premisePlaqueSeries',
+  premiseFloor: 'premiseFloor',
+  premiseUnitNo: 'premiseUnitNo',
+  premisePostalCode: 'premisePostalCode',
+  premisePhone: 'premisePhone',
+  premiseFax: 'premiseFax',
+  premiseGeoPosition: 'premiseGeoPosition',
+  premisePublicAccess: 'premisePublicAccess',
+  registrationPlaceId: 'registrationPlaceId',
+  premiseOwnership: 'premiseOwnership',
+  premiseDeedNo: 'premiseDeedNo',
+  premiseArea: 'premiseArea',
+  leaseIssuedAt: 'leaseIssuedAt',
+  leaseExpiresAt: 'leaseExpiresAt',
+  leaseAgency: 'leaseAgency',
+  premiseOwnerName: 'premiseOwnerName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseFileScalarFieldEnum = (typeof CaseFileScalarFieldEnum)[keyof typeof CaseFileScalarFieldEnum]
+
+
+export const CaseRequestScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  type: 'type',
+  number: 'number',
+  status: 'status',
+  formationStep: 'formationStep',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRequestScalarFieldEnum = (typeof CaseRequestScalarFieldEnum)[keyof typeof CaseRequestScalarFieldEnum]
 
 
 export const PersonDocumentScalarFieldEnum = {
@@ -532,33 +624,6 @@ export const UserScalarFieldEnum = {
   homePhone: 'homePhone',
   educationLevel: 'educationLevel',
   citizenGroup: 'citizenGroup',
-  formationStep: 'formationStep',
-  caseTrackingCode: 'caseTrackingCode',
-  businessUnitTitle: 'businessUnitTitle',
-  activityJobId: 'activityJobId',
-  previousOccupation: 'previousOccupation',
-  posDeviceCount: 'posDeviceCount',
-  premiseCityId: 'premiseCityId',
-  premiseEstablishment: 'premiseEstablishment',
-  premiseComplexId: 'premiseComplexId',
-  premiseAddress: 'premiseAddress',
-  premisePlaque: 'premisePlaque',
-  premisePlaqueSeries: 'premisePlaqueSeries',
-  premiseFloor: 'premiseFloor',
-  premiseUnitNo: 'premiseUnitNo',
-  premisePostalCode: 'premisePostalCode',
-  premisePhone: 'premisePhone',
-  premiseFax: 'premiseFax',
-  premiseGeoPosition: 'premiseGeoPosition',
-  premisePublicAccess: 'premisePublicAccess',
-  registrationPlaceId: 'registrationPlaceId',
-  premiseOwnership: 'premiseOwnership',
-  premiseDeedNo: 'premiseDeedNo',
-  premiseArea: 'premiseArea',
-  leaseIssuedAt: 'leaseIssuedAt',
-  leaseExpiresAt: 'leaseExpiresAt',
-  leaseAgency: 'leaseAgency',
-  premiseOwnerName: 'premiseOwnerName',
   jobId: 'jobId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1303,6 +1368,7 @@ export const ViolationScalarFieldEnum = {
   description: 'description',
   status: 'status',
   caseUserId: 'caseUserId',
+  caseFileId: 'caseFileId',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1351,6 +1417,21 @@ export const ViolationProceedingAttachmentScalarFieldEnum = {
 } as const
 
 export type ViolationProceedingAttachmentScalarFieldEnum = (typeof ViolationProceedingAttachmentScalarFieldEnum)[keyof typeof ViolationProceedingAttachmentScalarFieldEnum]
+
+
+export const SmsSettingsScalarFieldEnum = {
+  id: 'id',
+  singletonKey: 'singletonKey',
+  isActive: 'isActive',
+  endpoint: 'endpoint',
+  senderNumber: 'senderNumber',
+  username: 'username',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SmsSettingsScalarFieldEnum = (typeof SmsSettingsScalarFieldEnum)[keyof typeof SmsSettingsScalarFieldEnum]
 
 
 export const SortOrder = {

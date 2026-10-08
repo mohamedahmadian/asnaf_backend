@@ -32,6 +32,7 @@ export type ViolationMinAggregateOutputType = {
   description: string | null
   status: $Enums.ViolationStatus | null
   caseUserId: string | null
+  caseFileId: string | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -45,6 +46,7 @@ export type ViolationMaxAggregateOutputType = {
   description: string | null
   status: $Enums.ViolationStatus | null
   caseUserId: string | null
+  caseFileId: string | null
   createdById: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -58,6 +60,7 @@ export type ViolationCountAggregateOutputType = {
   description: number
   status: number
   caseUserId: number
+  caseFileId: number
   createdById: number
   createdAt: number
   updatedAt: number
@@ -73,6 +76,7 @@ export type ViolationMinAggregateInputType = {
   description?: true
   status?: true
   caseUserId?: true
+  caseFileId?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
@@ -86,6 +90,7 @@ export type ViolationMaxAggregateInputType = {
   description?: true
   status?: true
   caseUserId?: true
+  caseFileId?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
@@ -99,6 +104,7 @@ export type ViolationCountAggregateInputType = {
   description?: true
   status?: true
   caseUserId?: true
+  caseFileId?: true
   createdById?: true
   createdAt?: true
   updatedAt?: true
@@ -185,6 +191,7 @@ export type ViolationGroupByOutputType = {
   description: string | null
   status: $Enums.ViolationStatus
   caseUserId: string | null
+  caseFileId: string | null
   createdById: string
   createdAt: Date
   updatedAt: Date
@@ -219,11 +226,13 @@ export type ViolationWhereInput = {
   description?: Prisma.StringNullableFilter<"Violation"> | string | null
   status?: Prisma.EnumViolationStatusFilter<"Violation"> | $Enums.ViolationStatus
   caseUserId?: Prisma.StringNullableFilter<"Violation"> | string | null
+  caseFileId?: Prisma.StringNullableFilter<"Violation"> | string | null
   createdById?: Prisma.StringFilter<"Violation"> | string
   createdAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
   violationType?: Prisma.XOR<Prisma.ViolationTypeScalarRelationFilter, Prisma.ViolationTypeWhereInput>
   caseUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  caseFile?: Prisma.XOR<Prisma.CaseFileNullableScalarRelationFilter, Prisma.CaseFileWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   attachments?: Prisma.ViolationAttachmentListRelationFilter
   proceedings?: Prisma.ViolationProceedingListRelationFilter
@@ -237,11 +246,13 @@ export type ViolationOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   caseUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  caseFileId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   violationType?: Prisma.ViolationTypeOrderByWithRelationInput
   caseUser?: Prisma.UserOrderByWithRelationInput
+  caseFile?: Prisma.CaseFileOrderByWithRelationInput
   createdBy?: Prisma.UserOrderByWithRelationInput
   attachments?: Prisma.ViolationAttachmentOrderByRelationAggregateInput
   proceedings?: Prisma.ViolationProceedingOrderByRelationAggregateInput
@@ -258,11 +269,13 @@ export type ViolationWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Violation"> | string | null
   status?: Prisma.EnumViolationStatusFilter<"Violation"> | $Enums.ViolationStatus
   caseUserId?: Prisma.StringNullableFilter<"Violation"> | string | null
+  caseFileId?: Prisma.StringNullableFilter<"Violation"> | string | null
   createdById?: Prisma.StringFilter<"Violation"> | string
   createdAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
   violationType?: Prisma.XOR<Prisma.ViolationTypeScalarRelationFilter, Prisma.ViolationTypeWhereInput>
   caseUser?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  caseFile?: Prisma.XOR<Prisma.CaseFileNullableScalarRelationFilter, Prisma.CaseFileWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   attachments?: Prisma.ViolationAttachmentListRelationFilter
   proceedings?: Prisma.ViolationProceedingListRelationFilter
@@ -276,6 +289,7 @@ export type ViolationOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   caseUserId?: Prisma.SortOrderInput | Prisma.SortOrder
+  caseFileId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -295,6 +309,7 @@ export type ViolationScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Violation"> | string | null
   status?: Prisma.EnumViolationStatusWithAggregatesFilter<"Violation"> | $Enums.ViolationStatus
   caseUserId?: Prisma.StringNullableWithAggregatesFilter<"Violation"> | string | null
+  caseFileId?: Prisma.StringNullableWithAggregatesFilter<"Violation"> | string | null
   createdById?: Prisma.StringWithAggregatesFilter<"Violation"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Violation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Violation"> | Date | string
@@ -310,6 +325,7 @@ export type ViolationCreateInput = {
   updatedAt?: Date | string
   violationType: Prisma.ViolationTypeCreateNestedOneWithoutViolationsInput
   caseUser?: Prisma.UserCreateNestedOneWithoutViolationCasesInput
+  caseFile?: Prisma.CaseFileCreateNestedOneWithoutViolationsInput
   createdBy: Prisma.UserCreateNestedOneWithoutViolationsCreatedInput
   attachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutViolationInput
   proceedings?: Prisma.ViolationProceedingCreateNestedManyWithoutViolationInput
@@ -323,6 +339,7 @@ export type ViolationUncheckedCreateInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -340,6 +357,7 @@ export type ViolationUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   violationType?: Prisma.ViolationTypeUpdateOneRequiredWithoutViolationsNestedInput
   caseUser?: Prisma.UserUpdateOneWithoutViolationCasesNestedInput
+  caseFile?: Prisma.CaseFileUpdateOneWithoutViolationsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutViolationsCreatedNestedInput
   attachments?: Prisma.ViolationAttachmentUpdateManyWithoutViolationNestedInput
   proceedings?: Prisma.ViolationProceedingUpdateManyWithoutViolationNestedInput
@@ -353,6 +371,7 @@ export type ViolationUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -368,6 +387,7 @@ export type ViolationCreateManyInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -391,6 +411,7 @@ export type ViolationUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -414,6 +435,7 @@ export type ViolationCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   caseUserId?: Prisma.SortOrder
+  caseFileId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -427,6 +449,7 @@ export type ViolationMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   caseUserId?: Prisma.SortOrder
+  caseFileId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -440,6 +463,7 @@ export type ViolationMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   status?: Prisma.SortOrder
   caseUserId?: Prisma.SortOrder
+  caseFileId?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -448,6 +472,48 @@ export type ViolationMinOrderByAggregateInput = {
 export type ViolationScalarRelationFilter = {
   is?: Prisma.ViolationWhereInput
   isNot?: Prisma.ViolationWhereInput
+}
+
+export type ViolationCreateNestedManyWithoutCaseFileInput = {
+  create?: Prisma.XOR<Prisma.ViolationCreateWithoutCaseFileInput, Prisma.ViolationUncheckedCreateWithoutCaseFileInput> | Prisma.ViolationCreateWithoutCaseFileInput[] | Prisma.ViolationUncheckedCreateWithoutCaseFileInput[]
+  connectOrCreate?: Prisma.ViolationCreateOrConnectWithoutCaseFileInput | Prisma.ViolationCreateOrConnectWithoutCaseFileInput[]
+  createMany?: Prisma.ViolationCreateManyCaseFileInputEnvelope
+  connect?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+}
+
+export type ViolationUncheckedCreateNestedManyWithoutCaseFileInput = {
+  create?: Prisma.XOR<Prisma.ViolationCreateWithoutCaseFileInput, Prisma.ViolationUncheckedCreateWithoutCaseFileInput> | Prisma.ViolationCreateWithoutCaseFileInput[] | Prisma.ViolationUncheckedCreateWithoutCaseFileInput[]
+  connectOrCreate?: Prisma.ViolationCreateOrConnectWithoutCaseFileInput | Prisma.ViolationCreateOrConnectWithoutCaseFileInput[]
+  createMany?: Prisma.ViolationCreateManyCaseFileInputEnvelope
+  connect?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+}
+
+export type ViolationUpdateManyWithoutCaseFileNestedInput = {
+  create?: Prisma.XOR<Prisma.ViolationCreateWithoutCaseFileInput, Prisma.ViolationUncheckedCreateWithoutCaseFileInput> | Prisma.ViolationCreateWithoutCaseFileInput[] | Prisma.ViolationUncheckedCreateWithoutCaseFileInput[]
+  connectOrCreate?: Prisma.ViolationCreateOrConnectWithoutCaseFileInput | Prisma.ViolationCreateOrConnectWithoutCaseFileInput[]
+  upsert?: Prisma.ViolationUpsertWithWhereUniqueWithoutCaseFileInput | Prisma.ViolationUpsertWithWhereUniqueWithoutCaseFileInput[]
+  createMany?: Prisma.ViolationCreateManyCaseFileInputEnvelope
+  set?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  disconnect?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  delete?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  connect?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  update?: Prisma.ViolationUpdateWithWhereUniqueWithoutCaseFileInput | Prisma.ViolationUpdateWithWhereUniqueWithoutCaseFileInput[]
+  updateMany?: Prisma.ViolationUpdateManyWithWhereWithoutCaseFileInput | Prisma.ViolationUpdateManyWithWhereWithoutCaseFileInput[]
+  deleteMany?: Prisma.ViolationScalarWhereInput | Prisma.ViolationScalarWhereInput[]
+}
+
+export type ViolationUncheckedUpdateManyWithoutCaseFileNestedInput = {
+  create?: Prisma.XOR<Prisma.ViolationCreateWithoutCaseFileInput, Prisma.ViolationUncheckedCreateWithoutCaseFileInput> | Prisma.ViolationCreateWithoutCaseFileInput[] | Prisma.ViolationUncheckedCreateWithoutCaseFileInput[]
+  connectOrCreate?: Prisma.ViolationCreateOrConnectWithoutCaseFileInput | Prisma.ViolationCreateOrConnectWithoutCaseFileInput[]
+  upsert?: Prisma.ViolationUpsertWithWhereUniqueWithoutCaseFileInput | Prisma.ViolationUpsertWithWhereUniqueWithoutCaseFileInput[]
+  createMany?: Prisma.ViolationCreateManyCaseFileInputEnvelope
+  set?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  disconnect?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  delete?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  connect?: Prisma.ViolationWhereUniqueInput | Prisma.ViolationWhereUniqueInput[]
+  update?: Prisma.ViolationUpdateWithWhereUniqueWithoutCaseFileInput | Prisma.ViolationUpdateWithWhereUniqueWithoutCaseFileInput[]
+  updateMany?: Prisma.ViolationUpdateManyWithWhereWithoutCaseFileInput | Prisma.ViolationUpdateManyWithWhereWithoutCaseFileInput[]
+  deleteMany?: Prisma.ViolationScalarWhereInput | Prisma.ViolationScalarWhereInput[]
 }
 
 export type ViolationCreateNestedManyWithoutCreatedByInput = {
@@ -608,6 +674,79 @@ export type ViolationUpdateOneRequiredWithoutProceedingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ViolationUpdateToOneWithWhereWithoutProceedingsInput, Prisma.ViolationUpdateWithoutProceedingsInput>, Prisma.ViolationUncheckedUpdateWithoutProceedingsInput>
 }
 
+export type ViolationCreateWithoutCaseFileInput = {
+  id?: string
+  nationalId: string
+  occurredAt: Date | string
+  description?: string | null
+  status?: $Enums.ViolationStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  violationType: Prisma.ViolationTypeCreateNestedOneWithoutViolationsInput
+  caseUser?: Prisma.UserCreateNestedOneWithoutViolationCasesInput
+  createdBy: Prisma.UserCreateNestedOneWithoutViolationsCreatedInput
+  attachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutViolationInput
+  proceedings?: Prisma.ViolationProceedingCreateNestedManyWithoutViolationInput
+}
+
+export type ViolationUncheckedCreateWithoutCaseFileInput = {
+  id?: string
+  nationalId: string
+  violationTypeId: string
+  occurredAt: Date | string
+  description?: string | null
+  status?: $Enums.ViolationStatus
+  caseUserId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutViolationInput
+  proceedings?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutViolationInput
+}
+
+export type ViolationCreateOrConnectWithoutCaseFileInput = {
+  where: Prisma.ViolationWhereUniqueInput
+  create: Prisma.XOR<Prisma.ViolationCreateWithoutCaseFileInput, Prisma.ViolationUncheckedCreateWithoutCaseFileInput>
+}
+
+export type ViolationCreateManyCaseFileInputEnvelope = {
+  data: Prisma.ViolationCreateManyCaseFileInput | Prisma.ViolationCreateManyCaseFileInput[]
+  skipDuplicates?: boolean
+}
+
+export type ViolationUpsertWithWhereUniqueWithoutCaseFileInput = {
+  where: Prisma.ViolationWhereUniqueInput
+  update: Prisma.XOR<Prisma.ViolationUpdateWithoutCaseFileInput, Prisma.ViolationUncheckedUpdateWithoutCaseFileInput>
+  create: Prisma.XOR<Prisma.ViolationCreateWithoutCaseFileInput, Prisma.ViolationUncheckedCreateWithoutCaseFileInput>
+}
+
+export type ViolationUpdateWithWhereUniqueWithoutCaseFileInput = {
+  where: Prisma.ViolationWhereUniqueInput
+  data: Prisma.XOR<Prisma.ViolationUpdateWithoutCaseFileInput, Prisma.ViolationUncheckedUpdateWithoutCaseFileInput>
+}
+
+export type ViolationUpdateManyWithWhereWithoutCaseFileInput = {
+  where: Prisma.ViolationScalarWhereInput
+  data: Prisma.XOR<Prisma.ViolationUpdateManyMutationInput, Prisma.ViolationUncheckedUpdateManyWithoutCaseFileInput>
+}
+
+export type ViolationScalarWhereInput = {
+  AND?: Prisma.ViolationScalarWhereInput | Prisma.ViolationScalarWhereInput[]
+  OR?: Prisma.ViolationScalarWhereInput[]
+  NOT?: Prisma.ViolationScalarWhereInput | Prisma.ViolationScalarWhereInput[]
+  id?: Prisma.StringFilter<"Violation"> | string
+  nationalId?: Prisma.StringFilter<"Violation"> | string
+  violationTypeId?: Prisma.StringFilter<"Violation"> | string
+  occurredAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
+  description?: Prisma.StringNullableFilter<"Violation"> | string | null
+  status?: Prisma.EnumViolationStatusFilter<"Violation"> | $Enums.ViolationStatus
+  caseUserId?: Prisma.StringNullableFilter<"Violation"> | string | null
+  caseFileId?: Prisma.StringNullableFilter<"Violation"> | string | null
+  createdById?: Prisma.StringFilter<"Violation"> | string
+  createdAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
+}
+
 export type ViolationCreateWithoutCreatedByInput = {
   id?: string
   nationalId: string
@@ -618,6 +757,7 @@ export type ViolationCreateWithoutCreatedByInput = {
   updatedAt?: Date | string
   violationType: Prisma.ViolationTypeCreateNestedOneWithoutViolationsInput
   caseUser?: Prisma.UserCreateNestedOneWithoutViolationCasesInput
+  caseFile?: Prisma.CaseFileCreateNestedOneWithoutViolationsInput
   attachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutViolationInput
   proceedings?: Prisma.ViolationProceedingCreateNestedManyWithoutViolationInput
 }
@@ -630,6 +770,7 @@ export type ViolationUncheckedCreateWithoutCreatedByInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   attachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutViolationInput
@@ -655,6 +796,7 @@ export type ViolationCreateWithoutCaseUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   violationType: Prisma.ViolationTypeCreateNestedOneWithoutViolationsInput
+  caseFile?: Prisma.CaseFileCreateNestedOneWithoutViolationsInput
   createdBy: Prisma.UserCreateNestedOneWithoutViolationsCreatedInput
   attachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutViolationInput
   proceedings?: Prisma.ViolationProceedingCreateNestedManyWithoutViolationInput
@@ -667,6 +809,7 @@ export type ViolationUncheckedCreateWithoutCaseUserInput = {
   occurredAt: Date | string
   description?: string | null
   status?: $Enums.ViolationStatus
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -700,22 +843,6 @@ export type ViolationUpdateManyWithWhereWithoutCreatedByInput = {
   data: Prisma.XOR<Prisma.ViolationUpdateManyMutationInput, Prisma.ViolationUncheckedUpdateManyWithoutCreatedByInput>
 }
 
-export type ViolationScalarWhereInput = {
-  AND?: Prisma.ViolationScalarWhereInput | Prisma.ViolationScalarWhereInput[]
-  OR?: Prisma.ViolationScalarWhereInput[]
-  NOT?: Prisma.ViolationScalarWhereInput | Prisma.ViolationScalarWhereInput[]
-  id?: Prisma.StringFilter<"Violation"> | string
-  nationalId?: Prisma.StringFilter<"Violation"> | string
-  violationTypeId?: Prisma.StringFilter<"Violation"> | string
-  occurredAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
-  description?: Prisma.StringNullableFilter<"Violation"> | string | null
-  status?: Prisma.EnumViolationStatusFilter<"Violation"> | $Enums.ViolationStatus
-  caseUserId?: Prisma.StringNullableFilter<"Violation"> | string | null
-  createdById?: Prisma.StringFilter<"Violation"> | string
-  createdAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Violation"> | Date | string
-}
-
 export type ViolationUpsertWithWhereUniqueWithoutCaseUserInput = {
   where: Prisma.ViolationWhereUniqueInput
   update: Prisma.XOR<Prisma.ViolationUpdateWithoutCaseUserInput, Prisma.ViolationUncheckedUpdateWithoutCaseUserInput>
@@ -741,6 +868,7 @@ export type ViolationCreateWithoutViolationTypeInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseUser?: Prisma.UserCreateNestedOneWithoutViolationCasesInput
+  caseFile?: Prisma.CaseFileCreateNestedOneWithoutViolationsInput
   createdBy: Prisma.UserCreateNestedOneWithoutViolationsCreatedInput
   attachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutViolationInput
   proceedings?: Prisma.ViolationProceedingCreateNestedManyWithoutViolationInput
@@ -753,6 +881,7 @@ export type ViolationUncheckedCreateWithoutViolationTypeInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -796,6 +925,7 @@ export type ViolationCreateWithoutAttachmentsInput = {
   updatedAt?: Date | string
   violationType: Prisma.ViolationTypeCreateNestedOneWithoutViolationsInput
   caseUser?: Prisma.UserCreateNestedOneWithoutViolationCasesInput
+  caseFile?: Prisma.CaseFileCreateNestedOneWithoutViolationsInput
   createdBy: Prisma.UserCreateNestedOneWithoutViolationsCreatedInput
   proceedings?: Prisma.ViolationProceedingCreateNestedManyWithoutViolationInput
 }
@@ -808,6 +938,7 @@ export type ViolationUncheckedCreateWithoutAttachmentsInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -840,6 +971,7 @@ export type ViolationUpdateWithoutAttachmentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   violationType?: Prisma.ViolationTypeUpdateOneRequiredWithoutViolationsNestedInput
   caseUser?: Prisma.UserUpdateOneWithoutViolationCasesNestedInput
+  caseFile?: Prisma.CaseFileUpdateOneWithoutViolationsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutViolationsCreatedNestedInput
   proceedings?: Prisma.ViolationProceedingUpdateManyWithoutViolationNestedInput
 }
@@ -852,6 +984,7 @@ export type ViolationUncheckedUpdateWithoutAttachmentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -868,6 +1001,7 @@ export type ViolationCreateWithoutProceedingsInput = {
   updatedAt?: Date | string
   violationType: Prisma.ViolationTypeCreateNestedOneWithoutViolationsInput
   caseUser?: Prisma.UserCreateNestedOneWithoutViolationCasesInput
+  caseFile?: Prisma.CaseFileCreateNestedOneWithoutViolationsInput
   createdBy: Prisma.UserCreateNestedOneWithoutViolationsCreatedInput
   attachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutViolationInput
 }
@@ -880,6 +1014,7 @@ export type ViolationUncheckedCreateWithoutProceedingsInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -912,6 +1047,7 @@ export type ViolationUpdateWithoutProceedingsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   violationType?: Prisma.ViolationTypeUpdateOneRequiredWithoutViolationsNestedInput
   caseUser?: Prisma.UserUpdateOneWithoutViolationCasesNestedInput
+  caseFile?: Prisma.CaseFileUpdateOneWithoutViolationsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutViolationsCreatedNestedInput
   attachments?: Prisma.ViolationAttachmentUpdateManyWithoutViolationNestedInput
 }
@@ -924,10 +1060,67 @@ export type ViolationUncheckedUpdateWithoutProceedingsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutViolationNestedInput
+}
+
+export type ViolationCreateManyCaseFileInput = {
+  id?: string
+  nationalId: string
+  violationTypeId: string
+  occurredAt: Date | string
+  description?: string | null
+  status?: $Enums.ViolationStatus
+  caseUserId?: string | null
+  createdById: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ViolationUpdateWithoutCaseFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  occurredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  violationType?: Prisma.ViolationTypeUpdateOneRequiredWithoutViolationsNestedInput
+  caseUser?: Prisma.UserUpdateOneWithoutViolationCasesNestedInput
+  createdBy?: Prisma.UserUpdateOneRequiredWithoutViolationsCreatedNestedInput
+  attachments?: Prisma.ViolationAttachmentUpdateManyWithoutViolationNestedInput
+  proceedings?: Prisma.ViolationProceedingUpdateManyWithoutViolationNestedInput
+}
+
+export type ViolationUncheckedUpdateWithoutCaseFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  violationTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  occurredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
+  caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutViolationNestedInput
+  proceedings?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutViolationNestedInput
+}
+
+export type ViolationUncheckedUpdateManyWithoutCaseFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nationalId?: Prisma.StringFieldUpdateOperationsInput | string
+  violationTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  occurredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
+  caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ViolationCreateManyCreatedByInput = {
@@ -938,6 +1131,7 @@ export type ViolationCreateManyCreatedByInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -949,6 +1143,7 @@ export type ViolationCreateManyCaseUserInput = {
   occurredAt: Date | string
   description?: string | null
   status?: $Enums.ViolationStatus
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -964,6 +1159,7 @@ export type ViolationUpdateWithoutCreatedByInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   violationType?: Prisma.ViolationTypeUpdateOneRequiredWithoutViolationsNestedInput
   caseUser?: Prisma.UserUpdateOneWithoutViolationCasesNestedInput
+  caseFile?: Prisma.CaseFileUpdateOneWithoutViolationsNestedInput
   attachments?: Prisma.ViolationAttachmentUpdateManyWithoutViolationNestedInput
   proceedings?: Prisma.ViolationProceedingUpdateManyWithoutViolationNestedInput
 }
@@ -976,6 +1172,7 @@ export type ViolationUncheckedUpdateWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutViolationNestedInput
@@ -990,6 +1187,7 @@ export type ViolationUncheckedUpdateManyWithoutCreatedByInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1003,6 +1201,7 @@ export type ViolationUpdateWithoutCaseUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   violationType?: Prisma.ViolationTypeUpdateOneRequiredWithoutViolationsNestedInput
+  caseFile?: Prisma.CaseFileUpdateOneWithoutViolationsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutViolationsCreatedNestedInput
   attachments?: Prisma.ViolationAttachmentUpdateManyWithoutViolationNestedInput
   proceedings?: Prisma.ViolationProceedingUpdateManyWithoutViolationNestedInput
@@ -1015,6 +1214,7 @@ export type ViolationUncheckedUpdateWithoutCaseUserInput = {
   occurredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1029,6 +1229,7 @@ export type ViolationUncheckedUpdateManyWithoutCaseUserInput = {
   occurredAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1041,6 +1242,7 @@ export type ViolationCreateManyViolationTypeInput = {
   description?: string | null
   status?: $Enums.ViolationStatus
   caseUserId?: string | null
+  caseFileId?: string | null
   createdById: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1055,6 +1257,7 @@ export type ViolationUpdateWithoutViolationTypeInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseUser?: Prisma.UserUpdateOneWithoutViolationCasesNestedInput
+  caseFile?: Prisma.CaseFileUpdateOneWithoutViolationsNestedInput
   createdBy?: Prisma.UserUpdateOneRequiredWithoutViolationsCreatedNestedInput
   attachments?: Prisma.ViolationAttachmentUpdateManyWithoutViolationNestedInput
   proceedings?: Prisma.ViolationProceedingUpdateManyWithoutViolationNestedInput
@@ -1067,6 +1270,7 @@ export type ViolationUncheckedUpdateWithoutViolationTypeInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1081,6 +1285,7 @@ export type ViolationUncheckedUpdateManyWithoutViolationTypeInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumViolationStatusFieldUpdateOperationsInput | $Enums.ViolationStatus
   caseUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  caseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1134,11 +1339,13 @@ export type ViolationSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   description?: boolean
   status?: boolean
   caseUserId?: boolean
+  caseFileId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   violationType?: boolean | Prisma.ViolationTypeDefaultArgs<ExtArgs>
   caseUser?: boolean | Prisma.Violation$caseUserArgs<ExtArgs>
+  caseFile?: boolean | Prisma.Violation$caseFileArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   attachments?: boolean | Prisma.Violation$attachmentsArgs<ExtArgs>
   proceedings?: boolean | Prisma.Violation$proceedingsArgs<ExtArgs>
@@ -1153,11 +1360,13 @@ export type ViolationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   status?: boolean
   caseUserId?: boolean
+  caseFileId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   violationType?: boolean | Prisma.ViolationTypeDefaultArgs<ExtArgs>
   caseUser?: boolean | Prisma.Violation$caseUserArgs<ExtArgs>
+  caseFile?: boolean | Prisma.Violation$caseFileArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["violation"]>
 
@@ -1169,11 +1378,13 @@ export type ViolationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   description?: boolean
   status?: boolean
   caseUserId?: boolean
+  caseFileId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   violationType?: boolean | Prisma.ViolationTypeDefaultArgs<ExtArgs>
   caseUser?: boolean | Prisma.Violation$caseUserArgs<ExtArgs>
+  caseFile?: boolean | Prisma.Violation$caseFileArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["violation"]>
 
@@ -1185,15 +1396,17 @@ export type ViolationSelectScalar = {
   description?: boolean
   status?: boolean
   caseUserId?: boolean
+  caseFileId?: boolean
   createdById?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ViolationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nationalId" | "violationTypeId" | "occurredAt" | "description" | "status" | "caseUserId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["violation"]>
+export type ViolationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nationalId" | "violationTypeId" | "occurredAt" | "description" | "status" | "caseUserId" | "caseFileId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["violation"]>
 export type ViolationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   violationType?: boolean | Prisma.ViolationTypeDefaultArgs<ExtArgs>
   caseUser?: boolean | Prisma.Violation$caseUserArgs<ExtArgs>
+  caseFile?: boolean | Prisma.Violation$caseFileArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   attachments?: boolean | Prisma.Violation$attachmentsArgs<ExtArgs>
   proceedings?: boolean | Prisma.Violation$proceedingsArgs<ExtArgs>
@@ -1202,11 +1415,13 @@ export type ViolationInclude<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type ViolationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   violationType?: boolean | Prisma.ViolationTypeDefaultArgs<ExtArgs>
   caseUser?: boolean | Prisma.Violation$caseUserArgs<ExtArgs>
+  caseFile?: boolean | Prisma.Violation$caseFileArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type ViolationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   violationType?: boolean | Prisma.ViolationTypeDefaultArgs<ExtArgs>
   caseUser?: boolean | Prisma.Violation$caseUserArgs<ExtArgs>
+  caseFile?: boolean | Prisma.Violation$caseFileArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -1215,6 +1430,7 @@ export type $ViolationPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     violationType: Prisma.$ViolationTypePayload<ExtArgs>
     caseUser: Prisma.$UserPayload<ExtArgs> | null
+    caseFile: Prisma.$CaseFilePayload<ExtArgs> | null
     createdBy: Prisma.$UserPayload<ExtArgs>
     attachments: Prisma.$ViolationAttachmentPayload<ExtArgs>[]
     proceedings: Prisma.$ViolationProceedingPayload<ExtArgs>[]
@@ -1227,6 +1443,7 @@ export type $ViolationPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     description: string | null
     status: $Enums.ViolationStatus
     caseUserId: string | null
+    caseFileId: string | null
     createdById: string
     createdAt: Date
     updatedAt: Date
@@ -1626,6 +1843,7 @@ export interface Prisma__ViolationClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   violationType<T extends Prisma.ViolationTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ViolationTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__ViolationTypeClient<runtime.Types.Result.GetResult<Prisma.$ViolationTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   caseUser<T extends Prisma.Violation$caseUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Violation$caseUserArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  caseFile<T extends Prisma.Violation$caseFileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Violation$caseFileArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   attachments<T extends Prisma.Violation$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Violation$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   proceedings<T extends Prisma.Violation$proceedingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Violation$proceedingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationProceedingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1665,6 +1883,7 @@ export interface ViolationFieldRefs {
   readonly description: Prisma.FieldRef<"Violation", 'String'>
   readonly status: Prisma.FieldRef<"Violation", 'ViolationStatus'>
   readonly caseUserId: Prisma.FieldRef<"Violation", 'String'>
+  readonly caseFileId: Prisma.FieldRef<"Violation", 'String'>
   readonly createdById: Prisma.FieldRef<"Violation", 'String'>
   readonly createdAt: Prisma.FieldRef<"Violation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Violation", 'DateTime'>
@@ -2085,6 +2304,25 @@ export type Violation$caseUserArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * Violation.caseFile
+ */
+export type Violation$caseFileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseFile
+   */
+  select?: Prisma.CaseFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseFile
+   */
+  omit?: Prisma.CaseFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseFileInclude<ExtArgs> | null
+  where?: Prisma.CaseFileWhereInput
 }
 
 /**

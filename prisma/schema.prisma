@@ -239,7 +239,7 @@ model City {
   sortOrder          Int                   @default(0)
   users              User[]                @relation("UserHomeCity")
   locatedUsers       User[]                @relation("UserLocationCity")
-  premiseUsers       User[]                @relation("UserPremiseCity")
+  premiseCases       CaseFile[]            @relation("CasePremiseCity")
   locationHistories  UserLocationHistory[] @relation("UserLocationHistoryCity")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
@@ -397,7 +397,7 @@ model Job {
   inquiryCenters JobInquiryCenter[]
   documents   JobDocument[]
   identityUsers User[] @relation("UserEconomicJob")
-  activityUsers User[] @relation("UserActivityJob")
+  activityCases CaseFile[] @relation("CaseActivityJob")
   createdAt   DateTime           @default(now())
   updatedAt   DateTime           @updatedAt
 
@@ -438,8 +438,8 @@ enum CaseInquiryChannel {
 
 model CaseInquiry {
   id              String              @id @default(uuid())
-  userId          String
-  user            User                @relation("CaseInquirySubject", fields: [userId], references: [id], onDelete: Cascade)
+  caseFileId      String
+  caseFile        CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
   inquiryCenterId String
   inquiryCenter   InquiryCenter       @relation(fields: [inquiryCenterId], references: [id], onDelete: Restrict)
   status          CaseInquiryStatus   @default(PENDING)
@@ -452,8 +452,8 @@ model CaseInquiry {
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 
-  @@unique([userId, inquiryCenterId])
-  @@index([userId])
+  @@unique([caseFileId, inquiryCenterId])
+  @@index([caseFileId])
   @@index([inquiryCenterId])
   @@index([status])
   @@index([decidedById])
@@ -494,8 +494,8 @@ model CasePlacesOffice {
 
 model CasePlacesReview {
   id          String              @id @default(uuid())
-  userId      String              @unique
-  user        User                @relation("CasePlacesSubject", fields: [userId], references: [id], onDelete: Cascade)
+  caseFileId  String              @unique
+  caseFile    CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
   status      CaseInquiryStatus   @default(PENDING)
   channel     CaseInquiryChannel?
   note        String?
@@ -565,13 +565,15 @@ model Document {
   @@map("documents")
 }
 
-/// مدارکی که در تب اطلاعات هویتی تشکیل پرونده نشان داده می‌شوند
+/// مدارکی که در تب مدارک مرحلهٔ اطلاعات هویتی تشکیل پرونده نشان داده می‌شوند
 model CaseIdentityDocument {
-  documentId String   @id
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
+  documentId String         @id
+  document   Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  gender     DocumentGender @default(BOTH)
+  createdAt  DateTime       @default(now())
 
   @@index([createdAt])
+  @@index([gender])
   @@map("case_identity_documents")
 }
 
@@ -589,6 +591,148 @@ model CaseManagementApprover {
   @@index([roleId])
   @@index([createdAt])
   @@map("case_management_approvers")
+}
+
+/// نتیجهٔ تایید مدیریتی هر پرونده برای یک واحد و نقش
+model CaseManagementReview {
+  id          String              @id @default(uuid())
+  caseFileId  String
+  caseFile    CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  workUnitId  String
+  workUnit    WorkUnit            @relation(fields: [workUnitId], references: [id], onDelete: Restrict)
+  roleId      String
+  role        Role                @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  status      CaseInquiryStatus   @default(PENDING)
+  channel     CaseInquiryChannel?
+  note        String?
+  decidedById String?
+  decidedBy   User?               @relation("CaseManagementDecider", fields: [decidedById], references: [id], onDelete: SetNull)
+  decidedAt   DateTime?
+  files       CaseManagementReviewFile[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@unique([caseFileId, workUnitId, roleId])
+  @@index([caseFileId])
+  @@index([workUnitId])
+  @@index([roleId])
+  @@index([status])
+  @@index([decidedById])
+  @@index([createdAt])
+  @@map("case_management_reviews")
+}
+
+model CaseManagementReviewFile {
+  id           String               @id @default(uuid())
+  reviewId     String
+  review       CaseManagementReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  uploadedById String?
+  uploadedBy   User?                @relation("CaseManagementFileUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime             @default(now())
+
+  @@index([reviewId])
+  @@index([uploadedById])
+  @@map("case_management_review_files")
+}
+
+enum CaseRequestType {
+  ISSUANCE
+  RENEWAL
+  STEWARDSHIP
+  AUCTION
+}
+
+enum CaseRequestStatus {
+  OPEN
+  ISSUED
+}
+
+/// یک پروندهٔ فعالیت اقتصادی برای یک شخص و یک شغل. شخص می‌تواند چند پرونده داشته باشد.
+model CaseFile {
+  id                   String                 @id @default(uuid())
+  userId               String
+  user                 User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// مرحلهٔ درخواست صدور: ۰ هویت، ۱ فعالیت، ۲ محل، ۳ استعلام، ۴ اماکن، ۵ بررسی مدیریت، ۶ صدور
+  formationStep        Int                    @default(0)
+  trackingCode         String?                @unique
+  /// شمارهٔ ثابت مجوز فعالیت اقتصادی؛ با تمام شدن درخواست صدور پر می‌شود
+  licenseNumber        String?                @unique
+  licenseIssuedAt      DateTime?              @db.Date
+  licenseExpiresAt     DateTime?              @db.Date
+  businessUnitTitle    String?
+  activityJobId        String?
+  activityJob          Job?                   @relation("CaseActivityJob", fields: [activityJobId], references: [id], onDelete: SetNull)
+  previousOccupation   PreviousOccupation?
+  posDeviceCount       Int?
+  premiseCityId        String?
+  premiseCity          City?                  @relation("CasePremiseCity", fields: [premiseCityId], references: [id], onDelete: SetNull)
+  premiseEstablishment PremiseEstablishment?
+  premiseComplexId     String?
+  premiseComplex       CommercialComplex?     @relation("CasePremiseComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
+  premiseAddress       String?
+  premisePlaque        String?
+  premisePlaqueSeries  String?
+  premiseFloor         String?
+  premiseUnitNo        String?
+  premisePostalCode    String?
+  premisePhone         String?
+  premiseFax           String?
+  premiseGeoPosition   PremiseGeoPosition?
+  premisePublicAccess  PremisePublicAccess?
+  registrationPlaceId  String?
+  registrationPlace    RegistrationPlace?     @relation("CaseRegistrationPlace", fields: [registrationPlaceId], references: [id], onDelete: SetNull)
+  premiseOwnership     PremiseOwnership?
+  premiseDeedNo        String?
+  premiseArea          Decimal?               @db.Decimal(12, 2)
+  leaseIssuedAt        DateTime?              @db.Date
+  leaseExpiresAt       DateTime?              @db.Date
+  leaseAgency          String?
+  premiseOwnerName     String?
+  inquiries            CaseInquiry[]
+  placesReview         CasePlacesReview?
+  managementReviews    CaseManagementReview[]
+  requests             CaseRequest[]
+  violations           Violation[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+
+  @@index([userId])
+  @@index([formationStep])
+  @@index([activityJobId])
+  @@index([premiseCityId])
+  @@index([premiseComplexId])
+  @@index([registrationPlaceId])
+  @@index([licenseIssuedAt])
+  @@index([licenseExpiresAt])
+  @@index([createdAt])
+  @@map("case_files")
+}
+
+/// هر کار روی پرونده: صدور، و بعداً تمدید، مباشرت یا مجوز حراج.
+/// شمارهٔ درخواست با باز شدن درخواست زده می‌شود. شمارهٔ مجوز فعالیت اقتصادی روی پرونده ثابت می‌ماند.
+model CaseRequest {
+  id            String            @id @default(uuid())
+  caseFileId    String
+  caseFile      CaseFile          @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  type          CaseRequestType
+  number        String            @unique
+  status        CaseRequestStatus @default(OPEN)
+  /// مرحلهٔ همین درخواست. برای صدور همان ۰ تا ۶ است. نوع‌های دیگر مرحلهٔ جدا دارند.
+  formationStep Int               @default(0)
+  completedAt   DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@index([caseFileId])
+  @@index([type])
+  @@index([status])
+  @@index([formationStep])
+  @@index([createdAt])
+  @@map("case_requests")
 }
 
 model PersonDocument {
@@ -693,51 +837,19 @@ model User {
   homePhone          String?
   educationLevel     EducationLevel?
   citizenGroup       String?
-  /// دورترین مرحلهٔ تشکیل پرونده که این شخص به آن رسیده؛ ۰ یعنی هنوز روی اطلاعات هویتی است
-  formationStep      Int                   @default(0)
-  /// شماره ثابت پرونده؛ بعد از رد شدن اطلاعات هویتی صادر می‌شود
-  caseTrackingCode   String?               @unique
-  businessUnitTitle  String?
-  activityJobId      String?
-  activityJob        Job?                  @relation("UserActivityJob", fields: [activityJobId], references: [id], onDelete: SetNull)
-  previousOccupation PreviousOccupation?
-  posDeviceCount     Int?
-  premiseCityId      String?
-  premiseCity        City?                 @relation("UserPremiseCity", fields: [premiseCityId], references: [id], onDelete: SetNull)
-  premiseEstablishment PremiseEstablishment?
-  premiseComplexId   String?
-  premiseComplex     CommercialComplex?    @relation(fields: [premiseComplexId], references: [id], onDelete: SetNull)
-  premiseAddress     String?
-  premisePlaque      String?
-  premisePlaqueSeries String?
-  premiseFloor       String?
-  premiseUnitNo      String?
-  premisePostalCode  String?
-  premisePhone       String?
-  premiseFax         String?
-  premiseGeoPosition PremiseGeoPosition?
-  premisePublicAccess PremisePublicAccess?
-  registrationPlaceId String?
-  registrationPlace  RegistrationPlace?    @relation(fields: [registrationPlaceId], references: [id], onDelete: SetNull)
-  premiseOwnership   PremiseOwnership?
-  premiseDeedNo      String?
-  premiseArea        Decimal?              @db.Decimal(12, 2)
-  leaseIssuedAt      DateTime?             @db.Date
-  leaseExpiresAt     DateTime?             @db.Date
-  leaseAgency        String?
-  premiseOwnerName   String?
+  caseFiles          CaseFile[]
   jobId              String?
   economicJob        Job?                  @relation("UserEconomicJob", fields: [jobId], references: [id], onDelete: SetNull)
   personDocuments    PersonDocument[]
   nutritionUnits     OrganizationUnit[]    @relation("UnitNutritionRep")
   inquiryCenters     InquiryCenter[]       @relation("InquiryCenterOfficer")
-  caseInquiries      CaseInquiry[]         @relation("CaseInquirySubject")
   caseInquiriesDecided CaseInquiry[]       @relation("CaseInquiryDecider")
   caseInquiryFiles   CaseInquiryFile[]     @relation("CaseInquiryFileUploader")
   placesOffice       CasePlacesOffice?     @relation("CasePlacesOfficer")
-  casePlacesReviews  CasePlacesReview[]    @relation("CasePlacesSubject")
   casePlacesDecided  CasePlacesReview[]    @relation("CasePlacesDecider")
   casePlacesFiles    CasePlacesFile[]      @relation("CasePlacesFileUploader")
+  caseManagementDecided CaseManagementReview[] @relation("CaseManagementDecider")
+  caseManagementReviewFiles CaseManagementReviewFile[] @relation("CaseManagementFileUploader")
   jobGroupRepresentations JobGroupRepresentative[]
   foodReservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
@@ -771,10 +883,6 @@ model User {
   @@index([positionId])
   @@index([workUnitId])
   @@index([staffPostId])
-  @@index([activityJobId])
-  @@index([premiseCityId])
-  @@index([premiseComplexId])
-  @@index([registrationPlaceId])
   @@index([jobId])
   @@map("users")
 }
@@ -1337,6 +1445,7 @@ model Role {
   users       UserRole[]
   permissions RolePermission[]
   caseManagementApprovers CaseManagementApprover[]
+  caseManagementReviews CaseManagementReview[]
 
   @@index([name])
   @@index([createdAt])
@@ -1694,7 +1803,7 @@ model CommercialComplex {
   postalCode String?
   isActive   Boolean           @default(true)
   floors       CommercialFloor[]
-  premiseUsers User[]
+  premiseCases CaseFile[]        @relation("CasePremiseComplex")
   createdAt    DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
 
@@ -1761,6 +1870,7 @@ model WorkUnit {
   isActive    Boolean  @default(true)
   users       User[]
   caseManagementApprovers CaseManagementApprover[]
+  caseManagementReviews CaseManagementReview[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -1805,7 +1915,7 @@ model RegistrationPlace {
   title       String   @unique
   description String?
   isActive     Boolean  @default(true)
-  premiseUsers User[]
+  premiseCases CaseFile[] @relation("CaseRegistrationPlace")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -1840,6 +1950,8 @@ model Violation {
   status          ViolationStatus        @default(REGISTERED)
   caseUserId      String?
   caseUser        User?                  @relation("ViolationCase", fields: [caseUserId], references: [id], onDelete: SetNull)
+  caseFileId      String?
+  caseFile        CaseFile?              @relation(fields: [caseFileId], references: [id], onDelete: SetNull)
   createdById     String
   createdBy       User                   @relation("ViolationAuthor", fields: [createdById], references: [id], onDelete: Restrict)
   attachments     ViolationAttachment[]
@@ -1851,6 +1963,7 @@ model Violation {
   @@index([violationTypeId])
   @@index([status])
   @@index([caseUserId])
+  @@index([caseFileId])
   @@index([occurredAt])
   @@index([createdById])
   @@index([createdAt])
@@ -1913,4 +2026,18 @@ model ViolationProceedingAttachment {
   @@index([imageId])
   @@index([fileId])
   @@map("violation_proceeding_attachments")
+}
+
+model SmsSettings {
+  id           String   @id @default(uuid())
+  singletonKey String   @unique @default("default")
+  isActive     Boolean  @default(false)
+  endpoint     String?
+  senderNumber String?
+  username     String?
+  password     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("sms_settings")
 }

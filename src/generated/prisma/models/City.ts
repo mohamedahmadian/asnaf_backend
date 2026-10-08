@@ -307,7 +307,7 @@ export type CityWhereInput = {
   province?: Prisma.XOR<Prisma.ProvinceScalarRelationFilter, Prisma.ProvinceWhereInput>
   users?: Prisma.UserListRelationFilter
   locatedUsers?: Prisma.UserListRelationFilter
-  premiseUsers?: Prisma.UserListRelationFilter
+  premiseCases?: Prisma.CaseFileListRelationFilter
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
 }
 
@@ -330,7 +330,7 @@ export type CityOrderByWithRelationInput = {
   province?: Prisma.ProvinceOrderByWithRelationInput
   users?: Prisma.UserOrderByRelationAggregateInput
   locatedUsers?: Prisma.UserOrderByRelationAggregateInput
-  premiseUsers?: Prisma.UserOrderByRelationAggregateInput
+  premiseCases?: Prisma.CaseFileOrderByRelationAggregateInput
   locationHistories?: Prisma.UserLocationHistoryOrderByRelationAggregateInput
 }
 
@@ -357,7 +357,7 @@ export type CityWhereUniqueInput = Prisma.AtLeast<{
   province?: Prisma.XOR<Prisma.ProvinceScalarRelationFilter, Prisma.ProvinceWhereInput>
   users?: Prisma.UserListRelationFilter
   locatedUsers?: Prisma.UserListRelationFilter
-  premiseUsers?: Prisma.UserListRelationFilter
+  premiseCases?: Prisma.CaseFileListRelationFilter
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
 }, "id" | "provinceId_code">
 
@@ -423,7 +423,7 @@ export type CityCreateInput = {
   province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
 }
 
@@ -445,7 +445,7 @@ export type CityUncheckedCreateInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
 }
 
@@ -467,7 +467,7 @@ export type CityUpdateInput = {
   province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
 }
 
@@ -489,7 +489,7 @@ export type CityUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
 }
 
@@ -674,6 +674,22 @@ export type CityUncheckedUpdateManyWithoutProvinceNestedInput = {
   deleteMany?: Prisma.CityScalarWhereInput | Prisma.CityScalarWhereInput[]
 }
 
+export type CityCreateNestedOneWithoutPremiseCasesInput = {
+  create?: Prisma.XOR<Prisma.CityCreateWithoutPremiseCasesInput, Prisma.CityUncheckedCreateWithoutPremiseCasesInput>
+  connectOrCreate?: Prisma.CityCreateOrConnectWithoutPremiseCasesInput
+  connect?: Prisma.CityWhereUniqueInput
+}
+
+export type CityUpdateOneWithoutPremiseCasesNestedInput = {
+  create?: Prisma.XOR<Prisma.CityCreateWithoutPremiseCasesInput, Prisma.CityUncheckedCreateWithoutPremiseCasesInput>
+  connectOrCreate?: Prisma.CityCreateOrConnectWithoutPremiseCasesInput
+  upsert?: Prisma.CityUpsertWithoutPremiseCasesInput
+  disconnect?: Prisma.CityWhereInput | boolean
+  delete?: Prisma.CityWhereInput | boolean
+  connect?: Prisma.CityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutPremiseCasesInput, Prisma.CityUpdateWithoutPremiseCasesInput>, Prisma.CityUncheckedUpdateWithoutPremiseCasesInput>
+}
+
 export type CityCreateNestedOneWithoutUsersInput = {
   create?: Prisma.XOR<Prisma.CityCreateWithoutUsersInput, Prisma.CityUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.CityCreateOrConnectWithoutUsersInput
@@ -683,12 +699,6 @@ export type CityCreateNestedOneWithoutUsersInput = {
 export type CityCreateNestedOneWithoutLocatedUsersInput = {
   create?: Prisma.XOR<Prisma.CityCreateWithoutLocatedUsersInput, Prisma.CityUncheckedCreateWithoutLocatedUsersInput>
   connectOrCreate?: Prisma.CityCreateOrConnectWithoutLocatedUsersInput
-  connect?: Prisma.CityWhereUniqueInput
-}
-
-export type CityCreateNestedOneWithoutPremiseUsersInput = {
-  create?: Prisma.XOR<Prisma.CityCreateWithoutPremiseUsersInput, Prisma.CityUncheckedCreateWithoutPremiseUsersInput>
-  connectOrCreate?: Prisma.CityCreateOrConnectWithoutPremiseUsersInput
   connect?: Prisma.CityWhereUniqueInput
 }
 
@@ -710,16 +720,6 @@ export type CityUpdateOneWithoutLocatedUsersNestedInput = {
   delete?: Prisma.CityWhereInput | boolean
   connect?: Prisma.CityWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutLocatedUsersInput, Prisma.CityUpdateWithoutLocatedUsersInput>, Prisma.CityUncheckedUpdateWithoutLocatedUsersInput>
-}
-
-export type CityUpdateOneWithoutPremiseUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.CityCreateWithoutPremiseUsersInput, Prisma.CityUncheckedCreateWithoutPremiseUsersInput>
-  connectOrCreate?: Prisma.CityCreateOrConnectWithoutPremiseUsersInput
-  upsert?: Prisma.CityUpsertWithoutPremiseUsersInput
-  disconnect?: Prisma.CityWhereInput | boolean
-  delete?: Prisma.CityWhereInput | boolean
-  connect?: Prisma.CityWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutPremiseUsersInput, Prisma.CityUpdateWithoutPremiseUsersInput>, Prisma.CityUncheckedUpdateWithoutPremiseUsersInput>
 }
 
 export type CityCreateNestedOneWithoutLocationHistoriesInput = {
@@ -755,7 +755,7 @@ export type CityCreateWithoutProvinceInput = {
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
 }
 
@@ -776,7 +776,7 @@ export type CityUncheckedCreateWithoutProvinceInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
 }
 
@@ -827,6 +827,106 @@ export type CityScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"City"> | Date | string
 }
 
+export type CityCreateWithoutPremiseCasesInput = {
+  id?: string
+  code: string
+  nameFa: string
+  nameEn: string
+  neshanAddress?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: boolean
+  hasRailway?: boolean
+  hasAirport?: boolean
+  isActive?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
+  users?: Prisma.UserCreateNestedManyWithoutCityInput
+  locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
+}
+
+export type CityUncheckedCreateWithoutPremiseCasesInput = {
+  id?: string
+  provinceId: string
+  code: string
+  nameFa: string
+  nameEn: string
+  neshanAddress?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: boolean
+  hasRailway?: boolean
+  hasAirport?: boolean
+  isActive?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
+  locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
+}
+
+export type CityCreateOrConnectWithoutPremiseCasesInput = {
+  where: Prisma.CityWhereUniqueInput
+  create: Prisma.XOR<Prisma.CityCreateWithoutPremiseCasesInput, Prisma.CityUncheckedCreateWithoutPremiseCasesInput>
+}
+
+export type CityUpsertWithoutPremiseCasesInput = {
+  update: Prisma.XOR<Prisma.CityUpdateWithoutPremiseCasesInput, Prisma.CityUncheckedUpdateWithoutPremiseCasesInput>
+  create: Prisma.XOR<Prisma.CityCreateWithoutPremiseCasesInput, Prisma.CityUncheckedCreateWithoutPremiseCasesInput>
+  where?: Prisma.CityWhereInput
+}
+
+export type CityUpdateToOneWithWhereWithoutPremiseCasesInput = {
+  where?: Prisma.CityWhereInput
+  data: Prisma.XOR<Prisma.CityUpdateWithoutPremiseCasesInput, Prisma.CityUncheckedUpdateWithoutPremiseCasesInput>
+}
+
+export type CityUpdateWithoutPremiseCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  nameFa?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  neshanAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRailway?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirport?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
+  users?: Prisma.UserUpdateManyWithoutCityNestedInput
+  locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
+}
+
+export type CityUncheckedUpdateWithoutPremiseCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  nameFa?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  neshanAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRailway?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirport?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
+  locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
+}
+
 export type CityCreateWithoutUsersInput = {
   id?: string
   code: string
@@ -844,7 +944,7 @@ export type CityCreateWithoutUsersInput = {
   updatedAt?: Date | string
   province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
 }
 
@@ -865,7 +965,7 @@ export type CityUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
 }
 
@@ -891,7 +991,7 @@ export type CityCreateWithoutLocatedUsersInput = {
   updatedAt?: Date | string
   province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
   users?: Prisma.UserCreateNestedManyWithoutCityInput
-  premiseUsers?: Prisma.UserCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
 }
 
@@ -912,60 +1012,13 @@ export type CityUncheckedCreateWithoutLocatedUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
-  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
 }
 
 export type CityCreateOrConnectWithoutLocatedUsersInput = {
   where: Prisma.CityWhereUniqueInput
   create: Prisma.XOR<Prisma.CityCreateWithoutLocatedUsersInput, Prisma.CityUncheckedCreateWithoutLocatedUsersInput>
-}
-
-export type CityCreateWithoutPremiseUsersInput = {
-  id?: string
-  code: string
-  nameFa: string
-  nameEn: string
-  neshanAddress?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isProvinceCapital?: boolean
-  hasRailway?: boolean
-  hasAirport?: boolean
-  isActive?: boolean
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
-  users?: Prisma.UserCreateNestedManyWithoutCityInput
-  locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
-  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
-}
-
-export type CityUncheckedCreateWithoutPremiseUsersInput = {
-  id?: string
-  provinceId: string
-  code: string
-  nameFa: string
-  nameEn: string
-  neshanAddress?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isProvinceCapital?: boolean
-  hasRailway?: boolean
-  hasAirport?: boolean
-  isActive?: boolean
-  sortOrder?: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
-  locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
-  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
-}
-
-export type CityCreateOrConnectWithoutPremiseUsersInput = {
-  where: Prisma.CityWhereUniqueInput
-  create: Prisma.XOR<Prisma.CityCreateWithoutPremiseUsersInput, Prisma.CityUncheckedCreateWithoutPremiseUsersInput>
 }
 
 export type CityUpsertWithoutUsersInput = {
@@ -996,7 +1049,7 @@ export type CityUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
 }
 
@@ -1017,7 +1070,7 @@ export type CityUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
 }
 
@@ -1049,7 +1102,7 @@ export type CityUpdateWithoutLocatedUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
-  premiseUsers?: Prisma.UserUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
 }
 
@@ -1070,60 +1123,7 @@ export type CityUncheckedUpdateWithoutLocatedUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
-  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutPremiseCityNestedInput
-  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
-}
-
-export type CityUpsertWithoutPremiseUsersInput = {
-  update: Prisma.XOR<Prisma.CityUpdateWithoutPremiseUsersInput, Prisma.CityUncheckedUpdateWithoutPremiseUsersInput>
-  create: Prisma.XOR<Prisma.CityCreateWithoutPremiseUsersInput, Prisma.CityUncheckedCreateWithoutPremiseUsersInput>
-  where?: Prisma.CityWhereInput
-}
-
-export type CityUpdateToOneWithWhereWithoutPremiseUsersInput = {
-  where?: Prisma.CityWhereInput
-  data: Prisma.XOR<Prisma.CityUpdateWithoutPremiseUsersInput, Prisma.CityUncheckedUpdateWithoutPremiseUsersInput>
-}
-
-export type CityUpdateWithoutPremiseUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  nameFa?: Prisma.StringFieldUpdateOperationsInput | string
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  neshanAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isProvinceCapital?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  hasRailway?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  hasAirport?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
-  users?: Prisma.UserUpdateManyWithoutCityNestedInput
-  locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
-  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
-}
-
-export type CityUncheckedUpdateWithoutPremiseUsersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
-  code?: Prisma.StringFieldUpdateOperationsInput | string
-  nameFa?: Prisma.StringFieldUpdateOperationsInput | string
-  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
-  neshanAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isProvinceCapital?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  hasRailway?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  hasAirport?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
-  locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
 }
 
@@ -1145,7 +1145,7 @@ export type CityCreateWithoutLocationHistoriesInput = {
   province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
 }
 
 export type CityUncheckedCreateWithoutLocationHistoriesInput = {
@@ -1166,7 +1166,7 @@ export type CityUncheckedCreateWithoutLocationHistoriesInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
-  premiseUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPremiseCityInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
 }
 
 export type CityCreateOrConnectWithoutLocationHistoriesInput = {
@@ -1203,7 +1203,7 @@ export type CityUpdateWithoutLocationHistoriesInput = {
   province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
 }
 
 export type CityUncheckedUpdateWithoutLocationHistoriesInput = {
@@ -1224,7 +1224,7 @@ export type CityUncheckedUpdateWithoutLocationHistoriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
 }
 
 export type CityCreateManyProvinceInput = {
@@ -1261,7 +1261,7 @@ export type CityUpdateWithoutProvinceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
 }
 
@@ -1282,7 +1282,7 @@ export type CityUncheckedUpdateWithoutProvinceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
-  premiseUsers?: Prisma.UserUncheckedUpdateManyWithoutPremiseCityNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
 }
 
@@ -1311,14 +1311,14 @@ export type CityUncheckedUpdateManyWithoutProvinceInput = {
 export type CityCountOutputType = {
   users: number
   locatedUsers: number
-  premiseUsers: number
+  premiseCases: number
   locationHistories: number
 }
 
 export type CityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | CityCountOutputTypeCountUsersArgs
   locatedUsers?: boolean | CityCountOutputTypeCountLocatedUsersArgs
-  premiseUsers?: boolean | CityCountOutputTypeCountPremiseUsersArgs
+  premiseCases?: boolean | CityCountOutputTypeCountPremiseCasesArgs
   locationHistories?: boolean | CityCountOutputTypeCountLocationHistoriesArgs
 }
 
@@ -1349,8 +1349,8 @@ export type CityCountOutputTypeCountLocatedUsersArgs<ExtArgs extends runtime.Typ
 /**
  * CityCountOutputType without action
  */
-export type CityCountOutputTypeCountPremiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserWhereInput
+export type CityCountOutputTypeCountPremiseCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseFileWhereInput
 }
 
 /**
@@ -1380,7 +1380,7 @@ export type CitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   province?: boolean | Prisma.ProvinceDefaultArgs<ExtArgs>
   users?: boolean | Prisma.City$usersArgs<ExtArgs>
   locatedUsers?: boolean | Prisma.City$locatedUsersArgs<ExtArgs>
-  premiseUsers?: boolean | Prisma.City$premiseUsersArgs<ExtArgs>
+  premiseCases?: boolean | Prisma.City$premiseCasesArgs<ExtArgs>
   locationHistories?: boolean | Prisma.City$locationHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.CityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["city"]>
@@ -1446,7 +1446,7 @@ export type CityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   province?: boolean | Prisma.ProvinceDefaultArgs<ExtArgs>
   users?: boolean | Prisma.City$usersArgs<ExtArgs>
   locatedUsers?: boolean | Prisma.City$locatedUsersArgs<ExtArgs>
-  premiseUsers?: boolean | Prisma.City$premiseUsersArgs<ExtArgs>
+  premiseCases?: boolean | Prisma.City$premiseCasesArgs<ExtArgs>
   locationHistories?: boolean | Prisma.City$locationHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.CityCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1463,7 +1463,7 @@ export type $CityPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     province: Prisma.$ProvincePayload<ExtArgs>
     users: Prisma.$UserPayload<ExtArgs>[]
     locatedUsers: Prisma.$UserPayload<ExtArgs>[]
-    premiseUsers: Prisma.$UserPayload<ExtArgs>[]
+    premiseCases: Prisma.$CaseFilePayload<ExtArgs>[]
     locationHistories: Prisma.$UserLocationHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1879,7 +1879,7 @@ export interface Prisma__CityClient<T, Null = never, ExtArgs extends runtime.Typ
   province<T extends Prisma.ProvinceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProvinceDefaultArgs<ExtArgs>>): Prisma.Prisma__ProvinceClient<runtime.Types.Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   users<T extends Prisma.City$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   locatedUsers<T extends Prisma.City$locatedUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$locatedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  premiseUsers<T extends Prisma.City$premiseUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$premiseUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  premiseCases<T extends Prisma.City$premiseCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$premiseCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   locationHistories<T extends Prisma.City$locationHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$locationHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLocationHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2374,27 +2374,27 @@ export type City$locatedUsersArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * City.premiseUsers
+ * City.premiseCases
  */
-export type City$premiseUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type City$premiseCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the CaseFile
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.CaseFileSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the CaseFile
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.CaseFileOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
-  cursor?: Prisma.UserWhereUniqueInput
+  include?: Prisma.CaseFileInclude<ExtArgs> | null
+  where?: Prisma.CaseFileWhereInput
+  orderBy?: Prisma.CaseFileOrderByWithRelationInput | Prisma.CaseFileOrderByWithRelationInput[]
+  cursor?: Prisma.CaseFileWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+  distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
 }
 
 /**

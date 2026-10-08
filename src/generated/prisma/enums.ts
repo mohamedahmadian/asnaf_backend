@@ -237,6 +237,24 @@ export const CaseInquiryChannel = {
 export type CaseInquiryChannel = (typeof CaseInquiryChannel)[keyof typeof CaseInquiryChannel]
 
 
+export const CaseRequestType = {
+  ISSUANCE: 'ISSUANCE',
+  RENEWAL: 'RENEWAL',
+  STEWARDSHIP: 'STEWARDSHIP',
+  AUCTION: 'AUCTION'
+} as const
+
+export type CaseRequestType = (typeof CaseRequestType)[keyof typeof CaseRequestType]
+
+
+export const CaseRequestStatus = {
+  OPEN: 'OPEN',
+  ISSUED: 'ISSUED'
+} as const
+
+export type CaseRequestStatus = (typeof CaseRequestStatus)[keyof typeof CaseRequestStatus]
+
+
 export const SingardFeedbackKind = {
   SUGGESTION: 'SUGGESTION',
   COMPLAINT: 'COMPLAINT',

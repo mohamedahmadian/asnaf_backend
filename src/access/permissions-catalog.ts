@@ -102,6 +102,15 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
+    code: 'sms',
+    kind: 'MODULE',
+    nameKey: 'modules.sms',
+    children: [
+      { code: 'sms.settings', kind: 'MENU', nameKey: 'menus.smsSettings' },
+      { code: 'sms.send', kind: 'MENU', nameKey: 'menus.smsSend' },
+    ],
+  },
+  {
     code: 'management',
     kind: 'MODULE',
     nameKey: 'modules.management',

@@ -308,7 +308,7 @@ export class UsersService {
   }
 
   async update(id: string, dto: UpdateUserDto) {
-    await this.findOne(id);
+    const existing = await this.findOne(id);
     await this.assertUnique(dto, id);
     await this.assertImages(dto);
     if (dto.orgUnitId !== undefined || dto.positionId !== undefined) {
@@ -377,25 +377,57 @@ export class UsersService {
         data: { nutritionRepId: null },
       });
     }
-    if (dto.password) {
-      data.passwordHash = await bcrypt.hash(toLatinDigits(dto.password), 10);
+    const plainPassword = dto.password ? toLatinDigits(dto.password) : '';
+    if (plainPassword) {
+      data.passwordHash = await bcrypt.hash(plainPassword, 10);
     }
+    const passwordSms = dto.sendPasswordToUser
+      ? this.preparePasswordSms(
+          existing.phone,
+          dto.phone,
+          plainPassword,
+          dto.username ?? existing.username,
+        )
+      : null;
     const user = await this.prisma.user.update({
       where: { id },
       data,
       select: userSelect,
     });
+    const sentSms = passwordSms ? await this.sms.send(passwordSms) : undefined;
     if (dto.roleIds !== undefined) {
       await this.syncUserRoles(id, dto.roleIds);
-      return this.findOne(id);
+      const fresh = await this.findOne(id);
+      return sentSms ? { ...fresh, passwordSms: sentSms } : fresh;
     }
-    return mapUser(user);
+    const mapped = mapUser(user);
+    return sentSms ? { ...mapped, passwordSms: sentSms } : mapped;
+  }
+
+  private preparePasswordSms(
+    currentPhone: string | null,
+    nextPhone: string | null | undefined,
+    plainPassword: string,
+    username: string,
+  ) {
+    if (!plainPassword) {
+      throw new BadRequestException('برای ارسال رمز، رمز جدید را وارد کنید');
+    }
+    const phone = (nextPhone !== undefined ? nextPhone : currentPhone)?.trim();
+    if (!phone) {
+      throw new BadRequestException('برای ارسال رمز، تلفن همراه کاربر لازم است');
+    }
+    return {
+      phone,
+      body: `نام کاربری: ${toLatinDigits(username.trim())}\nرمز عبور جدید: ${plainPassword}`,
+    };
   }
 
   async updateOwnAccount(id: string, dto: UpdateUserDto) {
     const {
       status: _status,
       password: _password,
+      sendPasswordToUser: _sendPasswordToUser,
       roleIds: _roleIds,
       orgUnitId: _orgUnitId,
       positionId: _positionId,

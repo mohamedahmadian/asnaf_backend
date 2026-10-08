@@ -46,12 +46,13 @@ const attachmentSelect = {
 
 const caseFileSelect = {
   id: true,
-  fullName: true,
-  caseTrackingCode: true,
+  userId: true,
+  trackingCode: true,
   businessUnitTitle: true,
   formationStep: true,
   activityJob: { select: { title: true, group: { select: { title: true } } } },
-} satisfies Prisma.UserSelect;
+  user: { select: { fullName: true } },
+} satisfies Prisma.CaseFileSelect;
 
 const violationSelect = {
   id: true,
@@ -61,7 +62,7 @@ const violationSelect = {
   occurredAt: true,
   description: true,
   status: true,
-  caseUser: { select: caseFileSelect },
+  caseFile: { select: caseFileSelect },
   createdAt: true,
   updatedAt: true,
   attachments: { orderBy: { sortOrder: 'asc' as const }, select: attachmentSelect },
@@ -85,7 +86,7 @@ export class ViolationsService {
         violationType: (dir) => ({ violationType: { title: dir } }),
         occurredAt: (dir) => ({ occurredAt: dir }),
         status: (dir) => ({ status: dir }),
-        caseTrackingCode: (dir) => ({ caseUser: { caseTrackingCode: dir } }),
+        caseTrackingCode: (dir) => ({ caseFile: { trackingCode: dir } }),
         createdAt: (dir) => ({ createdAt: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
@@ -168,15 +169,21 @@ export class ViolationsService {
   }
 
   async findPerson(nationalId: string) {
-    const people = await this.prisma.user.findMany({
+    const person = await this.prisma.user.findUnique({
       where: { nationalId },
-      orderBy: [{ formationStep: 'desc' }, { createdAt: 'desc' }],
-      select: caseFileSelect,
+      select: {
+        fullName: true,
+        caseFiles: {
+          where: { formationStep: { gt: 0 } },
+          orderBy: [{ formationStep: 'desc' }, { createdAt: 'desc' }],
+          select: caseFileSelect,
+        },
+      },
     });
     return {
       nationalId,
-      fullName: people.find((person) => person.fullName)?.fullName ?? null,
-      cases: people.filter((person) => person.formationStep > 0).map(mapCaseFile),
+      fullName: person?.fullName ?? null,
+      cases: (person?.caseFiles ?? []).map(mapCaseFile),
     };
   }
 
@@ -192,7 +199,7 @@ export class ViolationsService {
 
   async create(dto: CreateViolationDto, userId: string, files?: UploadFile[]) {
     await this.ensureType(dto.violationTypeId);
-    await this.ensureCase(dto.nationalId, dto.caseUserId);
+    const linked = await this.ensureCase(dto.nationalId, dto.caseUserId);
     const occurredAt = this.requireDate(dto.occurredAt);
     const uploads = await storeUploads(files, this.images, this.prisma);
     try {
@@ -203,7 +210,8 @@ export class ViolationsService {
           occurredAt,
           description: dto.description,
           status: dto.status ?? ViolationStatus.REGISTERED,
-          caseUserId: dto.caseUserId ?? null,
+          caseUserId: linked?.userId ?? null,
+          caseFileId: linked?.id ?? null,
           createdById: userId,
           attachments: {
             create: uploads.map((file, index) => ({
@@ -232,7 +240,10 @@ export class ViolationsService {
   ) {
     const current = await this.findOne(id);
     if (dto.violationTypeId) await this.ensureType(dto.violationTypeId);
-    await this.ensureCase(dto.nationalId ?? current.nationalId, dto.caseUserId);
+    const linked =
+      dto.caseUserId === undefined
+        ? undefined
+        : await this.ensureCase(dto.nationalId ?? current.nationalId, dto.caseUserId);
     const occurredAt = dto.occurredAt
       ? this.requireDate(dto.occurredAt)
       : undefined;
@@ -248,7 +259,8 @@ export class ViolationsService {
           occurredAt,
           description: dto.description,
           status: dto.status,
-          caseUserId: dto.caseUserId,
+          caseUserId: linked === undefined ? undefined : linked?.userId ?? null,
+          caseFileId: linked === undefined ? undefined : linked?.id ?? null,
           attachments: uploads.length
             ? {
                 create: uploads.map((file, index) => ({
@@ -544,10 +556,10 @@ export class ViolationsService {
         ? { nationalId: { contains: digits } }
         : { nationalId: containsInsensitive(q) },
       {
-        caseUser: {
+        caseFile: {
           OR: [
             {
-              caseTrackingCode: digits
+              trackingCode: digits
                 ? { contains: digits }
                 : containsInsensitive(q),
             },
@@ -594,13 +606,13 @@ export class ViolationsService {
       createdAt: Date;
       updatedAt: Date;
       attachments: AttachmentRow[];
-      caseUser?: CaseFileRow | null;
+      caseFile?: CaseFileRow | null;
     },
   >(item: T) {
-    const { caseUser, ...rest } = item;
+    const { caseFile, ...rest } = item;
     return {
       ...rest,
-      caseFile: mapCaseFile(caseUser),
+      caseFile: mapCaseFile(caseFile),
       occurredAt: formatDateOnly(item.occurredAt),
       createdAt: item.createdAt.toISOString(),
       updatedAt: item.updatedAt.toISOString(),
@@ -641,14 +653,15 @@ export class ViolationsService {
   }
 
   private async ensureCase(nationalId: string, caseUserId?: string | null) {
-    if (!caseUserId) return;
-    const row = await this.prisma.user.findFirst({
-      where: { id: caseUserId, nationalId, formationStep: { gt: 0 } },
-      select: { id: true },
+    if (!caseUserId) return null;
+    const row = await this.prisma.caseFile.findFirst({
+      where: { id: caseUserId, formationStep: { gt: 0 }, user: { nationalId } },
+      select: { id: true, userId: true },
     });
     if (!row) {
       throw new BadRequestException('پرونده انتخاب‌شده متعلق به این کد ملی نیست');
     }
+    return row;
   }
 
   private async ensureViolation(id: string) {
@@ -729,11 +742,12 @@ function nextAttachmentSort(
 
 type CaseFileRow = {
   id: string;
-  fullName: string;
-  caseTrackingCode: string | null;
+  userId: string;
+  trackingCode: string | null;
   businessUnitTitle: string | null;
   formationStep: number;
   activityJob: { title: string; group: { title: string } | null } | null;
+  user: { fullName: string };
 };
 
 function typeCounts(
@@ -760,8 +774,8 @@ function mapCaseFile(row?: CaseFileRow | null) {
   if (!row || row.formationStep <= 0) return null;
   return {
     id: row.id,
-    fullName: row.fullName,
-    caseTrackingCode: row.caseTrackingCode,
+    fullName: row.user.fullName,
+    caseTrackingCode: row.trackingCode,
     businessUnitTitle: row.businessUnitTitle,
     jobGroupTitle: row.activityJob?.group?.title ?? null,
     jobTitle: row.activityJob?.title ?? null,

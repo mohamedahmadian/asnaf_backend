@@ -119,7 +119,7 @@ export type JobDocument = Prisma.JobDocumentModel
 export type Document = Prisma.DocumentModel
 /**
  * Model CaseIdentityDocument
- * مدارکی که در تب اطلاعات هویتی تشکیل پرونده نشان داده می‌شوند
+ * مدارکی که در تب مدارک مرحلهٔ اطلاعات هویتی تشکیل پرونده نشان داده می‌شوند
  */
 export type CaseIdentityDocument = Prisma.CaseIdentityDocumentModel
 /**
@@ -127,6 +127,27 @@ export type CaseIdentityDocument = Prisma.CaseIdentityDocumentModel
  * واحد و نقشی که در مرحلهٔ تاییدهای مدیریتی باید پرونده را تایید کنند
  */
 export type CaseManagementApprover = Prisma.CaseManagementApproverModel
+/**
+ * Model CaseManagementReview
+ * نتیجهٔ تایید مدیریتی هر پرونده برای یک واحد و نقش
+ */
+export type CaseManagementReview = Prisma.CaseManagementReviewModel
+/**
+ * Model CaseManagementReviewFile
+ * 
+ */
+export type CaseManagementReviewFile = Prisma.CaseManagementReviewFileModel
+/**
+ * Model CaseFile
+ * یک پروندهٔ فعالیت اقتصادی برای یک شخص و یک شغل. شخص می‌تواند چند پرونده داشته باشد.
+ */
+export type CaseFile = Prisma.CaseFileModel
+/**
+ * Model CaseRequest
+ * هر کار روی پرونده: صدور، و بعداً تمدید، مباشرت یا مجوز حراج.
+ * شمارهٔ درخواست با باز شدن درخواست زده می‌شود. شمارهٔ مجوز فعالیت اقتصادی روی پرونده ثابت می‌ماند.
+ */
+export type CaseRequest = Prisma.CaseRequestModel
 /**
  * Model PersonDocument
  * 
@@ -412,3 +433,8 @@ export type ViolationProceeding = Prisma.ViolationProceedingModel
  * 
  */
 export type ViolationProceedingAttachment = Prisma.ViolationProceedingAttachmentModel
+/**
+ * Model SmsSettings
+ * 
+ */
+export type SmsSettings = Prisma.SmsSettingsModel

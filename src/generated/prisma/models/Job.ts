@@ -277,7 +277,7 @@ export type JobWhereInput = {
   inquiryCenters?: Prisma.JobInquiryCenterListRelationFilter
   documents?: Prisma.JobDocumentListRelationFilter
   identityUsers?: Prisma.UserListRelationFilter
-  activityUsers?: Prisma.UserListRelationFilter
+  activityCases?: Prisma.CaseFileListRelationFilter
 }
 
 export type JobOrderByWithRelationInput = {
@@ -298,7 +298,7 @@ export type JobOrderByWithRelationInput = {
   inquiryCenters?: Prisma.JobInquiryCenterOrderByRelationAggregateInput
   documents?: Prisma.JobDocumentOrderByRelationAggregateInput
   identityUsers?: Prisma.UserOrderByRelationAggregateInput
-  activityUsers?: Prisma.UserOrderByRelationAggregateInput
+  activityCases?: Prisma.CaseFileOrderByRelationAggregateInput
 }
 
 export type JobWhereUniqueInput = Prisma.AtLeast<{
@@ -325,7 +325,7 @@ export type JobWhereUniqueInput = Prisma.AtLeast<{
   inquiryCenters?: Prisma.JobInquiryCenterListRelationFilter
   documents?: Prisma.JobDocumentListRelationFilter
   identityUsers?: Prisma.UserListRelationFilter
-  activityUsers?: Prisma.UserListRelationFilter
+  activityCases?: Prisma.CaseFileListRelationFilter
 }, "id" | "taxIntaCode" | "groupId_code" | "groupId_title" | "groupId_titleEn">
 
 export type JobOrderByWithAggregationInput = {
@@ -382,7 +382,7 @@ export type JobCreateInput = {
   inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobUncheckedCreateInput = {
@@ -401,7 +401,7 @@ export type JobUncheckedCreateInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobUpdateInput = {
@@ -420,7 +420,7 @@ export type JobUpdateInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateInput = {
@@ -439,7 +439,7 @@ export type JobUncheckedUpdateInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUncheckedUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUncheckedUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUncheckedUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUncheckedUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobCreateManyInput = {
@@ -685,26 +685,26 @@ export type JobUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.JobUpdateToOneWithWhereWithoutDocumentsInput, Prisma.JobUpdateWithoutDocumentsInput>, Prisma.JobUncheckedUpdateWithoutDocumentsInput>
 }
 
-export type JobCreateNestedOneWithoutActivityUsersInput = {
-  create?: Prisma.XOR<Prisma.JobCreateWithoutActivityUsersInput, Prisma.JobUncheckedCreateWithoutActivityUsersInput>
-  connectOrCreate?: Prisma.JobCreateOrConnectWithoutActivityUsersInput
+export type JobCreateNestedOneWithoutActivityCasesInput = {
+  create?: Prisma.XOR<Prisma.JobCreateWithoutActivityCasesInput, Prisma.JobUncheckedCreateWithoutActivityCasesInput>
+  connectOrCreate?: Prisma.JobCreateOrConnectWithoutActivityCasesInput
   connect?: Prisma.JobWhereUniqueInput
+}
+
+export type JobUpdateOneWithoutActivityCasesNestedInput = {
+  create?: Prisma.XOR<Prisma.JobCreateWithoutActivityCasesInput, Prisma.JobUncheckedCreateWithoutActivityCasesInput>
+  connectOrCreate?: Prisma.JobCreateOrConnectWithoutActivityCasesInput
+  upsert?: Prisma.JobUpsertWithoutActivityCasesInput
+  disconnect?: Prisma.JobWhereInput | boolean
+  delete?: Prisma.JobWhereInput | boolean
+  connect?: Prisma.JobWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JobUpdateToOneWithWhereWithoutActivityCasesInput, Prisma.JobUpdateWithoutActivityCasesInput>, Prisma.JobUncheckedUpdateWithoutActivityCasesInput>
 }
 
 export type JobCreateNestedOneWithoutIdentityUsersInput = {
   create?: Prisma.XOR<Prisma.JobCreateWithoutIdentityUsersInput, Prisma.JobUncheckedCreateWithoutIdentityUsersInput>
   connectOrCreate?: Prisma.JobCreateOrConnectWithoutIdentityUsersInput
   connect?: Prisma.JobWhereUniqueInput
-}
-
-export type JobUpdateOneWithoutActivityUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.JobCreateWithoutActivityUsersInput, Prisma.JobUncheckedCreateWithoutActivityUsersInput>
-  connectOrCreate?: Prisma.JobCreateOrConnectWithoutActivityUsersInput
-  upsert?: Prisma.JobUpsertWithoutActivityUsersInput
-  disconnect?: Prisma.JobWhereInput | boolean
-  delete?: Prisma.JobWhereInput | boolean
-  connect?: Prisma.JobWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.JobUpdateToOneWithWhereWithoutActivityUsersInput, Prisma.JobUpdateWithoutActivityUsersInput>, Prisma.JobUncheckedUpdateWithoutActivityUsersInput>
 }
 
 export type JobUpdateOneWithoutIdentityUsersNestedInput = {
@@ -732,7 +732,7 @@ export type JobCreateWithoutJobTypeInput = {
   inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobUncheckedCreateWithoutJobTypeInput = {
@@ -750,7 +750,7 @@ export type JobUncheckedCreateWithoutJobTypeInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobCreateOrConnectWithoutJobTypeInput = {
@@ -812,7 +812,7 @@ export type JobCreateWithoutGroupInput = {
   inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobUncheckedCreateWithoutGroupInput = {
@@ -830,7 +830,7 @@ export type JobUncheckedCreateWithoutGroupInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutJobInput
   documents?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobCreateOrConnectWithoutGroupInput = {
@@ -874,7 +874,7 @@ export type JobCreateWithoutInquiryCentersInput = {
   jobType: Prisma.JobTypeCreateNestedOneWithoutJobsInput
   documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobUncheckedCreateWithoutInquiryCentersInput = {
@@ -892,7 +892,7 @@ export type JobUncheckedCreateWithoutInquiryCentersInput = {
   updatedAt?: Date | string
   documents?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobCreateOrConnectWithoutInquiryCentersInput = {
@@ -926,7 +926,7 @@ export type JobUpdateWithoutInquiryCentersInput = {
   jobType?: Prisma.JobTypeUpdateOneRequiredWithoutJobsNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutInquiryCentersInput = {
@@ -944,7 +944,7 @@ export type JobUncheckedUpdateWithoutInquiryCentersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.JobDocumentUncheckedUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUncheckedUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUncheckedUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUncheckedUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobCreateWithoutDocumentsInput = {
@@ -962,7 +962,7 @@ export type JobCreateWithoutDocumentsInput = {
   jobType: Prisma.JobTypeCreateNestedOneWithoutJobsInput
   inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobUncheckedCreateWithoutDocumentsInput = {
@@ -980,7 +980,7 @@ export type JobUncheckedCreateWithoutDocumentsInput = {
   updatedAt?: Date | string
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutJobInput
   identityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutEconomicJobInput
-  activityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutActivityJobInput
+  activityCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutActivityJobInput
 }
 
 export type JobCreateOrConnectWithoutDocumentsInput = {
@@ -1014,7 +1014,7 @@ export type JobUpdateWithoutDocumentsInput = {
   jobType?: Prisma.JobTypeUpdateOneRequiredWithoutJobsNestedInput
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutDocumentsInput = {
@@ -1032,10 +1032,10 @@ export type JobUncheckedUpdateWithoutDocumentsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUncheckedUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUncheckedUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUncheckedUpdateManyWithoutActivityJobNestedInput
 }
 
-export type JobCreateWithoutActivityUsersInput = {
+export type JobCreateWithoutActivityCasesInput = {
   id?: string
   title: string
   titleEn?: string | null
@@ -1053,7 +1053,7 @@ export type JobCreateWithoutActivityUsersInput = {
   identityUsers?: Prisma.UserCreateNestedManyWithoutEconomicJobInput
 }
 
-export type JobUncheckedCreateWithoutActivityUsersInput = {
+export type JobUncheckedCreateWithoutActivityCasesInput = {
   id?: string
   groupId?: string | null
   title: string
@@ -1071,64 +1071,23 @@ export type JobUncheckedCreateWithoutActivityUsersInput = {
   identityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutEconomicJobInput
 }
 
-export type JobCreateOrConnectWithoutActivityUsersInput = {
+export type JobCreateOrConnectWithoutActivityCasesInput = {
   where: Prisma.JobWhereUniqueInput
-  create: Prisma.XOR<Prisma.JobCreateWithoutActivityUsersInput, Prisma.JobUncheckedCreateWithoutActivityUsersInput>
+  create: Prisma.XOR<Prisma.JobCreateWithoutActivityCasesInput, Prisma.JobUncheckedCreateWithoutActivityCasesInput>
 }
 
-export type JobCreateWithoutIdentityUsersInput = {
-  id?: string
-  title: string
-  titleEn?: string | null
-  taxIntaCode?: string | null
-  description?: string | null
-  code: string
-  annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  group?: Prisma.JobGroupCreateNestedOneWithoutJobsInput
-  jobType: Prisma.JobTypeCreateNestedOneWithoutJobsInput
-  inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
-  documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
-  activityUsers?: Prisma.UserCreateNestedManyWithoutActivityJobInput
-}
-
-export type JobUncheckedCreateWithoutIdentityUsersInput = {
-  id?: string
-  groupId?: string | null
-  title: string
-  titleEn?: string | null
-  taxIntaCode?: string | null
-  description?: string | null
-  code: string
-  jobTypeId: string
-  annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  isActive?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  inquiryCenters?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutJobInput
-  documents?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutJobInput
-  activityUsers?: Prisma.UserUncheckedCreateNestedManyWithoutActivityJobInput
-}
-
-export type JobCreateOrConnectWithoutIdentityUsersInput = {
-  where: Prisma.JobWhereUniqueInput
-  create: Prisma.XOR<Prisma.JobCreateWithoutIdentityUsersInput, Prisma.JobUncheckedCreateWithoutIdentityUsersInput>
-}
-
-export type JobUpsertWithoutActivityUsersInput = {
-  update: Prisma.XOR<Prisma.JobUpdateWithoutActivityUsersInput, Prisma.JobUncheckedUpdateWithoutActivityUsersInput>
-  create: Prisma.XOR<Prisma.JobCreateWithoutActivityUsersInput, Prisma.JobUncheckedCreateWithoutActivityUsersInput>
+export type JobUpsertWithoutActivityCasesInput = {
+  update: Prisma.XOR<Prisma.JobUpdateWithoutActivityCasesInput, Prisma.JobUncheckedUpdateWithoutActivityCasesInput>
+  create: Prisma.XOR<Prisma.JobCreateWithoutActivityCasesInput, Prisma.JobUncheckedCreateWithoutActivityCasesInput>
   where?: Prisma.JobWhereInput
 }
 
-export type JobUpdateToOneWithWhereWithoutActivityUsersInput = {
+export type JobUpdateToOneWithWhereWithoutActivityCasesInput = {
   where?: Prisma.JobWhereInput
-  data: Prisma.XOR<Prisma.JobUpdateWithoutActivityUsersInput, Prisma.JobUncheckedUpdateWithoutActivityUsersInput>
+  data: Prisma.XOR<Prisma.JobUpdateWithoutActivityCasesInput, Prisma.JobUncheckedUpdateWithoutActivityCasesInput>
 }
 
-export type JobUpdateWithoutActivityUsersInput = {
+export type JobUpdateWithoutActivityCasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1146,7 +1105,7 @@ export type JobUpdateWithoutActivityUsersInput = {
   identityUsers?: Prisma.UserUpdateManyWithoutEconomicJobNestedInput
 }
 
-export type JobUncheckedUpdateWithoutActivityUsersInput = {
+export type JobUncheckedUpdateWithoutActivityCasesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1162,6 +1121,47 @@ export type JobUncheckedUpdateWithoutActivityUsersInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUncheckedUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUncheckedUpdateManyWithoutEconomicJobNestedInput
+}
+
+export type JobCreateWithoutIdentityUsersInput = {
+  id?: string
+  title: string
+  titleEn?: string | null
+  taxIntaCode?: string | null
+  description?: string | null
+  code: string
+  annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  group?: Prisma.JobGroupCreateNestedOneWithoutJobsInput
+  jobType: Prisma.JobTypeCreateNestedOneWithoutJobsInput
+  inquiryCenters?: Prisma.JobInquiryCenterCreateNestedManyWithoutJobInput
+  documents?: Prisma.JobDocumentCreateNestedManyWithoutJobInput
+  activityCases?: Prisma.CaseFileCreateNestedManyWithoutActivityJobInput
+}
+
+export type JobUncheckedCreateWithoutIdentityUsersInput = {
+  id?: string
+  groupId?: string | null
+  title: string
+  titleEn?: string | null
+  taxIntaCode?: string | null
+  description?: string | null
+  code: string
+  jobTypeId: string
+  annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiryCenters?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutJobInput
+  documents?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutJobInput
+  activityCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutActivityJobInput
+}
+
+export type JobCreateOrConnectWithoutIdentityUsersInput = {
+  where: Prisma.JobWhereUniqueInput
+  create: Prisma.XOR<Prisma.JobCreateWithoutIdentityUsersInput, Prisma.JobUncheckedCreateWithoutIdentityUsersInput>
 }
 
 export type JobUpsertWithoutIdentityUsersInput = {
@@ -1190,7 +1190,7 @@ export type JobUpdateWithoutIdentityUsersInput = {
   jobType?: Prisma.JobTypeUpdateOneRequiredWithoutJobsNestedInput
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
-  activityUsers?: Prisma.UserUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutIdentityUsersInput = {
@@ -1208,7 +1208,7 @@ export type JobUncheckedUpdateWithoutIdentityUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUncheckedUpdateManyWithoutJobNestedInput
-  activityUsers?: Prisma.UserUncheckedUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUncheckedUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobCreateManyJobTypeInput = {
@@ -1240,7 +1240,7 @@ export type JobUpdateWithoutJobTypeInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutJobTypeInput = {
@@ -1258,7 +1258,7 @@ export type JobUncheckedUpdateWithoutJobTypeInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUncheckedUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUncheckedUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUncheckedUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUncheckedUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateManyWithoutJobTypeInput = {
@@ -1304,7 +1304,7 @@ export type JobUpdateWithoutGroupInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateWithoutGroupInput = {
@@ -1322,7 +1322,7 @@ export type JobUncheckedUpdateWithoutGroupInput = {
   inquiryCenters?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutJobNestedInput
   documents?: Prisma.JobDocumentUncheckedUpdateManyWithoutJobNestedInput
   identityUsers?: Prisma.UserUncheckedUpdateManyWithoutEconomicJobNestedInput
-  activityUsers?: Prisma.UserUncheckedUpdateManyWithoutActivityJobNestedInput
+  activityCases?: Prisma.CaseFileUncheckedUpdateManyWithoutActivityJobNestedInput
 }
 
 export type JobUncheckedUpdateManyWithoutGroupInput = {
@@ -1348,14 +1348,14 @@ export type JobCountOutputType = {
   inquiryCenters: number
   documents: number
   identityUsers: number
-  activityUsers: number
+  activityCases: number
 }
 
 export type JobCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   inquiryCenters?: boolean | JobCountOutputTypeCountInquiryCentersArgs
   documents?: boolean | JobCountOutputTypeCountDocumentsArgs
   identityUsers?: boolean | JobCountOutputTypeCountIdentityUsersArgs
-  activityUsers?: boolean | JobCountOutputTypeCountActivityUsersArgs
+  activityCases?: boolean | JobCountOutputTypeCountActivityCasesArgs
 }
 
 /**
@@ -1392,8 +1392,8 @@ export type JobCountOutputTypeCountIdentityUsersArgs<ExtArgs extends runtime.Typ
 /**
  * JobCountOutputType without action
  */
-export type JobCountOutputTypeCountActivityUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserWhereInput
+export type JobCountOutputTypeCountActivityCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseFileWhereInput
 }
 
 
@@ -1415,7 +1415,7 @@ export type JobSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   inquiryCenters?: boolean | Prisma.Job$inquiryCentersArgs<ExtArgs>
   documents?: boolean | Prisma.Job$documentsArgs<ExtArgs>
   identityUsers?: boolean | Prisma.Job$identityUsersArgs<ExtArgs>
-  activityUsers?: boolean | Prisma.Job$activityUsersArgs<ExtArgs>
+  activityCases?: boolean | Prisma.Job$activityCasesArgs<ExtArgs>
   _count?: boolean | Prisma.JobCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["job"]>
 
@@ -1475,7 +1475,7 @@ export type JobInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   inquiryCenters?: boolean | Prisma.Job$inquiryCentersArgs<ExtArgs>
   documents?: boolean | Prisma.Job$documentsArgs<ExtArgs>
   identityUsers?: boolean | Prisma.Job$identityUsersArgs<ExtArgs>
-  activityUsers?: boolean | Prisma.Job$activityUsersArgs<ExtArgs>
+  activityCases?: boolean | Prisma.Job$activityCasesArgs<ExtArgs>
   _count?: boolean | Prisma.JobCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type JobIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1495,7 +1495,7 @@ export type $JobPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     inquiryCenters: Prisma.$JobInquiryCenterPayload<ExtArgs>[]
     documents: Prisma.$JobDocumentPayload<ExtArgs>[]
     identityUsers: Prisma.$UserPayload<ExtArgs>[]
-    activityUsers: Prisma.$UserPayload<ExtArgs>[]
+    activityCases: Prisma.$CaseFilePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1915,7 +1915,7 @@ export interface Prisma__JobClient<T, Null = never, ExtArgs extends runtime.Type
   inquiryCenters<T extends Prisma.Job$inquiryCentersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$inquiryCentersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobInquiryCenterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Job$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   identityUsers<T extends Prisma.Job$identityUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$identityUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  activityUsers<T extends Prisma.Job$activityUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$activityUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activityCases<T extends Prisma.Job$activityCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Job$activityCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2449,27 +2449,27 @@ export type Job$identityUsersArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Job.activityUsers
+ * Job.activityCases
  */
-export type Job$activityUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Job$activityCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the CaseFile
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.CaseFileSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the CaseFile
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.CaseFileOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
-  cursor?: Prisma.UserWhereUniqueInput
+  include?: Prisma.CaseFileInclude<ExtArgs> | null
+  where?: Prisma.CaseFileWhereInput
+  orderBy?: Prisma.CaseFileOrderByWithRelationInput | Prisma.CaseFileOrderByWithRelationInput[]
+  cursor?: Prisma.CaseFileWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+  distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
 }
 
 /**

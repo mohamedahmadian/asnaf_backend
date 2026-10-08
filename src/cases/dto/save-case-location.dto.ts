@@ -23,7 +23,7 @@ function textOrNull(value: unknown) {
 
 export class SaveCaseLocationDto {
   @IsUUID('4')
-  userId: string;
+  caseId: string;
 
   @IsUUID('4')
   cityId: string;

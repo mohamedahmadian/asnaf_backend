@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Jimp, JimpMime } from 'jimp';
-import { mkdir, readFile, writeFile } from 'fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { dirname, join, normalize, sep } from 'path';
 
 const MAX_EDGE = 1600;
@@ -102,8 +102,47 @@ export class PersonFileStorage {
     };
   }
 
+  async saveManagementReview(input: {
+    personId: string;
+    reviewId: string;
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = await this.prepare(input.buffer, input.mimeType);
+    const storageKey = [
+      'persons',
+      input.personId,
+      'management-reviews',
+      input.reviewId,
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
   async read(storageKey: string) {
     return readFile(this.resolve(storageKey));
+  }
+
+  async remove(storageKey: string) {
+    await rm(this.resolve(storageKey), { force: true });
+  }
+
+  /** پوشهٔ فایل‌های یک شخص: مدارک، استعلام، اماکن و تایید مدیریتی. */
+  async removePerson(personId: string) {
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(personId)) {
+      return;
+    }
+    await rm(this.resolve(`persons/${personId}`), { recursive: true, force: true });
   }
 
   private resolve(storageKey: string) {

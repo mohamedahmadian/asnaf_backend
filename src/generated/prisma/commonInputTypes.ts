@@ -324,6 +324,125 @@ export type EnumDocumentGenderWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumDocumentGenderFilter<$PrismaModel>
 }
 
+export type EnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel> | $Enums.PreviousOccupation | null
+}
+
+export type EnumPremiseEstablishmentNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
+}
+
+export type EnumPremiseGeoPositionNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
+}
+
+export type EnumPremisePublicAccessNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
+}
+
+export type EnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
+}
+
+export type EnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel> | $Enums.PreviousOccupation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
+}
+
+export type EnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
+}
+
+export type EnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
+}
+
+export type EnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
+}
+
+export type EnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseOwnership | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
+}
+
+export type EnumCaseRequestTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel> | $Enums.CaseRequestType
+}
+
+export type EnumCaseRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel> | $Enums.CaseRequestStatus
+}
+
+export type EnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+}
+
+export type EnumCaseRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel>
+}
+
 export type EnumDocumentSourceFilter<$PrismaModel = never> = {
   equals?: $Enums.DocumentSource | Prisma.EnumDocumentSourceFieldRefInput<$PrismaModel>
   in?: $Enums.DocumentSource[] | Prisma.ListEnumDocumentSourceFieldRefInput<$PrismaModel>
@@ -376,41 +495,6 @@ export type EnumEducationLevelNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumEducationLevelNullableFilter<$PrismaModel> | $Enums.EducationLevel | null
 }
 
-export type EnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel> | $Enums.PreviousOccupation | null
-}
-
-export type EnumPremiseEstablishmentNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
-}
-
-export type EnumPremiseGeoPositionNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
-}
-
-export type EnumPremisePublicAccessNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
-}
-
-export type EnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
-}
-
 export type EnumUserStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.UserStatus | Prisma.EnumUserStatusFieldRefInput<$PrismaModel>
   in?: $Enums.UserStatus[] | Prisma.ListEnumUserStatusFieldRefInput<$PrismaModel>
@@ -459,56 +543,6 @@ export type EnumEducationLevelNullableWithAggregatesFilter<$PrismaModel = never>
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumEducationLevelNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumEducationLevelNullableFilter<$PrismaModel>
-}
-
-export type EnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel> | $Enums.PreviousOccupation | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
-}
-
-export type EnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
-}
-
-export type EnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
-}
-
-export type EnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
-}
-
-export type EnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseOwnership | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
 }
 
 export type EnumLocationSourceFilter<$PrismaModel = never> = {
@@ -1289,6 +1323,125 @@ export type NestedEnumDocumentGenderWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumDocumentGenderFilter<$PrismaModel>
 }
 
+export type NestedEnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel> | $Enums.PreviousOccupation | null
+}
+
+export type NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
+}
+
+export type NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
+}
+
+export type NestedEnumPremisePublicAccessNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
+}
+
+export type NestedEnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
+}
+
+export type NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel> | $Enums.PreviousOccupation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseOwnership | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumCaseRequestTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel> | $Enums.CaseRequestType
+}
+
+export type NestedEnumCaseRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel> | $Enums.CaseRequestStatus
+}
+
+export type NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumCaseRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel>
+}
+
 export type NestedEnumDocumentSourceFilter<$PrismaModel = never> = {
   equals?: $Enums.DocumentSource | Prisma.EnumDocumentSourceFieldRefInput<$PrismaModel>
   in?: $Enums.DocumentSource[] | Prisma.ListEnumDocumentSourceFieldRefInput<$PrismaModel>
@@ -1341,41 +1494,6 @@ export type NestedEnumEducationLevelNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumEducationLevelNullableFilter<$PrismaModel> | $Enums.EducationLevel | null
 }
 
-export type NestedEnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel> | $Enums.PreviousOccupation | null
-}
-
-export type NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
-}
-
-export type NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
-}
-
-export type NestedEnumPremisePublicAccessNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
-}
-
-export type NestedEnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
-}
-
 export type NestedEnumUserStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.UserStatus | Prisma.EnumUserStatusFieldRefInput<$PrismaModel>
   in?: $Enums.UserStatus[] | Prisma.ListEnumUserStatusFieldRefInput<$PrismaModel>
@@ -1424,56 +1542,6 @@ export type NestedEnumEducationLevelNullableWithAggregatesFilter<$PrismaModel = 
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumEducationLevelNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumEducationLevelNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel> | $Enums.PreviousOccupation | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPreviousOccupationNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseEstablishment | Prisma.EnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseEstablishment[] | Prisma.ListEnumPremiseEstablishmentFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseEstablishmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseEstablishment | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremiseEstablishmentNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseGeoPosition | Prisma.EnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseGeoPosition[] | Prisma.ListEnumPremiseGeoPositionFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseGeoPositionNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseGeoPosition | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremiseGeoPositionNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremisePublicAccess | Prisma.EnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremisePublicAccess[] | Prisma.ListEnumPremisePublicAccessFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremisePublicAccessNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremisePublicAccess | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremisePublicAccessNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.PremiseOwnership | Prisma.EnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
-  not?: Prisma.NestedEnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel> | $Enums.PremiseOwnership | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumLocationSourceFilter<$PrismaModel = never> = {
