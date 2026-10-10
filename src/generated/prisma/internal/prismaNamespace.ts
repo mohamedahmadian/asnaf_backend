@@ -412,6 +412,7 @@ export const ModelName = {
   JobInquiryCenter: 'JobInquiryCenter',
   CaseInquiry: 'CaseInquiry',
   CaseInquiryFile: 'CaseInquiryFile',
+  CaseGeneralSettings: 'CaseGeneralSettings',
   CasePlacesOffice: 'CasePlacesOffice',
   CasePlacesReview: 'CasePlacesReview',
   CasePlacesFile: 'CasePlacesFile',
@@ -425,6 +426,8 @@ export const ModelName = {
   CaseRequest: 'CaseRequest',
   PersonDocument: 'PersonDocument',
   PersonDocumentVersion: 'PersonDocumentVersion',
+  CaseActivityDocument: 'CaseActivityDocument',
+  CaseActivityDocumentVersion: 'CaseActivityDocumentVersion',
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
@@ -496,7 +499,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseRequest" | "personDocument" | "personDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseRequest" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1610,6 +1613,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CaseGeneralSettings: {
+      payload: Prisma.$CaseGeneralSettingsPayload<ExtArgs>
+      fields: Prisma.CaseGeneralSettingsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseGeneralSettingsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseGeneralSettingsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseGeneralSettingsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseGeneralSettingsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>
+        }
+        findMany: {
+          args: Prisma.CaseGeneralSettingsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>[]
+        }
+        create: {
+          args: Prisma.CaseGeneralSettingsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>
+        }
+        createMany: {
+          args: Prisma.CaseGeneralSettingsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseGeneralSettingsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseGeneralSettingsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>
+        }
+        update: {
+          args: Prisma.CaseGeneralSettingsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseGeneralSettingsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseGeneralSettingsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseGeneralSettingsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseGeneralSettingsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseGeneralSettingsPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseGeneralSettingsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseGeneralSettings>
+        }
+        groupBy: {
+          args: Prisma.CaseGeneralSettingsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseGeneralSettingsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseGeneralSettingsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseGeneralSettingsCountAggregateOutputType> | number
+        }
+      }
+    }
     CasePlacesOffice: {
       payload: Prisma.$CasePlacesOfficePayload<ExtArgs>
       fields: Prisma.CasePlacesOfficeFieldRefs
@@ -2569,6 +2646,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PersonDocumentVersionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PersonDocumentVersionCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseActivityDocument: {
+      payload: Prisma.$CaseActivityDocumentPayload<ExtArgs>
+      fields: Prisma.CaseActivityDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseActivityDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseActivityDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseActivityDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseActivityDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.CaseActivityDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.CaseActivityDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.CaseActivityDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseActivityDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseActivityDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>
+        }
+        update: {
+          args: Prisma.CaseActivityDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseActivityDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseActivityDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseActivityDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseActivityDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseActivityDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseActivityDocument>
+        }
+        groupBy: {
+          args: Prisma.CaseActivityDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseActivityDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseActivityDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseActivityDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseActivityDocumentVersion: {
+      payload: Prisma.$CaseActivityDocumentVersionPayload<ExtArgs>
+      fields: Prisma.CaseActivityDocumentVersionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseActivityDocumentVersionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseActivityDocumentVersionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseActivityDocumentVersionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseActivityDocumentVersionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>
+        }
+        findMany: {
+          args: Prisma.CaseActivityDocumentVersionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>[]
+        }
+        create: {
+          args: Prisma.CaseActivityDocumentVersionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>
+        }
+        createMany: {
+          args: Prisma.CaseActivityDocumentVersionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseActivityDocumentVersionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseActivityDocumentVersionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>
+        }
+        update: {
+          args: Prisma.CaseActivityDocumentVersionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseActivityDocumentVersionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseActivityDocumentVersionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseActivityDocumentVersionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseActivityDocumentVersionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityDocumentVersionPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseActivityDocumentVersionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseActivityDocumentVersion>
+        }
+        groupBy: {
+          args: Prisma.CaseActivityDocumentVersionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseActivityDocumentVersionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseActivityDocumentVersionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseActivityDocumentVersionCountAggregateOutputType> | number
         }
       }
     }
@@ -6976,6 +7201,16 @@ export const CaseInquiryFileScalarFieldEnum = {
 export type CaseInquiryFileScalarFieldEnum = (typeof CaseInquiryFileScalarFieldEnum)[keyof typeof CaseInquiryFileScalarFieldEnum]
 
 
+export const CaseGeneralSettingsScalarFieldEnum = {
+  id: 'id',
+  editAfterIssuance: 'editAfterIssuance',
+  editorRoleId: 'editorRoleId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseGeneralSettingsScalarFieldEnum = (typeof CaseGeneralSettingsScalarFieldEnum)[keyof typeof CaseGeneralSettingsScalarFieldEnum]
+
+
 export const CasePlacesOfficeScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -7171,6 +7406,32 @@ export const PersonDocumentVersionScalarFieldEnum = {
 } as const
 
 export type PersonDocumentVersionScalarFieldEnum = (typeof PersonDocumentVersionScalarFieldEnum)[keyof typeof PersonDocumentVersionScalarFieldEnum]
+
+
+export const CaseActivityDocumentScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  documentId: 'documentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseActivityDocumentScalarFieldEnum = (typeof CaseActivityDocumentScalarFieldEnum)[keyof typeof CaseActivityDocumentScalarFieldEnum]
+
+
+export const CaseActivityDocumentVersionScalarFieldEnum = {
+  id: 'id',
+  caseActivityDocumentId: 'caseActivityDocumentId',
+  version: 'version',
+  source: 'source',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseActivityDocumentVersionScalarFieldEnum = (typeof CaseActivityDocumentVersionScalarFieldEnum)[keyof typeof CaseActivityDocumentVersionScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -7956,6 +8217,7 @@ export const RegistrationPlaceScalarFieldEnum = {
   title: 'title',
   description: 'description',
   isActive: 'isActive',
+  isDefault: 'isDefault',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -8872,6 +9134,7 @@ export type GlobalOmitConfig = {
   jobInquiryCenter?: Prisma.JobInquiryCenterOmit
   caseInquiry?: Prisma.CaseInquiryOmit
   caseInquiryFile?: Prisma.CaseInquiryFileOmit
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsOmit
   casePlacesOffice?: Prisma.CasePlacesOfficeOmit
   casePlacesReview?: Prisma.CasePlacesReviewOmit
   casePlacesFile?: Prisma.CasePlacesFileOmit
@@ -8885,6 +9148,8 @@ export type GlobalOmitConfig = {
   caseRequest?: Prisma.CaseRequestOmit
   personDocument?: Prisma.PersonDocumentOmit
   personDocumentVersion?: Prisma.PersonDocumentVersionOmit
+  caseActivityDocument?: Prisma.CaseActivityDocumentOmit
+  caseActivityDocumentVersion?: Prisma.CaseActivityDocumentVersionOmit
   user?: Prisma.UserOmit
   userLocationHistory?: Prisma.UserLocationHistoryOmit
   projectGroup?: Prisma.ProjectGroupOmit

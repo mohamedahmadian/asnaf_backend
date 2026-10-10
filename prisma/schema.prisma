@@ -1,7 +1,8 @@
 generator client {
-  provider     = "prisma-client"
-  output       = "../src/generated/prisma"
-  moduleFormat = "cjs"
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  moduleFormat    = "cjs"
+  previewFeatures = ["partialIndexes"]
 }
 
 datasource db {
@@ -478,6 +479,18 @@ model CaseInquiryFile {
   @@map("case_inquiry_files")
 }
 
+/// تنظیمات کلی پرونده‌ها؛ یک ردیف ثابت
+model CaseGeneralSettings {
+  id                String   @id @default("default")
+  editAfterIssuance Boolean  @default(false)
+  editorRoleId      String?
+  editorRole        Role?    @relation(fields: [editorRoleId], references: [id], onDelete: SetNull)
+  updatedAt         DateTime @updatedAt
+
+  @@index([editorRoleId])
+  @@map("case_general_settings")
+}
+
 /// تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
 model CasePlacesOffice {
   id          String   @id @default("default")
@@ -552,6 +565,7 @@ model Document {
   code       String?         @unique
   jobs       JobDocument[]
   personDocuments PersonDocument[]
+  caseActivityDocuments CaseActivityDocument[]
   caseIdentityDocument CaseIdentityDocument?
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @updatedAt
@@ -697,6 +711,7 @@ model CaseFile {
   placesReview         CasePlacesReview?
   managementReviews    CaseManagementReview[]
   requests             CaseRequest[]
+  activityDocuments    CaseActivityDocument[]
   violations           Violation[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
@@ -766,8 +781,45 @@ model PersonDocumentVersion {
 
   @@unique([personDocumentId, version])
   @@index([personDocumentId])
+  @@index([storageKey])
   @@index([createdAt])
   @@map("person_document_versions")
+}
+
+/// مدرک شغلی یک پرونده. هر پرونده فایل جدا دارد و با مدارک هویتی شخص مشترک نیست.
+model CaseActivityDocument {
+  id         String                         @id @default(uuid())
+  caseFileId String
+  caseFile   CaseFile                       @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  documentId String
+  document   Document                       @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  versions   CaseActivityDocumentVersion[]
+  createdAt  DateTime                       @default(now())
+  updatedAt  DateTime                       @updatedAt
+
+  @@unique([caseFileId, documentId])
+  @@index([caseFileId])
+  @@index([documentId])
+  @@map("case_activity_documents")
+}
+
+model CaseActivityDocumentVersion {
+  id                     String               @id @default(uuid())
+  caseActivityDocumentId String
+  caseActivityDocument   CaseActivityDocument @relation(fields: [caseActivityDocumentId], references: [id], onDelete: Cascade)
+  version                Int
+  source                 DocumentSource       @default(MANUAL)
+  storageKey             String
+  originalName           String?
+  mimeType               String
+  byteSize               Int
+  createdAt              DateTime             @default(now())
+
+  @@unique([caseActivityDocumentId, version])
+  @@index([caseActivityDocumentId])
+  @@index([storageKey])
+  @@index([createdAt])
+  @@map("case_activity_document_versions")
 }
 
 model User {
@@ -1447,6 +1499,7 @@ model Role {
   permissions RolePermission[]
   caseManagementApprovers CaseManagementApprover[]
   caseManagementReviews CaseManagementReview[]
+  caseGeneralSettings CaseGeneralSettings[]
 
   @@index([name])
   @@index([createdAt])
@@ -1912,16 +1965,19 @@ model ViolationType {
 }
 
 model RegistrationPlace {
-  id          String   @id @default(uuid())
-  title       String   @unique
-  description String?
-  isActive     Boolean  @default(true)
+  id           String     @id @default(uuid())
+  title        String     @unique
+  description  String?
+  isActive     Boolean    @default(true)
+  isDefault    Boolean    @default(false)
   premiseCases CaseFile[] @relation("CaseRegistrationPlace")
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
+  @@unique([isDefault], map: "registration_places_one_default", where: { isDefault: true })
   @@index([title])
   @@index([isActive])
+  @@index([isDefault])
   @@index([createdAt])
   @@map("registration_places")
 }

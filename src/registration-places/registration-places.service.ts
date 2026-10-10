@@ -21,6 +21,7 @@ const registrationPlaceSelect = {
   title: true,
   description: true,
   isActive: true,
+  isDefault: true,
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.RegistrationPlaceSelect;
@@ -46,6 +47,7 @@ export class RegistrationPlacesService {
           title: (dir) => ({ title: dir }),
           description: (dir) => ({ description: dir }),
           isActive: (dir) => ({ isActive: dir }),
+          isDefault: (dir) => ({ isDefault: dir }),
         },
         [{ createdAt: 'desc' }, { id: 'asc' }],
       );
@@ -82,14 +84,20 @@ export class RegistrationPlacesService {
   }
 
   async create(dto: CreateRegistrationPlaceDto) {
+    const isActive = dto.isActive ?? true;
+    const isDefault = Boolean(dto.isDefault && isActive);
     try {
-      return await this.prisma.registrationPlace.create({
-        data: {
-          title: dto.title,
-          description: dto.description,
-          isActive: dto.isActive,
-        },
-        select: registrationPlaceSelect,
+      return await this.prisma.$transaction(async (tx) => {
+        if (isDefault) await this.clearDefault(tx);
+        return tx.registrationPlace.create({
+          data: {
+            title: dto.title,
+            description: dto.description,
+            isActive,
+            isDefault,
+          },
+          select: registrationPlaceSelect,
+        });
       });
     } catch (error) {
       this.rethrowUnique(error);
@@ -97,16 +105,22 @@ export class RegistrationPlacesService {
   }
 
   async update(id: string, dto: UpdateRegistrationPlaceDto) {
-    await this.findOne(id);
+    const current = await this.findOne(id);
+    const isActive = dto.isActive ?? current.isActive;
+    const isDefault = Boolean((dto.isDefault ?? current.isDefault) && isActive);
     try {
-      return await this.prisma.registrationPlace.update({
-        where: { id },
-        data: {
-          title: dto.title,
-          description: dto.description,
-          isActive: dto.isActive,
-        },
-        select: registrationPlaceSelect,
+      return await this.prisma.$transaction(async (tx) => {
+        if (isDefault) await this.clearDefault(tx, id);
+        return tx.registrationPlace.update({
+          where: { id },
+          data: {
+            title: dto.title,
+            description: dto.description,
+            isActive: dto.isActive,
+            isDefault,
+          },
+          select: registrationPlaceSelect,
+        });
       });
     } catch (error) {
       this.rethrowUnique(error);
@@ -117,6 +131,19 @@ export class RegistrationPlacesService {
     await this.findOne(id);
     await this.prisma.registrationPlace.delete({ where: { id } });
     return { ok: true };
+  }
+
+  private clearDefault(
+    tx: Prisma.TransactionClient,
+    exceptId?: string,
+  ) {
+    return tx.registrationPlace.updateMany({
+      where: {
+        isDefault: true,
+        ...(exceptId ? { id: { not: exceptId } } : {}),
+      },
+      data: { isDefault: false },
+    });
   }
 
   private rethrowUnique(error: unknown): never {

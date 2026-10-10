@@ -29,6 +29,7 @@ export type RegistrationPlaceMinAggregateOutputType = {
   title: string | null
   description: string | null
   isActive: boolean | null
+  isDefault: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -38,6 +39,7 @@ export type RegistrationPlaceMaxAggregateOutputType = {
   title: string | null
   description: string | null
   isActive: boolean | null
+  isDefault: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -47,6 +49,7 @@ export type RegistrationPlaceCountAggregateOutputType = {
   title: number
   description: number
   isActive: number
+  isDefault: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -58,6 +61,7 @@ export type RegistrationPlaceMinAggregateInputType = {
   title?: true
   description?: true
   isActive?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -67,6 +71,7 @@ export type RegistrationPlaceMaxAggregateInputType = {
   title?: true
   description?: true
   isActive?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -76,6 +81,7 @@ export type RegistrationPlaceCountAggregateInputType = {
   title?: true
   description?: true
   isActive?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -158,6 +164,7 @@ export type RegistrationPlaceGroupByOutputType = {
   title: string
   description: string | null
   isActive: boolean
+  isDefault: boolean
   createdAt: Date
   updatedAt: Date
   _count: RegistrationPlaceCountAggregateOutputType | null
@@ -188,6 +195,7 @@ export type RegistrationPlaceWhereInput = {
   title?: Prisma.StringFilter<"RegistrationPlace"> | string
   description?: Prisma.StringNullableFilter<"RegistrationPlace"> | string | null
   isActive?: Prisma.BoolFilter<"RegistrationPlace"> | boolean
+  isDefault?: Prisma.BoolFilter<"RegistrationPlace"> | boolean
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   premiseCases?: Prisma.CaseFileListRelationFilter
@@ -198,6 +206,7 @@ export type RegistrationPlaceOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   premiseCases?: Prisma.CaseFileOrderByRelationAggregateInput
@@ -206,6 +215,7 @@ export type RegistrationPlaceOrderByWithRelationInput = {
 export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   title?: string
+  isDefault?: boolean
   AND?: Prisma.RegistrationPlaceWhereInput | Prisma.RegistrationPlaceWhereInput[]
   OR?: Prisma.RegistrationPlaceWhereInput[]
   NOT?: Prisma.RegistrationPlaceWhereInput | Prisma.RegistrationPlaceWhereInput[]
@@ -214,13 +224,14 @@ export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   premiseCases?: Prisma.CaseFileListRelationFilter
-}, "id" | "title">
+}, "id" | "title" | "isDefault">
 
 export type RegistrationPlaceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.RegistrationPlaceCountOrderByAggregateInput
@@ -236,6 +247,7 @@ export type RegistrationPlaceScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"RegistrationPlace"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"RegistrationPlace"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"RegistrationPlace"> | boolean
+  isDefault?: Prisma.BoolWithAggregatesFilter<"RegistrationPlace"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RegistrationPlace"> | Date | string
 }
@@ -245,6 +257,7 @@ export type RegistrationPlaceCreateInput = {
   title: string
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
@@ -255,6 +268,7 @@ export type RegistrationPlaceUncheckedCreateInput = {
   title: string
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
@@ -265,6 +279,7 @@ export type RegistrationPlaceUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
@@ -275,6 +290,7 @@ export type RegistrationPlaceUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
@@ -285,6 +301,7 @@ export type RegistrationPlaceCreateManyInput = {
   title: string
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -294,6 +311,7 @@ export type RegistrationPlaceUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -303,6 +321,7 @@ export type RegistrationPlaceUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -317,6 +336,7 @@ export type RegistrationPlaceCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -326,6 +346,7 @@ export type RegistrationPlaceMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -335,6 +356,7 @@ export type RegistrationPlaceMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -360,6 +382,7 @@ export type RegistrationPlaceCreateWithoutPremiseCasesInput = {
   title: string
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -369,6 +392,7 @@ export type RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput = {
   title: string
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -394,6 +418,7 @@ export type RegistrationPlaceUpdateWithoutPremiseCasesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -403,6 +428,7 @@ export type RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -443,6 +469,7 @@ export type RegistrationPlaceSelect<ExtArgs extends runtime.Types.Extensions.Int
   title?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
@@ -454,6 +481,7 @@ export type RegistrationPlaceSelectCreateManyAndReturn<ExtArgs extends runtime.T
   title?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["registrationPlace"]>
@@ -463,6 +491,7 @@ export type RegistrationPlaceSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   title?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["registrationPlace"]>
@@ -472,11 +501,12 @@ export type RegistrationPlaceSelectScalar = {
   title?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type RegistrationPlaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["registrationPlace"]>
+export type RegistrationPlaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["registrationPlace"]>
 export type RegistrationPlaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
   _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
@@ -494,6 +524,7 @@ export type $RegistrationPlacePayload<ExtArgs extends runtime.Types.Extensions.I
     title: string
     description: string | null
     isActive: boolean
+    isDefault: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["registrationPlace"]>
@@ -924,6 +955,7 @@ export interface RegistrationPlaceFieldRefs {
   readonly title: Prisma.FieldRef<"RegistrationPlace", 'String'>
   readonly description: Prisma.FieldRef<"RegistrationPlace", 'String'>
   readonly isActive: Prisma.FieldRef<"RegistrationPlace", 'Boolean'>
+  readonly isDefault: Prisma.FieldRef<"RegistrationPlace", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"RegistrationPlace", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"RegistrationPlace", 'DateTime'>
 }

@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { CaseGeneralSettingsController } from './case-general-settings.controller';
+import { CaseGeneralSettingsService } from './case-general-settings.service';
 import { CaseIdentityDocumentsController } from './case-identity-documents.controller';
 import { CaseIdentityDocumentsService } from './case-identity-documents.service';
 import { CaseManagementApproversController } from './case-management-approvers.controller';
@@ -21,6 +23,7 @@ import { PersonFileStorage } from './person-file.storage';
     CasePlacesOfficeController,
     CaseRecordsController,
     CaseIdentityDocumentsController,
+    CaseGeneralSettingsController,
     CaseManagementApproversController,
     DashboardController,
   ],
@@ -29,6 +32,7 @@ import { PersonFileStorage } from './person-file.storage';
     CaseInquiriesService,
     CasePlacesService,
     CaseIdentityDocumentsService,
+    CaseGeneralSettingsService,
     CaseManagementApproversService,
     PersonFileStorage,
   ],

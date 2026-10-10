@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  MinLength,
   IsUUID,
   Matches,
   Max,
@@ -37,11 +38,10 @@ export class SaveCaseLocationDto {
   @IsUUID('4')
   complexId?: string | null;
 
-  @IsOptional()
-  @Transform(({ value }) => textOrNull(value))
-  @ValidateIf((_, value) => value != null)
+  @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()
-  address?: string | null;
+  @MinLength(1)
+  address: string;
 
   @IsOptional()
   @Transform(({ value }) => textOrNull(value))
@@ -118,17 +118,15 @@ export class SaveCaseLocationDto {
   @IsString()
   deedNo?: string | null;
 
-  @IsOptional()
   @Transform(({ value }) => {
-    if (value === '' || value == null) return null;
+    if (value === '' || value == null) return value;
     const parsed = Number(value);
     return Number.isFinite(parsed) ? parsed : value;
   })
-  @ValidateIf((_, value) => value != null)
   @IsNumber()
   @Min(0)
   @Max(1000000)
-  area?: number | null;
+  area: number;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))

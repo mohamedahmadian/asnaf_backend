@@ -48,6 +48,36 @@ export class PersonFileStorage {
     };
   }
 
+  async saveCaseActivity(input: {
+    personId: string;
+    caseFileId: string;
+    documentId: string;
+    version: number;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = await this.prepare(input.buffer, input.mimeType);
+    const storageKey = [
+      'persons',
+      input.personId,
+      'cases',
+      input.caseFileId,
+      'documents',
+      input.documentId,
+      `v${input.version}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
   async saveInquiry(input: {
     personId: string;
     inquiryId: string;

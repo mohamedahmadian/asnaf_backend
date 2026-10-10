@@ -115,6 +115,11 @@ export type CaseInquiry = Prisma.CaseInquiryModel
  */
 export type CaseInquiryFile = Prisma.CaseInquiryFileModel
 /**
+ * Model CaseGeneralSettings
+ * تنظیمات کلی پرونده‌ها؛ یک ردیف ثابت
+ */
+export type CaseGeneralSettings = Prisma.CaseGeneralSettingsModel
+/**
  * Model CasePlacesOffice
  * تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
  */
@@ -180,6 +185,16 @@ export type PersonDocument = Prisma.PersonDocumentModel
  * 
  */
 export type PersonDocumentVersion = Prisma.PersonDocumentVersionModel
+/**
+ * Model CaseActivityDocument
+ * مدرک شغلی یک پرونده. هر پرونده فایل جدا دارد و با مدارک هویتی شخص مشترک نیست.
+ */
+export type CaseActivityDocument = Prisma.CaseActivityDocumentModel
+/**
+ * Model CaseActivityDocumentVersion
+ * 
+ */
+export type CaseActivityDocumentVersion = Prisma.CaseActivityDocumentVersionModel
 /**
  * Model User
  * 

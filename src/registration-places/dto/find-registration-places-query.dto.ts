@@ -8,6 +8,7 @@ export const registrationPlaceSortFields = [
   'title',
   'description',
   'isActive',
+  'isDefault',
 ] as const;
 
 export class FindRegistrationPlacesQueryDto extends PaginationQueryDto {

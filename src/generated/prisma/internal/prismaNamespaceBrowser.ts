@@ -66,6 +66,7 @@ export const ModelName = {
   JobInquiryCenter: 'JobInquiryCenter',
   CaseInquiry: 'CaseInquiry',
   CaseInquiryFile: 'CaseInquiryFile',
+  CaseGeneralSettings: 'CaseGeneralSettings',
   CasePlacesOffice: 'CasePlacesOffice',
   CasePlacesReview: 'CasePlacesReview',
   CasePlacesFile: 'CasePlacesFile',
@@ -79,6 +80,8 @@ export const ModelName = {
   CaseRequest: 'CaseRequest',
   PersonDocument: 'PersonDocument',
   PersonDocumentVersion: 'PersonDocumentVersion',
+  CaseActivityDocument: 'CaseActivityDocument',
+  CaseActivityDocumentVersion: 'CaseActivityDocumentVersion',
   User: 'User',
   UserLocationHistory: 'UserLocationHistory',
   ProjectGroup: 'ProjectGroup',
@@ -374,6 +377,16 @@ export const CaseInquiryFileScalarFieldEnum = {
 export type CaseInquiryFileScalarFieldEnum = (typeof CaseInquiryFileScalarFieldEnum)[keyof typeof CaseInquiryFileScalarFieldEnum]
 
 
+export const CaseGeneralSettingsScalarFieldEnum = {
+  id: 'id',
+  editAfterIssuance: 'editAfterIssuance',
+  editorRoleId: 'editorRoleId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseGeneralSettingsScalarFieldEnum = (typeof CaseGeneralSettingsScalarFieldEnum)[keyof typeof CaseGeneralSettingsScalarFieldEnum]
+
+
 export const CasePlacesOfficeScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -569,6 +582,32 @@ export const PersonDocumentVersionScalarFieldEnum = {
 } as const
 
 export type PersonDocumentVersionScalarFieldEnum = (typeof PersonDocumentVersionScalarFieldEnum)[keyof typeof PersonDocumentVersionScalarFieldEnum]
+
+
+export const CaseActivityDocumentScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  documentId: 'documentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseActivityDocumentScalarFieldEnum = (typeof CaseActivityDocumentScalarFieldEnum)[keyof typeof CaseActivityDocumentScalarFieldEnum]
+
+
+export const CaseActivityDocumentVersionScalarFieldEnum = {
+  id: 'id',
+  caseActivityDocumentId: 'caseActivityDocumentId',
+  version: 'version',
+  source: 'source',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseActivityDocumentVersionScalarFieldEnum = (typeof CaseActivityDocumentVersionScalarFieldEnum)[keyof typeof CaseActivityDocumentVersionScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -1354,6 +1393,7 @@ export const RegistrationPlaceScalarFieldEnum = {
   title: 'title',
   description: 'description',
   isActive: 'isActive',
+  isDefault: 'isDefault',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

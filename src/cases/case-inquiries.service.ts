@@ -486,8 +486,8 @@ export class CaseInquiriesService {
         select: { id: true, title: true, gender: true },
         orderBy: { title: 'asc' },
       }),
-      this.prisma.personDocument.findMany({
-        where: { userId: user.id },
+      this.prisma.caseActivityDocument.findMany({
+        where: { caseFileId },
         select: {
           documentId: true,
           versions: {
@@ -624,14 +624,27 @@ export class CaseInquiriesService {
       where: { id: versionId },
       include: { personDocument: { select: { userId: true } } },
     });
-    if (!version || version.personDocument.userId !== userId) {
+    if (version?.personDocument.userId === userId) {
+      const data = await this.files.read(version.storageKey);
+      return {
+        mimeType: version.mimeType,
+        byteSize: version.byteSize,
+        originalName: version.originalName,
+        data,
+      };
+    }
+    const activity = await this.prisma.caseActivityDocumentVersion.findUnique({
+      where: { id: versionId },
+      include: { caseActivityDocument: { select: { caseFile: { select: { userId: true } } } } },
+    });
+    if (!activity || activity.caseActivityDocument.caseFile.userId !== userId) {
       throw new NotFoundException('فایل مدرک یافت نشد');
     }
-    const data = await this.files.read(version.storageKey);
+    const data = await this.files.read(activity.storageKey);
     return {
-      mimeType: version.mimeType,
-      byteSize: version.byteSize,
-      originalName: version.originalName,
+      mimeType: activity.mimeType,
+      byteSize: activity.byteSize,
+      originalName: activity.originalName,
       data,
     };
   }

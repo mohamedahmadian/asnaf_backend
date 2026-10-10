@@ -65,13 +65,15 @@ export class CasesController {
   }
 
   @Post('activity')
-  saveActivity(@Body() dto: SaveCaseActivityDto) {
-    return this.cases.saveActivity(dto);
+  saveActivity(@Body() dto: SaveCaseActivityDto, @CurrentUser() user: RequestUser | undefined) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.cases.saveActivity(dto, user.id);
   }
 
   @Post('location')
-  saveLocation(@Body() dto: SaveCaseLocationDto) {
-    return this.cases.saveLocation(dto);
+  saveLocation(@Body() dto: SaveCaseLocationDto, @CurrentUser() user: RequestUser | undefined) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.cases.saveLocation(dto, user.id);
   }
 
   @Post('step')
@@ -210,6 +212,11 @@ export class CasesController {
     return this.cases.personDocuments(userId);
   }
 
+  @Get('activity-documents')
+  activityDocuments(@Query('caseId') caseId = '') {
+    return this.cases.activityDocuments(caseId);
+  }
+
   @Post('documents')
   @UseInterceptors(
     FileInterceptor('file', {
@@ -221,11 +228,13 @@ export class CasesController {
     @UploadedFile() file: UploadFile,
     @Body('userId') userId: string,
     @Body('documentId') documentId: string,
+    @Body('caseId') caseId?: string,
     @Body('jobId') jobId?: string,
   ) {
     return this.cases.uploadDocument({
       userId,
       documentId,
+      caseId: caseId?.trim() || undefined,
       jobId: jobId?.trim() || undefined,
       buffer: file?.buffer,
       mimeType: file?.mimetype,
@@ -234,7 +243,12 @@ export class CasesController {
   }
 
   @Delete('documents/:documentId')
-  removeDocument(@Param('documentId') documentId: string, @Query('userId') userId = '') {
+  removeDocument(
+    @Param('documentId') documentId: string,
+    @Query('userId') userId = '',
+    @Query('caseId') caseId = '',
+  ) {
+    if (caseId) return this.cases.removeActivityDocument(caseId, documentId);
     return this.cases.removeDocument(userId, documentId);
   }
 

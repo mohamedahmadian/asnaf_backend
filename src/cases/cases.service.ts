@@ -39,6 +39,7 @@ import { SaveFormationStepDto } from './dto/save-formation-step.dto';
 import { PersonFileStorage } from './person-file.storage';
 import { CaseInquiriesService } from './case-inquiries.service';
 import { CasePlacesService } from './case-places.service';
+import { CaseGeneralSettingsService } from './case-general-settings.service';
 import { CaseManagementApproversService } from './case-management-approvers.service';
 import {
   ISSUANCE_FORMATION_STEP,
@@ -90,7 +91,15 @@ const caseFileSelect = {
   businessUnitTitle: true,
   previousOccupation: true,
   posDeviceCount: true,
-  activityJob: { select: { id: true, groupId: true, jobType: { select: { title: true } } } },
+  activityJob: {
+    select: {
+      id: true,
+      title: true,
+      groupId: true,
+      group: { select: { title: true } },
+      jobType: { select: { title: true } },
+    },
+  },
   premiseCityId: true,
   premiseEstablishment: true,
   premiseComplexId: true,
@@ -153,7 +162,9 @@ function mapActivity(user: Pick<CaseFileRow, 'businessUnitTitle' | 'previousOccu
   return {
     businessUnitTitle: user.businessUnitTitle,
     jobGroupId: user.activityJob?.groupId ?? null,
+    jobGroupTitle: user.activityJob?.group?.title ?? null,
     jobId: user.activityJob?.id ?? null,
+    jobTitle: user.activityJob?.title ?? null,
     previousOccupation: user.previousOccupation,
     posDeviceCount: user.posDeviceCount,
   };
@@ -204,6 +215,7 @@ export class CasesService {
     private readonly inquiries: CaseInquiriesService,
     private readonly places: CasePlacesService,
     private readonly managementApprovers: CaseManagementApproversService,
+    private readonly generalSettings: CaseGeneralSettingsService,
   ) {}
 
   private async ensureTrackingCode(caseFileId: string, current: string | null, formationStep: number) {
@@ -397,15 +409,25 @@ export class CasesService {
     return tracked;
   }
 
-  async saveActivity(dto: SaveCaseActivityDto) {
+  /** پروندهٔ صادرشده فقط برای نقش انتخاب‌شده در تنظیمات کلی قابل ویرایش است. شماره مجوز ثابت می‌ماند. */
+  private async assertIssuedCaseEditable(licenseNumber: string | null, userId: string) {
+    if (!licenseNumber) return;
+    const allowed = await this.generalSettings.userMayEditIssuedCase(userId);
+    if (allowed === true) return;
+    throw new BadRequestException(
+      allowed === false
+        ? 'ویرایش پرونده صادرشده فقط برای نقش تعیین‌شده مجاز است'
+        : 'مجوز فعالیت اقتصادی این پرونده صادر شده است',
+    );
+  }
+
+  async saveActivity(dto: SaveCaseActivityDto, userId: string) {
     const user = await this.prisma.caseFile.findUnique({
       where: { id: dto.caseId },
       select: { id: true, formationStep: true, licenseNumber: true },
     });
     if (!user) throw new NotFoundException('پرونده یافت نشد');
-    if (user.licenseNumber) {
-      throw new BadRequestException('مجوز فعالیت اقتصادی این پرونده صادر شده است');
-    }
+    await this.assertIssuedCaseEditable(user.licenseNumber, userId);
     const job = await this.prisma.job.findUnique({
       where: { id: dto.jobId },
       select: { id: true, groupId: true },
@@ -429,15 +451,13 @@ export class CasesService {
     return { formationStep: saved.formationStep, activity: mapActivity(saved) };
   }
 
-  async saveLocation(dto: SaveCaseLocationDto) {
+  async saveLocation(dto: SaveCaseLocationDto, userId: string) {
     const user = await this.prisma.caseFile.findUnique({
       where: { id: dto.caseId },
       select: { id: true, formationStep: true, licenseNumber: true },
     });
     if (!user) throw new NotFoundException('پرونده یافت نشد');
-    if (user.licenseNumber) {
-      throw new BadRequestException('مجوز فعالیت اقتصادی این پرونده صادر شده است');
-    }
+    await this.assertIssuedCaseEditable(user.licenseNumber, userId);
     const city = await this.prisma.city.findUnique({
       where: { id: dto.cityId },
       select: { id: true },
@@ -559,6 +579,7 @@ export class CasesService {
     const q = query.q?.trim();
     const digits = q ? normalizeSearchDigits(q) : '';
     const where: Prisma.CaseFileWhereInput = {
+      userId: query.userId,
       formationStep: query.step != null ? query.step : { gt: 0 },
       activityJobId: query.jobId,
       user: {
@@ -601,11 +622,22 @@ export class CasesService {
     const select = {
       id: true,
       formationStep: true,
+      trackingCode: true,
       businessUnitTitle: true,
       licenseNumber: true,
       licenseIssuedAt: true,
       licenseExpiresAt: true,
-      activityJob: { select: { id: true, title: true } },
+      premiseOwnership: true,
+      leaseIssuedAt: true,
+      leaseExpiresAt: true,
+      activityJob: {
+        select: {
+          id: true,
+          title: true,
+          group: { select: { id: true, title: true } },
+        },
+      },
+      premiseCity: { select: { nameFa: true, nameEn: true } },
       user: {
         select: {
           fullName: true,
@@ -622,9 +654,13 @@ export class CasesService {
     const mapRow = (row: Prisma.CaseFileGetPayload<{ select: typeof select }>) => ({
       id: row.id,
       formationStep: row.formationStep,
+      trackingCode: row.trackingCode,
       licenseNumber: row.licenseNumber,
       licenseIssuedAt: dateOnly(row.licenseIssuedAt),
       licenseExpiresAt: dateOnly(row.licenseExpiresAt),
+      premiseOwnership: row.premiseOwnership,
+      leaseIssuedAt: dateOnly(row.leaseIssuedAt),
+      leaseExpiresAt: dateOnly(row.leaseExpiresAt),
       fullName: row.user.fullName,
       fatherName: row.user.fatherName,
       nationalId: row.user.nationalId,
@@ -634,6 +670,7 @@ export class CasesService {
       educationLevel: row.user.educationLevel,
       job: row.activityJob,
       jobTitle: row.businessUnitTitle,
+      city: row.premiseCity,
     });
 
     if (!wantsPagination(query)) {
@@ -660,6 +697,7 @@ export class CasesService {
         licenseNumber: true,
         licenseIssuedAt: true,
         licenseExpiresAt: true,
+        premiseCity: { select: { nameFa: true, nameEn: true } },
         activityJob: {
           select: { id: true, title: true, group: { select: { id: true, title: true } } },
         },
@@ -696,6 +734,7 @@ export class CasesService {
       licenseNumber: file.licenseNumber,
       licenseIssuedAt: dateOnly(file.licenseIssuedAt),
       licenseExpiresAt: dateOnly(file.licenseExpiresAt),
+      city: file.premiseCity,
       job: file.activityJob,
       person: file.user,
       requests: file.requests.map((request) => ({
@@ -789,7 +828,12 @@ export class CasesService {
     if (!file || file.formationStep < 1) {
       throw new NotFoundException('پرونده یافت نشد');
     }
+    const activityFiles = await this.prisma.caseActivityDocumentVersion.findMany({
+      where: { caseActivityDocument: { caseFileId: file.id } },
+      select: { storageKey: true },
+    });
     await this.prisma.caseFile.delete({ where: { id: file.id } });
+    await this.removeStorageIfUnused(activityFiles.map((item) => item.storageKey));
     const remaining = await this.prisma.caseFile.count({ where: { userId: file.userId } });
     if (remaining > 0) return { ok: true };
 
@@ -921,9 +965,41 @@ export class CasesService {
     }));
   }
 
+  async activityDocuments(caseId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseId },
+      select: { id: true },
+    });
+    if (!file) throw new NotFoundException('پرونده یافت نشد');
+    const rows = await this.prisma.caseActivityDocument.findMany({
+      where: { caseFileId: caseId },
+      select: {
+        documentId: true,
+        versions: {
+          orderBy: { version: 'desc' },
+          take: 1,
+          select: {
+            id: true,
+            version: true,
+            source: true,
+            originalName: true,
+            mimeType: true,
+            byteSize: true,
+            createdAt: true,
+          },
+        },
+      },
+    });
+    return rows.map((row) => ({
+      documentId: row.documentId,
+      current: row.versions[0] ?? null,
+    }));
+  }
+
   async uploadDocument(input: {
     userId: string;
     documentId: string;
+    caseId?: string;
     jobId?: string;
     buffer: Buffer;
     mimeType: string;
@@ -935,16 +1011,17 @@ export class CasesService {
       select: { id: true, isFixed: true, isRequired: true },
     });
     if (!document) throw new NotFoundException('مدرک یافت نشد');
-    if (input.jobId) {
-      const allowed = await this.isActivityDocument(document, input.jobId);
-      if (!allowed) throw new NotFoundException('این مدرک برای شغل انتخاب‌شده نیست');
-    } else {
-      const linked = await this.prisma.caseIdentityDocument.findUnique({
-        where: { documentId: document.id },
-        select: { documentId: true },
-      });
-      if (!linked) throw new NotFoundException('این مدرک در فهرست مدارک اطلاعات هویتی نیست');
+    if (input.caseId) {
+      return this.uploadActivityDocument(input, document);
     }
+    if (input.jobId) {
+      throw new BadRequestException('مدرک شغلی باید روی پرونده ذخیره شود');
+    }
+    const linked = await this.prisma.caseIdentityDocument.findUnique({
+      where: { documentId: document.id },
+      select: { documentId: true },
+    });
+    if (!linked) throw new NotFoundException('این مدرک در فهرست مدارک اطلاعات هویتی نیست');
 
     const personDocument = await this.prisma.personDocument.upsert({
       where: {
@@ -989,6 +1066,75 @@ export class CasesService {
     return { documentId: document.id, current: created };
   }
 
+  private async uploadActivityDocument(
+    input: {
+      userId: string;
+      documentId: string;
+      caseId?: string;
+      jobId?: string;
+      buffer: Buffer;
+      mimeType: string;
+      originalName: string;
+    },
+    document: { id: string; isFixed: boolean; isRequired: boolean },
+  ) {
+    if (!input.caseId) throw new BadRequestException('مدرک شغلی باید روی پرونده ذخیره شود');
+    const caseFile = await this.prisma.caseFile.findUnique({
+      where: { id: input.caseId },
+      select: { id: true, userId: true, activityJobId: true },
+    });
+    if (!caseFile || caseFile.userId !== input.userId) {
+      throw new NotFoundException('پرونده یافت نشد');
+    }
+    const jobId = input.jobId || caseFile.activityJobId;
+    if (!jobId) throw new BadRequestException('قبل از بارگذاری مدرک باید شغل انتخاب شود');
+    const allowed = await this.isActivityDocument(document, jobId);
+    if (!allowed) throw new NotFoundException('این مدرک برای شغل انتخاب‌شده نیست');
+
+    const activityDocument = await this.prisma.caseActivityDocument.upsert({
+      where: {
+        caseFileId_documentId: { caseFileId: caseFile.id, documentId: document.id },
+      },
+      create: { caseFileId: caseFile.id, documentId: document.id },
+      update: {},
+      select: {
+        id: true,
+        versions: { select: { version: true }, orderBy: { version: 'desc' }, take: 1 },
+      },
+    });
+    const version = (activityDocument.versions[0]?.version ?? 0) + 1;
+    const stored = await this.files.saveCaseActivity({
+      personId: caseFile.userId,
+      caseFileId: caseFile.id,
+      documentId: document.id,
+      version,
+      buffer: input.buffer,
+      mimeType: input.mimeType,
+      originalName: input.originalName,
+    });
+    const created = await this.prisma.caseActivityDocumentVersion.create({
+      data: {
+        caseActivityDocumentId: activityDocument.id,
+        version,
+        source: DocumentSource.MANUAL,
+        storageKey: stored.storageKey,
+        originalName: stored.originalName,
+        mimeType: stored.mimeType,
+        byteSize: stored.byteSize,
+      },
+      select: {
+        id: true,
+        version: true,
+        source: true,
+        originalName: true,
+        mimeType: true,
+        byteSize: true,
+        createdAt: true,
+      },
+    });
+    return { documentId: document.id, current: created };
+  }
+
   async removeDocument(userId: string, documentId: string) {
     await this.assertPerson(userId);
     const row = await this.prisma.personDocument.findUnique({
@@ -1002,9 +1148,28 @@ export class CasesService {
       throw new NotFoundException('مدرک بارگذاری‌شده‌ای یافت نشد');
     }
     await this.prisma.personDocument.delete({ where: { id: row.id } });
-    for (const version of row.versions) {
-      await this.files.remove(version.storageKey);
+    await this.removeStorageIfUnused(row.versions.map((version) => version.storageKey));
+    return { ok: true };
+  }
+
+  async removeActivityDocument(caseId: string, documentId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseId },
+      select: { id: true },
+    });
+    if (!file) throw new NotFoundException('پرونده یافت نشد');
+    const row = await this.prisma.caseActivityDocument.findUnique({
+      where: { caseFileId_documentId: { caseFileId: caseId, documentId } },
+      select: {
+        id: true,
+        versions: { select: { storageKey: true } },
+      },
+    });
+    if (!row || row.versions.length === 0) {
+      throw new NotFoundException('مدرک بارگذاری‌شده‌ای یافت نشد');
     }
+    await this.prisma.caseActivityDocument.delete({ where: { id: row.id } });
+    await this.removeStorageIfUnused(row.versions.map((version) => version.storageKey));
     return { ok: true };
   }
 
@@ -1012,9 +1177,16 @@ export class CasesService {
     const version = await this.prisma.personDocumentVersion.findUnique({
       where: { id: versionId },
     });
-    if (!version) throw new NotFoundException('فایل مدرک یافت نشد');
-    const data = await this.files.read(version.storageKey);
-    return { ...version, data };
+    if (version) {
+      const data = await this.files.read(version.storageKey);
+      return { ...version, data };
+    }
+    const activity = await this.prisma.caseActivityDocumentVersion.findUnique({
+      where: { id: versionId },
+    });
+    if (!activity) throw new NotFoundException('فایل مدرک یافت نشد');
+    const data = await this.files.read(activity.storageKey);
+    return { ...activity, data };
   }
 
   private matchesDocumentGender(
@@ -1044,7 +1216,7 @@ export class CasesService {
     if (!file?.activityJobId) {
       throw new BadRequestException('قبل از مرحله اماکن باید شغل و مدارک آن تکمیل شود');
     }
-    const user = { activityJobId: file.activityJobId, gender: file.user.gender, id: file.userId };
+    const user = { activityJobId: file.activityJobId, gender: file.user.gender };
     const [fixed, links, stored] = await Promise.all([
       this.prisma.document.findMany({
         where: { isFixed: true, isRequired: true },
@@ -1054,8 +1226,8 @@ export class CasesService {
         where: { jobId: user.activityJobId },
         select: { documentId: true, gender: true, isRequired: true },
       }),
-      this.prisma.personDocument.findMany({
-        where: { userId: user.id },
+      this.prisma.caseActivityDocument.findMany({
+        where: { caseFileId },
         select: {
           documentId: true,
           versions: { select: { id: true }, take: 1 },
@@ -1080,6 +1252,16 @@ export class CasesService {
           'قبل از مرحله اماکن همه مدارک الزامی این شغل باید بارگذاری شده باشند',
         );
       }
+    }
+  }
+
+  private async removeStorageIfUnused(keys: string[]) {
+    for (const storageKey of [...new Set(keys)]) {
+      const [personUse, caseUse] = await Promise.all([
+        this.prisma.personDocumentVersion.count({ where: { storageKey } }),
+        this.prisma.caseActivityDocumentVersion.count({ where: { storageKey } }),
+      ]);
+      if (personUse + caseUse === 0) await this.files.remove(storageKey);
     }
   }
 

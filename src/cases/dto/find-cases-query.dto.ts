@@ -46,6 +46,11 @@ export class FindCasesQueryDto extends PaginationQueryDto {
   jobId?: string;
 
   @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  userId?: string;
+
+  @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(0)
