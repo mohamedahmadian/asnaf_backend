@@ -11,6 +11,7 @@ export const violationSortFields = [
   'occurredAt',
   'status',
   'caseTrackingCode',
+  'licenseNumber',
   'createdAt',
 ] as const;
 
@@ -19,6 +20,12 @@ export class FindViolationsQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...violationStatuses])
   status?: (typeof violationStatuses)[number];
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsString()
+  @MaxLength(20)
+  nationalId?: string;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

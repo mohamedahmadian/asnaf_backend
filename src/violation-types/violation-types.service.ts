@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  OnModuleInit,
 } from '@nestjs/common';
 import {
   containsInsensitive,
@@ -25,9 +26,19 @@ const violationTypeSelect = {
   updatedAt: true,
 } satisfies Prisma.ViolationTypeSelect;
 
+export const OTHER_VIOLATION_TYPE_TITLE = 'سایر';
+
 @Injectable()
-export class ViolationTypesService {
+export class ViolationTypesService implements OnModuleInit {
   constructor(private readonly prisma: PrismaService) {}
+
+  async onModuleInit() {
+    await this.prisma.violationType.upsert({
+      where: { title: OTHER_VIOLATION_TYPE_TITLE },
+      create: { title: OTHER_VIOLATION_TYPE_TITLE, isActive: true },
+      update: { isActive: true },
+    });
+  }
 
   async findAll(query: FindViolationTypesQueryDto) {
     const where: Prisma.ViolationTypeWhereInput = {

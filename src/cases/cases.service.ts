@@ -726,8 +726,12 @@ export class CasesService {
       },
     });
     if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    const violationCount = file.user.nationalId
+      ? await this.prisma.violation.count({ where: { nationalId: file.user.nationalId } })
+      : 0;
     return {
       id: file.id,
+      violationCount,
       formationStep: file.formationStep,
       trackingCode: file.trackingCode,
       businessUnitTitle: file.businessUnitTitle,

@@ -22,6 +22,11 @@ export class JobsCatalogController {
     return this.jobs.findCatalog(query);
   }
 
+  @Get('stats')
+  stats() {
+    return this.jobs.catalogStats();
+  }
+
   @Post()
   create(@Body() dto: CreateJobCatalogDto) {
     return this.jobs.createCatalog(dto);

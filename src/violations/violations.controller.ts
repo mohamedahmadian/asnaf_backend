@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
   Query,
@@ -46,6 +47,11 @@ export class ViolationsController {
   @Get('person')
   person(@Query() query: FindViolationPersonQueryDto) {
     return this.violations.findPerson(query.nationalId);
+  }
+
+  @Get('by-case/:caseFileId')
+  findByCase(@Param('caseFileId', ParseUUIDPipe) caseFileId: string) {
+    return this.violations.findByCase(caseFileId);
   }
 
   @Get()

@@ -225,9 +225,34 @@ export class JobsService {
     return this.mapJob(item);
   }
 
+  async catalogStats() {
+    const [jobCount, jobGroupCount, grouped, types] = await Promise.all([
+      this.prisma.job.count(),
+      this.prisma.jobGroup.count(),
+      this.prisma.job.groupBy({
+        by: ['jobTypeId'],
+        _count: { _all: true },
+      }),
+      this.prisma.jobType.findMany({
+        select: { id: true, title: true },
+        orderBy: { title: 'asc' },
+      }),
+    ]);
+    const counts = new Map(grouped.map((row) => [row.jobTypeId, row._count._all]));
+    const byJobType = types
+      .map((type) => ({
+        id: type.id,
+        title: type.title,
+        count: counts.get(type.id) ?? 0,
+      }))
+      .sort((left, right) => right.count - left.count || left.title.localeCompare(right.title, 'fa'));
+    return { jobCount, jobGroupCount, byJobType };
+  }
+
   async findCatalog(query: FindJobsCatalogQueryDto) {
     const where: Prisma.JobWhereInput = {
       jobTypeId: query.jobTypeId,
+      groupId: query.groupId,
       OR: this.catalogSearchFilter(query.q),
     };
     const orderBy = resolveSortOrder<Prisma.JobOrderByWithRelationInput>(

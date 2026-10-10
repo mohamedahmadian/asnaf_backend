@@ -15,6 +15,15 @@ const FILE_MIME = new Set([
   'text/plain',
   'application/zip',
   'application/x-zip-compressed',
+  'audio/webm',
+  'audio/ogg',
+  'audio/mp4',
+  'audio/mpeg',
+  'audio/mp3',
+  'audio/wav',
+  'audio/x-wav',
+  'audio/aac',
+  'audio/x-m4a',
 ]);
 
 export type UploadFile = {

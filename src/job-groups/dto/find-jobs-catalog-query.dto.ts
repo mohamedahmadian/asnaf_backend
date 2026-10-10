@@ -22,6 +22,11 @@ export class FindJobsCatalogQueryDto extends PaginationQueryDto {
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  groupId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...jobCatalogSortFields])
   sortBy?: (typeof jobCatalogSortFields)[number];
 

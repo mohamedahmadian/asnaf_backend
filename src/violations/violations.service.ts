@@ -40,14 +40,15 @@ const attachmentSelect = {
   kind: true,
   originalName: true,
   sortOrder: true,
-  imageId: true,
-  fileId: true,
+  image: { select: { mimeType: true } },
+  file: { select: { mimeType: true } },
 } satisfies Prisma.ViolationAttachmentSelect;
 
 const caseFileSelect = {
   id: true,
   userId: true,
   trackingCode: true,
+  licenseNumber: true,
   businessUnitTitle: true,
   formationStep: true,
   activityJob: { select: { title: true, group: { select: { title: true } } } },
@@ -87,6 +88,7 @@ export class ViolationsService {
         occurredAt: (dir) => ({ occurredAt: dir }),
         status: (dir) => ({ status: dir }),
         caseTrackingCode: (dir) => ({ caseFile: { trackingCode: dir } }),
+        licenseNumber: (dir) => ({ caseFile: { licenseNumber: dir } }),
         createdAt: (dir) => ({ createdAt: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
@@ -119,12 +121,14 @@ export class ViolationsService {
       select: {
         occurredAt: true,
         status: true,
+        nationalId: true,
         violationTypeId: true,
         violationType: { select: { title: true } },
       },
     });
     const parts = rows.map((row) => ({
       status: row.status,
+      nationalId: row.nationalId,
       violationTypeId: row.violationTypeId,
       violationTypeTitle: row.violationType.title,
       ...calendarParts(row.occurredAt, calendar),
@@ -154,6 +158,7 @@ export class ViolationsService {
         count: scoped.filter((item) => item.status === status).length,
       })),
       byType: typeCounts(scoped),
+      byPerson: await this.topPeople(scoped),
       monthly: Array.from({ length: 12 }, (_, index) => ({
         month: index + 1,
         count: parts.filter(
@@ -172,7 +177,12 @@ export class ViolationsService {
     const person = await this.prisma.user.findUnique({
       where: { nationalId },
       select: {
+        firstName: true,
+        lastName: true,
         fullName: true,
+        birthPlace: true,
+        identityCertificateNo: true,
+        photoId: true,
         caseFiles: {
           where: { formationStep: { gt: 0 } },
           orderBy: [{ formationStep: 'desc' }, { createdAt: 'desc' }],
@@ -180,11 +190,49 @@ export class ViolationsService {
         },
       },
     });
+    const files = person?.caseFiles ?? [];
+    const counts = await this.violationCounts(files.map((item) => item.id));
     return {
       nationalId,
+      found: Boolean(person),
+      firstName: person?.firstName ?? null,
+      lastName: person?.lastName ?? null,
       fullName: person?.fullName ?? null,
-      cases: (person?.caseFiles ?? []).map(mapCaseFile),
+      birthPlace: person?.birthPlace ?? null,
+      identityCertificateNo: person?.identityCertificateNo ?? null,
+      photoId: person?.photoId ?? null,
+      cases: files.flatMap((row) => {
+        const mapped = mapCaseFile(row);
+        if (!mapped) return [];
+        return [{ ...mapped, violationCount: counts.get(row.id) ?? 0 }];
+      }),
     };
+  }
+
+  async findByCase(caseFileId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseFileId },
+      select: { id: true },
+    });
+    if (!file) throw new NotFoundException('پرونده یافت نشد');
+    const items = await this.prisma.violation.findMany({
+      where: { caseFileId },
+      orderBy: [{ occurredAt: 'desc' }, { createdAt: 'desc' }, { id: 'asc' }],
+      select: {
+        id: true,
+        occurredAt: true,
+        description: true,
+        status: true,
+        violationType: { select: { id: true, title: true } },
+      },
+    });
+    return items.map((item) => ({
+      id: item.id,
+      description: item.description,
+      status: item.status,
+      violationType: item.violationType,
+      occurredAt: formatDateOnly(item.occurredAt),
+    }));
   }
 
   async findOne(id: string) {
@@ -533,6 +581,7 @@ export class ViolationsService {
     const where: Prisma.ViolationWhereInput = {
       status: query.status,
       violationTypeId: query.violationTypeId,
+      nationalId: query.nationalId,
       occurredAt: from || to ? { gte: from, lte: to } : undefined,
     };
     const q = query.q?.trim();
@@ -560,6 +609,11 @@ export class ViolationsService {
           OR: [
             {
               trackingCode: digits
+                ? { contains: digits }
+                : containsInsensitive(q),
+            },
+            {
+              licenseNumber: digits
                 ? { contains: digits }
                 : containsInsensitive(q),
             },
@@ -598,6 +652,58 @@ export class ViolationsService {
           : null,
       };
     });
+  }
+
+  private async topPeople(rows: { nationalId: string }[]) {
+    const counts = new Map<string, number>();
+    for (const row of rows) {
+      counts.set(row.nationalId, (counts.get(row.nationalId) ?? 0) + 1);
+    }
+    const ranked = [...counts.entries()]
+      .sort(
+        (left, right) =>
+          right[1] - left[1] || left[0].localeCompare(right[0]),
+      )
+      .slice(0, 10);
+    if (!ranked.length) return [];
+    const people = await this.prisma.user.findMany({
+      where: { nationalId: { in: ranked.map(([nationalId]) => nationalId) } },
+      select: { nationalId: true, fullName: true },
+    });
+    const nameByNationalId = new Map(
+      people
+        .filter((person) => person.nationalId)
+        .map((person) => [person.nationalId as string, person.fullName]),
+    );
+    return ranked
+      .map(([nationalId, count]) => ({
+        nationalId,
+        fullName: nameByNationalId.get(nationalId) ?? null,
+        count,
+      }))
+      .sort((left, right) => {
+        if (right.count !== left.count) return right.count - left.count;
+        const leftName = left.fullName ?? left.nationalId;
+        const rightName = right.fullName ?? right.nationalId;
+        return (
+          leftName.localeCompare(rightName, 'fa') ||
+          left.nationalId.localeCompare(right.nationalId)
+        );
+      });
+  }
+
+  private async violationCounts(caseFileIds: string[]) {
+    const counts = new Map<string, number>();
+    if (!caseFileIds.length) return counts;
+    const rows = await this.prisma.violation.groupBy({
+      by: ['caseFileId'],
+      where: { caseFileId: { in: caseFileIds } },
+      _count: { _all: true },
+    });
+    for (const row of rows) {
+      if (row.caseFileId) counts.set(row.caseFileId, row._count._all);
+    }
+    return counts;
   }
 
   private mapDates<
@@ -642,6 +748,7 @@ export class ViolationsService {
     kind: item.kind,
     originalName: item.originalName,
     sortOrder: item.sortOrder,
+    mimeType: item.file?.mimeType ?? item.image?.mimeType ?? null,
   });
 
   private async ensureType(id: string) {
@@ -724,8 +831,8 @@ type AttachmentRow = {
   kind: string;
   originalName: string | null;
   sortOrder: number;
-  imageId: string | null;
-  fileId: string | null;
+  image: { mimeType: string } | null;
+  file: { mimeType: string } | null;
 };
 
 function nextAttachmentSort(
@@ -744,6 +851,7 @@ type CaseFileRow = {
   id: string;
   userId: string;
   trackingCode: string | null;
+  licenseNumber: string | null;
   businessUnitTitle: string | null;
   formationStep: number;
   activityJob: { title: string; group: { title: string } | null } | null;
@@ -776,6 +884,7 @@ function mapCaseFile(row?: CaseFileRow | null) {
     id: row.id,
     fullName: row.user.fullName,
     caseTrackingCode: row.trackingCode,
+    licenseNumber: row.licenseNumber,
     businessUnitTitle: row.businessUnitTitle,
     jobGroupTitle: row.activityJob?.group?.title ?? null,
     jobTitle: row.activityJob?.title ?? null,
