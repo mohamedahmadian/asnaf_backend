@@ -32,6 +32,21 @@ export const SYSTEM_ROLES = [
     name: 'فعال اقتصادی',
     description: 'نقش پیش‌فرض شخص هنگام تشکیل پرونده؛ قابل حذف نیست',
   },
+  {
+    code: 'SPECIAL_INSPECTOR',
+    name: 'بازرس ویژه',
+    description: 'تأیید درخواست مجوز حراج',
+  },
+  {
+    code: 'AUCTION_COMMITTEE',
+    name: 'کارگروه حراج',
+    description: 'تأیید درخواست مجوز حراج',
+  },
+  {
+    code: 'COMMERCIAL_MANAGER',
+    name: 'مدیر بازرگانی',
+    description: 'تأیید درخواست مجوز حراج',
+  },
 ] as const;
 
 export const RESERVED_ROLE_CODES = new Set<string>(

@@ -207,6 +207,7 @@ export type DocumentWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   jobs?: Prisma.JobDocumentListRelationFilter
+  requirements?: Prisma.DocumentRequirementListRelationFilter
   personDocuments?: Prisma.PersonDocumentListRelationFilter
   caseActivityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
   caseIdentityDocument?: Prisma.XOR<Prisma.CaseIdentityDocumentNullableScalarRelationFilter, Prisma.CaseIdentityDocumentWhereInput> | null
@@ -222,6 +223,7 @@ export type DocumentOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   jobs?: Prisma.JobDocumentOrderByRelationAggregateInput
+  requirements?: Prisma.DocumentRequirementOrderByRelationAggregateInput
   personDocuments?: Prisma.PersonDocumentOrderByRelationAggregateInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentOrderByRelationAggregateInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentOrderByWithRelationInput
@@ -240,6 +242,7 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   jobs?: Prisma.JobDocumentListRelationFilter
+  requirements?: Prisma.DocumentRequirementListRelationFilter
   personDocuments?: Prisma.PersonDocumentListRelationFilter
   caseActivityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
   caseIdentityDocument?: Prisma.XOR<Prisma.CaseIdentityDocumentNullableScalarRelationFilter, Prisma.CaseIdentityDocumentWhereInput> | null
@@ -283,6 +286,7 @@ export type DocumentCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
@@ -298,6 +302,7 @@ export type DocumentUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
@@ -313,6 +318,7 @@ export type DocumentUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
@@ -328,6 +334,7 @@ export type DocumentUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
@@ -432,6 +439,20 @@ export type DocumentUpdateOneRequiredWithoutCaseIdentityDocumentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutCaseIdentityDocumentInput, Prisma.DocumentUpdateWithoutCaseIdentityDocumentInput>, Prisma.DocumentUncheckedUpdateWithoutCaseIdentityDocumentInput>
 }
 
+export type DocumentCreateNestedOneWithoutRequirementsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRequirementsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRequirementsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutRequirementsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRequirementsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRequirementsInput
+  upsert?: Prisma.DocumentUpsertWithoutRequirementsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutRequirementsInput, Prisma.DocumentUpdateWithoutRequirementsInput>, Prisma.DocumentUncheckedUpdateWithoutRequirementsInput>
+}
+
 export type DocumentCreateNestedOneWithoutPersonDocumentsInput = {
   create?: Prisma.XOR<Prisma.DocumentCreateWithoutPersonDocumentsInput, Prisma.DocumentUncheckedCreateWithoutPersonDocumentsInput>
   connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutPersonDocumentsInput
@@ -469,6 +490,7 @@ export type DocumentCreateWithoutJobsInput = {
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
@@ -483,6 +505,7 @@ export type DocumentUncheckedCreateWithoutJobsInput = {
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
@@ -513,6 +536,7 @@ export type DocumentUpdateWithoutJobsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
@@ -527,6 +551,7 @@ export type DocumentUncheckedUpdateWithoutJobsInput = {
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
@@ -542,6 +567,7 @@ export type DocumentCreateWithoutCaseIdentityDocumentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
 }
@@ -556,6 +582,7 @@ export type DocumentUncheckedCreateWithoutCaseIdentityDocumentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
@@ -586,6 +613,7 @@ export type DocumentUpdateWithoutCaseIdentityDocumentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
 }
@@ -600,8 +628,85 @@ export type DocumentUncheckedUpdateWithoutCaseIdentityDocumentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentCreateWithoutRequirementsInput = {
+  id?: string
+  title: string
+  isRequired?: boolean
+  gender?: $Enums.DocumentGender
+  isFixed?: boolean
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutRequirementsInput = {
+  id?: string
+  title: string
+  isRequired?: boolean
+  gender?: $Enums.DocumentGender
+  isFixed?: boolean
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutRequirementsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRequirementsInput>
+}
+
+export type DocumentUpsertWithoutRequirementsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutRequirementsInput, Prisma.DocumentUncheckedUpdateWithoutRequirementsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRequirementsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutRequirementsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutRequirementsInput, Prisma.DocumentUncheckedUpdateWithoutRequirementsInput>
+}
+
+export type DocumentUpdateWithoutRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
 }
 
 export type DocumentCreateWithoutPersonDocumentsInput = {
@@ -614,6 +719,7 @@ export type DocumentCreateWithoutPersonDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
 }
@@ -628,6 +734,7 @@ export type DocumentUncheckedCreateWithoutPersonDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
 }
@@ -658,6 +765,7 @@ export type DocumentUpdateWithoutPersonDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
 }
@@ -672,6 +780,7 @@ export type DocumentUncheckedUpdateWithoutPersonDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
 }
@@ -686,6 +795,7 @@ export type DocumentCreateWithoutCaseActivityDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
 }
@@ -700,6 +810,7 @@ export type DocumentUncheckedCreateWithoutCaseActivityDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
 }
@@ -730,6 +841,7 @@ export type DocumentUpdateWithoutCaseActivityDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
 }
@@ -744,6 +856,7 @@ export type DocumentUncheckedUpdateWithoutCaseActivityDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
 }
@@ -755,12 +868,14 @@ export type DocumentUncheckedUpdateWithoutCaseActivityDocumentsInput = {
 
 export type DocumentCountOutputType = {
   jobs: number
+  requirements: number
   personDocuments: number
   caseActivityDocuments: number
 }
 
 export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | DocumentCountOutputTypeCountJobsArgs
+  requirements?: boolean | DocumentCountOutputTypeCountRequirementsArgs
   personDocuments?: boolean | DocumentCountOutputTypeCountPersonDocumentsArgs
   caseActivityDocuments?: boolean | DocumentCountOutputTypeCountCaseActivityDocumentsArgs
 }
@@ -780,6 +895,13 @@ export type DocumentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
  */
 export type DocumentCountOutputTypeCountJobsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.JobDocumentWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentRequirementWhereInput
 }
 
 /**
@@ -807,6 +929,7 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   jobs?: boolean | Prisma.Document$jobsArgs<ExtArgs>
+  requirements?: boolean | Prisma.Document$requirementsArgs<ExtArgs>
   personDocuments?: boolean | Prisma.Document$personDocumentsArgs<ExtArgs>
   caseActivityDocuments?: boolean | Prisma.Document$caseActivityDocumentsArgs<ExtArgs>
   caseIdentityDocument?: boolean | Prisma.Document$caseIdentityDocumentArgs<ExtArgs>
@@ -849,6 +972,7 @@ export type DocumentSelectScalar = {
 export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "isRequired" | "gender" | "isFixed" | "code" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | Prisma.Document$jobsArgs<ExtArgs>
+  requirements?: boolean | Prisma.Document$requirementsArgs<ExtArgs>
   personDocuments?: boolean | Prisma.Document$personDocumentsArgs<ExtArgs>
   caseActivityDocuments?: boolean | Prisma.Document$caseActivityDocumentsArgs<ExtArgs>
   caseIdentityDocument?: boolean | Prisma.Document$caseIdentityDocumentArgs<ExtArgs>
@@ -861,6 +985,7 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Document"
   objects: {
     jobs: Prisma.$JobDocumentPayload<ExtArgs>[]
+    requirements: Prisma.$DocumentRequirementPayload<ExtArgs>[]
     personDocuments: Prisma.$PersonDocumentPayload<ExtArgs>[]
     caseActivityDocuments: Prisma.$CaseActivityDocumentPayload<ExtArgs>[]
     caseIdentityDocument: Prisma.$CaseIdentityDocumentPayload<ExtArgs> | null
@@ -1272,6 +1397,7 @@ readonly fields: DocumentFieldRefs;
 export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   jobs<T extends Prisma.Document$jobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$jobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requirements<T extends Prisma.Document$requirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$requirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   personDocuments<T extends Prisma.Document$personDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$personDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PersonDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseActivityDocuments<T extends Prisma.Document$caseActivityDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$caseActivityDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseActivityDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseIdentityDocument<T extends Prisma.Document$caseIdentityDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$caseIdentityDocumentArgs<ExtArgs>>): Prisma.Prisma__CaseIdentityDocumentClient<runtime.Types.Result.GetResult<Prisma.$CaseIdentityDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1726,6 +1852,30 @@ export type Document$jobsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.JobDocumentScalarFieldEnum | Prisma.JobDocumentScalarFieldEnum[]
+}
+
+/**
+ * Document.requirements
+ */
+export type Document$requirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentRequirement
+   */
+  select?: Prisma.DocumentRequirementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentRequirement
+   */
+  omit?: Prisma.DocumentRequirementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentRequirementInclude<ExtArgs> | null
+  where?: Prisma.DocumentRequirementWhereInput
+  orderBy?: Prisma.DocumentRequirementOrderByWithRelationInput | Prisma.DocumentRequirementOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentRequirementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentRequirementScalarFieldEnum | Prisma.DocumentRequirementScalarFieldEnum[]
 }
 
 /**

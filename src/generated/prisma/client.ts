@@ -176,6 +176,51 @@ export type CaseFile = Prisma.CaseFileModel
  */
 export type CaseRequest = Prisma.CaseRequestModel
 /**
+ * Model CaseRequestEvent
+ * تغییر وضعیت درخواست
+ */
+export type CaseRequestEvent = Prisma.CaseRequestEventModel
+/**
+ * Model CaseRenewalTerms
+ * تاریخ‌های محاسبه‌شدهٔ تمدید؛ موقع باز شدن درخواست ثابت می‌شوند
+ */
+export type CaseRenewalTerms = Prisma.CaseRenewalTermsModel
+/**
+ * Model CaseLocationDraft
+ * محل پیشنهادی تغییر مکان تا زمان تکمیل درخواست
+ */
+export type CaseLocationDraft = Prisma.CaseLocationDraftModel
+/**
+ * Model CasePremiseHistory
+ * محل قبلی پرونده. قبل از نشستن آدرس جدیدِ تغییر مکان، در همان تراکنش ذخیره می‌شود.
+ */
+export type CasePremiseHistory = Prisma.CasePremiseHistoryModel
+/**
+ * Model CaseAuction
+ * بازه، سقف تخفیف و کالاهای درخواست مجوز حراج
+ */
+export type CaseAuction = Prisma.CaseAuctionModel
+/**
+ * Model CaseAuctionItem
+ * 
+ */
+export type CaseAuctionItem = Prisma.CaseAuctionItemModel
+/**
+ * Model CaseAuctionApproval
+ * 
+ */
+export type CaseAuctionApproval = Prisma.CaseAuctionApprovalModel
+/**
+ * Model DocumentRequirement
+ * مدرک لازم برای یک نوع درخواست. شغل خالی یعنی همهٔ شغل‌ها.
+ */
+export type DocumentRequirement = Prisma.DocumentRequirementModel
+/**
+ * Model InquiryRequirement
+ * مرکز استعلام لازم برای یک نوع درخواست. شغل خالی یعنی همهٔ شغل‌ها.
+ */
+export type InquiryRequirement = Prisma.InquiryRequirementModel
+/**
  * Model PersonDocument
  * 
  */
@@ -187,7 +232,7 @@ export type PersonDocument = Prisma.PersonDocumentModel
 export type PersonDocumentVersion = Prisma.PersonDocumentVersionModel
 /**
  * Model CaseActivityDocument
- * مدرک شغلی یک پرونده. هر پرونده فایل جدا دارد و با مدارک هویتی شخص مشترک نیست.
+ * مدرک شغلی یک درخواست. فایل روی پرونده می‌ماند و ارائه مال همین درخواست است.
  */
 export type CaseActivityDocument = Prisma.CaseActivityDocumentModel
 /**

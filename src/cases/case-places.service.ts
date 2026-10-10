@@ -16,12 +16,14 @@ import { resolveSortOrder } from '../common/sort-query';
 import {
   CaseInquiryChannel,
   CaseInquiryStatus,
+  CaseRequestType,
   Prisma,
   UserStatus,
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CaseInquiriesService, type InquiryActor } from './case-inquiries.service';
-import { PLACES_FORMATION_STEP, rewindFormationStep, syncIssuanceRequest } from './formation-steps';
+import { syncIssuanceRequest } from './formation-steps';
+import { findOpenRequest, placesRewindPhase, rewindRequestPhase } from './request-process';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
 import { SaveCasePlacesOfficeDto } from './dto/save-case-places-office.dto';
 import { PersonFileStorage } from './person-file.storage';
@@ -109,24 +111,36 @@ export class CasePlacesService {
   }
 
   async ensureForUser(caseFileId: string) {
-    const file = await this.prisma.caseFile.findUnique({
-      where: { id: caseFileId },
+    const open = await findOpenRequest(this.prisma, caseFileId);
+    if (open?.type === CaseRequestType.ISSUANCE) {
+      return this.prisma.casePlacesReview.upsert({
+        where: { caseRequestId: open.id },
+        create: { caseFileId, caseRequestId: open.id },
+        update: {},
+        include: reviewInclude,
+      });
+    }
+    const issuance = await this.prisma.caseRequest.findFirst({
+      where: { caseFileId, type: CaseRequestType.ISSUANCE },
+      orderBy: { createdAt: 'desc' },
       select: { id: true },
     });
-    if (!file) return null;
-    return this.prisma.casePlacesReview.upsert({
-      where: { caseFileId },
-      create: { caseFileId },
-      update: {},
+    if (!issuance) return null;
+    return this.prisma.casePlacesReview.findUnique({
+      where: { caseRequestId: issuance.id },
       include: reviewInclude,
     });
   }
 
   async assertDelivered(caseFileId: string) {
-    const row = await this.prisma.casePlacesReview.findUnique({
-      where: { caseFileId },
-      select: { status: true },
-    });
+    const open = await findOpenRequest(this.prisma, caseFileId);
+    const requestId = open?.type === CaseRequestType.ISSUANCE ? open.id : null;
+    const row = requestId
+      ? await this.prisma.casePlacesReview.findUnique({
+          where: { caseRequestId: requestId },
+          select: { status: true },
+        })
+      : null;
     if (!row || row.status === CaseInquiryStatus.PENDING) {
       throw new BadRequestException('قبل از تاییدهای مدیریتی باید نظر اداره اماکن ثبت شود');
     }
@@ -242,7 +256,12 @@ export class CasePlacesService {
       },
       include: reviewInclude,
     });
-    await rewindFormationStep(this.prisma, saved.caseFileId, PLACES_FORMATION_STEP);
+    const owner = await this.prisma.caseRequest.findUnique({
+      where: { id: saved.caseRequestId },
+      select: { type: true },
+    });
+    const phase = owner ? placesRewindPhase(owner.type) : null;
+    if (phase != null) await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
     return this.mapReview(saved);
   }
 

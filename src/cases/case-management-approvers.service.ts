@@ -15,8 +15,13 @@ import { CaseInquiryChannel, CaseInquiryStatus, Prisma, UserStatus } from '../ge
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCaseManagementApproverDto } from './dto/create-case-management-approver.dto';
 import { FindCaseManagementApproversQueryDto } from './dto/find-case-management-approvers-query.dto';
-import { MANAGEMENT_FORMATION_STEP, rewindFormationStep } from './formation-steps';
 import { PersonFileStorage } from './person-file.storage';
+import {
+  findOpenRequest,
+  isProcessType,
+  managementRewindPhase,
+  rewindRequestPhase,
+} from './request-process';
 
 const reviewInclude = {
   workUnit: { select: { id: true, title: true } },
@@ -142,13 +147,24 @@ export class CaseManagementApproversService {
     return { ok: true };
   }
 
-  /** برای هر واحد و نقشِ تنظیمات، یک ردیف در انتظار روی پرونده می‌سازد. */
+  private async targetRequest(caseFileId: string) {
+    const open = await findOpenRequest(this.prisma, caseFileId);
+    if (open && isProcessType(open.type)) return open;
+    return this.prisma.caseRequest.findFirst({
+      where: { caseFileId, type: 'ISSUANCE' },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  /** برای هر واحد و نقشِ تنظیمات، یک ردیف در انتظار روی درخواست باز می‌سازد. */
   async ensureForUser(caseFileId: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseFileId },
       select: { id: true },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
+    const request = await findOpenRequest(this.prisma, caseFileId);
+    if (!request || !isProcessType(request.type)) return;
     const settings = await this.prisma.caseManagementApprover.findMany({
       select: { workUnitId: true, roleId: true },
     });
@@ -156,6 +172,7 @@ export class CaseManagementApproversService {
     await this.prisma.caseManagementReview.createMany({
       data: settings.map((item) => ({
         caseFileId,
+        caseRequestId: request.id,
         workUnitId: item.workUnitId,
         roleId: item.roleId,
       })),
@@ -165,8 +182,10 @@ export class CaseManagementApproversService {
 
   async assertDelivered(caseFileId: string) {
     await this.ensureForUser(caseFileId);
+    const request = await this.targetRequest(caseFileId);
+    if (!request) throw new BadRequestException('قبل از صدور مجوز باید نتیجه همه تاییدهای مدیریتی ثبت شود');
     const pending = await this.prisma.caseManagementReview.count({
-      where: { caseFileId, status: CaseInquiryStatus.PENDING },
+      where: { caseRequestId: request.id, status: CaseInquiryStatus.PENDING },
     });
     if (pending > 0) {
       throw new BadRequestException('قبل از صدور مجوز باید نتیجه همه تاییدهای مدیریتی ثبت شود');
@@ -176,8 +195,10 @@ export class CaseManagementApproversService {
   async listForCase(caseFileId: string) {
     if (!caseFileId) throw new BadRequestException('پرونده مشخص نیست');
     await this.ensureForUser(caseFileId);
+    const request = await this.targetRequest(caseFileId);
+    if (!request) return [];
     const rows = await this.prisma.caseManagementReview.findMany({
-      where: { caseFileId },
+      where: { caseRequestId: request.id },
       include: reviewInclude,
       orderBy: [{ workUnit: { title: 'asc' } }, { role: { name: 'asc' } }, { id: 'asc' }],
     });
@@ -276,7 +297,12 @@ export class CaseManagementApproversService {
       },
       include: reviewInclude,
     });
-    await rewindFormationStep(this.prisma, saved.caseFileId, MANAGEMENT_FORMATION_STEP);
+    const owner = await this.prisma.caseRequest.findUnique({
+      where: { id: saved.caseRequestId },
+      select: { type: true },
+    });
+    const phase = owner ? managementRewindPhase(owner.type) : null;
+    if (phase != null) await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
     return this.mapReview(saved, await this.peopleFor(saved));
   }
 

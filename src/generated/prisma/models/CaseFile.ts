@@ -470,10 +470,11 @@ export type CaseFileWhereInput = {
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
   registrationPlace?: Prisma.XOR<Prisma.RegistrationPlaceNullableScalarRelationFilter, Prisma.RegistrationPlaceWhereInput> | null
   inquiries?: Prisma.CaseInquiryListRelationFilter
-  placesReview?: Prisma.XOR<Prisma.CasePlacesReviewNullableScalarRelationFilter, Prisma.CasePlacesReviewWhereInput> | null
+  placesReviews?: Prisma.CasePlacesReviewListRelationFilter
   managementReviews?: Prisma.CaseManagementReviewListRelationFilter
   requests?: Prisma.CaseRequestListRelationFilter
   activityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
+  premiseHistory?: Prisma.CasePremiseHistoryListRelationFilter
   violations?: Prisma.ViolationListRelationFilter
 }
 
@@ -519,10 +520,11 @@ export type CaseFileOrderByWithRelationInput = {
   premiseComplex?: Prisma.CommercialComplexOrderByWithRelationInput
   registrationPlace?: Prisma.RegistrationPlaceOrderByWithRelationInput
   inquiries?: Prisma.CaseInquiryOrderByRelationAggregateInput
-  placesReview?: Prisma.CasePlacesReviewOrderByWithRelationInput
+  placesReviews?: Prisma.CasePlacesReviewOrderByRelationAggregateInput
   managementReviews?: Prisma.CaseManagementReviewOrderByRelationAggregateInput
   requests?: Prisma.CaseRequestOrderByRelationAggregateInput
   activityDocuments?: Prisma.CaseActivityDocumentOrderByRelationAggregateInput
+  premiseHistory?: Prisma.CasePremiseHistoryOrderByRelationAggregateInput
   violations?: Prisma.ViolationOrderByRelationAggregateInput
 }
 
@@ -571,10 +573,11 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
   registrationPlace?: Prisma.XOR<Prisma.RegistrationPlaceNullableScalarRelationFilter, Prisma.RegistrationPlaceWhereInput> | null
   inquiries?: Prisma.CaseInquiryListRelationFilter
-  placesReview?: Prisma.XOR<Prisma.CasePlacesReviewNullableScalarRelationFilter, Prisma.CasePlacesReviewWhereInput> | null
+  placesReviews?: Prisma.CasePlacesReviewListRelationFilter
   managementReviews?: Prisma.CaseManagementReviewListRelationFilter
   requests?: Prisma.CaseRequestListRelationFilter
   activityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
+  premiseHistory?: Prisma.CasePremiseHistoryListRelationFilter
   violations?: Prisma.ViolationListRelationFilter
 }, "id" | "trackingCode" | "licenseNumber">
 
@@ -699,10 +702,11 @@ export type CaseFileCreateInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -743,10 +747,11 @@ export type CaseFileUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -787,10 +792,11 @@ export type CaseFileUpdateInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -831,10 +837,11 @@ export type CaseFileUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -1191,18 +1198,18 @@ export type CaseFileUpdateOneRequiredWithoutInquiriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutInquiriesInput, Prisma.CaseFileUpdateWithoutInquiriesInput>, Prisma.CaseFileUncheckedUpdateWithoutInquiriesInput>
 }
 
-export type CaseFileCreateNestedOneWithoutPlacesReviewInput = {
-  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewInput>
-  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPlacesReviewInput
+export type CaseFileCreateNestedOneWithoutPlacesReviewsInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewsInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewsInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPlacesReviewsInput
   connect?: Prisma.CaseFileWhereUniqueInput
 }
 
-export type CaseFileUpdateOneRequiredWithoutPlacesReviewNestedInput = {
-  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewInput>
-  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPlacesReviewInput
-  upsert?: Prisma.CaseFileUpsertWithoutPlacesReviewInput
+export type CaseFileUpdateOneRequiredWithoutPlacesReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewsInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewsInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPlacesReviewsInput
+  upsert?: Prisma.CaseFileUpsertWithoutPlacesReviewsInput
   connect?: Prisma.CaseFileWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutPlacesReviewInput, Prisma.CaseFileUpdateWithoutPlacesReviewInput>, Prisma.CaseFileUncheckedUpdateWithoutPlacesReviewInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutPlacesReviewsInput, Prisma.CaseFileUpdateWithoutPlacesReviewsInput>, Prisma.CaseFileUncheckedUpdateWithoutPlacesReviewsInput>
 }
 
 export type CaseFileCreateNestedOneWithoutManagementReviewsInput = {
@@ -1251,6 +1258,20 @@ export type CaseFileUpdateOneRequiredWithoutRequestsNestedInput = {
   upsert?: Prisma.CaseFileUpsertWithoutRequestsInput
   connect?: Prisma.CaseFileWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutRequestsInput, Prisma.CaseFileUpdateWithoutRequestsInput>, Prisma.CaseFileUncheckedUpdateWithoutRequestsInput>
+}
+
+export type CaseFileCreateNestedOneWithoutPremiseHistoryInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseHistoryInput, Prisma.CaseFileUncheckedCreateWithoutPremiseHistoryInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPremiseHistoryInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+}
+
+export type CaseFileUpdateOneRequiredWithoutPremiseHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseHistoryInput, Prisma.CaseFileUncheckedCreateWithoutPremiseHistoryInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPremiseHistoryInput
+  upsert?: Prisma.CaseFileUpsertWithoutPremiseHistoryInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutPremiseHistoryInput, Prisma.CaseFileUpdateWithoutPremiseHistoryInput>, Prisma.CaseFileUncheckedUpdateWithoutPremiseHistoryInput>
 }
 
 export type CaseFileCreateNestedOneWithoutActivityDocumentsInput = {
@@ -1445,10 +1466,11 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -1488,10 +1510,11 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -1598,10 +1621,11 @@ export type CaseFileCreateWithoutActivityJobInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -1641,10 +1665,11 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -1710,10 +1735,11 @@ export type CaseFileCreateWithoutInquiriesInput = {
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -1753,10 +1779,11 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -1812,10 +1839,11 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -1855,14 +1883,15 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
-export type CaseFileCreateWithoutPlacesReviewInput = {
+export type CaseFileCreateWithoutPlacesReviewsInput = {
   id?: string
   formationStep?: number
   trackingCode?: string | null
@@ -1902,10 +1931,11 @@ export type CaseFileCreateWithoutPlacesReviewInput = {
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
-export type CaseFileUncheckedCreateWithoutPlacesReviewInput = {
+export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   id?: string
   userId: string
   formationStep?: number
@@ -1945,26 +1975,27 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewInput = {
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
-export type CaseFileCreateOrConnectWithoutPlacesReviewInput = {
+export type CaseFileCreateOrConnectWithoutPlacesReviewsInput = {
   where: Prisma.CaseFileWhereUniqueInput
-  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewsInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewsInput>
 }
 
-export type CaseFileUpsertWithoutPlacesReviewInput = {
-  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutPlacesReviewInput, Prisma.CaseFileUncheckedUpdateWithoutPlacesReviewInput>
-  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewInput>
+export type CaseFileUpsertWithoutPlacesReviewsInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutPlacesReviewsInput, Prisma.CaseFileUncheckedUpdateWithoutPlacesReviewsInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPlacesReviewsInput, Prisma.CaseFileUncheckedCreateWithoutPlacesReviewsInput>
   where?: Prisma.CaseFileWhereInput
 }
 
-export type CaseFileUpdateToOneWithWhereWithoutPlacesReviewInput = {
+export type CaseFileUpdateToOneWithWhereWithoutPlacesReviewsInput = {
   where?: Prisma.CaseFileWhereInput
-  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutPlacesReviewInput, Prisma.CaseFileUncheckedUpdateWithoutPlacesReviewInput>
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutPlacesReviewsInput, Prisma.CaseFileUncheckedUpdateWithoutPlacesReviewsInput>
 }
 
-export type CaseFileUpdateWithoutPlacesReviewInput = {
+export type CaseFileUpdateWithoutPlacesReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2004,10 +2035,11 @@ export type CaseFileUpdateWithoutPlacesReviewInput = {
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
-export type CaseFileUncheckedUpdateWithoutPlacesReviewInput = {
+export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2047,6 +2079,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewInput = {
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -2087,9 +2120,10 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2130,9 +2164,10 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2189,9 +2224,10 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -2232,9 +2268,10 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -2275,9 +2312,10 @@ export type CaseFileCreateWithoutRequestsInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2318,9 +2356,10 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2377,9 +2416,10 @@ export type CaseFileUpdateWithoutRequestsInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -2420,8 +2460,201 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileCreateWithoutPremiseHistoryInput = {
+  id?: string
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
+  id?: string
+  userId: string
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutPremiseHistoryInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseHistoryInput, Prisma.CaseFileUncheckedCreateWithoutPremiseHistoryInput>
+}
+
+export type CaseFileUpsertWithoutPremiseHistoryInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutPremiseHistoryInput, Prisma.CaseFileUncheckedUpdateWithoutPremiseHistoryInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseHistoryInput, Prisma.CaseFileUncheckedCreateWithoutPremiseHistoryInput>
+  where?: Prisma.CaseFileWhereInput
+}
+
+export type CaseFileUpdateToOneWithWhereWithoutPremiseHistoryInput = {
+  where?: Prisma.CaseFileWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutPremiseHistoryInput, Prisma.CaseFileUncheckedUpdateWithoutPremiseHistoryInput>
+}
+
+export type CaseFileUpdateWithoutPremiseHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
@@ -2463,9 +2696,10 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2506,9 +2740,10 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2565,9 +2800,10 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -2608,9 +2844,10 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -2650,10 +2887,11 @@ export type CaseFileCreateWithoutUserInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2693,10 +2931,11 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2762,10 +3001,11 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2805,10 +3045,11 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2874,10 +3115,11 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2917,10 +3159,11 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
@@ -2987,10 +3230,11 @@ export type CaseFileCreateWithoutViolationsInput = {
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutViolationsInput = {
@@ -3030,10 +3274,11 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutViolationsInput = {
@@ -3089,10 +3334,11 @@ export type CaseFileUpdateWithoutViolationsInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutViolationsInput = {
@@ -3132,10 +3378,11 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyPremiseCityInput = {
@@ -3211,10 +3458,11 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3254,10 +3502,11 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3371,10 +3620,11 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3414,10 +3664,11 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3531,10 +3782,11 @@ export type CaseFileUpdateWithoutUserInput = {
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3574,10 +3826,11 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3691,10 +3944,11 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3734,10 +3988,11 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3851,10 +4106,11 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3894,10 +4150,11 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
-  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
@@ -3945,17 +4202,21 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
 
 export type CaseFileCountOutputType = {
   inquiries: number
+  placesReviews: number
   managementReviews: number
   requests: number
   activityDocuments: number
+  premiseHistory: number
   violations: number
 }
 
 export type CaseFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   inquiries?: boolean | CaseFileCountOutputTypeCountInquiriesArgs
+  placesReviews?: boolean | CaseFileCountOutputTypeCountPlacesReviewsArgs
   managementReviews?: boolean | CaseFileCountOutputTypeCountManagementReviewsArgs
   requests?: boolean | CaseFileCountOutputTypeCountRequestsArgs
   activityDocuments?: boolean | CaseFileCountOutputTypeCountActivityDocumentsArgs
+  premiseHistory?: boolean | CaseFileCountOutputTypeCountPremiseHistoryArgs
   violations?: boolean | CaseFileCountOutputTypeCountViolationsArgs
 }
 
@@ -3979,6 +4240,13 @@ export type CaseFileCountOutputTypeCountInquiriesArgs<ExtArgs extends runtime.Ty
 /**
  * CaseFileCountOutputType without action
  */
+export type CaseFileCountOutputTypeCountPlacesReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CasePlacesReviewWhereInput
+}
+
+/**
+ * CaseFileCountOutputType without action
+ */
 export type CaseFileCountOutputTypeCountManagementReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CaseManagementReviewWhereInput
 }
@@ -3995,6 +4263,13 @@ export type CaseFileCountOutputTypeCountRequestsArgs<ExtArgs extends runtime.Typ
  */
 export type CaseFileCountOutputTypeCountActivityDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CaseActivityDocumentWhereInput
+}
+
+/**
+ * CaseFileCountOutputType without action
+ */
+export type CaseFileCountOutputTypeCountPremiseHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CasePremiseHistoryWhereInput
 }
 
 /**
@@ -4047,10 +4322,11 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
   inquiries?: boolean | Prisma.CaseFile$inquiriesArgs<ExtArgs>
-  placesReview?: boolean | Prisma.CaseFile$placesReviewArgs<ExtArgs>
+  placesReviews?: boolean | Prisma.CaseFile$placesReviewsArgs<ExtArgs>
   managementReviews?: boolean | Prisma.CaseFile$managementReviewsArgs<ExtArgs>
   requests?: boolean | Prisma.CaseFile$requestsArgs<ExtArgs>
   activityDocuments?: boolean | Prisma.CaseFile$activityDocumentsArgs<ExtArgs>
+  premiseHistory?: boolean | Prisma.CaseFile$premiseHistoryArgs<ExtArgs>
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseFile"]>
@@ -4187,10 +4463,11 @@ export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
   inquiries?: boolean | Prisma.CaseFile$inquiriesArgs<ExtArgs>
-  placesReview?: boolean | Prisma.CaseFile$placesReviewArgs<ExtArgs>
+  placesReviews?: boolean | Prisma.CaseFile$placesReviewsArgs<ExtArgs>
   managementReviews?: boolean | Prisma.CaseFile$managementReviewsArgs<ExtArgs>
   requests?: boolean | Prisma.CaseFile$requestsArgs<ExtArgs>
   activityDocuments?: boolean | Prisma.CaseFile$activityDocumentsArgs<ExtArgs>
+  premiseHistory?: boolean | Prisma.CaseFile$premiseHistoryArgs<ExtArgs>
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -4218,10 +4495,11 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     premiseComplex: Prisma.$CommercialComplexPayload<ExtArgs> | null
     registrationPlace: Prisma.$RegistrationPlacePayload<ExtArgs> | null
     inquiries: Prisma.$CaseInquiryPayload<ExtArgs>[]
-    placesReview: Prisma.$CasePlacesReviewPayload<ExtArgs> | null
+    placesReviews: Prisma.$CasePlacesReviewPayload<ExtArgs>[]
     managementReviews: Prisma.$CaseManagementReviewPayload<ExtArgs>[]
     requests: Prisma.$CaseRequestPayload<ExtArgs>[]
     activityDocuments: Prisma.$CaseActivityDocumentPayload<ExtArgs>[]
+    premiseHistory: Prisma.$CasePremiseHistoryPayload<ExtArgs>[]
     violations: Prisma.$ViolationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -4666,10 +4944,11 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
   premiseComplex<T extends Prisma.CaseFile$premiseComplexArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseComplexArgs<ExtArgs>>): Prisma.Prisma__CommercialComplexClient<runtime.Types.Result.GetResult<Prisma.$CommercialComplexPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   registrationPlace<T extends Prisma.CaseFile$registrationPlaceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$registrationPlaceArgs<ExtArgs>>): Prisma.Prisma__RegistrationPlaceClient<runtime.Types.Result.GetResult<Prisma.$RegistrationPlacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   inquiries<T extends Prisma.CaseFile$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseInquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  placesReview<T extends Prisma.CaseFile$placesReviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$placesReviewArgs<ExtArgs>>): Prisma.Prisma__CasePlacesReviewClient<runtime.Types.Result.GetResult<Prisma.$CasePlacesReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  placesReviews<T extends Prisma.CaseFile$placesReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$placesReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePlacesReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   managementReviews<T extends Prisma.CaseFile$managementReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$managementReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   requests<T extends Prisma.CaseFile$requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activityDocuments<T extends Prisma.CaseFile$activityDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$activityDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseActivityDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  premiseHistory<T extends Prisma.CaseFile$premiseHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   violations<T extends Prisma.CaseFile$violationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$violationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5236,9 +5515,9 @@ export type CaseFile$inquiriesArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * CaseFile.placesReview
+ * CaseFile.placesReviews
  */
-export type CaseFile$placesReviewArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CaseFile$placesReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the CasePlacesReview
    */
@@ -5252,6 +5531,11 @@ export type CaseFile$placesReviewArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.CasePlacesReviewInclude<ExtArgs> | null
   where?: Prisma.CasePlacesReviewWhereInput
+  orderBy?: Prisma.CasePlacesReviewOrderByWithRelationInput | Prisma.CasePlacesReviewOrderByWithRelationInput[]
+  cursor?: Prisma.CasePlacesReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CasePlacesReviewScalarFieldEnum | Prisma.CasePlacesReviewScalarFieldEnum[]
 }
 
 /**
@@ -5324,6 +5608,30 @@ export type CaseFile$activityDocumentsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.CaseActivityDocumentScalarFieldEnum | Prisma.CaseActivityDocumentScalarFieldEnum[]
+}
+
+/**
+ * CaseFile.premiseHistory
+ */
+export type CaseFile$premiseHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasePremiseHistory
+   */
+  select?: Prisma.CasePremiseHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasePremiseHistory
+   */
+  omit?: Prisma.CasePremiseHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasePremiseHistoryInclude<ExtArgs> | null
+  where?: Prisma.CasePremiseHistoryWhereInput
+  orderBy?: Prisma.CasePremiseHistoryOrderByWithRelationInput | Prisma.CasePremiseHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.CasePremiseHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CasePremiseHistoryScalarFieldEnum | Prisma.CasePremiseHistoryScalarFieldEnum[]
 }
 
 /**

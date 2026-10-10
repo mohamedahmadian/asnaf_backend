@@ -240,6 +240,7 @@ export type CaseInquiryChannel = (typeof CaseInquiryChannel)[keyof typeof CaseIn
 export const CaseRequestType = {
   ISSUANCE: 'ISSUANCE',
   RENEWAL: 'RENEWAL',
+  LOCATION_CHANGE: 'LOCATION_CHANGE',
   STEWARDSHIP: 'STEWARDSHIP',
   AUCTION: 'AUCTION'
 } as const
@@ -249,10 +250,22 @@ export type CaseRequestType = (typeof CaseRequestType)[keyof typeof CaseRequestT
 
 export const CaseRequestStatus = {
   OPEN: 'OPEN',
-  ISSUED: 'ISSUED'
+  ISSUED: 'ISSUED',
+  COMPLETED: 'COMPLETED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
 } as const
 
 export type CaseRequestStatus = (typeof CaseRequestStatus)[keyof typeof CaseRequestStatus]
+
+
+export const AuctionApproverKind = {
+  SPECIAL_INSPECTOR: 'SPECIAL_INSPECTOR',
+  AUCTION_COMMITTEE: 'AUCTION_COMMITTEE',
+  COMMERCIAL_MANAGER: 'COMMERCIAL_MANAGER'
+} as const
+
+export type AuctionApproverKind = (typeof AuctionApproverKind)[keyof typeof AuctionApproverKind]
 
 
 export const SingardFeedbackKind = {

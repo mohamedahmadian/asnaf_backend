@@ -33,7 +33,7 @@ function isUniqueConflict(error: unknown) {
   return error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002';
 }
 
-async function nextRequestNumber(prisma: PrismaService) {
+export async function nextRequestNumber(prisma: PrismaService | Prisma.TransactionClient) {
   const prefix = `REQ-${jalaliYear()}-`;
   for (let attempt = 0; attempt < 8; attempt++) {
     const count = await prisma.caseRequest.count({
@@ -46,8 +46,8 @@ async function nextRequestNumber(prisma: PrismaService) {
   throw new ConflictException('صدور شماره درخواست انجام نشد');
 }
 
-async function assignLicenseNumber(
-  prisma: PrismaService,
+export async function assignLicenseNumber(
+  prisma: PrismaService | Prisma.TransactionClient,
   caseFileId: string,
   ownership: PremiseOwnership | null,
   leaseExpiresAt: Date | null,
@@ -83,7 +83,7 @@ async function assignLicenseNumber(
 
 /**
  * درخواست صدور را با مرحلهٔ پرونده هم‌گام می‌کند.
- * با رسیدن به صدور، شماره مجوز فعالیت اقتصادی یک‌بار ساخته می‌شود.
+ * شماره مجوز فقط در تکمیل درخواست نوشته می‌شود.
  */
 export async function syncIssuanceRequest(prisma: PrismaService, caseFileId: string) {
   const file = await prisma.caseFile.findUnique({
@@ -91,9 +91,6 @@ export async function syncIssuanceRequest(prisma: PrismaService, caseFileId: str
     select: {
       id: true,
       formationStep: true,
-      licenseNumber: true,
-      premiseOwnership: true,
-      leaseExpiresAt: true,
       requests: {
         where: { type: CaseRequestType.ISSUANCE },
         take: 1,
@@ -103,18 +100,8 @@ export async function syncIssuanceRequest(prisma: PrismaService, caseFileId: str
   });
   if (!file || file.formationStep < 1) return;
 
-  let licenseNumber = file.licenseNumber;
-  if (file.formationStep >= ISSUANCE_FORMATION_STEP && !licenseNumber) {
-    licenseNumber = await assignLicenseNumber(
-      prisma,
-      file.id,
-      file.premiseOwnership,
-      file.leaseExpiresAt,
-    );
-  }
-
-  const issued = Boolean(licenseNumber) && file.formationStep >= ISSUANCE_FORMATION_STEP;
   const existing = file.requests[0];
+  const closed = existing?.status === CaseRequestStatus.ISSUED || existing?.status === CaseRequestStatus.COMPLETED;
   if (!existing) {
     for (let attempt = 0; attempt < 4; attempt++) {
       const number = await nextRequestNumber(prisma);
@@ -124,9 +111,8 @@ export async function syncIssuanceRequest(prisma: PrismaService, caseFileId: str
             caseFileId: file.id,
             type: CaseRequestType.ISSUANCE,
             number,
-            status: issued ? CaseRequestStatus.ISSUED : CaseRequestStatus.OPEN,
+            status: CaseRequestStatus.OPEN,
             formationStep: file.formationStep,
-            completedAt: issued ? new Date() : null,
           },
         });
         return;
@@ -142,20 +128,11 @@ export async function syncIssuanceRequest(prisma: PrismaService, caseFileId: str
     throw new ConflictException('صدور شماره درخواست انجام نشد');
   }
 
-  const alreadyIssued = existing.status === CaseRequestStatus.ISSUED
-  if (existing.formationStep === file.formationStep && (!issued || alreadyIssued)) return
+  if (closed || existing.formationStep === file.formationStep) return;
 
   await prisma.caseRequest.update({
     where: { id: existing.id },
-    data: {
-      formationStep: file.formationStep,
-      ...(issued
-        ? {
-            status: CaseRequestStatus.ISSUED,
-            completedAt: alreadyIssued ? undefined : new Date(),
-          }
-        : {}),
-    },
+    data: { formationStep: file.formationStep },
   });
 }
 

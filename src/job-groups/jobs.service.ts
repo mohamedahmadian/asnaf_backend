@@ -11,7 +11,7 @@ import {
   wantsPagination,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { DocumentGender, Prisma } from '../generated/prisma/client';
+import { CaseRequestType, DocumentGender, Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateJobCatalogDto } from './dto/create-job-catalog.dto';
 import { CreateJobDto } from './dto/create-job.dto';
@@ -380,6 +380,36 @@ export class JobsService {
         },
         select: jobSelect,
       });
+      if (jobDocuments) {
+        await this.prisma.documentRequirement.deleteMany({
+          where: { jobId: id, requestType: CaseRequestType.ISSUANCE },
+        });
+        if (jobDocuments.length) {
+          await this.prisma.documentRequirement.createMany({
+            data: jobDocuments.map((item) => ({
+              jobId: id,
+              requestType: CaseRequestType.ISSUANCE,
+              documentId: item.documentId,
+              gender: item.gender,
+              isRequired: item.isRequired,
+            })),
+          });
+        }
+      }
+      if (inquiryCenterIds) {
+        await this.prisma.inquiryRequirement.deleteMany({
+          where: { jobId: id, requestType: CaseRequestType.ISSUANCE },
+        });
+        if (inquiryCenterIds.length) {
+          await this.prisma.inquiryRequirement.createMany({
+            data: inquiryCenterIds.map((inquiryCenterId) => ({
+              jobId: id,
+              requestType: CaseRequestType.ISSUANCE,
+              inquiryCenterId,
+            })),
+          });
+        }
+      }
       return this.mapJob(item);
     } catch (error) {
       this.rethrowUnique(error);

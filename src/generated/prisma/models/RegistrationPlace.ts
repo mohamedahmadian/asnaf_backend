@@ -199,6 +199,8 @@ export type RegistrationPlaceWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   premiseCases?: Prisma.CaseFileListRelationFilter
+  locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
+  premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
 }
 
 export type RegistrationPlaceOrderByWithRelationInput = {
@@ -210,6 +212,8 @@ export type RegistrationPlaceOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   premiseCases?: Prisma.CaseFileOrderByRelationAggregateInput
+  locationDrafts?: Prisma.CaseLocationDraftOrderByRelationAggregateInput
+  premiseHistories?: Prisma.CasePremiseHistoryOrderByRelationAggregateInput
 }
 
 export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
@@ -224,6 +228,8 @@ export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   premiseCases?: Prisma.CaseFileListRelationFilter
+  locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
+  premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
 }, "id" | "title" | "isDefault">
 
 export type RegistrationPlaceOrderByWithAggregationInput = {
@@ -261,6 +267,8 @@ export type RegistrationPlaceCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceUncheckedCreateInput = {
@@ -272,6 +280,8 @@ export type RegistrationPlaceUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceUpdateInput = {
@@ -283,6 +293,8 @@ export type RegistrationPlaceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 export type RegistrationPlaceUncheckedUpdateInput = {
@@ -294,6 +306,8 @@ export type RegistrationPlaceUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 export type RegistrationPlaceCreateManyInput = {
@@ -377,6 +391,38 @@ export type RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutPremiseCasesInput, Prisma.RegistrationPlaceUpdateWithoutPremiseCasesInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput>
 }
 
+export type RegistrationPlaceCreateNestedOneWithoutLocationDraftsInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutLocationDraftsInput, Prisma.RegistrationPlaceUncheckedCreateWithoutLocationDraftsInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutLocationDraftsInput
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+}
+
+export type RegistrationPlaceUpdateOneWithoutLocationDraftsNestedInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutLocationDraftsInput, Prisma.RegistrationPlaceUncheckedCreateWithoutLocationDraftsInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutLocationDraftsInput
+  upsert?: Prisma.RegistrationPlaceUpsertWithoutLocationDraftsInput
+  disconnect?: Prisma.RegistrationPlaceWhereInput | boolean
+  delete?: Prisma.RegistrationPlaceWhereInput | boolean
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutLocationDraftsInput, Prisma.RegistrationPlaceUpdateWithoutLocationDraftsInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutLocationDraftsInput>
+}
+
+export type RegistrationPlaceCreateNestedOneWithoutPremiseHistoriesInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseHistoriesInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseHistoriesInput
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+}
+
+export type RegistrationPlaceUpdateOneWithoutPremiseHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseHistoriesInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseHistoriesInput
+  upsert?: Prisma.RegistrationPlaceUpsertWithoutPremiseHistoriesInput
+  disconnect?: Prisma.RegistrationPlaceWhereInput | boolean
+  delete?: Prisma.RegistrationPlaceWhereInput | boolean
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUpdateWithoutPremiseHistoriesInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseHistoriesInput>
+}
+
 export type RegistrationPlaceCreateWithoutPremiseCasesInput = {
   id?: string
   title: string
@@ -385,6 +431,8 @@ export type RegistrationPlaceCreateWithoutPremiseCasesInput = {
   isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput = {
@@ -395,6 +443,8 @@ export type RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput = {
   isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
 
 export type RegistrationPlaceCreateOrConnectWithoutPremiseCasesInput = {
@@ -421,6 +471,8 @@ export type RegistrationPlaceUpdateWithoutPremiseCasesInput = {
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 export type RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput = {
@@ -431,6 +483,136 @@ export type RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput = {
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+}
+
+export type RegistrationPlaceCreateWithoutLocationDraftsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  isDefault?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutRegistrationPlaceInput
+}
+
+export type RegistrationPlaceUncheckedCreateWithoutLocationDraftsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  isDefault?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+}
+
+export type RegistrationPlaceCreateOrConnectWithoutLocationDraftsInput = {
+  where: Prisma.RegistrationPlaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutLocationDraftsInput, Prisma.RegistrationPlaceUncheckedCreateWithoutLocationDraftsInput>
+}
+
+export type RegistrationPlaceUpsertWithoutLocationDraftsInput = {
+  update: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutLocationDraftsInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutLocationDraftsInput>
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutLocationDraftsInput, Prisma.RegistrationPlaceUncheckedCreateWithoutLocationDraftsInput>
+  where?: Prisma.RegistrationPlaceWhereInput
+}
+
+export type RegistrationPlaceUpdateToOneWithWhereWithoutLocationDraftsInput = {
+  where?: Prisma.RegistrationPlaceWhereInput
+  data: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutLocationDraftsInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutLocationDraftsInput>
+}
+
+export type RegistrationPlaceUpdateWithoutLocationDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutRegistrationPlaceNestedInput
+}
+
+export type RegistrationPlaceUncheckedUpdateWithoutLocationDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+}
+
+export type RegistrationPlaceCreateWithoutPremiseHistoriesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  isDefault?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput
+}
+
+export type RegistrationPlaceUncheckedCreateWithoutPremiseHistoriesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  isDefault?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+}
+
+export type RegistrationPlaceCreateOrConnectWithoutPremiseHistoriesInput = {
+  where: Prisma.RegistrationPlaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseHistoriesInput>
+}
+
+export type RegistrationPlaceUpsertWithoutPremiseHistoriesInput = {
+  update: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseHistoriesInput>
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseHistoriesInput>
+  where?: Prisma.RegistrationPlaceWhereInput
+}
+
+export type RegistrationPlaceUpdateToOneWithWhereWithoutPremiseHistoriesInput = {
+  where?: Prisma.RegistrationPlaceWhereInput
+  data: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseHistoriesInput>
+}
+
+export type RegistrationPlaceUpdateWithoutPremiseHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutRegistrationPlaceNestedInput
+}
+
+export type RegistrationPlaceUncheckedUpdateWithoutPremiseHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
 
@@ -440,10 +622,14 @@ export type RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput = {
 
 export type RegistrationPlaceCountOutputType = {
   premiseCases: number
+  locationDrafts: number
+  premiseHistories: number
 }
 
 export type RegistrationPlaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   premiseCases?: boolean | RegistrationPlaceCountOutputTypeCountPremiseCasesArgs
+  locationDrafts?: boolean | RegistrationPlaceCountOutputTypeCountLocationDraftsArgs
+  premiseHistories?: boolean | RegistrationPlaceCountOutputTypeCountPremiseHistoriesArgs
 }
 
 /**
@@ -463,6 +649,20 @@ export type RegistrationPlaceCountOutputTypeCountPremiseCasesArgs<ExtArgs extend
   where?: Prisma.CaseFileWhereInput
 }
 
+/**
+ * RegistrationPlaceCountOutputType without action
+ */
+export type RegistrationPlaceCountOutputTypeCountLocationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseLocationDraftWhereInput
+}
+
+/**
+ * RegistrationPlaceCountOutputType without action
+ */
+export type RegistrationPlaceCountOutputTypeCountPremiseHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CasePremiseHistoryWhereInput
+}
+
 
 export type RegistrationPlaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -473,6 +673,8 @@ export type RegistrationPlaceSelect<ExtArgs extends runtime.Types.Extensions.Int
   createdAt?: boolean
   updatedAt?: boolean
   premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
+  locationDrafts?: boolean | Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs>
+  premiseHistories?: boolean | Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["registrationPlace"]>
 
@@ -509,6 +711,8 @@ export type RegistrationPlaceSelectScalar = {
 export type RegistrationPlaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["registrationPlace"]>
 export type RegistrationPlaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
+  locationDrafts?: boolean | Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs>
+  premiseHistories?: boolean | Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RegistrationPlaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -518,6 +722,8 @@ export type $RegistrationPlacePayload<ExtArgs extends runtime.Types.Extensions.I
   name: "RegistrationPlace"
   objects: {
     premiseCases: Prisma.$CaseFilePayload<ExtArgs>[]
+    locationDrafts: Prisma.$CaseLocationDraftPayload<ExtArgs>[]
+    premiseHistories: Prisma.$CasePremiseHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -922,6 +1128,8 @@ readonly fields: RegistrationPlaceFieldRefs;
 export interface Prisma__RegistrationPlaceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   premiseCases<T extends Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  locationDrafts<T extends Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLocationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  premiseHistories<T extends Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1372,6 +1580,54 @@ export type RegistrationPlace$premiseCasesArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
+}
+
+/**
+ * RegistrationPlace.locationDrafts
+ */
+export type RegistrationPlace$locationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseLocationDraft
+   */
+  select?: Prisma.CaseLocationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseLocationDraft
+   */
+  omit?: Prisma.CaseLocationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseLocationDraftInclude<ExtArgs> | null
+  where?: Prisma.CaseLocationDraftWhereInput
+  orderBy?: Prisma.CaseLocationDraftOrderByWithRelationInput | Prisma.CaseLocationDraftOrderByWithRelationInput[]
+  cursor?: Prisma.CaseLocationDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseLocationDraftScalarFieldEnum | Prisma.CaseLocationDraftScalarFieldEnum[]
+}
+
+/**
+ * RegistrationPlace.premiseHistories
+ */
+export type RegistrationPlace$premiseHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasePremiseHistory
+   */
+  select?: Prisma.CasePremiseHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasePremiseHistory
+   */
+  omit?: Prisma.CasePremiseHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasePremiseHistoryInclude<ExtArgs> | null
+  where?: Prisma.CasePremiseHistoryWhereInput
+  orderBy?: Prisma.CasePremiseHistoryOrderByWithRelationInput | Prisma.CasePremiseHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.CasePremiseHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CasePremiseHistoryScalarFieldEnum | Prisma.CasePremiseHistoryScalarFieldEnum[]
 }
 
 /**

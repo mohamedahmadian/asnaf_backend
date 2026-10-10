@@ -76,6 +76,26 @@ export class CasesController {
     return this.cases.saveLocation(dto, user.id);
   }
 
+  @Get('activity-requirements')
+  activityRequirements(@Query('caseId') caseId = '', @Query('jobId') jobId = '') {
+    return this.cases.activityRequirements(caseId, jobId || undefined);
+  }
+
+  @Post('location-draft')
+  saveLocationDraft(@Body() dto: SaveCaseLocationDto) {
+    return this.cases.saveLocationDraft(dto);
+  }
+
+  @Post('process-step')
+  advanceProcess(@Body() dto: SaveFormationStepDto) {
+    return this.cases.advanceProcess(dto.caseId, dto.step);
+  }
+
+  @Post('complete')
+  complete(@Body() dto: SaveFormationStepDto, @CurrentUser() user: RequestUser | undefined) {
+    return this.cases.completeRequest(dto.caseId, user?.id);
+  }
+
   @Post('step')
   advanceStep(@Body() dto: SaveFormationStepDto) {
     return this.cases.advanceStep(dto);

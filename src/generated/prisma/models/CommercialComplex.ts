@@ -208,6 +208,8 @@ export type CommercialComplexWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"CommercialComplex"> | Date | string
   floors?: Prisma.CommercialFloorListRelationFilter
   premiseCases?: Prisma.CaseFileListRelationFilter
+  locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
+  premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
 }
 
 export type CommercialComplexOrderByWithRelationInput = {
@@ -221,6 +223,8 @@ export type CommercialComplexOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   floors?: Prisma.CommercialFloorOrderByRelationAggregateInput
   premiseCases?: Prisma.CaseFileOrderByRelationAggregateInput
+  locationDrafts?: Prisma.CaseLocationDraftOrderByRelationAggregateInput
+  premiseHistories?: Prisma.CasePremiseHistoryOrderByRelationAggregateInput
 }
 
 export type CommercialComplexWhereUniqueInput = Prisma.AtLeast<{
@@ -237,6 +241,8 @@ export type CommercialComplexWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"CommercialComplex"> | Date | string
   floors?: Prisma.CommercialFloorListRelationFilter
   premiseCases?: Prisma.CaseFileListRelationFilter
+  locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
+  premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
 }, "id">
 
 export type CommercialComplexOrderByWithAggregationInput = {
@@ -278,6 +284,8 @@ export type CommercialComplexCreateInput = {
   updatedAt?: Date | string
   floors?: Prisma.CommercialFloorCreateNestedManyWithoutComplexInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexUncheckedCreateInput = {
@@ -291,6 +299,8 @@ export type CommercialComplexUncheckedCreateInput = {
   updatedAt?: Date | string
   floors?: Prisma.CommercialFloorUncheckedCreateNestedManyWithoutComplexInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexUpdateInput = {
@@ -304,6 +314,8 @@ export type CommercialComplexUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   floors?: Prisma.CommercialFloorUpdateManyWithoutComplexNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexUncheckedUpdateInput = {
@@ -317,6 +329,8 @@ export type CommercialComplexUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   floors?: Prisma.CommercialFloorUncheckedUpdateManyWithoutComplexNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexCreateManyInput = {
@@ -411,6 +425,38 @@ export type CommercialComplexUpdateOneWithoutPremiseCasesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CommercialComplexUpdateToOneWithWhereWithoutPremiseCasesInput, Prisma.CommercialComplexUpdateWithoutPremiseCasesInput>, Prisma.CommercialComplexUncheckedUpdateWithoutPremiseCasesInput>
 }
 
+export type CommercialComplexCreateNestedOneWithoutLocationDraftsInput = {
+  create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutLocationDraftsInput, Prisma.CommercialComplexUncheckedCreateWithoutLocationDraftsInput>
+  connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutLocationDraftsInput
+  connect?: Prisma.CommercialComplexWhereUniqueInput
+}
+
+export type CommercialComplexUpdateOneWithoutLocationDraftsNestedInput = {
+  create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutLocationDraftsInput, Prisma.CommercialComplexUncheckedCreateWithoutLocationDraftsInput>
+  connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutLocationDraftsInput
+  upsert?: Prisma.CommercialComplexUpsertWithoutLocationDraftsInput
+  disconnect?: Prisma.CommercialComplexWhereInput | boolean
+  delete?: Prisma.CommercialComplexWhereInput | boolean
+  connect?: Prisma.CommercialComplexWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommercialComplexUpdateToOneWithWhereWithoutLocationDraftsInput, Prisma.CommercialComplexUpdateWithoutLocationDraftsInput>, Prisma.CommercialComplexUncheckedUpdateWithoutLocationDraftsInput>
+}
+
+export type CommercialComplexCreateNestedOneWithoutPremiseHistoriesInput = {
+  create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseHistoriesInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseHistoriesInput>
+  connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutPremiseHistoriesInput
+  connect?: Prisma.CommercialComplexWhereUniqueInput
+}
+
+export type CommercialComplexUpdateOneWithoutPremiseHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseHistoriesInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseHistoriesInput>
+  connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutPremiseHistoriesInput
+  upsert?: Prisma.CommercialComplexUpsertWithoutPremiseHistoriesInput
+  disconnect?: Prisma.CommercialComplexWhereInput | boolean
+  delete?: Prisma.CommercialComplexWhereInput | boolean
+  connect?: Prisma.CommercialComplexWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CommercialComplexUpdateToOneWithWhereWithoutPremiseHistoriesInput, Prisma.CommercialComplexUpdateWithoutPremiseHistoriesInput>, Prisma.CommercialComplexUncheckedUpdateWithoutPremiseHistoriesInput>
+}
+
 export type CommercialComplexCreateNestedOneWithoutFloorsInput = {
   create?: Prisma.XOR<Prisma.CommercialComplexCreateWithoutFloorsInput, Prisma.CommercialComplexUncheckedCreateWithoutFloorsInput>
   connectOrCreate?: Prisma.CommercialComplexCreateOrConnectWithoutFloorsInput
@@ -435,6 +481,8 @@ export type CommercialComplexCreateWithoutPremiseCasesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   floors?: Prisma.CommercialFloorCreateNestedManyWithoutComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexUncheckedCreateWithoutPremiseCasesInput = {
@@ -447,6 +495,8 @@ export type CommercialComplexUncheckedCreateWithoutPremiseCasesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   floors?: Prisma.CommercialFloorUncheckedCreateNestedManyWithoutComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexCreateOrConnectWithoutPremiseCasesInput = {
@@ -475,6 +525,8 @@ export type CommercialComplexUpdateWithoutPremiseCasesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   floors?: Prisma.CommercialFloorUpdateManyWithoutComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexUncheckedUpdateWithoutPremiseCasesInput = {
@@ -487,6 +539,152 @@ export type CommercialComplexUncheckedUpdateWithoutPremiseCasesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   floors?: Prisma.CommercialFloorUncheckedUpdateManyWithoutComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseComplexNestedInput
+}
+
+export type CommercialComplexCreateWithoutLocationDraftsInput = {
+  id?: string
+  name: string
+  nameEn: string
+  address?: string | null
+  postalCode?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  floors?: Prisma.CommercialFloorCreateNestedManyWithoutComplexInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseComplexInput
+}
+
+export type CommercialComplexUncheckedCreateWithoutLocationDraftsInput = {
+  id?: string
+  name: string
+  nameEn: string
+  address?: string | null
+  postalCode?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  floors?: Prisma.CommercialFloorUncheckedCreateNestedManyWithoutComplexInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseComplexInput
+}
+
+export type CommercialComplexCreateOrConnectWithoutLocationDraftsInput = {
+  where: Prisma.CommercialComplexWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommercialComplexCreateWithoutLocationDraftsInput, Prisma.CommercialComplexUncheckedCreateWithoutLocationDraftsInput>
+}
+
+export type CommercialComplexUpsertWithoutLocationDraftsInput = {
+  update: Prisma.XOR<Prisma.CommercialComplexUpdateWithoutLocationDraftsInput, Prisma.CommercialComplexUncheckedUpdateWithoutLocationDraftsInput>
+  create: Prisma.XOR<Prisma.CommercialComplexCreateWithoutLocationDraftsInput, Prisma.CommercialComplexUncheckedCreateWithoutLocationDraftsInput>
+  where?: Prisma.CommercialComplexWhereInput
+}
+
+export type CommercialComplexUpdateToOneWithWhereWithoutLocationDraftsInput = {
+  where?: Prisma.CommercialComplexWhereInput
+  data: Prisma.XOR<Prisma.CommercialComplexUpdateWithoutLocationDraftsInput, Prisma.CommercialComplexUncheckedUpdateWithoutLocationDraftsInput>
+}
+
+export type CommercialComplexUpdateWithoutLocationDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  floors?: Prisma.CommercialFloorUpdateManyWithoutComplexNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseComplexNestedInput
+}
+
+export type CommercialComplexUncheckedUpdateWithoutLocationDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  floors?: Prisma.CommercialFloorUncheckedUpdateManyWithoutComplexNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseComplexNestedInput
+}
+
+export type CommercialComplexCreateWithoutPremiseHistoriesInput = {
+  id?: string
+  name: string
+  nameEn: string
+  address?: string | null
+  postalCode?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  floors?: Prisma.CommercialFloorCreateNestedManyWithoutComplexInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseComplexInput
+}
+
+export type CommercialComplexUncheckedCreateWithoutPremiseHistoriesInput = {
+  id?: string
+  name: string
+  nameEn: string
+  address?: string | null
+  postalCode?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  floors?: Prisma.CommercialFloorUncheckedCreateNestedManyWithoutComplexInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseComplexInput
+}
+
+export type CommercialComplexCreateOrConnectWithoutPremiseHistoriesInput = {
+  where: Prisma.CommercialComplexWhereUniqueInput
+  create: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseHistoriesInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseHistoriesInput>
+}
+
+export type CommercialComplexUpsertWithoutPremiseHistoriesInput = {
+  update: Prisma.XOR<Prisma.CommercialComplexUpdateWithoutPremiseHistoriesInput, Prisma.CommercialComplexUncheckedUpdateWithoutPremiseHistoriesInput>
+  create: Prisma.XOR<Prisma.CommercialComplexCreateWithoutPremiseHistoriesInput, Prisma.CommercialComplexUncheckedCreateWithoutPremiseHistoriesInput>
+  where?: Prisma.CommercialComplexWhereInput
+}
+
+export type CommercialComplexUpdateToOneWithWhereWithoutPremiseHistoriesInput = {
+  where?: Prisma.CommercialComplexWhereInput
+  data: Prisma.XOR<Prisma.CommercialComplexUpdateWithoutPremiseHistoriesInput, Prisma.CommercialComplexUncheckedUpdateWithoutPremiseHistoriesInput>
+}
+
+export type CommercialComplexUpdateWithoutPremiseHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  floors?: Prisma.CommercialFloorUpdateManyWithoutComplexNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseComplexNestedInput
+}
+
+export type CommercialComplexUncheckedUpdateWithoutPremiseHistoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  floors?: Prisma.CommercialFloorUncheckedUpdateManyWithoutComplexNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexCreateWithoutFloorsInput = {
@@ -499,6 +697,8 @@ export type CommercialComplexCreateWithoutFloorsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexUncheckedCreateWithoutFloorsInput = {
@@ -511,6 +711,8 @@ export type CommercialComplexUncheckedCreateWithoutFloorsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseComplexInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseComplexInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseComplexInput
 }
 
 export type CommercialComplexCreateOrConnectWithoutFloorsInput = {
@@ -539,6 +741,8 @@ export type CommercialComplexUpdateWithoutFloorsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseComplexNestedInput
 }
 
 export type CommercialComplexUncheckedUpdateWithoutFloorsInput = {
@@ -551,6 +755,8 @@ export type CommercialComplexUncheckedUpdateWithoutFloorsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseComplexNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseComplexNestedInput
 }
 
 
@@ -561,11 +767,15 @@ export type CommercialComplexUncheckedUpdateWithoutFloorsInput = {
 export type CommercialComplexCountOutputType = {
   floors: number
   premiseCases: number
+  locationDrafts: number
+  premiseHistories: number
 }
 
 export type CommercialComplexCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   floors?: boolean | CommercialComplexCountOutputTypeCountFloorsArgs
   premiseCases?: boolean | CommercialComplexCountOutputTypeCountPremiseCasesArgs
+  locationDrafts?: boolean | CommercialComplexCountOutputTypeCountLocationDraftsArgs
+  premiseHistories?: boolean | CommercialComplexCountOutputTypeCountPremiseHistoriesArgs
 }
 
 /**
@@ -592,6 +802,20 @@ export type CommercialComplexCountOutputTypeCountPremiseCasesArgs<ExtArgs extend
   where?: Prisma.CaseFileWhereInput
 }
 
+/**
+ * CommercialComplexCountOutputType without action
+ */
+export type CommercialComplexCountOutputTypeCountLocationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseLocationDraftWhereInput
+}
+
+/**
+ * CommercialComplexCountOutputType without action
+ */
+export type CommercialComplexCountOutputTypeCountPremiseHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CasePremiseHistoryWhereInput
+}
+
 
 export type CommercialComplexSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -604,6 +828,8 @@ export type CommercialComplexSelect<ExtArgs extends runtime.Types.Extensions.Int
   updatedAt?: boolean
   floors?: boolean | Prisma.CommercialComplex$floorsArgs<ExtArgs>
   premiseCases?: boolean | Prisma.CommercialComplex$premiseCasesArgs<ExtArgs>
+  locationDrafts?: boolean | Prisma.CommercialComplex$locationDraftsArgs<ExtArgs>
+  premiseHistories?: boolean | Prisma.CommercialComplex$premiseHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.CommercialComplexCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["commercialComplex"]>
 
@@ -644,6 +870,8 @@ export type CommercialComplexOmit<ExtArgs extends runtime.Types.Extensions.Inter
 export type CommercialComplexInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   floors?: boolean | Prisma.CommercialComplex$floorsArgs<ExtArgs>
   premiseCases?: boolean | Prisma.CommercialComplex$premiseCasesArgs<ExtArgs>
+  locationDrafts?: boolean | Prisma.CommercialComplex$locationDraftsArgs<ExtArgs>
+  premiseHistories?: boolean | Prisma.CommercialComplex$premiseHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.CommercialComplexCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CommercialComplexIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -654,6 +882,8 @@ export type $CommercialComplexPayload<ExtArgs extends runtime.Types.Extensions.I
   objects: {
     floors: Prisma.$CommercialFloorPayload<ExtArgs>[]
     premiseCases: Prisma.$CaseFilePayload<ExtArgs>[]
+    locationDrafts: Prisma.$CaseLocationDraftPayload<ExtArgs>[]
+    premiseHistories: Prisma.$CasePremiseHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1060,6 +1290,8 @@ export interface Prisma__CommercialComplexClient<T, Null = never, ExtArgs extend
   readonly [Symbol.toStringTag]: "PrismaPromise"
   floors<T extends Prisma.CommercialComplex$floorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommercialComplex$floorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommercialFloorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   premiseCases<T extends Prisma.CommercialComplex$premiseCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommercialComplex$premiseCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  locationDrafts<T extends Prisma.CommercialComplex$locationDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommercialComplex$locationDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLocationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  premiseHistories<T extends Prisma.CommercialComplex$premiseHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CommercialComplex$premiseHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1535,6 +1767,54 @@ export type CommercialComplex$premiseCasesArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
+}
+
+/**
+ * CommercialComplex.locationDrafts
+ */
+export type CommercialComplex$locationDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseLocationDraft
+   */
+  select?: Prisma.CaseLocationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseLocationDraft
+   */
+  omit?: Prisma.CaseLocationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseLocationDraftInclude<ExtArgs> | null
+  where?: Prisma.CaseLocationDraftWhereInput
+  orderBy?: Prisma.CaseLocationDraftOrderByWithRelationInput | Prisma.CaseLocationDraftOrderByWithRelationInput[]
+  cursor?: Prisma.CaseLocationDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseLocationDraftScalarFieldEnum | Prisma.CaseLocationDraftScalarFieldEnum[]
+}
+
+/**
+ * CommercialComplex.premiseHistories
+ */
+export type CommercialComplex$premiseHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasePremiseHistory
+   */
+  select?: Prisma.CasePremiseHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasePremiseHistory
+   */
+  omit?: Prisma.CasePremiseHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasePremiseHistoryInclude<ExtArgs> | null
+  where?: Prisma.CasePremiseHistoryWhereInput
+  orderBy?: Prisma.CasePremiseHistoryOrderByWithRelationInput | Prisma.CasePremiseHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.CasePremiseHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CasePremiseHistoryScalarFieldEnum | Prisma.CasePremiseHistoryScalarFieldEnum[]
 }
 
 /**

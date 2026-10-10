@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model CaseActivityDocument
- * مدرک شغلی یک پرونده. هر پرونده فایل جدا دارد و با مدارک هویتی شخص مشترک نیست.
+ * مدرک شغلی یک درخواست. فایل روی پرونده می‌ماند و ارائه مال همین درخواست است.
  */
 export type CaseActivityDocumentModel = runtime.Types.Result.DefaultSelection<Prisma.$CaseActivityDocumentPayload>
 
@@ -27,6 +27,7 @@ export type AggregateCaseActivityDocument = {
 export type CaseActivityDocumentMinAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  caseRequestId: string | null
   documentId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -35,6 +36,7 @@ export type CaseActivityDocumentMinAggregateOutputType = {
 export type CaseActivityDocumentMaxAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  caseRequestId: string | null
   documentId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,6 +45,7 @@ export type CaseActivityDocumentMaxAggregateOutputType = {
 export type CaseActivityDocumentCountAggregateOutputType = {
   id: number
   caseFileId: number
+  caseRequestId: number
   documentId: number
   createdAt: number
   updatedAt: number
@@ -53,6 +56,7 @@ export type CaseActivityDocumentCountAggregateOutputType = {
 export type CaseActivityDocumentMinAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   documentId?: true
   createdAt?: true
   updatedAt?: true
@@ -61,6 +65,7 @@ export type CaseActivityDocumentMinAggregateInputType = {
 export type CaseActivityDocumentMaxAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   documentId?: true
   createdAt?: true
   updatedAt?: true
@@ -69,6 +74,7 @@ export type CaseActivityDocumentMaxAggregateInputType = {
 export type CaseActivityDocumentCountAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   documentId?: true
   createdAt?: true
   updatedAt?: true
@@ -150,6 +156,7 @@ export type CaseActivityDocumentGroupByArgs<ExtArgs extends runtime.Types.Extens
 export type CaseActivityDocumentGroupByOutputType = {
   id: string
   caseFileId: string
+  caseRequestId: string
   documentId: string
   createdAt: Date
   updatedAt: Date
@@ -179,10 +186,12 @@ export type CaseActivityDocumentWhereInput = {
   NOT?: Prisma.CaseActivityDocumentWhereInput | Prisma.CaseActivityDocumentWhereInput[]
   id?: Prisma.StringFilter<"CaseActivityDocument"> | string
   caseFileId?: Prisma.StringFilter<"CaseActivityDocument"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseActivityDocument"> | string
   documentId?: Prisma.StringFilter<"CaseActivityDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"CaseActivityDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseActivityDocument"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   versions?: Prisma.CaseActivityDocumentVersionListRelationFilter
 }
@@ -190,32 +199,37 @@ export type CaseActivityDocumentWhereInput = {
 export type CaseActivityDocumentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
+  caseRequest?: Prisma.CaseRequestOrderByWithRelationInput
   document?: Prisma.DocumentOrderByWithRelationInput
   versions?: Prisma.CaseActivityDocumentVersionOrderByRelationAggregateInput
 }
 
 export type CaseActivityDocumentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  caseFileId_documentId?: Prisma.CaseActivityDocumentCaseFileIdDocumentIdCompoundUniqueInput
+  caseRequestId_documentId?: Prisma.CaseActivityDocumentCaseRequestIdDocumentIdCompoundUniqueInput
   AND?: Prisma.CaseActivityDocumentWhereInput | Prisma.CaseActivityDocumentWhereInput[]
   OR?: Prisma.CaseActivityDocumentWhereInput[]
   NOT?: Prisma.CaseActivityDocumentWhereInput | Prisma.CaseActivityDocumentWhereInput[]
   caseFileId?: Prisma.StringFilter<"CaseActivityDocument"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseActivityDocument"> | string
   documentId?: Prisma.StringFilter<"CaseActivityDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"CaseActivityDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseActivityDocument"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   versions?: Prisma.CaseActivityDocumentVersionListRelationFilter
-}, "id" | "caseFileId_documentId">
+}, "id" | "caseRequestId_documentId">
 
 export type CaseActivityDocumentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -230,6 +244,7 @@ export type CaseActivityDocumentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CaseActivityDocumentScalarWhereWithAggregatesInput | Prisma.CaseActivityDocumentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CaseActivityDocument"> | string
   caseFileId?: Prisma.StringWithAggregatesFilter<"CaseActivityDocument"> | string
+  caseRequestId?: Prisma.StringWithAggregatesFilter<"CaseActivityDocument"> | string
   documentId?: Prisma.StringWithAggregatesFilter<"CaseActivityDocument"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseActivityDocument"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CaseActivityDocument"> | Date | string
@@ -240,6 +255,7 @@ export type CaseActivityDocumentCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutActivityDocumentsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutActivityDocumentsInput
   document: Prisma.DocumentCreateNestedOneWithoutCaseActivityDocumentsInput
   versions?: Prisma.CaseActivityDocumentVersionCreateNestedManyWithoutCaseActivityDocumentInput
 }
@@ -247,6 +263,7 @@ export type CaseActivityDocumentCreateInput = {
 export type CaseActivityDocumentUncheckedCreateInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   documentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -258,6 +275,7 @@ export type CaseActivityDocumentUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutActivityDocumentsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutActivityDocumentsNestedInput
   document?: Prisma.DocumentUpdateOneRequiredWithoutCaseActivityDocumentsNestedInput
   versions?: Prisma.CaseActivityDocumentVersionUpdateManyWithoutCaseActivityDocumentNestedInput
 }
@@ -265,6 +283,7 @@ export type CaseActivityDocumentUpdateInput = {
 export type CaseActivityDocumentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -274,6 +293,7 @@ export type CaseActivityDocumentUncheckedUpdateInput = {
 export type CaseActivityDocumentCreateManyInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   documentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -288,6 +308,7 @@ export type CaseActivityDocumentUpdateManyMutationInput = {
 export type CaseActivityDocumentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -303,14 +324,15 @@ export type CaseActivityDocumentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type CaseActivityDocumentCaseFileIdDocumentIdCompoundUniqueInput = {
-  caseFileId: string
+export type CaseActivityDocumentCaseRequestIdDocumentIdCompoundUniqueInput = {
+  caseRequestId: string
   documentId: string
 }
 
 export type CaseActivityDocumentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -319,6 +341,7 @@ export type CaseActivityDocumentCountOrderByAggregateInput = {
 export type CaseActivityDocumentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -327,6 +350,7 @@ export type CaseActivityDocumentMaxOrderByAggregateInput = {
 export type CaseActivityDocumentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -421,6 +445,48 @@ export type CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput = 
   deleteMany?: Prisma.CaseActivityDocumentScalarWhereInput | Prisma.CaseActivityDocumentScalarWhereInput[]
 }
 
+export type CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput[] | Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput | Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseActivityDocumentCreateManyCaseRequestInputEnvelope
+  connect?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+}
+
+export type CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput[] | Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput | Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseActivityDocumentCreateManyCaseRequestInputEnvelope
+  connect?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+}
+
+export type CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput[] | Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput | Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput[]
+  upsert?: Prisma.CaseActivityDocumentUpsertWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseActivityDocumentUpsertWithWhereUniqueWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseActivityDocumentCreateManyCaseRequestInputEnvelope
+  set?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  disconnect?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  delete?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  connect?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  update?: Prisma.CaseActivityDocumentUpdateWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseActivityDocumentUpdateWithWhereUniqueWithoutCaseRequestInput[]
+  updateMany?: Prisma.CaseActivityDocumentUpdateManyWithWhereWithoutCaseRequestInput | Prisma.CaseActivityDocumentUpdateManyWithWhereWithoutCaseRequestInput[]
+  deleteMany?: Prisma.CaseActivityDocumentScalarWhereInput | Prisma.CaseActivityDocumentScalarWhereInput[]
+}
+
+export type CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput[] | Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput | Prisma.CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput[]
+  upsert?: Prisma.CaseActivityDocumentUpsertWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseActivityDocumentUpsertWithWhereUniqueWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseActivityDocumentCreateManyCaseRequestInputEnvelope
+  set?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  disconnect?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  delete?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  connect?: Prisma.CaseActivityDocumentWhereUniqueInput | Prisma.CaseActivityDocumentWhereUniqueInput[]
+  update?: Prisma.CaseActivityDocumentUpdateWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseActivityDocumentUpdateWithWhereUniqueWithoutCaseRequestInput[]
+  updateMany?: Prisma.CaseActivityDocumentUpdateManyWithWhereWithoutCaseRequestInput | Prisma.CaseActivityDocumentUpdateManyWithWhereWithoutCaseRequestInput[]
+  deleteMany?: Prisma.CaseActivityDocumentScalarWhereInput | Prisma.CaseActivityDocumentScalarWhereInput[]
+}
+
 export type CaseActivityDocumentCreateNestedOneWithoutVersionsInput = {
   create?: Prisma.XOR<Prisma.CaseActivityDocumentCreateWithoutVersionsInput, Prisma.CaseActivityDocumentUncheckedCreateWithoutVersionsInput>
   connectOrCreate?: Prisma.CaseActivityDocumentCreateOrConnectWithoutVersionsInput
@@ -440,12 +506,14 @@ export type CaseActivityDocumentCreateWithoutDocumentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutActivityDocumentsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutActivityDocumentsInput
   versions?: Prisma.CaseActivityDocumentVersionCreateNestedManyWithoutCaseActivityDocumentInput
 }
 
 export type CaseActivityDocumentUncheckedCreateWithoutDocumentInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   versions?: Prisma.CaseActivityDocumentVersionUncheckedCreateNestedManyWithoutCaseActivityDocumentInput
@@ -483,6 +551,7 @@ export type CaseActivityDocumentScalarWhereInput = {
   NOT?: Prisma.CaseActivityDocumentScalarWhereInput | Prisma.CaseActivityDocumentScalarWhereInput[]
   id?: Prisma.StringFilter<"CaseActivityDocument"> | string
   caseFileId?: Prisma.StringFilter<"CaseActivityDocument"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseActivityDocument"> | string
   documentId?: Prisma.StringFilter<"CaseActivityDocument"> | string
   createdAt?: Prisma.DateTimeFilter<"CaseActivityDocument"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseActivityDocument"> | Date | string
@@ -492,12 +561,14 @@ export type CaseActivityDocumentCreateWithoutCaseFileInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutActivityDocumentsInput
   document: Prisma.DocumentCreateNestedOneWithoutCaseActivityDocumentsInput
   versions?: Prisma.CaseActivityDocumentVersionCreateNestedManyWithoutCaseActivityDocumentInput
 }
 
 export type CaseActivityDocumentUncheckedCreateWithoutCaseFileInput = {
   id?: string
+  caseRequestId: string
   documentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -530,17 +601,63 @@ export type CaseActivityDocumentUpdateManyWithWhereWithoutCaseFileInput = {
   data: Prisma.XOR<Prisma.CaseActivityDocumentUpdateManyMutationInput, Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileInput>
 }
 
+export type CaseActivityDocumentCreateWithoutCaseRequestInput = {
+  id?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutActivityDocumentsInput
+  document: Prisma.DocumentCreateNestedOneWithoutCaseActivityDocumentsInput
+  versions?: Prisma.CaseActivityDocumentVersionCreateNestedManyWithoutCaseActivityDocumentInput
+}
+
+export type CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput = {
+  id?: string
+  caseFileId: string
+  documentId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  versions?: Prisma.CaseActivityDocumentVersionUncheckedCreateNestedManyWithoutCaseActivityDocumentInput
+}
+
+export type CaseActivityDocumentCreateOrConnectWithoutCaseRequestInput = {
+  where: Prisma.CaseActivityDocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput>
+}
+
+export type CaseActivityDocumentCreateManyCaseRequestInputEnvelope = {
+  data: Prisma.CaseActivityDocumentCreateManyCaseRequestInput | Prisma.CaseActivityDocumentCreateManyCaseRequestInput[]
+  skipDuplicates?: boolean
+}
+
+export type CaseActivityDocumentUpsertWithWhereUniqueWithoutCaseRequestInput = {
+  where: Prisma.CaseActivityDocumentWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseActivityDocumentUpdateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedUpdateWithoutCaseRequestInput>
+  create: Prisma.XOR<Prisma.CaseActivityDocumentCreateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedCreateWithoutCaseRequestInput>
+}
+
+export type CaseActivityDocumentUpdateWithWhereUniqueWithoutCaseRequestInput = {
+  where: Prisma.CaseActivityDocumentWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseActivityDocumentUpdateWithoutCaseRequestInput, Prisma.CaseActivityDocumentUncheckedUpdateWithoutCaseRequestInput>
+}
+
+export type CaseActivityDocumentUpdateManyWithWhereWithoutCaseRequestInput = {
+  where: Prisma.CaseActivityDocumentScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseActivityDocumentUpdateManyMutationInput, Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestInput>
+}
+
 export type CaseActivityDocumentCreateWithoutVersionsInput = {
   id?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutActivityDocumentsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutActivityDocumentsInput
   document: Prisma.DocumentCreateNestedOneWithoutCaseActivityDocumentsInput
 }
 
 export type CaseActivityDocumentUncheckedCreateWithoutVersionsInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   documentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -567,12 +684,14 @@ export type CaseActivityDocumentUpdateWithoutVersionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutActivityDocumentsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutActivityDocumentsNestedInput
   document?: Prisma.DocumentUpdateOneRequiredWithoutCaseActivityDocumentsNestedInput
 }
 
 export type CaseActivityDocumentUncheckedUpdateWithoutVersionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -581,6 +700,7 @@ export type CaseActivityDocumentUncheckedUpdateWithoutVersionsInput = {
 export type CaseActivityDocumentCreateManyDocumentInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -590,12 +710,14 @@ export type CaseActivityDocumentUpdateWithoutDocumentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutActivityDocumentsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutActivityDocumentsNestedInput
   versions?: Prisma.CaseActivityDocumentVersionUpdateManyWithoutCaseActivityDocumentNestedInput
 }
 
 export type CaseActivityDocumentUncheckedUpdateWithoutDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   versions?: Prisma.CaseActivityDocumentVersionUncheckedUpdateManyWithoutCaseActivityDocumentNestedInput
@@ -604,12 +726,14 @@ export type CaseActivityDocumentUncheckedUpdateWithoutDocumentInput = {
 export type CaseActivityDocumentUncheckedUpdateManyWithoutDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CaseActivityDocumentCreateManyCaseFileInput = {
   id?: string
+  caseRequestId: string
   documentId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -619,12 +743,14 @@ export type CaseActivityDocumentUpdateWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutActivityDocumentsNestedInput
   document?: Prisma.DocumentUpdateOneRequiredWithoutCaseActivityDocumentsNestedInput
   versions?: Prisma.CaseActivityDocumentVersionUpdateManyWithoutCaseActivityDocumentNestedInput
 }
 
 export type CaseActivityDocumentUncheckedUpdateWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -633,6 +759,41 @@ export type CaseActivityDocumentUncheckedUpdateWithoutCaseFileInput = {
 
 export type CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
+  documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseActivityDocumentCreateManyCaseRequestInput = {
+  id?: string
+  caseFileId: string
+  documentId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CaseActivityDocumentUpdateWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutActivityDocumentsNestedInput
+  document?: Prisma.DocumentUpdateOneRequiredWithoutCaseActivityDocumentsNestedInput
+  versions?: Prisma.CaseActivityDocumentVersionUpdateManyWithoutCaseActivityDocumentNestedInput
+}
+
+export type CaseActivityDocumentUncheckedUpdateWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  versions?: Prisma.CaseActivityDocumentVersionUncheckedUpdateManyWithoutCaseActivityDocumentNestedInput
+}
+
+export type CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -672,10 +833,12 @@ export type CaseActivityDocumentCountOutputTypeCountVersionsArgs<ExtArgs extends
 export type CaseActivityDocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   documentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   versions?: boolean | Prisma.CaseActivityDocument$versionsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseActivityDocumentCountOutputTypeDefaultArgs<ExtArgs>
@@ -684,44 +847,52 @@ export type CaseActivityDocumentSelect<ExtArgs extends runtime.Types.Extensions.
 export type CaseActivityDocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   documentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseActivityDocument"]>
 
 export type CaseActivityDocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   documentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseActivityDocument"]>
 
 export type CaseActivityDocumentSelectScalar = {
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   documentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CaseActivityDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "documentId" | "createdAt" | "updatedAt", ExtArgs["result"]["caseActivityDocument"]>
+export type CaseActivityDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "caseRequestId" | "documentId" | "createdAt" | "updatedAt", ExtArgs["result"]["caseActivityDocument"]>
 export type CaseActivityDocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
   versions?: boolean | Prisma.CaseActivityDocument$versionsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseActivityDocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseActivityDocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }
 export type CaseActivityDocumentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }
 
@@ -729,12 +900,14 @@ export type $CaseActivityDocumentPayload<ExtArgs extends runtime.Types.Extension
   name: "CaseActivityDocument"
   objects: {
     caseFile: Prisma.$CaseFilePayload<ExtArgs>
+    caseRequest: Prisma.$CaseRequestPayload<ExtArgs>
     document: Prisma.$DocumentPayload<ExtArgs>
     versions: Prisma.$CaseActivityDocumentVersionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     caseFileId: string
+    caseRequestId: string
     documentId: string
     createdAt: Date
     updatedAt: Date
@@ -1133,6 +1306,7 @@ readonly fields: CaseActivityDocumentFieldRefs;
 export interface Prisma__CaseActivityDocumentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   caseFile<T extends Prisma.CaseFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFileDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  caseRequest<T extends Prisma.CaseRequestDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequestDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseRequestClient<runtime.Types.Result.GetResult<Prisma.$CaseRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   document<T extends Prisma.DocumentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentDefaultArgs<ExtArgs>>): Prisma.Prisma__DocumentClient<runtime.Types.Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   versions<T extends Prisma.CaseActivityDocument$versionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseActivityDocument$versionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseActivityDocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1166,6 +1340,7 @@ export interface Prisma__CaseActivityDocumentClient<T, Null = never, ExtArgs ext
 export interface CaseActivityDocumentFieldRefs {
   readonly id: Prisma.FieldRef<"CaseActivityDocument", 'String'>
   readonly caseFileId: Prisma.FieldRef<"CaseActivityDocument", 'String'>
+  readonly caseRequestId: Prisma.FieldRef<"CaseActivityDocument", 'String'>
   readonly documentId: Prisma.FieldRef<"CaseActivityDocument", 'String'>
   readonly createdAt: Prisma.FieldRef<"CaseActivityDocument", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CaseActivityDocument", 'DateTime'>

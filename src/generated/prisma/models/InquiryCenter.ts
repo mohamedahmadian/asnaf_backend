@@ -225,6 +225,7 @@ export type InquiryCenterWhereInput = {
   officer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   jobs?: Prisma.JobInquiryCenterListRelationFilter
   caseInquiries?: Prisma.CaseInquiryListRelationFilter
+  requirements?: Prisma.InquiryRequirementListRelationFilter
 }
 
 export type InquiryCenterOrderByWithRelationInput = {
@@ -241,6 +242,7 @@ export type InquiryCenterOrderByWithRelationInput = {
   officer?: Prisma.UserOrderByWithRelationInput
   jobs?: Prisma.JobInquiryCenterOrderByRelationAggregateInput
   caseInquiries?: Prisma.CaseInquiryOrderByRelationAggregateInput
+  requirements?: Prisma.InquiryRequirementOrderByRelationAggregateInput
 }
 
 export type InquiryCenterWhereUniqueInput = Prisma.AtLeast<{
@@ -260,6 +262,7 @@ export type InquiryCenterWhereUniqueInput = Prisma.AtLeast<{
   officer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   jobs?: Prisma.JobInquiryCenterListRelationFilter
   caseInquiries?: Prisma.CaseInquiryListRelationFilter
+  requirements?: Prisma.InquiryRequirementListRelationFilter
 }, "id" | "name">
 
 export type InquiryCenterOrderByWithAggregationInput = {
@@ -307,6 +310,7 @@ export type InquiryCenterCreateInput = {
   officer?: Prisma.UserCreateNestedOneWithoutInquiryCentersInput
   jobs?: Prisma.JobInquiryCenterCreateNestedManyWithoutInquiryCenterInput
   caseInquiries?: Prisma.CaseInquiryCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterUncheckedCreateInput = {
@@ -322,6 +326,7 @@ export type InquiryCenterUncheckedCreateInput = {
   updatedAt?: Date | string
   jobs?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutInquiryCenterInput
   caseInquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementUncheckedCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterUpdateInput = {
@@ -337,6 +342,7 @@ export type InquiryCenterUpdateInput = {
   officer?: Prisma.UserUpdateOneWithoutInquiryCentersNestedInput
   jobs?: Prisma.JobInquiryCenterUpdateManyWithoutInquiryCenterNestedInput
   caseInquiries?: Prisma.CaseInquiryUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterUncheckedUpdateInput = {
@@ -352,6 +358,7 @@ export type InquiryCenterUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutInquiryCenterNestedInput
   caseInquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUncheckedUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterCreateManyInput = {
@@ -474,6 +481,20 @@ export type InquiryCenterUpdateOneRequiredWithoutCaseInquiriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.InquiryCenterUpdateToOneWithWhereWithoutCaseInquiriesInput, Prisma.InquiryCenterUpdateWithoutCaseInquiriesInput>, Prisma.InquiryCenterUncheckedUpdateWithoutCaseInquiriesInput>
 }
 
+export type InquiryCenterCreateNestedOneWithoutRequirementsInput = {
+  create?: Prisma.XOR<Prisma.InquiryCenterCreateWithoutRequirementsInput, Prisma.InquiryCenterUncheckedCreateWithoutRequirementsInput>
+  connectOrCreate?: Prisma.InquiryCenterCreateOrConnectWithoutRequirementsInput
+  connect?: Prisma.InquiryCenterWhereUniqueInput
+}
+
+export type InquiryCenterUpdateOneRequiredWithoutRequirementsNestedInput = {
+  create?: Prisma.XOR<Prisma.InquiryCenterCreateWithoutRequirementsInput, Prisma.InquiryCenterUncheckedCreateWithoutRequirementsInput>
+  connectOrCreate?: Prisma.InquiryCenterCreateOrConnectWithoutRequirementsInput
+  upsert?: Prisma.InquiryCenterUpsertWithoutRequirementsInput
+  connect?: Prisma.InquiryCenterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InquiryCenterUpdateToOneWithWhereWithoutRequirementsInput, Prisma.InquiryCenterUpdateWithoutRequirementsInput>, Prisma.InquiryCenterUncheckedUpdateWithoutRequirementsInput>
+}
+
 export type InquiryCenterCreateNestedManyWithoutOfficerInput = {
   create?: Prisma.XOR<Prisma.InquiryCenterCreateWithoutOfficerInput, Prisma.InquiryCenterUncheckedCreateWithoutOfficerInput> | Prisma.InquiryCenterCreateWithoutOfficerInput[] | Prisma.InquiryCenterUncheckedCreateWithoutOfficerInput[]
   connectOrCreate?: Prisma.InquiryCenterCreateOrConnectWithoutOfficerInput | Prisma.InquiryCenterCreateOrConnectWithoutOfficerInput[]
@@ -528,6 +549,7 @@ export type InquiryCenterCreateWithoutJobsInput = {
   updatedAt?: Date | string
   officer?: Prisma.UserCreateNestedOneWithoutInquiryCentersInput
   caseInquiries?: Prisma.CaseInquiryCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterUncheckedCreateWithoutJobsInput = {
@@ -542,6 +564,7 @@ export type InquiryCenterUncheckedCreateWithoutJobsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseInquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementUncheckedCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterCreateOrConnectWithoutJobsInput = {
@@ -572,6 +595,7 @@ export type InquiryCenterUpdateWithoutJobsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   officer?: Prisma.UserUpdateOneWithoutInquiryCentersNestedInput
   caseInquiries?: Prisma.CaseInquiryUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterUncheckedUpdateWithoutJobsInput = {
@@ -586,6 +610,7 @@ export type InquiryCenterUncheckedUpdateWithoutJobsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseInquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUncheckedUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterCreateWithoutCaseInquiriesInput = {
@@ -600,6 +625,7 @@ export type InquiryCenterCreateWithoutCaseInquiriesInput = {
   updatedAt?: Date | string
   officer?: Prisma.UserCreateNestedOneWithoutInquiryCentersInput
   jobs?: Prisma.JobInquiryCenterCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterUncheckedCreateWithoutCaseInquiriesInput = {
@@ -614,6 +640,7 @@ export type InquiryCenterUncheckedCreateWithoutCaseInquiriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementUncheckedCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterCreateOrConnectWithoutCaseInquiriesInput = {
@@ -644,6 +671,7 @@ export type InquiryCenterUpdateWithoutCaseInquiriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   officer?: Prisma.UserUpdateOneWithoutInquiryCentersNestedInput
   jobs?: Prisma.JobInquiryCenterUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterUncheckedUpdateWithoutCaseInquiriesInput = {
@@ -658,6 +686,83 @@ export type InquiryCenterUncheckedUpdateWithoutCaseInquiriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUncheckedUpdateManyWithoutInquiryCenterNestedInput
+}
+
+export type InquiryCenterCreateWithoutRequirementsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  phone?: string | null
+  letterTitle?: string | null
+  letterBody?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  officer?: Prisma.UserCreateNestedOneWithoutInquiryCentersInput
+  jobs?: Prisma.JobInquiryCenterCreateNestedManyWithoutInquiryCenterInput
+  caseInquiries?: Prisma.CaseInquiryCreateNestedManyWithoutInquiryCenterInput
+}
+
+export type InquiryCenterUncheckedCreateWithoutRequirementsInput = {
+  id?: string
+  name: string
+  description?: string | null
+  phone?: string | null
+  officerId?: string | null
+  letterTitle?: string | null
+  letterBody?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutInquiryCenterInput
+  caseInquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutInquiryCenterInput
+}
+
+export type InquiryCenterCreateOrConnectWithoutRequirementsInput = {
+  where: Prisma.InquiryCenterWhereUniqueInput
+  create: Prisma.XOR<Prisma.InquiryCenterCreateWithoutRequirementsInput, Prisma.InquiryCenterUncheckedCreateWithoutRequirementsInput>
+}
+
+export type InquiryCenterUpsertWithoutRequirementsInput = {
+  update: Prisma.XOR<Prisma.InquiryCenterUpdateWithoutRequirementsInput, Prisma.InquiryCenterUncheckedUpdateWithoutRequirementsInput>
+  create: Prisma.XOR<Prisma.InquiryCenterCreateWithoutRequirementsInput, Prisma.InquiryCenterUncheckedCreateWithoutRequirementsInput>
+  where?: Prisma.InquiryCenterWhereInput
+}
+
+export type InquiryCenterUpdateToOneWithWhereWithoutRequirementsInput = {
+  where?: Prisma.InquiryCenterWhereInput
+  data: Prisma.XOR<Prisma.InquiryCenterUpdateWithoutRequirementsInput, Prisma.InquiryCenterUncheckedUpdateWithoutRequirementsInput>
+}
+
+export type InquiryCenterUpdateWithoutRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  officer?: Prisma.UserUpdateOneWithoutInquiryCentersNestedInput
+  jobs?: Prisma.JobInquiryCenterUpdateManyWithoutInquiryCenterNestedInput
+  caseInquiries?: Prisma.CaseInquiryUpdateManyWithoutInquiryCenterNestedInput
+}
+
+export type InquiryCenterUncheckedUpdateWithoutRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  officerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutInquiryCenterNestedInput
+  caseInquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterCreateWithoutOfficerInput = {
@@ -672,6 +777,7 @@ export type InquiryCenterCreateWithoutOfficerInput = {
   updatedAt?: Date | string
   jobs?: Prisma.JobInquiryCenterCreateNestedManyWithoutInquiryCenterInput
   caseInquiries?: Prisma.CaseInquiryCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterUncheckedCreateWithoutOfficerInput = {
@@ -686,6 +792,7 @@ export type InquiryCenterUncheckedCreateWithoutOfficerInput = {
   updatedAt?: Date | string
   jobs?: Prisma.JobInquiryCenterUncheckedCreateNestedManyWithoutInquiryCenterInput
   caseInquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutInquiryCenterInput
+  requirements?: Prisma.InquiryRequirementUncheckedCreateNestedManyWithoutInquiryCenterInput
 }
 
 export type InquiryCenterCreateOrConnectWithoutOfficerInput = {
@@ -754,6 +861,7 @@ export type InquiryCenterUpdateWithoutOfficerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobInquiryCenterUpdateManyWithoutInquiryCenterNestedInput
   caseInquiries?: Prisma.CaseInquiryUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterUncheckedUpdateWithoutOfficerInput = {
@@ -768,6 +876,7 @@ export type InquiryCenterUncheckedUpdateWithoutOfficerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobInquiryCenterUncheckedUpdateManyWithoutInquiryCenterNestedInput
   caseInquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutInquiryCenterNestedInput
+  requirements?: Prisma.InquiryRequirementUncheckedUpdateManyWithoutInquiryCenterNestedInput
 }
 
 export type InquiryCenterUncheckedUpdateManyWithoutOfficerInput = {
@@ -790,11 +899,13 @@ export type InquiryCenterUncheckedUpdateManyWithoutOfficerInput = {
 export type InquiryCenterCountOutputType = {
   jobs: number
   caseInquiries: number
+  requirements: number
 }
 
 export type InquiryCenterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | InquiryCenterCountOutputTypeCountJobsArgs
   caseInquiries?: boolean | InquiryCenterCountOutputTypeCountCaseInquiriesArgs
+  requirements?: boolean | InquiryCenterCountOutputTypeCountRequirementsArgs
 }
 
 /**
@@ -821,6 +932,13 @@ export type InquiryCenterCountOutputTypeCountCaseInquiriesArgs<ExtArgs extends r
   where?: Prisma.CaseInquiryWhereInput
 }
 
+/**
+ * InquiryCenterCountOutputType without action
+ */
+export type InquiryCenterCountOutputTypeCountRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InquiryRequirementWhereInput
+}
+
 
 export type InquiryCenterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -836,6 +954,7 @@ export type InquiryCenterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   officer?: boolean | Prisma.InquiryCenter$officerArgs<ExtArgs>
   jobs?: boolean | Prisma.InquiryCenter$jobsArgs<ExtArgs>
   caseInquiries?: boolean | Prisma.InquiryCenter$caseInquiriesArgs<ExtArgs>
+  requirements?: boolean | Prisma.InquiryCenter$requirementsArgs<ExtArgs>
   _count?: boolean | Prisma.InquiryCenterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["inquiryCenter"]>
 
@@ -885,6 +1004,7 @@ export type InquiryCenterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   officer?: boolean | Prisma.InquiryCenter$officerArgs<ExtArgs>
   jobs?: boolean | Prisma.InquiryCenter$jobsArgs<ExtArgs>
   caseInquiries?: boolean | Prisma.InquiryCenter$caseInquiriesArgs<ExtArgs>
+  requirements?: boolean | Prisma.InquiryCenter$requirementsArgs<ExtArgs>
   _count?: boolean | Prisma.InquiryCenterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type InquiryCenterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -900,6 +1020,7 @@ export type $InquiryCenterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     officer: Prisma.$UserPayload<ExtArgs> | null
     jobs: Prisma.$JobInquiryCenterPayload<ExtArgs>[]
     caseInquiries: Prisma.$CaseInquiryPayload<ExtArgs>[]
+    requirements: Prisma.$InquiryRequirementPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1309,6 +1430,7 @@ export interface Prisma__InquiryCenterClient<T, Null = never, ExtArgs extends ru
   officer<T extends Prisma.InquiryCenter$officerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InquiryCenter$officerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   jobs<T extends Prisma.InquiryCenter$jobsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InquiryCenter$jobsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JobInquiryCenterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseInquiries<T extends Prisma.InquiryCenter$caseInquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InquiryCenter$caseInquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseInquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requirements<T extends Prisma.InquiryCenter$requirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InquiryCenter$requirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1813,6 +1935,30 @@ export type InquiryCenter$caseInquiriesArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.CaseInquiryScalarFieldEnum | Prisma.CaseInquiryScalarFieldEnum[]
+}
+
+/**
+ * InquiryCenter.requirements
+ */
+export type InquiryCenter$requirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InquiryRequirement
+   */
+  select?: Prisma.InquiryRequirementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InquiryRequirement
+   */
+  omit?: Prisma.InquiryRequirementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InquiryRequirementInclude<ExtArgs> | null
+  where?: Prisma.InquiryRequirementWhereInput
+  orderBy?: Prisma.InquiryRequirementOrderByWithRelationInput | Prisma.InquiryRequirementOrderByWithRelationInput[]
+  cursor?: Prisma.InquiryRequirementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InquiryRequirementScalarFieldEnum | Prisma.InquiryRequirementScalarFieldEnum[]
 }
 
 /**

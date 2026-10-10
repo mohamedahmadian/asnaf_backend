@@ -27,6 +27,7 @@ export type AggregateCaseInquiry = {
 export type CaseInquiryMinAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  caseRequestId: string | null
   inquiryCenterId: string | null
   status: $Enums.CaseInquiryStatus | null
   channel: $Enums.CaseInquiryChannel | null
@@ -40,6 +41,7 @@ export type CaseInquiryMinAggregateOutputType = {
 export type CaseInquiryMaxAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  caseRequestId: string | null
   inquiryCenterId: string | null
   status: $Enums.CaseInquiryStatus | null
   channel: $Enums.CaseInquiryChannel | null
@@ -53,6 +55,7 @@ export type CaseInquiryMaxAggregateOutputType = {
 export type CaseInquiryCountAggregateOutputType = {
   id: number
   caseFileId: number
+  caseRequestId: number
   inquiryCenterId: number
   status: number
   channel: number
@@ -68,6 +71,7 @@ export type CaseInquiryCountAggregateOutputType = {
 export type CaseInquiryMinAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   inquiryCenterId?: true
   status?: true
   channel?: true
@@ -81,6 +85,7 @@ export type CaseInquiryMinAggregateInputType = {
 export type CaseInquiryMaxAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   inquiryCenterId?: true
   status?: true
   channel?: true
@@ -94,6 +99,7 @@ export type CaseInquiryMaxAggregateInputType = {
 export type CaseInquiryCountAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   inquiryCenterId?: true
   status?: true
   channel?: true
@@ -180,6 +186,7 @@ export type CaseInquiryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type CaseInquiryGroupByOutputType = {
   id: string
   caseFileId: string
+  caseRequestId: string
   inquiryCenterId: string
   status: $Enums.CaseInquiryStatus
   channel: $Enums.CaseInquiryChannel | null
@@ -214,6 +221,7 @@ export type CaseInquiryWhereInput = {
   NOT?: Prisma.CaseInquiryWhereInput | Prisma.CaseInquiryWhereInput[]
   id?: Prisma.StringFilter<"CaseInquiry"> | string
   caseFileId?: Prisma.StringFilter<"CaseInquiry"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseInquiry"> | string
   inquiryCenterId?: Prisma.StringFilter<"CaseInquiry"> | string
   status?: Prisma.EnumCaseInquiryStatusFilter<"CaseInquiry"> | $Enums.CaseInquiryStatus
   channel?: Prisma.EnumCaseInquiryChannelNullableFilter<"CaseInquiry"> | $Enums.CaseInquiryChannel | null
@@ -223,6 +231,7 @@ export type CaseInquiryWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   inquiryCenter?: Prisma.XOR<Prisma.InquiryCenterScalarRelationFilter, Prisma.InquiryCenterWhereInput>
   decidedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   files?: Prisma.CaseInquiryFileListRelationFilter
@@ -231,6 +240,7 @@ export type CaseInquiryWhereInput = {
 export type CaseInquiryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   inquiryCenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   channel?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -240,6 +250,7 @@ export type CaseInquiryOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
+  caseRequest?: Prisma.CaseRequestOrderByWithRelationInput
   inquiryCenter?: Prisma.InquiryCenterOrderByWithRelationInput
   decidedBy?: Prisma.UserOrderByWithRelationInput
   files?: Prisma.CaseInquiryFileOrderByRelationAggregateInput
@@ -247,11 +258,12 @@ export type CaseInquiryOrderByWithRelationInput = {
 
 export type CaseInquiryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  caseFileId_inquiryCenterId?: Prisma.CaseInquiryCaseFileIdInquiryCenterIdCompoundUniqueInput
+  caseRequestId_inquiryCenterId?: Prisma.CaseInquiryCaseRequestIdInquiryCenterIdCompoundUniqueInput
   AND?: Prisma.CaseInquiryWhereInput | Prisma.CaseInquiryWhereInput[]
   OR?: Prisma.CaseInquiryWhereInput[]
   NOT?: Prisma.CaseInquiryWhereInput | Prisma.CaseInquiryWhereInput[]
   caseFileId?: Prisma.StringFilter<"CaseInquiry"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseInquiry"> | string
   inquiryCenterId?: Prisma.StringFilter<"CaseInquiry"> | string
   status?: Prisma.EnumCaseInquiryStatusFilter<"CaseInquiry"> | $Enums.CaseInquiryStatus
   channel?: Prisma.EnumCaseInquiryChannelNullableFilter<"CaseInquiry"> | $Enums.CaseInquiryChannel | null
@@ -261,14 +273,16 @@ export type CaseInquiryWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   inquiryCenter?: Prisma.XOR<Prisma.InquiryCenterScalarRelationFilter, Prisma.InquiryCenterWhereInput>
   decidedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   files?: Prisma.CaseInquiryFileListRelationFilter
-}, "id" | "caseFileId_inquiryCenterId">
+}, "id" | "caseRequestId_inquiryCenterId">
 
 export type CaseInquiryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   inquiryCenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   channel?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -288,6 +302,7 @@ export type CaseInquiryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CaseInquiryScalarWhereWithAggregatesInput | Prisma.CaseInquiryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CaseInquiry"> | string
   caseFileId?: Prisma.StringWithAggregatesFilter<"CaseInquiry"> | string
+  caseRequestId?: Prisma.StringWithAggregatesFilter<"CaseInquiry"> | string
   inquiryCenterId?: Prisma.StringWithAggregatesFilter<"CaseInquiry"> | string
   status?: Prisma.EnumCaseInquiryStatusWithAggregatesFilter<"CaseInquiry"> | $Enums.CaseInquiryStatus
   channel?: Prisma.EnumCaseInquiryChannelNullableWithAggregatesFilter<"CaseInquiry"> | $Enums.CaseInquiryChannel | null
@@ -307,6 +322,7 @@ export type CaseInquiryCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutInquiriesInput
   inquiryCenter: Prisma.InquiryCenterCreateNestedOneWithoutCaseInquiriesInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseInquiriesDecidedInput
   files?: Prisma.CaseInquiryFileCreateNestedManyWithoutCaseInquiryInput
@@ -315,6 +331,7 @@ export type CaseInquiryCreateInput = {
 export type CaseInquiryUncheckedCreateInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   inquiryCenterId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -335,6 +352,7 @@ export type CaseInquiryUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutInquiriesNestedInput
   inquiryCenter?: Prisma.InquiryCenterUpdateOneRequiredWithoutCaseInquiriesNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseInquiriesDecidedNestedInput
   files?: Prisma.CaseInquiryFileUpdateManyWithoutCaseInquiryNestedInput
@@ -343,6 +361,7 @@ export type CaseInquiryUpdateInput = {
 export type CaseInquiryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -357,6 +376,7 @@ export type CaseInquiryUncheckedUpdateInput = {
 export type CaseInquiryCreateManyInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   inquiryCenterId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -380,6 +400,7 @@ export type CaseInquiryUpdateManyMutationInput = {
 export type CaseInquiryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -400,14 +421,15 @@ export type CaseInquiryOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type CaseInquiryCaseFileIdInquiryCenterIdCompoundUniqueInput = {
-  caseFileId: string
+export type CaseInquiryCaseRequestIdInquiryCenterIdCompoundUniqueInput = {
+  caseRequestId: string
   inquiryCenterId: string
 }
 
 export type CaseInquiryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   inquiryCenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   channel?: Prisma.SortOrder
@@ -421,6 +443,7 @@ export type CaseInquiryCountOrderByAggregateInput = {
 export type CaseInquiryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   inquiryCenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   channel?: Prisma.SortOrder
@@ -434,6 +457,7 @@ export type CaseInquiryMaxOrderByAggregateInput = {
 export type CaseInquiryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   inquiryCenterId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   channel?: Prisma.SortOrder
@@ -559,6 +583,48 @@ export type CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput = {
   deleteMany?: Prisma.CaseInquiryScalarWhereInput | Prisma.CaseInquiryScalarWhereInput[]
 }
 
+export type CaseInquiryCreateNestedManyWithoutCaseRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseInquiryCreateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseInquiryCreateWithoutCaseRequestInput[] | Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput | Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseInquiryCreateManyCaseRequestInputEnvelope
+  connect?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+}
+
+export type CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseInquiryCreateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseInquiryCreateWithoutCaseRequestInput[] | Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput | Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseInquiryCreateManyCaseRequestInputEnvelope
+  connect?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+}
+
+export type CaseInquiryUpdateManyWithoutCaseRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseInquiryCreateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseInquiryCreateWithoutCaseRequestInput[] | Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput | Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput[]
+  upsert?: Prisma.CaseInquiryUpsertWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseInquiryUpsertWithWhereUniqueWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseInquiryCreateManyCaseRequestInputEnvelope
+  set?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  disconnect?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  delete?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  connect?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  update?: Prisma.CaseInquiryUpdateWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseInquiryUpdateWithWhereUniqueWithoutCaseRequestInput[]
+  updateMany?: Prisma.CaseInquiryUpdateManyWithWhereWithoutCaseRequestInput | Prisma.CaseInquiryUpdateManyWithWhereWithoutCaseRequestInput[]
+  deleteMany?: Prisma.CaseInquiryScalarWhereInput | Prisma.CaseInquiryScalarWhereInput[]
+}
+
+export type CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseInquiryCreateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseInquiryCreateWithoutCaseRequestInput[] | Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput | Prisma.CaseInquiryCreateOrConnectWithoutCaseRequestInput[]
+  upsert?: Prisma.CaseInquiryUpsertWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseInquiryUpsertWithWhereUniqueWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseInquiryCreateManyCaseRequestInputEnvelope
+  set?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  disconnect?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  delete?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  connect?: Prisma.CaseInquiryWhereUniqueInput | Prisma.CaseInquiryWhereUniqueInput[]
+  update?: Prisma.CaseInquiryUpdateWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseInquiryUpdateWithWhereUniqueWithoutCaseRequestInput[]
+  updateMany?: Prisma.CaseInquiryUpdateManyWithWhereWithoutCaseRequestInput | Prisma.CaseInquiryUpdateManyWithWhereWithoutCaseRequestInput[]
+  deleteMany?: Prisma.CaseInquiryScalarWhereInput | Prisma.CaseInquiryScalarWhereInput[]
+}
+
 export type CaseInquiryCreateNestedManyWithoutDecidedByInput = {
   create?: Prisma.XOR<Prisma.CaseInquiryCreateWithoutDecidedByInput, Prisma.CaseInquiryUncheckedCreateWithoutDecidedByInput> | Prisma.CaseInquiryCreateWithoutDecidedByInput[] | Prisma.CaseInquiryUncheckedCreateWithoutDecidedByInput[]
   connectOrCreate?: Prisma.CaseInquiryCreateOrConnectWithoutDecidedByInput | Prisma.CaseInquiryCreateOrConnectWithoutDecidedByInput[]
@@ -610,6 +676,7 @@ export type CaseInquiryCreateWithoutInquiryCenterInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutInquiriesInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseInquiriesDecidedInput
   files?: Prisma.CaseInquiryFileCreateNestedManyWithoutCaseInquiryInput
 }
@@ -617,6 +684,7 @@ export type CaseInquiryCreateWithoutInquiryCenterInput = {
 export type CaseInquiryUncheckedCreateWithoutInquiryCenterInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
@@ -659,6 +727,7 @@ export type CaseInquiryScalarWhereInput = {
   NOT?: Prisma.CaseInquiryScalarWhereInput | Prisma.CaseInquiryScalarWhereInput[]
   id?: Prisma.StringFilter<"CaseInquiry"> | string
   caseFileId?: Prisma.StringFilter<"CaseInquiry"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseInquiry"> | string
   inquiryCenterId?: Prisma.StringFilter<"CaseInquiry"> | string
   status?: Prisma.EnumCaseInquiryStatusFilter<"CaseInquiry"> | $Enums.CaseInquiryStatus
   channel?: Prisma.EnumCaseInquiryChannelNullableFilter<"CaseInquiry"> | $Enums.CaseInquiryChannel | null
@@ -678,6 +747,7 @@ export type CaseInquiryCreateWithoutFilesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutInquiriesInput
   inquiryCenter: Prisma.InquiryCenterCreateNestedOneWithoutCaseInquiriesInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseInquiriesDecidedInput
 }
@@ -685,6 +755,7 @@ export type CaseInquiryCreateWithoutFilesInput = {
 export type CaseInquiryUncheckedCreateWithoutFilesInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   inquiryCenterId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -720,6 +791,7 @@ export type CaseInquiryUpdateWithoutFilesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutInquiriesNestedInput
   inquiryCenter?: Prisma.InquiryCenterUpdateOneRequiredWithoutCaseInquiriesNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseInquiriesDecidedNestedInput
 }
@@ -727,6 +799,7 @@ export type CaseInquiryUpdateWithoutFilesInput = {
 export type CaseInquiryUncheckedUpdateWithoutFilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -745,6 +818,7 @@ export type CaseInquiryCreateWithoutCaseFileInput = {
   decidedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutInquiriesInput
   inquiryCenter: Prisma.InquiryCenterCreateNestedOneWithoutCaseInquiriesInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseInquiriesDecidedInput
   files?: Prisma.CaseInquiryFileCreateNestedManyWithoutCaseInquiryInput
@@ -752,6 +826,7 @@ export type CaseInquiryCreateWithoutCaseFileInput = {
 
 export type CaseInquiryUncheckedCreateWithoutCaseFileInput = {
   id?: string
+  caseRequestId: string
   inquiryCenterId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -789,7 +864,7 @@ export type CaseInquiryUpdateManyWithWhereWithoutCaseFileInput = {
   data: Prisma.XOR<Prisma.CaseInquiryUpdateManyMutationInput, Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileInput>
 }
 
-export type CaseInquiryCreateWithoutDecidedByInput = {
+export type CaseInquiryCreateWithoutCaseRequestInput = {
   id?: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -799,12 +874,68 @@ export type CaseInquiryCreateWithoutDecidedByInput = {
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
   inquiryCenter: Prisma.InquiryCenterCreateNestedOneWithoutCaseInquiriesInput
+  decidedBy?: Prisma.UserCreateNestedOneWithoutCaseInquiriesDecidedInput
+  files?: Prisma.CaseInquiryFileCreateNestedManyWithoutCaseInquiryInput
+}
+
+export type CaseInquiryUncheckedCreateWithoutCaseRequestInput = {
+  id?: string
+  caseFileId: string
+  inquiryCenterId: string
+  status?: $Enums.CaseInquiryStatus
+  channel?: $Enums.CaseInquiryChannel | null
+  note?: string | null
+  decidedById?: string | null
+  decidedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  files?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutCaseInquiryInput
+}
+
+export type CaseInquiryCreateOrConnectWithoutCaseRequestInput = {
+  where: Prisma.CaseInquiryWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseInquiryCreateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput>
+}
+
+export type CaseInquiryCreateManyCaseRequestInputEnvelope = {
+  data: Prisma.CaseInquiryCreateManyCaseRequestInput | Prisma.CaseInquiryCreateManyCaseRequestInput[]
+  skipDuplicates?: boolean
+}
+
+export type CaseInquiryUpsertWithWhereUniqueWithoutCaseRequestInput = {
+  where: Prisma.CaseInquiryWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseInquiryUpdateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedUpdateWithoutCaseRequestInput>
+  create: Prisma.XOR<Prisma.CaseInquiryCreateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedCreateWithoutCaseRequestInput>
+}
+
+export type CaseInquiryUpdateWithWhereUniqueWithoutCaseRequestInput = {
+  where: Prisma.CaseInquiryWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseInquiryUpdateWithoutCaseRequestInput, Prisma.CaseInquiryUncheckedUpdateWithoutCaseRequestInput>
+}
+
+export type CaseInquiryUpdateManyWithWhereWithoutCaseRequestInput = {
+  where: Prisma.CaseInquiryScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseInquiryUpdateManyMutationInput, Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestInput>
+}
+
+export type CaseInquiryCreateWithoutDecidedByInput = {
+  id?: string
+  status?: $Enums.CaseInquiryStatus
+  channel?: $Enums.CaseInquiryChannel | null
+  note?: string | null
+  decidedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutInquiriesInput
+  inquiryCenter: Prisma.InquiryCenterCreateNestedOneWithoutCaseInquiriesInput
   files?: Prisma.CaseInquiryFileCreateNestedManyWithoutCaseInquiryInput
 }
 
 export type CaseInquiryUncheckedCreateWithoutDecidedByInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   inquiryCenterId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -844,6 +975,7 @@ export type CaseInquiryUpdateManyWithWhereWithoutDecidedByInput = {
 export type CaseInquiryCreateManyInquiryCenterInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
@@ -862,6 +994,7 @@ export type CaseInquiryUpdateWithoutInquiryCenterInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutInquiriesNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseInquiriesDecidedNestedInput
   files?: Prisma.CaseInquiryFileUpdateManyWithoutCaseInquiryNestedInput
 }
@@ -869,6 +1002,7 @@ export type CaseInquiryUpdateWithoutInquiryCenterInput = {
 export type CaseInquiryUncheckedUpdateWithoutInquiryCenterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -882,6 +1016,7 @@ export type CaseInquiryUncheckedUpdateWithoutInquiryCenterInput = {
 export type CaseInquiryUncheckedUpdateManyWithoutInquiryCenterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -893,6 +1028,7 @@ export type CaseInquiryUncheckedUpdateManyWithoutInquiryCenterInput = {
 
 export type CaseInquiryCreateManyCaseFileInput = {
   id?: string
+  caseRequestId: string
   inquiryCenterId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -911,6 +1047,7 @@ export type CaseInquiryUpdateWithoutCaseFileInput = {
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutInquiriesNestedInput
   inquiryCenter?: Prisma.InquiryCenterUpdateOneRequiredWithoutCaseInquiriesNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseInquiriesDecidedNestedInput
   files?: Prisma.CaseInquiryFileUpdateManyWithoutCaseInquiryNestedInput
@@ -918,6 +1055,7 @@ export type CaseInquiryUpdateWithoutCaseFileInput = {
 
 export type CaseInquiryUncheckedUpdateWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -931,6 +1069,61 @@ export type CaseInquiryUncheckedUpdateWithoutCaseFileInput = {
 
 export type CaseInquiryUncheckedUpdateManyWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
+  inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
+  channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseInquiryCreateManyCaseRequestInput = {
+  id?: string
+  caseFileId: string
+  inquiryCenterId: string
+  status?: $Enums.CaseInquiryStatus
+  channel?: $Enums.CaseInquiryChannel | null
+  note?: string | null
+  decidedById?: string | null
+  decidedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CaseInquiryUpdateWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
+  channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
+  inquiryCenter?: Prisma.InquiryCenterUpdateOneRequiredWithoutCaseInquiriesNestedInput
+  decidedBy?: Prisma.UserUpdateOneWithoutCaseInquiriesDecidedNestedInput
+  files?: Prisma.CaseInquiryFileUpdateManyWithoutCaseInquiryNestedInput
+}
+
+export type CaseInquiryUncheckedUpdateWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
+  channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutCaseInquiryNestedInput
+}
+
+export type CaseInquiryUncheckedUpdateManyWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -944,6 +1137,7 @@ export type CaseInquiryUncheckedUpdateManyWithoutCaseFileInput = {
 export type CaseInquiryCreateManyDecidedByInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   inquiryCenterId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -962,6 +1156,7 @@ export type CaseInquiryUpdateWithoutDecidedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutInquiriesNestedInput
   inquiryCenter?: Prisma.InquiryCenterUpdateOneRequiredWithoutCaseInquiriesNestedInput
   files?: Prisma.CaseInquiryFileUpdateManyWithoutCaseInquiryNestedInput
 }
@@ -969,6 +1164,7 @@ export type CaseInquiryUpdateWithoutDecidedByInput = {
 export type CaseInquiryUncheckedUpdateWithoutDecidedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -982,6 +1178,7 @@ export type CaseInquiryUncheckedUpdateWithoutDecidedByInput = {
 export type CaseInquiryUncheckedUpdateManyWithoutDecidedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   inquiryCenterId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -1025,6 +1222,7 @@ export type CaseInquiryCountOutputTypeCountFilesArgs<ExtArgs extends runtime.Typ
 export type CaseInquirySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   inquiryCenterId?: boolean
   status?: boolean
   channel?: boolean
@@ -1034,6 +1232,7 @@ export type CaseInquirySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   inquiryCenter?: boolean | Prisma.InquiryCenterDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseInquiry$decidedByArgs<ExtArgs>
   files?: boolean | Prisma.CaseInquiry$filesArgs<ExtArgs>
@@ -1043,6 +1242,7 @@ export type CaseInquirySelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type CaseInquirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   inquiryCenterId?: boolean
   status?: boolean
   channel?: boolean
@@ -1052,6 +1252,7 @@ export type CaseInquirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   inquiryCenter?: boolean | Prisma.InquiryCenterDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseInquiry$decidedByArgs<ExtArgs>
 }, ExtArgs["result"]["caseInquiry"]>
@@ -1059,6 +1260,7 @@ export type CaseInquirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type CaseInquirySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   inquiryCenterId?: boolean
   status?: boolean
   channel?: boolean
@@ -1068,6 +1270,7 @@ export type CaseInquirySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   inquiryCenter?: boolean | Prisma.InquiryCenterDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseInquiry$decidedByArgs<ExtArgs>
 }, ExtArgs["result"]["caseInquiry"]>
@@ -1075,6 +1278,7 @@ export type CaseInquirySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type CaseInquirySelectScalar = {
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   inquiryCenterId?: boolean
   status?: boolean
   channel?: boolean
@@ -1085,9 +1289,10 @@ export type CaseInquirySelectScalar = {
   updatedAt?: boolean
 }
 
-export type CaseInquiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "inquiryCenterId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseInquiry"]>
+export type CaseInquiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "caseRequestId" | "inquiryCenterId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseInquiry"]>
 export type CaseInquiryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   inquiryCenter?: boolean | Prisma.InquiryCenterDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseInquiry$decidedByArgs<ExtArgs>
   files?: boolean | Prisma.CaseInquiry$filesArgs<ExtArgs>
@@ -1095,11 +1300,13 @@ export type CaseInquiryInclude<ExtArgs extends runtime.Types.Extensions.Internal
 }
 export type CaseInquiryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   inquiryCenter?: boolean | Prisma.InquiryCenterDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseInquiry$decidedByArgs<ExtArgs>
 }
 export type CaseInquiryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   inquiryCenter?: boolean | Prisma.InquiryCenterDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseInquiry$decidedByArgs<ExtArgs>
 }
@@ -1108,6 +1315,7 @@ export type $CaseInquiryPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "CaseInquiry"
   objects: {
     caseFile: Prisma.$CaseFilePayload<ExtArgs>
+    caseRequest: Prisma.$CaseRequestPayload<ExtArgs>
     inquiryCenter: Prisma.$InquiryCenterPayload<ExtArgs>
     decidedBy: Prisma.$UserPayload<ExtArgs> | null
     files: Prisma.$CaseInquiryFilePayload<ExtArgs>[]
@@ -1115,6 +1323,7 @@ export type $CaseInquiryPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     caseFileId: string
+    caseRequestId: string
     inquiryCenterId: string
     status: $Enums.CaseInquiryStatus
     channel: $Enums.CaseInquiryChannel | null
@@ -1518,6 +1727,7 @@ readonly fields: CaseInquiryFieldRefs;
 export interface Prisma__CaseInquiryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   caseFile<T extends Prisma.CaseFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFileDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  caseRequest<T extends Prisma.CaseRequestDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequestDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseRequestClient<runtime.Types.Result.GetResult<Prisma.$CaseRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   inquiryCenter<T extends Prisma.InquiryCenterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.InquiryCenterDefaultArgs<ExtArgs>>): Prisma.Prisma__InquiryCenterClient<runtime.Types.Result.GetResult<Prisma.$InquiryCenterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   decidedBy<T extends Prisma.CaseInquiry$decidedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseInquiry$decidedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   files<T extends Prisma.CaseInquiry$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseInquiry$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseInquiryFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1552,6 +1762,7 @@ export interface Prisma__CaseInquiryClient<T, Null = never, ExtArgs extends runt
 export interface CaseInquiryFieldRefs {
   readonly id: Prisma.FieldRef<"CaseInquiry", 'String'>
   readonly caseFileId: Prisma.FieldRef<"CaseInquiry", 'String'>
+  readonly caseRequestId: Prisma.FieldRef<"CaseInquiry", 'String'>
   readonly inquiryCenterId: Prisma.FieldRef<"CaseInquiry", 'String'>
   readonly status: Prisma.FieldRef<"CaseInquiry", 'CaseInquiryStatus'>
   readonly channel: Prisma.FieldRef<"CaseInquiry", 'CaseInquiryChannel'>

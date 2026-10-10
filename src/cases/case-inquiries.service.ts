@@ -21,8 +21,15 @@ import {
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
-import { INQUIRIES_FORMATION_STEP, rewindFormationStep } from './formation-steps';
 import { PersonFileStorage } from './person-file.storage';
+import {
+  findOpenRequest,
+  inquiryRewindPhase,
+  isProcessType,
+  resolveDocumentRequirements,
+  resolveInquiryCenterIds,
+  rewindRequestPhase,
+} from './request-process';
 
 const inquiryInclude = {
   inquiryCenter: {
@@ -92,21 +99,30 @@ export class CaseInquiriesService {
     private readonly files: PersonFileStorage,
   ) {}
 
+  private async targetRequest(caseFileId: string) {
+    const open = await findOpenRequest(this.prisma, caseFileId);
+    if (open) return open;
+    return this.prisma.caseRequest.findFirst({
+      where: { caseFileId, type: 'ISSUANCE' },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
   async ensureForUser(caseFileId: string) {
+    const request = await findOpenRequest(this.prisma, caseFileId);
+    if (!request || !isProcessType(request.type)) return;
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseFileId },
       select: { id: true, activityJobId: true },
     });
-    if (!file?.activityJobId) return;
-    const links = await this.prisma.jobInquiryCenter.findMany({
-      where: { jobId: file.activityJobId, inquiryCenter: { isActive: true } },
-      select: { inquiryCenterId: true },
-    });
-    if (!links.length) return;
+    if (!file) return;
+    const centerIds = await resolveInquiryCenterIds(this.prisma, request.type, file.activityJobId);
+    if (!centerIds.length) return;
     await this.prisma.caseInquiry.createMany({
-      data: links.map((link) => ({
+      data: centerIds.map((inquiryCenterId) => ({
         caseFileId: file.id,
-        inquiryCenterId: link.inquiryCenterId,
+        caseRequestId: request.id,
+        inquiryCenterId,
       })),
       skipDuplicates: true,
     });
@@ -114,8 +130,10 @@ export class CaseInquiriesService {
 
   async assertDelivered(caseFileId: string) {
     await this.ensureForUser(caseFileId);
+    const request = await this.targetRequest(caseFileId);
+    if (!request) return;
     const pending = await this.prisma.caseInquiry.count({
-      where: { caseFileId, status: CaseInquiryStatus.PENDING },
+      where: { caseRequestId: request.id, status: CaseInquiryStatus.PENDING },
     });
     if (pending > 0) {
       throw new BadRequestException('قبل از مرحله اماکن باید نتیجه همه استعلام‌ها ثبت شود');
@@ -124,8 +142,10 @@ export class CaseInquiriesService {
 
   async listForCase(caseFileId: string) {
     await this.ensureForUser(caseFileId);
+    const request = await this.targetRequest(caseFileId);
+    if (!request) return [];
     const rows = await this.prisma.caseInquiry.findMany({
-      where: { caseFileId },
+      where: { caseRequestId: request.id },
       include: inquiryInclude,
       orderBy: [{ inquiryCenter: { name: 'asc' } }, { id: 'asc' }],
     });
@@ -236,7 +256,12 @@ export class CaseInquiriesService {
       },
       include: inquiryInclude,
     });
-    await rewindFormationStep(this.prisma, saved.caseFileId, INQUIRIES_FORMATION_STEP);
+    const owner = await this.prisma.caseRequest.findUnique({
+      where: { id: saved.caseRequestId },
+      select: { type: true },
+    });
+    const phase = owner ? inquiryRewindPhase(owner.type) : null;
+    if (phase != null) await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
     return mapInquiry(saved);
   }
 
@@ -398,6 +423,7 @@ export class CaseInquiriesService {
         leaseExpiresAt: true,
         leaseAgency: true,
         premiseOwnerName: true,
+        activityJobId: true,
         activityJob: {
           select: {
             title: true,
@@ -480,14 +506,18 @@ export class CaseInquiriesService {
       registrationPlace: dossier.registrationPlace,
     };
 
-    const [fixedDocs, stored] = await Promise.all([
-      this.prisma.document.findMany({
-        where: { isFixed: true, isRequired: true },
-        select: { id: true, title: true, gender: true },
-        orderBy: { title: 'asc' },
-      }),
+    const request = await this.targetRequest(caseFileId);
+    const [requiredDocs, stored] = await Promise.all([
+      request
+        ? resolveDocumentRequirements(
+            this.prisma,
+            request.type,
+            dossier.activityJobId,
+            user.gender,
+          )
+        : Promise.resolve([]),
       this.prisma.caseActivityDocument.findMany({
-        where: { caseFileId },
+        where: { caseRequestId: request?.id ?? 'none' },
         select: {
           documentId: true,
           versions: {
@@ -517,30 +547,16 @@ export class CaseInquiriesService {
       file: { id: string; originalName: string | null; mimeType: string } | null;
     }[] = [];
     let fixedTotal = 0;
-    let jobTotal = 0;
-    for (const doc of fixedDocs) {
-      if (!this.matchesDocumentGender(doc.gender, user.gender)) continue;
-      fixedTotal += 1;
+    const jobTotal = requiredDocs.length;
+    for (const doc of requiredDocs) {
+      if (seen.has(doc.id)) continue;
       seen.add(doc.id);
       documents.push({
         id: doc.id,
         title: doc.title,
-        group: 'FIXED',
-        isRequired: true,
-        file: currentFile(doc.id),
-      });
-    }
-    for (const link of user.activityJob?.documents ?? []) {
-      if (!this.matchesDocumentGender(link.gender, user.gender)) continue;
-      jobTotal += 1;
-      if (seen.has(link.document.id)) continue;
-      seen.add(link.document.id);
-      documents.push({
-        id: link.document.id,
-        title: link.document.title,
         group: 'JOB',
-        isRequired: link.isRequired,
-        file: currentFile(link.document.id),
+        isRequired: doc.isRequired,
+        file: currentFile(doc.id),
       });
     }
     documents.sort((left, right) => {

@@ -27,6 +27,7 @@ export type AggregateCaseManagementReview = {
 export type CaseManagementReviewMinAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  caseRequestId: string | null
   workUnitId: string | null
   roleId: string | null
   status: $Enums.CaseInquiryStatus | null
@@ -41,6 +42,7 @@ export type CaseManagementReviewMinAggregateOutputType = {
 export type CaseManagementReviewMaxAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  caseRequestId: string | null
   workUnitId: string | null
   roleId: string | null
   status: $Enums.CaseInquiryStatus | null
@@ -55,6 +57,7 @@ export type CaseManagementReviewMaxAggregateOutputType = {
 export type CaseManagementReviewCountAggregateOutputType = {
   id: number
   caseFileId: number
+  caseRequestId: number
   workUnitId: number
   roleId: number
   status: number
@@ -71,6 +74,7 @@ export type CaseManagementReviewCountAggregateOutputType = {
 export type CaseManagementReviewMinAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   workUnitId?: true
   roleId?: true
   status?: true
@@ -85,6 +89,7 @@ export type CaseManagementReviewMinAggregateInputType = {
 export type CaseManagementReviewMaxAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   workUnitId?: true
   roleId?: true
   status?: true
@@ -99,6 +104,7 @@ export type CaseManagementReviewMaxAggregateInputType = {
 export type CaseManagementReviewCountAggregateInputType = {
   id?: true
   caseFileId?: true
+  caseRequestId?: true
   workUnitId?: true
   roleId?: true
   status?: true
@@ -186,6 +192,7 @@ export type CaseManagementReviewGroupByArgs<ExtArgs extends runtime.Types.Extens
 export type CaseManagementReviewGroupByOutputType = {
   id: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status: $Enums.CaseInquiryStatus
@@ -221,6 +228,7 @@ export type CaseManagementReviewWhereInput = {
   NOT?: Prisma.CaseManagementReviewWhereInput | Prisma.CaseManagementReviewWhereInput[]
   id?: Prisma.StringFilter<"CaseManagementReview"> | string
   caseFileId?: Prisma.StringFilter<"CaseManagementReview"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseManagementReview"> | string
   workUnitId?: Prisma.StringFilter<"CaseManagementReview"> | string
   roleId?: Prisma.StringFilter<"CaseManagementReview"> | string
   status?: Prisma.EnumCaseInquiryStatusFilter<"CaseManagementReview"> | $Enums.CaseInquiryStatus
@@ -231,6 +239,7 @@ export type CaseManagementReviewWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CaseManagementReview"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseManagementReview"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   workUnit?: Prisma.XOR<Prisma.WorkUnitScalarRelationFilter, Prisma.WorkUnitWhereInput>
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
   decidedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -240,6 +249,7 @@ export type CaseManagementReviewWhereInput = {
 export type CaseManagementReviewOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
   roleId?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -250,6 +260,7 @@ export type CaseManagementReviewOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
+  caseRequest?: Prisma.CaseRequestOrderByWithRelationInput
   workUnit?: Prisma.WorkUnitOrderByWithRelationInput
   role?: Prisma.RoleOrderByWithRelationInput
   decidedBy?: Prisma.UserOrderByWithRelationInput
@@ -258,11 +269,12 @@ export type CaseManagementReviewOrderByWithRelationInput = {
 
 export type CaseManagementReviewWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  caseFileId_workUnitId_roleId?: Prisma.CaseManagementReviewCaseFileIdWorkUnitIdRoleIdCompoundUniqueInput
+  caseRequestId_workUnitId_roleId?: Prisma.CaseManagementReviewCaseRequestIdWorkUnitIdRoleIdCompoundUniqueInput
   AND?: Prisma.CaseManagementReviewWhereInput | Prisma.CaseManagementReviewWhereInput[]
   OR?: Prisma.CaseManagementReviewWhereInput[]
   NOT?: Prisma.CaseManagementReviewWhereInput | Prisma.CaseManagementReviewWhereInput[]
   caseFileId?: Prisma.StringFilter<"CaseManagementReview"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseManagementReview"> | string
   workUnitId?: Prisma.StringFilter<"CaseManagementReview"> | string
   roleId?: Prisma.StringFilter<"CaseManagementReview"> | string
   status?: Prisma.EnumCaseInquiryStatusFilter<"CaseManagementReview"> | $Enums.CaseInquiryStatus
@@ -273,15 +285,17 @@ export type CaseManagementReviewWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CaseManagementReview"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseManagementReview"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   workUnit?: Prisma.XOR<Prisma.WorkUnitScalarRelationFilter, Prisma.WorkUnitWhereInput>
   role?: Prisma.XOR<Prisma.RoleScalarRelationFilter, Prisma.RoleWhereInput>
   decidedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   files?: Prisma.CaseManagementReviewFileListRelationFilter
-}, "id" | "caseFileId_workUnitId_roleId">
+}, "id" | "caseRequestId_workUnitId_roleId">
 
 export type CaseManagementReviewOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
   roleId?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -302,6 +316,7 @@ export type CaseManagementReviewScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CaseManagementReviewScalarWhereWithAggregatesInput | Prisma.CaseManagementReviewScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CaseManagementReview"> | string
   caseFileId?: Prisma.StringWithAggregatesFilter<"CaseManagementReview"> | string
+  caseRequestId?: Prisma.StringWithAggregatesFilter<"CaseManagementReview"> | string
   workUnitId?: Prisma.StringWithAggregatesFilter<"CaseManagementReview"> | string
   roleId?: Prisma.StringWithAggregatesFilter<"CaseManagementReview"> | string
   status?: Prisma.EnumCaseInquiryStatusWithAggregatesFilter<"CaseManagementReview"> | $Enums.CaseInquiryStatus
@@ -322,6 +337,7 @@ export type CaseManagementReviewCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutManagementReviewsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutManagementReviewsInput
   workUnit: Prisma.WorkUnitCreateNestedOneWithoutCaseManagementReviewsInput
   role: Prisma.RoleCreateNestedOneWithoutCaseManagementReviewsInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseManagementDecidedInput
@@ -331,6 +347,7 @@ export type CaseManagementReviewCreateInput = {
 export type CaseManagementReviewUncheckedCreateInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
@@ -352,6 +369,7 @@ export type CaseManagementReviewUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutManagementReviewsNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   role?: Prisma.RoleUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseManagementDecidedNestedInput
@@ -361,6 +379,7 @@ export type CaseManagementReviewUpdateInput = {
 export type CaseManagementReviewUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
@@ -376,6 +395,7 @@ export type CaseManagementReviewUncheckedUpdateInput = {
 export type CaseManagementReviewCreateManyInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
@@ -400,6 +420,7 @@ export type CaseManagementReviewUpdateManyMutationInput = {
 export type CaseManagementReviewUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
@@ -411,8 +432,8 @@ export type CaseManagementReviewUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type CaseManagementReviewCaseFileIdWorkUnitIdRoleIdCompoundUniqueInput = {
-  caseFileId: string
+export type CaseManagementReviewCaseRequestIdWorkUnitIdRoleIdCompoundUniqueInput = {
+  caseRequestId: string
   workUnitId: string
   roleId: string
 }
@@ -420,6 +441,7 @@ export type CaseManagementReviewCaseFileIdWorkUnitIdRoleIdCompoundUniqueInput = 
 export type CaseManagementReviewCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
   roleId?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -434,6 +456,7 @@ export type CaseManagementReviewCountOrderByAggregateInput = {
 export type CaseManagementReviewMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
   roleId?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -448,6 +471,7 @@ export type CaseManagementReviewMaxOrderByAggregateInput = {
 export type CaseManagementReviewMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  caseRequestId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
   roleId?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -527,6 +551,48 @@ export type CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput = 
   connect?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
   update?: Prisma.CaseManagementReviewUpdateWithWhereUniqueWithoutCaseFileInput | Prisma.CaseManagementReviewUpdateWithWhereUniqueWithoutCaseFileInput[]
   updateMany?: Prisma.CaseManagementReviewUpdateManyWithWhereWithoutCaseFileInput | Prisma.CaseManagementReviewUpdateManyWithWhereWithoutCaseFileInput[]
+  deleteMany?: Prisma.CaseManagementReviewScalarWhereInput | Prisma.CaseManagementReviewScalarWhereInput[]
+}
+
+export type CaseManagementReviewCreateNestedManyWithoutCaseRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseManagementReviewCreateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseManagementReviewCreateWithoutCaseRequestInput[] | Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput | Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseManagementReviewCreateManyCaseRequestInputEnvelope
+  connect?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+}
+
+export type CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseManagementReviewCreateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseManagementReviewCreateWithoutCaseRequestInput[] | Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput | Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseManagementReviewCreateManyCaseRequestInputEnvelope
+  connect?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+}
+
+export type CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseManagementReviewCreateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseManagementReviewCreateWithoutCaseRequestInput[] | Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput | Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput[]
+  upsert?: Prisma.CaseManagementReviewUpsertWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseManagementReviewUpsertWithWhereUniqueWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseManagementReviewCreateManyCaseRequestInputEnvelope
+  set?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  disconnect?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  delete?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  connect?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  update?: Prisma.CaseManagementReviewUpdateWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseManagementReviewUpdateWithWhereUniqueWithoutCaseRequestInput[]
+  updateMany?: Prisma.CaseManagementReviewUpdateManyWithWhereWithoutCaseRequestInput | Prisma.CaseManagementReviewUpdateManyWithWhereWithoutCaseRequestInput[]
+  deleteMany?: Prisma.CaseManagementReviewScalarWhereInput | Prisma.CaseManagementReviewScalarWhereInput[]
+}
+
+export type CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseManagementReviewCreateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput> | Prisma.CaseManagementReviewCreateWithoutCaseRequestInput[] | Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput[]
+  connectOrCreate?: Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput | Prisma.CaseManagementReviewCreateOrConnectWithoutCaseRequestInput[]
+  upsert?: Prisma.CaseManagementReviewUpsertWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseManagementReviewUpsertWithWhereUniqueWithoutCaseRequestInput[]
+  createMany?: Prisma.CaseManagementReviewCreateManyCaseRequestInputEnvelope
+  set?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  disconnect?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  delete?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  connect?: Prisma.CaseManagementReviewWhereUniqueInput | Prisma.CaseManagementReviewWhereUniqueInput[]
+  update?: Prisma.CaseManagementReviewUpdateWithWhereUniqueWithoutCaseRequestInput | Prisma.CaseManagementReviewUpdateWithWhereUniqueWithoutCaseRequestInput[]
+  updateMany?: Prisma.CaseManagementReviewUpdateManyWithWhereWithoutCaseRequestInput | Prisma.CaseManagementReviewUpdateManyWithWhereWithoutCaseRequestInput[]
   deleteMany?: Prisma.CaseManagementReviewScalarWhereInput | Prisma.CaseManagementReviewScalarWhereInput[]
 }
 
@@ -665,6 +731,7 @@ export type CaseManagementReviewCreateWithoutFilesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutManagementReviewsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutManagementReviewsInput
   workUnit: Prisma.WorkUnitCreateNestedOneWithoutCaseManagementReviewsInput
   role: Prisma.RoleCreateNestedOneWithoutCaseManagementReviewsInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseManagementDecidedInput
@@ -673,6 +740,7 @@ export type CaseManagementReviewCreateWithoutFilesInput = {
 export type CaseManagementReviewUncheckedCreateWithoutFilesInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
@@ -709,6 +777,7 @@ export type CaseManagementReviewUpdateWithoutFilesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutManagementReviewsNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   role?: Prisma.RoleUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseManagementDecidedNestedInput
@@ -717,6 +786,7 @@ export type CaseManagementReviewUpdateWithoutFilesInput = {
 export type CaseManagementReviewUncheckedUpdateWithoutFilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
@@ -736,6 +806,7 @@ export type CaseManagementReviewCreateWithoutCaseFileInput = {
   decidedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutManagementReviewsInput
   workUnit: Prisma.WorkUnitCreateNestedOneWithoutCaseManagementReviewsInput
   role: Prisma.RoleCreateNestedOneWithoutCaseManagementReviewsInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseManagementDecidedInput
@@ -744,6 +815,7 @@ export type CaseManagementReviewCreateWithoutCaseFileInput = {
 
 export type CaseManagementReviewUncheckedCreateWithoutCaseFileInput = {
   id?: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
@@ -788,6 +860,7 @@ export type CaseManagementReviewScalarWhereInput = {
   NOT?: Prisma.CaseManagementReviewScalarWhereInput | Prisma.CaseManagementReviewScalarWhereInput[]
   id?: Prisma.StringFilter<"CaseManagementReview"> | string
   caseFileId?: Prisma.StringFilter<"CaseManagementReview"> | string
+  caseRequestId?: Prisma.StringFilter<"CaseManagementReview"> | string
   workUnitId?: Prisma.StringFilter<"CaseManagementReview"> | string
   roleId?: Prisma.StringFilter<"CaseManagementReview"> | string
   status?: Prisma.EnumCaseInquiryStatusFilter<"CaseManagementReview"> | $Enums.CaseInquiryStatus
@@ -799,7 +872,7 @@ export type CaseManagementReviewScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"CaseManagementReview"> | Date | string
 }
 
-export type CaseManagementReviewCreateWithoutDecidedByInput = {
+export type CaseManagementReviewCreateWithoutCaseRequestInput = {
   id?: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -810,12 +883,70 @@ export type CaseManagementReviewCreateWithoutDecidedByInput = {
   caseFile: Prisma.CaseFileCreateNestedOneWithoutManagementReviewsInput
   workUnit: Prisma.WorkUnitCreateNestedOneWithoutCaseManagementReviewsInput
   role: Prisma.RoleCreateNestedOneWithoutCaseManagementReviewsInput
+  decidedBy?: Prisma.UserCreateNestedOneWithoutCaseManagementDecidedInput
+  files?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutReviewInput
+}
+
+export type CaseManagementReviewUncheckedCreateWithoutCaseRequestInput = {
+  id?: string
+  caseFileId: string
+  workUnitId: string
+  roleId: string
+  status?: $Enums.CaseInquiryStatus
+  channel?: $Enums.CaseInquiryChannel | null
+  note?: string | null
+  decidedById?: string | null
+  decidedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  files?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutReviewInput
+}
+
+export type CaseManagementReviewCreateOrConnectWithoutCaseRequestInput = {
+  where: Prisma.CaseManagementReviewWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseManagementReviewCreateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput>
+}
+
+export type CaseManagementReviewCreateManyCaseRequestInputEnvelope = {
+  data: Prisma.CaseManagementReviewCreateManyCaseRequestInput | Prisma.CaseManagementReviewCreateManyCaseRequestInput[]
+  skipDuplicates?: boolean
+}
+
+export type CaseManagementReviewUpsertWithWhereUniqueWithoutCaseRequestInput = {
+  where: Prisma.CaseManagementReviewWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseManagementReviewUpdateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedUpdateWithoutCaseRequestInput>
+  create: Prisma.XOR<Prisma.CaseManagementReviewCreateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedCreateWithoutCaseRequestInput>
+}
+
+export type CaseManagementReviewUpdateWithWhereUniqueWithoutCaseRequestInput = {
+  where: Prisma.CaseManagementReviewWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseManagementReviewUpdateWithoutCaseRequestInput, Prisma.CaseManagementReviewUncheckedUpdateWithoutCaseRequestInput>
+}
+
+export type CaseManagementReviewUpdateManyWithWhereWithoutCaseRequestInput = {
+  where: Prisma.CaseManagementReviewScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseManagementReviewUpdateManyMutationInput, Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestInput>
+}
+
+export type CaseManagementReviewCreateWithoutDecidedByInput = {
+  id?: string
+  status?: $Enums.CaseInquiryStatus
+  channel?: $Enums.CaseInquiryChannel | null
+  note?: string | null
+  decidedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutManagementReviewsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutManagementReviewsInput
+  workUnit: Prisma.WorkUnitCreateNestedOneWithoutCaseManagementReviewsInput
+  role: Prisma.RoleCreateNestedOneWithoutCaseManagementReviewsInput
   files?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutReviewInput
 }
 
 export type CaseManagementReviewUncheckedCreateWithoutDecidedByInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
@@ -862,6 +993,7 @@ export type CaseManagementReviewCreateWithoutRoleInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutManagementReviewsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutManagementReviewsInput
   workUnit: Prisma.WorkUnitCreateNestedOneWithoutCaseManagementReviewsInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseManagementDecidedInput
   files?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutReviewInput
@@ -870,6 +1002,7 @@ export type CaseManagementReviewCreateWithoutRoleInput = {
 export type CaseManagementReviewUncheckedCreateWithoutRoleInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -916,6 +1049,7 @@ export type CaseManagementReviewCreateWithoutWorkUnitInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutManagementReviewsInput
+  caseRequest: Prisma.CaseRequestCreateNestedOneWithoutManagementReviewsInput
   role: Prisma.RoleCreateNestedOneWithoutCaseManagementReviewsInput
   decidedBy?: Prisma.UserCreateNestedOneWithoutCaseManagementDecidedInput
   files?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutReviewInput
@@ -924,6 +1058,7 @@ export type CaseManagementReviewCreateWithoutWorkUnitInput = {
 export type CaseManagementReviewUncheckedCreateWithoutWorkUnitInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -963,6 +1098,7 @@ export type CaseManagementReviewUpdateManyWithWhereWithoutWorkUnitInput = {
 
 export type CaseManagementReviewCreateManyCaseFileInput = {
   id?: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
@@ -982,6 +1118,7 @@ export type CaseManagementReviewUpdateWithoutCaseFileInput = {
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutManagementReviewsNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   role?: Prisma.RoleUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseManagementDecidedNestedInput
@@ -990,6 +1127,7 @@ export type CaseManagementReviewUpdateWithoutCaseFileInput = {
 
 export type CaseManagementReviewUncheckedUpdateWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
@@ -1004,6 +1142,65 @@ export type CaseManagementReviewUncheckedUpdateWithoutCaseFileInput = {
 
 export type CaseManagementReviewUncheckedUpdateManyWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
+  workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
+  roleId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
+  channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseManagementReviewCreateManyCaseRequestInput = {
+  id?: string
+  caseFileId: string
+  workUnitId: string
+  roleId: string
+  status?: $Enums.CaseInquiryStatus
+  channel?: $Enums.CaseInquiryChannel | null
+  note?: string | null
+  decidedById?: string | null
+  decidedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CaseManagementReviewUpdateWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
+  channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput
+  workUnit?: Prisma.WorkUnitUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
+  role?: Prisma.RoleUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
+  decidedBy?: Prisma.UserUpdateOneWithoutCaseManagementDecidedNestedInput
+  files?: Prisma.CaseManagementReviewFileUpdateManyWithoutReviewNestedInput
+}
+
+export type CaseManagementReviewUncheckedUpdateWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
+  roleId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
+  channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutReviewNestedInput
+}
+
+export type CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
@@ -1018,6 +1215,7 @@ export type CaseManagementReviewUncheckedUpdateManyWithoutCaseFileInput = {
 export type CaseManagementReviewCreateManyDecidedByInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
@@ -1037,6 +1235,7 @@ export type CaseManagementReviewUpdateWithoutDecidedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutManagementReviewsNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   role?: Prisma.RoleUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   files?: Prisma.CaseManagementReviewFileUpdateManyWithoutReviewNestedInput
@@ -1045,6 +1244,7 @@ export type CaseManagementReviewUpdateWithoutDecidedByInput = {
 export type CaseManagementReviewUncheckedUpdateWithoutDecidedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
@@ -1059,6 +1259,7 @@ export type CaseManagementReviewUncheckedUpdateWithoutDecidedByInput = {
 export type CaseManagementReviewUncheckedUpdateManyWithoutDecidedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
@@ -1072,6 +1273,7 @@ export type CaseManagementReviewUncheckedUpdateManyWithoutDecidedByInput = {
 export type CaseManagementReviewCreateManyRoleInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   workUnitId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -1091,6 +1293,7 @@ export type CaseManagementReviewUpdateWithoutRoleInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutManagementReviewsNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseManagementDecidedNestedInput
   files?: Prisma.CaseManagementReviewFileUpdateManyWithoutReviewNestedInput
@@ -1099,6 +1302,7 @@ export type CaseManagementReviewUpdateWithoutRoleInput = {
 export type CaseManagementReviewUncheckedUpdateWithoutRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -1113,6 +1317,7 @@ export type CaseManagementReviewUncheckedUpdateWithoutRoleInput = {
 export type CaseManagementReviewUncheckedUpdateManyWithoutRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   workUnitId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -1126,6 +1331,7 @@ export type CaseManagementReviewUncheckedUpdateManyWithoutRoleInput = {
 export type CaseManagementReviewCreateManyWorkUnitInput = {
   id?: string
   caseFileId: string
+  caseRequestId: string
   roleId: string
   status?: $Enums.CaseInquiryStatus
   channel?: $Enums.CaseInquiryChannel | null
@@ -1145,6 +1351,7 @@ export type CaseManagementReviewUpdateWithoutWorkUnitInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput
+  caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutManagementReviewsNestedInput
   role?: Prisma.RoleUpdateOneRequiredWithoutCaseManagementReviewsNestedInput
   decidedBy?: Prisma.UserUpdateOneWithoutCaseManagementDecidedNestedInput
   files?: Prisma.CaseManagementReviewFileUpdateManyWithoutReviewNestedInput
@@ -1153,6 +1360,7 @@ export type CaseManagementReviewUpdateWithoutWorkUnitInput = {
 export type CaseManagementReviewUncheckedUpdateWithoutWorkUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -1167,6 +1375,7 @@ export type CaseManagementReviewUncheckedUpdateWithoutWorkUnitInput = {
 export type CaseManagementReviewUncheckedUpdateManyWithoutWorkUnitInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  caseRequestId?: Prisma.StringFieldUpdateOperationsInput | string
   roleId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseInquiryStatusFieldUpdateOperationsInput | $Enums.CaseInquiryStatus
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
@@ -1211,6 +1420,7 @@ export type CaseManagementReviewCountOutputTypeCountFilesArgs<ExtArgs extends ru
 export type CaseManagementReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   workUnitId?: boolean
   roleId?: boolean
   status?: boolean
@@ -1221,6 +1431,7 @@ export type CaseManagementReviewSelect<ExtArgs extends runtime.Types.Extensions.
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   workUnit?: boolean | Prisma.WorkUnitDefaultArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseManagementReview$decidedByArgs<ExtArgs>
@@ -1231,6 +1442,7 @@ export type CaseManagementReviewSelect<ExtArgs extends runtime.Types.Extensions.
 export type CaseManagementReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   workUnitId?: boolean
   roleId?: boolean
   status?: boolean
@@ -1241,6 +1453,7 @@ export type CaseManagementReviewSelectCreateManyAndReturn<ExtArgs extends runtim
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   workUnit?: boolean | Prisma.WorkUnitDefaultArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseManagementReview$decidedByArgs<ExtArgs>
@@ -1249,6 +1462,7 @@ export type CaseManagementReviewSelectCreateManyAndReturn<ExtArgs extends runtim
 export type CaseManagementReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   workUnitId?: boolean
   roleId?: boolean
   status?: boolean
@@ -1259,6 +1473,7 @@ export type CaseManagementReviewSelectUpdateManyAndReturn<ExtArgs extends runtim
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   workUnit?: boolean | Prisma.WorkUnitDefaultArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseManagementReview$decidedByArgs<ExtArgs>
@@ -1267,6 +1482,7 @@ export type CaseManagementReviewSelectUpdateManyAndReturn<ExtArgs extends runtim
 export type CaseManagementReviewSelectScalar = {
   id?: boolean
   caseFileId?: boolean
+  caseRequestId?: boolean
   workUnitId?: boolean
   roleId?: boolean
   status?: boolean
@@ -1278,9 +1494,10 @@ export type CaseManagementReviewSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CaseManagementReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "workUnitId" | "roleId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseManagementReview"]>
+export type CaseManagementReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "caseRequestId" | "workUnitId" | "roleId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseManagementReview"]>
 export type CaseManagementReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   workUnit?: boolean | Prisma.WorkUnitDefaultArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseManagementReview$decidedByArgs<ExtArgs>
@@ -1289,12 +1506,14 @@ export type CaseManagementReviewInclude<ExtArgs extends runtime.Types.Extensions
 }
 export type CaseManagementReviewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   workUnit?: boolean | Prisma.WorkUnitDefaultArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseManagementReview$decidedByArgs<ExtArgs>
 }
 export type CaseManagementReviewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   workUnit?: boolean | Prisma.WorkUnitDefaultArgs<ExtArgs>
   role?: boolean | Prisma.RoleDefaultArgs<ExtArgs>
   decidedBy?: boolean | Prisma.CaseManagementReview$decidedByArgs<ExtArgs>
@@ -1304,6 +1523,7 @@ export type $CaseManagementReviewPayload<ExtArgs extends runtime.Types.Extension
   name: "CaseManagementReview"
   objects: {
     caseFile: Prisma.$CaseFilePayload<ExtArgs>
+    caseRequest: Prisma.$CaseRequestPayload<ExtArgs>
     workUnit: Prisma.$WorkUnitPayload<ExtArgs>
     role: Prisma.$RolePayload<ExtArgs>
     decidedBy: Prisma.$UserPayload<ExtArgs> | null
@@ -1312,6 +1532,7 @@ export type $CaseManagementReviewPayload<ExtArgs extends runtime.Types.Extension
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     caseFileId: string
+    caseRequestId: string
     workUnitId: string
     roleId: string
     status: $Enums.CaseInquiryStatus
@@ -1716,6 +1937,7 @@ readonly fields: CaseManagementReviewFieldRefs;
 export interface Prisma__CaseManagementReviewClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   caseFile<T extends Prisma.CaseFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFileDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  caseRequest<T extends Prisma.CaseRequestDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequestDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseRequestClient<runtime.Types.Result.GetResult<Prisma.$CaseRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   workUnit<T extends Prisma.WorkUnitDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkUnitDefaultArgs<ExtArgs>>): Prisma.Prisma__WorkUnitClient<runtime.Types.Result.GetResult<Prisma.$WorkUnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   role<T extends Prisma.RoleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoleDefaultArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   decidedBy<T extends Prisma.CaseManagementReview$decidedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseManagementReview$decidedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1751,6 +1973,7 @@ export interface Prisma__CaseManagementReviewClient<T, Null = never, ExtArgs ext
 export interface CaseManagementReviewFieldRefs {
   readonly id: Prisma.FieldRef<"CaseManagementReview", 'String'>
   readonly caseFileId: Prisma.FieldRef<"CaseManagementReview", 'String'>
+  readonly caseRequestId: Prisma.FieldRef<"CaseManagementReview", 'String'>
   readonly workUnitId: Prisma.FieldRef<"CaseManagementReview", 'String'>
   readonly roleId: Prisma.FieldRef<"CaseManagementReview", 'String'>
   readonly status: Prisma.FieldRef<"CaseManagementReview", 'CaseInquiryStatus'>

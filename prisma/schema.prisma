@@ -241,6 +241,8 @@ model City {
   users              User[]                @relation("UserHomeCity")
   locatedUsers       User[]                @relation("UserLocationCity")
   premiseCases       CaseFile[]            @relation("CasePremiseCity")
+  locationDrafts     CaseLocationDraft[]   @relation("LocationDraftCity")
+  premiseHistories   CasePremiseHistory[]  @relation("PremiseHistoryCity")
   locationHistories  UserLocationHistory[] @relation("UserLocationHistoryCity")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
@@ -337,6 +339,7 @@ model InquiryCenter {
   updatedAt   DateTime @updatedAt
   jobs        JobInquiryCenter[]
   caseInquiries CaseInquiry[]
+  requirements InquiryRequirement[]
 
   @@index([name])
   @@index([phone])
@@ -397,6 +400,8 @@ model Job {
   isActive    Boolean            @default(true)
   inquiryCenters JobInquiryCenter[]
   documents   JobDocument[]
+  documentRequirements DocumentRequirement[]
+  inquiryRequirements InquiryRequirement[]
   identityUsers User[] @relation("UserEconomicJob")
   activityCases CaseFile[] @relation("CaseActivityJob")
   createdAt   DateTime           @default(now())
@@ -441,6 +446,8 @@ model CaseInquiry {
   id              String              @id @default(uuid())
   caseFileId      String
   caseFile        CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  caseRequestId   String
+  caseRequest     CaseRequest         @relation(fields: [caseRequestId], references: [id], onDelete: Cascade)
   inquiryCenterId String
   inquiryCenter   InquiryCenter       @relation(fields: [inquiryCenterId], references: [id], onDelete: Restrict)
   status          CaseInquiryStatus   @default(PENDING)
@@ -453,8 +460,9 @@ model CaseInquiry {
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 
-  @@unique([caseFileId, inquiryCenterId])
+  @@unique([caseRequestId, inquiryCenterId])
   @@index([caseFileId])
+  @@index([caseRequestId])
   @@index([inquiryCenterId])
   @@index([status])
   @@index([decidedById])
@@ -507,9 +515,11 @@ model CasePlacesOffice {
 
 model CasePlacesReview {
   id          String              @id @default(uuid())
-  caseFileId  String              @unique
-  caseFile    CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
-  status      CaseInquiryStatus   @default(PENDING)
+  caseFileId    String
+  caseFile      CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  caseRequestId String              @unique
+  caseRequest   CaseRequest         @relation(fields: [caseRequestId], references: [id], onDelete: Cascade)
+  status        CaseInquiryStatus   @default(PENDING)
   channel     CaseInquiryChannel?
   note        String?
   decidedById String?
@@ -519,6 +529,7 @@ model CasePlacesReview {
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
 
+  @@index([caseFileId])
   @@index([status])
   @@index([decidedById])
   @@index([createdAt])
@@ -564,6 +575,7 @@ model Document {
   /// کد پایدار مدرک سیستمی؛ اگر پر باشد حذف و تغییر کد ممنوع است
   code       String?         @unique
   jobs       JobDocument[]
+  requirements DocumentRequirement[]
   personDocuments PersonDocument[]
   caseActivityDocuments CaseActivityDocument[]
   caseIdentityDocument CaseIdentityDocument?
@@ -610,11 +622,13 @@ model CaseManagementApprover {
 /// نتیجهٔ تایید مدیریتی هر پرونده برای یک واحد و نقش
 model CaseManagementReview {
   id          String              @id @default(uuid())
-  caseFileId  String
-  caseFile    CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
-  workUnitId  String
-  workUnit    WorkUnit            @relation(fields: [workUnitId], references: [id], onDelete: Restrict)
-  roleId      String
+  caseFileId    String
+  caseFile      CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  caseRequestId String
+  caseRequest   CaseRequest         @relation(fields: [caseRequestId], references: [id], onDelete: Cascade)
+  workUnitId    String
+  workUnit      WorkUnit            @relation(fields: [workUnitId], references: [id], onDelete: Restrict)
+  roleId        String
   role        Role                @relation(fields: [roleId], references: [id], onDelete: Restrict)
   status      CaseInquiryStatus   @default(PENDING)
   channel     CaseInquiryChannel?
@@ -626,8 +640,9 @@ model CaseManagementReview {
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
 
-  @@unique([caseFileId, workUnitId, roleId])
+  @@unique([caseRequestId, workUnitId, roleId])
   @@index([caseFileId])
+  @@index([caseRequestId])
   @@index([workUnitId])
   @@index([roleId])
   @@index([status])
@@ -656,6 +671,7 @@ model CaseManagementReviewFile {
 enum CaseRequestType {
   ISSUANCE
   RENEWAL
+  LOCATION_CHANGE
   STEWARDSHIP
   AUCTION
 }
@@ -663,6 +679,9 @@ enum CaseRequestType {
 enum CaseRequestStatus {
   OPEN
   ISSUED
+  COMPLETED
+  REJECTED
+  CANCELLED
 }
 
 /// یک پروندهٔ فعالیت اقتصادی برای یک شخص و یک شغل. شخص می‌تواند چند پرونده داشته باشد.
@@ -708,10 +727,11 @@ model CaseFile {
   leaseAgency          String?
   premiseOwnerName     String?
   inquiries            CaseInquiry[]
-  placesReview         CasePlacesReview?
+  placesReviews        CasePlacesReview[]
   managementReviews    CaseManagementReview[]
   requests             CaseRequest[]
   activityDocuments    CaseActivityDocument[]
+  premiseHistory       CasePremiseHistory[]
   violations           Violation[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
@@ -740,6 +760,15 @@ model CaseRequest {
   /// مرحلهٔ همین درخواست. برای صدور همان ۰ تا ۶ است. نوع‌های دیگر مرحلهٔ جدا دارند.
   formationStep Int               @default(0)
   completedAt   DateTime?
+  inquiries     CaseInquiry[]
+  placesReview  CasePlacesReview?
+  managementReviews CaseManagementReview[]
+  activityDocuments CaseActivityDocument[]
+  events        CaseRequestEvent[]
+  renewalTerms  CaseRenewalTerms?
+  locationDraft CaseLocationDraft?
+  replacedPremise CasePremiseHistory?
+  auction       CaseAuction?
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
 
@@ -749,6 +778,210 @@ model CaseRequest {
   @@index([formationStep])
   @@index([createdAt])
   @@map("case_requests")
+}
+
+/// تغییر وضعیت درخواست
+model CaseRequestEvent {
+  id         String            @id @default(uuid())
+  requestId  String
+  request    CaseRequest       @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  fromStatus CaseRequestStatus?
+  toStatus   CaseRequestStatus
+  actorId    String?
+  actor      User?             @relation("CaseRequestEventActor", fields: [actorId], references: [id], onDelete: SetNull)
+  createdAt  DateTime          @default(now())
+
+  @@index([requestId])
+  @@index([actorId])
+  @@index([createdAt])
+  @@map("case_request_events")
+}
+
+/// تاریخ‌های محاسبه‌شدهٔ تمدید؛ موقع باز شدن درخواست ثابت می‌شوند
+model CaseRenewalTerms {
+  requestId          String    @id
+  request            CaseRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  currentIssuedAt    DateTime  @db.Date
+  currentExpiresAt   DateTime  @db.Date
+  nextIssuedAt       DateTime  @db.Date
+  nextExpiresAt      DateTime  @db.Date
+  /// روزهای گذشته از انقضای فعلی؛ صفر یعنی هنوز نگذشته
+  delayDays          Int       @default(0)
+
+  @@index([currentExpiresAt])
+  @@map("case_renewal_terms")
+}
+
+/// محل پیشنهادی تغییر مکان تا زمان تکمیل درخواست
+model CaseLocationDraft {
+  requestId            String                 @id
+  request              CaseRequest            @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  premiseCityId        String?
+  premiseCity          City?                  @relation("LocationDraftCity", fields: [premiseCityId], references: [id], onDelete: SetNull)
+  premiseEstablishment PremiseEstablishment?
+  premiseComplexId     String?
+  premiseComplex       CommercialComplex?     @relation("LocationDraftComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
+  premiseAddress       String?
+  premiseAddressEn     String?
+  premisePlaque        String?
+  premisePlaqueSeries  String?
+  premiseFloor         String?
+  premiseUnitNo        String?
+  premisePostalCode    String?
+  premisePhone         String?
+  premiseFax           String?
+  premiseGeoPosition   PremiseGeoPosition?
+  premisePublicAccess  PremisePublicAccess?
+  registrationPlaceId  String?
+  registrationPlace    RegistrationPlace?     @relation("LocationDraftRegistration", fields: [registrationPlaceId], references: [id], onDelete: SetNull)
+  premiseOwnership     PremiseOwnership?
+  premiseDeedNo        String?
+  premiseArea          Decimal?               @db.Decimal(12, 2)
+  leaseIssuedAt        DateTime?              @db.Date
+  leaseExpiresAt       DateTime?              @db.Date
+  leaseAgency          String?
+  premiseOwnerName     String?
+  updatedAt            DateTime               @updatedAt
+
+  @@index([premiseCityId])
+  @@index([premiseComplexId])
+  @@index([registrationPlaceId])
+  @@map("case_location_drafts")
+}
+
+/// محل قبلی پرونده. قبل از نشستن آدرس جدیدِ تغییر مکان، در همان تراکنش ذخیره می‌شود.
+model CasePremiseHistory {
+  id                   String                 @id @default(uuid())
+  caseFileId           String
+  caseFile             CaseFile               @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  replacedByRequestId  String?                @unique
+  replacedByRequest    CaseRequest?           @relation(fields: [replacedByRequestId], references: [id], onDelete: SetNull)
+  startedAt            DateTime
+  endedAt              DateTime
+  premiseCityId        String?
+  premiseCity          City?                  @relation("PremiseHistoryCity", fields: [premiseCityId], references: [id], onDelete: SetNull)
+  premiseEstablishment PremiseEstablishment?
+  premiseComplexId     String?
+  premiseComplex       CommercialComplex?     @relation("PremiseHistoryComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
+  premiseAddress       String?
+  premiseAddressEn     String?
+  premisePlaque        String?
+  premisePlaqueSeries  String?
+  premiseFloor         String?
+  premiseUnitNo        String?
+  premisePostalCode    String?
+  premisePhone         String?
+  premiseFax           String?
+  premiseGeoPosition   PremiseGeoPosition?
+  premisePublicAccess  PremisePublicAccess?
+  registrationPlaceId  String?
+  registrationPlace    RegistrationPlace?     @relation("PremiseHistoryRegistration", fields: [registrationPlaceId], references: [id], onDelete: SetNull)
+  premiseOwnership     PremiseOwnership?
+  premiseDeedNo        String?
+  premiseArea          Decimal?               @db.Decimal(12, 2)
+  leaseIssuedAt        DateTime?              @db.Date
+  leaseExpiresAt       DateTime?              @db.Date
+  leaseAgency          String?
+  premiseOwnerName     String?
+
+  @@index([caseFileId, endedAt])
+  @@index([premiseCityId])
+  @@index([premiseComplexId])
+  @@index([registrationPlaceId])
+  @@map("case_premise_history")
+}
+
+enum AuctionApproverKind {
+  SPECIAL_INSPECTOR
+  AUCTION_COMMITTEE
+  COMMERCIAL_MANAGER
+}
+
+/// بازه، سقف تخفیف و کالاهای درخواست مجوز حراج
+model CaseAuction {
+  requestId   String   @id
+  request     CaseRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  startsAt    DateTime @db.Date
+  endsAt      DateTime @db.Date
+  discountMin Decimal  @db.Decimal(5, 2)
+  discountMax Decimal  @db.Decimal(5, 2)
+  items       CaseAuctionItem[]
+  approvals   CaseAuctionApproval[]
+
+  @@index([startsAt])
+  @@index([endsAt])
+  @@map("case_auctions")
+}
+
+model CaseAuctionItem {
+  id              String      @id @default(uuid())
+  requestId       String
+  auction         CaseAuction @relation(fields: [requestId], references: [requestId], onDelete: Cascade)
+  name            String
+  price           Decimal     @db.Decimal(18, 0)
+  discountPercent Decimal     @db.Decimal(5, 2)
+  sortOrder       Int
+
+  @@index([requestId])
+  @@index([sortOrder])
+  @@map("case_auction_items")
+}
+
+model CaseAuctionApproval {
+  id          String              @id @default(uuid())
+  requestId   String
+  auction     CaseAuction         @relation(fields: [requestId], references: [requestId], onDelete: Cascade)
+  kind        AuctionApproverKind
+  status      CaseInquiryStatus   @default(PENDING)
+  note        String?
+  decidedById String?
+  decidedBy   User?               @relation("CaseAuctionDecider", fields: [decidedById], references: [id], onDelete: SetNull)
+  decidedAt   DateTime?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@unique([requestId, kind])
+  @@index([requestId])
+  @@index([kind])
+  @@index([status])
+  @@index([decidedById])
+  @@map("case_auction_approvals")
+}
+
+/// مدرک لازم برای یک نوع درخواست. شغل خالی یعنی همهٔ شغل‌ها.
+model DocumentRequirement {
+  id          String           @id @default(uuid())
+  documentId  String
+  document    Document         @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  requestType CaseRequestType
+  jobId       String?
+  job         Job?             @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  gender      DocumentGender   @default(BOTH)
+  isRequired  Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([documentId])
+  @@index([requestType])
+  @@index([jobId])
+  @@map("document_requirements")
+}
+
+/// مرکز استعلام لازم برای یک نوع درخواست. شغل خالی یعنی همهٔ شغل‌ها.
+model InquiryRequirement {
+  id               String           @id @default(uuid())
+  inquiryCenterId  String
+  inquiryCenter    InquiryCenter    @relation(fields: [inquiryCenterId], references: [id], onDelete: Restrict)
+  requestType      CaseRequestType
+  jobId            String?
+  job              Job?             @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([inquiryCenterId])
+  @@index([requestType])
+  @@index([jobId])
+  @@map("inquiry_requirements")
 }
 
 model PersonDocument {
@@ -786,19 +1019,22 @@ model PersonDocumentVersion {
   @@map("person_document_versions")
 }
 
-/// مدرک شغلی یک پرونده. هر پرونده فایل جدا دارد و با مدارک هویتی شخص مشترک نیست.
+/// مدرک شغلی یک درخواست. فایل روی پرونده می‌ماند و ارائه مال همین درخواست است.
 model CaseActivityDocument {
-  id         String                         @id @default(uuid())
-  caseFileId String
-  caseFile   CaseFile                       @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
-  documentId String
-  document   Document                       @relation(fields: [documentId], references: [id], onDelete: Restrict)
-  versions   CaseActivityDocumentVersion[]
-  createdAt  DateTime                       @default(now())
-  updatedAt  DateTime                       @updatedAt
+  id            String                         @id @default(uuid())
+  caseFileId    String
+  caseFile      CaseFile                       @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  caseRequestId String
+  caseRequest   CaseRequest                    @relation(fields: [caseRequestId], references: [id], onDelete: Cascade)
+  documentId    String
+  document      Document                       @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  versions      CaseActivityDocumentVersion[]
+  createdAt     DateTime                       @default(now())
+  updatedAt     DateTime                       @updatedAt
 
-  @@unique([caseFileId, documentId])
+  @@unique([caseRequestId, documentId])
   @@index([caseFileId])
+  @@index([caseRequestId])
   @@index([documentId])
   @@map("case_activity_documents")
 }
@@ -891,6 +1127,7 @@ model User {
   educationLevel     EducationLevel?
   citizenGroup       String?
   caseFiles          CaseFile[]
+  caseRequestEvents  CaseRequestEvent[] @relation("CaseRequestEventActor")
   jobId              String?
   economicJob        Job?                  @relation("UserEconomicJob", fields: [jobId], references: [id], onDelete: SetNull)
   personDocuments    PersonDocument[]
@@ -902,6 +1139,7 @@ model User {
   casePlacesDecided  CasePlacesReview[]    @relation("CasePlacesDecider")
   casePlacesFiles    CasePlacesFile[]      @relation("CasePlacesFileUploader")
   caseManagementDecided CaseManagementReview[] @relation("CaseManagementDecider")
+  caseAuctionDecided CaseAuctionApproval[] @relation("CaseAuctionDecider")
   caseManagementReviewFiles CaseManagementReviewFile[] @relation("CaseManagementFileUploader")
   jobGroupRepresentations JobGroupRepresentative[]
   foodReservations   FoodReservation[]
@@ -1858,6 +2096,8 @@ model CommercialComplex {
   isActive   Boolean           @default(true)
   floors       CommercialFloor[]
   premiseCases CaseFile[]        @relation("CasePremiseComplex")
+  locationDrafts CaseLocationDraft[] @relation("LocationDraftComplex")
+  premiseHistories CasePremiseHistory[] @relation("PremiseHistoryComplex")
   createdAt    DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
 
@@ -1971,6 +2211,8 @@ model RegistrationPlace {
   isActive     Boolean    @default(true)
   isDefault    Boolean    @default(false)
   premiseCases CaseFile[] @relation("CaseRegistrationPlace")
+  locationDrafts CaseLocationDraft[] @relation("LocationDraftRegistration")
+  premiseHistories CasePremiseHistory[] @relation("PremiseHistoryRegistration")
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 

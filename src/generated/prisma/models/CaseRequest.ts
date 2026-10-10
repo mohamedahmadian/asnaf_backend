@@ -250,6 +250,15 @@ export type CaseRequestWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  inquiries?: Prisma.CaseInquiryListRelationFilter
+  placesReview?: Prisma.XOR<Prisma.CasePlacesReviewNullableScalarRelationFilter, Prisma.CasePlacesReviewWhereInput> | null
+  managementReviews?: Prisma.CaseManagementReviewListRelationFilter
+  activityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
+  events?: Prisma.CaseRequestEventListRelationFilter
+  renewalTerms?: Prisma.XOR<Prisma.CaseRenewalTermsNullableScalarRelationFilter, Prisma.CaseRenewalTermsWhereInput> | null
+  locationDraft?: Prisma.XOR<Prisma.CaseLocationDraftNullableScalarRelationFilter, Prisma.CaseLocationDraftWhereInput> | null
+  replacedPremise?: Prisma.XOR<Prisma.CasePremiseHistoryNullableScalarRelationFilter, Prisma.CasePremiseHistoryWhereInput> | null
+  auction?: Prisma.XOR<Prisma.CaseAuctionNullableScalarRelationFilter, Prisma.CaseAuctionWhereInput> | null
 }
 
 export type CaseRequestOrderByWithRelationInput = {
@@ -263,6 +272,15 @@ export type CaseRequestOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
+  inquiries?: Prisma.CaseInquiryOrderByRelationAggregateInput
+  placesReview?: Prisma.CasePlacesReviewOrderByWithRelationInput
+  managementReviews?: Prisma.CaseManagementReviewOrderByRelationAggregateInput
+  activityDocuments?: Prisma.CaseActivityDocumentOrderByRelationAggregateInput
+  events?: Prisma.CaseRequestEventOrderByRelationAggregateInput
+  renewalTerms?: Prisma.CaseRenewalTermsOrderByWithRelationInput
+  locationDraft?: Prisma.CaseLocationDraftOrderByWithRelationInput
+  replacedPremise?: Prisma.CasePremiseHistoryOrderByWithRelationInput
+  auction?: Prisma.CaseAuctionOrderByWithRelationInput
 }
 
 export type CaseRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -279,6 +297,15 @@ export type CaseRequestWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  inquiries?: Prisma.CaseInquiryListRelationFilter
+  placesReview?: Prisma.XOR<Prisma.CasePlacesReviewNullableScalarRelationFilter, Prisma.CasePlacesReviewWhereInput> | null
+  managementReviews?: Prisma.CaseManagementReviewListRelationFilter
+  activityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
+  events?: Prisma.CaseRequestEventListRelationFilter
+  renewalTerms?: Prisma.XOR<Prisma.CaseRenewalTermsNullableScalarRelationFilter, Prisma.CaseRenewalTermsWhereInput> | null
+  locationDraft?: Prisma.XOR<Prisma.CaseLocationDraftNullableScalarRelationFilter, Prisma.CaseLocationDraftWhereInput> | null
+  replacedPremise?: Prisma.XOR<Prisma.CasePremiseHistoryNullableScalarRelationFilter, Prisma.CasePremiseHistoryWhereInput> | null
+  auction?: Prisma.XOR<Prisma.CaseAuctionNullableScalarRelationFilter, Prisma.CaseAuctionWhereInput> | null
 }, "id" | "number">
 
 export type CaseRequestOrderByWithAggregationInput = {
@@ -323,6 +350,15 @@ export type CaseRequestCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateInput = {
@@ -335,6 +371,15 @@ export type CaseRequestUncheckedCreateInput = {
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUpdateInput = {
@@ -347,6 +392,15 @@ export type CaseRequestUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateInput = {
@@ -359,6 +413,15 @@ export type CaseRequestUncheckedUpdateInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateManyInput = {
@@ -394,6 +457,11 @@ export type CaseRequestUncheckedUpdateManyInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseRequestScalarRelationFilter = {
+  is?: Prisma.CaseRequestWhereInput
+  isNot?: Prisma.CaseRequestWhereInput
 }
 
 export type CaseRequestListRelationFilter = {
@@ -450,6 +518,53 @@ export type CaseRequestSumOrderByAggregateInput = {
   formationStep?: Prisma.SortOrder
 }
 
+export type CaseRequestNullableScalarRelationFilter = {
+  is?: Prisma.CaseRequestWhereInput | null
+  isNot?: Prisma.CaseRequestWhereInput | null
+}
+
+export type CaseRequestCreateNestedOneWithoutInquiriesInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutInquiriesInput, Prisma.CaseRequestUncheckedCreateWithoutInquiriesInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutInquiriesInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutInquiriesNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutInquiriesInput, Prisma.CaseRequestUncheckedCreateWithoutInquiriesInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutInquiriesInput
+  upsert?: Prisma.CaseRequestUpsertWithoutInquiriesInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutInquiriesInput, Prisma.CaseRequestUpdateWithoutInquiriesInput>, Prisma.CaseRequestUncheckedUpdateWithoutInquiriesInput>
+}
+
+export type CaseRequestCreateNestedOneWithoutPlacesReviewInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutPlacesReviewInput, Prisma.CaseRequestUncheckedCreateWithoutPlacesReviewInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutPlacesReviewInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutPlacesReviewNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutPlacesReviewInput, Prisma.CaseRequestUncheckedCreateWithoutPlacesReviewInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutPlacesReviewInput
+  upsert?: Prisma.CaseRequestUpsertWithoutPlacesReviewInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutPlacesReviewInput, Prisma.CaseRequestUpdateWithoutPlacesReviewInput>, Prisma.CaseRequestUncheckedUpdateWithoutPlacesReviewInput>
+}
+
+export type CaseRequestCreateNestedOneWithoutManagementReviewsInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutManagementReviewsInput, Prisma.CaseRequestUncheckedCreateWithoutManagementReviewsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutManagementReviewsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutManagementReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutManagementReviewsInput, Prisma.CaseRequestUncheckedCreateWithoutManagementReviewsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutManagementReviewsInput
+  upsert?: Prisma.CaseRequestUpsertWithoutManagementReviewsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutManagementReviewsInput, Prisma.CaseRequestUpdateWithoutManagementReviewsInput>, Prisma.CaseRequestUncheckedUpdateWithoutManagementReviewsInput>
+}
+
 export type CaseRequestCreateNestedManyWithoutCaseFileInput = {
   create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutCaseFileInput, Prisma.CaseRequestUncheckedCreateWithoutCaseFileInput> | Prisma.CaseRequestCreateWithoutCaseFileInput[] | Prisma.CaseRequestUncheckedCreateWithoutCaseFileInput[]
   connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutCaseFileInput | Prisma.CaseRequestCreateOrConnectWithoutCaseFileInput[]
@@ -500,6 +615,380 @@ export type EnumCaseRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.CaseRequestStatus
 }
 
+export type CaseRequestCreateNestedOneWithoutEventsInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutEventsInput, Prisma.CaseRequestUncheckedCreateWithoutEventsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutEventsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutEventsInput, Prisma.CaseRequestUncheckedCreateWithoutEventsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutEventsInput
+  upsert?: Prisma.CaseRequestUpsertWithoutEventsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutEventsInput, Prisma.CaseRequestUpdateWithoutEventsInput>, Prisma.CaseRequestUncheckedUpdateWithoutEventsInput>
+}
+
+export type CaseRequestCreateNestedOneWithoutRenewalTermsInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutRenewalTermsInput, Prisma.CaseRequestUncheckedCreateWithoutRenewalTermsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutRenewalTermsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutRenewalTermsNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutRenewalTermsInput, Prisma.CaseRequestUncheckedCreateWithoutRenewalTermsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutRenewalTermsInput
+  upsert?: Prisma.CaseRequestUpsertWithoutRenewalTermsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutRenewalTermsInput, Prisma.CaseRequestUpdateWithoutRenewalTermsInput>, Prisma.CaseRequestUncheckedUpdateWithoutRenewalTermsInput>
+}
+
+export type CaseRequestCreateNestedOneWithoutLocationDraftInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutLocationDraftInput, Prisma.CaseRequestUncheckedCreateWithoutLocationDraftInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutLocationDraftInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutLocationDraftNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutLocationDraftInput, Prisma.CaseRequestUncheckedCreateWithoutLocationDraftInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutLocationDraftInput
+  upsert?: Prisma.CaseRequestUpsertWithoutLocationDraftInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutLocationDraftInput, Prisma.CaseRequestUpdateWithoutLocationDraftInput>, Prisma.CaseRequestUncheckedUpdateWithoutLocationDraftInput>
+}
+
+export type CaseRequestCreateNestedOneWithoutReplacedPremiseInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutReplacedPremiseInput, Prisma.CaseRequestUncheckedCreateWithoutReplacedPremiseInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutReplacedPremiseInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneWithoutReplacedPremiseNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutReplacedPremiseInput, Prisma.CaseRequestUncheckedCreateWithoutReplacedPremiseInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutReplacedPremiseInput
+  upsert?: Prisma.CaseRequestUpsertWithoutReplacedPremiseInput
+  disconnect?: Prisma.CaseRequestWhereInput | boolean
+  delete?: Prisma.CaseRequestWhereInput | boolean
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutReplacedPremiseInput, Prisma.CaseRequestUpdateWithoutReplacedPremiseInput>, Prisma.CaseRequestUncheckedUpdateWithoutReplacedPremiseInput>
+}
+
+export type CaseRequestCreateNestedOneWithoutAuctionInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutAuctionInput, Prisma.CaseRequestUncheckedCreateWithoutAuctionInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutAuctionInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutAuctionNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutAuctionInput, Prisma.CaseRequestUncheckedCreateWithoutAuctionInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutAuctionInput
+  upsert?: Prisma.CaseRequestUpsertWithoutAuctionInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutAuctionInput, Prisma.CaseRequestUpdateWithoutAuctionInput>, Prisma.CaseRequestUncheckedUpdateWithoutAuctionInput>
+}
+
+export type CaseRequestCreateNestedOneWithoutActivityDocumentsInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutActivityDocumentsInput, Prisma.CaseRequestUncheckedCreateWithoutActivityDocumentsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutActivityDocumentsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutActivityDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutActivityDocumentsInput, Prisma.CaseRequestUncheckedCreateWithoutActivityDocumentsInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutActivityDocumentsInput
+  upsert?: Prisma.CaseRequestUpsertWithoutActivityDocumentsInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutActivityDocumentsInput, Prisma.CaseRequestUpdateWithoutActivityDocumentsInput>, Prisma.CaseRequestUncheckedUpdateWithoutActivityDocumentsInput>
+}
+
+export type CaseRequestCreateWithoutInquiriesInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutInquiriesInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutInquiriesInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutInquiriesInput, Prisma.CaseRequestUncheckedCreateWithoutInquiriesInput>
+}
+
+export type CaseRequestUpsertWithoutInquiriesInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutInquiriesInput, Prisma.CaseRequestUncheckedUpdateWithoutInquiriesInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutInquiriesInput, Prisma.CaseRequestUncheckedCreateWithoutInquiriesInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutInquiriesInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutInquiriesInput, Prisma.CaseRequestUncheckedUpdateWithoutInquiriesInput>
+}
+
+export type CaseRequestUpdateWithoutInquiriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutInquiriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutPlacesReviewInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutPlacesReviewInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutPlacesReviewInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutPlacesReviewInput, Prisma.CaseRequestUncheckedCreateWithoutPlacesReviewInput>
+}
+
+export type CaseRequestUpsertWithoutPlacesReviewInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutPlacesReviewInput, Prisma.CaseRequestUncheckedUpdateWithoutPlacesReviewInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutPlacesReviewInput, Prisma.CaseRequestUncheckedCreateWithoutPlacesReviewInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutPlacesReviewInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutPlacesReviewInput, Prisma.CaseRequestUncheckedUpdateWithoutPlacesReviewInput>
+}
+
+export type CaseRequestUpdateWithoutPlacesReviewInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutPlacesReviewInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutManagementReviewsInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutManagementReviewsInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutManagementReviewsInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutManagementReviewsInput, Prisma.CaseRequestUncheckedCreateWithoutManagementReviewsInput>
+}
+
+export type CaseRequestUpsertWithoutManagementReviewsInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutManagementReviewsInput, Prisma.CaseRequestUncheckedUpdateWithoutManagementReviewsInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutManagementReviewsInput, Prisma.CaseRequestUncheckedCreateWithoutManagementReviewsInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutManagementReviewsInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutManagementReviewsInput, Prisma.CaseRequestUncheckedUpdateWithoutManagementReviewsInput>
+}
+
+export type CaseRequestUpdateWithoutManagementReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutManagementReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
 export type CaseRequestCreateWithoutCaseFileInput = {
   id?: string
   type: $Enums.CaseRequestType
@@ -509,6 +998,15 @@ export type CaseRequestCreateWithoutCaseFileInput = {
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutCaseFileInput = {
@@ -520,6 +1018,15 @@ export type CaseRequestUncheckedCreateWithoutCaseFileInput = {
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutCaseFileInput = {
@@ -563,6 +1070,582 @@ export type CaseRequestScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
 }
 
+export type CaseRequestCreateWithoutEventsInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutEventsInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutEventsInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutEventsInput, Prisma.CaseRequestUncheckedCreateWithoutEventsInput>
+}
+
+export type CaseRequestUpsertWithoutEventsInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutEventsInput, Prisma.CaseRequestUncheckedUpdateWithoutEventsInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutEventsInput, Prisma.CaseRequestUncheckedCreateWithoutEventsInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutEventsInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutEventsInput, Prisma.CaseRequestUncheckedUpdateWithoutEventsInput>
+}
+
+export type CaseRequestUpdateWithoutEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutRenewalTermsInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutRenewalTermsInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutRenewalTermsInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutRenewalTermsInput, Prisma.CaseRequestUncheckedCreateWithoutRenewalTermsInput>
+}
+
+export type CaseRequestUpsertWithoutRenewalTermsInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutRenewalTermsInput, Prisma.CaseRequestUncheckedUpdateWithoutRenewalTermsInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutRenewalTermsInput, Prisma.CaseRequestUncheckedCreateWithoutRenewalTermsInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutRenewalTermsInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutRenewalTermsInput, Prisma.CaseRequestUncheckedUpdateWithoutRenewalTermsInput>
+}
+
+export type CaseRequestUpdateWithoutRenewalTermsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutRenewalTermsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutLocationDraftInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutLocationDraftInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutLocationDraftInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutLocationDraftInput, Prisma.CaseRequestUncheckedCreateWithoutLocationDraftInput>
+}
+
+export type CaseRequestUpsertWithoutLocationDraftInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutLocationDraftInput, Prisma.CaseRequestUncheckedUpdateWithoutLocationDraftInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutLocationDraftInput, Prisma.CaseRequestUncheckedCreateWithoutLocationDraftInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutLocationDraftInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutLocationDraftInput, Prisma.CaseRequestUncheckedUpdateWithoutLocationDraftInput>
+}
+
+export type CaseRequestUpdateWithoutLocationDraftInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutLocationDraftInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutReplacedPremiseInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutReplacedPremiseInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutReplacedPremiseInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutReplacedPremiseInput, Prisma.CaseRequestUncheckedCreateWithoutReplacedPremiseInput>
+}
+
+export type CaseRequestUpsertWithoutReplacedPremiseInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutReplacedPremiseInput, Prisma.CaseRequestUncheckedUpdateWithoutReplacedPremiseInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutReplacedPremiseInput, Prisma.CaseRequestUncheckedCreateWithoutReplacedPremiseInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutReplacedPremiseInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutReplacedPremiseInput, Prisma.CaseRequestUncheckedUpdateWithoutReplacedPremiseInput>
+}
+
+export type CaseRequestUpdateWithoutReplacedPremiseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutReplacedPremiseInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutAuctionInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutAuctionInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutAuctionInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutAuctionInput, Prisma.CaseRequestUncheckedCreateWithoutAuctionInput>
+}
+
+export type CaseRequestUpsertWithoutAuctionInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutAuctionInput, Prisma.CaseRequestUncheckedUpdateWithoutAuctionInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutAuctionInput, Prisma.CaseRequestUncheckedCreateWithoutAuctionInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutAuctionInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutAuctionInput, Prisma.CaseRequestUncheckedUpdateWithoutAuctionInput>
+}
+
+export type CaseRequestUpdateWithoutAuctionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutAuctionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutActivityDocumentsInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutActivityDocumentsInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutActivityDocumentsInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutActivityDocumentsInput, Prisma.CaseRequestUncheckedCreateWithoutActivityDocumentsInput>
+}
+
+export type CaseRequestUpsertWithoutActivityDocumentsInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutActivityDocumentsInput, Prisma.CaseRequestUncheckedUpdateWithoutActivityDocumentsInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutActivityDocumentsInput, Prisma.CaseRequestUncheckedCreateWithoutActivityDocumentsInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutActivityDocumentsInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutActivityDocumentsInput, Prisma.CaseRequestUncheckedUpdateWithoutActivityDocumentsInput>
+}
+
+export type CaseRequestUpdateWithoutActivityDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutActivityDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+}
+
 export type CaseRequestCreateManyCaseFileInput = {
   id?: string
   type: $Enums.CaseRequestType
@@ -583,6 +1666,15 @@ export type CaseRequestUpdateWithoutCaseFileInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutCaseFileInput = {
@@ -594,6 +1686,15 @@ export type CaseRequestUncheckedUpdateWithoutCaseFileInput = {
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateManyWithoutCaseFileInput = {
@@ -608,6 +1709,62 @@ export type CaseRequestUncheckedUpdateManyWithoutCaseFileInput = {
 }
 
 
+/**
+ * Count Type CaseRequestCountOutputType
+ */
+
+export type CaseRequestCountOutputType = {
+  inquiries: number
+  managementReviews: number
+  activityDocuments: number
+  events: number
+}
+
+export type CaseRequestCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  inquiries?: boolean | CaseRequestCountOutputTypeCountInquiriesArgs
+  managementReviews?: boolean | CaseRequestCountOutputTypeCountManagementReviewsArgs
+  activityDocuments?: boolean | CaseRequestCountOutputTypeCountActivityDocumentsArgs
+  events?: boolean | CaseRequestCountOutputTypeCountEventsArgs
+}
+
+/**
+ * CaseRequestCountOutputType without action
+ */
+export type CaseRequestCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRequestCountOutputType
+   */
+  select?: Prisma.CaseRequestCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CaseRequestCountOutputType without action
+ */
+export type CaseRequestCountOutputTypeCountInquiriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseInquiryWhereInput
+}
+
+/**
+ * CaseRequestCountOutputType without action
+ */
+export type CaseRequestCountOutputTypeCountManagementReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseManagementReviewWhereInput
+}
+
+/**
+ * CaseRequestCountOutputType without action
+ */
+export type CaseRequestCountOutputTypeCountActivityDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseActivityDocumentWhereInput
+}
+
+/**
+ * CaseRequestCountOutputType without action
+ */
+export type CaseRequestCountOutputTypeCountEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseRequestEventWhereInput
+}
+
 
 export type CaseRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -620,6 +1777,16 @@ export type CaseRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  inquiries?: boolean | Prisma.CaseRequest$inquiriesArgs<ExtArgs>
+  placesReview?: boolean | Prisma.CaseRequest$placesReviewArgs<ExtArgs>
+  managementReviews?: boolean | Prisma.CaseRequest$managementReviewsArgs<ExtArgs>
+  activityDocuments?: boolean | Prisma.CaseRequest$activityDocumentsArgs<ExtArgs>
+  events?: boolean | Prisma.CaseRequest$eventsArgs<ExtArgs>
+  renewalTerms?: boolean | Prisma.CaseRequest$renewalTermsArgs<ExtArgs>
+  locationDraft?: boolean | Prisma.CaseRequest$locationDraftArgs<ExtArgs>
+  replacedPremise?: boolean | Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>
+  auction?: boolean | Prisma.CaseRequest$auctionArgs<ExtArgs>
+  _count?: boolean | Prisma.CaseRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseRequest"]>
 
 export type CaseRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -663,6 +1830,16 @@ export type CaseRequestSelectScalar = {
 export type CaseRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "type" | "number" | "status" | "formationStep" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseRequest"]>
 export type CaseRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  inquiries?: boolean | Prisma.CaseRequest$inquiriesArgs<ExtArgs>
+  placesReview?: boolean | Prisma.CaseRequest$placesReviewArgs<ExtArgs>
+  managementReviews?: boolean | Prisma.CaseRequest$managementReviewsArgs<ExtArgs>
+  activityDocuments?: boolean | Prisma.CaseRequest$activityDocumentsArgs<ExtArgs>
+  events?: boolean | Prisma.CaseRequest$eventsArgs<ExtArgs>
+  renewalTerms?: boolean | Prisma.CaseRequest$renewalTermsArgs<ExtArgs>
+  locationDraft?: boolean | Prisma.CaseRequest$locationDraftArgs<ExtArgs>
+  replacedPremise?: boolean | Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>
+  auction?: boolean | Prisma.CaseRequest$auctionArgs<ExtArgs>
+  _count?: boolean | Prisma.CaseRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -675,6 +1852,15 @@ export type $CaseRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "CaseRequest"
   objects: {
     caseFile: Prisma.$CaseFilePayload<ExtArgs>
+    inquiries: Prisma.$CaseInquiryPayload<ExtArgs>[]
+    placesReview: Prisma.$CasePlacesReviewPayload<ExtArgs> | null
+    managementReviews: Prisma.$CaseManagementReviewPayload<ExtArgs>[]
+    activityDocuments: Prisma.$CaseActivityDocumentPayload<ExtArgs>[]
+    events: Prisma.$CaseRequestEventPayload<ExtArgs>[]
+    renewalTerms: Prisma.$CaseRenewalTermsPayload<ExtArgs> | null
+    locationDraft: Prisma.$CaseLocationDraftPayload<ExtArgs> | null
+    replacedPremise: Prisma.$CasePremiseHistoryPayload<ExtArgs> | null
+    auction: Prisma.$CaseAuctionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1084,6 +2270,15 @@ readonly fields: CaseRequestFieldRefs;
 export interface Prisma__CaseRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   caseFile<T extends Prisma.CaseFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFileDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  inquiries<T extends Prisma.CaseRequest$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseInquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  placesReview<T extends Prisma.CaseRequest$placesReviewArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$placesReviewArgs<ExtArgs>>): Prisma.Prisma__CasePlacesReviewClient<runtime.Types.Result.GetResult<Prisma.$CasePlacesReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  managementReviews<T extends Prisma.CaseRequest$managementReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$managementReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activityDocuments<T extends Prisma.CaseRequest$activityDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$activityDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseActivityDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  events<T extends Prisma.CaseRequest$eventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseRequestEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  renewalTerms<T extends Prisma.CaseRequest$renewalTermsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$renewalTermsArgs<ExtArgs>>): Prisma.Prisma__CaseRenewalTermsClient<runtime.Types.Result.GetResult<Prisma.$CaseRenewalTermsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  locationDraft<T extends Prisma.CaseRequest$locationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$locationDraftArgs<ExtArgs>>): Prisma.Prisma__CaseLocationDraftClient<runtime.Types.Result.GetResult<Prisma.$CaseLocationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  replacedPremise<T extends Prisma.CaseRequest$replacedPremiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>>): Prisma.Prisma__CasePremiseHistoryClient<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  auction<T extends Prisma.CaseRequest$auctionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$auctionArgs<ExtArgs>>): Prisma.Prisma__CaseAuctionClient<runtime.Types.Result.GetResult<Prisma.$CaseAuctionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1520,6 +2715,197 @@ export type CaseRequestDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many CaseRequests to delete.
    */
   limit?: number
+}
+
+/**
+ * CaseRequest.inquiries
+ */
+export type CaseRequest$inquiriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseInquiry
+   */
+  select?: Prisma.CaseInquirySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseInquiry
+   */
+  omit?: Prisma.CaseInquiryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseInquiryInclude<ExtArgs> | null
+  where?: Prisma.CaseInquiryWhereInput
+  orderBy?: Prisma.CaseInquiryOrderByWithRelationInput | Prisma.CaseInquiryOrderByWithRelationInput[]
+  cursor?: Prisma.CaseInquiryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseInquiryScalarFieldEnum | Prisma.CaseInquiryScalarFieldEnum[]
+}
+
+/**
+ * CaseRequest.placesReview
+ */
+export type CaseRequest$placesReviewArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasePlacesReview
+   */
+  select?: Prisma.CasePlacesReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasePlacesReview
+   */
+  omit?: Prisma.CasePlacesReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasePlacesReviewInclude<ExtArgs> | null
+  where?: Prisma.CasePlacesReviewWhereInput
+}
+
+/**
+ * CaseRequest.managementReviews
+ */
+export type CaseRequest$managementReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseManagementReview
+   */
+  select?: Prisma.CaseManagementReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseManagementReview
+   */
+  omit?: Prisma.CaseManagementReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseManagementReviewInclude<ExtArgs> | null
+  where?: Prisma.CaseManagementReviewWhereInput
+  orderBy?: Prisma.CaseManagementReviewOrderByWithRelationInput | Prisma.CaseManagementReviewOrderByWithRelationInput[]
+  cursor?: Prisma.CaseManagementReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseManagementReviewScalarFieldEnum | Prisma.CaseManagementReviewScalarFieldEnum[]
+}
+
+/**
+ * CaseRequest.activityDocuments
+ */
+export type CaseRequest$activityDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseActivityDocument
+   */
+  select?: Prisma.CaseActivityDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseActivityDocument
+   */
+  omit?: Prisma.CaseActivityDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseActivityDocumentInclude<ExtArgs> | null
+  where?: Prisma.CaseActivityDocumentWhereInput
+  orderBy?: Prisma.CaseActivityDocumentOrderByWithRelationInput | Prisma.CaseActivityDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.CaseActivityDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseActivityDocumentScalarFieldEnum | Prisma.CaseActivityDocumentScalarFieldEnum[]
+}
+
+/**
+ * CaseRequest.events
+ */
+export type CaseRequest$eventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRequestEvent
+   */
+  select?: Prisma.CaseRequestEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRequestEvent
+   */
+  omit?: Prisma.CaseRequestEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRequestEventInclude<ExtArgs> | null
+  where?: Prisma.CaseRequestEventWhereInput
+  orderBy?: Prisma.CaseRequestEventOrderByWithRelationInput | Prisma.CaseRequestEventOrderByWithRelationInput[]
+  cursor?: Prisma.CaseRequestEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseRequestEventScalarFieldEnum | Prisma.CaseRequestEventScalarFieldEnum[]
+}
+
+/**
+ * CaseRequest.renewalTerms
+ */
+export type CaseRequest$renewalTermsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRenewalTerms
+   */
+  select?: Prisma.CaseRenewalTermsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRenewalTerms
+   */
+  omit?: Prisma.CaseRenewalTermsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRenewalTermsInclude<ExtArgs> | null
+  where?: Prisma.CaseRenewalTermsWhereInput
+}
+
+/**
+ * CaseRequest.locationDraft
+ */
+export type CaseRequest$locationDraftArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseLocationDraft
+   */
+  select?: Prisma.CaseLocationDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseLocationDraft
+   */
+  omit?: Prisma.CaseLocationDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseLocationDraftInclude<ExtArgs> | null
+  where?: Prisma.CaseLocationDraftWhereInput
+}
+
+/**
+ * CaseRequest.replacedPremise
+ */
+export type CaseRequest$replacedPremiseArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasePremiseHistory
+   */
+  select?: Prisma.CasePremiseHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasePremiseHistory
+   */
+  omit?: Prisma.CasePremiseHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasePremiseHistoryInclude<ExtArgs> | null
+  where?: Prisma.CasePremiseHistoryWhereInput
+}
+
+/**
+ * CaseRequest.auction
+ */
+export type CaseRequest$auctionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseAuction
+   */
+  select?: Prisma.CaseAuctionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseAuction
+   */
+  omit?: Prisma.CaseAuctionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseAuctionInclude<ExtArgs> | null
+  where?: Prisma.CaseAuctionWhereInput
 }
 
 /**

@@ -47,6 +47,14 @@ import {
   PLACES_FORMATION_STEP,
   syncIssuanceRequest,
 } from './formation-steps';
+import {
+  alignStoredRenewalTerms,
+  completeOpenRequest,
+  findOpenRequest,
+  isProcessType,
+  openProcessRequest,
+  resolveDocumentRequirements,
+} from './request-process';
 
 /** رمز اولیهٔ فعال اقتصادی؛ فقط هنگام ساخت حساب تازه از تشکیل پرونده */
 const ECONOMIC_ACTOR_INITIAL_PASSWORD = '11111111';
@@ -517,7 +525,186 @@ export class CasesService {
     return { formationStep: saved.formationStep, location: mapLocation(saved) };
   }
 
+  async openRequest(caseId: string, type: string) {
+    if (!isProcessType(type) || type === CaseRequestType.ISSUANCE) {
+      throw new BadRequestException('این نوع درخواست از اینجا ساخته نمی‌شود');
+    }
+    return openProcessRequest(this.prisma, caseId, type);
+  }
+
+  async processState(caseId: string) {
+    const request = await findOpenRequest(this.prisma, caseId);
+    if (!request || !isProcessType(request.type) || request.type === CaseRequestType.ISSUANCE) {
+      throw new NotFoundException('درخواست باز یافت نشد');
+    }
+    const [storedTerms, draft, file] = await Promise.all([
+      request.type === CaseRequestType.RENEWAL
+        ? this.prisma.caseRenewalTerms.findUnique({ where: { requestId: request.id } })
+        : Promise.resolve(null),
+      request.type === CaseRequestType.LOCATION_CHANGE
+        ? this.prisma.caseLocationDraft.findUnique({ where: { requestId: request.id } })
+        : Promise.resolve(null),
+      this.prisma.caseFile.findUnique({
+        where: { id: caseId },
+        select: {
+          id: true,
+          licenseNumber: true,
+          userId: true,
+          businessUnitTitle: true,
+          activityJob: { select: { title: true, group: { select: { title: true } } } },
+        },
+      }),
+    ]);
+    const terms =
+      request.type === CaseRequestType.RENEWAL && storedTerms
+        ? await alignStoredRenewalTerms(this.prisma, request.id, storedTerms)
+        : storedTerms;
+    const date = (value: Date | null | undefined) => (value ? value.toISOString().slice(0, 10) : null);
+    return {
+      id: request.id,
+      caseId,
+      userId: file?.userId ?? null,
+      number: request.number,
+      type: request.type,
+      status: request.status,
+      formationStep: request.formationStep,
+      licenseNumber: file?.licenseNumber ?? null,
+      businessUnitTitle: file?.businessUnitTitle ?? null,
+      jobGroupTitle: file?.activityJob?.group?.title ?? null,
+      jobTitle: file?.activityJob?.title ?? null,
+      renewal: terms
+        ? {
+            currentIssuedAt: date(terms.currentIssuedAt),
+            currentExpiresAt: date(terms.currentExpiresAt),
+            nextIssuedAt: date(terms.nextIssuedAt),
+            nextExpiresAt: date(terms.nextExpiresAt),
+            delayDays: terms.delayDays,
+          }
+        : null,
+      location: draft
+        ? {
+            cityId: draft.premiseCityId,
+            establishment: draft.premiseEstablishment,
+            complexId: draft.premiseComplexId,
+            address: draft.premiseAddress,
+            addressEn: draft.premiseAddressEn,
+            plaque: draft.premisePlaque,
+            plaqueSeries: draft.premisePlaqueSeries,
+            floor: draft.premiseFloor,
+            unitNo: draft.premiseUnitNo,
+            postalCode: draft.premisePostalCode,
+            phone: draft.premisePhone,
+            fax: draft.premiseFax,
+            geoPosition: draft.premiseGeoPosition,
+            publicAccess: draft.premisePublicAccess,
+            registrationPlaceId: draft.registrationPlaceId,
+            ownership: draft.premiseOwnership,
+            deedNo: draft.premiseDeedNo,
+            area: draft.premiseArea == null ? null : Number(draft.premiseArea),
+            leaseIssuedAt: date(draft.leaseIssuedAt),
+            leaseExpiresAt: date(draft.leaseExpiresAt),
+            leaseAgency: draft.leaseAgency,
+            ownerName: draft.premiseOwnerName,
+          }
+        : null,
+    };
+  }
+
+  async saveLocationDraft(dto: SaveCaseLocationDto) {
+    const request = await findOpenRequest(this.prisma, dto.caseId);
+    if (!request || request.type !== CaseRequestType.LOCATION_CHANGE) {
+      throw new BadRequestException('درخواست تغییر مکان باز نیست');
+    }
+    const city = await this.prisma.city.findUnique({ where: { id: dto.cityId }, select: { id: true } });
+    if (!city) throw new BadRequestException('شهر معتبر نیست');
+    const complex = dto.establishment === 'COMMERCIAL_COMPLEX' ? dto.complexId ?? null : null;
+    if (dto.establishment === 'COMMERCIAL_COMPLEX' && !complex) {
+      throw new BadRequestException('مجتمع را انتخاب کنید');
+    }
+    const rented = dto.ownership === 'RENTED';
+    const digits = (value?: string | null) => value?.replace(/\D/g, '') || null;
+    await this.prisma.caseLocationDraft.update({
+      where: { requestId: request.id },
+      data: {
+        premiseCityId: dto.cityId,
+        premiseEstablishment: dto.establishment as PremiseEstablishment,
+        premiseComplexId: complex,
+        premiseAddress: dto.address?.trim() || null,
+        premiseAddressEn: dto.addressEn?.trim() || null,
+        premisePlaque: dto.plaque?.trim() || null,
+        premisePlaqueSeries: dto.plaqueSeries?.trim() || null,
+        premiseFloor: dto.floor?.trim() || null,
+        premiseUnitNo: dto.unitNo?.trim() || null,
+        premisePostalCode: digits(dto.postalCode),
+        premisePhone: digits(dto.phone),
+        premiseFax: digits(dto.fax),
+        premiseGeoPosition: (dto.geoPosition ?? null) as PremiseGeoPosition | null,
+        premisePublicAccess: (dto.publicAccess ?? null) as PremisePublicAccess | null,
+        registrationPlaceId: dto.registrationPlaceId ?? null,
+        premiseOwnership: dto.ownership as PremiseOwnership,
+        premiseDeedNo: dto.deedNo?.trim() || null,
+        premiseArea: dto.area ?? null,
+        leaseIssuedAt: rented ? parseDate(dto.leaseIssuedAt) : null,
+        leaseExpiresAt: rented ? parseDate(dto.leaseExpiresAt) : null,
+        leaseAgency: rented ? dto.leaseAgency?.trim() || null : null,
+        premiseOwnerName: rented ? dto.ownerName?.trim() || null : null,
+      },
+    });
+    if (request.formationStep < 1) {
+      await this.prisma.caseRequest.update({
+        where: { id: request.id },
+        data: { formationStep: 1 },
+      });
+    }
+    return this.processState(dto.caseId);
+  }
+
+  async advanceProcess(caseId: string, step: number) {
+    const request = await findOpenRequest(this.prisma, caseId);
+    if (!request || request.type === CaseRequestType.ISSUANCE || !isProcessType(request.type)) {
+      throw new BadRequestException('درخواست تمدید یا تغییر مکان باز نیست');
+    }
+    const requested = Math.min(Math.max(step, 0), 3);
+    const next = Math.max(request.formationStep, Math.min(requested, request.formationStep + 1));
+    if (request.type === CaseRequestType.LOCATION_CHANGE && next >= 1) {
+      const draft = await this.prisma.caseLocationDraft.findUnique({ where: { requestId: request.id } });
+      if (!draft?.premiseCityId || !draft.premiseAddress || !draft.premiseOwnership) {
+        throw new BadRequestException('اطلاعات محل جدید کامل نیست');
+      }
+    }
+    if (next >= 2) await this.assertActivityDocumentsDelivered(caseId);
+    if (next >= 3) await this.inquiries.assertDelivered(caseId);
+    const saved = await this.prisma.caseRequest.update({
+      where: { id: request.id },
+      data: { formationStep: next },
+      select: { formationStep: true },
+    });
+    return saved;
+  }
+
+  async completeRequest(caseId: string, actorId?: string) {
+    const request = await findOpenRequest(this.prisma, caseId);
+    if (!request) throw new BadRequestException('درخواست بازی برای تکمیل نیست');
+    if (request.type !== CaseRequestType.ISSUANCE && request.formationStep < 3) {
+      throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
+    }
+    if (request.type !== CaseRequestType.ISSUANCE) {
+      await this.inquiries.ensureForUser(caseId);
+      await this.managementApprovers.ensureForUser(caseId);
+    }
+    if (request.type === CaseRequestType.ISSUANCE) {
+      await this.places.ensureForUser(caseId);
+      await this.managementApprovers.ensureForUser(caseId);
+      await this.inquiries.ensureForUser(caseId);
+    }
+    return completeOpenRequest(this.prisma, caseId, actorId);
+  }
+
   async advanceStep(dto: SaveFormationStepDto) {
+    const open = await findOpenRequest(this.prisma, dto.caseId);
+    if (open && open.type !== CaseRequestType.ISSUANCE) {
+      throw new BadRequestException('درخواست باز این پرونده صدور نیست');
+    }
     const user = await this.prisma.caseFile.findUnique({
       where: { id: dto.caseId },
       select: { id: true, formationStep: true },
@@ -548,18 +735,18 @@ export class CasesService {
   async advanceToPlacesAfterInquiry(inquiryId: string) {
     const inquiry = await this.prisma.caseInquiry.findUnique({
       where: { id: inquiryId },
-      select: { caseFileId: true },
+      select: { caseFileId: true, caseRequestId: true, caseRequest: { select: { type: true } } },
     });
-    if (!inquiry) return null;
+    if (!inquiry || inquiry.caseRequest.type !== CaseRequestType.ISSUANCE) return null;
     const user = await this.prisma.caseFile.findUnique({
       where: { id: inquiry.caseFileId },
       select: { id: true, formationStep: true },
     });
     if (!user || user.formationStep !== PLACES_FORMATION_STEP - 1) return null;
     const [total, pending] = await Promise.all([
-      this.prisma.caseInquiry.count({ where: { caseFileId: user.id } }),
+      this.prisma.caseInquiry.count({ where: { caseRequestId: inquiry.caseRequestId } }),
       this.prisma.caseInquiry.count({
-        where: { caseFileId: user.id, status: CaseInquiryStatus.PENDING },
+        where: { caseRequestId: inquiry.caseRequestId, status: CaseInquiryStatus.PENDING },
       }),
     ]);
     if (total === 0 || pending > 0) return null;
@@ -697,7 +884,22 @@ export class CasesService {
         licenseNumber: true,
         licenseIssuedAt: true,
         licenseExpiresAt: true,
+        premiseAddress: true,
+        premisePlaque: true,
+        premiseOwnership: true,
         premiseCity: { select: { nameFa: true, nameEn: true } },
+        premiseHistory: {
+          orderBy: [{ endedAt: 'asc' }, { id: 'asc' }],
+          select: {
+            id: true,
+            startedAt: true,
+            endedAt: true,
+            premiseAddress: true,
+            premisePlaque: true,
+            premiseOwnership: true,
+            premiseCity: { select: { nameFa: true, nameEn: true } },
+          },
+        },
         activityJob: {
           select: { id: true, title: true, group: { select: { id: true, title: true } } },
         },
@@ -712,7 +914,7 @@ export class CasesService {
           },
         },
         requests: {
-          orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+          orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
           select: {
             id: true,
             number: true,
@@ -729,6 +931,16 @@ export class CasesService {
     const violationCount = file.user.nationalId
       ? await this.prisma.violation.count({ where: { nationalId: file.user.nationalId } })
       : 0;
+    const premiseHistory = file.premiseHistory.map((row) => ({
+      id: row.id,
+      address: row.premiseAddress,
+      plaque: row.premisePlaque,
+      ownership: row.premiseOwnership,
+      city: row.premiseCity,
+      startedAt: dateOnly(row.startedAt),
+      endedAt: dateOnly(row.endedAt),
+    }));
+    const currentStartedAt = file.premiseHistory.at(-1)?.endedAt ?? file.licenseIssuedAt;
     return {
       id: file.id,
       violationCount,
@@ -739,6 +951,17 @@ export class CasesService {
       licenseIssuedAt: dateOnly(file.licenseIssuedAt),
       licenseExpiresAt: dateOnly(file.licenseExpiresAt),
       city: file.premiseCity,
+      premise:
+        file.premiseAddress || file.premiseCity
+          ? {
+              address: file.premiseAddress,
+              plaque: file.premisePlaque,
+              ownership: file.premiseOwnership,
+              city: file.premiseCity,
+              startedAt: dateOnly(currentStartedAt),
+            }
+          : null,
+      premiseHistory,
       job: file.activityJob,
       person: file.user,
       requests: file.requests.map((request) => ({
@@ -969,14 +1192,41 @@ export class CasesService {
     }));
   }
 
+  private async currentRequest(caseId: string) {
+    const open = await findOpenRequest(this.prisma, caseId);
+    if (open) return open;
+    return this.prisma.caseRequest.findFirst({
+      where: { caseFileId: caseId, type: CaseRequestType.ISSUANCE },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async activityRequirements(caseId: string, jobId?: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseId },
+      select: { id: true, activityJobId: true, user: { select: { gender: true } } },
+    });
+    if (!file) throw new NotFoundException('پرونده یافت نشد');
+    const request = await this.currentRequest(caseId);
+    const type = request && isProcessType(request.type) ? request.type : CaseRequestType.ISSUANCE;
+    return resolveDocumentRequirements(
+      this.prisma,
+      type,
+      jobId || file.activityJobId,
+      file.user.gender,
+    );
+  }
+
   async activityDocuments(caseId: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseId },
       select: { id: true },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
+    const request = await this.currentRequest(caseId);
+    if (!request) return [];
     const rows = await this.prisma.caseActivityDocument.findMany({
-      where: { caseFileId: caseId },
+      where: { caseRequestId: request.id },
       select: {
         documentId: true,
         versions: {
@@ -1085,21 +1335,24 @@ export class CasesService {
     if (!input.caseId) throw new BadRequestException('مدرک شغلی باید روی پرونده ذخیره شود');
     const caseFile = await this.prisma.caseFile.findUnique({
       where: { id: input.caseId },
-      select: { id: true, userId: true, activityJobId: true },
+      select: { id: true, userId: true, activityJobId: true, user: { select: { gender: true } } },
     });
     if (!caseFile || caseFile.userId !== input.userId) {
       throw new NotFoundException('پرونده یافت نشد');
     }
     const jobId = input.jobId || caseFile.activityJobId;
     if (!jobId) throw new BadRequestException('قبل از بارگذاری مدرک باید شغل انتخاب شود');
-    const allowed = await this.isActivityDocument(document, jobId);
+    const request = await this.currentRequest(caseFile.id);
+    if (!request || !isProcessType(request.type)) {
+      throw new BadRequestException('درخواست بازی برای این مدرک نیست');
+    }
+    const allowed = await this.isActivityDocument(document, jobId, request.type, caseFile.user.gender);
     if (!allowed) throw new NotFoundException('این مدرک برای شغل انتخاب‌شده نیست');
-
     const activityDocument = await this.prisma.caseActivityDocument.upsert({
       where: {
-        caseFileId_documentId: { caseFileId: caseFile.id, documentId: document.id },
+        caseRequestId_documentId: { caseRequestId: request.id, documentId: document.id },
       },
-      create: { caseFileId: caseFile.id, documentId: document.id },
+      create: { caseFileId: caseFile.id, caseRequestId: request.id, documentId: document.id },
       update: {},
       select: {
         id: true,
@@ -1162,8 +1415,10 @@ export class CasesService {
       select: { id: true },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
+    const request = await this.currentRequest(caseId);
+    if (!request) throw new NotFoundException('مدرک بارگذاری‌شده‌ای یافت نشد');
     const row = await this.prisma.caseActivityDocument.findUnique({
-      where: { caseFileId_documentId: { caseFileId: caseId, documentId } },
+      where: { caseRequestId_documentId: { caseRequestId: request.id, documentId } },
       select: {
         id: true,
         versions: { select: { storageKey: true } },
@@ -1201,57 +1456,46 @@ export class CasesService {
   }
 
   private async isActivityDocument(
-    document: { id: string; isFixed: boolean; isRequired: boolean },
+    document: { id: string },
     jobId: string,
+    requestType: CaseRequestType,
+    gender: 'MALE' | 'FEMALE' | null,
   ) {
-    if (document.isFixed && document.isRequired) return true;
-    const link = await this.prisma.jobDocument.findUnique({
-      where: { jobId_documentId: { jobId, documentId: document.id } },
-      select: { documentId: true },
-    });
-    return Boolean(link);
+    const rows = await resolveDocumentRequirements(this.prisma, requestType, jobId, gender);
+    return rows.some((row) => row.id === document.id);
   }
 
   private async assertActivityDocumentsDelivered(caseFileId: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseFileId },
-      select: { userId: true, activityJobId: true, user: { select: { gender: true } } },
+      select: { activityJobId: true, user: { select: { gender: true } } },
     });
     if (!file?.activityJobId) {
       throw new BadRequestException('قبل از مرحله اماکن باید شغل و مدارک آن تکمیل شود');
     }
-    const user = { activityJobId: file.activityJobId, gender: file.user.gender };
-    const [fixed, links, stored] = await Promise.all([
-      this.prisma.document.findMany({
-        where: { isFixed: true, isRequired: true },
-        select: { id: true, gender: true },
-      }),
-      this.prisma.jobDocument.findMany({
-        where: { jobId: user.activityJobId },
-        select: { documentId: true, gender: true, isRequired: true },
-      }),
-      this.prisma.caseActivityDocument.findMany({
-        where: { caseFileId },
-        select: {
-          documentId: true,
-          versions: { select: { id: true }, take: 1 },
-        },
-      }),
-    ]);
-    const required = new Set<string>();
-    for (const doc of fixed) {
-      if (this.matchesDocumentGender(doc.gender, user.gender)) required.add(doc.id);
+    const request = await this.currentRequest(caseFileId);
+    if (!request || !isProcessType(request.type)) {
+      throw new BadRequestException('قبل از مرحله اماکن باید شغل و مدارک آن تکمیل شود');
     }
-    for (const link of links) {
-      if (required.has(link.documentId) || !link.isRequired) continue;
-      if (!this.matchesDocumentGender(link.gender, user.gender)) continue;
-      required.add(link.documentId);
-    }
+    const required = await resolveDocumentRequirements(
+      this.prisma,
+      request.type,
+      file.activityJobId,
+      file.user.gender,
+    );
+    const stored = await this.prisma.caseActivityDocument.findMany({
+      where: { caseRequestId: request.id },
+      select: {
+        documentId: true,
+        versions: { select: { id: true }, take: 1 },
+      },
+    });
     const uploaded = new Set(
       stored.filter((row) => row.versions.length > 0).map((row) => row.documentId),
     );
-    for (const id of required) {
-      if (!uploaded.has(id)) {
+    for (const item of required) {
+      if (!item.isRequired) continue;
+      if (!uploaded.has(item.id)) {
         throw new BadRequestException(
           'قبل از مرحله اماکن همه مدارک الزامی این شغل باید بارگذاری شده باشند',
         );

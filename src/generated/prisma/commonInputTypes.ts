@@ -443,6 +443,40 @@ export type EnumCaseRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel>
 }
 
+export type EnumCaseRequestStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRequestStatusNullableFilter<$PrismaModel> | $Enums.CaseRequestStatus | null
+}
+
+export type EnumCaseRequestStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRequestStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestStatusNullableFilter<$PrismaModel>
+}
+
+export type EnumAuctionApproverKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.AuctionApproverKind | Prisma.EnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  in?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAuctionApproverKindFilter<$PrismaModel> | $Enums.AuctionApproverKind
+}
+
+export type EnumAuctionApproverKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AuctionApproverKind | Prisma.EnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  in?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAuctionApproverKindWithAggregatesFilter<$PrismaModel> | $Enums.AuctionApproverKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAuctionApproverKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAuctionApproverKindFilter<$PrismaModel>
+}
+
 export type EnumDocumentSourceFilter<$PrismaModel = never> = {
   equals?: $Enums.DocumentSource | Prisma.EnumDocumentSourceFieldRefInput<$PrismaModel>
   in?: $Enums.DocumentSource[] | Prisma.ListEnumDocumentSourceFieldRefInput<$PrismaModel>
@@ -1440,6 +1474,40 @@ export type NestedEnumCaseRequestStatusWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumCaseRequestStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRequestStatusNullableFilter<$PrismaModel> | $Enums.CaseRequestStatus | null
+}
+
+export type NestedEnumCaseRequestStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestStatus | Prisma.EnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRequestStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestStatusNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumAuctionApproverKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.AuctionApproverKind | Prisma.EnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  in?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAuctionApproverKindFilter<$PrismaModel> | $Enums.AuctionApproverKind
+}
+
+export type NestedEnumAuctionApproverKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.AuctionApproverKind | Prisma.EnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  in?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.AuctionApproverKind[] | Prisma.ListEnumAuctionApproverKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumAuctionApproverKindWithAggregatesFilter<$PrismaModel> | $Enums.AuctionApproverKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumAuctionApproverKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumAuctionApproverKindFilter<$PrismaModel>
 }
 
 export type NestedEnumDocumentSourceFilter<$PrismaModel = never> = {
