@@ -596,6 +596,7 @@ export class CasesService {
           licenseNumber: true,
           userId: true,
           businessUnitTitle: true,
+          user: { select: { firstName: true, lastName: true, fullName: true } },
           activityJob: { select: { title: true, group: { select: { title: true } } } },
         },
       }),
@@ -616,6 +617,9 @@ export class CasesService {
       formationStep: request.formationStep,
       licenseNumber: file?.licenseNumber ?? null,
       businessUnitTitle: file?.businessUnitTitle ?? null,
+      person: file?.user
+        ? { firstName: file.user.firstName, lastName: file.user.lastName, fullName: file.user.fullName }
+        : null,
       jobGroupTitle: file?.activityJob?.group?.title ?? null,
       jobTitle: file?.activityJob?.title ?? null,
       contractYears,
@@ -914,7 +918,7 @@ export class CasesService {
     if (!request || request.type === CaseRequestType.ISSUANCE || !isProcessType(request.type)) {
       throw new BadRequestException('درخواست تمدید یا تغییر مکان باز نیست');
     }
-    const ceiling = request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE ? 4 : 3;
+    const ceiling = request.type === CaseRequestType.RENEWAL ? 5 : request.type === CaseRequestType.LOCATION_CHANGE ? 4 : 3;
     const requested = Math.min(Math.max(step, 0), ceiling);
     let next = Math.max(request.formationStep, Math.min(requested, request.formationStep + 1));
     if (request.type === CaseRequestType.RENEWAL && next === 1 && (await this.renewalHasNoDocuments(caseId))) {
@@ -934,6 +938,9 @@ export class CasesService {
     if ((request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE) && next >= 4) {
       await this.places.assertDelivered(caseId);
     }
+    if (request.type === CaseRequestType.RENEWAL && next >= 5) {
+      await this.managementApprovers.assertDelivered(caseId);
+    }
     const saved = await this.prisma.caseRequest.update({
       where: { id: request.id },
       data: { formationStep: next },
@@ -951,7 +958,7 @@ export class CasesService {
     const request = await findOpenRequest(this.prisma, caseId);
     if (!request) throw new BadRequestException('درخواست بازی برای تکمیل نیست');
     if (request.type === CaseRequestType.RENEWAL) {
-      if (request.formationStep < 4) {
+      if (request.formationStep < 5) {
         throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
       }
       await this.inquiries.ensureForUser(caseId);
