@@ -112,7 +112,7 @@ export class CasePlacesService {
 
   async ensureForUser(caseFileId: string) {
     const open = await findOpenRequest(this.prisma, caseFileId);
-    if (open?.type === CaseRequestType.ISSUANCE) {
+    if (open?.type === CaseRequestType.ISSUANCE || open?.type === CaseRequestType.RENEWAL) {
       return this.prisma.casePlacesReview.upsert({
         where: { caseRequestId: open.id },
         create: { caseFileId, caseRequestId: open.id },
@@ -134,7 +134,8 @@ export class CasePlacesService {
 
   async assertDelivered(caseFileId: string) {
     const open = await findOpenRequest(this.prisma, caseFileId);
-    const requestId = open?.type === CaseRequestType.ISSUANCE ? open.id : null;
+    const requestId =
+      open?.type === CaseRequestType.ISSUANCE || open?.type === CaseRequestType.RENEWAL ? open.id : null;
     const row = requestId
       ? await this.prisma.casePlacesReview.findUnique({
           where: { caseRequestId: requestId },

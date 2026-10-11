@@ -324,6 +324,13 @@ export type EnumDocumentGenderWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumDocumentGenderFilter<$PrismaModel>
 }
 
+export type EnumCaseFileStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel> | $Enums.CaseFileStatus
+}
+
 export type EnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
   in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
@@ -357,6 +364,16 @@ export type EnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
   in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
+}
+
+export type EnumCaseFileStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileStatusWithAggregatesFilter<$PrismaModel> | $Enums.CaseFileStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
 }
 
 export type EnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -1357,6 +1374,13 @@ export type NestedEnumDocumentGenderWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumDocumentGenderFilter<$PrismaModel>
 }
 
+export type NestedEnumCaseFileStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel> | $Enums.CaseFileStatus
+}
+
 export type NestedEnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.PreviousOccupation | Prisma.EnumPreviousOccupationFieldRefInput<$PrismaModel> | null
   in?: $Enums.PreviousOccupation[] | Prisma.ListEnumPreviousOccupationFieldRefInput<$PrismaModel> | null
@@ -1390,6 +1414,16 @@ export type NestedEnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
   in?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
   notIn?: $Enums.PremiseOwnership[] | Prisma.ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> | null
   not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
+}
+
+export type NestedEnumCaseFileStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileStatusWithAggregatesFilter<$PrismaModel> | $Enums.CaseFileStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {

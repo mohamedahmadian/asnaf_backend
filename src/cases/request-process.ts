@@ -1,12 +1,14 @@
 import { BadRequestException, ConflictException } from '@nestjs/common';
 import {
   CaseInquiryStatus,
+  CaseFileStatus,
   CaseRequestStatus,
   CaseRequestType,
   DocumentGender,
   Prisma,
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CONTRACT_DURATION_MAX, CONTRACT_DURATION_MIN, clampContractYears, readContractYears } from './contract-duration';
 import {
   ISSUANCE_FORMATION_STEP,
   MANAGEMENT_FORMATION_STEP,
@@ -112,42 +114,54 @@ function addUtcYears(date: Date, years: number) {
   return new Date(Date.UTC(date.getUTCFullYear() + years, date.getUTCMonth(), date.getUTCDate()));
 }
 
-/** بازهٔ تمدید فقط از تاریخ انقضای فعلی پرونده تا یک سال بعد؛ اجاره در آن دخیل نیست. */
-export function renewalWindow(currentExpiresAt: Date) {
+/** بازهٔ تمدید از تاریخ انقضای فعلی پرونده به اندازهٔ مدت قرارداد؛ اجاره در آن دخیل نیست. */
+export function renewalWindow(currentExpiresAt: Date, years = 1) {
   const currentExpiry = utcDateOnly(currentExpiresAt);
   return {
     nextIssuedAt: currentExpiry,
-    nextExpiresAt: addUtcYears(currentExpiry, 1),
+    nextExpiresAt: addUtcYears(currentExpiry, clampContractYears(years)),
   };
 }
 
-export function renewalTermsFor(currentIssuedAt: Date, currentExpiresAt: Date, today = new Date()) {
+function wholeYearSpan(start: Date, end: Date) {
+  for (let years = CONTRACT_DURATION_MIN; years <= CONTRACT_DURATION_MAX; years++) {
+    if (addUtcYears(start, years).getTime() === end.getTime()) return years;
+  }
+  return null;
+}
+
+/** اگر انقضا هنوز همان بازهٔ سالانهٔ پیش‌فرض است، آن را با مدت قرارداد فعلی هم‌گام می‌کند. */
+export async function alignDefaultRenewalExpiry<
+  T extends { requestId: string; nextIssuedAt: Date; nextExpiresAt: Date },
+>(prisma: Db, terms: T, years: number) {
+  const issued = utcDateOnly(terms.nextIssuedAt);
+  const expires = utcDateOnly(terms.nextExpiresAt);
+  const target = clampContractYears(years);
+  const span = wholeYearSpan(issued, expires);
+  if (span == null || span === target) return terms;
+  const nextExpiresAt = addUtcYears(issued, target);
+  await prisma.caseRenewalTerms.update({
+    where: { requestId: terms.requestId },
+    data: { nextExpiresAt },
+  });
+  return { ...terms, nextExpiresAt };
+}
+
+export function renewalTermsFor(
+  currentIssuedAt: Date,
+  currentExpiresAt: Date,
+  today = new Date(),
+  years = 1,
+) {
   const opened = utcDateOnly(today);
   const currentExpiry = utcDateOnly(currentExpiresAt);
   const delayDays = Math.floor((opened.getTime() - currentExpiry.getTime()) / 86_400_000);
   return {
     currentIssuedAt: utcDateOnly(currentIssuedAt),
     currentExpiresAt: currentExpiry,
-    ...renewalWindow(currentExpiry),
+    ...renewalWindow(currentExpiry, years),
     delayDays: delayDays > 0 ? delayDays : 0,
   };
-}
-
-export async function alignStoredRenewalTerms<T extends { currentExpiresAt: Date; nextIssuedAt: Date; nextExpiresAt: Date }>(
-  prisma: Db,
-  requestId: string,
-  terms: T,
-) {
-  const window = renewalWindow(terms.currentExpiresAt);
-  const same =
-    utcDateOnly(terms.nextIssuedAt).getTime() === window.nextIssuedAt.getTime() &&
-    utcDateOnly(terms.nextExpiresAt).getTime() === window.nextExpiresAt.getTime();
-  if (same) return terms;
-  const updated = await prisma.caseRenewalTerms.update({
-    where: { requestId },
-    data: window,
-  });
-  return { ...terms, ...updated };
 }
 
 export async function rewindRequestPhase(prisma: Db, caseRequestId: string, phase: number) {
@@ -180,12 +194,15 @@ export function inquiryRewindPhase(type: CaseRequestType) {
 }
 
 export function placesRewindPhase(type: CaseRequestType) {
-  return type === CaseRequestType.ISSUANCE ? 4 : null;
+  if (type === CaseRequestType.ISSUANCE) return 4;
+  if (type === CaseRequestType.RENEWAL) return 3;
+  return null;
 }
 
 export function managementRewindPhase(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return MANAGEMENT_FORMATION_STEP;
-  if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 3;
+  if (type === CaseRequestType.RENEWAL) return 4;
+  if (type === CaseRequestType.LOCATION_CHANGE) return 3;
   return null;
 }
 
@@ -217,17 +234,22 @@ export async function openProcessRequest(
     where: { id: caseFileId },
     select: {
       id: true,
+      status: true,
       licenseNumber: true,
       licenseIssuedAt: true,
       licenseExpiresAt: true,
     },
   });
+  if (file?.status === CaseFileStatus.REVOKED) {
+    throw new BadRequestException('روی پرونده ابطال‌شده درخواست جدید ثبت نمی‌شود');
+  }
   if (!file?.licenseNumber || !file.licenseIssuedAt || !file.licenseExpiresAt) {
     throw new BadRequestException('قبل از این درخواست باید مجوز صادر شده باشد');
   }
   const open = await findOpenRequest(prisma, file.id);
   if (open) throw new BadRequestException('یک درخواست باز روی این پرونده وجود دارد');
 
+  const contractYears = await readContractYears(prisma);
   for (let attempt = 0; attempt < 4; attempt++) {
     const number = await nextRequestNumber(prisma);
     try {
@@ -244,7 +266,7 @@ export async function openProcessRequest(
             ...(type === CaseRequestType.RENEWAL
               ? {
                   renewalTerms: {
-                    create: renewalTermsFor(file.licenseIssuedAt!, file.licenseExpiresAt!),
+                    create: renewalTermsFor(file.licenseIssuedAt!, file.licenseExpiresAt!, new Date(), contractYears),
                   },
                 }
               : {}),
@@ -305,7 +327,12 @@ async function assertManagement(prisma: Db, requestId: string) {
   }
 }
 
-export async function completeOpenRequest(prisma: PrismaService, caseFileId: string, actorId?: string) {
+export async function completeOpenRequest(
+  prisma: PrismaService,
+  caseFileId: string,
+  actorId?: string,
+  licenseDates?: { issuedAt?: Date | null; expiresAt?: Date | null },
+) {
   return prisma.$transaction(async (tx) => {
     const request = await findOpenRequest(tx, caseFileId);
     if (!request || !isProcessType(request.type)) {
@@ -358,20 +385,29 @@ export async function completeOpenRequest(prisma: PrismaService, caseFileId: str
       await assertPlaces(tx, request.id);
       await assertManagement(tx, request.id);
       if (!file.licenseNumber) {
-        await assignLicenseNumber(tx, file.id, file.premiseOwnership, file.leaseExpiresAt);
+        const issuedAt = licenseDates?.issuedAt ?? null;
+        const expiresAt = licenseDates?.expiresAt ?? null;
+        if ((issuedAt && !expiresAt) || (!issuedAt && expiresAt)) {
+          throw new BadRequestException('تاریخ صدور و تاریخ انقضا را با هم وارد کنید');
+        }
+        const years = await readContractYears(tx);
+        await assignLicenseNumber(tx, file.id, issuedAt, expiresAt, years);
       }
     }
 
     if (request.type === CaseRequestType.RENEWAL) {
       await assertDocuments(tx, request.id, request.type, file.activityJobId, gender);
       await assertInquiries(tx, request.id);
+      await assertPlaces(tx, request.id);
       await assertManagement(tx, request.id);
       const stored = await tx.caseRenewalTerms.findUnique({ where: { requestId: request.id } });
       if (!stored) throw new BadRequestException('تاریخ‌های تمدید مشخص نیست');
-      const terms = await alignStoredRenewalTerms(tx, request.id, stored);
+      if (stored.nextExpiresAt.getTime() <= stored.nextIssuedAt.getTime()) {
+        throw new BadRequestException('تاریخ انقضا باید بعد از تاریخ صدور باشد');
+      }
       await tx.caseFile.update({
         where: { id: file.id },
-        data: { licenseIssuedAt: terms.nextIssuedAt, licenseExpiresAt: terms.nextExpiresAt },
+        data: { licenseIssuedAt: stored.nextIssuedAt, licenseExpiresAt: stored.nextExpiresAt },
       });
     }
 

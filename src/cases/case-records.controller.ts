@@ -6,6 +6,8 @@ import { DecideCaseAuctionDto } from './dto/decide-case-auction.dto';
 import { FindCasesQueryDto } from './dto/find-cases-query.dto';
 import { OpenCaseRequestDto } from './dto/open-case-request.dto';
 import { SaveCaseAuctionDto } from './dto/save-case-auction.dto';
+import { RevokeCaseDto } from './dto/revoke-case.dto';
+import { SuspendCaseDto } from './dto/suspend-case.dto';
 
 type RequestUser = { id: string; isAdmin?: boolean; roleCodes?: string[] };
 
@@ -87,6 +89,33 @@ export class CaseRecordsController {
   @Post(':id/requests')
   openRequest(@Param('id') id: string, @Body() dto: OpenCaseRequestDto) {
     return this.cases.openRequest(id, dto.type);
+  }
+
+  @Delete(':id/requests/:requestId')
+  removeRequest(
+    @Param('id') id: string,
+    @Param('requestId') requestId: string,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.cases.removeRequest(id, requestId, user?.id ? { id: user.id, isAdmin: user.isAdmin } : undefined);
+  }
+
+  @Post(':id/revocation')
+  revoke(
+    @Param('id') id: string,
+    @Body() dto: RevokeCaseDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.cases.revoke(id, dto, user?.id);
+  }
+
+  @Post(':id/suspensions')
+  suspend(
+    @Param('id') id: string,
+    @Body() dto: SuspendCaseDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.cases.suspend(id, dto, user?.id);
   }
 
   @Get(':id')

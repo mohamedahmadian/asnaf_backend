@@ -41,6 +41,10 @@ export type CaseFileSumAggregateOutputType = {
 export type CaseFileMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  status: $Enums.CaseFileStatus | null
+  revokeReason: string | null
+  revokedAt: Date | null
+  revokedById: string | null
   formationStep: number | null
   trackingCode: string | null
   licenseNumber: string | null
@@ -79,6 +83,10 @@ export type CaseFileMinAggregateOutputType = {
 export type CaseFileMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  status: $Enums.CaseFileStatus | null
+  revokeReason: string | null
+  revokedAt: Date | null
+  revokedById: string | null
   formationStep: number | null
   trackingCode: string | null
   licenseNumber: string | null
@@ -117,6 +125,10 @@ export type CaseFileMaxAggregateOutputType = {
 export type CaseFileCountAggregateOutputType = {
   id: number
   userId: number
+  status: number
+  revokeReason: number
+  revokedAt: number
+  revokedById: number
   formationStep: number
   trackingCode: number
   licenseNumber: number
@@ -169,6 +181,10 @@ export type CaseFileSumAggregateInputType = {
 export type CaseFileMinAggregateInputType = {
   id?: true
   userId?: true
+  status?: true
+  revokeReason?: true
+  revokedAt?: true
+  revokedById?: true
   formationStep?: true
   trackingCode?: true
   licenseNumber?: true
@@ -207,6 +223,10 @@ export type CaseFileMinAggregateInputType = {
 export type CaseFileMaxAggregateInputType = {
   id?: true
   userId?: true
+  status?: true
+  revokeReason?: true
+  revokedAt?: true
+  revokedById?: true
   formationStep?: true
   trackingCode?: true
   licenseNumber?: true
@@ -245,6 +265,10 @@ export type CaseFileMaxAggregateInputType = {
 export type CaseFileCountAggregateInputType = {
   id?: true
   userId?: true
+  status?: true
+  revokeReason?: true
+  revokedAt?: true
+  revokedById?: true
   formationStep?: true
   trackingCode?: true
   licenseNumber?: true
@@ -370,6 +394,10 @@ export type CaseFileGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type CaseFileGroupByOutputType = {
   id: string
   userId: string
+  status: $Enums.CaseFileStatus
+  revokeReason: string | null
+  revokedAt: Date | null
+  revokedById: string | null
   formationStep: number
   trackingCode: string | null
   licenseNumber: string | null
@@ -431,6 +459,10 @@ export type CaseFileWhereInput = {
   NOT?: Prisma.CaseFileWhereInput | Prisma.CaseFileWhereInput[]
   id?: Prisma.StringFilter<"CaseFile"> | string
   userId?: Prisma.StringFilter<"CaseFile"> | string
+  status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
+  revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -465,6 +497,7 @@ export type CaseFileWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  revokedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   activityJob?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
@@ -476,11 +509,16 @@ export type CaseFileWhereInput = {
   activityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
   premiseHistory?: Prisma.CasePremiseHistoryListRelationFilter
   violations?: Prisma.ViolationListRelationFilter
+  suspensions?: Prisma.CaseSuspensionListRelationFilter
 }
 
 export type CaseFileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  revokeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokedById?: Prisma.SortOrderInput | Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -515,6 +553,7 @@ export type CaseFileOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  revokedBy?: Prisma.UserOrderByWithRelationInput
   activityJob?: Prisma.JobOrderByWithRelationInput
   premiseCity?: Prisma.CityOrderByWithRelationInput
   premiseComplex?: Prisma.CommercialComplexOrderByWithRelationInput
@@ -526,6 +565,7 @@ export type CaseFileOrderByWithRelationInput = {
   activityDocuments?: Prisma.CaseActivityDocumentOrderByRelationAggregateInput
   premiseHistory?: Prisma.CasePremiseHistoryOrderByRelationAggregateInput
   violations?: Prisma.ViolationOrderByRelationAggregateInput
+  suspensions?: Prisma.CaseSuspensionOrderByRelationAggregateInput
 }
 
 export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
@@ -536,6 +576,10 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CaseFileWhereInput[]
   NOT?: Prisma.CaseFileWhereInput | Prisma.CaseFileWhereInput[]
   userId?: Prisma.StringFilter<"CaseFile"> | string
+  status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
+  revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   licenseIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   licenseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
@@ -568,6 +612,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  revokedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   activityJob?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
@@ -579,11 +624,16 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   activityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
   premiseHistory?: Prisma.CasePremiseHistoryListRelationFilter
   violations?: Prisma.ViolationListRelationFilter
+  suspensions?: Prisma.CaseSuspensionListRelationFilter
 }, "id" | "trackingCode" | "licenseNumber">
 
 export type CaseFileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  revokeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokedById?: Prisma.SortOrderInput | Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -630,6 +680,10 @@ export type CaseFileScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CaseFileScalarWhereWithAggregatesInput | Prisma.CaseFileScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CaseFile"> | string
   userId?: Prisma.StringWithAggregatesFilter<"CaseFile"> | string
+  status?: Prisma.EnumCaseFileStatusWithAggregatesFilter<"CaseFile"> | $Enums.CaseFileStatus
+  revokeReason?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
+  revokedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
+  revokedById?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntWithAggregatesFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
@@ -667,6 +721,9 @@ export type CaseFileScalarWhereWithAggregatesInput = {
 
 export type CaseFileCreateInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -697,6 +754,7 @@ export type CaseFileCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -708,11 +766,16 @@ export type CaseFileCreateInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -753,10 +816,14 @@ export type CaseFileUncheckedCreateInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -787,6 +854,7 @@ export type CaseFileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -798,11 +866,16 @@ export type CaseFileUpdateInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -843,11 +916,16 @@ export type CaseFileUncheckedUpdateInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -885,6 +963,9 @@ export type CaseFileCreateManyInput = {
 
 export type CaseFileUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -919,6 +1000,10 @@ export type CaseFileUpdateManyMutationInput = {
 export type CaseFileUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -972,6 +1057,10 @@ export type CaseFileScalarRelationFilter = {
 export type CaseFileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  revokeReason?: Prisma.SortOrder
+  revokedAt?: Prisma.SortOrder
+  revokedById?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
@@ -1016,6 +1105,10 @@ export type CaseFileAvgOrderByAggregateInput = {
 export type CaseFileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  revokeReason?: Prisma.SortOrder
+  revokedAt?: Prisma.SortOrder
+  revokedById?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
@@ -1054,6 +1147,10 @@ export type CaseFileMaxOrderByAggregateInput = {
 export type CaseFileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  revokeReason?: Prisma.SortOrder
+  revokedAt?: Prisma.SortOrder
+  revokedById?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
@@ -1226,6 +1323,10 @@ export type CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutManagementReviewsInput, Prisma.CaseFileUpdateWithoutManagementReviewsInput>, Prisma.CaseFileUncheckedUpdateWithoutManagementReviewsInput>
 }
 
+export type EnumCaseFileStatusFieldUpdateOperationsInput = {
+  set?: $Enums.CaseFileStatus
+}
+
 export type NullableEnumPreviousOccupationFieldUpdateOperationsInput = {
   set?: $Enums.PreviousOccupation | null
 }
@@ -1244,6 +1345,20 @@ export type NullableEnumPremisePublicAccessFieldUpdateOperationsInput = {
 
 export type NullableEnumPremiseOwnershipFieldUpdateOperationsInput = {
   set?: $Enums.PremiseOwnership | null
+}
+
+export type CaseFileCreateNestedOneWithoutSuspensionsInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutSuspensionsInput, Prisma.CaseFileUncheckedCreateWithoutSuspensionsInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutSuspensionsInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+}
+
+export type CaseFileUpdateOneRequiredWithoutSuspensionsNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutSuspensionsInput, Prisma.CaseFileUncheckedCreateWithoutSuspensionsInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutSuspensionsInput
+  upsert?: Prisma.CaseFileUpsertWithoutSuspensionsInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutSuspensionsInput, Prisma.CaseFileUpdateWithoutSuspensionsInput>, Prisma.CaseFileUncheckedUpdateWithoutSuspensionsInput>
 }
 
 export type CaseFileCreateNestedOneWithoutRequestsInput = {
@@ -1295,10 +1410,24 @@ export type CaseFileCreateNestedManyWithoutUserInput = {
   connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
 }
 
+export type CaseFileCreateNestedManyWithoutRevokedByInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutRevokedByInput, Prisma.CaseFileUncheckedCreateWithoutRevokedByInput> | Prisma.CaseFileCreateWithoutRevokedByInput[] | Prisma.CaseFileUncheckedCreateWithoutRevokedByInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutRevokedByInput | Prisma.CaseFileCreateOrConnectWithoutRevokedByInput[]
+  createMany?: Prisma.CaseFileCreateManyRevokedByInputEnvelope
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+}
+
 export type CaseFileUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.CaseFileCreateWithoutUserInput, Prisma.CaseFileUncheckedCreateWithoutUserInput> | Prisma.CaseFileCreateWithoutUserInput[] | Prisma.CaseFileUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutUserInput | Prisma.CaseFileCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.CaseFileCreateManyUserInputEnvelope
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+}
+
+export type CaseFileUncheckedCreateNestedManyWithoutRevokedByInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutRevokedByInput, Prisma.CaseFileUncheckedCreateWithoutRevokedByInput> | Prisma.CaseFileCreateWithoutRevokedByInput[] | Prisma.CaseFileUncheckedCreateWithoutRevokedByInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutRevokedByInput | Prisma.CaseFileCreateOrConnectWithoutRevokedByInput[]
+  createMany?: Prisma.CaseFileCreateManyRevokedByInputEnvelope
   connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
 }
 
@@ -1316,6 +1445,20 @@ export type CaseFileUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
 }
 
+export type CaseFileUpdateManyWithoutRevokedByNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutRevokedByInput, Prisma.CaseFileUncheckedCreateWithoutRevokedByInput> | Prisma.CaseFileCreateWithoutRevokedByInput[] | Prisma.CaseFileUncheckedCreateWithoutRevokedByInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutRevokedByInput | Prisma.CaseFileCreateOrConnectWithoutRevokedByInput[]
+  upsert?: Prisma.CaseFileUpsertWithWhereUniqueWithoutRevokedByInput | Prisma.CaseFileUpsertWithWhereUniqueWithoutRevokedByInput[]
+  createMany?: Prisma.CaseFileCreateManyRevokedByInputEnvelope
+  set?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  disconnect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  delete?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutRevokedByInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutRevokedByInput[]
+  updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutRevokedByInput | Prisma.CaseFileUpdateManyWithWhereWithoutRevokedByInput[]
+  deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
+}
+
 export type CaseFileUncheckedUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.CaseFileCreateWithoutUserInput, Prisma.CaseFileUncheckedCreateWithoutUserInput> | Prisma.CaseFileCreateWithoutUserInput[] | Prisma.CaseFileUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutUserInput | Prisma.CaseFileCreateOrConnectWithoutUserInput[]
@@ -1327,6 +1470,20 @@ export type CaseFileUncheckedUpdateManyWithoutUserNestedInput = {
   connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
   update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutUserInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutUserInput | Prisma.CaseFileUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
+}
+
+export type CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutRevokedByInput, Prisma.CaseFileUncheckedCreateWithoutRevokedByInput> | Prisma.CaseFileCreateWithoutRevokedByInput[] | Prisma.CaseFileUncheckedCreateWithoutRevokedByInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutRevokedByInput | Prisma.CaseFileCreateOrConnectWithoutRevokedByInput[]
+  upsert?: Prisma.CaseFileUpsertWithWhereUniqueWithoutRevokedByInput | Prisma.CaseFileUpsertWithWhereUniqueWithoutRevokedByInput[]
+  createMany?: Prisma.CaseFileCreateManyRevokedByInputEnvelope
+  set?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  disconnect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  delete?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutRevokedByInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutRevokedByInput[]
+  updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutRevokedByInput | Prisma.CaseFileUpdateManyWithWhereWithoutRevokedByInput[]
   deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
 }
 
@@ -1432,6 +1589,9 @@ export type CaseFileUpdateOneWithoutViolationsNestedInput = {
 
 export type CaseFileCreateWithoutPremiseCityInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1462,6 +1622,7 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
@@ -1472,11 +1633,16 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1516,6 +1682,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseCityInput = {
@@ -1550,6 +1717,10 @@ export type CaseFileScalarWhereInput = {
   NOT?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
   id?: Prisma.StringFilter<"CaseFile"> | string
   userId?: Prisma.StringFilter<"CaseFile"> | string
+  status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
+  revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -1587,6 +1758,9 @@ export type CaseFileScalarWhereInput = {
 
 export type CaseFileCreateWithoutActivityJobInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1617,6 +1791,7 @@ export type CaseFileCreateWithoutActivityJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
@@ -1627,11 +1802,16 @@ export type CaseFileCreateWithoutActivityJobInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1671,6 +1851,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityJobInput = {
@@ -1701,6 +1882,9 @@ export type CaseFileUpdateManyWithWhereWithoutActivityJobInput = {
 
 export type CaseFileCreateWithoutInquiriesInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1731,6 +1915,7 @@ export type CaseFileCreateWithoutInquiriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -1741,11 +1926,16 @@ export type CaseFileCreateWithoutInquiriesInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1785,6 +1975,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutInquiriesInput = {
@@ -1805,6 +1996,9 @@ export type CaseFileUpdateToOneWithWhereWithoutInquiriesInput = {
 
 export type CaseFileUpdateWithoutInquiriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1835,6 +2029,7 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -1845,11 +2040,16 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1889,10 +2089,14 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPlacesReviewsInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1923,6 +2127,7 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -1933,11 +2138,16 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1977,6 +2187,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPlacesReviewsInput = {
@@ -1997,6 +2208,9 @@ export type CaseFileUpdateToOneWithWhereWithoutPlacesReviewsInput = {
 
 export type CaseFileUpdateWithoutPlacesReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2027,6 +2241,7 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -2037,11 +2252,16 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2081,10 +2301,14 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutManagementReviewsInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2115,6 +2339,7 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -2125,11 +2350,16 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2169,6 +2399,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutManagementReviewsInput = {
@@ -2189,6 +2420,9 @@ export type CaseFileUpdateToOneWithWhereWithoutManagementReviewsInput = {
 
 export type CaseFileUpdateWithoutManagementReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2219,6 +2453,7 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -2229,11 +2464,16 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2273,10 +2513,14 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
-export type CaseFileCreateWithoutRequestsInput = {
+export type CaseFileCreateWithoutSuspensionsInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2307,6 +2551,219 @@ export type CaseFileCreateWithoutRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
+  id?: string
+  userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutSuspensionsInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutSuspensionsInput, Prisma.CaseFileUncheckedCreateWithoutSuspensionsInput>
+}
+
+export type CaseFileUpsertWithoutSuspensionsInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutSuspensionsInput, Prisma.CaseFileUncheckedUpdateWithoutSuspensionsInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutSuspensionsInput, Prisma.CaseFileUncheckedCreateWithoutSuspensionsInput>
+  where?: Prisma.CaseFileWhereInput
+}
+
+export type CaseFileUpdateToOneWithWhereWithoutSuspensionsInput = {
+  where?: Prisma.CaseFileWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutSuspensionsInput, Prisma.CaseFileUncheckedUpdateWithoutSuspensionsInput>
+}
+
+export type CaseFileUpdateWithoutSuspensionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileCreateWithoutRequestsInput = {
+  id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -2317,11 +2774,16 @@ export type CaseFileCreateWithoutRequestsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRequestsInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2361,6 +2823,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRequestsInput = {
@@ -2381,6 +2844,9 @@ export type CaseFileUpdateToOneWithWhereWithoutRequestsInput = {
 
 export type CaseFileUpdateWithoutRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2411,6 +2877,7 @@ export type CaseFileUpdateWithoutRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -2421,11 +2888,16 @@ export type CaseFileUpdateWithoutRequestsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2465,10 +2937,14 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPremiseHistoryInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2499,6 +2975,7 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -2509,11 +2986,16 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2553,6 +3035,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseHistoryInput = {
@@ -2573,6 +3056,9 @@ export type CaseFileUpdateToOneWithWhereWithoutPremiseHistoryInput = {
 
 export type CaseFileUpdateWithoutPremiseHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2603,6 +3089,7 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -2613,11 +3100,16 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2657,10 +3149,14 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutActivityDocumentsInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2691,6 +3187,7 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -2701,11 +3198,16 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2745,6 +3247,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityDocumentsInput = {
@@ -2765,6 +3268,9 @@ export type CaseFileUpdateToOneWithWhereWithoutActivityDocumentsInput = {
 
 export type CaseFileUpdateWithoutActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2795,6 +3301,7 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -2805,11 +3312,16 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2849,10 +3361,14 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutUserInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2882,6 +3398,7 @@ export type CaseFileCreateWithoutUserInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -2893,10 +3410,15 @@ export type CaseFileCreateWithoutUserInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutUserInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2937,6 +3459,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutUserInput = {
@@ -2949,24 +3472,11 @@ export type CaseFileCreateManyUserInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type CaseFileUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.CaseFileWhereUniqueInput
-  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutUserInput, Prisma.CaseFileUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.CaseFileCreateWithoutUserInput, Prisma.CaseFileUncheckedCreateWithoutUserInput>
-}
-
-export type CaseFileUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.CaseFileWhereUniqueInput
-  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutUserInput, Prisma.CaseFileUncheckedUpdateWithoutUserInput>
-}
-
-export type CaseFileUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.CaseFileScalarWhereInput
-  data: Prisma.XOR<Prisma.CaseFileUpdateManyMutationInput, Prisma.CaseFileUncheckedUpdateManyWithoutUserInput>
-}
-
-export type CaseFileCreateWithoutPremiseComplexInput = {
+export type CaseFileCreateWithoutRevokedByInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2999,6 +3509,7 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
@@ -3007,11 +3518,156 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutRevokedByInput = {
+  id?: string
+  userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutRevokedByInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutRevokedByInput, Prisma.CaseFileUncheckedCreateWithoutRevokedByInput>
+}
+
+export type CaseFileCreateManyRevokedByInputEnvelope = {
+  data: Prisma.CaseFileCreateManyRevokedByInput | Prisma.CaseFileCreateManyRevokedByInput[]
+  skipDuplicates?: boolean
+}
+
+export type CaseFileUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutUserInput, Prisma.CaseFileUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutUserInput, Prisma.CaseFileUncheckedCreateWithoutUserInput>
+}
+
+export type CaseFileUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutUserInput, Prisma.CaseFileUncheckedUpdateWithoutUserInput>
+}
+
+export type CaseFileUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.CaseFileScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateManyMutationInput, Prisma.CaseFileUncheckedUpdateManyWithoutUserInput>
+}
+
+export type CaseFileUpsertWithWhereUniqueWithoutRevokedByInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutRevokedByInput, Prisma.CaseFileUncheckedUpdateWithoutRevokedByInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutRevokedByInput, Prisma.CaseFileUncheckedCreateWithoutRevokedByInput>
+}
+
+export type CaseFileUpdateWithWhereUniqueWithoutRevokedByInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutRevokedByInput, Prisma.CaseFileUncheckedUpdateWithoutRevokedByInput>
+}
+
+export type CaseFileUpdateManyWithWhereWithoutRevokedByInput = {
+  where: Prisma.CaseFileScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateManyMutationInput, Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByInput>
+}
+
+export type CaseFileCreateWithoutPremiseComplexInput = {
+  id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3051,6 +3707,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseComplexInput = {
@@ -3081,6 +3738,9 @@ export type CaseFileUpdateManyWithWhereWithoutPremiseComplexInput = {
 
 export type CaseFileCreateWithoutRegistrationPlaceInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3111,6 +3771,7 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -3121,11 +3782,16 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3165,6 +3831,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRegistrationPlaceInput = {
@@ -3195,6 +3862,9 @@ export type CaseFileUpdateManyWithWhereWithoutRegistrationPlaceInput = {
 
 export type CaseFileCreateWithoutViolationsInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3225,6 +3895,7 @@ export type CaseFileCreateWithoutViolationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -3235,11 +3906,16 @@ export type CaseFileCreateWithoutViolationsInput = {
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutViolationsInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3279,6 +3955,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutViolationsInput = {
@@ -3299,6 +3976,9 @@ export type CaseFileUpdateToOneWithWhereWithoutViolationsInput = {
 
 export type CaseFileUpdateWithoutViolationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3329,6 +4009,7 @@ export type CaseFileUpdateWithoutViolationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -3339,11 +4020,16 @@ export type CaseFileUpdateWithoutViolationsInput = {
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3383,11 +4069,16 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyPremiseCityInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3424,6 +4115,9 @@ export type CaseFileCreateManyPremiseCityInput = {
 
 export type CaseFileUpdateWithoutPremiseCityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3454,6 +4148,7 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
@@ -3464,11 +4159,16 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3508,11 +4208,16 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3550,6 +4255,10 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
 export type CaseFileCreateManyActivityJobInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3586,6 +4295,9 @@ export type CaseFileCreateManyActivityJobInput = {
 
 export type CaseFileUpdateWithoutActivityJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3616,6 +4328,7 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
@@ -3626,11 +4339,16 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3670,11 +4388,16 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3711,6 +4434,51 @@ export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
 
 export type CaseFileCreateManyUserInput = {
   id?: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CaseFileCreateManyRevokedByInput = {
+  id?: string
+  userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3748,6 +4516,9 @@ export type CaseFileCreateManyUserInput = {
 
 export type CaseFileUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3777,6 +4548,7 @@ export type CaseFileUpdateWithoutUserInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -3788,10 +4560,15 @@ export type CaseFileUpdateWithoutUserInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3832,10 +4609,154 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseFileUpdateWithoutRevokedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3874,6 +4795,10 @@ export type CaseFileUncheckedUpdateManyWithoutUserInput = {
 export type CaseFileCreateManyPremiseComplexInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3910,6 +4835,9 @@ export type CaseFileCreateManyPremiseComplexInput = {
 
 export type CaseFileUpdateWithoutPremiseComplexInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3940,6 +4868,7 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
@@ -3950,11 +4879,16 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3994,11 +4928,16 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4036,6 +4975,10 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
 export type CaseFileCreateManyRegistrationPlaceInput = {
   id?: string
   userId: string
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokedAt?: Date | string | null
+  revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4072,6 +5015,9 @@ export type CaseFileCreateManyRegistrationPlaceInput = {
 
 export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4102,6 +5048,7 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -4112,11 +5059,16 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4156,11 +5108,16 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4208,6 +5165,7 @@ export type CaseFileCountOutputType = {
   activityDocuments: number
   premiseHistory: number
   violations: number
+  suspensions: number
 }
 
 export type CaseFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4218,6 +5176,7 @@ export type CaseFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   activityDocuments?: boolean | CaseFileCountOutputTypeCountActivityDocumentsArgs
   premiseHistory?: boolean | CaseFileCountOutputTypeCountPremiseHistoryArgs
   violations?: boolean | CaseFileCountOutputTypeCountViolationsArgs
+  suspensions?: boolean | CaseFileCountOutputTypeCountSuspensionsArgs
 }
 
 /**
@@ -4279,10 +5238,21 @@ export type CaseFileCountOutputTypeCountViolationsArgs<ExtArgs extends runtime.T
   where?: Prisma.ViolationWhereInput
 }
 
+/**
+ * CaseFileCountOutputType without action
+ */
+export type CaseFileCountOutputTypeCountSuspensionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseSuspensionWhereInput
+}
+
 
 export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  status?: boolean
+  revokeReason?: boolean
+  revokedAt?: boolean
+  revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -4317,6 +5287,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
@@ -4328,12 +5299,17 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   activityDocuments?: boolean | Prisma.CaseFile$activityDocumentsArgs<ExtArgs>
   premiseHistory?: boolean | Prisma.CaseFile$premiseHistoryArgs<ExtArgs>
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
+  suspensions?: boolean | Prisma.CaseFile$suspensionsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseFile"]>
 
 export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  status?: boolean
+  revokeReason?: boolean
+  revokedAt?: boolean
+  revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -4368,6 +5344,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
@@ -4377,6 +5354,10 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  status?: boolean
+  revokeReason?: boolean
+  revokedAt?: boolean
+  revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -4411,6 +5392,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
@@ -4420,6 +5402,10 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type CaseFileSelectScalar = {
   id?: boolean
   userId?: boolean
+  status?: boolean
+  revokeReason?: boolean
+  revokedAt?: boolean
+  revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -4455,9 +5441,10 @@ export type CaseFileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
+export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "status" | "revokeReason" | "revokedAt" | "revokedById" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
 export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
@@ -4469,10 +5456,12 @@ export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   activityDocuments?: boolean | Prisma.CaseFile$activityDocumentsArgs<ExtArgs>
   premiseHistory?: boolean | Prisma.CaseFile$premiseHistoryArgs<ExtArgs>
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
+  suspensions?: boolean | Prisma.CaseFile$suspensionsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
@@ -4480,6 +5469,7 @@ export type CaseFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 }
 export type CaseFileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
@@ -4490,6 +5480,7 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "CaseFile"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    revokedBy: Prisma.$UserPayload<ExtArgs> | null
     activityJob: Prisma.$JobPayload<ExtArgs> | null
     premiseCity: Prisma.$CityPayload<ExtArgs> | null
     premiseComplex: Prisma.$CommercialComplexPayload<ExtArgs> | null
@@ -4501,10 +5492,15 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     activityDocuments: Prisma.$CaseActivityDocumentPayload<ExtArgs>[]
     premiseHistory: Prisma.$CasePremiseHistoryPayload<ExtArgs>[]
     violations: Prisma.$ViolationPayload<ExtArgs>[]
+    suspensions: Prisma.$CaseSuspensionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    status: $Enums.CaseFileStatus
+    revokeReason: string | null
+    revokedAt: Date | null
+    revokedById: string | null
     /**
      * مرحلهٔ درخواست صدور: ۰ هویت، ۱ فعالیت، ۲ محل، ۳ استعلام، ۴ اماکن، ۵ بررسی مدیریت، ۶ صدور
      */
@@ -4939,6 +5935,7 @@ readonly fields: CaseFileFieldRefs;
 export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  revokedBy<T extends Prisma.CaseFile$revokedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$revokedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   activityJob<T extends Prisma.CaseFile$activityJobArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$activityJobArgs<ExtArgs>>): Prisma.Prisma__JobClient<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   premiseCity<T extends Prisma.CaseFile$premiseCityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseCityArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   premiseComplex<T extends Prisma.CaseFile$premiseComplexArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseComplexArgs<ExtArgs>>): Prisma.Prisma__CommercialComplexClient<runtime.Types.Result.GetResult<Prisma.$CommercialComplexPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -4950,6 +5947,7 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
   activityDocuments<T extends Prisma.CaseFile$activityDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$activityDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseActivityDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   premiseHistory<T extends Prisma.CaseFile$premiseHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   violations<T extends Prisma.CaseFile$violationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$violationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  suspensions<T extends Prisma.CaseFile$suspensionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$suspensionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseSuspensionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4981,6 +5979,10 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
 export interface CaseFileFieldRefs {
   readonly id: Prisma.FieldRef<"CaseFile", 'String'>
   readonly userId: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly status: Prisma.FieldRef<"CaseFile", 'CaseFileStatus'>
+  readonly revokeReason: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly revokedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
+  readonly revokedById: Prisma.FieldRef<"CaseFile", 'String'>
   readonly formationStep: Prisma.FieldRef<"CaseFile", 'Int'>
   readonly trackingCode: Prisma.FieldRef<"CaseFile", 'String'>
   readonly licenseNumber: Prisma.FieldRef<"CaseFile", 'String'>
@@ -5415,6 +6417,25 @@ export type CaseFileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * CaseFile.revokedBy
+ */
+export type CaseFile$revokedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+}
+
+/**
  * CaseFile.activityJob
  */
 export type CaseFile$activityJobArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5656,6 +6677,30 @@ export type CaseFile$violationsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ViolationScalarFieldEnum | Prisma.ViolationScalarFieldEnum[]
+}
+
+/**
+ * CaseFile.suspensions
+ */
+export type CaseFile$suspensionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseSuspension
+   */
+  select?: Prisma.CaseSuspensionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseSuspension
+   */
+  omit?: Prisma.CaseSuspensionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseSuspensionInclude<ExtArgs> | null
+  where?: Prisma.CaseSuspensionWhereInput
+  orderBy?: Prisma.CaseSuspensionOrderByWithRelationInput | Prisma.CaseSuspensionOrderByWithRelationInput[]
+  cursor?: Prisma.CaseSuspensionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseSuspensionScalarFieldEnum | Prisma.CaseSuspensionScalarFieldEnum[]
 }
 
 /**

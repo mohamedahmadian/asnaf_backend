@@ -25,6 +25,7 @@ import { SaveCaseActivityDto } from './dto/save-case-activity.dto';
 import { SaveCaseLocationDto } from './dto/save-case-location.dto';
 import { SaveCaseIdentityDto } from './dto/save-case-identity.dto';
 import { SaveFormationStepDto } from './dto/save-formation-step.dto';
+import { SaveRenewalDatesDto } from './dto/save-renewal-dates.dto';
 
 type UploadFile = {
   buffer: Buffer;
@@ -77,13 +78,22 @@ export class CasesController {
   }
 
   @Get('activity-requirements')
-  activityRequirements(@Query('caseId') caseId = '', @Query('jobId') jobId = '') {
-    return this.cases.activityRequirements(caseId, jobId || undefined);
+  activityRequirements(
+    @Query('caseId') caseId = '',
+    @Query('jobId') jobId = '',
+    @Query('requestType') requestType = '',
+  ) {
+    return this.cases.activityRequirements(caseId, jobId || undefined, requestType || undefined);
   }
 
   @Post('location-draft')
   saveLocationDraft(@Body() dto: SaveCaseLocationDto) {
     return this.cases.saveLocationDraft(dto);
+  }
+
+  @Post('renewal-dates')
+  saveRenewalDates(@Body() dto: SaveRenewalDatesDto) {
+    return this.cases.saveRenewalDates(dto.caseId, dto.nextIssuedAt, dto.nextExpiresAt);
   }
 
   @Post('process-step')
@@ -93,7 +103,7 @@ export class CasesController {
 
   @Post('complete')
   complete(@Body() dto: SaveFormationStepDto, @CurrentUser() user: RequestUser | undefined) {
-    return this.cases.completeRequest(dto.caseId, user?.id);
+    return this.cases.completeRequest(dto.caseId, user?.id, dto.licenseIssuedAt, dto.licenseExpiresAt);
   }
 
   @Post('step')

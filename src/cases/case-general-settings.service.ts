@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { clampContractYears } from './contract-duration';
 import { SaveCaseGeneralSettingsDto } from './dto/save-case-general-settings.dto';
 
 const SETTINGS_ID = 'default';
@@ -19,6 +20,7 @@ export class CaseGeneralSettingsService {
     return {
       editAfterIssuance: row.editAfterIssuance,
       editorRoleId: row.editorRoleId,
+      contractYears: clampContractYears(row.contractYears),
       roles,
     };
   }
@@ -35,10 +37,20 @@ export class CaseGeneralSettingsService {
       });
       if (!role) throw new NotFoundException('نقش یافت نشد');
     }
+    const contractYears = dto.contractYears == null ? undefined : clampContractYears(dto.contractYears);
     await this.prisma.caseGeneralSettings.upsert({
       where: { id: SETTINGS_ID },
-      create: { id: SETTINGS_ID, editAfterIssuance: dto.editAfterIssuance, editorRoleId },
-      update: { editAfterIssuance: dto.editAfterIssuance, editorRoleId },
+      create: {
+        id: SETTINGS_ID,
+        editAfterIssuance: dto.editAfterIssuance,
+        editorRoleId,
+        ...(contractYears == null ? {} : { contractYears }),
+      },
+      update: {
+        editAfterIssuance: dto.editAfterIssuance,
+        editorRoleId,
+        ...(contractYears == null ? {} : { contractYears }),
+      },
     });
     return this.get();
   }
@@ -66,7 +78,7 @@ export class CaseGeneralSettingsService {
       where: { id: SETTINGS_ID },
       create: { id: SETTINGS_ID },
       update: {},
-      select: { editAfterIssuance: true, editorRoleId: true },
+      select: { editAfterIssuance: true, editorRoleId: true, contractYears: true },
     });
   }
 }

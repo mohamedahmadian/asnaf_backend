@@ -170,6 +170,11 @@ export type CaseManagementReviewFile = Prisma.CaseManagementReviewFileModel
  */
 export type CaseFile = Prisma.CaseFileModel
 /**
+ * Model CaseSuspension
+ * یک دوره تعلیق پرونده. تاریخ شروع همان روز ثبت است.
+ */
+export type CaseSuspension = Prisma.CaseSuspensionModel
+/**
  * Model CaseRequest
  * هر کار روی پرونده: صدور، و بعداً تمدید، مباشرت یا مجوز حراج.
  * شمارهٔ درخواست با باز شدن درخواست زده می‌شود. شمارهٔ مجوز فعالیت اقتصادی روی پرونده ثابت می‌ماند.

@@ -1,11 +1,7 @@
-import { ConflictException } from '@nestjs/common';
-import {
-  CaseRequestStatus,
-  CaseRequestType,
-  PremiseOwnership,
-  Prisma,
-} from '../generated/prisma/client';
+import { BadRequestException, ConflictException } from '@nestjs/common';
+import { CaseFileStatus, CaseRequestStatus, CaseRequestType, Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { clampContractYears } from './contract-duration';
 
 /** 0 هویت، 1 فعالیت، 2 محل، 3 استعلام، 4 اماکن، 5 بررسی مدیریت، 6 صدور */
 export const INQUIRIES_FORMATION_STEP = 3;
@@ -49,14 +45,17 @@ export async function nextRequestNumber(prisma: PrismaService | Prisma.Transacti
 export async function assignLicenseNumber(
   prisma: PrismaService | Prisma.TransactionClient,
   caseFileId: string,
-  ownership: PremiseOwnership | null,
-  leaseExpiresAt: Date | null,
+  issuedAtInput?: Date | null,
+  expiresAtInput?: Date | null,
+  contractYears = 1,
 ) {
   const prefix = `${jalaliYear()}-`;
-  const issuedAt = utcDateOnly(new Date());
-  let expiresAt = addUtcYears(issuedAt, 1);
-  if (ownership === PremiseOwnership.RENTED && leaseExpiresAt && leaseExpiresAt.getTime() < expiresAt.getTime()) {
-    expiresAt = utcDateOnly(leaseExpiresAt);
+  const issuedAt = issuedAtInput ? utcDateOnly(issuedAtInput) : utcDateOnly(new Date());
+  const expiresAt = expiresAtInput
+    ? utcDateOnly(expiresAtInput)
+    : addUtcYears(issuedAt, clampContractYears(contractYears));
+  if (expiresAt.getTime() <= issuedAt.getTime()) {
+    throw new BadRequestException('تاریخ انقضا باید بعد از تاریخ صدور باشد');
   }
   for (let attempt = 0; attempt < 8; attempt++) {
     const count = await prisma.caseFile.count({
@@ -85,11 +84,18 @@ export async function assignLicenseNumber(
  * درخواست صدور را با مرحلهٔ پرونده هم‌گام می‌کند.
  * شماره مجوز فقط در تکمیل درخواست نوشته می‌شود.
  */
-export async function syncIssuanceRequest(prisma: PrismaService, caseFileId: string) {
+export async function syncIssuanceRequest(
+  prisma: PrismaService,
+  caseFileId: string,
+  options?: { createIfMissing?: boolean },
+) {
+  const createIfMissing = options?.createIfMissing !== false;
   const file = await prisma.caseFile.findUnique({
     where: { id: caseFileId },
     select: {
       id: true,
+      status: true,
+      licenseNumber: true,
       formationStep: true,
       requests: {
         where: { type: CaseRequestType.ISSUANCE },
@@ -103,6 +109,7 @@ export async function syncIssuanceRequest(prisma: PrismaService, caseFileId: str
   const existing = file.requests[0];
   const closed = existing?.status === CaseRequestStatus.ISSUED || existing?.status === CaseRequestStatus.COMPLETED;
   if (!existing) {
+    if (!createIfMissing || file.status === CaseFileStatus.REVOKED || file.licenseNumber) return;
     for (let attempt = 0; attempt < 4; attempt++) {
       const number = await nextRequestNumber(prisma);
       try {

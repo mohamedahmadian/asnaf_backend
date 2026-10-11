@@ -1,9 +1,10 @@
 import { Type } from 'class-transformer';
-import { IsArray, IsBoolean, IsIn, IsUUID, ValidateNested } from 'class-validator';
+import { IsArray, IsBoolean, IsIn, IsString, IsUUID, Matches, ValidateNested } from 'class-validator';
 import { DocumentGender } from '../../generated/prisma/client';
 
 export class RequirementDocumentDto {
-  @IsUUID('4')
+  @IsString()
+  @Matches(/^[A-Za-z0-9-]{1,64}$/)
   documentId: string;
 
   @IsIn(['MALE', 'FEMALE', 'BOTH'])

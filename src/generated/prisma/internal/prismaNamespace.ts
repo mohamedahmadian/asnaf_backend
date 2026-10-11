@@ -423,6 +423,7 @@ export const ModelName = {
   CaseManagementReview: 'CaseManagementReview',
   CaseManagementReviewFile: 'CaseManagementReviewFile',
   CaseFile: 'CaseFile',
+  CaseSuspension: 'CaseSuspension',
   CaseRequest: 'CaseRequest',
   CaseRequestEvent: 'CaseRequestEvent',
   CaseRenewalTerms: 'CaseRenewalTerms',
@@ -508,7 +509,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseRequest" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseSuspension" | "caseRequest" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2433,6 +2434,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseFileCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseFileCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseSuspension: {
+      payload: Prisma.$CaseSuspensionPayload<ExtArgs>
+      fields: Prisma.CaseSuspensionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseSuspensionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseSuspensionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseSuspensionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseSuspensionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>
+        }
+        findMany: {
+          args: Prisma.CaseSuspensionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>[]
+        }
+        create: {
+          args: Prisma.CaseSuspensionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>
+        }
+        createMany: {
+          args: Prisma.CaseSuspensionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseSuspensionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseSuspensionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>
+        }
+        update: {
+          args: Prisma.CaseSuspensionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseSuspensionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseSuspensionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseSuspensionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseSuspensionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseSuspensionPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseSuspensionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseSuspension>
+        }
+        groupBy: {
+          args: Prisma.CaseSuspensionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseSuspensionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseSuspensionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseSuspensionCountAggregateOutputType> | number
         }
       }
     }
@@ -7881,6 +7956,7 @@ export const CaseGeneralSettingsScalarFieldEnum = {
   id: 'id',
   editAfterIssuance: 'editAfterIssuance',
   editorRoleId: 'editorRoleId',
+  contractYears: 'contractYears',
   updatedAt: 'updatedAt'
 } as const
 
@@ -8007,6 +8083,10 @@ export type CaseManagementReviewFileScalarFieldEnum = (typeof CaseManagementRevi
 export const CaseFileScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  status: 'status',
+  revokeReason: 'revokeReason',
+  revokedAt: 'revokedAt',
+  revokedById: 'revokedById',
   formationStep: 'formationStep',
   trackingCode: 'trackingCode',
   licenseNumber: 'licenseNumber',
@@ -8043,6 +8123,19 @@ export const CaseFileScalarFieldEnum = {
 } as const
 
 export type CaseFileScalarFieldEnum = (typeof CaseFileScalarFieldEnum)[keyof typeof CaseFileScalarFieldEnum]
+
+
+export const CaseSuspensionScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  reason: 'reason',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseSuspensionScalarFieldEnum = (typeof CaseSuspensionScalarFieldEnum)[keyof typeof CaseSuspensionScalarFieldEnum]
 
 
 export const CaseRequestScalarFieldEnum = {
@@ -9296,6 +9389,20 @@ export type ListEnumDocumentGenderFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'CaseFileStatus'
+ */
+export type EnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseFileStatus[]'
+ */
+export type ListEnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PreviousOccupation'
  */
 export type EnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation'>
@@ -9989,6 +10096,7 @@ export type GlobalOmitConfig = {
   caseManagementReview?: Prisma.CaseManagementReviewOmit
   caseManagementReviewFile?: Prisma.CaseManagementReviewFileOmit
   caseFile?: Prisma.CaseFileOmit
+  caseSuspension?: Prisma.CaseSuspensionOmit
   caseRequest?: Prisma.CaseRequestOmit
   caseRequestEvent?: Prisma.CaseRequestEventOmit
   caseRenewalTerms?: Prisma.CaseRenewalTermsOmit

@@ -259,6 +259,15 @@ export const CaseRequestStatus = {
 export type CaseRequestStatus = (typeof CaseRequestStatus)[keyof typeof CaseRequestStatus]
 
 
+export const CaseFileStatus = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  REVOKED: 'REVOKED'
+} as const
+
+export type CaseFileStatus = (typeof CaseFileStatus)[keyof typeof CaseFileStatus]
+
+
 export const AuctionApproverKind = {
   SPECIAL_INSPECTOR: 'SPECIAL_INSPECTOR',
   AUCTION_COMMITTEE: 'AUCTION_COMMITTEE',

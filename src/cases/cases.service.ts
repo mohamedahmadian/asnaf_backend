@@ -1,8 +1,10 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { ECONOMIC_ACTOR_ROLE_CODE, ensureEconomicActorRole } from '../access/access.constants';
@@ -17,6 +19,7 @@ import {
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
 import {
+  CaseFileStatus,
   CaseInquiryStatus,
   CaseRequestType,
   DocumentGender,
@@ -32,6 +35,8 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { joinFullName } from '../users/user-profile.util';
 import { FindCasesQueryDto } from './dto/find-cases-query.dto';
+import { RevokeCaseDto } from './dto/revoke-case.dto';
+import { SuspendCaseDto } from './dto/suspend-case.dto';
 import { SaveCaseActivityDto } from './dto/save-case-activity.dto';
 import { SaveCaseLocationDto } from './dto/save-case-location.dto';
 import { SaveCaseIdentityDto } from './dto/save-case-identity.dto';
@@ -47,11 +52,13 @@ import {
   PLACES_FORMATION_STEP,
   syncIssuanceRequest,
 } from './formation-steps';
+import { readContractYears } from './contract-duration';
 import {
-  alignStoredRenewalTerms,
+  alignDefaultRenewalExpiry,
   completeOpenRequest,
   findOpenRequest,
   isProcessType,
+  requestIsDone,
   openProcessRequest,
   resolveDocumentRequirements,
 } from './request-process';
@@ -180,6 +187,17 @@ function mapActivity(user: Pick<CaseFileRow, 'businessUnitTitle' | 'previousOccu
 
 function dateOnly(value: Date | null) {
   return value ? value.toISOString().slice(0, 10) : null;
+}
+
+function localTodayIso() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
+function suspensionCoversToday(startsAt: Date, endsAt: Date, today: Date) {
+  return startsAt.getTime() <= today.getTime() && endsAt.getTime() >= today.getTime();
 }
 
 function parseDate(value: string | null | undefined) {
@@ -532,6 +550,20 @@ export class CasesService {
     return openProcessRequest(this.prisma, caseId, type);
   }
 
+  async removeRequest(caseId: string, requestId: string, actor?: { id: string; isAdmin?: boolean }) {
+    if (!actor?.id) throw new UnauthorizedException();
+    const request = await this.prisma.caseRequest.findFirst({
+      where: { id: requestId, caseFileId: caseId },
+      select: { id: true, status: true },
+    });
+    if (!request) throw new NotFoundException('درخواست یافت نشد');
+    if (requestIsDone(request.status) && !actor.isAdmin) {
+      throw new ForbiddenException('پس از اتمام درخواست فقط مدیریت می‌تواند آن را حذف کند');
+    }
+    await this.prisma.caseRequest.delete({ where: { id: request.id } });
+    return { id: request.id };
+  }
+
   async processState(caseId: string) {
     const request = await findOpenRequest(this.prisma, caseId);
     if (!request || !isProcessType(request.type) || request.type === CaseRequestType.ISSUANCE) {
@@ -555,9 +587,10 @@ export class CasesService {
         },
       }),
     ]);
+    const contractYears = await readContractYears(this.prisma);
     const terms =
       request.type === CaseRequestType.RENEWAL && storedTerms
-        ? await alignStoredRenewalTerms(this.prisma, request.id, storedTerms)
+        ? await alignDefaultRenewalExpiry(this.prisma, storedTerms, contractYears)
         : storedTerms;
     const date = (value: Date | null | undefined) => (value ? value.toISOString().slice(0, 10) : null);
     return {
@@ -572,6 +605,7 @@ export class CasesService {
       businessUnitTitle: file?.businessUnitTitle ?? null,
       jobGroupTitle: file?.activityJob?.group?.title ?? null,
       jobTitle: file?.activityJob?.title ?? null,
+      contractYears,
       renewal: terms
         ? {
             currentIssuedAt: date(terms.currentIssuedAt),
@@ -659,13 +693,37 @@ export class CasesService {
     return this.processState(dto.caseId);
   }
 
+  async saveRenewalDates(caseId: string, nextIssuedAt: string, nextExpiresAt: string) {
+    const request = await findOpenRequest(this.prisma, caseId);
+    if (!request || request.type !== CaseRequestType.RENEWAL) {
+      throw new BadRequestException('درخواست تمدید باز نیست');
+    }
+    const issued = parseDate(nextIssuedAt);
+    const expires = parseDate(nextExpiresAt);
+    if (!issued || !expires) {
+      throw new BadRequestException('تاریخ صدور و تاریخ انقضا را وارد کنید');
+    }
+    if (expires.getTime() <= issued.getTime()) {
+      throw new BadRequestException('تاریخ انقضا باید بعد از تاریخ صدور باشد');
+    }
+    await this.prisma.caseRenewalTerms.update({
+      where: { requestId: request.id },
+      data: { nextIssuedAt: issued, nextExpiresAt: expires },
+    });
+    return this.processState(caseId);
+  }
+
   async advanceProcess(caseId: string, step: number) {
     const request = await findOpenRequest(this.prisma, caseId);
     if (!request || request.type === CaseRequestType.ISSUANCE || !isProcessType(request.type)) {
       throw new BadRequestException('درخواست تمدید یا تغییر مکان باز نیست');
     }
-    const requested = Math.min(Math.max(step, 0), 3);
-    const next = Math.max(request.formationStep, Math.min(requested, request.formationStep + 1));
+    const ceiling = request.type === CaseRequestType.RENEWAL ? 4 : 3;
+    const requested = Math.min(Math.max(step, 0), ceiling);
+    let next = Math.max(request.formationStep, Math.min(requested, request.formationStep + 1));
+    if (request.type === CaseRequestType.RENEWAL && next === 1 && (await this.renewalHasNoDocuments(caseId))) {
+      next = 2;
+    }
     if (request.type === CaseRequestType.LOCATION_CHANGE && next >= 1) {
       const draft = await this.prisma.caseLocationDraft.findUnique({ where: { requestId: request.id } });
       if (!draft?.premiseCityId || !draft.premiseAddress || !draft.premiseOwnership) {
@@ -674,6 +732,12 @@ export class CasesService {
     }
     if (next >= 2) await this.assertActivityDocumentsDelivered(caseId);
     if (next >= 3) await this.inquiries.assertDelivered(caseId);
+    if (request.type === CaseRequestType.RENEWAL && next >= 3) {
+      await this.places.ensureForUser(caseId);
+    }
+    if (request.type === CaseRequestType.RENEWAL && next >= 4) {
+      await this.places.assertDelivered(caseId);
+    }
     const saved = await this.prisma.caseRequest.update({
       where: { id: request.id },
       data: { formationStep: next },
@@ -682,13 +746,25 @@ export class CasesService {
     return saved;
   }
 
-  async completeRequest(caseId: string, actorId?: string) {
+  async completeRequest(
+    caseId: string,
+    actorId?: string,
+    licenseIssuedAt?: string,
+    licenseExpiresAt?: string,
+  ) {
     const request = await findOpenRequest(this.prisma, caseId);
     if (!request) throw new BadRequestException('درخواست بازی برای تکمیل نیست');
-    if (request.type !== CaseRequestType.ISSUANCE && request.formationStep < 3) {
-      throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
-    }
-    if (request.type !== CaseRequestType.ISSUANCE) {
+    if (request.type === CaseRequestType.RENEWAL) {
+      if (request.formationStep < 4) {
+        throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
+      }
+      await this.inquiries.ensureForUser(caseId);
+      await this.places.ensureForUser(caseId);
+      await this.managementApprovers.ensureForUser(caseId);
+    } else if (request.type !== CaseRequestType.ISSUANCE) {
+      if (request.formationStep < 3) {
+        throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
+      }
       await this.inquiries.ensureForUser(caseId);
       await this.managementApprovers.ensureForUser(caseId);
     }
@@ -697,7 +773,10 @@ export class CasesService {
       await this.managementApprovers.ensureForUser(caseId);
       await this.inquiries.ensureForUser(caseId);
     }
-    return completeOpenRequest(this.prisma, caseId, actorId);
+    return completeOpenRequest(this.prisma, caseId, actorId, {
+      issuedAt: parseDate(licenseIssuedAt),
+      expiresAt: parseDate(licenseExpiresAt),
+    });
   }
 
   async advanceStep(dto: SaveFormationStepDto) {
@@ -873,11 +952,14 @@ export class CasesService {
   }
 
   async findOne(id: string) {
-    await syncIssuanceRequest(this.prisma, id);
+    await syncIssuanceRequest(this.prisma, id, { createIfMissing: false });
     const file = await this.prisma.caseFile.findUnique({
       where: { id },
       select: {
         id: true,
+        status: true,
+        revokeReason: true,
+        revokedAt: true,
         formationStep: true,
         trackingCode: true,
         businessUnitTitle: true,
@@ -923,11 +1005,41 @@ export class CasesService {
             formationStep: true,
             completedAt: true,
             createdAt: true,
+            renewalTerms: {
+              select: {
+                currentIssuedAt: true,
+                currentExpiresAt: true,
+                nextIssuedAt: true,
+                nextExpiresAt: true,
+              },
+            },
+            auction: { select: { startsAt: true, endsAt: true } },
           },
+        },
+        suspensions: {
+          orderBy: [{ startsAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
+          select: { id: true, reason: true, startsAt: true, endsAt: true },
         },
       },
     });
     if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    const today = parseDate(localTodayIso())!;
+    const suspensions = file.suspensions.map((row) => ({
+      id: row.id,
+      reason: row.reason,
+      startsAt: dateOnly(row.startsAt)!,
+      endsAt: dateOnly(row.endsAt)!,
+      active: suspensionCoversToday(row.startsAt, row.endsAt, today),
+    }));
+    const status =
+      file.status === CaseFileStatus.REVOKED
+        ? CaseFileStatus.REVOKED
+        : suspensions.some((row) => row.active)
+          ? CaseFileStatus.SUSPENDED
+          : CaseFileStatus.ACTIVE;
+    if (file.status !== status) {
+      await this.prisma.caseFile.update({ where: { id: file.id }, data: { status } });
+    }
     const violationCount = file.user.nationalId
       ? await this.prisma.violation.count({ where: { nationalId: file.user.nationalId } })
       : 0;
@@ -941,9 +1053,17 @@ export class CasesService {
       endedAt: dateOnly(row.endedAt),
     }));
     const currentStartedAt = file.premiseHistory.at(-1)?.endedAt ?? file.licenseIssuedAt;
+    const firstRenewal = [...file.requests]
+      .filter((row) => row.type === CaseRequestType.RENEWAL && row.renewalTerms)
+      .sort((left, right) => left.createdAt.getTime() - right.createdAt.getTime())[0];
     return {
       id: file.id,
+      status,
+      revokeReason: file.status === CaseFileStatus.REVOKED ? file.revokeReason : null,
+      revokedAt: file.status === CaseFileStatus.REVOKED ? file.revokedAt?.toISOString() ?? null : null,
       violationCount,
+      suspensionCount: suspensions.length,
+      suspensions,
       formationStep: file.formationStep,
       trackingCode: file.trackingCode,
       businessUnitTitle: file.businessUnitTitle,
@@ -964,16 +1084,121 @@ export class CasesService {
       premiseHistory,
       job: file.activityJob,
       person: file.user,
-      requests: file.requests.map((request) => ({
-        ...request,
-        completedAt: request.completedAt?.toISOString() ?? null,
-        createdAt: request.createdAt.toISOString(),
-      })),
+      requests: file.requests.map((request) => {
+        const done = request.status === 'ISSUED' || request.status === 'COMPLETED';
+        let issuedAt: string | null = null;
+        let expiresAt: string | null = null;
+        let auctionStartsAt: string | null = null;
+        let auctionEndsAt: string | null = null;
+        if (request.type === CaseRequestType.AUCTION) {
+          auctionStartsAt = dateOnly(request.auction?.startsAt ?? null);
+          auctionEndsAt = dateOnly(request.auction?.endsAt ?? null);
+        } else if (request.type === CaseRequestType.RENEWAL && done && request.renewalTerms) {
+          issuedAt = dateOnly(request.renewalTerms.nextIssuedAt);
+          expiresAt = dateOnly(request.renewalTerms.nextExpiresAt);
+        } else if (request.type === CaseRequestType.ISSUANCE && done) {
+          if (firstRenewal?.renewalTerms) {
+            issuedAt = dateOnly(firstRenewal.renewalTerms.currentIssuedAt);
+            expiresAt = dateOnly(firstRenewal.renewalTerms.currentExpiresAt);
+          } else {
+            issuedAt = dateOnly(file.licenseIssuedAt);
+            expiresAt = dateOnly(file.licenseExpiresAt);
+          }
+        }
+        return {
+          id: request.id,
+          number: request.number,
+          type: request.type,
+          status: request.status,
+          formationStep: request.formationStep,
+          completedAt: request.completedAt?.toISOString() ?? null,
+          createdAt: request.createdAt.toISOString(),
+          issuedAt,
+          expiresAt,
+          auctionStartsAt,
+          auctionEndsAt,
+        };
+      }),
+    };
+  }
+
+  async suspend(id: string, dto: SuspendCaseDto, actorId?: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id },
+      select: { id: true, formationStep: true, status: true },
+    });
+    if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    if (file.status === CaseFileStatus.REVOKED) {
+      throw new BadRequestException('روی پرونده ابطال‌شده تعلیق ثبت نمی‌شود');
+    }
+    const start = parseDate(dto.startsAt);
+    const end = parseDate(dto.endsAt);
+    if (!start || !end || end.getTime() < start.getTime()) {
+      throw new BadRequestException('تاریخ پایان باید همان روز شروع یا بعد از آن باشد');
+    }
+    const today = parseDate(localTodayIso())!;
+    const created = await this.prisma.$transaction(async (tx) => {
+      const row = await tx.caseSuspension.create({
+        data: {
+          caseFileId: id,
+          reason: dto.reason,
+          startsAt: start,
+          endsAt: end,
+          createdById: actorId ?? null,
+        },
+        select: { id: true, reason: true, startsAt: true, endsAt: true },
+      });
+      const rows = await tx.caseSuspension.findMany({
+        where: { caseFileId: id },
+        select: { startsAt: true, endsAt: true },
+      });
+      const active = rows.some((item) => suspensionCoversToday(item.startsAt, item.endsAt, today));
+      await tx.caseFile.update({
+        where: { id },
+        data: { status: active ? CaseFileStatus.SUSPENDED : CaseFileStatus.ACTIVE },
+      });
+      return row;
+    });
+    return {
+      id: created.id,
+      reason: created.reason,
+      startsAt: dateOnly(created.startsAt),
+      endsAt: dateOnly(created.endsAt),
+      active: suspensionCoversToday(created.startsAt, created.endsAt, today),
+      status: suspensionCoversToday(created.startsAt, created.endsAt, today)
+        ? CaseFileStatus.SUSPENDED
+        : CaseFileStatus.ACTIVE,
+    };
+  }
+
+  async revoke(id: string, dto: RevokeCaseDto, actorId?: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id },
+      select: { id: true, formationStep: true, status: true },
+    });
+    if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    if (file.status === CaseFileStatus.REVOKED) {
+      throw new BadRequestException('این پرونده قبلاً ابطال شده است');
+    }
+    const revokedAt = new Date();
+    await this.prisma.caseFile.update({
+      where: { id },
+      data: {
+        status: CaseFileStatus.REVOKED,
+        revokeReason: dto.reason,
+        revokedAt,
+        revokedById: actorId ?? null,
+      },
+    });
+    return {
+      status: CaseFileStatus.REVOKED,
+      revokeReason: dto.reason,
+      revokedAt: revokedAt.toISOString(),
     };
   }
 
   async licenseDocument(id: string) {
-    await syncIssuanceRequest(this.prisma, id);
+    await syncIssuanceRequest(this.prisma, id, { createIfMissing: false });
     const file = await this.prisma.caseFile.findUnique({
       where: { id },
       select: {
@@ -1201,14 +1426,15 @@ export class CasesService {
     });
   }
 
-  async activityRequirements(caseId: string, jobId?: string) {
+  async activityRequirements(caseId: string, jobId?: string, requestType?: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseId },
       select: { id: true, activityJobId: true, user: { select: { gender: true } } },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
     const request = await this.currentRequest(caseId);
-    const type = request && isProcessType(request.type) ? request.type : CaseRequestType.ISSUANCE;
+    const explicit = requestType && isProcessType(requestType) ? requestType : null;
+    const type = explicit ?? (request && isProcessType(request.type) ? request.type : CaseRequestType.ISSUANCE);
     return resolveDocumentRequirements(
       this.prisma,
       type,
@@ -1463,6 +1689,20 @@ export class CasesService {
   ) {
     const rows = await resolveDocumentRequirements(this.prisma, requestType, jobId, gender);
     return rows.some((row) => row.id === document.id);
+  }
+
+  private async renewalHasNoDocuments(caseId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseId },
+      select: { activityJobId: true, user: { select: { gender: true } } },
+    });
+    const docs = await resolveDocumentRequirements(
+      this.prisma,
+      CaseRequestType.RENEWAL,
+      file?.activityJobId ?? null,
+      file?.user.gender ?? null,
+    );
+    return !docs.some((row) => row.isRequired);
   }
 
   private async assertActivityDocumentsDelivered(caseFileId: string) {

@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import {
   AuctionApproverKind,
+  CaseFileStatus,
   CaseInquiryStatus,
   CaseRequestStatus,
   CaseRequestType,
@@ -93,6 +94,9 @@ export class CaseAuctionService {
 
   async create(caseId: string, dto: SaveCaseAuctionDto, actor?: Actor) {
     const file = await this.caseFile(caseId);
+    if (file.status === CaseFileStatus.REVOKED) {
+      throw new BadRequestException('روی پرونده ابطال‌شده درخواست جدید ثبت نمی‌شود');
+    }
     assertRange(dto);
     for (let attempt = 0; attempt < 4; attempt++) {
       const number = await nextRequestNumber(this.prisma);
@@ -216,7 +220,7 @@ export class CaseAuctionService {
   private async caseFile(caseId: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseId },
-      select: { id: true, userId: true, licenseNumber: true, formationStep: true },
+      select: { id: true, userId: true, status: true, licenseNumber: true, formationStep: true },
     });
     if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
     if (!file.licenseNumber) {

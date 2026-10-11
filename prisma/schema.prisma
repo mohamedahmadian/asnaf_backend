@@ -493,6 +493,8 @@ model CaseGeneralSettings {
   editAfterIssuance Boolean  @default(false)
   editorRoleId      String?
   editorRole        Role?    @relation(fields: [editorRoleId], references: [id], onDelete: SetNull)
+  /// مدت قرارداد مجوز؛ ۱ تا ۵ سال
+  contractYears     Int      @default(1)
   updatedAt         DateTime @updatedAt
 
   @@index([editorRoleId])
@@ -684,11 +686,23 @@ enum CaseRequestStatus {
   CANCELLED
 }
 
+/// وضعیت عملیاتی پرونده. تعلیق فعال تا پایان بازه، پرونده را معلق نگه می‌دارد. ابطال دائمی است.
+enum CaseFileStatus {
+  ACTIVE
+  SUSPENDED
+  REVOKED
+}
+
 /// یک پروندهٔ فعالیت اقتصادی برای یک شخص و یک شغل. شخص می‌تواند چند پرونده داشته باشد.
 model CaseFile {
   id                   String                 @id @default(uuid())
   userId               String
   user                 User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status               CaseFileStatus         @default(ACTIVE)
+  revokeReason         String?
+  revokedAt            DateTime?
+  revokedById          String?
+  revokedBy            User?                  @relation("CaseRevocationAuthor", fields: [revokedById], references: [id], onDelete: SetNull)
   /// مرحلهٔ درخواست صدور: ۰ هویت، ۱ فعالیت، ۲ محل، ۳ استعلام، ۴ اماکن، ۵ بررسی مدیریت، ۶ صدور
   formationStep        Int                    @default(0)
   trackingCode         String?                @unique
@@ -733,10 +747,13 @@ model CaseFile {
   activityDocuments    CaseActivityDocument[]
   premiseHistory       CasePremiseHistory[]
   violations           Violation[]
+  suspensions          CaseSuspension[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
 
   @@index([userId])
+  @@index([status])
+  @@index([revokedById])
   @@index([formationStep])
   @@index([activityJobId])
   @@index([premiseCityId])
@@ -746,6 +763,26 @@ model CaseFile {
   @@index([licenseExpiresAt])
   @@index([createdAt])
   @@map("case_files")
+}
+
+/// یک دوره تعلیق پرونده. تاریخ شروع همان روز ثبت است.
+model CaseSuspension {
+  id          String   @id @default(uuid())
+  caseFileId  String
+  caseFile    CaseFile @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  reason      String
+  startsAt    DateTime @db.Date
+  endsAt      DateTime @db.Date
+  createdById String?
+  createdBy   User?    @relation("CaseSuspensionAuthor", fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+
+  @@index([caseFileId])
+  @@index([startsAt])
+  @@index([endsAt])
+  @@index([createdById])
+  @@index([createdAt])
+  @@map("case_suspensions")
 }
 
 /// هر کار روی پرونده: صدور، و بعداً تمدید، مباشرت یا مجوز حراج.
@@ -1128,6 +1165,8 @@ model User {
   citizenGroup       String?
   caseFiles          CaseFile[]
   caseRequestEvents  CaseRequestEvent[] @relation("CaseRequestEventActor")
+  caseSuspensions    CaseSuspension[]   @relation("CaseSuspensionAuthor")
+  caseRevocations    CaseFile[]         @relation("CaseRevocationAuthor")
   jobId              String?
   economicJob        Job?                  @relation("UserEconomicJob", fields: [jobId], references: [id], onDelete: SetNull)
   personDocuments    PersonDocument[]
