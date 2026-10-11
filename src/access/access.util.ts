@@ -39,11 +39,17 @@ export async function loadUserAccess(
     if (officerCenters > 0 && !permissionCodes.includes('cases.inquiries')) {
       permissionCodes.push('cases.inquiries');
     }
-    const placesOfficer = await prisma.casePlacesOffice.count({
-      where: { officerId: userId },
+    const placesOffice = await prisma.casePlacesOffice.findUnique({
+      where: { id: 'default' },
+      select: { officerRoleId: true },
     });
-    if (placesOfficer > 0 && !permissionCodes.includes('cases.places')) {
-      permissionCodes.push('cases.places');
+    if (placesOffice?.officerRoleId) {
+      const placesOfficer = await prisma.userRole.count({
+        where: { userId, roleId: placesOffice.officerRoleId },
+      });
+      if (placesOfficer > 0 && !permissionCodes.includes('cases.places')) {
+        permissionCodes.push('cases.places');
+      }
     }
   }
   return { isAdmin, roleCodes, permissionCodes };

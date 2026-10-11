@@ -74,10 +74,12 @@ export const ModelName = {
   Document: 'Document',
   CaseIdentityDocument: 'CaseIdentityDocument',
   CaseManagementApprover: 'CaseManagementApprover',
+  CaseProcessManagementRole: 'CaseProcessManagementRole',
   CaseManagementReview: 'CaseManagementReview',
   CaseManagementReviewFile: 'CaseManagementReviewFile',
   CaseFile: 'CaseFile',
   CaseSuspension: 'CaseSuspension',
+  CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
   CaseRequestEvent: 'CaseRequestEvent',
   CaseRenewalTerms: 'CaseRenewalTerms',
@@ -402,7 +404,7 @@ export type CaseGeneralSettingsScalarFieldEnum = (typeof CaseGeneralSettingsScal
 export const CasePlacesOfficeScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
-  officerId: 'officerId',
+  officerRoleId: 'officerRoleId',
   letterTitle: 'letterTitle',
   letterBody: 'letterBody',
   updatedAt: 'updatedAt'
@@ -484,6 +486,17 @@ export const CaseManagementApproverScalarFieldEnum = {
 export type CaseManagementApproverScalarFieldEnum = (typeof CaseManagementApproverScalarFieldEnum)[keyof typeof CaseManagementApproverScalarFieldEnum]
 
 
+export const CaseProcessManagementRoleScalarFieldEnum = {
+  id: 'id',
+  requestType: 'requestType',
+  roleId: 'roleId',
+  title: 'title',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseProcessManagementRoleScalarFieldEnum = (typeof CaseProcessManagementRoleScalarFieldEnum)[keyof typeof CaseProcessManagementRoleScalarFieldEnum]
+
+
 export const CaseManagementReviewScalarFieldEnum = {
   id: 'id',
   caseFileId: 'caseFileId',
@@ -522,6 +535,7 @@ export const CaseFileScalarFieldEnum = {
   status: 'status',
   revokeReason: 'revokeReason',
   revokedAt: 'revokedAt',
+  reactivatedAt: 'reactivatedAt',
   revokedById: 'revokedById',
   formationStep: 'formationStep',
   trackingCode: 'trackingCode',
@@ -567,11 +581,27 @@ export const CaseSuspensionScalarFieldEnum = {
   reason: 'reason',
   startsAt: 'startsAt',
   endsAt: 'endsAt',
+  liftNote: 'liftNote',
+  liftedAt: 'liftedAt',
   createdById: 'createdById',
   createdAt: 'createdAt'
 } as const
 
 export type CaseSuspensionScalarFieldEnum = (typeof CaseSuspensionScalarFieldEnum)[keyof typeof CaseSuspensionScalarFieldEnum]
+
+
+export const CaseSuspensionFileScalarFieldEnum = {
+  id: 'id',
+  suspensionId: 'suspensionId',
+  kind: 'kind',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseSuspensionFileScalarFieldEnum = (typeof CaseSuspensionFileScalarFieldEnum)[keyof typeof CaseSuspensionFileScalarFieldEnum]
 
 
 export const CaseRequestScalarFieldEnum = {
@@ -678,6 +708,7 @@ export type CasePremiseHistoryScalarFieldEnum = (typeof CasePremiseHistoryScalar
 
 export const CaseAuctionScalarFieldEnum = {
   requestId: 'requestId',
+  title: 'title',
   startsAt: 'startsAt',
   endsAt: 'endsAt',
   discountMin: 'discountMin',

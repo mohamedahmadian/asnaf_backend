@@ -5,6 +5,7 @@ import {
   IsArray,
   IsInt,
   IsNumber,
+  IsOptional,
   IsString,
   Matches,
   Max,
@@ -17,6 +18,13 @@ import { toLatinDigits } from '../../common/national-id';
 
 function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
+}
+
+function emptyToNull(value: unknown) {
+  if (value == null) return null;
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed ? trimmed : null;
 }
 
 function toPercent(value: unknown) {
@@ -60,6 +68,12 @@ export class AuctionItemDto {
 }
 
 export class SaveCaseAuctionDto {
+  @Transform(({ value }) => emptyToNull(value))
+  @IsOptional()
+  @IsString({ message: 'عنوان مجوز حراج معتبر نیست' })
+  @MaxLength(200, { message: 'عنوان مجوز حراج طولانی است' })
+  title?: string | null;
+
   @Matches(/^\d{4}-\d{2}-\d{2}$/, { message: 'تاریخ شروع حراج معتبر نیست' })
   startsAt: string;
 
@@ -68,16 +82,16 @@ export class SaveCaseAuctionDto {
 
   @Transform(({ value }) => toPercent(value))
   @Type(() => Number)
-  @IsNumber({ maxDecimalPlaces: 2 }, { message: 'درصد تخفیف از معتبر نیست' })
-  @Min(0, { message: 'درصد تخفیف از معتبر نیست' })
-  @Max(100, { message: 'درصد تخفیف از معتبر نیست' })
+  @IsNumber({ maxDecimalPlaces: 2 }, { message: 'حداقل درصد تخفیف معتبر نیست' })
+  @Min(0, { message: 'حداقل درصد تخفیف معتبر نیست' })
+  @Max(100, { message: 'حداقل درصد تخفیف معتبر نیست' })
   discountMin: number;
 
   @Transform(({ value }) => toPercent(value))
   @Type(() => Number)
-  @IsNumber({ maxDecimalPlaces: 2 }, { message: 'درصد تخفیف تا معتبر نیست' })
-  @Min(0, { message: 'درصد تخفیف تا معتبر نیست' })
-  @Max(100, { message: 'درصد تخفیف تا معتبر نیست' })
+  @IsNumber({ maxDecimalPlaces: 2 }, { message: 'حداکثر درصد تخفیف معتبر نیست' })
+  @Min(0, { message: 'حداکثر درصد تخفیف معتبر نیست' })
+  @Max(100, { message: 'حداکثر درصد تخفیف معتبر نیست' })
   discountMax: number;
 
   @IsArray({ message: 'حداقل یک کالا لازم است' })

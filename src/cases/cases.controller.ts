@@ -112,18 +112,18 @@ export class CasesController {
   }
 
   @Get('inquiries')
-  caseInquiries(@Query('caseId') caseId = '') {
-    return this.inquiries.listForCase(caseId);
+  caseInquiries(@Query('caseId') caseId = '', @Query('requestId') requestId = '') {
+    return this.inquiries.listForCase(caseId, requestId || undefined);
   }
 
   @Get('places')
-  casePlaces(@Query('caseId') caseId = '') {
-    return this.places.listForCase(caseId);
+  casePlaces(@Query('caseId') caseId = '', @Query('requestId') requestId = '') {
+    return this.places.listForCase(caseId, requestId || undefined);
   }
 
   @Get('management-approvers')
-  caseManagementApprovers(@Query('caseId') caseId = '') {
-    return this.managementApprovers.listForCase(caseId);
+  caseManagementApprovers(@Query('caseId') caseId = '', @Query('requestId') requestId = '') {
+    return this.managementApprovers.listForCase(caseId, requestId || undefined);
   }
 
   @Get('management-reviews/files/:fileId')

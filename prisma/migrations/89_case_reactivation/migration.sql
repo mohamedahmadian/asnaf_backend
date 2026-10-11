@@ -1,0 +1,1 @@
+ALTER TABLE "case_files" ADD COLUMN IF NOT EXISTS "reactivatedAt" TIMESTAMP(3);

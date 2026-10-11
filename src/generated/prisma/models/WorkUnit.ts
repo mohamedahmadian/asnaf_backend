@@ -378,10 +378,12 @@ export type WorkUnitCreateNestedOneWithoutCaseManagementReviewsInput = {
   connect?: Prisma.WorkUnitWhereUniqueInput
 }
 
-export type WorkUnitUpdateOneRequiredWithoutCaseManagementReviewsNestedInput = {
+export type WorkUnitUpdateOneWithoutCaseManagementReviewsNestedInput = {
   create?: Prisma.XOR<Prisma.WorkUnitCreateWithoutCaseManagementReviewsInput, Prisma.WorkUnitUncheckedCreateWithoutCaseManagementReviewsInput>
   connectOrCreate?: Prisma.WorkUnitCreateOrConnectWithoutCaseManagementReviewsInput
   upsert?: Prisma.WorkUnitUpsertWithoutCaseManagementReviewsInput
+  disconnect?: Prisma.WorkUnitWhereInput | boolean
+  delete?: Prisma.WorkUnitWhereInput | boolean
   connect?: Prisma.WorkUnitWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.WorkUnitUpdateToOneWithWhereWithoutCaseManagementReviewsInput, Prisma.WorkUnitUpdateWithoutCaseManagementReviewsInput>, Prisma.WorkUnitUncheckedUpdateWithoutCaseManagementReviewsInput>
 }

@@ -268,6 +268,14 @@ export const CaseFileStatus = {
 export type CaseFileStatus = (typeof CaseFileStatus)[keyof typeof CaseFileStatus]
 
 
+export const CaseSuspensionFileKind = {
+  SUSPEND: 'SUSPEND',
+  LIFT: 'LIFT'
+} as const
+
+export type CaseSuspensionFileKind = (typeof CaseSuspensionFileKind)[keyof typeof CaseSuspensionFileKind]
+
+
 export const AuctionApproverKind = {
   SPECIAL_INSPECTOR: 'SPECIAL_INSPECTOR',
   AUCTION_COMMITTEE: 'AUCTION_COMMITTEE',

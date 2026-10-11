@@ -44,6 +44,7 @@ export type CaseFileMinAggregateOutputType = {
   status: $Enums.CaseFileStatus | null
   revokeReason: string | null
   revokedAt: Date | null
+  reactivatedAt: Date | null
   revokedById: string | null
   formationStep: number | null
   trackingCode: string | null
@@ -86,6 +87,7 @@ export type CaseFileMaxAggregateOutputType = {
   status: $Enums.CaseFileStatus | null
   revokeReason: string | null
   revokedAt: Date | null
+  reactivatedAt: Date | null
   revokedById: string | null
   formationStep: number | null
   trackingCode: string | null
@@ -128,6 +130,7 @@ export type CaseFileCountAggregateOutputType = {
   status: number
   revokeReason: number
   revokedAt: number
+  reactivatedAt: number
   revokedById: number
   formationStep: number
   trackingCode: number
@@ -184,6 +187,7 @@ export type CaseFileMinAggregateInputType = {
   status?: true
   revokeReason?: true
   revokedAt?: true
+  reactivatedAt?: true
   revokedById?: true
   formationStep?: true
   trackingCode?: true
@@ -226,6 +230,7 @@ export type CaseFileMaxAggregateInputType = {
   status?: true
   revokeReason?: true
   revokedAt?: true
+  reactivatedAt?: true
   revokedById?: true
   formationStep?: true
   trackingCode?: true
@@ -268,6 +273,7 @@ export type CaseFileCountAggregateInputType = {
   status?: true
   revokeReason?: true
   revokedAt?: true
+  reactivatedAt?: true
   revokedById?: true
   formationStep?: true
   trackingCode?: true
@@ -397,6 +403,7 @@ export type CaseFileGroupByOutputType = {
   status: $Enums.CaseFileStatus
   revokeReason: string | null
   revokedAt: Date | null
+  reactivatedAt: Date | null
   revokedById: string | null
   formationStep: number
   trackingCode: string | null
@@ -462,6 +469,7 @@ export type CaseFileWhereInput = {
   status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  reactivatedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -518,6 +526,7 @@ export type CaseFileOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  reactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedById?: Prisma.SortOrderInput | Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -579,6 +588,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  reactivatedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   licenseIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
@@ -633,6 +643,7 @@ export type CaseFileOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  reactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedById?: Prisma.SortOrderInput | Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -683,6 +694,7 @@ export type CaseFileScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumCaseFileStatusWithAggregatesFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   revokedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
+  reactivatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntWithAggregatesFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
@@ -724,6 +736,7 @@ export type CaseFileCreateInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -775,6 +788,7 @@ export type CaseFileUncheckedCreateInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -824,6 +838,7 @@ export type CaseFileUpdateInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -875,6 +890,7 @@ export type CaseFileUncheckedUpdateInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -925,6 +941,7 @@ export type CaseFileCreateManyInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -966,6 +983,7 @@ export type CaseFileUpdateManyMutationInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1003,6 +1021,7 @@ export type CaseFileUncheckedUpdateManyInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1060,6 +1079,7 @@ export type CaseFileCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
+  reactivatedAt?: Prisma.SortOrder
   revokedById?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
@@ -1108,6 +1128,7 @@ export type CaseFileMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
+  reactivatedAt?: Prisma.SortOrder
   revokedById?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
@@ -1150,6 +1171,7 @@ export type CaseFileMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
+  reactivatedAt?: Prisma.SortOrder
   revokedById?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
@@ -1592,6 +1614,7 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1642,6 +1665,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -1720,6 +1744,7 @@ export type CaseFileScalarWhereInput = {
   status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  reactivatedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -1761,6 +1786,7 @@ export type CaseFileCreateWithoutActivityJobInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1811,6 +1837,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -1885,6 +1912,7 @@ export type CaseFileCreateWithoutInquiriesInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1935,6 +1963,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -1999,6 +2028,7 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2049,6 +2079,7 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2097,6 +2128,7 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2147,6 +2179,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -2211,6 +2244,7 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2261,6 +2295,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2309,6 +2344,7 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2359,6 +2395,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -2423,6 +2460,7 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2473,6 +2511,7 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2521,6 +2560,7 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2571,6 +2611,7 @@ export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -2635,6 +2676,7 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2685,6 +2727,7 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2733,6 +2776,7 @@ export type CaseFileCreateWithoutRequestsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2783,6 +2827,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -2847,6 +2892,7 @@ export type CaseFileUpdateWithoutRequestsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2897,6 +2943,7 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2945,6 +2992,7 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2995,6 +3043,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -3059,6 +3108,7 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3109,6 +3159,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3157,6 +3208,7 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3207,6 +3259,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -3271,6 +3324,7 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3321,6 +3375,7 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3369,6 +3424,7 @@ export type CaseFileCreateWithoutUserInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3418,6 +3474,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -3477,6 +3534,7 @@ export type CaseFileCreateWithoutRevokedByInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3527,6 +3585,7 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3617,6 +3676,7 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3667,6 +3727,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -3741,6 +3802,7 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3791,6 +3853,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -3865,6 +3928,7 @@ export type CaseFileCreateWithoutViolationsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3915,6 +3979,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -3979,6 +4044,7 @@ export type CaseFileUpdateWithoutViolationsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4029,6 +4095,7 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4078,6 +4145,7 @@ export type CaseFileCreateManyPremiseCityInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -4118,6 +4186,7 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4168,6 +4237,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4217,6 +4287,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4258,6 +4329,7 @@ export type CaseFileCreateManyActivityJobInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -4298,6 +4370,7 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4348,6 +4421,7 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4397,6 +4471,7 @@ export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4437,6 +4512,7 @@ export type CaseFileCreateManyUserInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -4479,6 +4555,7 @@ export type CaseFileCreateManyRevokedByInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4519,6 +4596,7 @@ export type CaseFileUpdateWithoutUserInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4568,6 +4646,7 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4617,6 +4696,7 @@ export type CaseFileUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4658,6 +4738,7 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4708,6 +4789,7 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4757,6 +4839,7 @@ export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4798,6 +4881,7 @@ export type CaseFileCreateManyPremiseComplexInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -4838,6 +4922,7 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4888,6 +4973,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4937,6 +5023,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4978,6 +5065,7 @@ export type CaseFileCreateManyRegistrationPlaceInput = {
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
   revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
   revokedById?: string | null
   formationStep?: number
   trackingCode?: string | null
@@ -5018,6 +5106,7 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5068,6 +5157,7 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5117,6 +5207,7 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5252,6 +5343,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   revokeReason?: boolean
   revokedAt?: boolean
+  reactivatedAt?: boolean
   revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
@@ -5309,6 +5401,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   revokeReason?: boolean
   revokedAt?: boolean
+  reactivatedAt?: boolean
   revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
@@ -5357,6 +5450,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   revokeReason?: boolean
   revokedAt?: boolean
+  reactivatedAt?: boolean
   revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
@@ -5405,6 +5499,7 @@ export type CaseFileSelectScalar = {
   status?: boolean
   revokeReason?: boolean
   revokedAt?: boolean
+  reactivatedAt?: boolean
   revokedById?: boolean
   formationStep?: boolean
   trackingCode?: boolean
@@ -5441,7 +5536,7 @@ export type CaseFileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "status" | "revokeReason" | "revokedAt" | "revokedById" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
+export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "status" | "revokeReason" | "revokedAt" | "reactivatedAt" | "revokedById" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
 export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
@@ -5500,6 +5595,7 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     status: $Enums.CaseFileStatus
     revokeReason: string | null
     revokedAt: Date | null
+    reactivatedAt: Date | null
     revokedById: string | null
     /**
      * مرحلهٔ درخواست صدور: ۰ هویت، ۱ فعالیت، ۲ محل، ۳ استعلام، ۴ اماکن، ۵ بررسی مدیریت، ۶ صدور
@@ -5982,6 +6078,7 @@ export interface CaseFileFieldRefs {
   readonly status: Prisma.FieldRef<"CaseFile", 'CaseFileStatus'>
   readonly revokeReason: Prisma.FieldRef<"CaseFile", 'String'>
   readonly revokedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
+  readonly reactivatedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly revokedById: Prisma.FieldRef<"CaseFile", 'String'>
   readonly formationStep: Prisma.FieldRef<"CaseFile", 'Int'>
   readonly trackingCode: Prisma.FieldRef<"CaseFile", 'String'>

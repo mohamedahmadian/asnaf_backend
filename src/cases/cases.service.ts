@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import {
   BadRequestException,
   ConflictException,
@@ -8,7 +9,7 @@ import {
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { ECONOMIC_ACTOR_ROLE_CODE, ensureEconomicActorRole } from '../access/access.constants';
-import { normalizeNationalId } from '../common/national-id';
+import { normalizeNationalId, toLatinDigits } from '../common/national-id';
 import { normalizeMobile } from '../common/phone';
 import {
   containsInsensitive,
@@ -21,6 +22,7 @@ import { resolveSortOrder } from '../common/sort-query';
 import {
   CaseFileStatus,
   CaseInquiryStatus,
+  CaseSuspensionFileKind,
   CaseRequestType,
   DocumentGender,
   DocumentSource,
@@ -35,6 +37,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { joinFullName } from '../users/user-profile.util';
 import { FindCasesQueryDto } from './dto/find-cases-query.dto';
+import { LiftCaseSuspensionDto } from './dto/lift-case-suspension.dto';
 import { RevokeCaseDto } from './dto/revoke-case.dto';
 import { SuspendCaseDto } from './dto/suspend-case.dto';
 import { SaveCaseActivityDto } from './dto/save-case-activity.dto';
@@ -58,6 +61,7 @@ import {
   completeOpenRequest,
   findOpenRequest,
   isProcessType,
+  processManagementTitles,
   requestIsDone,
   openProcessRequest,
   resolveDocumentRequirements,
@@ -196,8 +200,17 @@ function localTodayIso() {
   return `${now.getFullYear()}-${month}-${day}`;
 }
 
-function suspensionCoversToday(startsAt: Date, endsAt: Date, today: Date) {
-  return startsAt.getTime() <= today.getTime() && endsAt.getTime() >= today.getTime();
+function suspensionCoversToday(startsAt: Date, endsAt: Date | null, today: Date) {
+  if (startsAt.getTime() > today.getTime()) return false;
+  if (!endsAt) return true;
+  return endsAt.getTime() >= today.getTime();
+}
+
+function suspensionIsActive(
+  row: { startsAt: Date; endsAt: Date | null; liftedAt?: Date | null },
+  today: Date,
+) {
+  return !row.liftedAt && suspensionCoversToday(row.startsAt, row.endsAt, today);
 }
 
 function parseDate(value: string | null | undefined) {
@@ -644,6 +657,189 @@ export class CasesService {
     };
   }
 
+  private async renewalManagement(
+    rows: {
+      id: string;
+      status: CaseInquiryStatus;
+      note: string | null;
+      decidedAt: Date | null;
+      decidedBy: { fullName: string } | null;
+      workUnit: { title: string } | null;
+      role: { id: string; name: string };
+    }[],
+  ) {
+    const titles = await processManagementTitles(this.prisma, CaseRequestType.RENEWAL);
+    if (!titles.length) return [];
+    const titleByRole = new Map(titles.map((item) => [item.roleId, item.title]));
+    return rows
+      .filter((row) => titleByRole.has(row.role.id))
+      .map((row) => ({
+        id: row.id,
+        workUnitTitle: row.workUnit?.title ?? null,
+        roleName: row.role.name,
+        displayTitle: titleByRole.get(row.role.id) ?? null,
+        status: row.status,
+        note: row.note,
+        decidedAt: row.decidedAt?.toISOString() ?? null,
+        decidedByName: row.decidedBy?.fullName ?? null,
+      }));
+  }
+
+  async renewalView(caseId: string, requestId: string) {
+    const request = await this.prisma.caseRequest.findFirst({
+      where: { id: requestId, caseFileId: caseId, type: CaseRequestType.RENEWAL },
+      select: {
+        id: true,
+        number: true,
+        status: true,
+        formationStep: true,
+        createdAt: true,
+        completedAt: true,
+        renewalTerms: true,
+        caseFile: {
+          select: {
+            licenseNumber: true,
+            businessUnitTitle: true,
+            activityJobId: true,
+            user: { select: { gender: true } },
+            activityJob: { select: { title: true, group: { select: { title: true } } } },
+          },
+        },
+        activityDocuments: {
+          select: {
+            documentId: true,
+            document: { select: { title: true } },
+            versions: {
+              orderBy: { version: 'desc' },
+              take: 1,
+              select: { id: true, originalName: true, mimeType: true, createdAt: true },
+            },
+          },
+        },
+        inquiries: {
+          orderBy: [{ inquiryCenter: { name: 'asc' } }, { id: 'asc' }],
+          select: {
+            id: true,
+            status: true,
+            note: true,
+            decidedAt: true,
+            decidedBy: { select: { fullName: true } },
+            inquiryCenter: { select: { name: true } },
+          },
+        },
+        placesReview: {
+          select: {
+            id: true,
+            status: true,
+            note: true,
+            decidedAt: true,
+            decidedBy: { select: { fullName: true } },
+          },
+        },
+        managementReviews: {
+          orderBy: [{ workUnit: { title: 'asc' } }, { role: { name: 'asc' } }, { id: 'asc' }],
+          select: {
+            id: true,
+            status: true,
+            note: true,
+            decidedAt: true,
+            decidedBy: { select: { fullName: true } },
+            workUnit: { select: { title: true } },
+            role: { select: { id: true, name: true } },
+          },
+        },
+      },
+    });
+    if (!request) throw new NotFoundException('درخواست تمدید یافت نشد');
+    const requirements = await resolveDocumentRequirements(
+      this.prisma,
+      CaseRequestType.RENEWAL,
+      request.caseFile.activityJobId,
+      request.caseFile.user.gender,
+    );
+    const uploaded = new Map(request.activityDocuments.map((row) => [row.documentId, row]));
+    const seen = new Set<string>();
+    const documents: {
+      id: string;
+      title: string;
+      isRequired: boolean;
+      file: { id: string; originalName: string | null; mimeType: string; createdAt: string } | null;
+    }[] = [];
+    const mapFile = (
+      file: { id: string; originalName: string | null; mimeType: string; createdAt: Date },
+    ) => ({
+      id: file.id,
+      originalName: file.originalName,
+      mimeType: file.mimeType,
+      createdAt: file.createdAt.toISOString(),
+    });
+    for (const requirement of requirements) {
+      seen.add(requirement.id);
+      const row = uploaded.get(requirement.id);
+      const file = row?.versions[0] ?? null;
+      documents.push({
+        id: requirement.id,
+        title: requirement.title,
+        isRequired: requirement.isRequired,
+        file: file ? mapFile(file) : null,
+      });
+    }
+    for (const row of request.activityDocuments) {
+      if (seen.has(row.documentId)) continue;
+      const file = row.versions[0];
+      if (!file) continue;
+      documents.push({
+        id: row.documentId,
+        title: row.document.title,
+        isRequired: false,
+        file: mapFile(file),
+      });
+    }
+    documents.sort((left, right) => left.title.localeCompare(right.title, 'fa'));
+    const terms = request.renewalTerms;
+    const stamp = (value: Date | null | undefined) => value?.toISOString() ?? null;
+    return {
+      id: request.id,
+      number: request.number,
+      status: request.status,
+      formationStep: request.formationStep,
+      createdAt: request.createdAt.toISOString(),
+      completedAt: stamp(request.completedAt),
+      licenseNumber: request.caseFile.licenseNumber,
+      businessUnitTitle: request.caseFile.businessUnitTitle,
+      jobGroupTitle: request.caseFile.activityJob?.group?.title ?? null,
+      jobTitle: request.caseFile.activityJob?.title ?? null,
+      renewal: terms
+        ? {
+            currentIssuedAt: dateOnly(terms.currentIssuedAt),
+            currentExpiresAt: dateOnly(terms.currentExpiresAt),
+            nextIssuedAt: dateOnly(terms.nextIssuedAt),
+            nextExpiresAt: dateOnly(terms.nextExpiresAt),
+            delayDays: terms.delayDays,
+          }
+        : null,
+      documents,
+      inquiries: request.inquiries.map((row) => ({
+        id: row.id,
+        centerName: row.inquiryCenter.name,
+        status: row.status,
+        note: row.note,
+        decidedAt: stamp(row.decidedAt),
+        decidedByName: row.decidedBy?.fullName ?? null,
+      })),
+      places: request.placesReview
+        ? {
+            id: request.placesReview.id,
+            status: request.placesReview.status,
+            note: request.placesReview.note,
+            decidedAt: stamp(request.placesReview.decidedAt),
+            decidedByName: request.placesReview.decidedBy?.fullName ?? null,
+          }
+        : null,
+      management: await this.renewalManagement(request.managementReviews),
+    };
+  }
+
   async saveLocationDraft(dto: SaveCaseLocationDto) {
     const request = await findOpenRequest(this.prisma, dto.caseId);
     if (!request || request.type !== CaseRequestType.LOCATION_CHANGE) {
@@ -718,7 +914,7 @@ export class CasesService {
     if (!request || request.type === CaseRequestType.ISSUANCE || !isProcessType(request.type)) {
       throw new BadRequestException('درخواست تمدید یا تغییر مکان باز نیست');
     }
-    const ceiling = request.type === CaseRequestType.RENEWAL ? 4 : 3;
+    const ceiling = request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE ? 4 : 3;
     const requested = Math.min(Math.max(step, 0), ceiling);
     let next = Math.max(request.formationStep, Math.min(requested, request.formationStep + 1));
     if (request.type === CaseRequestType.RENEWAL && next === 1 && (await this.renewalHasNoDocuments(caseId))) {
@@ -732,10 +928,10 @@ export class CasesService {
     }
     if (next >= 2) await this.assertActivityDocumentsDelivered(caseId);
     if (next >= 3) await this.inquiries.assertDelivered(caseId);
-    if (request.type === CaseRequestType.RENEWAL && next >= 3) {
+    if ((request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE) && next >= 3) {
       await this.places.ensureForUser(caseId);
     }
-    if (request.type === CaseRequestType.RENEWAL && next >= 4) {
+    if ((request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE) && next >= 4) {
       await this.places.assertDelivered(caseId);
     }
     const saved = await this.prisma.caseRequest.update({
@@ -755,6 +951,13 @@ export class CasesService {
     const request = await findOpenRequest(this.prisma, caseId);
     if (!request) throw new BadRequestException('درخواست بازی برای تکمیل نیست');
     if (request.type === CaseRequestType.RENEWAL) {
+      if (request.formationStep < 4) {
+        throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
+      }
+      await this.inquiries.ensureForUser(caseId);
+      await this.places.ensureForUser(caseId);
+      await this.managementApprovers.ensureForUser(caseId);
+    } else if (request.type === CaseRequestType.LOCATION_CHANGE) {
       if (request.formationStep < 4) {
         throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
       }
@@ -844,29 +1047,27 @@ export class CasesService {
   async list(query: FindCasesQueryDto) {
     const q = query.q?.trim();
     const digits = q ? normalizeSearchDigits(q) : '';
+    const licenseQuery = q ? toLatinDigits(q).trim() : '';
     const where: Prisma.CaseFileWhereInput = {
       userId: query.userId,
+      status: query.status,
       formationStep: query.step != null ? query.step : { gt: 0 },
       activityJobId: query.jobId,
+      activityJob: query.jobGroupId ? { groupId: query.jobGroupId } : undefined,
       user: {
         gender: query.gender,
         residencyStatus: query.residencyStatus,
         educationLevel: query.educationLevel,
-        OR: q
-          ? [
-              { fullName: containsInsensitive(q) },
-              { firstName: containsInsensitive(q) },
-              { lastName: containsInsensitive(q) },
-              { fatherName: containsInsensitive(q) },
-              ...(digits
-                ? [
-                    { nationalId: { contains: digits } },
-                    { phone: { contains: digits } },
-                  ]
-                : []),
-            ]
-          : undefined,
       },
+      OR: q
+        ? [
+            { user: { firstName: containsInsensitive(q) } },
+            { user: { lastName: containsInsensitive(q) } },
+            { user: { fullName: containsInsensitive(q) } },
+            ...(licenseQuery ? [{ licenseNumber: containsInsensitive(licenseQuery) }] : []),
+            ...(digits ? [{ user: { phone: { contains: digits } } }] : []),
+          ]
+        : undefined,
     };
     const orderBy = resolveSortOrder<Prisma.CaseFileOrderByWithRelationInput>(
       query.sortBy,
@@ -881,6 +1082,7 @@ export class CasesService {
         educationLevel: (dir) => ({ user: { educationLevel: dir } }),
         job: (dir) => ({ activityJob: { title: dir } }),
         jobTitle: (dir) => ({ businessUnitTitle: dir }),
+        licenseNumber: (dir) => ({ licenseNumber: dir }),
         formationStep: (dir) => ({ formationStep: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
@@ -890,9 +1092,14 @@ export class CasesService {
       formationStep: true,
       trackingCode: true,
       businessUnitTitle: true,
+      status: true,
       licenseNumber: true,
       licenseIssuedAt: true,
       licenseExpiresAt: true,
+      suspensions: {
+        orderBy: [{ startsAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
+        select: { startsAt: true, endsAt: true, liftedAt: true },
+      },
       premiseOwnership: true,
       leaseIssuedAt: true,
       leaseExpiresAt: true,
@@ -917,27 +1124,39 @@ export class CasesService {
       },
     } satisfies Prisma.CaseFileSelect;
 
-    const mapRow = (row: Prisma.CaseFileGetPayload<{ select: typeof select }>) => ({
-      id: row.id,
-      formationStep: row.formationStep,
-      trackingCode: row.trackingCode,
-      licenseNumber: row.licenseNumber,
-      licenseIssuedAt: dateOnly(row.licenseIssuedAt),
-      licenseExpiresAt: dateOnly(row.licenseExpiresAt),
-      premiseOwnership: row.premiseOwnership,
-      leaseIssuedAt: dateOnly(row.leaseIssuedAt),
-      leaseExpiresAt: dateOnly(row.leaseExpiresAt),
-      fullName: row.user.fullName,
-      fatherName: row.user.fatherName,
-      nationalId: row.user.nationalId,
-      gender: row.user.gender,
-      phone: row.user.phone,
-      residencyStatus: row.user.residencyStatus,
-      educationLevel: row.user.educationLevel,
-      job: row.activityJob,
-      jobTitle: row.businessUnitTitle,
-      city: row.premiseCity,
-    });
+    const today = parseDate(localTodayIso())!;
+    const mapRow = (row: Prisma.CaseFileGetPayload<{ select: typeof select }>) => {
+      const activeSuspension = row.suspensions.find((item) => suspensionIsActive(item, today));
+      const status =
+        row.status === CaseFileStatus.REVOKED
+          ? CaseFileStatus.REVOKED
+          : activeSuspension
+            ? CaseFileStatus.SUSPENDED
+            : CaseFileStatus.ACTIVE;
+      return {
+        id: row.id,
+        formationStep: row.formationStep,
+        trackingCode: row.trackingCode,
+        status,
+        suspensionStartsAt: activeSuspension ? dateOnly(activeSuspension.startsAt) : null,
+        licenseNumber: row.licenseNumber,
+        licenseIssuedAt: dateOnly(row.licenseIssuedAt),
+        licenseExpiresAt: dateOnly(row.licenseExpiresAt),
+        premiseOwnership: row.premiseOwnership,
+        leaseIssuedAt: dateOnly(row.leaseIssuedAt),
+        leaseExpiresAt: dateOnly(row.leaseExpiresAt),
+        fullName: row.user.fullName,
+        fatherName: row.user.fatherName,
+        nationalId: row.user.nationalId,
+        gender: row.user.gender,
+        phone: row.user.phone,
+        residencyStatus: row.user.residencyStatus,
+        educationLevel: row.user.educationLevel,
+        job: row.activityJob,
+        jobTitle: row.businessUnitTitle,
+        city: row.premiseCity,
+      };
+    };
 
     if (!wantsPagination(query)) {
       const items = await this.prisma.caseFile.findMany({ where, orderBy, select });
@@ -960,6 +1179,7 @@ export class CasesService {
         status: true,
         revokeReason: true,
         revokedAt: true,
+        reactivatedAt: true,
         formationStep: true,
         trackingCode: true,
         businessUnitTitle: true,
@@ -1018,7 +1238,18 @@ export class CasesService {
         },
         suspensions: {
           orderBy: [{ startsAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
-          select: { id: true, reason: true, startsAt: true, endsAt: true },
+          select: {
+            id: true,
+            reason: true,
+            startsAt: true,
+            endsAt: true,
+            liftNote: true,
+            liftedAt: true,
+            files: {
+              orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+              select: { id: true, kind: true, originalName: true, mimeType: true },
+            },
+          },
         },
       },
     });
@@ -1028,8 +1259,10 @@ export class CasesService {
       id: row.id,
       reason: row.reason,
       startsAt: dateOnly(row.startsAt)!,
-      endsAt: dateOnly(row.endsAt)!,
-      active: suspensionCoversToday(row.startsAt, row.endsAt, today),
+      endsAt: dateOnly(row.endsAt),
+      liftNote: row.liftNote,
+      files: row.files,
+      active: suspensionIsActive(row, today),
     }));
     const status =
       file.status === CaseFileStatus.REVOKED
@@ -1061,6 +1294,7 @@ export class CasesService {
       status,
       revokeReason: file.status === CaseFileStatus.REVOKED ? file.revokeReason : null,
       revokedAt: file.status === CaseFileStatus.REVOKED ? file.revokedAt?.toISOString() ?? null : null,
+      reactivatedAt: file.reactivatedAt?.toISOString() ?? null,
       violationCount,
       suspensionCount: suspensions.length,
       suspensions,
@@ -1122,21 +1356,31 @@ export class CasesService {
     };
   }
 
-  async suspend(id: string, dto: SuspendCaseDto, actorId?: string) {
+  async suspend(
+    id: string,
+    dto: SuspendCaseDto,
+    actorId?: string,
+    upload?: { buffer: Buffer; mimeType: string; originalName: string },
+  ) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id },
-      select: { id: true, formationStep: true, status: true },
+      select: { id: true, userId: true, formationStep: true, status: true },
     });
     if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
     if (file.status === CaseFileStatus.REVOKED) {
       throw new BadRequestException('روی پرونده ابطال‌شده تعلیق ثبت نمی‌شود');
     }
     const start = parseDate(dto.startsAt);
-    const end = parseDate(dto.endsAt);
-    if (!start || !end || end.getTime() < start.getTime()) {
+    const end = dto.endsAt ? parseDate(dto.endsAt) : null;
+    if (!start || (dto.endsAt && !end)) {
+      throw new BadRequestException('تاریخ تعلیق معتبر نیست');
+    }
+    if (end && end.getTime() < start.getTime()) {
       throw new BadRequestException('تاریخ پایان باید همان روز شروع یا بعد از آن باشد');
     }
     const today = parseDate(localTodayIso())!;
+    let storageKey: string | null = null;
+    try {
     const created = await this.prisma.$transaction(async (tx) => {
       const row = await tx.caseSuspension.create({
         data: {
@@ -1148,11 +1392,21 @@ export class CasesService {
         },
         select: { id: true, reason: true, startsAt: true, endsAt: true },
       });
+      await this.attachSuspensionFile(tx, {
+        personId: file.userId,
+        caseFileId: id,
+        suspensionId: row.id,
+        kind: CaseSuspensionFileKind.SUSPEND,
+        upload,
+        track: (key) => {
+          storageKey = key;
+        },
+      });
       const rows = await tx.caseSuspension.findMany({
         where: { caseFileId: id },
-        select: { startsAt: true, endsAt: true },
+        select: { startsAt: true, endsAt: true, liftedAt: true },
       });
-      const active = rows.some((item) => suspensionCoversToday(item.startsAt, item.endsAt, today));
+      const active = rows.some((item) => suspensionIsActive(item, today));
       await tx.caseFile.update({
         where: { id },
         data: { status: active ? CaseFileStatus.SUSPENDED : CaseFileStatus.ACTIVE },
@@ -1164,11 +1418,80 @@ export class CasesService {
       reason: created.reason,
       startsAt: dateOnly(created.startsAt),
       endsAt: dateOnly(created.endsAt),
-      active: suspensionCoversToday(created.startsAt, created.endsAt, today),
-      status: suspensionCoversToday(created.startsAt, created.endsAt, today)
-        ? CaseFileStatus.SUSPENDED
-        : CaseFileStatus.ACTIVE,
+      active: suspensionIsActive(created, today),
+      status: suspensionIsActive(created, today) ? CaseFileStatus.SUSPENDED : CaseFileStatus.ACTIVE,
     };
+    } catch (error) {
+      if (storageKey) await this.files.remove(storageKey);
+      throw error;
+    }
+  }
+
+  async liftSuspension(
+    id: string,
+    dto: LiftCaseSuspensionDto,
+    upload?: { buffer: Buffer; mimeType: string; originalName: string },
+  ) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id },
+      select: { id: true, userId: true, formationStep: true, status: true },
+    });
+    if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    if (file.status === CaseFileStatus.REVOKED) {
+      throw new BadRequestException('روی پرونده ابطال‌شده تعلیق برداشته نمی‌شود');
+    }
+    const end = parseDate(dto.endsAt);
+    const today = parseDate(localTodayIso())!;
+    if (!end) throw new BadRequestException('تاریخ پایان تعلیق معتبر نیست');
+    if (end.getTime() > today.getTime()) {
+      throw new BadRequestException('تاریخ پایان تعلیق نمی‌تواند بعد از امروز باشد');
+    }
+    let storageKey: string | null = null;
+    try {
+    const updated = await this.prisma.$transaction(async (tx) => {
+      const rows = await tx.caseSuspension.findMany({
+        where: { caseFileId: id },
+        orderBy: [{ startsAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
+        select: { id: true, startsAt: true, endsAt: true, liftedAt: true },
+      });
+      const current = rows.find((row) => suspensionIsActive(row, today));
+      if (!current) throw new BadRequestException('این پرونده در حال تعلیق نیست');
+      if (end.getTime() < current.startsAt.getTime()) {
+        throw new BadRequestException('تاریخ پایان باید همان روز شروع یا بعد از آن باشد');
+      }
+      const row = await tx.caseSuspension.update({
+        where: { id: current.id },
+        data: { endsAt: end, liftNote: dto.note, liftedAt: new Date() },
+        select: { id: true, startsAt: true, endsAt: true, liftNote: true },
+      });
+      await this.attachSuspensionFile(tx, {
+        personId: file.userId,
+        caseFileId: id,
+        suspensionId: row.id,
+        kind: CaseSuspensionFileKind.LIFT,
+        upload,
+        track: (key) => {
+          storageKey = key;
+        },
+      });
+      const stillActive = rows.some(
+        (item) => item.id !== current.id && suspensionIsActive(item, today),
+      );
+      const status = stillActive ? CaseFileStatus.SUSPENDED : CaseFileStatus.ACTIVE;
+      await tx.caseFile.update({ where: { id }, data: { status } });
+      return { ...row, status };
+    });
+    return {
+      id: updated.id,
+      startsAt: dateOnly(updated.startsAt),
+      endsAt: dateOnly(updated.endsAt),
+      liftNote: updated.liftNote,
+      status: updated.status,
+    };
+    } catch (error) {
+      if (storageKey) await this.files.remove(storageKey);
+      throw error;
+    }
   }
 
   async revoke(id: string, dto: RevokeCaseDto, actorId?: string) {
@@ -1188,6 +1511,7 @@ export class CasesService {
         revokeReason: dto.reason,
         revokedAt,
         revokedById: actorId ?? null,
+        reactivatedAt: null,
       },
     });
     return {
@@ -1195,6 +1519,82 @@ export class CasesService {
       revokeReason: dto.reason,
       revokedAt: revokedAt.toISOString(),
     };
+  }
+
+  async reactivate(id: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id },
+      select: { id: true, formationStep: true, status: true },
+    });
+    if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
+    if (file.status !== CaseFileStatus.REVOKED) {
+      throw new BadRequestException('فقط پرونده ابطال‌شده دوباره فعال می‌شود');
+    }
+    const reactivatedAt = new Date();
+    const today = parseDate(localTodayIso())!;
+    await this.prisma.$transaction(async (tx) => {
+      await tx.caseSuspension.updateMany({
+        where: {
+          caseFileId: id,
+          liftedAt: null,
+          OR: [{ endsAt: null }, { endsAt: { gte: today } }],
+        },
+        data: { liftedAt: reactivatedAt },
+      });
+      await tx.caseFile.update({
+        where: { id },
+        data: { status: CaseFileStatus.ACTIVE, reactivatedAt },
+      });
+    });
+    return { status: CaseFileStatus.ACTIVE, reactivatedAt: reactivatedAt.toISOString() };
+  }
+
+  async readSuspensionFile(fileId: string) {
+    const file = await this.prisma.caseSuspensionFile.findUnique({ where: { id: fileId } });
+    if (!file) throw new NotFoundException('پیوست یافت نشد');
+    const data = await this.files.read(file.storageKey);
+    return {
+      mimeType: file.mimeType,
+      byteSize: file.byteSize,
+      originalName: file.originalName,
+      data,
+    };
+  }
+
+  private async attachSuspensionFile(
+    tx: Prisma.TransactionClient,
+    input: {
+      personId: string;
+      caseFileId: string;
+      suspensionId: string;
+      kind: CaseSuspensionFileKind;
+      upload?: { buffer: Buffer; mimeType: string; originalName: string };
+      track: (storageKey: string) => void;
+    },
+  ) {
+    if (!input.upload?.buffer?.length) return;
+    const fileId = randomUUID();
+    const stored = await this.files.saveSuspension({
+      personId: input.personId,
+      caseFileId: input.caseFileId,
+      suspensionId: input.suspensionId,
+      fileId,
+      buffer: input.upload.buffer,
+      mimeType: input.upload.mimeType,
+      originalName: input.upload.originalName,
+    });
+    input.track(stored.storageKey);
+    await tx.caseSuspensionFile.create({
+      data: {
+        id: fileId,
+        suspensionId: input.suspensionId,
+        kind: input.kind,
+        storageKey: stored.storageKey,
+        originalName: stored.originalName,
+        mimeType: stored.mimeType,
+        byteSize: stored.byteSize,
+      },
+    });
   }
 
   async licenseDocument(id: string) {
@@ -1238,9 +1638,7 @@ export class CasesService {
       },
     });
     if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
-    if (!file.licenseNumber) {
-      throw new NotFoundException('مجوز فعالیت اقتصادی هنوز صادر نشده است');
-    }
+    if (!file.licenseNumber) return { licenseNumber: null };
     return {
       licenseNumber: file.licenseNumber,
       issuedAt: dateOnly(file.licenseIssuedAt),
@@ -1284,8 +1682,15 @@ export class CasesService {
       where: { caseActivityDocument: { caseFileId: file.id } },
       select: { storageKey: true },
     });
+    const suspensionFiles = await this.prisma.caseSuspensionFile.findMany({
+      where: { suspension: { caseFileId: file.id } },
+      select: { storageKey: true },
+    });
     await this.prisma.caseFile.delete({ where: { id: file.id } });
-    await this.removeStorageIfUnused(activityFiles.map((item) => item.storageKey));
+    await this.removeStorageIfUnused([
+      ...activityFiles.map((item) => item.storageKey),
+      ...suspensionFiles.map((item) => item.storageKey),
+    ]);
     const remaining = await this.prisma.caseFile.count({ where: { userId: file.userId } });
     if (remaining > 0) return { ok: true };
 

@@ -132,6 +132,36 @@ export class PersonFileStorage {
     };
   }
 
+  async saveSuspension(input: {
+    personId: string;
+    caseFileId: string;
+    suspensionId: string;
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = this.asAudio(input.buffer, input.mimeType, input.originalName) ?? (await this.prepare(input.buffer, input.mimeType));
+    const storageKey = [
+      'persons',
+      input.personId,
+      'cases',
+      input.caseFileId,
+      'suspensions',
+      input.suspensionId,
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
   async saveManagementReview(input: {
     personId: string;
     reviewId: string;
@@ -182,6 +212,36 @@ export class PersonFileStorage {
       throw new BadRequestException('مسیر فایل نامعتبر است');
     }
     return absolute;
+  }
+
+  private asAudio(buffer: Buffer, mimeType: string, originalName: string) {
+    if (!buffer?.length || buffer.length > MAX_BYTES) return null;
+    const mime = mimeType.split(';')[0].trim().toLowerCase();
+    const byMime: Record<string, string> = {
+      'audio/mpeg': 'mp3',
+      'audio/mp3': 'mp3',
+      'audio/wav': 'wav',
+      'audio/x-wav': 'wav',
+      'audio/webm': 'webm',
+      'audio/ogg': 'ogg',
+      'audio/mp4': 'm4a',
+      'audio/aac': 'aac',
+      'audio/x-m4a': 'm4a',
+    };
+    if (byMime[mime]) return { data: buffer, mimeType: mime, ext: byMime[mime] };
+    const match = /\.(webm|ogg|mp3|m4a|wav|aac)$/i.exec(originalName);
+    if (!match) return null;
+    if (mime && mime !== 'application/octet-stream' && !mime.startsWith('audio/')) return null;
+    const ext = match[1].toLowerCase();
+    const byExt: Record<string, string> = {
+      mp3: 'audio/mpeg',
+      wav: 'audio/wav',
+      webm: 'audio/webm',
+      ogg: 'audio/ogg',
+      m4a: 'audio/mp4',
+      aac: 'audio/aac',
+    };
+    return { data: buffer, mimeType: byExt[ext] ?? 'audio/mpeg', ext };
   }
 
   private async prepare(buffer: Buffer, mimeType: string) {

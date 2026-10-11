@@ -16,6 +16,7 @@ import { resolveSortOrder } from '../common/sort-query';
 import {
   CaseInquiryChannel,
   CaseInquiryStatus,
+  CaseRequestStatus,
   DocumentGender,
   Prisma,
 } from '../generated/prisma/client';
@@ -26,6 +27,8 @@ import {
   findOpenRequest,
   inquiryRewindPhase,
   isProcessType,
+  requestIsOpen,
+  requestOnCase,
   resolveDocumentRequirements,
   resolveInquiryCenterIds,
   rewindRequestPhase,
@@ -108,15 +111,20 @@ export class CaseInquiriesService {
     });
   }
 
-  async ensureForUser(caseFileId: string) {
-    const request = await findOpenRequest(this.prisma, caseFileId);
-    if (!request || !isProcessType(request.type)) return;
+  private async ensureForRequest(request: {
+    id: string;
+    caseFileId: string;
+    type: string;
+    status: CaseRequestStatus;
+  }) {
+    const requestType = request.type;
+    if (!requestIsOpen(request.status) || !isProcessType(requestType)) return;
     const file = await this.prisma.caseFile.findUnique({
-      where: { id: caseFileId },
+      where: { id: request.caseFileId },
       select: { id: true, activityJobId: true },
     });
     if (!file) return;
-    const centerIds = await resolveInquiryCenterIds(this.prisma, request.type, file.activityJobId);
+    const centerIds = await resolveInquiryCenterIds(this.prisma, requestType, file.activityJobId);
     if (!centerIds.length) return;
     await this.prisma.caseInquiry.createMany({
       data: centerIds.map((inquiryCenterId) => ({
@@ -126,6 +134,12 @@ export class CaseInquiriesService {
       })),
       skipDuplicates: true,
     });
+  }
+
+  async ensureForUser(caseFileId: string) {
+    const request = await findOpenRequest(this.prisma, caseFileId);
+    if (!request) return;
+    await this.ensureForRequest(request);
   }
 
   async assertDelivered(caseFileId: string) {
@@ -140,10 +154,10 @@ export class CaseInquiriesService {
     }
   }
 
-  async listForCase(caseFileId: string) {
-    await this.ensureForUser(caseFileId);
-    const request = await this.targetRequest(caseFileId);
+  async listForCase(caseFileId: string, requestId?: string) {
+    const request = await requestOnCase(this.prisma, caseFileId, requestId);
     if (!request) return [];
+    await this.ensureForRequest(request);
     const rows = await this.prisma.caseInquiry.findMany({
       where: { caseRequestId: request.id },
       include: inquiryInclude,

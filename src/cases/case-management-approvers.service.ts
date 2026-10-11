@@ -11,15 +11,20 @@ import {
   paginationArgs,
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
-import { CaseInquiryChannel, CaseInquiryStatus, Prisma, UserStatus } from '../generated/prisma/client';
+import { CaseInquiryChannel, CaseInquiryStatus, CaseRequestStatus, Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateCaseManagementApproverDto } from './dto/create-case-management-approver.dto';
 import { FindCaseManagementApproversQueryDto } from './dto/find-case-management-approvers-query.dto';
+import { CaseAuctionService } from './case-auction.service';
 import { PersonFileStorage } from './person-file.storage';
 import {
   findOpenRequest,
   isProcessType,
+  isSettingsRequestType,
   managementRewindPhase,
+  processManagementTitles,
+  requestIsOpen,
+  requestOnCase,
   rewindRequestPhase,
 } from './request-process';
 
@@ -46,6 +51,7 @@ export class CaseManagementApproversService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly files: PersonFileStorage,
+    private readonly auction: CaseAuctionService,
   ) {}
 
   async findAll(query: FindCaseManagementApproversQueryDto) {
@@ -156,6 +162,25 @@ export class CaseManagementApproversService {
     });
   }
 
+  private async ensureForRequest(request: {
+    id: string;
+    caseFileId: string;
+    type: string;
+    status: CaseRequestStatus;
+  }) {
+    if (!requestIsOpen(request.status) || !isSettingsRequestType(request.type)) return;
+    const roles = await processManagementTitles(this.prisma, request.type);
+    if (!roles.length) return;
+    await this.prisma.caseManagementReview.createMany({
+      data: roles.map((item) => ({
+        caseFileId: request.caseFileId,
+        caseRequestId: request.id,
+        roleId: item.roleId,
+      })),
+      skipDuplicates: true,
+    });
+  }
+
   /** برای هر واحد و نقشِ تنظیمات، یک ردیف در انتظار روی درخواست باز می‌سازد. */
   async ensureForUser(caseFileId: string) {
     const file = await this.prisma.caseFile.findUnique({
@@ -164,52 +189,50 @@ export class CaseManagementApproversService {
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
     const request = await findOpenRequest(this.prisma, caseFileId);
-    if (!request || !isProcessType(request.type)) return;
-    const settings = await this.prisma.caseManagementApprover.findMany({
-      select: { workUnitId: true, roleId: true },
-    });
-    if (!settings.length) return;
-    await this.prisma.caseManagementReview.createMany({
-      data: settings.map((item) => ({
-        caseFileId,
-        caseRequestId: request.id,
-        workUnitId: item.workUnitId,
-        roleId: item.roleId,
-      })),
-      skipDuplicates: true,
-    });
+    if (!request) return;
+    await this.ensureForRequest(request);
   }
 
   async assertDelivered(caseFileId: string) {
     await this.ensureForUser(caseFileId);
     const request = await this.targetRequest(caseFileId);
     if (!request) throw new BadRequestException('قبل از صدور مجوز باید نتیجه همه تاییدهای مدیریتی ثبت شود');
-    const pending = await this.prisma.caseManagementReview.count({
-      where: { caseRequestId: request.id, status: CaseInquiryStatus.PENDING },
-    });
-    if (pending > 0) {
+    const configured = await processManagementTitles(this.prisma, request.type);
+    if (!configured.length) return;
+    const roleIds = configured.map((item) => item.roleId);
+    const [pending, total] = await Promise.all([
+      this.prisma.caseManagementReview.count({
+        where: { caseRequestId: request.id, roleId: { in: roleIds }, status: CaseInquiryStatus.PENDING },
+      }),
+      this.prisma.caseManagementReview.count({
+        where: { caseRequestId: request.id, roleId: { in: roleIds } },
+      }),
+    ]);
+    if (total < configured.length || pending > 0) {
       throw new BadRequestException('قبل از صدور مجوز باید نتیجه همه تاییدهای مدیریتی ثبت شود');
     }
   }
 
-  async listForCase(caseFileId: string) {
+  async listForCase(caseFileId: string, requestId?: string) {
     if (!caseFileId) throw new BadRequestException('پرونده مشخص نیست');
-    await this.ensureForUser(caseFileId);
-    const request = await this.targetRequest(caseFileId);
+    const request = await requestOnCase(this.prisma, caseFileId, requestId);
     if (!request) return [];
-    const rows = await this.prisma.caseManagementReview.findMany({
-      where: { caseRequestId: request.id },
-      include: reviewInclude,
-      orderBy: [{ workUnit: { title: 'asc' } }, { role: { name: 'asc' } }, { id: 'asc' }],
-    });
+    await this.ensureForRequest(request);
+    const titles = await processManagementTitles(this.prisma, request.type);
+    if (!titles.length) return [];
+    const titleByRole = new Map(titles.map((item) => [item.roleId, item.title]));
+    const order = new Map(titles.map((item, index) => [item.roleId, index]));
+    const rows = (
+      await this.prisma.caseManagementReview.findMany({
+        where: { caseRequestId: request.id, roleId: { in: [...titleByRole.keys()] } },
+        include: reviewInclude,
+      })
+    ).sort((left, right) => (order.get(left.roleId) ?? 0) - (order.get(right.roleId) ?? 0) || left.id.localeCompare(right.id));
     if (!rows.length) return [];
     const people = await this.prisma.user.findMany({
       where: {
         status: UserStatus.ACTIVE,
-        OR: rows.map((row) => ({
-          workUnitId: row.workUnitId,
-          userRoles: { some: { roleId: row.roleId } },
-        })),
+        userRoles: { some: { roleId: { in: rows.map((row) => row.roleId) } } },
       },
       select: {
         id: true,
@@ -219,7 +242,7 @@ export class CaseManagementApproversService {
       },
       orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
     });
-    return rows.map((row) => this.mapReview(row, people));
+    return rows.map((row) => this.mapReview(row, people, titleByRole.get(row.roleId) ?? null));
   }
 
   async decide(
@@ -280,6 +303,7 @@ export class CaseManagementApproversService {
       },
       include: reviewInclude,
     });
+    await this.auction.syncPhase(saved.caseRequestId);
     return this.mapReview(saved, await this.peopleFor(saved));
   }
 
@@ -303,6 +327,7 @@ export class CaseManagementApproversService {
     });
     const phase = owner ? managementRewindPhase(owner.type) : null;
     if (phase != null) await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
+    await this.auction.syncPhase(saved.caseRequestId);
     return this.mapReview(saved, await this.peopleFor(saved));
   }
 
@@ -326,11 +351,10 @@ export class CaseManagementApproversService {
     return row?.userId ?? null;
   }
 
-  private async peopleFor(row: { workUnitId: string; roleId: string }) {
+  private async peopleFor(row: { roleId: string }) {
     return this.prisma.user.findMany({
       where: {
         status: UserStatus.ACTIVE,
-        workUnitId: row.workUnitId,
         userRoles: { some: { roleId: row.roleId } },
       },
       select: {
@@ -351,6 +375,7 @@ export class CaseManagementApproversService {
       workUnitId: string | null;
       userRoles: { roleId: string }[];
     }[],
+    displayTitle: string | null = null,
   ) {
     return {
       id: row.id,
@@ -360,14 +385,11 @@ export class CaseManagementApproversService {
       createdAt: row.createdAt,
       decidedAt: row.decidedAt,
       decidedBy: row.decidedBy,
-      workUnitTitle: row.workUnit.title,
+      workUnitTitle: row.workUnit?.title ?? null,
       roleName: row.role.name,
+      displayTitle,
       people: people
-        .filter(
-          (person) =>
-            person.workUnitId === row.workUnitId &&
-            person.userRoles.some((link) => link.roleId === row.roleId),
-        )
+        .filter((person) => person.userRoles.some((link) => link.roleId === row.roleId))
         .map((person) => ({ id: person.id, fullName: person.fullName })),
       files: row.files,
     };

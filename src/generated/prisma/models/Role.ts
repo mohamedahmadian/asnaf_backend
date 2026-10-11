@@ -202,6 +202,8 @@ export type RoleWhereInput = {
   permissions?: Prisma.RolePermissionListRelationFilter
   caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
   caseManagementReviews?: Prisma.CaseManagementReviewListRelationFilter
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleListRelationFilter
+  placesOffice?: Prisma.XOR<Prisma.CasePlacesOfficeNullableScalarRelationFilter, Prisma.CasePlacesOfficeWhereInput> | null
   caseGeneralSettings?: Prisma.CaseGeneralSettingsListRelationFilter
 }
 
@@ -217,6 +219,8 @@ export type RoleOrderByWithRelationInput = {
   permissions?: Prisma.RolePermissionOrderByRelationAggregateInput
   caseManagementApprovers?: Prisma.CaseManagementApproverOrderByRelationAggregateInput
   caseManagementReviews?: Prisma.CaseManagementReviewOrderByRelationAggregateInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleOrderByRelationAggregateInput
+  placesOffice?: Prisma.CasePlacesOfficeOrderByWithRelationInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsOrderByRelationAggregateInput
 }
 
@@ -235,6 +239,8 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<{
   permissions?: Prisma.RolePermissionListRelationFilter
   caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
   caseManagementReviews?: Prisma.CaseManagementReviewListRelationFilter
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleListRelationFilter
+  placesOffice?: Prisma.XOR<Prisma.CasePlacesOfficeNullableScalarRelationFilter, Prisma.CasePlacesOfficeWhereInput> | null
   caseGeneralSettings?: Prisma.CaseGeneralSettingsListRelationFilter
 }, "id" | "code">
 
@@ -276,6 +282,8 @@ export type RoleCreateInput = {
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -291,6 +299,8 @@ export type RoleUncheckedCreateInput = {
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -306,6 +316,8 @@ export type RoleUpdateInput = {
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -321,6 +333,8 @@ export type RoleUncheckedUpdateInput = {
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -410,6 +424,22 @@ export type RoleUpdateOneWithoutCaseGeneralSettingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutCaseGeneralSettingsInput, Prisma.RoleUpdateWithoutCaseGeneralSettingsInput>, Prisma.RoleUncheckedUpdateWithoutCaseGeneralSettingsInput>
 }
 
+export type RoleCreateNestedOneWithoutPlacesOfficeInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutPlacesOfficeInput, Prisma.RoleUncheckedCreateWithoutPlacesOfficeInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutPlacesOfficeInput
+  connect?: Prisma.RoleWhereUniqueInput
+}
+
+export type RoleUpdateOneWithoutPlacesOfficeNestedInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutPlacesOfficeInput, Prisma.RoleUncheckedCreateWithoutPlacesOfficeInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutPlacesOfficeInput
+  upsert?: Prisma.RoleUpsertWithoutPlacesOfficeInput
+  disconnect?: Prisma.RoleWhereInput | boolean
+  delete?: Prisma.RoleWhereInput | boolean
+  connect?: Prisma.RoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutPlacesOfficeInput, Prisma.RoleUpdateWithoutPlacesOfficeInput>, Prisma.RoleUncheckedUpdateWithoutPlacesOfficeInput>
+}
+
 export type RoleCreateNestedOneWithoutCaseManagementApproversInput = {
   create?: Prisma.XOR<Prisma.RoleCreateWithoutCaseManagementApproversInput, Prisma.RoleUncheckedCreateWithoutCaseManagementApproversInput>
   connectOrCreate?: Prisma.RoleCreateOrConnectWithoutCaseManagementApproversInput
@@ -422,6 +452,20 @@ export type RoleUpdateOneRequiredWithoutCaseManagementApproversNestedInput = {
   upsert?: Prisma.RoleUpsertWithoutCaseManagementApproversInput
   connect?: Prisma.RoleWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutCaseManagementApproversInput, Prisma.RoleUpdateWithoutCaseManagementApproversInput>, Prisma.RoleUncheckedUpdateWithoutCaseManagementApproversInput>
+}
+
+export type RoleCreateNestedOneWithoutCaseProcessManagementRolesInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutCaseProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutCaseProcessManagementRolesInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutCaseProcessManagementRolesInput
+  connect?: Prisma.RoleWhereUniqueInput
+}
+
+export type RoleUpdateOneRequiredWithoutCaseProcessManagementRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutCaseProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutCaseProcessManagementRolesInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutCaseProcessManagementRolesInput
+  upsert?: Prisma.RoleUpsertWithoutCaseProcessManagementRolesInput
+  connect?: Prisma.RoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutCaseProcessManagementRolesInput, Prisma.RoleUpdateWithoutCaseProcessManagementRolesInput>, Prisma.RoleUncheckedUpdateWithoutCaseProcessManagementRolesInput>
 }
 
 export type RoleCreateNestedOneWithoutCaseManagementReviewsInput = {
@@ -478,6 +522,8 @@ export type RoleCreateWithoutCaseGeneralSettingsInput = {
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
 }
 
 export type RoleUncheckedCreateWithoutCaseGeneralSettingsInput = {
@@ -492,6 +538,8 @@ export type RoleUncheckedCreateWithoutCaseGeneralSettingsInput = {
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
 }
 
 export type RoleCreateOrConnectWithoutCaseGeneralSettingsInput = {
@@ -522,6 +570,8 @@ export type RoleUpdateWithoutCaseGeneralSettingsInput = {
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
 }
 
 export type RoleUncheckedUpdateWithoutCaseGeneralSettingsInput = {
@@ -536,6 +586,88 @@ export type RoleUncheckedUpdateWithoutCaseGeneralSettingsInput = {
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
+}
+
+export type RoleCreateWithoutPlacesOfficeInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleUncheckedCreateWithoutPlacesOfficeInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleCreateOrConnectWithoutPlacesOfficeInput = {
+  where: Prisma.RoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoleCreateWithoutPlacesOfficeInput, Prisma.RoleUncheckedCreateWithoutPlacesOfficeInput>
+}
+
+export type RoleUpsertWithoutPlacesOfficeInput = {
+  update: Prisma.XOR<Prisma.RoleUpdateWithoutPlacesOfficeInput, Prisma.RoleUncheckedUpdateWithoutPlacesOfficeInput>
+  create: Prisma.XOR<Prisma.RoleCreateWithoutPlacesOfficeInput, Prisma.RoleUncheckedCreateWithoutPlacesOfficeInput>
+  where?: Prisma.RoleWhereInput
+}
+
+export type RoleUpdateToOneWithWhereWithoutPlacesOfficeInput = {
+  where?: Prisma.RoleWhereInput
+  data: Prisma.XOR<Prisma.RoleUpdateWithoutPlacesOfficeInput, Prisma.RoleUncheckedUpdateWithoutPlacesOfficeInput>
+}
+
+export type RoleUpdateWithoutPlacesOfficeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
+}
+
+export type RoleUncheckedUpdateWithoutPlacesOfficeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
 export type RoleCreateWithoutCaseManagementApproversInput = {
@@ -549,6 +681,8 @@ export type RoleCreateWithoutCaseManagementApproversInput = {
   users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -563,6 +697,8 @@ export type RoleUncheckedCreateWithoutCaseManagementApproversInput = {
   users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -593,6 +729,8 @@ export type RoleUpdateWithoutCaseManagementApproversInput = {
   users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -607,6 +745,88 @@ export type RoleUncheckedUpdateWithoutCaseManagementApproversInput = {
   users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
+}
+
+export type RoleCreateWithoutCaseProcessManagementRolesInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleUncheckedCreateWithoutCaseProcessManagementRolesInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleCreateOrConnectWithoutCaseProcessManagementRolesInput = {
+  where: Prisma.RoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoleCreateWithoutCaseProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutCaseProcessManagementRolesInput>
+}
+
+export type RoleUpsertWithoutCaseProcessManagementRolesInput = {
+  update: Prisma.XOR<Prisma.RoleUpdateWithoutCaseProcessManagementRolesInput, Prisma.RoleUncheckedUpdateWithoutCaseProcessManagementRolesInput>
+  create: Prisma.XOR<Prisma.RoleCreateWithoutCaseProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutCaseProcessManagementRolesInput>
+  where?: Prisma.RoleWhereInput
+}
+
+export type RoleUpdateToOneWithWhereWithoutCaseProcessManagementRolesInput = {
+  where?: Prisma.RoleWhereInput
+  data: Prisma.XOR<Prisma.RoleUpdateWithoutCaseProcessManagementRolesInput, Prisma.RoleUncheckedUpdateWithoutCaseProcessManagementRolesInput>
+}
+
+export type RoleUpdateWithoutCaseProcessManagementRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
+}
+
+export type RoleUncheckedUpdateWithoutCaseProcessManagementRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -621,6 +841,8 @@ export type RoleCreateWithoutCaseManagementReviewsInput = {
   users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -635,6 +857,8 @@ export type RoleUncheckedCreateWithoutCaseManagementReviewsInput = {
   users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -665,6 +889,8 @@ export type RoleUpdateWithoutCaseManagementReviewsInput = {
   users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -679,6 +905,8 @@ export type RoleUncheckedUpdateWithoutCaseManagementReviewsInput = {
   users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -693,6 +921,8 @@ export type RoleCreateWithoutUsersInput = {
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -707,6 +937,8 @@ export type RoleUncheckedCreateWithoutUsersInput = {
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -737,6 +969,8 @@ export type RoleUpdateWithoutUsersInput = {
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -751,6 +985,8 @@ export type RoleUncheckedUpdateWithoutUsersInput = {
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -765,6 +1001,8 @@ export type RoleCreateWithoutPermissionsInput = {
   users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -779,6 +1017,8 @@ export type RoleUncheckedCreateWithoutPermissionsInput = {
   users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -809,6 +1049,8 @@ export type RoleUpdateWithoutPermissionsInput = {
   users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -823,6 +1065,8 @@ export type RoleUncheckedUpdateWithoutPermissionsInput = {
   users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -836,6 +1080,7 @@ export type RoleCountOutputType = {
   permissions: number
   caseManagementApprovers: number
   caseManagementReviews: number
+  caseProcessManagementRoles: number
   caseGeneralSettings: number
 }
 
@@ -844,6 +1089,7 @@ export type RoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   permissions?: boolean | RoleCountOutputTypeCountPermissionsArgs
   caseManagementApprovers?: boolean | RoleCountOutputTypeCountCaseManagementApproversArgs
   caseManagementReviews?: boolean | RoleCountOutputTypeCountCaseManagementReviewsArgs
+  caseProcessManagementRoles?: boolean | RoleCountOutputTypeCountCaseProcessManagementRolesArgs
   caseGeneralSettings?: boolean | RoleCountOutputTypeCountCaseGeneralSettingsArgs
 }
 
@@ -888,6 +1134,13 @@ export type RoleCountOutputTypeCountCaseManagementReviewsArgs<ExtArgs extends ru
 /**
  * RoleCountOutputType without action
  */
+export type RoleCountOutputTypeCountCaseProcessManagementRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseProcessManagementRoleWhereInput
+}
+
+/**
+ * RoleCountOutputType without action
+ */
 export type RoleCountOutputTypeCountCaseGeneralSettingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CaseGeneralSettingsWhereInput
 }
@@ -905,6 +1158,8 @@ export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   permissions?: boolean | Prisma.Role$permissionsArgs<ExtArgs>
   caseManagementApprovers?: boolean | Prisma.Role$caseManagementApproversArgs<ExtArgs>
   caseManagementReviews?: boolean | Prisma.Role$caseManagementReviewsArgs<ExtArgs>
+  caseProcessManagementRoles?: boolean | Prisma.Role$caseProcessManagementRolesArgs<ExtArgs>
+  placesOffice?: boolean | Prisma.Role$placesOfficeArgs<ExtArgs>
   caseGeneralSettings?: boolean | Prisma.Role$caseGeneralSettingsArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["role"]>
@@ -945,6 +1200,8 @@ export type RoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   permissions?: boolean | Prisma.Role$permissionsArgs<ExtArgs>
   caseManagementApprovers?: boolean | Prisma.Role$caseManagementApproversArgs<ExtArgs>
   caseManagementReviews?: boolean | Prisma.Role$caseManagementReviewsArgs<ExtArgs>
+  caseProcessManagementRoles?: boolean | Prisma.Role$caseProcessManagementRolesArgs<ExtArgs>
+  placesOffice?: boolean | Prisma.Role$placesOfficeArgs<ExtArgs>
   caseGeneralSettings?: boolean | Prisma.Role$caseGeneralSettingsArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -958,6 +1215,8 @@ export type $RolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     permissions: Prisma.$RolePermissionPayload<ExtArgs>[]
     caseManagementApprovers: Prisma.$CaseManagementApproverPayload<ExtArgs>[]
     caseManagementReviews: Prisma.$CaseManagementReviewPayload<ExtArgs>[]
+    caseProcessManagementRoles: Prisma.$CaseProcessManagementRolePayload<ExtArgs>[]
+    placesOffice: Prisma.$CasePlacesOfficePayload<ExtArgs> | null
     caseGeneralSettings: Prisma.$CaseGeneralSettingsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1366,6 +1625,8 @@ export interface Prisma__RoleClient<T, Null = never, ExtArgs extends runtime.Typ
   permissions<T extends Prisma.Role$permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RolePermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseManagementApprovers<T extends Prisma.Role$caseManagementApproversArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseManagementApproversArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementApproverPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseManagementReviews<T extends Prisma.Role$caseManagementReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseManagementReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  caseProcessManagementRoles<T extends Prisma.Role$caseProcessManagementRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseProcessManagementRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseProcessManagementRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  placesOffice<T extends Prisma.Role$placesOfficeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$placesOfficeArgs<ExtArgs>>): Prisma.Prisma__CasePlacesOfficeClient<runtime.Types.Result.GetResult<Prisma.$CasePlacesOfficePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   caseGeneralSettings<T extends Prisma.Role$caseGeneralSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseGeneralSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseGeneralSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1889,6 +2150,49 @@ export type Role$caseManagementReviewsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.CaseManagementReviewScalarFieldEnum | Prisma.CaseManagementReviewScalarFieldEnum[]
+}
+
+/**
+ * Role.caseProcessManagementRoles
+ */
+export type Role$caseProcessManagementRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseProcessManagementRole
+   */
+  select?: Prisma.CaseProcessManagementRoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseProcessManagementRole
+   */
+  omit?: Prisma.CaseProcessManagementRoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseProcessManagementRoleInclude<ExtArgs> | null
+  where?: Prisma.CaseProcessManagementRoleWhereInput
+  orderBy?: Prisma.CaseProcessManagementRoleOrderByWithRelationInput | Prisma.CaseProcessManagementRoleOrderByWithRelationInput[]
+  cursor?: Prisma.CaseProcessManagementRoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseProcessManagementRoleScalarFieldEnum | Prisma.CaseProcessManagementRoleScalarFieldEnum[]
+}
+
+/**
+ * Role.placesOffice
+ */
+export type Role$placesOfficeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasePlacesOffice
+   */
+  select?: Prisma.CasePlacesOfficeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasePlacesOffice
+   */
+  omit?: Prisma.CasePlacesOfficeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasePlacesOfficeInclude<ExtArgs> | null
+  where?: Prisma.CasePlacesOfficeWhereInput
 }
 
 /**

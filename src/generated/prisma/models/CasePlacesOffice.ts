@@ -27,7 +27,7 @@ export type AggregateCasePlacesOffice = {
 export type CasePlacesOfficeMinAggregateOutputType = {
   id: string | null
   phone: string | null
-  officerId: string | null
+  officerRoleId: string | null
   letterTitle: string | null
   letterBody: string | null
   updatedAt: Date | null
@@ -36,7 +36,7 @@ export type CasePlacesOfficeMinAggregateOutputType = {
 export type CasePlacesOfficeMaxAggregateOutputType = {
   id: string | null
   phone: string | null
-  officerId: string | null
+  officerRoleId: string | null
   letterTitle: string | null
   letterBody: string | null
   updatedAt: Date | null
@@ -45,7 +45,7 @@ export type CasePlacesOfficeMaxAggregateOutputType = {
 export type CasePlacesOfficeCountAggregateOutputType = {
   id: number
   phone: number
-  officerId: number
+  officerRoleId: number
   letterTitle: number
   letterBody: number
   updatedAt: number
@@ -56,7 +56,7 @@ export type CasePlacesOfficeCountAggregateOutputType = {
 export type CasePlacesOfficeMinAggregateInputType = {
   id?: true
   phone?: true
-  officerId?: true
+  officerRoleId?: true
   letterTitle?: true
   letterBody?: true
   updatedAt?: true
@@ -65,7 +65,7 @@ export type CasePlacesOfficeMinAggregateInputType = {
 export type CasePlacesOfficeMaxAggregateInputType = {
   id?: true
   phone?: true
-  officerId?: true
+  officerRoleId?: true
   letterTitle?: true
   letterBody?: true
   updatedAt?: true
@@ -74,7 +74,7 @@ export type CasePlacesOfficeMaxAggregateInputType = {
 export type CasePlacesOfficeCountAggregateInputType = {
   id?: true
   phone?: true
-  officerId?: true
+  officerRoleId?: true
   letterTitle?: true
   letterBody?: true
   updatedAt?: true
@@ -156,7 +156,7 @@ export type CasePlacesOfficeGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type CasePlacesOfficeGroupByOutputType = {
   id: string
   phone: string | null
-  officerId: string | null
+  officerRoleId: string | null
   letterTitle: string | null
   letterBody: string | null
   updatedAt: Date
@@ -186,26 +186,26 @@ export type CasePlacesOfficeWhereInput = {
   NOT?: Prisma.CasePlacesOfficeWhereInput | Prisma.CasePlacesOfficeWhereInput[]
   id?: Prisma.StringFilter<"CasePlacesOffice"> | string
   phone?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
-  officerId?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
+  officerRoleId?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   letterTitle?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   letterBody?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"CasePlacesOffice"> | Date | string
-  officer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
+  officerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
 }
 
 export type CasePlacesOfficeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  officerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  officerRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   letterTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   letterBody?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  officer?: Prisma.UserOrderByWithRelationInput
+  officerRole?: Prisma.RoleOrderByWithRelationInput
 }
 
 export type CasePlacesOfficeWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  officerId?: string
+  officerRoleId?: string
   AND?: Prisma.CasePlacesOfficeWhereInput | Prisma.CasePlacesOfficeWhereInput[]
   OR?: Prisma.CasePlacesOfficeWhereInput[]
   NOT?: Prisma.CasePlacesOfficeWhereInput | Prisma.CasePlacesOfficeWhereInput[]
@@ -213,13 +213,13 @@ export type CasePlacesOfficeWhereUniqueInput = Prisma.AtLeast<{
   letterTitle?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   letterBody?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"CasePlacesOffice"> | Date | string
-  officer?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-}, "id" | "officerId">
+  officerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
+}, "id" | "officerRoleId">
 
 export type CasePlacesOfficeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  officerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  officerRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   letterTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   letterBody?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -234,7 +234,7 @@ export type CasePlacesOfficeScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CasePlacesOfficeScalarWhereWithAggregatesInput | Prisma.CasePlacesOfficeScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CasePlacesOffice"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
-  officerId?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
+  officerRoleId?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
   letterTitle?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
   letterBody?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CasePlacesOffice"> | Date | string
@@ -246,13 +246,13 @@ export type CasePlacesOfficeCreateInput = {
   letterTitle?: string | null
   letterBody?: string | null
   updatedAt?: Date | string
-  officer?: Prisma.UserCreateNestedOneWithoutPlacesOfficeInput
+  officerRole?: Prisma.RoleCreateNestedOneWithoutPlacesOfficeInput
 }
 
 export type CasePlacesOfficeUncheckedCreateInput = {
   id?: string
   phone?: string | null
-  officerId?: string | null
+  officerRoleId?: string | null
   letterTitle?: string | null
   letterBody?: string | null
   updatedAt?: Date | string
@@ -264,13 +264,13 @@ export type CasePlacesOfficeUpdateInput = {
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  officer?: Prisma.UserUpdateOneWithoutPlacesOfficeNestedInput
+  officerRole?: Prisma.RoleUpdateOneWithoutPlacesOfficeNestedInput
 }
 
 export type CasePlacesOfficeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  officerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -279,7 +279,7 @@ export type CasePlacesOfficeUncheckedUpdateInput = {
 export type CasePlacesOfficeCreateManyInput = {
   id?: string
   phone?: string | null
-  officerId?: string | null
+  officerRoleId?: string | null
   letterTitle?: string | null
   letterBody?: string | null
   updatedAt?: Date | string
@@ -296,7 +296,7 @@ export type CasePlacesOfficeUpdateManyMutationInput = {
 export type CasePlacesOfficeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  officerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  officerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -305,7 +305,7 @@ export type CasePlacesOfficeUncheckedUpdateManyInput = {
 export type CasePlacesOfficeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
-  officerId?: Prisma.SortOrder
+  officerRoleId?: Prisma.SortOrder
   letterTitle?: Prisma.SortOrder
   letterBody?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -314,7 +314,7 @@ export type CasePlacesOfficeCountOrderByAggregateInput = {
 export type CasePlacesOfficeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
-  officerId?: Prisma.SortOrder
+  officerRoleId?: Prisma.SortOrder
   letterTitle?: Prisma.SortOrder
   letterBody?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -323,7 +323,7 @@ export type CasePlacesOfficeMaxOrderByAggregateInput = {
 export type CasePlacesOfficeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   phone?: Prisma.SortOrder
-  officerId?: Prisma.SortOrder
+  officerRoleId?: Prisma.SortOrder
   letterTitle?: Prisma.SortOrder
   letterBody?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -334,39 +334,39 @@ export type CasePlacesOfficeNullableScalarRelationFilter = {
   isNot?: Prisma.CasePlacesOfficeWhereInput | null
 }
 
-export type CasePlacesOfficeCreateNestedOneWithoutOfficerInput = {
-  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerInput>
-  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerInput
+export type CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput = {
+  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput>
+  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerRoleInput
   connect?: Prisma.CasePlacesOfficeWhereUniqueInput
 }
 
-export type CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerInput = {
-  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerInput>
-  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerInput
+export type CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput = {
+  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput>
+  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerRoleInput
   connect?: Prisma.CasePlacesOfficeWhereUniqueInput
 }
 
-export type CasePlacesOfficeUpdateOneWithoutOfficerNestedInput = {
-  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerInput>
-  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerInput
-  upsert?: Prisma.CasePlacesOfficeUpsertWithoutOfficerInput
+export type CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput = {
+  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput>
+  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerRoleInput
+  upsert?: Prisma.CasePlacesOfficeUpsertWithoutOfficerRoleInput
   disconnect?: Prisma.CasePlacesOfficeWhereInput | boolean
   delete?: Prisma.CasePlacesOfficeWhereInput | boolean
   connect?: Prisma.CasePlacesOfficeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CasePlacesOfficeUpdateToOneWithWhereWithoutOfficerInput, Prisma.CasePlacesOfficeUpdateWithoutOfficerInput>, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CasePlacesOfficeUpdateToOneWithWhereWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUpdateWithoutOfficerRoleInput>, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerRoleInput>
 }
 
-export type CasePlacesOfficeUncheckedUpdateOneWithoutOfficerNestedInput = {
-  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerInput>
-  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerInput
-  upsert?: Prisma.CasePlacesOfficeUpsertWithoutOfficerInput
+export type CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput = {
+  create?: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput>
+  connectOrCreate?: Prisma.CasePlacesOfficeCreateOrConnectWithoutOfficerRoleInput
+  upsert?: Prisma.CasePlacesOfficeUpsertWithoutOfficerRoleInput
   disconnect?: Prisma.CasePlacesOfficeWhereInput | boolean
   delete?: Prisma.CasePlacesOfficeWhereInput | boolean
   connect?: Prisma.CasePlacesOfficeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CasePlacesOfficeUpdateToOneWithWhereWithoutOfficerInput, Prisma.CasePlacesOfficeUpdateWithoutOfficerInput>, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CasePlacesOfficeUpdateToOneWithWhereWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUpdateWithoutOfficerRoleInput>, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerRoleInput>
 }
 
-export type CasePlacesOfficeCreateWithoutOfficerInput = {
+export type CasePlacesOfficeCreateWithoutOfficerRoleInput = {
   id?: string
   phone?: string | null
   letterTitle?: string | null
@@ -374,7 +374,7 @@ export type CasePlacesOfficeCreateWithoutOfficerInput = {
   updatedAt?: Date | string
 }
 
-export type CasePlacesOfficeUncheckedCreateWithoutOfficerInput = {
+export type CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput = {
   id?: string
   phone?: string | null
   letterTitle?: string | null
@@ -382,23 +382,23 @@ export type CasePlacesOfficeUncheckedCreateWithoutOfficerInput = {
   updatedAt?: Date | string
 }
 
-export type CasePlacesOfficeCreateOrConnectWithoutOfficerInput = {
+export type CasePlacesOfficeCreateOrConnectWithoutOfficerRoleInput = {
   where: Prisma.CasePlacesOfficeWhereUniqueInput
-  create: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerInput>
+  create: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput>
 }
 
-export type CasePlacesOfficeUpsertWithoutOfficerInput = {
-  update: Prisma.XOR<Prisma.CasePlacesOfficeUpdateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerInput>
-  create: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerInput>
+export type CasePlacesOfficeUpsertWithoutOfficerRoleInput = {
+  update: Prisma.XOR<Prisma.CasePlacesOfficeUpdateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerRoleInput>
+  create: Prisma.XOR<Prisma.CasePlacesOfficeCreateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput>
   where?: Prisma.CasePlacesOfficeWhereInput
 }
 
-export type CasePlacesOfficeUpdateToOneWithWhereWithoutOfficerInput = {
+export type CasePlacesOfficeUpdateToOneWithWhereWithoutOfficerRoleInput = {
   where?: Prisma.CasePlacesOfficeWhereInput
-  data: Prisma.XOR<Prisma.CasePlacesOfficeUpdateWithoutOfficerInput, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerInput>
+  data: Prisma.XOR<Prisma.CasePlacesOfficeUpdateWithoutOfficerRoleInput, Prisma.CasePlacesOfficeUncheckedUpdateWithoutOfficerRoleInput>
 }
 
-export type CasePlacesOfficeUpdateWithoutOfficerInput = {
+export type CasePlacesOfficeUpdateWithoutOfficerRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -406,7 +406,7 @@ export type CasePlacesOfficeUpdateWithoutOfficerInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type CasePlacesOfficeUncheckedUpdateWithoutOfficerInput = {
+export type CasePlacesOfficeUncheckedUpdateWithoutOfficerRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -419,62 +419,62 @@ export type CasePlacesOfficeUncheckedUpdateWithoutOfficerInput = {
 export type CasePlacesOfficeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   phone?: boolean
-  officerId?: boolean
+  officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
   updatedAt?: boolean
-  officer?: boolean | Prisma.CasePlacesOffice$officerArgs<ExtArgs>
+  officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }, ExtArgs["result"]["casePlacesOffice"]>
 
 export type CasePlacesOfficeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   phone?: boolean
-  officerId?: boolean
+  officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
   updatedAt?: boolean
-  officer?: boolean | Prisma.CasePlacesOffice$officerArgs<ExtArgs>
+  officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }, ExtArgs["result"]["casePlacesOffice"]>
 
 export type CasePlacesOfficeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   phone?: boolean
-  officerId?: boolean
+  officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
   updatedAt?: boolean
-  officer?: boolean | Prisma.CasePlacesOffice$officerArgs<ExtArgs>
+  officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }, ExtArgs["result"]["casePlacesOffice"]>
 
 export type CasePlacesOfficeSelectScalar = {
   id?: boolean
   phone?: boolean
-  officerId?: boolean
+  officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
   updatedAt?: boolean
 }
 
-export type CasePlacesOfficeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "phone" | "officerId" | "letterTitle" | "letterBody" | "updatedAt", ExtArgs["result"]["casePlacesOffice"]>
+export type CasePlacesOfficeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "phone" | "officerRoleId" | "letterTitle" | "letterBody" | "updatedAt", ExtArgs["result"]["casePlacesOffice"]>
 export type CasePlacesOfficeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  officer?: boolean | Prisma.CasePlacesOffice$officerArgs<ExtArgs>
+  officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }
 export type CasePlacesOfficeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  officer?: boolean | Prisma.CasePlacesOffice$officerArgs<ExtArgs>
+  officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }
 export type CasePlacesOfficeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  officer?: boolean | Prisma.CasePlacesOffice$officerArgs<ExtArgs>
+  officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }
 
 export type $CasePlacesOfficePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CasePlacesOffice"
   objects: {
-    officer: Prisma.$UserPayload<ExtArgs> | null
+    officerRole: Prisma.$RolePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     phone: string | null
-    officerId: string | null
+    officerRoleId: string | null
     letterTitle: string | null
     letterBody: string | null
     updatedAt: Date
@@ -872,7 +872,7 @@ readonly fields: CasePlacesOfficeFieldRefs;
  */
 export interface Prisma__CasePlacesOfficeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  officer<T extends Prisma.CasePlacesOffice$officerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CasePlacesOffice$officerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  officerRole<T extends Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>>): Prisma.Prisma__RoleClient<runtime.Types.Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -904,7 +904,7 @@ export interface Prisma__CasePlacesOfficeClient<T, Null = never, ExtArgs extends
 export interface CasePlacesOfficeFieldRefs {
   readonly id: Prisma.FieldRef<"CasePlacesOffice", 'String'>
   readonly phone: Prisma.FieldRef<"CasePlacesOffice", 'String'>
-  readonly officerId: Prisma.FieldRef<"CasePlacesOffice", 'String'>
+  readonly officerRoleId: Prisma.FieldRef<"CasePlacesOffice", 'String'>
   readonly letterTitle: Prisma.FieldRef<"CasePlacesOffice", 'String'>
   readonly letterBody: Prisma.FieldRef<"CasePlacesOffice", 'String'>
   readonly updatedAt: Prisma.FieldRef<"CasePlacesOffice", 'DateTime'>
@@ -1309,22 +1309,22 @@ export type CasePlacesOfficeDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
- * CasePlacesOffice.officer
+ * CasePlacesOffice.officerRole
  */
-export type CasePlacesOffice$officerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type CasePlacesOffice$officerRoleArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the User
+   * Select specific fields to fetch from the Role
    */
-  select?: Prisma.UserSelect<ExtArgs> | null
+  select?: Prisma.RoleSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the User
+   * Omit specific fields from the Role
    */
-  omit?: Prisma.UserOmit<ExtArgs> | null
+  omit?: Prisma.RoleOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
+  include?: Prisma.RoleInclude<ExtArgs> | null
+  where?: Prisma.RoleWhereInput
 }
 
 /**

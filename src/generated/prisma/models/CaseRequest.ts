@@ -607,10 +607,6 @@ export type CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput = {
   deleteMany?: Prisma.CaseRequestScalarWhereInput | Prisma.CaseRequestScalarWhereInput[]
 }
 
-export type EnumCaseRequestTypeFieldUpdateOperationsInput = {
-  set?: $Enums.CaseRequestType
-}
-
 export type EnumCaseRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.CaseRequestStatus
 }

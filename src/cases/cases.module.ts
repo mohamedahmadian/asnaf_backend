@@ -7,6 +7,8 @@ import { CaseIdentityDocumentsController } from './case-identity-documents.contr
 import { CaseIdentityDocumentsService } from './case-identity-documents.service';
 import { CaseManagementApproversController } from './case-management-approvers.controller';
 import { CaseManagementApproversService } from './case-management-approvers.service';
+import { CaseProcessManagementRolesController } from './case-process-management-roles.controller';
+import { CaseProcessManagementRolesService } from './case-process-management-roles.service';
 import { DashboardController } from './dashboard.controller';
 import { CaseInquiriesController } from './case-inquiries.controller';
 import { CaseInquiriesService } from './case-inquiries.service';
@@ -29,6 +31,7 @@ import { PersonFileStorage } from './person-file.storage';
     CaseGeneralSettingsController,
     CaseRequirementsController,
     CaseManagementApproversController,
+    CaseProcessManagementRolesController,
     DashboardController,
   ],
   providers: [
@@ -40,6 +43,7 @@ import { PersonFileStorage } from './person-file.storage';
     CaseGeneralSettingsService,
     CaseRequirementsService,
     CaseManagementApproversService,
+    CaseProcessManagementRolesService,
     PersonFileStorage,
   ],
 })

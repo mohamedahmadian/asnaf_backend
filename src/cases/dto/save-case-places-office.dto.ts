@@ -7,7 +7,7 @@ export class SaveCasePlacesOfficeDto {
   @Transform(({ value }) => (value === '' || value == null ? null : value))
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
-  officerId?: string | null;
+  officerRoleId?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

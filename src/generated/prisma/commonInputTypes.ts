@@ -324,6 +324,23 @@ export type EnumDocumentGenderWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumDocumentGenderFilter<$PrismaModel>
 }
 
+export type EnumCaseRequestTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel> | $Enums.CaseRequestType
+}
+
+export type EnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+}
+
 export type EnumCaseFileStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
@@ -426,11 +443,21 @@ export type EnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel = neve
   _max?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
 }
 
-export type EnumCaseRequestTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel> | $Enums.CaseRequestType
+export type EnumCaseSuspensionFileKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseSuspensionFileKind | Prisma.EnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseSuspensionFileKindFilter<$PrismaModel> | $Enums.CaseSuspensionFileKind
+}
+
+export type EnumCaseSuspensionFileKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseSuspensionFileKind | Prisma.EnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseSuspensionFileKindWithAggregatesFilter<$PrismaModel> | $Enums.CaseSuspensionFileKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseSuspensionFileKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseSuspensionFileKindFilter<$PrismaModel>
 }
 
 export type EnumCaseRequestStatusFilter<$PrismaModel = never> = {
@@ -438,16 +465,6 @@ export type EnumCaseRequestStatusFilter<$PrismaModel = never> = {
   in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel> | $Enums.CaseRequestStatus
-}
-
-export type EnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
 }
 
 export type EnumCaseRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1374,6 +1391,23 @@ export type NestedEnumDocumentGenderWithAggregatesFilter<$PrismaModel = never> =
   _max?: Prisma.NestedEnumDocumentGenderFilter<$PrismaModel>
 }
 
+export type NestedEnumCaseRequestTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel> | $Enums.CaseRequestType
+}
+
+export type NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
+}
+
 export type NestedEnumCaseFileStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
@@ -1476,11 +1510,21 @@ export type NestedEnumPremiseOwnershipNullableWithAggregatesFilter<$PrismaModel 
   _max?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel>
 }
 
-export type NestedEnumCaseRequestTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel> | $Enums.CaseRequestType
+export type NestedEnumCaseSuspensionFileKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseSuspensionFileKind | Prisma.EnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseSuspensionFileKindFilter<$PrismaModel> | $Enums.CaseSuspensionFileKind
+}
+
+export type NestedEnumCaseSuspensionFileKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseSuspensionFileKind | Prisma.EnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseSuspensionFileKind[] | Prisma.ListEnumCaseSuspensionFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseSuspensionFileKindWithAggregatesFilter<$PrismaModel> | $Enums.CaseSuspensionFileKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseSuspensionFileKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseSuspensionFileKindFilter<$PrismaModel>
 }
 
 export type NestedEnumCaseRequestStatusFilter<$PrismaModel = never> = {
@@ -1488,16 +1532,6 @@ export type NestedEnumCaseRequestStatusFilter<$PrismaModel = never> = {
   in?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.CaseRequestStatus[] | Prisma.ListEnumCaseRequestStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumCaseRequestStatusFilter<$PrismaModel> | $Enums.CaseRequestStatus
-}
-
-export type NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel> | $Enums.CaseRequestType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumCaseRequestStatusWithAggregatesFilter<$PrismaModel = never> = {

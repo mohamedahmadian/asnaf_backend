@@ -63,11 +63,6 @@ export class CasePlacesOfficeController {
     return this.places.office();
   }
 
-  @Get('officers')
-  officers() {
-    return this.places.officerOptions();
-  }
-
   @Put()
   save(@Body() dto: SaveCasePlacesOfficeDto) {
     return this.places.saveOffice(dto);

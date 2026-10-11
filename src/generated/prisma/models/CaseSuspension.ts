@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model CaseSuspension
- * یک دوره تعلیق پرونده. تاریخ شروع همان روز ثبت است.
+ * یک دوره تعلیق پرونده. با رفع تعلیق، liftedAt پر می‌شود و پرونده از حالت تعلیق خارج می‌شود.
  */
 export type CaseSuspensionModel = runtime.Types.Result.DefaultSelection<Prisma.$CaseSuspensionPayload>
 
@@ -30,6 +30,8 @@ export type CaseSuspensionMinAggregateOutputType = {
   reason: string | null
   startsAt: Date | null
   endsAt: Date | null
+  liftNote: string | null
+  liftedAt: Date | null
   createdById: string | null
   createdAt: Date | null
 }
@@ -40,6 +42,8 @@ export type CaseSuspensionMaxAggregateOutputType = {
   reason: string | null
   startsAt: Date | null
   endsAt: Date | null
+  liftNote: string | null
+  liftedAt: Date | null
   createdById: string | null
   createdAt: Date | null
 }
@@ -50,6 +54,8 @@ export type CaseSuspensionCountAggregateOutputType = {
   reason: number
   startsAt: number
   endsAt: number
+  liftNote: number
+  liftedAt: number
   createdById: number
   createdAt: number
   _all: number
@@ -62,6 +68,8 @@ export type CaseSuspensionMinAggregateInputType = {
   reason?: true
   startsAt?: true
   endsAt?: true
+  liftNote?: true
+  liftedAt?: true
   createdById?: true
   createdAt?: true
 }
@@ -72,6 +80,8 @@ export type CaseSuspensionMaxAggregateInputType = {
   reason?: true
   startsAt?: true
   endsAt?: true
+  liftNote?: true
+  liftedAt?: true
   createdById?: true
   createdAt?: true
 }
@@ -82,6 +92,8 @@ export type CaseSuspensionCountAggregateInputType = {
   reason?: true
   startsAt?: true
   endsAt?: true
+  liftNote?: true
+  liftedAt?: true
   createdById?: true
   createdAt?: true
   _all?: true
@@ -164,7 +176,9 @@ export type CaseSuspensionGroupByOutputType = {
   caseFileId: string
   reason: string
   startsAt: Date
-  endsAt: Date
+  endsAt: Date | null
+  liftNote: string | null
+  liftedAt: Date | null
   createdById: string | null
   createdAt: Date
   _count: CaseSuspensionCountAggregateOutputType | null
@@ -195,10 +209,13 @@ export type CaseSuspensionWhereInput = {
   caseFileId?: Prisma.StringFilter<"CaseSuspension"> | string
   reason?: Prisma.StringFilter<"CaseSuspension"> | string
   startsAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
-  endsAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
+  endsAt?: Prisma.DateTimeNullableFilter<"CaseSuspension"> | Date | string | null
+  liftNote?: Prisma.StringNullableFilter<"CaseSuspension"> | string | null
+  liftedAt?: Prisma.DateTimeNullableFilter<"CaseSuspension"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"CaseSuspension"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  files?: Prisma.CaseSuspensionFileListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -207,10 +224,13 @@ export type CaseSuspensionOrderByWithRelationInput = {
   caseFileId?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
-  endsAt?: Prisma.SortOrder
+  endsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  liftNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  liftedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
+  files?: Prisma.CaseSuspensionFileOrderByRelationAggregateInput
   createdBy?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -222,10 +242,13 @@ export type CaseSuspensionWhereUniqueInput = Prisma.AtLeast<{
   caseFileId?: Prisma.StringFilter<"CaseSuspension"> | string
   reason?: Prisma.StringFilter<"CaseSuspension"> | string
   startsAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
-  endsAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
+  endsAt?: Prisma.DateTimeNullableFilter<"CaseSuspension"> | Date | string | null
+  liftNote?: Prisma.StringNullableFilter<"CaseSuspension"> | string | null
+  liftedAt?: Prisma.DateTimeNullableFilter<"CaseSuspension"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"CaseSuspension"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  files?: Prisma.CaseSuspensionFileListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
@@ -234,7 +257,9 @@ export type CaseSuspensionOrderByWithAggregationInput = {
   caseFileId?: Prisma.SortOrder
   reason?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
-  endsAt?: Prisma.SortOrder
+  endsAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  liftNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  liftedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdById?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.CaseSuspensionCountOrderByAggregateInput
@@ -250,7 +275,9 @@ export type CaseSuspensionScalarWhereWithAggregatesInput = {
   caseFileId?: Prisma.StringWithAggregatesFilter<"CaseSuspension"> | string
   reason?: Prisma.StringWithAggregatesFilter<"CaseSuspension"> | string
   startsAt?: Prisma.DateTimeWithAggregatesFilter<"CaseSuspension"> | Date | string
-  endsAt?: Prisma.DateTimeWithAggregatesFilter<"CaseSuspension"> | Date | string
+  endsAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseSuspension"> | Date | string | null
+  liftNote?: Prisma.StringNullableWithAggregatesFilter<"CaseSuspension"> | string | null
+  liftedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseSuspension"> | Date | string | null
   createdById?: Prisma.StringNullableWithAggregatesFilter<"CaseSuspension"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseSuspension"> | Date | string
 }
@@ -259,9 +286,12 @@ export type CaseSuspensionCreateInput = {
   id?: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutSuspensionsInput
+  files?: Prisma.CaseSuspensionFileCreateNestedManyWithoutSuspensionInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCaseSuspensionsInput
 }
 
@@ -270,18 +300,24 @@ export type CaseSuspensionUncheckedCreateInput = {
   caseFileId: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdById?: string | null
   createdAt?: Date | string
+  files?: Prisma.CaseSuspensionFileUncheckedCreateNestedManyWithoutSuspensionInput
 }
 
 export type CaseSuspensionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutSuspensionsNestedInput
+  files?: Prisma.CaseSuspensionFileUpdateManyWithoutSuspensionNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCaseSuspensionsNestedInput
 }
 
@@ -290,9 +326,12 @@ export type CaseSuspensionUncheckedUpdateInput = {
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.CaseSuspensionFileUncheckedUpdateManyWithoutSuspensionNestedInput
 }
 
 export type CaseSuspensionCreateManyInput = {
@@ -300,7 +339,9 @@ export type CaseSuspensionCreateManyInput = {
   caseFileId: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdById?: string | null
   createdAt?: Date | string
 }
@@ -309,7 +350,9 @@ export type CaseSuspensionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -318,7 +361,9 @@ export type CaseSuspensionUncheckedUpdateManyInput = {
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -339,6 +384,8 @@ export type CaseSuspensionCountOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
+  liftNote?: Prisma.SortOrder
+  liftedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -349,6 +396,8 @@ export type CaseSuspensionMaxOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
+  liftNote?: Prisma.SortOrder
+  liftedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -359,8 +408,15 @@ export type CaseSuspensionMinOrderByAggregateInput = {
   reason?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
+  liftNote?: Prisma.SortOrder
+  liftedAt?: Prisma.SortOrder
   createdById?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type CaseSuspensionScalarRelationFilter = {
+  is?: Prisma.CaseSuspensionWhereInput
+  isNot?: Prisma.CaseSuspensionWhereInput
 }
 
 export type CaseSuspensionCreateNestedManyWithoutCaseFileInput = {
@@ -403,6 +459,20 @@ export type CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput = {
   update?: Prisma.CaseSuspensionUpdateWithWhereUniqueWithoutCaseFileInput | Prisma.CaseSuspensionUpdateWithWhereUniqueWithoutCaseFileInput[]
   updateMany?: Prisma.CaseSuspensionUpdateManyWithWhereWithoutCaseFileInput | Prisma.CaseSuspensionUpdateManyWithWhereWithoutCaseFileInput[]
   deleteMany?: Prisma.CaseSuspensionScalarWhereInput | Prisma.CaseSuspensionScalarWhereInput[]
+}
+
+export type CaseSuspensionCreateNestedOneWithoutFilesInput = {
+  create?: Prisma.XOR<Prisma.CaseSuspensionCreateWithoutFilesInput, Prisma.CaseSuspensionUncheckedCreateWithoutFilesInput>
+  connectOrCreate?: Prisma.CaseSuspensionCreateOrConnectWithoutFilesInput
+  connect?: Prisma.CaseSuspensionWhereUniqueInput
+}
+
+export type CaseSuspensionUpdateOneRequiredWithoutFilesNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseSuspensionCreateWithoutFilesInput, Prisma.CaseSuspensionUncheckedCreateWithoutFilesInput>
+  connectOrCreate?: Prisma.CaseSuspensionCreateOrConnectWithoutFilesInput
+  upsert?: Prisma.CaseSuspensionUpsertWithoutFilesInput
+  connect?: Prisma.CaseSuspensionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseSuspensionUpdateToOneWithWhereWithoutFilesInput, Prisma.CaseSuspensionUpdateWithoutFilesInput>, Prisma.CaseSuspensionUncheckedUpdateWithoutFilesInput>
 }
 
 export type CaseSuspensionCreateNestedManyWithoutCreatedByInput = {
@@ -451,8 +521,11 @@ export type CaseSuspensionCreateWithoutCaseFileInput = {
   id?: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdAt?: Date | string
+  files?: Prisma.CaseSuspensionFileCreateNestedManyWithoutSuspensionInput
   createdBy?: Prisma.UserCreateNestedOneWithoutCaseSuspensionsInput
 }
 
@@ -460,9 +533,12 @@ export type CaseSuspensionUncheckedCreateWithoutCaseFileInput = {
   id?: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdById?: string | null
   createdAt?: Date | string
+  files?: Prisma.CaseSuspensionFileUncheckedCreateNestedManyWithoutSuspensionInput
 }
 
 export type CaseSuspensionCreateOrConnectWithoutCaseFileInput = {
@@ -499,18 +575,87 @@ export type CaseSuspensionScalarWhereInput = {
   caseFileId?: Prisma.StringFilter<"CaseSuspension"> | string
   reason?: Prisma.StringFilter<"CaseSuspension"> | string
   startsAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
-  endsAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
+  endsAt?: Prisma.DateTimeNullableFilter<"CaseSuspension"> | Date | string | null
+  liftNote?: Prisma.StringNullableFilter<"CaseSuspension"> | string | null
+  liftedAt?: Prisma.DateTimeNullableFilter<"CaseSuspension"> | Date | string | null
   createdById?: Prisma.StringNullableFilter<"CaseSuspension"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseSuspension"> | Date | string
+}
+
+export type CaseSuspensionCreateWithoutFilesInput = {
+  id?: string
+  reason: string
+  startsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
+  createdAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutSuspensionsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutCaseSuspensionsInput
+}
+
+export type CaseSuspensionUncheckedCreateWithoutFilesInput = {
+  id?: string
+  caseFileId: string
+  reason: string
+  startsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
+  createdById?: string | null
+  createdAt?: Date | string
+}
+
+export type CaseSuspensionCreateOrConnectWithoutFilesInput = {
+  where: Prisma.CaseSuspensionWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseSuspensionCreateWithoutFilesInput, Prisma.CaseSuspensionUncheckedCreateWithoutFilesInput>
+}
+
+export type CaseSuspensionUpsertWithoutFilesInput = {
+  update: Prisma.XOR<Prisma.CaseSuspensionUpdateWithoutFilesInput, Prisma.CaseSuspensionUncheckedUpdateWithoutFilesInput>
+  create: Prisma.XOR<Prisma.CaseSuspensionCreateWithoutFilesInput, Prisma.CaseSuspensionUncheckedCreateWithoutFilesInput>
+  where?: Prisma.CaseSuspensionWhereInput
+}
+
+export type CaseSuspensionUpdateToOneWithWhereWithoutFilesInput = {
+  where?: Prisma.CaseSuspensionWhereInput
+  data: Prisma.XOR<Prisma.CaseSuspensionUpdateWithoutFilesInput, Prisma.CaseSuspensionUncheckedUpdateWithoutFilesInput>
+}
+
+export type CaseSuspensionUpdateWithoutFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutSuspensionsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutCaseSuspensionsNestedInput
+}
+
+export type CaseSuspensionUncheckedUpdateWithoutFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  reason?: Prisma.StringFieldUpdateOperationsInput | string
+  startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CaseSuspensionCreateWithoutCreatedByInput = {
   id?: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutSuspensionsInput
+  files?: Prisma.CaseSuspensionFileCreateNestedManyWithoutSuspensionInput
 }
 
 export type CaseSuspensionUncheckedCreateWithoutCreatedByInput = {
@@ -518,8 +663,11 @@ export type CaseSuspensionUncheckedCreateWithoutCreatedByInput = {
   caseFileId: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdAt?: Date | string
+  files?: Prisma.CaseSuspensionFileUncheckedCreateNestedManyWithoutSuspensionInput
 }
 
 export type CaseSuspensionCreateOrConnectWithoutCreatedByInput = {
@@ -552,7 +700,9 @@ export type CaseSuspensionCreateManyCaseFileInput = {
   id?: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdById?: string | null
   createdAt?: Date | string
 }
@@ -561,8 +711,11 @@ export type CaseSuspensionUpdateWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.CaseSuspensionFileUpdateManyWithoutSuspensionNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutCaseSuspensionsNestedInput
 }
 
@@ -570,16 +723,21 @@ export type CaseSuspensionUncheckedUpdateWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.CaseSuspensionFileUncheckedUpdateManyWithoutSuspensionNestedInput
 }
 
 export type CaseSuspensionUncheckedUpdateManyWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -589,7 +747,9 @@ export type CaseSuspensionCreateManyCreatedByInput = {
   caseFileId: string
   reason: string
   startsAt: Date | string
-  endsAt: Date | string
+  endsAt?: Date | string | null
+  liftNote?: string | null
+  liftedAt?: Date | string | null
   createdAt?: Date | string
 }
 
@@ -597,9 +757,12 @@ export type CaseSuspensionUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutSuspensionsNestedInput
+  files?: Prisma.CaseSuspensionFileUpdateManyWithoutSuspensionNestedInput
 }
 
 export type CaseSuspensionUncheckedUpdateWithoutCreatedByInput = {
@@ -607,8 +770,11 @@ export type CaseSuspensionUncheckedUpdateWithoutCreatedByInput = {
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.CaseSuspensionFileUncheckedUpdateManyWithoutSuspensionNestedInput
 }
 
 export type CaseSuspensionUncheckedUpdateManyWithoutCreatedByInput = {
@@ -616,10 +782,41 @@ export type CaseSuspensionUncheckedUpdateManyWithoutCreatedByInput = {
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   reason?: Prisma.StringFieldUpdateOperationsInput | string
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  liftNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  liftedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type CaseSuspensionCountOutputType
+ */
+
+export type CaseSuspensionCountOutputType = {
+  files: number
+}
+
+export type CaseSuspensionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  files?: boolean | CaseSuspensionCountOutputTypeCountFilesArgs
+}
+
+/**
+ * CaseSuspensionCountOutputType without action
+ */
+export type CaseSuspensionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseSuspensionCountOutputType
+   */
+  select?: Prisma.CaseSuspensionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CaseSuspensionCountOutputType without action
+ */
+export type CaseSuspensionCountOutputTypeCountFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseSuspensionFileWhereInput
+}
 
 
 export type CaseSuspensionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -628,10 +825,14 @@ export type CaseSuspensionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   reason?: boolean
   startsAt?: boolean
   endsAt?: boolean
+  liftNote?: boolean
+  liftedAt?: boolean
   createdById?: boolean
   createdAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  files?: boolean | Prisma.CaseSuspension$filesArgs<ExtArgs>
   createdBy?: boolean | Prisma.CaseSuspension$createdByArgs<ExtArgs>
+  _count?: boolean | Prisma.CaseSuspensionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseSuspension"]>
 
 export type CaseSuspensionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -640,6 +841,8 @@ export type CaseSuspensionSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   reason?: boolean
   startsAt?: boolean
   endsAt?: boolean
+  liftNote?: boolean
+  liftedAt?: boolean
   createdById?: boolean
   createdAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -652,6 +855,8 @@ export type CaseSuspensionSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   reason?: boolean
   startsAt?: boolean
   endsAt?: boolean
+  liftNote?: boolean
+  liftedAt?: boolean
   createdById?: boolean
   createdAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -664,14 +869,18 @@ export type CaseSuspensionSelectScalar = {
   reason?: boolean
   startsAt?: boolean
   endsAt?: boolean
+  liftNote?: boolean
+  liftedAt?: boolean
   createdById?: boolean
   createdAt?: boolean
 }
 
-export type CaseSuspensionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "reason" | "startsAt" | "endsAt" | "createdById" | "createdAt", ExtArgs["result"]["caseSuspension"]>
+export type CaseSuspensionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "reason" | "startsAt" | "endsAt" | "liftNote" | "liftedAt" | "createdById" | "createdAt", ExtArgs["result"]["caseSuspension"]>
 export type CaseSuspensionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  files?: boolean | Prisma.CaseSuspension$filesArgs<ExtArgs>
   createdBy?: boolean | Prisma.CaseSuspension$createdByArgs<ExtArgs>
+  _count?: boolean | Prisma.CaseSuspensionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseSuspensionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -686,6 +895,7 @@ export type $CaseSuspensionPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "CaseSuspension"
   objects: {
     caseFile: Prisma.$CaseFilePayload<ExtArgs>
+    files: Prisma.$CaseSuspensionFilePayload<ExtArgs>[]
     createdBy: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -693,7 +903,9 @@ export type $CaseSuspensionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     caseFileId: string
     reason: string
     startsAt: Date
-    endsAt: Date
+    endsAt: Date | null
+    liftNote: string | null
+    liftedAt: Date | null
     createdById: string | null
     createdAt: Date
   }, ExtArgs["result"]["caseSuspension"]>
@@ -1091,6 +1303,7 @@ readonly fields: CaseSuspensionFieldRefs;
 export interface Prisma__CaseSuspensionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   caseFile<T extends Prisma.CaseFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFileDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  files<T extends Prisma.CaseSuspension$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseSuspension$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseSuspensionFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.CaseSuspension$createdByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseSuspension$createdByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1126,6 +1339,8 @@ export interface CaseSuspensionFieldRefs {
   readonly reason: Prisma.FieldRef<"CaseSuspension", 'String'>
   readonly startsAt: Prisma.FieldRef<"CaseSuspension", 'DateTime'>
   readonly endsAt: Prisma.FieldRef<"CaseSuspension", 'DateTime'>
+  readonly liftNote: Prisma.FieldRef<"CaseSuspension", 'String'>
+  readonly liftedAt: Prisma.FieldRef<"CaseSuspension", 'DateTime'>
   readonly createdById: Prisma.FieldRef<"CaseSuspension", 'String'>
   readonly createdAt: Prisma.FieldRef<"CaseSuspension", 'DateTime'>
 }
@@ -1526,6 +1741,30 @@ export type CaseSuspensionDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many CaseSuspensions to delete.
    */
   limit?: number
+}
+
+/**
+ * CaseSuspension.files
+ */
+export type CaseSuspension$filesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseSuspensionFile
+   */
+  select?: Prisma.CaseSuspensionFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseSuspensionFile
+   */
+  omit?: Prisma.CaseSuspensionFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseSuspensionFileInclude<ExtArgs> | null
+  where?: Prisma.CaseSuspensionFileWhereInput
+  orderBy?: Prisma.CaseSuspensionFileOrderByWithRelationInput | Prisma.CaseSuspensionFileOrderByWithRelationInput[]
+  cursor?: Prisma.CaseSuspensionFileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseSuspensionFileScalarFieldEnum | Prisma.CaseSuspensionFileScalarFieldEnum[]
 }
 
 /**

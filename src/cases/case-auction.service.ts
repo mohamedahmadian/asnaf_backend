@@ -17,7 +17,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { DecideCaseAuctionDto } from './dto/decide-case-auction.dto';
 import { SaveCaseAuctionDto } from './dto/save-case-auction.dto';
 import { nextRequestNumber } from './formation-steps';
-import { findOpenRequest } from './request-process';
+import { findOpenRequest, processManagementTitles } from './request-process';
 
 type Db = PrismaService | Prisma.TransactionClient;
 
@@ -70,17 +70,32 @@ function isUniqueConflict(error: unknown) {
   return error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002';
 }
 
+function itemNameKey(name: string) {
+  return name
+    .trim()
+    .replace(/[يى]/g, 'ی')
+    .replace(/ك/g, 'ک')
+    .replace(/\s+/g, ' ')
+    .toLowerCase();
+}
+
 function assertRange(dto: SaveCaseAuctionDto) {
   if (dto.endsAt < dto.startsAt) {
     throw new BadRequestException('تاریخ پایان باید بعد از تاریخ شروع یا همان روز باشد');
   }
   if (hundredths(dto.discountMax) < hundredths(dto.discountMin)) {
-    throw new BadRequestException('درصد تخفیف تا باید بزرگ‌تر یا مساوی درصد از باشد');
+    throw new BadRequestException('حداکثر درصد تخفیف باید بزرگ‌تر یا مساوی حداقل درصد تخفیف باشد');
   }
   const min = hundredths(dto.discountMin);
   const max = hundredths(dto.discountMax);
   if (dto.items.some((item) => hundredths(item.discountPercent) < min || hundredths(item.discountPercent) > max)) {
-    throw new BadRequestException('درصد تخفیف هر کالا باید بین بازه اعلام‌شده باشد');
+    throw new BadRequestException('درصد تخفیف هر کالا باید بین حداقل و حداکثر درصد تخفیف باشد');
+  }
+  const names = new Set<string>();
+  for (const item of dto.items) {
+    const key = itemNameKey(item.name);
+    if (names.has(key)) throw new BadRequestException('نام کالا در این مجوز نباید تکراری باشد');
+    names.add(key);
   }
 }
 
@@ -89,6 +104,7 @@ export class CaseAuctionService {
   constructor(private readonly prisma: PrismaService) {}
 
   async find(caseId: string, requestId: string, actor?: Actor) {
+    await this.syncPhase(requestId);
     return this.present(this.prisma, caseId, requestId, actor);
   }
 
@@ -111,7 +127,7 @@ export class CaseAuctionService {
               type: CaseRequestType.AUCTION,
               number,
               status: CaseRequestStatus.OPEN,
-              formationStep: 0,
+              formationStep: 1,
             },
             select: { id: true },
           });
@@ -121,6 +137,7 @@ export class CaseAuctionService {
           await tx.caseAuction.create({
             data: {
               requestId: request.id,
+              title: dto.title ?? null,
               startsAt: parseDate(dto.startsAt),
               endsAt: parseDate(dto.endsAt),
               discountMin: dto.discountMin,
@@ -136,6 +153,7 @@ export class CaseAuctionService {
               approvals: { create: APPROVER_KINDS.map((kind) => ({ kind })) },
             },
           });
+          await this.refreshOpenPhase(tx, request.id);
           return this.present(tx, file.id, request.id, actor);
         });
       } catch (error) {
@@ -157,6 +175,7 @@ export class CaseAuctionService {
       await tx.caseAuction.update({
         where: { requestId },
         data: {
+          title: dto.title ?? null,
           startsAt: parseDate(dto.startsAt),
           endsAt: parseDate(dto.endsAt),
           discountMin: dto.discountMin,
@@ -208,11 +227,23 @@ export class CaseAuctionService {
       if (dto.status === CaseInquiryStatus.REJECTED) {
         await this.close(tx, requestId, CaseRequestStatus.REJECTED, actor.id);
       } else {
-        const pending = await tx.caseAuctionApproval.count({
-          where: { requestId, status: CaseInquiryStatus.PENDING },
-        });
-        if (pending === 0) await this.close(tx, requestId, CaseRequestStatus.COMPLETED, actor.id);
+        await this.refreshOpenPhase(tx, requestId);
       }
+      return this.present(tx, caseId, requestId, actor);
+    });
+  }
+
+  async issue(caseId: string, requestId: string, actor: Actor) {
+    return this.prisma.$transaction(async (tx) => {
+      await tx.$queryRaw`SELECT "id" FROM "case_auction_approvals" WHERE "requestId" = ${requestId} FOR UPDATE`;
+      const current = await this.load(tx, caseId, requestId);
+      if (current.request.status !== CaseRequestStatus.OPEN) {
+        throw new BadRequestException('این درخواست دیگر باز نیست');
+      }
+      if (!(await this.readyToIssue(tx, requestId))) {
+        throw new BadRequestException('قبل از صدور مجوز باید تاییدهای مدیریتی ثبت شده باشد');
+      }
+      await this.close(tx, requestId, CaseRequestStatus.ISSUED, actor.id, 2);
       return this.present(tx, caseId, requestId, actor);
     });
   }
@@ -261,6 +292,7 @@ export class CaseAuctionService {
             number: true,
             type: true,
             status: true,
+            formationStep: true,
             caseFile: { select: { userId: true } },
           },
         },
@@ -270,6 +302,52 @@ export class CaseAuctionService {
       throw new NotFoundException('درخواست مجوز حراج یافت نشد');
     }
     return auction;
+  }
+
+  async syncPhase(requestId: string) {
+    await this.refreshOpenPhase(this.prisma, requestId);
+  }
+
+  /** مرحلهٔ حراج: ۱ تایید مدیریتی، ۲ آمادهٔ صدور. اداره اماکن در این درخواست نیست. */
+  private async refreshOpenPhase(db: Db, requestId: string) {
+    const request = await db.caseRequest.findUnique({
+      where: { id: requestId },
+      select: { id: true, caseFileId: true, type: true, status: true, formationStep: true },
+    });
+    if (!request || request.type !== CaseRequestType.AUCTION || request.status !== CaseRequestStatus.OPEN) return;
+    const roles = await processManagementTitles(db, CaseRequestType.AUCTION);
+    if (roles.length) {
+      await db.caseManagementReview.createMany({
+        data: roles.map((item) => ({
+          caseFileId: request.caseFileId,
+          caseRequestId: request.id,
+          roleId: item.roleId,
+        })),
+        skipDuplicates: true,
+      });
+    }
+    const ready = await this.readyToIssue(db, requestId);
+    const next = ready ? 2 : 1;
+    if (request.formationStep === next) return;
+    await db.caseRequest.update({
+      where: { id: request.id },
+      data: { formationStep: next },
+    });
+  }
+
+  private async readyToIssue(db: Db, requestId: string) {
+    const roles = await processManagementTitles(db, CaseRequestType.AUCTION);
+    if (!roles.length) return true;
+    const roleIds = roles.map((item) => item.roleId);
+    const [pending, total] = await Promise.all([
+      db.caseManagementReview.count({
+        where: { caseRequestId: requestId, roleId: { in: roleIds }, status: CaseInquiryStatus.PENDING },
+      }),
+      db.caseManagementReview.count({
+        where: { caseRequestId: requestId, roleId: { in: roleIds } },
+      }),
+    ]);
+    return total >= roles.length && pending === 0;
   }
 
   private async present(db: Db, caseId: string, requestId: string, actor?: Actor) {
@@ -289,12 +367,17 @@ export class CaseAuctionService {
     const approvals = [...auction.approvals].sort(
       (left, right) => APPROVER_KINDS.indexOf(left.kind) - APPROVER_KINDS.indexOf(right.kind),
     );
+    const titles = await processManagementTitles(db, CaseRequestType.AUCTION);
+    const labelByCode = new Map(titles.map((item) => [item.role.code, item.title]));
     return {
       id: auction.request.id,
       caseId,
       number: auction.request.number,
       status: auction.request.status,
       editable: this.isEditable(auction.request.status, approvals),
+      canIssue: auction.request.status === CaseRequestStatus.OPEN && (await this.readyToIssue(db, requestId)),
+      phase: auction.request.formationStep,
+      title: auction.title,
       startsAt: dateOnly(auction.startsAt),
       endsAt: dateOnly(auction.endsAt),
       discountMin: asNumber(auction.discountMin),
@@ -313,6 +396,7 @@ export class CaseAuctionService {
       approvals: approvals.map((item) => ({
         id: item.id,
         kind: item.kind,
+        label: labelByCode.get(item.kind) ?? null,
         status: item.status,
         note: item.note,
         decidedAt: item.decidedAt?.toISOString() ?? null,
@@ -335,18 +419,27 @@ export class CaseAuctionService {
     return status === CaseRequestStatus.OPEN && approvals.every((item) => item.status === CaseInquiryStatus.PENDING);
   }
 
+  private canIssue(status: CaseRequestStatus, approvals: { status: CaseInquiryStatus; kind: AuctionApproverKind }[]) {
+    return (
+      status === CaseRequestStatus.OPEN &&
+      approvals.length === APPROVER_KINDS.length &&
+      approvals.every((item) => item.status === CaseInquiryStatus.APPROVED)
+    );
+  }
+
   private actorCanDecide(actor: Actor | undefined, kind: AuctionApproverKind) {
     if (!actor?.id) return false;
     if (actor.isAdmin) return true;
     return Boolean(actor.roleCodes?.includes(kind));
   }
 
-  private async close(db: Db, requestId: string, status: CaseRequestStatus, actorId: string) {
+  private async close(db: Db, requestId: string, status: CaseRequestStatus, actorId: string, formationStep?: number) {
     const closed = await db.caseRequest.updateMany({
       where: { id: requestId, status: CaseRequestStatus.OPEN },
       data: {
         status,
-        completedAt: status === CaseRequestStatus.COMPLETED ? new Date() : null,
+        completedAt: status === CaseRequestStatus.COMPLETED || status === CaseRequestStatus.ISSUED ? new Date() : null,
+        ...(formationStep == null ? {} : { formationStep }),
       },
     });
     if (closed.count !== 1) return;

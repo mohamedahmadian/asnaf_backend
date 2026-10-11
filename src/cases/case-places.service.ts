@@ -18,12 +18,12 @@ import {
   CaseInquiryStatus,
   CaseRequestType,
   Prisma,
-  UserStatus,
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CaseAuctionService } from './case-auction.service';
 import { CaseInquiriesService, type InquiryActor } from './case-inquiries.service';
 import { syncIssuanceRequest } from './formation-steps';
-import { findOpenRequest, placesRewindPhase, rewindRequestPhase } from './request-process';
+import { findOpenRequest, placesRewindPhase, requestIsOpen, requestOnCase, rewindRequestPhase } from './request-process';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
 import { SaveCasePlacesOfficeDto } from './dto/save-case-places-office.dto';
 import { PersonFileStorage } from './person-file.storage';
@@ -60,6 +60,7 @@ export class CasePlacesService {
     private readonly prisma: PrismaService,
     private readonly files: PersonFileStorage,
     private readonly inquiries: CaseInquiriesService,
+    private readonly auction: CaseAuctionService,
   ) {}
 
   async office() {
@@ -67,28 +68,20 @@ export class CasePlacesService {
     return {
       id: row.id,
       phone: row.phone,
-      officerId: row.officerId,
-      officerName: row.officer?.fullName ?? null,
+      officerRoleId: row.officerRoleId,
+      officerRoleName: row.officerRole?.name ?? null,
       letterTitle: row.letterTitle,
       letterBody: row.letterBody,
     };
   }
 
-  async officerOptions() {
-    return this.prisma.user.findMany({
-      where: { status: UserStatus.ACTIVE },
-      select: { id: true, fullName: true },
-      orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
-    });
-  }
-
   async saveOffice(dto: SaveCasePlacesOfficeDto) {
-    if (dto.officerId) {
-      const officer = await this.prisma.user.findUnique({
-        where: { id: dto.officerId },
+    if (dto.officerRoleId) {
+      const role = await this.prisma.role.findUnique({
+        where: { id: dto.officerRoleId },
         select: { id: true },
       });
-      if (!officer) throw new NotFoundException('مسئول مربوطه یافت نشد');
+      if (!role) throw new NotFoundException('نقش یافت نشد');
     }
     const phone = dto.phone?.replace(/\D/g, '') || null;
     await this.prisma.casePlacesOffice.upsert({
@@ -96,13 +89,13 @@ export class CasePlacesService {
       create: {
         id: OFFICE_ID,
         phone,
-        officerId: dto.officerId ?? null,
+        officerRoleId: dto.officerRoleId ?? null,
         letterTitle: dto.letterTitle?.trim() || null,
         letterBody: dto.letterBody?.trim() || null,
       },
       update: {
         phone,
-        officerId: dto.officerId ?? null,
+        officerRoleId: dto.officerRoleId ?? null,
         letterTitle: dto.letterTitle?.trim() || null,
         letterBody: dto.letterBody?.trim() || null,
       },
@@ -112,7 +105,11 @@ export class CasePlacesService {
 
   async ensureForUser(caseFileId: string) {
     const open = await findOpenRequest(this.prisma, caseFileId);
-    if (open?.type === CaseRequestType.ISSUANCE || open?.type === CaseRequestType.RENEWAL) {
+    if (
+      open?.type === CaseRequestType.ISSUANCE ||
+      open?.type === CaseRequestType.RENEWAL ||
+      open?.type === CaseRequestType.LOCATION_CHANGE
+    ) {
       return this.prisma.casePlacesReview.upsert({
         where: { caseRequestId: open.id },
         create: { caseFileId, caseRequestId: open.id },
@@ -135,7 +132,11 @@ export class CasePlacesService {
   async assertDelivered(caseFileId: string) {
     const open = await findOpenRequest(this.prisma, caseFileId);
     const requestId =
-      open?.type === CaseRequestType.ISSUANCE || open?.type === CaseRequestType.RENEWAL ? open.id : null;
+      open?.type === CaseRequestType.ISSUANCE ||
+      open?.type === CaseRequestType.RENEWAL ||
+      open?.type === CaseRequestType.LOCATION_CHANGE
+        ? open.id
+        : null;
     const row = requestId
       ? await this.prisma.casePlacesReview.findUnique({
           where: { caseRequestId: requestId },
@@ -147,8 +148,27 @@ export class CasePlacesService {
     }
   }
 
-  async listForCase(caseFileId: string) {
-    const row = await this.ensureForUser(caseFileId);
+  async listForCase(caseFileId: string, requestId?: string) {
+    const request = await requestOnCase(this.prisma, caseFileId, requestId);
+    if (!request) return null;
+    const placesRequest =
+      request.type === CaseRequestType.ISSUANCE ||
+      request.type === CaseRequestType.RENEWAL ||
+      request.type === CaseRequestType.LOCATION_CHANGE;
+    if (!placesRequest) return null;
+    if (requestIsOpen(request.status)) {
+      const row = await this.prisma.casePlacesReview.upsert({
+        where: { caseRequestId: request.id },
+        create: { caseFileId: request.caseFileId, caseRequestId: request.id },
+        update: {},
+        include: reviewInclude,
+      });
+      return this.mapReview(row);
+    }
+    const row = await this.prisma.casePlacesReview.findUnique({
+      where: { caseRequestId: request.id },
+      include: reviewInclude,
+    });
     if (!row) return null;
     return this.mapReview(row);
   }
@@ -193,7 +213,7 @@ export class CasePlacesService {
     const row = await this.findReadable(id, actor);
     if (input.channel === CaseInquiryChannel.SYSTEM) {
       const office = await this.ensureOffice();
-      if (!actor.isAdmin && office.officerId !== actor.id) {
+      if (!actor.isAdmin && !(await this.actorHasOfficerRole(actor.id, office.officerRoleId))) {
         throw new ForbiddenException('این پرونده برای اداره اماکن شما نیست');
       }
     }
@@ -240,6 +260,7 @@ export class CasePlacesService {
       },
       include: reviewInclude,
     });
+    await this.auction.syncPhase(saved.caseRequestId);
     return this.mapReview(saved);
   }
 
@@ -263,6 +284,7 @@ export class CasePlacesService {
     });
     const phase = owner ? placesRewindPhase(owner.type) : null;
     if (phase != null) await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
+    await this.auction.syncPhase(saved.caseRequestId);
     return this.mapReview(saved);
   }
 
@@ -272,6 +294,7 @@ export class CasePlacesService {
     const digits = q ? normalizeSearchDigits(q) : '';
     const where: Prisma.CasePlacesReviewWhereInput = {
       status: query.status,
+      caseRequest: { type: { not: CaseRequestType.AUCTION } },
       OR: q
         ? [
             { caseFile: { user: { fullName: containsInsensitive(q) } } },
@@ -460,7 +483,7 @@ export class CasePlacesService {
         id: OFFICE_ID,
         name: PLACES_NAME,
         phone: office.phone,
-        officerName: office.officer?.fullName ?? null,
+        officerName: office.officerRole?.name ?? null,
       },
       files: row.files,
     };
@@ -474,10 +497,10 @@ export class CasePlacesService {
       select: {
         id: true,
         phone: true,
-        officerId: true,
+        officerRoleId: true,
         letterTitle: true,
         letterBody: true,
-        officer: { select: { fullName: true } },
+        officerRole: { select: { name: true } },
       },
     });
   }
@@ -492,17 +515,26 @@ export class CasePlacesService {
     return row;
   }
 
+  private async actorHasOfficerRole(actorId: string, roleId: string | null) {
+    if (!roleId) return false;
+    const link = await this.prisma.userRole.findUnique({
+      where: { userId_roleId: { userId: actorId, roleId } },
+      select: { userId: true },
+    });
+    return Boolean(link);
+  }
+
   private async assertReadable(actor: InquiryActor) {
     if (actor.isAdmin || actor.formation) return;
     const office = await this.ensureOffice();
-    if (office.officerId === actor.id) return;
+    if (await this.actorHasOfficerRole(actor.id, office.officerRoleId)) return;
     throw new ForbiddenException('این پرونده برای اداره اماکن شما نیست');
   }
 
   private async assertInbox(actor: InquiryActor) {
     if (actor.isAdmin) return;
     const office = await this.ensureOffice();
-    if (office.officerId === actor.id) return;
+    if (await this.actorHasOfficerRole(actor.id, office.officerRoleId)) return;
     throw new ForbiddenException('این پرونده برای اداره اماکن شما نیست');
   }
 }

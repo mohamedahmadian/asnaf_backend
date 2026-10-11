@@ -20,8 +20,8 @@ export class RequirementInquiryDto {
 }
 
 export class SaveCaseRequirementsDto {
-  @IsIn(['ISSUANCE', 'RENEWAL', 'LOCATION_CHANGE'])
-  requestType: 'ISSUANCE' | 'RENEWAL' | 'LOCATION_CHANGE';
+  @IsIn(['ISSUANCE', 'RENEWAL', 'LOCATION_CHANGE', 'AUCTION'])
+  requestType: 'ISSUANCE' | 'RENEWAL' | 'LOCATION_CHANGE' | 'AUCTION';
 
   @IsArray()
   @ValidateNested({ each: true })

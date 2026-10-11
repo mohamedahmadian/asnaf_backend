@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException } from '@nestjs/common';
+import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
 import {
   CaseInquiryStatus,
   CaseFileStatus,
@@ -24,10 +24,31 @@ const PROCESS_TYPES = [
   CaseRequestType.LOCATION_CHANGE,
 ] as const;
 
+const SETTINGS_REQUEST_TYPES = [
+  CaseRequestType.ISSUANCE,
+  CaseRequestType.RENEWAL,
+  CaseRequestType.LOCATION_CHANGE,
+  CaseRequestType.AUCTION,
+] as const;
+
 export type ProcessType = (typeof PROCESS_TYPES)[number];
+export type SettingsRequestType = (typeof SETTINGS_REQUEST_TYPES)[number];
 
 export function isProcessType(value: string): value is ProcessType {
   return (PROCESS_TYPES as readonly string[]).includes(value);
+}
+
+export function isSettingsRequestType(value: string): value is SettingsRequestType {
+  return (SETTINGS_REQUEST_TYPES as readonly string[]).includes(value);
+}
+
+export async function processManagementTitles(prisma: Db, requestType: string) {
+  if (!isSettingsRequestType(requestType)) return [];
+  return prisma.caseProcessManagementRole.findMany({
+    where: { requestType },
+    orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+    select: { roleId: true, title: true, role: { select: { code: true, name: true } } },
+  });
 }
 
 export function requestIsOpen(status: CaseRequestStatus) {
@@ -41,6 +62,22 @@ export function requestIsDone(status: CaseRequestStatus) {
 export async function findOpenRequest(prisma: Db, caseFileId: string) {
   return prisma.caseRequest.findFirst({
     where: { caseFileId, status: CaseRequestStatus.OPEN },
+  });
+}
+
+/** ردیف‌های یک درخواست. بدون شناسه، درخواست صدور همین پرونده است، نه درخواست باز. */
+export async function requestOnCase(prisma: Db, caseFileId: string, requestId?: string) {
+  if (requestId) {
+    const request = await prisma.caseRequest.findFirst({
+      where: { id: requestId, caseFileId },
+    });
+    if (!request) throw new NotFoundException('درخواست یافت نشد');
+    return request;
+  }
+  if (!caseFileId) return null;
+  return prisma.caseRequest.findFirst({
+    where: { caseFileId, type: CaseRequestType.ISSUANCE },
+    orderBy: { createdAt: 'desc' },
   });
 }
 
@@ -195,14 +232,14 @@ export function inquiryRewindPhase(type: CaseRequestType) {
 
 export function placesRewindPhase(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return 4;
-  if (type === CaseRequestType.RENEWAL) return 3;
+  if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 3;
   return null;
 }
 
 export function managementRewindPhase(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return MANAGEMENT_FORMATION_STEP;
-  if (type === CaseRequestType.RENEWAL) return 4;
-  if (type === CaseRequestType.LOCATION_CHANGE) return 3;
+  if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 4;
+  if (type === CaseRequestType.AUCTION) return 1;
   return null;
 }
 
@@ -316,13 +353,22 @@ async function assertPlaces(prisma: Db, requestId: string) {
 }
 
 async function assertManagement(prisma: Db, requestId: string) {
-  const settings = await prisma.caseManagementApprover.count();
-  if (settings === 0) return;
-  const pending = await prisma.caseManagementReview.count({
-    where: { caseRequestId: requestId, status: CaseInquiryStatus.PENDING },
+  const request = await prisma.caseRequest.findUnique({
+    where: { id: requestId },
+    select: { type: true },
   });
-  const total = await prisma.caseManagementReview.count({ where: { caseRequestId: requestId } });
-  if (total < settings || pending > 0) {
+  const configured = request ? await processManagementTitles(prisma, request.type) : [];
+  if (!configured.length) return;
+  const roleIds = configured.map((item) => item.roleId);
+  const [pending, total] = await Promise.all([
+    prisma.caseManagementReview.count({
+      where: { caseRequestId: requestId, roleId: { in: roleIds }, status: CaseInquiryStatus.PENDING },
+    }),
+    prisma.caseManagementReview.count({
+      where: { caseRequestId: requestId, roleId: { in: roleIds } },
+    }),
+  ]);
+  if (total < configured.length || pending > 0) {
     throw new BadRequestException('تاییدهای مدیریتی این درخواست کامل نیست');
   }
 }
@@ -414,6 +460,7 @@ export async function completeOpenRequest(
     if (request.type === CaseRequestType.LOCATION_CHANGE) {
       await assertDocuments(tx, request.id, request.type, file.activityJobId, gender);
       await assertInquiries(tx, request.id);
+      await assertPlaces(tx, request.id);
       await assertManagement(tx, request.id);
       const draft = await tx.caseLocationDraft.findUnique({ where: { requestId: request.id } });
       if (!draft?.premiseCityId || !draft.premiseAddress || !draft.premiseOwnership) {

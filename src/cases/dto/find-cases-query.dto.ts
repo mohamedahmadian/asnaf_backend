@@ -4,6 +4,7 @@ import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 import {
+  CaseFileStatus,
   EducationLevel,
   ResidencyStatus,
   UserGender,
@@ -19,6 +20,7 @@ export const caseSortFields = [
   'educationLevel',
   'job',
   'jobTitle',
+  'licenseNumber',
   'formationStep',
 ] as const;
 
@@ -44,6 +46,16 @@ export class FindCasesQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsUUID()
   jobId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsUUID()
+  jobGroupId?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsEnum(CaseFileStatus)
+  status?: CaseFileStatus;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

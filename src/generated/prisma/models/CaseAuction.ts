@@ -38,6 +38,7 @@ export type CaseAuctionSumAggregateOutputType = {
 
 export type CaseAuctionMinAggregateOutputType = {
   requestId: string | null
+  title: string | null
   startsAt: Date | null
   endsAt: Date | null
   discountMin: runtime.Decimal | null
@@ -46,6 +47,7 @@ export type CaseAuctionMinAggregateOutputType = {
 
 export type CaseAuctionMaxAggregateOutputType = {
   requestId: string | null
+  title: string | null
   startsAt: Date | null
   endsAt: Date | null
   discountMin: runtime.Decimal | null
@@ -54,6 +56,7 @@ export type CaseAuctionMaxAggregateOutputType = {
 
 export type CaseAuctionCountAggregateOutputType = {
   requestId: number
+  title: number
   startsAt: number
   endsAt: number
   discountMin: number
@@ -74,6 +77,7 @@ export type CaseAuctionSumAggregateInputType = {
 
 export type CaseAuctionMinAggregateInputType = {
   requestId?: true
+  title?: true
   startsAt?: true
   endsAt?: true
   discountMin?: true
@@ -82,6 +86,7 @@ export type CaseAuctionMinAggregateInputType = {
 
 export type CaseAuctionMaxAggregateInputType = {
   requestId?: true
+  title?: true
   startsAt?: true
   endsAt?: true
   discountMin?: true
@@ -90,6 +95,7 @@ export type CaseAuctionMaxAggregateInputType = {
 
 export type CaseAuctionCountAggregateInputType = {
   requestId?: true
+  title?: true
   startsAt?: true
   endsAt?: true
   discountMin?: true
@@ -185,6 +191,7 @@ export type CaseAuctionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type CaseAuctionGroupByOutputType = {
   requestId: string
+  title: string | null
   startsAt: Date
   endsAt: Date
   discountMin: runtime.Decimal
@@ -216,6 +223,7 @@ export type CaseAuctionWhereInput = {
   OR?: Prisma.CaseAuctionWhereInput[]
   NOT?: Prisma.CaseAuctionWhereInput | Prisma.CaseAuctionWhereInput[]
   requestId?: Prisma.StringFilter<"CaseAuction"> | string
+  title?: Prisma.StringNullableFilter<"CaseAuction"> | string | null
   startsAt?: Prisma.DateTimeFilter<"CaseAuction"> | Date | string
   endsAt?: Prisma.DateTimeFilter<"CaseAuction"> | Date | string
   discountMin?: Prisma.DecimalFilter<"CaseAuction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -227,6 +235,7 @@ export type CaseAuctionWhereInput = {
 
 export type CaseAuctionOrderByWithRelationInput = {
   requestId?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
   discountMin?: Prisma.SortOrder
@@ -241,6 +250,7 @@ export type CaseAuctionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CaseAuctionWhereInput | Prisma.CaseAuctionWhereInput[]
   OR?: Prisma.CaseAuctionWhereInput[]
   NOT?: Prisma.CaseAuctionWhereInput | Prisma.CaseAuctionWhereInput[]
+  title?: Prisma.StringNullableFilter<"CaseAuction"> | string | null
   startsAt?: Prisma.DateTimeFilter<"CaseAuction"> | Date | string
   endsAt?: Prisma.DateTimeFilter<"CaseAuction"> | Date | string
   discountMin?: Prisma.DecimalFilter<"CaseAuction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -252,6 +262,7 @@ export type CaseAuctionWhereUniqueInput = Prisma.AtLeast<{
 
 export type CaseAuctionOrderByWithAggregationInput = {
   requestId?: Prisma.SortOrder
+  title?: Prisma.SortOrderInput | Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
   discountMin?: Prisma.SortOrder
@@ -268,6 +279,7 @@ export type CaseAuctionScalarWhereWithAggregatesInput = {
   OR?: Prisma.CaseAuctionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CaseAuctionScalarWhereWithAggregatesInput | Prisma.CaseAuctionScalarWhereWithAggregatesInput[]
   requestId?: Prisma.StringWithAggregatesFilter<"CaseAuction"> | string
+  title?: Prisma.StringNullableWithAggregatesFilter<"CaseAuction"> | string | null
   startsAt?: Prisma.DateTimeWithAggregatesFilter<"CaseAuction"> | Date | string
   endsAt?: Prisma.DateTimeWithAggregatesFilter<"CaseAuction"> | Date | string
   discountMin?: Prisma.DecimalWithAggregatesFilter<"CaseAuction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -275,6 +287,7 @@ export type CaseAuctionScalarWhereWithAggregatesInput = {
 }
 
 export type CaseAuctionCreateInput = {
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -286,6 +299,7 @@ export type CaseAuctionCreateInput = {
 
 export type CaseAuctionUncheckedCreateInput = {
   requestId: string
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -295,6 +309,7 @@ export type CaseAuctionUncheckedCreateInput = {
 }
 
 export type CaseAuctionUpdateInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -306,6 +321,7 @@ export type CaseAuctionUpdateInput = {
 
 export type CaseAuctionUncheckedUpdateInput = {
   requestId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -316,6 +332,7 @@ export type CaseAuctionUncheckedUpdateInput = {
 
 export type CaseAuctionCreateManyInput = {
   requestId: string
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -323,6 +340,7 @@ export type CaseAuctionCreateManyInput = {
 }
 
 export type CaseAuctionUpdateManyMutationInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -331,6 +349,7 @@ export type CaseAuctionUpdateManyMutationInput = {
 
 export type CaseAuctionUncheckedUpdateManyInput = {
   requestId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -344,6 +363,7 @@ export type CaseAuctionNullableScalarRelationFilter = {
 
 export type CaseAuctionCountOrderByAggregateInput = {
   requestId?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
   discountMin?: Prisma.SortOrder
@@ -357,6 +377,7 @@ export type CaseAuctionAvgOrderByAggregateInput = {
 
 export type CaseAuctionMaxOrderByAggregateInput = {
   requestId?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
   discountMin?: Prisma.SortOrder
@@ -365,6 +386,7 @@ export type CaseAuctionMaxOrderByAggregateInput = {
 
 export type CaseAuctionMinOrderByAggregateInput = {
   requestId?: Prisma.SortOrder
+  title?: Prisma.SortOrder
   startsAt?: Prisma.SortOrder
   endsAt?: Prisma.SortOrder
   discountMin?: Prisma.SortOrder
@@ -442,6 +464,7 @@ export type CaseAuctionUpdateOneRequiredWithoutApprovalsNestedInput = {
 }
 
 export type CaseAuctionCreateWithoutRequestInput = {
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -451,6 +474,7 @@ export type CaseAuctionCreateWithoutRequestInput = {
 }
 
 export type CaseAuctionUncheckedCreateWithoutRequestInput = {
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -476,6 +500,7 @@ export type CaseAuctionUpdateToOneWithWhereWithoutRequestInput = {
 }
 
 export type CaseAuctionUpdateWithoutRequestInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -485,6 +510,7 @@ export type CaseAuctionUpdateWithoutRequestInput = {
 }
 
 export type CaseAuctionUncheckedUpdateWithoutRequestInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -494,6 +520,7 @@ export type CaseAuctionUncheckedUpdateWithoutRequestInput = {
 }
 
 export type CaseAuctionCreateWithoutItemsInput = {
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -504,6 +531,7 @@ export type CaseAuctionCreateWithoutItemsInput = {
 
 export type CaseAuctionUncheckedCreateWithoutItemsInput = {
   requestId: string
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -528,6 +556,7 @@ export type CaseAuctionUpdateToOneWithWhereWithoutItemsInput = {
 }
 
 export type CaseAuctionUpdateWithoutItemsInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -538,6 +567,7 @@ export type CaseAuctionUpdateWithoutItemsInput = {
 
 export type CaseAuctionUncheckedUpdateWithoutItemsInput = {
   requestId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -546,6 +576,7 @@ export type CaseAuctionUncheckedUpdateWithoutItemsInput = {
 }
 
 export type CaseAuctionCreateWithoutApprovalsInput = {
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -556,6 +587,7 @@ export type CaseAuctionCreateWithoutApprovalsInput = {
 
 export type CaseAuctionUncheckedCreateWithoutApprovalsInput = {
   requestId: string
+  title?: string | null
   startsAt: Date | string
   endsAt: Date | string
   discountMin: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -580,6 +612,7 @@ export type CaseAuctionUpdateToOneWithWhereWithoutApprovalsInput = {
 }
 
 export type CaseAuctionUpdateWithoutApprovalsInput = {
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -590,6 +623,7 @@ export type CaseAuctionUpdateWithoutApprovalsInput = {
 
 export type CaseAuctionUncheckedUpdateWithoutApprovalsInput = {
   requestId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   startsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endsAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   discountMin?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -639,6 +673,7 @@ export type CaseAuctionCountOutputTypeCountApprovalsArgs<ExtArgs extends runtime
 
 export type CaseAuctionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   requestId?: boolean
+  title?: boolean
   startsAt?: boolean
   endsAt?: boolean
   discountMin?: boolean
@@ -651,6 +686,7 @@ export type CaseAuctionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type CaseAuctionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   requestId?: boolean
+  title?: boolean
   startsAt?: boolean
   endsAt?: boolean
   discountMin?: boolean
@@ -660,6 +696,7 @@ export type CaseAuctionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 
 export type CaseAuctionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   requestId?: boolean
+  title?: boolean
   startsAt?: boolean
   endsAt?: boolean
   discountMin?: boolean
@@ -669,13 +706,14 @@ export type CaseAuctionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 
 export type CaseAuctionSelectScalar = {
   requestId?: boolean
+  title?: boolean
   startsAt?: boolean
   endsAt?: boolean
   discountMin?: boolean
   discountMax?: boolean
 }
 
-export type CaseAuctionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"requestId" | "startsAt" | "endsAt" | "discountMin" | "discountMax", ExtArgs["result"]["caseAuction"]>
+export type CaseAuctionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"requestId" | "title" | "startsAt" | "endsAt" | "discountMin" | "discountMax", ExtArgs["result"]["caseAuction"]>
 export type CaseAuctionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   request?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   items?: boolean | Prisma.CaseAuction$itemsArgs<ExtArgs>
@@ -698,6 +736,7 @@ export type $CaseAuctionPayload<ExtArgs extends runtime.Types.Extensions.Interna
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     requestId: string
+    title: string | null
     startsAt: Date
     endsAt: Date
     discountMin: runtime.Decimal
@@ -1129,6 +1168,7 @@ export interface Prisma__CaseAuctionClient<T, Null = never, ExtArgs extends runt
  */
 export interface CaseAuctionFieldRefs {
   readonly requestId: Prisma.FieldRef<"CaseAuction", 'String'>
+  readonly title: Prisma.FieldRef<"CaseAuction", 'String'>
   readonly startsAt: Prisma.FieldRef<"CaseAuction", 'DateTime'>
   readonly endsAt: Prisma.FieldRef<"CaseAuction", 'DateTime'>
   readonly discountMin: Prisma.FieldRef<"CaseAuction", 'Decimal'>

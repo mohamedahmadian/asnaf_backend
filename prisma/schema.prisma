@@ -503,15 +503,15 @@ model CaseGeneralSettings {
 
 /// تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
 model CasePlacesOffice {
-  id          String   @id @default("default")
-  phone       String?
-  officerId   String?  @unique
-  officer     User?    @relation("CasePlacesOfficer", fields: [officerId], references: [id], onDelete: SetNull)
-  letterTitle String?
-  letterBody  String?
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default("default")
+  phone         String?
+  officerRoleId String?  @unique
+  officerRole   Role?    @relation(fields: [officerRoleId], references: [id], onDelete: SetNull)
+  letterTitle   String?
+  letterBody    String?
+  updatedAt     DateTime @updatedAt
 
-  @@index([officerId])
+  @@index([officerRoleId])
   @@map("case_places_office")
 }
 
@@ -621,6 +621,22 @@ model CaseManagementApprover {
   @@map("case_management_approvers")
 }
 
+/// نقش‌هایی که در تاییدیه مدیریتی هر نوع درخواست دیده می‌شوند، با عنوان نمایشی.
+model CaseProcessManagementRole {
+  id          String          @id @default(uuid())
+  requestType CaseRequestType
+  roleId      String
+  role        Role            @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  title       String
+  createdAt   DateTime        @default(now())
+
+  @@unique([requestType, roleId])
+  @@index([requestType])
+  @@index([roleId])
+  @@index([createdAt])
+  @@map("case_process_management_roles")
+}
+
 /// نتیجهٔ تایید مدیریتی هر پرونده برای یک واحد و نقش
 model CaseManagementReview {
   id          String              @id @default(uuid())
@@ -628,8 +644,8 @@ model CaseManagementReview {
   caseFile      CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
   caseRequestId String
   caseRequest   CaseRequest         @relation(fields: [caseRequestId], references: [id], onDelete: Cascade)
-  workUnitId    String
-  workUnit      WorkUnit            @relation(fields: [workUnitId], references: [id], onDelete: Restrict)
+  workUnitId    String?
+  workUnit      WorkUnit?           @relation(fields: [workUnitId], references: [id], onDelete: Restrict)
   roleId        String
   role        Role                @relation(fields: [roleId], references: [id], onDelete: Restrict)
   status      CaseInquiryStatus   @default(PENDING)
@@ -642,7 +658,7 @@ model CaseManagementReview {
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
 
-  @@unique([caseRequestId, workUnitId, roleId])
+  @@unique([caseRequestId, roleId])
   @@index([caseFileId])
   @@index([caseRequestId])
   @@index([workUnitId])
@@ -686,7 +702,7 @@ enum CaseRequestStatus {
   CANCELLED
 }
 
-/// وضعیت عملیاتی پرونده. تعلیق فعال تا پایان بازه، پرونده را معلق نگه می‌دارد. ابطال دائمی است.
+/// وضعیت عملیاتی پرونده. تعلیق فعال تا پایان بازه، پرونده را معلق نگه می‌دارد. ابطال با فعال‌سازی مجدد برداشته می‌شود.
 enum CaseFileStatus {
   ACTIVE
   SUSPENDED
@@ -701,6 +717,7 @@ model CaseFile {
   status               CaseFileStatus         @default(ACTIVE)
   revokeReason         String?
   revokedAt            DateTime?
+  reactivatedAt        DateTime?
   revokedById          String?
   revokedBy            User?                  @relation("CaseRevocationAuthor", fields: [revokedById], references: [id], onDelete: SetNull)
   /// مرحلهٔ درخواست صدور: ۰ هویت، ۱ فعالیت، ۲ محل، ۳ استعلام، ۴ اماکن، ۵ بررسی مدیریت، ۶ صدور
@@ -765,17 +782,20 @@ model CaseFile {
   @@map("case_files")
 }
 
-/// یک دوره تعلیق پرونده. تاریخ شروع همان روز ثبت است.
+/// یک دوره تعلیق پرونده. با رفع تعلیق، liftedAt پر می‌شود و پرونده از حالت تعلیق خارج می‌شود.
 model CaseSuspension {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   caseFileId  String
-  caseFile    CaseFile @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  caseFile    CaseFile  @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
   reason      String
-  startsAt    DateTime @db.Date
-  endsAt      DateTime @db.Date
+  startsAt    DateTime  @db.Date
+  endsAt      DateTime? @db.Date
+  liftNote    String?
+  liftedAt    DateTime?
+  files       CaseSuspensionFile[]
   createdById String?
-  createdBy   User?    @relation("CaseSuspensionAuthor", fields: [createdById], references: [id], onDelete: SetNull)
-  createdAt   DateTime @default(now())
+  createdBy   User?     @relation("CaseSuspensionAuthor", fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
 
   @@index([caseFileId])
   @@index([startsAt])
@@ -783,6 +803,28 @@ model CaseSuspension {
   @@index([createdById])
   @@index([createdAt])
   @@map("case_suspensions")
+}
+
+enum CaseSuspensionFileKind {
+  SUSPEND
+  LIFT
+}
+
+/// پیوست تعلیق یا رفع تعلیق. خود فایل در File Storage است.
+model CaseSuspensionFile {
+  id           String                 @id @default(uuid())
+  suspensionId String
+  suspension   CaseSuspension         @relation(fields: [suspensionId], references: [id], onDelete: Cascade)
+  kind         CaseSuspensionFileKind
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  createdAt    DateTime               @default(now())
+
+  @@index([suspensionId])
+  @@index([kind])
+  @@map("case_suspension_files")
 }
 
 /// هر کار روی پرونده: صدور، و بعداً تمدید، مباشرت یا مجوز حراج.
@@ -938,6 +980,7 @@ enum AuctionApproverKind {
 model CaseAuction {
   requestId   String   @id
   request     CaseRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  title       String?
   startsAt    DateTime @db.Date
   endsAt      DateTime @db.Date
   discountMin Decimal  @db.Decimal(5, 2)
@@ -1174,7 +1217,6 @@ model User {
   inquiryCenters     InquiryCenter[]       @relation("InquiryCenterOfficer")
   caseInquiriesDecided CaseInquiry[]       @relation("CaseInquiryDecider")
   caseInquiryFiles   CaseInquiryFile[]     @relation("CaseInquiryFileUploader")
-  placesOffice       CasePlacesOffice?     @relation("CasePlacesOfficer")
   casePlacesDecided  CasePlacesReview[]    @relation("CasePlacesDecider")
   casePlacesFiles    CasePlacesFile[]      @relation("CasePlacesFileUploader")
   caseManagementDecided CaseManagementReview[] @relation("CaseManagementDecider")
@@ -1776,6 +1818,8 @@ model Role {
   permissions RolePermission[]
   caseManagementApprovers CaseManagementApprover[]
   caseManagementReviews CaseManagementReview[]
+  caseProcessManagementRoles CaseProcessManagementRole[]
+  placesOffice CasePlacesOffice?
   caseGeneralSettings CaseGeneralSettings[]
 
   @@index([name])

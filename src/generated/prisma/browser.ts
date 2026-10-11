@@ -133,6 +133,11 @@ export type CaseIdentityDocument = Prisma.CaseIdentityDocumentModel
  */
 export type CaseManagementApprover = Prisma.CaseManagementApproverModel
 /**
+ * Model CaseProcessManagementRole
+ * نقش‌هایی که در تاییدیه مدیریتی هر نوع درخواست دیده می‌شوند، با عنوان نمایشی.
+ */
+export type CaseProcessManagementRole = Prisma.CaseProcessManagementRoleModel
+/**
  * Model CaseManagementReview
  * نتیجهٔ تایید مدیریتی هر پرونده برای یک واحد و نقش
  */
@@ -149,9 +154,14 @@ export type CaseManagementReviewFile = Prisma.CaseManagementReviewFileModel
 export type CaseFile = Prisma.CaseFileModel
 /**
  * Model CaseSuspension
- * یک دوره تعلیق پرونده. تاریخ شروع همان روز ثبت است.
+ * یک دوره تعلیق پرونده. با رفع تعلیق، liftedAt پر می‌شود و پرونده از حالت تعلیق خارج می‌شود.
  */
 export type CaseSuspension = Prisma.CaseSuspensionModel
+/**
+ * Model CaseSuspensionFile
+ * پیوست تعلیق یا رفع تعلیق. خود فایل در File Storage است.
+ */
+export type CaseSuspensionFile = Prisma.CaseSuspensionFileModel
 /**
  * Model CaseRequest
  * هر کار روی پرونده: صدور، و بعداً تمدید، مباشرت یا مجوز حراج.
