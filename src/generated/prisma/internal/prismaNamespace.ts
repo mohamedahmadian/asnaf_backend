@@ -424,6 +424,7 @@ export const ModelName = {
   CaseManagementReview: 'CaseManagementReview',
   CaseManagementReviewFile: 'CaseManagementReviewFile',
   CaseFile: 'CaseFile',
+  CaseStewardRevokeFile: 'CaseStewardRevokeFile',
   CaseSuspension: 'CaseSuspension',
   CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
@@ -511,7 +512,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2510,6 +2511,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseFileCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseFileCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseStewardRevokeFile: {
+      payload: Prisma.$CaseStewardRevokeFilePayload<ExtArgs>
+      fields: Prisma.CaseStewardRevokeFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseStewardRevokeFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseStewardRevokeFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>
+        }
+        findFirst: {
+          args: Prisma.CaseStewardRevokeFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseStewardRevokeFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>
+        }
+        findMany: {
+          args: Prisma.CaseStewardRevokeFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>[]
+        }
+        create: {
+          args: Prisma.CaseStewardRevokeFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>
+        }
+        createMany: {
+          args: Prisma.CaseStewardRevokeFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseStewardRevokeFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>[]
+        }
+        delete: {
+          args: Prisma.CaseStewardRevokeFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>
+        }
+        update: {
+          args: Prisma.CaseStewardRevokeFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseStewardRevokeFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseStewardRevokeFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseStewardRevokeFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseStewardRevokeFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseStewardRevokeFilePayload>
+        }
+        aggregate: {
+          args: Prisma.CaseStewardRevokeFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseStewardRevokeFile>
+        }
+        groupBy: {
+          args: Prisma.CaseStewardRevokeFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseStewardRevokeFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseStewardRevokeFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseStewardRevokeFileCountAggregateOutputType> | number
         }
       }
     }
@@ -8107,6 +8182,7 @@ export const CaseGeneralSettingsScalarFieldEnum = {
   editAfterIssuance: 'editAfterIssuance',
   editorRoleId: 'editorRoleId',
   contractYears: 'contractYears',
+  stewardContractYears: 'stewardContractYears',
   updatedAt: 'updatedAt'
 } as const
 
@@ -8244,11 +8320,18 @@ export type CaseManagementReviewFileScalarFieldEnum = (typeof CaseManagementRevi
 export const CaseFileScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  kind: 'kind',
+  hostCaseFileId: 'hostCaseFileId',
   status: 'status',
   revokeReason: 'revokeReason',
+  revokeSource: 'revokeSource',
+  revokeRequestedAt: 'revokeRequestedAt',
   revokedAt: 'revokedAt',
   reactivatedAt: 'reactivatedAt',
   revokedById: 'revokedById',
+  cardNumber: 'cardNumber',
+  cardIssuedAt: 'cardIssuedAt',
+  cardExpiresAt: 'cardExpiresAt',
   formationStep: 'formationStep',
   trackingCode: 'trackingCode',
   licenseNumber: 'licenseNumber',
@@ -8285,6 +8368,19 @@ export const CaseFileScalarFieldEnum = {
 } as const
 
 export type CaseFileScalarFieldEnum = (typeof CaseFileScalarFieldEnum)[keyof typeof CaseFileScalarFieldEnum]
+
+
+export const CaseStewardRevokeFileScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseStewardRevokeFileScalarFieldEnum = (typeof CaseStewardRevokeFileScalarFieldEnum)[keyof typeof CaseStewardRevokeFileScalarFieldEnum]
 
 
 export const CaseSuspensionScalarFieldEnum = {
@@ -9582,6 +9678,20 @@ export type ListEnumCaseRequestTypeFieldRefInput<$PrismaModel> = FieldRefInputTy
 
 
 /**
+ * Reference to a field of type 'CaseFileKind'
+ */
+export type EnumCaseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileKind'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseFileKind[]'
+ */
+export type ListEnumCaseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileKind[]'>
+    
+
+
+/**
  * Reference to a field of type 'CaseFileStatus'
  */
 export type EnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus'>
@@ -9592,6 +9702,20 @@ export type EnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'CaseFileStatus[]'
  */
 export type ListEnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRevokeSource'
+ */
+export type EnumCaseRevokeSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRevokeSource'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRevokeSource[]'
+ */
+export type ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRevokeSource[]'>
     
 
 
@@ -10290,6 +10414,7 @@ export type GlobalOmitConfig = {
   caseManagementReview?: Prisma.CaseManagementReviewOmit
   caseManagementReviewFile?: Prisma.CaseManagementReviewFileOmit
   caseFile?: Prisma.CaseFileOmit
+  caseStewardRevokeFile?: Prisma.CaseStewardRevokeFileOmit
   caseSuspension?: Prisma.CaseSuspensionOmit
   caseSuspensionFile?: Prisma.CaseSuspensionFileOmit
   caseRequest?: Prisma.CaseRequestOmit

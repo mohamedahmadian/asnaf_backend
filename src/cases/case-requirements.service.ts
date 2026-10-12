@@ -3,7 +3,13 @@ import { CaseRequestType, DocumentGender, Prisma } from '../generated/prisma/cli
 import { PrismaService } from '../prisma/prisma.service';
 import { SaveCaseRequirementsDto } from './dto/save-case-requirements.dto';
 
-const TYPES = [CaseRequestType.ISSUANCE, CaseRequestType.RENEWAL, CaseRequestType.LOCATION_CHANGE, CaseRequestType.AUCTION] as const;
+const TYPES = [
+  CaseRequestType.ISSUANCE,
+  CaseRequestType.RENEWAL,
+  CaseRequestType.LOCATION_CHANGE,
+  CaseRequestType.AUCTION,
+  CaseRequestType.STEWARDSHIP,
+] as const;
 
 @Injectable()
 export class CaseRequirementsService {

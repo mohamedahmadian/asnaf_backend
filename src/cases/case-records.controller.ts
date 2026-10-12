@@ -17,7 +17,9 @@ import { memoryStorage } from 'multer';
 import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CaseAuctionService } from './case-auction.service';
+import { CaseStewardshipService } from './case-stewardship.service';
 import { CasesService } from './cases.service';
+import { AdvanceStewardshipDto, CreateStewardshipDto, IssueStewardshipCardDto, RevokeStewardshipDto } from './dto/create-stewardship.dto';
 import { DecideCaseAuctionDto } from './dto/decide-case-auction.dto';
 import { FindCasesQueryDto } from './dto/find-cases-query.dto';
 import { OpenCaseRequestDto } from './dto/open-case-request.dto';
@@ -64,6 +66,7 @@ export class CaseRecordsController {
   constructor(
     private readonly cases: CasesService,
     private readonly auctions: CaseAuctionService,
+    private readonly stewardship: CaseStewardshipService,
   ) {}
 
   @Get()
@@ -122,6 +125,11 @@ export class CaseRecordsController {
   @Get(':id/renewal/:requestId')
   renewalView(@Param('id') id: string, @Param('requestId') requestId: string) {
     return this.cases.renewalView(id, requestId);
+  }
+
+  @Get(':id/place-change/:requestId')
+  locationView(@Param('id') id: string, @Param('requestId') requestId: string) {
+    return this.cases.locationView(id, requestId);
   }
 
   @Get(':id/license')
@@ -192,6 +200,52 @@ export class CaseRecordsController {
     @UploadedFile() file: UploadFile | undefined,
   ) {
     return this.cases.suspend(id, dto, user?.id, suspensionUpload(file));
+  }
+
+  @Get(':id/stewards')
+  stewards(@Param('id') id: string) {
+    return this.stewardship.listForHost(id);
+  }
+
+  @Post(':id/stewards')
+  createSteward(@Param('id') id: string, @Body() dto: CreateStewardshipDto) {
+    return this.stewardship.create(id, dto.nationalId);
+  }
+
+  @Get(':id/stewardship')
+  stewardshipState(@Param('id') id: string) {
+    return this.stewardship.state(id);
+  }
+
+  @Post(':id/stewardship/step')
+  advanceStewardship(@Param('id') id: string, @Body() dto: AdvanceStewardshipDto) {
+    return this.stewardship.advance(id, dto.step);
+  }
+
+  @Post(':id/stewardship/issue')
+  issueStewardship(
+    @Param('id') id: string,
+    @Body() dto: IssueStewardshipCardDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.stewardship.issue(id, dto.issuedAt, user?.id);
+  }
+
+  @Post(':id/stewardship/revocation')
+  @UseInterceptors(suspensionFile)
+  revokeStewardship(
+    @Param('id') id: string,
+    @Body() dto: RevokeStewardshipDto,
+    @CurrentUser() user: RequestUser | undefined,
+    @UploadedFile() file: UploadFile | undefined,
+  ) {
+    return this.stewardship.revoke(id, dto.source, dto.reason, user?.id, dto.revokedAt, suspensionUpload(file));
+  }
+
+  @Get(':id/dossier')
+  dossier(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.cases.dossier(id, user.id);
   }
 
   @Get(':id')

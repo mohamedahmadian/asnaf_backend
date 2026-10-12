@@ -10,6 +10,17 @@ import {
   UserGender,
 } from '../../generated/prisma/client';
 
+export const caseKindFilters = [
+  'ISSUANCE',
+  'RENEWAL',
+  'LOCATION_CHANGE',
+  'AUCTION',
+  'STEWARD_REQUEST',
+  'STEWARD_CARD',
+] as const;
+
+export type CaseKindFilter = (typeof caseKindFilters)[number];
+
 export const caseSortFields = [
   'fullName',
   'fatherName',
@@ -68,6 +79,11 @@ export class FindCasesQueryDto extends PaginationQueryDto {
   @Min(0)
   @Max(6)
   step?: number;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...caseKindFilters])
+  caseKind?: CaseKindFilter;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

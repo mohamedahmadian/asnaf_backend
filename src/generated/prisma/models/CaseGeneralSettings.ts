@@ -28,10 +28,12 @@ export type AggregateCaseGeneralSettings = {
 
 export type CaseGeneralSettingsAvgAggregateOutputType = {
   contractYears: number | null
+  stewardContractYears: number | null
 }
 
 export type CaseGeneralSettingsSumAggregateOutputType = {
   contractYears: number | null
+  stewardContractYears: number | null
 }
 
 export type CaseGeneralSettingsMinAggregateOutputType = {
@@ -39,6 +41,7 @@ export type CaseGeneralSettingsMinAggregateOutputType = {
   editAfterIssuance: boolean | null
   editorRoleId: string | null
   contractYears: number | null
+  stewardContractYears: number | null
   updatedAt: Date | null
 }
 
@@ -47,6 +50,7 @@ export type CaseGeneralSettingsMaxAggregateOutputType = {
   editAfterIssuance: boolean | null
   editorRoleId: string | null
   contractYears: number | null
+  stewardContractYears: number | null
   updatedAt: Date | null
 }
 
@@ -55,6 +59,7 @@ export type CaseGeneralSettingsCountAggregateOutputType = {
   editAfterIssuance: number
   editorRoleId: number
   contractYears: number
+  stewardContractYears: number
   updatedAt: number
   _all: number
 }
@@ -62,10 +67,12 @@ export type CaseGeneralSettingsCountAggregateOutputType = {
 
 export type CaseGeneralSettingsAvgAggregateInputType = {
   contractYears?: true
+  stewardContractYears?: true
 }
 
 export type CaseGeneralSettingsSumAggregateInputType = {
   contractYears?: true
+  stewardContractYears?: true
 }
 
 export type CaseGeneralSettingsMinAggregateInputType = {
@@ -73,6 +80,7 @@ export type CaseGeneralSettingsMinAggregateInputType = {
   editAfterIssuance?: true
   editorRoleId?: true
   contractYears?: true
+  stewardContractYears?: true
   updatedAt?: true
 }
 
@@ -81,6 +89,7 @@ export type CaseGeneralSettingsMaxAggregateInputType = {
   editAfterIssuance?: true
   editorRoleId?: true
   contractYears?: true
+  stewardContractYears?: true
   updatedAt?: true
 }
 
@@ -89,6 +98,7 @@ export type CaseGeneralSettingsCountAggregateInputType = {
   editAfterIssuance?: true
   editorRoleId?: true
   contractYears?: true
+  stewardContractYears?: true
   updatedAt?: true
   _all?: true
 }
@@ -184,6 +194,7 @@ export type CaseGeneralSettingsGroupByOutputType = {
   editAfterIssuance: boolean
   editorRoleId: string | null
   contractYears: number
+  stewardContractYears: number
   updatedAt: Date
   _count: CaseGeneralSettingsCountAggregateOutputType | null
   _avg: CaseGeneralSettingsAvgAggregateOutputType | null
@@ -215,6 +226,7 @@ export type CaseGeneralSettingsWhereInput = {
   editAfterIssuance?: Prisma.BoolFilter<"CaseGeneralSettings"> | boolean
   editorRoleId?: Prisma.StringNullableFilter<"CaseGeneralSettings"> | string | null
   contractYears?: Prisma.IntFilter<"CaseGeneralSettings"> | number
+  stewardContractYears?: Prisma.IntFilter<"CaseGeneralSettings"> | number
   updatedAt?: Prisma.DateTimeFilter<"CaseGeneralSettings"> | Date | string
   editorRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
 }
@@ -224,6 +236,7 @@ export type CaseGeneralSettingsOrderByWithRelationInput = {
   editAfterIssuance?: Prisma.SortOrder
   editorRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   contractYears?: Prisma.SortOrder
+  stewardContractYears?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   editorRole?: Prisma.RoleOrderByWithRelationInput
 }
@@ -236,6 +249,7 @@ export type CaseGeneralSettingsWhereUniqueInput = Prisma.AtLeast<{
   editAfterIssuance?: Prisma.BoolFilter<"CaseGeneralSettings"> | boolean
   editorRoleId?: Prisma.StringNullableFilter<"CaseGeneralSettings"> | string | null
   contractYears?: Prisma.IntFilter<"CaseGeneralSettings"> | number
+  stewardContractYears?: Prisma.IntFilter<"CaseGeneralSettings"> | number
   updatedAt?: Prisma.DateTimeFilter<"CaseGeneralSettings"> | Date | string
   editorRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
 }, "id">
@@ -245,6 +259,7 @@ export type CaseGeneralSettingsOrderByWithAggregationInput = {
   editAfterIssuance?: Prisma.SortOrder
   editorRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   contractYears?: Prisma.SortOrder
+  stewardContractYears?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CaseGeneralSettingsCountOrderByAggregateInput
   _avg?: Prisma.CaseGeneralSettingsAvgOrderByAggregateInput
@@ -261,6 +276,7 @@ export type CaseGeneralSettingsScalarWhereWithAggregatesInput = {
   editAfterIssuance?: Prisma.BoolWithAggregatesFilter<"CaseGeneralSettings"> | boolean
   editorRoleId?: Prisma.StringNullableWithAggregatesFilter<"CaseGeneralSettings"> | string | null
   contractYears?: Prisma.IntWithAggregatesFilter<"CaseGeneralSettings"> | number
+  stewardContractYears?: Prisma.IntWithAggregatesFilter<"CaseGeneralSettings"> | number
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CaseGeneralSettings"> | Date | string
 }
 
@@ -268,6 +284,7 @@ export type CaseGeneralSettingsCreateInput = {
   id?: string
   editAfterIssuance?: boolean
   contractYears?: number
+  stewardContractYears?: number
   updatedAt?: Date | string
   editorRole?: Prisma.RoleCreateNestedOneWithoutCaseGeneralSettingsInput
 }
@@ -277,6 +294,7 @@ export type CaseGeneralSettingsUncheckedCreateInput = {
   editAfterIssuance?: boolean
   editorRoleId?: string | null
   contractYears?: number
+  stewardContractYears?: number
   updatedAt?: Date | string
 }
 
@@ -284,6 +302,7 @@ export type CaseGeneralSettingsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   editAfterIssuance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contractYears?: Prisma.IntFieldUpdateOperationsInput | number
+  stewardContractYears?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   editorRole?: Prisma.RoleUpdateOneWithoutCaseGeneralSettingsNestedInput
 }
@@ -293,6 +312,7 @@ export type CaseGeneralSettingsUncheckedUpdateInput = {
   editAfterIssuance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   editorRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contractYears?: Prisma.IntFieldUpdateOperationsInput | number
+  stewardContractYears?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -301,6 +321,7 @@ export type CaseGeneralSettingsCreateManyInput = {
   editAfterIssuance?: boolean
   editorRoleId?: string | null
   contractYears?: number
+  stewardContractYears?: number
   updatedAt?: Date | string
 }
 
@@ -308,6 +329,7 @@ export type CaseGeneralSettingsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   editAfterIssuance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contractYears?: Prisma.IntFieldUpdateOperationsInput | number
+  stewardContractYears?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -316,6 +338,7 @@ export type CaseGeneralSettingsUncheckedUpdateManyInput = {
   editAfterIssuance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   editorRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contractYears?: Prisma.IntFieldUpdateOperationsInput | number
+  stewardContractYears?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -324,11 +347,13 @@ export type CaseGeneralSettingsCountOrderByAggregateInput = {
   editAfterIssuance?: Prisma.SortOrder
   editorRoleId?: Prisma.SortOrder
   contractYears?: Prisma.SortOrder
+  stewardContractYears?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CaseGeneralSettingsAvgOrderByAggregateInput = {
   contractYears?: Prisma.SortOrder
+  stewardContractYears?: Prisma.SortOrder
 }
 
 export type CaseGeneralSettingsMaxOrderByAggregateInput = {
@@ -336,6 +361,7 @@ export type CaseGeneralSettingsMaxOrderByAggregateInput = {
   editAfterIssuance?: Prisma.SortOrder
   editorRoleId?: Prisma.SortOrder
   contractYears?: Prisma.SortOrder
+  stewardContractYears?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -344,11 +370,13 @@ export type CaseGeneralSettingsMinOrderByAggregateInput = {
   editAfterIssuance?: Prisma.SortOrder
   editorRoleId?: Prisma.SortOrder
   contractYears?: Prisma.SortOrder
+  stewardContractYears?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type CaseGeneralSettingsSumOrderByAggregateInput = {
   contractYears?: Prisma.SortOrder
+  stewardContractYears?: Prisma.SortOrder
 }
 
 export type CaseGeneralSettingsListRelationFilter = {
@@ -407,6 +435,7 @@ export type CaseGeneralSettingsCreateWithoutEditorRoleInput = {
   id?: string
   editAfterIssuance?: boolean
   contractYears?: number
+  stewardContractYears?: number
   updatedAt?: Date | string
 }
 
@@ -414,6 +443,7 @@ export type CaseGeneralSettingsUncheckedCreateWithoutEditorRoleInput = {
   id?: string
   editAfterIssuance?: boolean
   contractYears?: number
+  stewardContractYears?: number
   updatedAt?: Date | string
 }
 
@@ -451,6 +481,7 @@ export type CaseGeneralSettingsScalarWhereInput = {
   editAfterIssuance?: Prisma.BoolFilter<"CaseGeneralSettings"> | boolean
   editorRoleId?: Prisma.StringNullableFilter<"CaseGeneralSettings"> | string | null
   contractYears?: Prisma.IntFilter<"CaseGeneralSettings"> | number
+  stewardContractYears?: Prisma.IntFilter<"CaseGeneralSettings"> | number
   updatedAt?: Prisma.DateTimeFilter<"CaseGeneralSettings"> | Date | string
 }
 
@@ -458,6 +489,7 @@ export type CaseGeneralSettingsCreateManyEditorRoleInput = {
   id?: string
   editAfterIssuance?: boolean
   contractYears?: number
+  stewardContractYears?: number
   updatedAt?: Date | string
 }
 
@@ -465,6 +497,7 @@ export type CaseGeneralSettingsUpdateWithoutEditorRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   editAfterIssuance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contractYears?: Prisma.IntFieldUpdateOperationsInput | number
+  stewardContractYears?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -472,6 +505,7 @@ export type CaseGeneralSettingsUncheckedUpdateWithoutEditorRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   editAfterIssuance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contractYears?: Prisma.IntFieldUpdateOperationsInput | number
+  stewardContractYears?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -479,6 +513,7 @@ export type CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   editAfterIssuance?: Prisma.BoolFieldUpdateOperationsInput | boolean
   contractYears?: Prisma.IntFieldUpdateOperationsInput | number
+  stewardContractYears?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -489,6 +524,7 @@ export type CaseGeneralSettingsSelect<ExtArgs extends runtime.Types.Extensions.I
   editAfterIssuance?: boolean
   editorRoleId?: boolean
   contractYears?: boolean
+  stewardContractYears?: boolean
   updatedAt?: boolean
   editorRole?: boolean | Prisma.CaseGeneralSettings$editorRoleArgs<ExtArgs>
 }, ExtArgs["result"]["caseGeneralSettings"]>
@@ -498,6 +534,7 @@ export type CaseGeneralSettingsSelectCreateManyAndReturn<ExtArgs extends runtime
   editAfterIssuance?: boolean
   editorRoleId?: boolean
   contractYears?: boolean
+  stewardContractYears?: boolean
   updatedAt?: boolean
   editorRole?: boolean | Prisma.CaseGeneralSettings$editorRoleArgs<ExtArgs>
 }, ExtArgs["result"]["caseGeneralSettings"]>
@@ -507,6 +544,7 @@ export type CaseGeneralSettingsSelectUpdateManyAndReturn<ExtArgs extends runtime
   editAfterIssuance?: boolean
   editorRoleId?: boolean
   contractYears?: boolean
+  stewardContractYears?: boolean
   updatedAt?: boolean
   editorRole?: boolean | Prisma.CaseGeneralSettings$editorRoleArgs<ExtArgs>
 }, ExtArgs["result"]["caseGeneralSettings"]>
@@ -516,10 +554,11 @@ export type CaseGeneralSettingsSelectScalar = {
   editAfterIssuance?: boolean
   editorRoleId?: boolean
   contractYears?: boolean
+  stewardContractYears?: boolean
   updatedAt?: boolean
 }
 
-export type CaseGeneralSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "editAfterIssuance" | "editorRoleId" | "contractYears" | "updatedAt", ExtArgs["result"]["caseGeneralSettings"]>
+export type CaseGeneralSettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "editAfterIssuance" | "editorRoleId" | "contractYears" | "stewardContractYears" | "updatedAt", ExtArgs["result"]["caseGeneralSettings"]>
 export type CaseGeneralSettingsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   editorRole?: boolean | Prisma.CaseGeneralSettings$editorRoleArgs<ExtArgs>
 }
@@ -543,6 +582,10 @@ export type $CaseGeneralSettingsPayload<ExtArgs extends runtime.Types.Extensions
      * مدت قرارداد مجوز؛ ۱ تا ۵ سال
      */
     contractYears: number
+    /**
+     * مدت اعتبار کارت مباشرت؛ ۱ تا ۵ سال
+     */
+    stewardContractYears: number
     updatedAt: Date
   }, ExtArgs["result"]["caseGeneralSettings"]>
   composites: {}
@@ -972,6 +1015,7 @@ export interface CaseGeneralSettingsFieldRefs {
   readonly editAfterIssuance: Prisma.FieldRef<"CaseGeneralSettings", 'Boolean'>
   readonly editorRoleId: Prisma.FieldRef<"CaseGeneralSettings", 'String'>
   readonly contractYears: Prisma.FieldRef<"CaseGeneralSettings", 'Int'>
+  readonly stewardContractYears: Prisma.FieldRef<"CaseGeneralSettings", 'Int'>
   readonly updatedAt: Prisma.FieldRef<"CaseGeneralSettings", 'DateTime'>
 }
     

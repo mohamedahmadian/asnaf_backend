@@ -268,6 +268,23 @@ export const CaseFileStatus = {
 export type CaseFileStatus = (typeof CaseFileStatus)[keyof typeof CaseFileStatus]
 
 
+export const CaseFileKind = {
+  LICENSE: 'LICENSE',
+  STEWARDSHIP: 'STEWARDSHIP'
+} as const
+
+export type CaseFileKind = (typeof CaseFileKind)[keyof typeof CaseFileKind]
+
+
+export const CaseRevokeSource = {
+  HOST: 'HOST',
+  STEWARD: 'STEWARD',
+  LICENSE: 'LICENSE'
+} as const
+
+export type CaseRevokeSource = (typeof CaseRevokeSource)[keyof typeof CaseRevokeSource]
+
+
 export const CaseSuspensionFileKind = {
   SUSPEND: 'SUSPEND',
   LIFT: 'LIFT'

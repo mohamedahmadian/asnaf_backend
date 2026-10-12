@@ -17,6 +17,7 @@ import {
   CaseInquiryChannel,
   CaseInquiryStatus,
   CaseRequestStatus,
+  CaseRequestType,
   DocumentGender,
   Prisma,
 } from '../generated/prisma/client';
@@ -33,6 +34,7 @@ import {
   resolveInquiryCenterIds,
   rewindRequestPhase,
 } from './request-process';
+import { activityContext } from './steward-context';
 
 const inquiryInclude = {
   inquiryCenter: {
@@ -118,17 +120,20 @@ export class CaseInquiriesService {
     status: CaseRequestStatus;
   }) {
     const requestType = request.type;
-    if (!requestIsOpen(request.status) || !isProcessType(requestType)) return;
-    const file = await this.prisma.caseFile.findUnique({
-      where: { id: request.caseFileId },
-      select: { id: true, activityJobId: true },
-    });
-    if (!file) return;
-    const centerIds = await resolveInquiryCenterIds(this.prisma, requestType, file.activityJobId);
+    if (!requestIsOpen(request.status) || (!isProcessType(requestType) && requestType !== CaseRequestType.STEWARDSHIP)) {
+      return;
+    }
+    const context = await activityContext(this.prisma, request.caseFileId);
+    if (!context) return;
+    const centerIds = await resolveInquiryCenterIds(
+      this.prisma,
+      requestType as CaseRequestType,
+      context.activityJobId,
+    );
     if (!centerIds.length) return;
     await this.prisma.caseInquiry.createMany({
       data: centerIds.map((inquiryCenterId) => ({
-        caseFileId: file.id,
+        caseFileId: request.caseFileId,
         caseRequestId: request.id,
         inquiryCenterId,
       })),
@@ -734,15 +739,16 @@ export class CaseInquiriesService {
       },
     });
     if (!row) return null;
+    const context = await activityContext(this.prisma, caseFileId);
     return {
       fullName: row.user.fullName,
       gender: row.user.gender,
       nationalId: row.user.nationalId,
       phone: row.user.phone,
       caseTrackingCode: row.trackingCode,
-      businessUnitTitle: row.businessUnitTitle,
-      premiseAddress: row.premiseAddress,
-      activityJob: row.activityJob,
+      businessUnitTitle: context?.businessUnitTitle ?? row.businessUnitTitle,
+      premiseAddress: context?.premiseAddress ?? row.premiseAddress,
+      activityJob: context?.activityJob ?? row.activityJob,
     };
   }
 

@@ -41,11 +41,18 @@ export type CaseFileSumAggregateOutputType = {
 export type CaseFileMinAggregateOutputType = {
   id: string | null
   userId: string | null
+  kind: $Enums.CaseFileKind | null
+  hostCaseFileId: string | null
   status: $Enums.CaseFileStatus | null
   revokeReason: string | null
+  revokeSource: $Enums.CaseRevokeSource | null
+  revokeRequestedAt: Date | null
   revokedAt: Date | null
   reactivatedAt: Date | null
   revokedById: string | null
+  cardNumber: string | null
+  cardIssuedAt: Date | null
+  cardExpiresAt: Date | null
   formationStep: number | null
   trackingCode: string | null
   licenseNumber: string | null
@@ -84,11 +91,18 @@ export type CaseFileMinAggregateOutputType = {
 export type CaseFileMaxAggregateOutputType = {
   id: string | null
   userId: string | null
+  kind: $Enums.CaseFileKind | null
+  hostCaseFileId: string | null
   status: $Enums.CaseFileStatus | null
   revokeReason: string | null
+  revokeSource: $Enums.CaseRevokeSource | null
+  revokeRequestedAt: Date | null
   revokedAt: Date | null
   reactivatedAt: Date | null
   revokedById: string | null
+  cardNumber: string | null
+  cardIssuedAt: Date | null
+  cardExpiresAt: Date | null
   formationStep: number | null
   trackingCode: string | null
   licenseNumber: string | null
@@ -127,11 +141,18 @@ export type CaseFileMaxAggregateOutputType = {
 export type CaseFileCountAggregateOutputType = {
   id: number
   userId: number
+  kind: number
+  hostCaseFileId: number
   status: number
   revokeReason: number
+  revokeSource: number
+  revokeRequestedAt: number
   revokedAt: number
   reactivatedAt: number
   revokedById: number
+  cardNumber: number
+  cardIssuedAt: number
+  cardExpiresAt: number
   formationStep: number
   trackingCode: number
   licenseNumber: number
@@ -184,11 +205,18 @@ export type CaseFileSumAggregateInputType = {
 export type CaseFileMinAggregateInputType = {
   id?: true
   userId?: true
+  kind?: true
+  hostCaseFileId?: true
   status?: true
   revokeReason?: true
+  revokeSource?: true
+  revokeRequestedAt?: true
   revokedAt?: true
   reactivatedAt?: true
   revokedById?: true
+  cardNumber?: true
+  cardIssuedAt?: true
+  cardExpiresAt?: true
   formationStep?: true
   trackingCode?: true
   licenseNumber?: true
@@ -227,11 +255,18 @@ export type CaseFileMinAggregateInputType = {
 export type CaseFileMaxAggregateInputType = {
   id?: true
   userId?: true
+  kind?: true
+  hostCaseFileId?: true
   status?: true
   revokeReason?: true
+  revokeSource?: true
+  revokeRequestedAt?: true
   revokedAt?: true
   reactivatedAt?: true
   revokedById?: true
+  cardNumber?: true
+  cardIssuedAt?: true
+  cardExpiresAt?: true
   formationStep?: true
   trackingCode?: true
   licenseNumber?: true
@@ -270,11 +305,18 @@ export type CaseFileMaxAggregateInputType = {
 export type CaseFileCountAggregateInputType = {
   id?: true
   userId?: true
+  kind?: true
+  hostCaseFileId?: true
   status?: true
   revokeReason?: true
+  revokeSource?: true
+  revokeRequestedAt?: true
   revokedAt?: true
   reactivatedAt?: true
   revokedById?: true
+  cardNumber?: true
+  cardIssuedAt?: true
+  cardExpiresAt?: true
   formationStep?: true
   trackingCode?: true
   licenseNumber?: true
@@ -400,11 +442,18 @@ export type CaseFileGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type CaseFileGroupByOutputType = {
   id: string
   userId: string
+  kind: $Enums.CaseFileKind
+  hostCaseFileId: string | null
   status: $Enums.CaseFileStatus
   revokeReason: string | null
+  revokeSource: $Enums.CaseRevokeSource | null
+  revokeRequestedAt: Date | null
   revokedAt: Date | null
   reactivatedAt: Date | null
   revokedById: string | null
+  cardNumber: string | null
+  cardIssuedAt: Date | null
+  cardExpiresAt: Date | null
   formationStep: number
   trackingCode: string | null
   licenseNumber: string | null
@@ -466,11 +515,18 @@ export type CaseFileWhereInput = {
   NOT?: Prisma.CaseFileWhereInput | Prisma.CaseFileWhereInput[]
   id?: Prisma.StringFilter<"CaseFile"> | string
   userId?: Prisma.StringFilter<"CaseFile"> | string
+  kind?: Prisma.EnumCaseFileKindFilter<"CaseFile"> | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  revokeSource?: Prisma.EnumCaseRevokeSourceNullableFilter<"CaseFile"> | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   reactivatedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  cardNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  cardIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  cardExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -505,6 +561,8 @@ export type CaseFileWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  hostCaseFile?: Prisma.XOR<Prisma.CaseFileNullableScalarRelationFilter, Prisma.CaseFileWhereInput> | null
+  stewardCases?: Prisma.CaseFileListRelationFilter
   revokedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   activityJob?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
@@ -518,16 +576,24 @@ export type CaseFileWhereInput = {
   premiseHistory?: Prisma.CasePremiseHistoryListRelationFilter
   violations?: Prisma.ViolationListRelationFilter
   suspensions?: Prisma.CaseSuspensionListRelationFilter
+  stewardRevokeFile?: Prisma.XOR<Prisma.CaseStewardRevokeFileNullableScalarRelationFilter, Prisma.CaseStewardRevokeFileWhereInput> | null
 }
 
 export type CaseFileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  hostCaseFileId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokeSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokeRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   reactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -562,6 +628,8 @@ export type CaseFileOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  hostCaseFile?: Prisma.CaseFileOrderByWithRelationInput
+  stewardCases?: Prisma.CaseFileOrderByRelationAggregateInput
   revokedBy?: Prisma.UserOrderByWithRelationInput
   activityJob?: Prisma.JobOrderByWithRelationInput
   premiseCity?: Prisma.CityOrderByWithRelationInput
@@ -575,21 +643,29 @@ export type CaseFileOrderByWithRelationInput = {
   premiseHistory?: Prisma.CasePremiseHistoryOrderByRelationAggregateInput
   violations?: Prisma.ViolationOrderByRelationAggregateInput
   suspensions?: Prisma.CaseSuspensionOrderByRelationAggregateInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileOrderByWithRelationInput
 }
 
 export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  cardNumber?: string
   trackingCode?: string
   licenseNumber?: string
   AND?: Prisma.CaseFileWhereInput | Prisma.CaseFileWhereInput[]
   OR?: Prisma.CaseFileWhereInput[]
   NOT?: Prisma.CaseFileWhereInput | Prisma.CaseFileWhereInput[]
   userId?: Prisma.StringFilter<"CaseFile"> | string
+  kind?: Prisma.EnumCaseFileKindFilter<"CaseFile"> | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  revokeSource?: Prisma.EnumCaseRevokeSourceNullableFilter<"CaseFile"> | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   reactivatedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  cardIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  cardExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   licenseIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   licenseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
@@ -622,6 +698,8 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  hostCaseFile?: Prisma.XOR<Prisma.CaseFileNullableScalarRelationFilter, Prisma.CaseFileWhereInput> | null
+  stewardCases?: Prisma.CaseFileListRelationFilter
   revokedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   activityJob?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
@@ -635,16 +713,24 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   premiseHistory?: Prisma.CasePremiseHistoryListRelationFilter
   violations?: Prisma.ViolationListRelationFilter
   suspensions?: Prisma.CaseSuspensionListRelationFilter
-}, "id" | "trackingCode" | "licenseNumber">
+  stewardRevokeFile?: Prisma.XOR<Prisma.CaseStewardRevokeFileNullableScalarRelationFilter, Prisma.CaseStewardRevokeFileWhereInput> | null
+}, "id" | "cardNumber" | "trackingCode" | "licenseNumber">
 
 export type CaseFileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  hostCaseFileId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokeSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  revokeRequestedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   reactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   revokedById?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -691,11 +777,18 @@ export type CaseFileScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CaseFileScalarWhereWithAggregatesInput | Prisma.CaseFileScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CaseFile"> | string
   userId?: Prisma.StringWithAggregatesFilter<"CaseFile"> | string
+  kind?: Prisma.EnumCaseFileKindWithAggregatesFilter<"CaseFile"> | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   status?: Prisma.EnumCaseFileStatusWithAggregatesFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
+  revokeSource?: Prisma.EnumCaseRevokeSourceNullableWithAggregatesFilter<"CaseFile"> | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   revokedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   reactivatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
+  cardNumber?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
+  cardIssuedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
+  cardExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   formationStep?: Prisma.IntWithAggregatesFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
@@ -733,10 +826,16 @@ export type CaseFileScalarWhereWithAggregatesInput = {
 
 export type CaseFileCreateInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -767,6 +866,8 @@ export type CaseFileCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -780,16 +881,24 @@ export type CaseFileCreateInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -823,6 +932,7 @@ export type CaseFileUncheckedCreateInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -831,14 +941,21 @@ export type CaseFileUncheckedCreateInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -869,6 +986,8 @@ export type CaseFileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -882,16 +1001,24 @@ export type CaseFileUpdateInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -925,6 +1052,7 @@ export type CaseFileUncheckedUpdateInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -933,16 +1061,24 @@ export type CaseFileUncheckedUpdateInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -980,10 +1116,16 @@ export type CaseFileCreateManyInput = {
 
 export type CaseFileUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1018,11 +1160,18 @@ export type CaseFileUpdateManyMutationInput = {
 export type CaseFileUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1073,14 +1222,26 @@ export type CaseFileScalarRelationFilter = {
   isNot?: Prisma.CaseFileWhereInput
 }
 
+export type CaseFileNullableScalarRelationFilter = {
+  is?: Prisma.CaseFileWhereInput | null
+  isNot?: Prisma.CaseFileWhereInput | null
+}
+
 export type CaseFileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  hostCaseFileId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrder
+  revokeSource?: Prisma.SortOrder
+  revokeRequestedAt?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
   reactivatedAt?: Prisma.SortOrder
   revokedById?: Prisma.SortOrder
+  cardNumber?: Prisma.SortOrder
+  cardIssuedAt?: Prisma.SortOrder
+  cardExpiresAt?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
@@ -1125,11 +1286,18 @@ export type CaseFileAvgOrderByAggregateInput = {
 export type CaseFileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  hostCaseFileId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrder
+  revokeSource?: Prisma.SortOrder
+  revokeRequestedAt?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
   reactivatedAt?: Prisma.SortOrder
   revokedById?: Prisma.SortOrder
+  cardNumber?: Prisma.SortOrder
+  cardIssuedAt?: Prisma.SortOrder
+  cardExpiresAt?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
@@ -1168,11 +1336,18 @@ export type CaseFileMaxOrderByAggregateInput = {
 export type CaseFileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  kind?: Prisma.SortOrder
+  hostCaseFileId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   revokeReason?: Prisma.SortOrder
+  revokeSource?: Prisma.SortOrder
+  revokeRequestedAt?: Prisma.SortOrder
   revokedAt?: Prisma.SortOrder
   reactivatedAt?: Prisma.SortOrder
   revokedById?: Prisma.SortOrder
+  cardNumber?: Prisma.SortOrder
+  cardIssuedAt?: Prisma.SortOrder
+  cardExpiresAt?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
@@ -1212,11 +1387,6 @@ export type CaseFileSumOrderByAggregateInput = {
   formationStep?: Prisma.SortOrder
   posDeviceCount?: Prisma.SortOrder
   premiseArea?: Prisma.SortOrder
-}
-
-export type CaseFileNullableScalarRelationFilter = {
-  is?: Prisma.CaseFileWhereInput | null
-  isNot?: Prisma.CaseFileWhereInput | null
 }
 
 export type CaseFileCreateNestedManyWithoutPremiseCityInput = {
@@ -1345,8 +1515,36 @@ export type CaseFileUpdateOneRequiredWithoutManagementReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutManagementReviewsInput, Prisma.CaseFileUpdateWithoutManagementReviewsInput>, Prisma.CaseFileUncheckedUpdateWithoutManagementReviewsInput>
 }
 
+export type CaseFileCreateNestedOneWithoutStewardCasesInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardCasesInput, Prisma.CaseFileUncheckedCreateWithoutStewardCasesInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutStewardCasesInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+}
+
+export type CaseFileCreateNestedManyWithoutHostCaseFileInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput> | Prisma.CaseFileCreateWithoutHostCaseFileInput[] | Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput | Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput[]
+  createMany?: Prisma.CaseFileCreateManyHostCaseFileInputEnvelope
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+}
+
+export type CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput> | Prisma.CaseFileCreateWithoutHostCaseFileInput[] | Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput | Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput[]
+  createMany?: Prisma.CaseFileCreateManyHostCaseFileInputEnvelope
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+}
+
+export type EnumCaseFileKindFieldUpdateOperationsInput = {
+  set?: $Enums.CaseFileKind
+}
+
 export type EnumCaseFileStatusFieldUpdateOperationsInput = {
   set?: $Enums.CaseFileStatus
+}
+
+export type NullableEnumCaseRevokeSourceFieldUpdateOperationsInput = {
+  set?: $Enums.CaseRevokeSource | null
 }
 
 export type NullableEnumPreviousOccupationFieldUpdateOperationsInput = {
@@ -1367,6 +1565,58 @@ export type NullableEnumPremisePublicAccessFieldUpdateOperationsInput = {
 
 export type NullableEnumPremiseOwnershipFieldUpdateOperationsInput = {
   set?: $Enums.PremiseOwnership | null
+}
+
+export type CaseFileUpdateOneWithoutStewardCasesNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardCasesInput, Prisma.CaseFileUncheckedCreateWithoutStewardCasesInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutStewardCasesInput
+  upsert?: Prisma.CaseFileUpsertWithoutStewardCasesInput
+  disconnect?: Prisma.CaseFileWhereInput | boolean
+  delete?: Prisma.CaseFileWhereInput | boolean
+  connect?: Prisma.CaseFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutStewardCasesInput, Prisma.CaseFileUpdateWithoutStewardCasesInput>, Prisma.CaseFileUncheckedUpdateWithoutStewardCasesInput>
+}
+
+export type CaseFileUpdateManyWithoutHostCaseFileNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput> | Prisma.CaseFileCreateWithoutHostCaseFileInput[] | Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput | Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput[]
+  upsert?: Prisma.CaseFileUpsertWithWhereUniqueWithoutHostCaseFileInput | Prisma.CaseFileUpsertWithWhereUniqueWithoutHostCaseFileInput[]
+  createMany?: Prisma.CaseFileCreateManyHostCaseFileInputEnvelope
+  set?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  disconnect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  delete?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput[]
+  updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutHostCaseFileInput | Prisma.CaseFileUpdateManyWithWhereWithoutHostCaseFileInput[]
+  deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
+}
+
+export type CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput> | Prisma.CaseFileCreateWithoutHostCaseFileInput[] | Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput | Prisma.CaseFileCreateOrConnectWithoutHostCaseFileInput[]
+  upsert?: Prisma.CaseFileUpsertWithWhereUniqueWithoutHostCaseFileInput | Prisma.CaseFileUpsertWithWhereUniqueWithoutHostCaseFileInput[]
+  createMany?: Prisma.CaseFileCreateManyHostCaseFileInputEnvelope
+  set?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  disconnect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  delete?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput[]
+  updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutHostCaseFileInput | Prisma.CaseFileUpdateManyWithWhereWithoutHostCaseFileInput[]
+  deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
+}
+
+export type CaseFileCreateNestedOneWithoutStewardRevokeFileInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardRevokeFileInput, Prisma.CaseFileUncheckedCreateWithoutStewardRevokeFileInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutStewardRevokeFileInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+}
+
+export type CaseFileUpdateOneRequiredWithoutStewardRevokeFileNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardRevokeFileInput, Prisma.CaseFileUncheckedCreateWithoutStewardRevokeFileInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutStewardRevokeFileInput
+  upsert?: Prisma.CaseFileUpsertWithoutStewardRevokeFileInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutStewardRevokeFileInput, Prisma.CaseFileUpdateWithoutStewardRevokeFileInput>, Prisma.CaseFileUncheckedUpdateWithoutStewardRevokeFileInput>
 }
 
 export type CaseFileCreateNestedOneWithoutSuspensionsInput = {
@@ -1611,10 +1861,16 @@ export type CaseFileUpdateOneWithoutViolationsNestedInput = {
 
 export type CaseFileCreateWithoutPremiseCityInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1645,6 +1901,8 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -1657,16 +1915,24 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1699,6 +1965,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -1707,6 +1974,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseCityInput = {
@@ -1741,11 +2009,18 @@ export type CaseFileScalarWhereInput = {
   NOT?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
   id?: Prisma.StringFilter<"CaseFile"> | string
   userId?: Prisma.StringFilter<"CaseFile"> | string
+  kind?: Prisma.EnumCaseFileKindFilter<"CaseFile"> | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   status?: Prisma.EnumCaseFileStatusFilter<"CaseFile"> | $Enums.CaseFileStatus
   revokeReason?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  revokeSource?: Prisma.EnumCaseRevokeSourceNullableFilter<"CaseFile"> | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   reactivatedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   revokedById?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  cardNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  cardIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  cardExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -1783,10 +2058,16 @@ export type CaseFileScalarWhereInput = {
 
 export type CaseFileCreateWithoutActivityJobInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1817,6 +2098,8 @@ export type CaseFileCreateWithoutActivityJobInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -1829,16 +2112,24 @@ export type CaseFileCreateWithoutActivityJobInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1871,6 +2162,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -1879,6 +2171,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityJobInput = {
@@ -1909,10 +2202,16 @@ export type CaseFileUpdateManyWithWhereWithoutActivityJobInput = {
 
 export type CaseFileCreateWithoutInquiriesInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1943,6 +2242,8 @@ export type CaseFileCreateWithoutInquiriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -1955,16 +2256,24 @@ export type CaseFileCreateWithoutInquiriesInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -1998,6 +2307,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2005,6 +2315,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutInquiriesInput = {
@@ -2025,10 +2336,16 @@ export type CaseFileUpdateToOneWithWhereWithoutInquiriesInput = {
 
 export type CaseFileUpdateWithoutInquiriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2059,6 +2376,8 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -2071,16 +2390,24 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2114,6 +2441,7 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -2121,14 +2449,21 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPlacesReviewsInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2159,6 +2494,8 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -2171,16 +2508,24 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2214,6 +2559,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2221,6 +2567,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPlacesReviewsInput = {
@@ -2241,10 +2588,16 @@ export type CaseFileUpdateToOneWithWhereWithoutPlacesReviewsInput = {
 
 export type CaseFileUpdateWithoutPlacesReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2275,6 +2628,8 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -2287,16 +2642,24 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2330,6 +2693,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -2337,14 +2701,21 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutManagementReviewsInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2375,6 +2746,8 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -2387,16 +2760,24 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2430,6 +2811,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2437,6 +2819,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutManagementReviewsInput = {
@@ -2457,10 +2840,16 @@ export type CaseFileUpdateToOneWithWhereWithoutManagementReviewsInput = {
 
 export type CaseFileUpdateWithoutManagementReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2491,6 +2880,8 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -2503,16 +2894,24 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2546,6 +2945,7 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -2553,14 +2953,21 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
-export type CaseFileCreateWithoutSuspensionsInput = {
+export type CaseFileCreateWithoutStewardCasesInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2591,6 +2998,7 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -2603,16 +3011,25 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
-export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
+export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2653,6 +3070,656 @@ export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutStewardCasesInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardCasesInput, Prisma.CaseFileUncheckedCreateWithoutStewardCasesInput>
+}
+
+export type CaseFileCreateWithoutHostCaseFileInput = {
+  id?: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutHostCaseFileInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput>
+}
+
+export type CaseFileCreateManyHostCaseFileInputEnvelope = {
+  data: Prisma.CaseFileCreateManyHostCaseFileInput | Prisma.CaseFileCreateManyHostCaseFileInput[]
+  skipDuplicates?: boolean
+}
+
+export type CaseFileUpsertWithoutStewardCasesInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutStewardCasesInput, Prisma.CaseFileUncheckedUpdateWithoutStewardCasesInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardCasesInput, Prisma.CaseFileUncheckedCreateWithoutStewardCasesInput>
+  where?: Prisma.CaseFileWhereInput
+}
+
+export type CaseFileUpdateToOneWithWhereWithoutStewardCasesInput = {
+  where?: Prisma.CaseFileWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutStewardCasesInput, Prisma.CaseFileUncheckedUpdateWithoutStewardCasesInput>
+}
+
+export type CaseFileUpdateWithoutStewardCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+}
+
+export type CaseFileUpsertWithWhereUniqueWithoutHostCaseFileInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedUpdateWithoutHostCaseFileInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedCreateWithoutHostCaseFileInput>
+}
+
+export type CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutHostCaseFileInput, Prisma.CaseFileUncheckedUpdateWithoutHostCaseFileInput>
+}
+
+export type CaseFileUpdateManyWithWhereWithoutHostCaseFileInput = {
+  where: Prisma.CaseFileScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateManyMutationInput, Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileInput>
+}
+
+export type CaseFileCreateWithoutStewardRevokeFileInput = {
+  id?: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutStewardRevokeFileInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardRevokeFileInput, Prisma.CaseFileUncheckedCreateWithoutStewardRevokeFileInput>
+}
+
+export type CaseFileUpsertWithoutStewardRevokeFileInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutStewardRevokeFileInput, Prisma.CaseFileUncheckedUpdateWithoutStewardRevokeFileInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutStewardRevokeFileInput, Prisma.CaseFileUncheckedCreateWithoutStewardRevokeFileInput>
+  where?: Prisma.CaseFileWhereInput
+}
+
+export type CaseFileUpdateToOneWithWhereWithoutStewardRevokeFileInput = {
+  where?: Prisma.CaseFileWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutStewardRevokeFileInput, Prisma.CaseFileUncheckedUpdateWithoutStewardRevokeFileInput>
+}
+
+export type CaseFileUpdateWithoutStewardRevokeFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileCreateWithoutSuspensionsInput = {
+  id?: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutSuspensionsInput = {
@@ -2673,10 +3740,16 @@ export type CaseFileUpdateToOneWithWhereWithoutSuspensionsInput = {
 
 export type CaseFileUpdateWithoutSuspensionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2707,6 +3780,8 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -2719,16 +3794,24 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2762,6 +3845,7 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -2769,14 +3853,21 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutRequestsInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2807,6 +3898,8 @@ export type CaseFileCreateWithoutRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -2819,16 +3912,24 @@ export type CaseFileCreateWithoutRequestsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRequestsInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -2862,6 +3963,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2869,6 +3971,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRequestsInput = {
@@ -2889,10 +3992,16 @@ export type CaseFileUpdateToOneWithWhereWithoutRequestsInput = {
 
 export type CaseFileUpdateWithoutRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2923,6 +4032,8 @@ export type CaseFileUpdateWithoutRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -2935,16 +4046,24 @@ export type CaseFileUpdateWithoutRequestsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2978,6 +4097,7 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -2985,14 +4105,21 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPremiseHistoryInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3023,6 +4150,8 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -3035,16 +4164,24 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3078,6 +4215,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3085,6 +4223,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseHistoryInput = {
@@ -3105,10 +4244,16 @@ export type CaseFileUpdateToOneWithWhereWithoutPremiseHistoryInput = {
 
 export type CaseFileUpdateWithoutPremiseHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3139,6 +4284,8 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -3151,16 +4298,24 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3194,6 +4349,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -3201,14 +4357,21 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutActivityDocumentsInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3239,6 +4402,8 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -3251,16 +4416,24 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3294,6 +4467,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3301,6 +4475,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityDocumentsInput = {
@@ -3321,10 +4496,16 @@ export type CaseFileUpdateToOneWithWhereWithoutActivityDocumentsInput = {
 
 export type CaseFileUpdateWithoutActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3355,6 +4536,8 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -3367,16 +4550,24 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3410,6 +4601,7 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -3417,14 +4609,21 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutUserInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3454,6 +4653,8 @@ export type CaseFileCreateWithoutUserInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -3467,15 +4668,23 @@ export type CaseFileCreateWithoutUserInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutUserInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3509,6 +4718,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3517,6 +4727,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutUserInput = {
@@ -3531,10 +4742,16 @@ export type CaseFileCreateManyUserInputEnvelope = {
 
 export type CaseFileCreateWithoutRevokedByInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3565,6 +4782,8 @@ export type CaseFileCreateWithoutRevokedByInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
@@ -3577,15 +4796,23 @@ export type CaseFileCreateWithoutRevokedByInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3619,6 +4846,7 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3627,6 +4855,7 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRevokedByInput = {
@@ -3673,10 +4902,16 @@ export type CaseFileUpdateManyWithWhereWithoutRevokedByInput = {
 
 export type CaseFileCreateWithoutPremiseComplexInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3707,6 +4942,8 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -3719,16 +4956,24 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3761,6 +5006,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3769,6 +5015,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseComplexInput = {
@@ -3799,10 +5046,16 @@ export type CaseFileUpdateManyWithWhereWithoutPremiseComplexInput = {
 
 export type CaseFileCreateWithoutRegistrationPlaceInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3833,6 +5086,8 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -3845,16 +5100,24 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3887,6 +5150,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3895,6 +5159,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRegistrationPlaceInput = {
@@ -3925,10 +5190,16 @@ export type CaseFileUpdateManyWithWhereWithoutRegistrationPlaceInput = {
 
 export type CaseFileCreateWithoutViolationsInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -3959,6 +5230,8 @@ export type CaseFileCreateWithoutViolationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
@@ -3971,16 +5244,24 @@ export type CaseFileCreateWithoutViolationsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutViolationsInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4014,6 +5295,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   premiseOwnerName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -4021,6 +5303,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutViolationsInput = {
@@ -4041,10 +5324,16 @@ export type CaseFileUpdateToOneWithWhereWithoutViolationsInput = {
 
 export type CaseFileUpdateWithoutViolationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4075,6 +5364,8 @@ export type CaseFileUpdateWithoutViolationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -4087,16 +5378,24 @@ export type CaseFileUpdateWithoutViolationsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4130,6 +5429,7 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4137,16 +5437,24 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyPremiseCityInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4183,10 +5491,16 @@ export type CaseFileCreateManyPremiseCityInput = {
 
 export type CaseFileUpdateWithoutPremiseCityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4217,6 +5531,8 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -4229,16 +5545,24 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4271,6 +5595,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4279,16 +5604,24 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4326,11 +5659,18 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
 export type CaseFileCreateManyActivityJobInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4367,10 +5707,16 @@ export type CaseFileCreateManyActivityJobInput = {
 
 export type CaseFileUpdateWithoutActivityJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4401,6 +5747,8 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -4413,16 +5761,24 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4455,6 +5811,7 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4463,22 +5820,246 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseFileCreateManyHostCaseFileInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CaseFileUpdateWithoutHostCaseFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateManyWithoutHostCaseFileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
   posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4509,11 +6090,18 @@ export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
 
 export type CaseFileCreateManyUserInput = {
   id?: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4552,10 +6140,17 @@ export type CaseFileCreateManyUserInput = {
 export type CaseFileCreateManyRevokedByInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4593,10 +6188,16 @@ export type CaseFileCreateManyRevokedByInput = {
 
 export type CaseFileUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4626,6 +6227,8 @@ export type CaseFileUpdateWithoutUserInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -4639,15 +6242,23 @@ export type CaseFileUpdateWithoutUserInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4681,6 +6292,7 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4689,15 +6301,23 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4735,10 +6355,16 @@ export type CaseFileUncheckedUpdateManyWithoutUserInput = {
 
 export type CaseFileUpdateWithoutRevokedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4769,6 +6395,8 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
@@ -4781,15 +6409,23 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4823,6 +6459,7 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4831,15 +6468,23 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4878,11 +6523,18 @@ export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
 export type CaseFileCreateManyPremiseComplexInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -4919,10 +6571,16 @@ export type CaseFileCreateManyPremiseComplexInput = {
 
 export type CaseFileUpdateWithoutPremiseComplexInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4953,6 +6611,8 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -4965,16 +6625,24 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5007,6 +6675,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -5015,16 +6684,24 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5062,11 +6739,18 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
 export type CaseFileCreateManyRegistrationPlaceInput = {
   id?: string
   userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
   status?: $Enums.CaseFileStatus
   revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
   revokedAt?: Date | string | null
   reactivatedAt?: Date | string | null
   revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
   formationStep?: number
   trackingCode?: string | null
   licenseNumber?: string | null
@@ -5103,10 +6787,16 @@ export type CaseFileCreateManyRegistrationPlaceInput = {
 
 export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5137,6 +6827,8 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
@@ -5149,16 +6841,24 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5191,6 +6891,7 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -5199,16 +6900,24 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
   revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5249,6 +6958,7 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
  */
 
 export type CaseFileCountOutputType = {
+  stewardCases: number
   inquiries: number
   placesReviews: number
   managementReviews: number
@@ -5260,6 +6970,7 @@ export type CaseFileCountOutputType = {
 }
 
 export type CaseFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  stewardCases?: boolean | CaseFileCountOutputTypeCountStewardCasesArgs
   inquiries?: boolean | CaseFileCountOutputTypeCountInquiriesArgs
   placesReviews?: boolean | CaseFileCountOutputTypeCountPlacesReviewsArgs
   managementReviews?: boolean | CaseFileCountOutputTypeCountManagementReviewsArgs
@@ -5278,6 +6989,13 @@ export type CaseFileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
    * Select specific fields to fetch from the CaseFileCountOutputType
    */
   select?: Prisma.CaseFileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * CaseFileCountOutputType without action
+ */
+export type CaseFileCountOutputTypeCountStewardCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseFileWhereInput
 }
 
 /**
@@ -5340,11 +7058,18 @@ export type CaseFileCountOutputTypeCountSuspensionsArgs<ExtArgs extends runtime.
 export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  kind?: boolean
+  hostCaseFileId?: boolean
   status?: boolean
   revokeReason?: boolean
+  revokeSource?: boolean
+  revokeRequestedAt?: boolean
   revokedAt?: boolean
   reactivatedAt?: boolean
   revokedById?: boolean
+  cardNumber?: boolean
+  cardIssuedAt?: boolean
+  cardExpiresAt?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -5379,6 +7104,8 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
+  stewardCases?: boolean | Prisma.CaseFile$stewardCasesArgs<ExtArgs>
   revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
@@ -5392,17 +7119,25 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   premiseHistory?: boolean | Prisma.CaseFile$premiseHistoryArgs<ExtArgs>
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
   suspensions?: boolean | Prisma.CaseFile$suspensionsArgs<ExtArgs>
+  stewardRevokeFile?: boolean | Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseFile"]>
 
 export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  kind?: boolean
+  hostCaseFileId?: boolean
   status?: boolean
   revokeReason?: boolean
+  revokeSource?: boolean
+  revokeRequestedAt?: boolean
   revokedAt?: boolean
   reactivatedAt?: boolean
   revokedById?: boolean
+  cardNumber?: boolean
+  cardIssuedAt?: boolean
+  cardExpiresAt?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -5437,6 +7172,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
   revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
@@ -5447,11 +7183,18 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   userId?: boolean
+  kind?: boolean
+  hostCaseFileId?: boolean
   status?: boolean
   revokeReason?: boolean
+  revokeSource?: boolean
+  revokeRequestedAt?: boolean
   revokedAt?: boolean
   reactivatedAt?: boolean
   revokedById?: boolean
+  cardNumber?: boolean
+  cardIssuedAt?: boolean
+  cardExpiresAt?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -5486,6 +7229,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
   revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
@@ -5496,11 +7240,18 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type CaseFileSelectScalar = {
   id?: boolean
   userId?: boolean
+  kind?: boolean
+  hostCaseFileId?: boolean
   status?: boolean
   revokeReason?: boolean
+  revokeSource?: boolean
+  revokeRequestedAt?: boolean
   revokedAt?: boolean
   reactivatedAt?: boolean
   revokedById?: boolean
+  cardNumber?: boolean
+  cardIssuedAt?: boolean
+  cardExpiresAt?: boolean
   formationStep?: boolean
   trackingCode?: boolean
   licenseNumber?: boolean
@@ -5536,9 +7287,11 @@ export type CaseFileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "status" | "revokeReason" | "revokedAt" | "reactivatedAt" | "revokedById" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
+export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "kind" | "hostCaseFileId" | "status" | "revokeReason" | "revokeSource" | "revokeRequestedAt" | "revokedAt" | "reactivatedAt" | "revokedById" | "cardNumber" | "cardIssuedAt" | "cardExpiresAt" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
 export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
+  stewardCases?: boolean | Prisma.CaseFile$stewardCasesArgs<ExtArgs>
   revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
@@ -5552,10 +7305,12 @@ export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   premiseHistory?: boolean | Prisma.CaseFile$premiseHistoryArgs<ExtArgs>
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
   suspensions?: boolean | Prisma.CaseFile$suspensionsArgs<ExtArgs>
+  stewardRevokeFile?: boolean | Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
   revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
@@ -5564,6 +7319,7 @@ export type CaseFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 }
 export type CaseFileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
   revokedBy?: boolean | Prisma.CaseFile$revokedByArgs<ExtArgs>
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
@@ -5575,6 +7331,8 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "CaseFile"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    hostCaseFile: Prisma.$CaseFilePayload<ExtArgs> | null
+    stewardCases: Prisma.$CaseFilePayload<ExtArgs>[]
     revokedBy: Prisma.$UserPayload<ExtArgs> | null
     activityJob: Prisma.$JobPayload<ExtArgs> | null
     premiseCity: Prisma.$CityPayload<ExtArgs> | null
@@ -5588,15 +7346,32 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     premiseHistory: Prisma.$CasePremiseHistoryPayload<ExtArgs>[]
     violations: Prisma.$ViolationPayload<ExtArgs>[]
     suspensions: Prisma.$CaseSuspensionPayload<ExtArgs>[]
+    stewardRevokeFile: Prisma.$CaseStewardRevokeFilePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     userId: string
+    kind: $Enums.CaseFileKind
+    /**
+     * پروندهٔ مجوز میزبان؛ فقط برای مباشرت
+     */
+    hostCaseFileId: string | null
     status: $Enums.CaseFileStatus
     revokeReason: string | null
+    revokeSource: $Enums.CaseRevokeSource | null
+    /**
+     * لحظهٔ ثبت درخواست ابطال مباشرت
+     */
+    revokeRequestedAt: Date | null
     revokedAt: Date | null
     reactivatedAt: Date | null
     revokedById: string | null
+    /**
+     * شمارهٔ کارت مباشرت؛ جدا از شمارهٔ مجوز فعالیت اقتصادی
+     */
+    cardNumber: string | null
+    cardIssuedAt: Date | null
+    cardExpiresAt: Date | null
     /**
      * مرحلهٔ درخواست صدور: ۰ هویت، ۱ فعالیت، ۲ محل، ۳ استعلام، ۴ اماکن، ۵ بررسی مدیریت، ۶ صدور
      */
@@ -6031,6 +7806,8 @@ readonly fields: CaseFileFieldRefs;
 export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  hostCaseFile<T extends Prisma.CaseFile$hostCaseFileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$hostCaseFileArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  stewardCases<T extends Prisma.CaseFile$stewardCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$stewardCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   revokedBy<T extends Prisma.CaseFile$revokedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$revokedByArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   activityJob<T extends Prisma.CaseFile$activityJobArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$activityJobArgs<ExtArgs>>): Prisma.Prisma__JobClient<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   premiseCity<T extends Prisma.CaseFile$premiseCityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseCityArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -6044,6 +7821,7 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
   premiseHistory<T extends Prisma.CaseFile$premiseHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   violations<T extends Prisma.CaseFile$violationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$violationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   suspensions<T extends Prisma.CaseFile$suspensionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$suspensionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseSuspensionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  stewardRevokeFile<T extends Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>>): Prisma.Prisma__CaseStewardRevokeFileClient<runtime.Types.Result.GetResult<Prisma.$CaseStewardRevokeFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6075,11 +7853,18 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
 export interface CaseFileFieldRefs {
   readonly id: Prisma.FieldRef<"CaseFile", 'String'>
   readonly userId: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly kind: Prisma.FieldRef<"CaseFile", 'CaseFileKind'>
+  readonly hostCaseFileId: Prisma.FieldRef<"CaseFile", 'String'>
   readonly status: Prisma.FieldRef<"CaseFile", 'CaseFileStatus'>
   readonly revokeReason: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly revokeSource: Prisma.FieldRef<"CaseFile", 'CaseRevokeSource'>
+  readonly revokeRequestedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly revokedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly reactivatedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly revokedById: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly cardNumber: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly cardIssuedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
+  readonly cardExpiresAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly formationStep: Prisma.FieldRef<"CaseFile", 'Int'>
   readonly trackingCode: Prisma.FieldRef<"CaseFile", 'String'>
   readonly licenseNumber: Prisma.FieldRef<"CaseFile", 'String'>
@@ -6514,6 +8299,49 @@ export type CaseFileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * CaseFile.hostCaseFile
+ */
+export type CaseFile$hostCaseFileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseFile
+   */
+  select?: Prisma.CaseFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseFile
+   */
+  omit?: Prisma.CaseFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseFileInclude<ExtArgs> | null
+  where?: Prisma.CaseFileWhereInput
+}
+
+/**
+ * CaseFile.stewardCases
+ */
+export type CaseFile$stewardCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseFile
+   */
+  select?: Prisma.CaseFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseFile
+   */
+  omit?: Prisma.CaseFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseFileInclude<ExtArgs> | null
+  where?: Prisma.CaseFileWhereInput
+  orderBy?: Prisma.CaseFileOrderByWithRelationInput | Prisma.CaseFileOrderByWithRelationInput[]
+  cursor?: Prisma.CaseFileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
+}
+
+/**
  * CaseFile.revokedBy
  */
 export type CaseFile$revokedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6798,6 +8626,25 @@ export type CaseFile$suspensionsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CaseSuspensionScalarFieldEnum | Prisma.CaseSuspensionScalarFieldEnum[]
+}
+
+/**
+ * CaseFile.stewardRevokeFile
+ */
+export type CaseFile$stewardRevokeFileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseStewardRevokeFile
+   */
+  select?: Prisma.CaseStewardRevokeFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseStewardRevokeFile
+   */
+  omit?: Prisma.CaseStewardRevokeFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseStewardRevokeFileInclude<ExtArgs> | null
+  where?: Prisma.CaseStewardRevokeFileWhereInput
 }
 
 /**

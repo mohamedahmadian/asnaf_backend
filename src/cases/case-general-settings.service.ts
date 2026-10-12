@@ -21,6 +21,7 @@ export class CaseGeneralSettingsService {
       editAfterIssuance: row.editAfterIssuance,
       editorRoleId: row.editorRoleId,
       contractYears: clampContractYears(row.contractYears),
+      stewardContractYears: clampContractYears(row.stewardContractYears),
       roles,
     };
   }
@@ -38,6 +39,8 @@ export class CaseGeneralSettingsService {
       if (!role) throw new NotFoundException('نقش یافت نشد');
     }
     const contractYears = dto.contractYears == null ? undefined : clampContractYears(dto.contractYears);
+    const stewardContractYears =
+      dto.stewardContractYears == null ? undefined : clampContractYears(dto.stewardContractYears);
     await this.prisma.caseGeneralSettings.upsert({
       where: { id: SETTINGS_ID },
       create: {
@@ -45,11 +48,13 @@ export class CaseGeneralSettingsService {
         editAfterIssuance: dto.editAfterIssuance,
         editorRoleId,
         ...(contractYears == null ? {} : { contractYears }),
+        ...(stewardContractYears == null ? {} : { stewardContractYears }),
       },
       update: {
         editAfterIssuance: dto.editAfterIssuance,
         editorRoleId,
         ...(contractYears == null ? {} : { contractYears }),
+        ...(stewardContractYears == null ? {} : { stewardContractYears }),
       },
     });
     return this.get();
@@ -78,7 +83,7 @@ export class CaseGeneralSettingsService {
       where: { id: SETTINGS_ID },
       create: { id: SETTINGS_ID },
       update: {},
-      select: { editAfterIssuance: true, editorRoleId: true, contractYears: true },
+      select: { editAfterIssuance: true, editorRoleId: true, contractYears: true, stewardContractYears: true },
     });
   }
 }

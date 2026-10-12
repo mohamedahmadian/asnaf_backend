@@ -1,13 +1,19 @@
 import { BadRequestException, ConflictException } from '@nestjs/common';
 import { CaseFileStatus, CaseRequestStatus, CaseRequestType, Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { clampContractYears } from './contract-duration';
+import { clampContractYears, readStewardContractYears } from './contract-duration';
 
 /** 0 هویت، 1 فعالیت، 2 محل، 3 استعلام، 4 اماکن، 5 بررسی مدیریت، 6 صدور */
 export const INQUIRIES_FORMATION_STEP = 3;
 export const PLACES_FORMATION_STEP = 4;
 export const MANAGEMENT_FORMATION_STEP = 5;
 export const ISSUANCE_FORMATION_STEP = 6;
+
+/** ۰ هویت، ۱ استعلام، ۲ اماکن، ۳ تأیید مدیریت، ۴ صدور کارت */
+export const STEWARDSHIP_INQUIRY_STEP = 1;
+export const STEWARDSHIP_PLACES_STEP = 2;
+export const STEWARDSHIP_MANAGEMENT_STEP = 3;
+export const STEWARDSHIP_ISSUANCE_STEP = 4;
 
 function jalaliYear(date = new Date()) {
   const year = date.getFullYear();
@@ -80,6 +86,40 @@ export async function assignLicenseNumber(
   throw new ConflictException('صدور شماره مجوز فعالیت اقتصادی انجام نشد');
 }
 
+/** شمارهٔ کارت مباشرت، جدا از شمارندهٔ مجوز. اعتبار از تاریخ صدور به اندازهٔ مدت قرارداد مباشرت است. */
+export async function assignStewardCardNumber(
+  prisma: PrismaService | Prisma.TransactionClient,
+  caseFileId: string,
+  issuedAtInput: Date,
+) {
+  const issuedAt = utcDateOnly(issuedAtInput);
+  const expiresAt = addUtcYears(issuedAt, await readStewardContractYears(prisma));
+  const prefix = `M-${jalaliYear(issuedAt)}-`;
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const count = await prisma.caseFile.count({
+      where: { cardNumber: { startsWith: prefix } },
+    });
+    const cardNumber = `${prefix}${String(count + 1 + attempt).padStart(5, '0')}`;
+    try {
+      const updated = await prisma.caseFile.updateMany({
+        where: { id: caseFileId, cardNumber: null },
+        data: { cardNumber, cardIssuedAt: issuedAt, cardExpiresAt: expiresAt },
+      });
+      if (updated.count === 1) return { cardNumber, cardIssuedAt: issuedAt, cardExpiresAt: expiresAt };
+      const row = await prisma.caseFile.findUnique({
+        where: { id: caseFileId },
+        select: { cardNumber: true, cardIssuedAt: true, cardExpiresAt: true },
+      });
+      if (row?.cardNumber && row.cardIssuedAt && row.cardExpiresAt) {
+        return { cardNumber: row.cardNumber, cardIssuedAt: row.cardIssuedAt, cardExpiresAt: row.cardExpiresAt };
+      }
+    } catch (error) {
+      if (!isUniqueConflict(error)) throw error;
+    }
+  }
+  throw new ConflictException('صدور شماره کارت مباشرت انجام نشد');
+}
+
 /**
  * درخواست صدور را با مرحلهٔ پرونده هم‌گام می‌کند.
  * شماره مجوز فقط در تکمیل درخواست نوشته می‌شود.
@@ -94,6 +134,7 @@ export async function syncIssuanceRequest(
     where: { id: caseFileId },
     select: {
       id: true,
+      kind: true,
       status: true,
       licenseNumber: true,
       formationStep: true,
@@ -104,7 +145,7 @@ export async function syncIssuanceRequest(
       },
     },
   });
-  if (!file || file.formationStep < 1) return;
+  if (!file || file.kind !== 'LICENSE' || file.formationStep < 1) return;
 
   const existing = file.requests[0];
   const closed = existing?.status === CaseRequestStatus.ISSUED || existing?.status === CaseRequestStatus.COMPLETED;

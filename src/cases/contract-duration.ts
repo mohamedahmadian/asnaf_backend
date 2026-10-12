@@ -20,3 +20,11 @@ export async function readContractYears(prisma: Db) {
   });
   return clampContractYears(row?.contractYears);
 }
+
+export async function readStewardContractYears(prisma: Db) {
+  const row = await prisma.caseGeneralSettings.findUnique({
+    where: { id: SETTINGS_ID },
+    select: { stewardContractYears: true },
+  });
+  return clampContractYears(row?.stewardContractYears);
+}

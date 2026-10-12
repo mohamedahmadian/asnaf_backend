@@ -29,6 +29,7 @@ const SETTINGS_REQUEST_TYPES = [
   CaseRequestType.RENEWAL,
   CaseRequestType.LOCATION_CHANGE,
   CaseRequestType.AUCTION,
+  CaseRequestType.STEWARDSHIP,
 ] as const;
 
 export type ProcessType = (typeof PROCESS_TYPES)[number];
@@ -211,6 +212,18 @@ export async function rewindRequestPhase(prisma: Db, caseRequestId: string, phas
     where: { id: request.id },
     data: { formationStep: phase },
   });
+  if (request.type === CaseRequestType.STEWARDSHIP) {
+    const file = await prisma.caseFile.findUnique({
+      where: { id: request.caseFileId },
+      select: { formationStep: true, cardNumber: true },
+    });
+    if (!file || file.cardNumber || file.formationStep <= phase) return;
+    await prisma.caseFile.update({
+      where: { id: request.caseFileId },
+      data: { formationStep: phase },
+    });
+    return;
+  }
   if (request.type !== CaseRequestType.ISSUANCE) return;
   const file = await prisma.caseFile.findUnique({
     where: { id: request.caseFileId },
@@ -227,12 +240,14 @@ export async function rewindRequestPhase(prisma: Db, caseRequestId: string, phas
 export function inquiryRewindPhase(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return 3;
   if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 2;
+  if (type === CaseRequestType.STEWARDSHIP) return 1;
   return null;
 }
 
 export function placesRewindPhase(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return 4;
   if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 3;
+  if (type === CaseRequestType.STEWARDSHIP) return 2;
   return null;
 }
 
@@ -240,10 +255,11 @@ export function managementRewindPhase(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return MANAGEMENT_FORMATION_STEP;
   if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 4;
   if (type === CaseRequestType.AUCTION) return 1;
+  if (type === CaseRequestType.STEWARDSHIP) return 3;
   return null;
 }
 
-async function recordStatus(
+export async function recordStatus(
   prisma: Db,
   requestId: string,
   fromStatus: CaseRequestStatus,
@@ -518,7 +534,6 @@ export async function completeOpenRequest(
           premiseFax: draft.premiseFax,
           premiseGeoPosition: draft.premiseGeoPosition,
           premisePublicAccess: draft.premisePublicAccess,
-          registrationPlaceId: draft.registrationPlaceId,
           premiseOwnership: draft.premiseOwnership,
           premiseDeedNo: draft.premiseDeedNo,
           premiseArea: draft.premiseArea,

@@ -162,6 +162,34 @@ export class PersonFileStorage {
     };
   }
 
+  async saveStewardRevoke(input: {
+    personId: string;
+    caseFileId: string;
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = this.asAudio(input.buffer, input.mimeType, input.originalName) ?? (await this.prepare(input.buffer, input.mimeType));
+    const storageKey = [
+      'persons',
+      input.personId,
+      'cases',
+      input.caseFileId,
+      'steward-revoke',
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
   async saveManagementReview(input: {
     personId: string;
     reviewId: string;

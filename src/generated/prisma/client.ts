@@ -175,6 +175,11 @@ export type CaseManagementReviewFile = Prisma.CaseManagementReviewFileModel
  */
 export type CaseFile = Prisma.CaseFileModel
 /**
+ * Model CaseStewardRevokeFile
+ * پیوست درخواست ابطال کارت مباشرت. خود فایل در File Storage است.
+ */
+export type CaseStewardRevokeFile = Prisma.CaseStewardRevokeFileModel
+/**
  * Model CaseSuspension
  * یک دوره تعلیق پرونده. با رفع تعلیق، liftedAt پر می‌شود و پرونده از حالت تعلیق خارج می‌شود.
  */

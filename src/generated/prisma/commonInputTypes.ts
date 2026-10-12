@@ -341,11 +341,25 @@ export type EnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
 }
 
+export type EnumCaseFileKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileKind | Prisma.EnumCaseFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileKindFilter<$PrismaModel> | $Enums.CaseFileKind
+}
+
 export type EnumCaseFileStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel> | $Enums.CaseFileStatus
+}
+
+export type EnumCaseRevokeSourceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRevokeSource | Prisma.EnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRevokeSourceNullableFilter<$PrismaModel> | $Enums.CaseRevokeSource | null
 }
 
 export type EnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
@@ -383,6 +397,16 @@ export type EnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
 }
 
+export type EnumCaseFileKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileKind | Prisma.EnumCaseFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileKindWithAggregatesFilter<$PrismaModel> | $Enums.CaseFileKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseFileKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseFileKindFilter<$PrismaModel>
+}
+
 export type EnumCaseFileStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
@@ -391,6 +415,16 @@ export type EnumCaseFileStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
+}
+
+export type EnumCaseRevokeSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRevokeSource | Prisma.EnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRevokeSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.CaseRevokeSource | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRevokeSourceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRevokeSourceNullableFilter<$PrismaModel>
 }
 
 export type EnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -1408,11 +1442,25 @@ export type NestedEnumCaseRequestTypeWithAggregatesFilter<$PrismaModel = never> 
   _max?: Prisma.NestedEnumCaseRequestTypeFilter<$PrismaModel>
 }
 
+export type NestedEnumCaseFileKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileKind | Prisma.EnumCaseFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileKindFilter<$PrismaModel> | $Enums.CaseFileKind
+}
+
 export type NestedEnumCaseFileStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
   notIn?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel> | $Enums.CaseFileStatus
+}
+
+export type NestedEnumCaseRevokeSourceNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRevokeSource | Prisma.EnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRevokeSourceNullableFilter<$PrismaModel> | $Enums.CaseRevokeSource | null
 }
 
 export type NestedEnumPreviousOccupationNullableFilter<$PrismaModel = never> = {
@@ -1450,6 +1498,16 @@ export type NestedEnumPremiseOwnershipNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumPremiseOwnershipNullableFilter<$PrismaModel> | $Enums.PremiseOwnership | null
 }
 
+export type NestedEnumCaseFileKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseFileKind | Prisma.EnumCaseFileKindFieldRefInput<$PrismaModel>
+  in?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.CaseFileKind[] | Prisma.ListEnumCaseFileKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumCaseFileKindWithAggregatesFilter<$PrismaModel> | $Enums.CaseFileKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseFileKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseFileKindFilter<$PrismaModel>
+}
+
 export type NestedEnumCaseFileStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.CaseFileStatus | Prisma.EnumCaseFileStatusFieldRefInput<$PrismaModel>
   in?: $Enums.CaseFileStatus[] | Prisma.ListEnumCaseFileStatusFieldRefInput<$PrismaModel>
@@ -1458,6 +1516,16 @@ export type NestedEnumCaseFileStatusWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumCaseFileStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumCaseRevokeSourceNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRevokeSource | Prisma.EnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  in?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.CaseRevokeSource[] | Prisma.ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumCaseRevokeSourceNullableWithAggregatesFilter<$PrismaModel> | $Enums.CaseRevokeSource | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumCaseRevokeSourceNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumCaseRevokeSourceNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumPreviousOccupationNullableWithAggregatesFilter<$PrismaModel = never> = {

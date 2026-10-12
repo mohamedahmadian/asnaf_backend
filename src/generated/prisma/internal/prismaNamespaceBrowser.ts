@@ -78,6 +78,7 @@ export const ModelName = {
   CaseManagementReview: 'CaseManagementReview',
   CaseManagementReviewFile: 'CaseManagementReviewFile',
   CaseFile: 'CaseFile',
+  CaseStewardRevokeFile: 'CaseStewardRevokeFile',
   CaseSuspension: 'CaseSuspension',
   CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
@@ -395,6 +396,7 @@ export const CaseGeneralSettingsScalarFieldEnum = {
   editAfterIssuance: 'editAfterIssuance',
   editorRoleId: 'editorRoleId',
   contractYears: 'contractYears',
+  stewardContractYears: 'stewardContractYears',
   updatedAt: 'updatedAt'
 } as const
 
@@ -532,11 +534,18 @@ export type CaseManagementReviewFileScalarFieldEnum = (typeof CaseManagementRevi
 export const CaseFileScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  kind: 'kind',
+  hostCaseFileId: 'hostCaseFileId',
   status: 'status',
   revokeReason: 'revokeReason',
+  revokeSource: 'revokeSource',
+  revokeRequestedAt: 'revokeRequestedAt',
   revokedAt: 'revokedAt',
   reactivatedAt: 'reactivatedAt',
   revokedById: 'revokedById',
+  cardNumber: 'cardNumber',
+  cardIssuedAt: 'cardIssuedAt',
+  cardExpiresAt: 'cardExpiresAt',
   formationStep: 'formationStep',
   trackingCode: 'trackingCode',
   licenseNumber: 'licenseNumber',
@@ -573,6 +582,19 @@ export const CaseFileScalarFieldEnum = {
 } as const
 
 export type CaseFileScalarFieldEnum = (typeof CaseFileScalarFieldEnum)[keyof typeof CaseFileScalarFieldEnum]
+
+
+export const CaseStewardRevokeFileScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseStewardRevokeFileScalarFieldEnum = (typeof CaseStewardRevokeFileScalarFieldEnum)[keyof typeof CaseStewardRevokeFileScalarFieldEnum]
 
 
 export const CaseSuspensionScalarFieldEnum = {

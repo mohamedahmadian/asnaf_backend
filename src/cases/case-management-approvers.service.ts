@@ -155,7 +155,7 @@ export class CaseManagementApproversService {
 
   private async targetRequest(caseFileId: string) {
     const open = await findOpenRequest(this.prisma, caseFileId);
-    if (open && isProcessType(open.type)) return open;
+    if (open && (isProcessType(open.type) || open.type === 'STEWARDSHIP')) return open;
     return this.prisma.caseRequest.findFirst({
       where: { caseFileId, type: 'ISSUANCE' },
       orderBy: { createdAt: 'desc' },

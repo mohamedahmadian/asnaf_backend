@@ -27,6 +27,7 @@ import { findOpenRequest, placesRewindPhase, requestIsOpen, requestOnCase, rewin
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
 import { SaveCasePlacesOfficeDto } from './dto/save-case-places-office.dto';
 import { PersonFileStorage } from './person-file.storage';
+import { activityContext } from './steward-context';
 
 const PLACES_NAME = 'اداره اماکن';
 const OFFICE_ID = 'default';
@@ -108,7 +109,8 @@ export class CasePlacesService {
     if (
       open?.type === CaseRequestType.ISSUANCE ||
       open?.type === CaseRequestType.RENEWAL ||
-      open?.type === CaseRequestType.LOCATION_CHANGE
+      open?.type === CaseRequestType.LOCATION_CHANGE ||
+      open?.type === CaseRequestType.STEWARDSHIP
     ) {
       return this.prisma.casePlacesReview.upsert({
         where: { caseRequestId: open.id },
@@ -134,7 +136,8 @@ export class CasePlacesService {
     const requestId =
       open?.type === CaseRequestType.ISSUANCE ||
       open?.type === CaseRequestType.RENEWAL ||
-      open?.type === CaseRequestType.LOCATION_CHANGE
+      open?.type === CaseRequestType.LOCATION_CHANGE ||
+      open?.type === CaseRequestType.STEWARDSHIP
         ? open.id
         : null;
     const row = requestId
@@ -154,7 +157,8 @@ export class CasePlacesService {
     const placesRequest =
       request.type === CaseRequestType.ISSUANCE ||
       request.type === CaseRequestType.RENEWAL ||
-      request.type === CaseRequestType.LOCATION_CHANGE;
+      request.type === CaseRequestType.LOCATION_CHANGE ||
+      request.type === CaseRequestType.STEWARDSHIP;
     if (!placesRequest) return null;
     if (requestIsOpen(request.status)) {
       const row = await this.prisma.casePlacesReview.upsert({
@@ -457,15 +461,16 @@ export class CasePlacesService {
       },
     });
     if (!row) return null;
+    const context = await activityContext(this.prisma, caseFileId);
     return {
       fullName: row.user.fullName,
       gender: row.user.gender,
       nationalId: row.user.nationalId,
       phone: row.user.phone,
       caseTrackingCode: row.trackingCode,
-      businessUnitTitle: row.businessUnitTitle,
-      premiseAddress: row.premiseAddress,
-      activityJob: row.activityJob,
+      businessUnitTitle: context?.businessUnitTitle ?? row.businessUnitTitle,
+      premiseAddress: context?.premiseAddress ?? row.premiseAddress,
+      activityJob: context?.activityJob ?? row.activityJob,
     };
   }
 

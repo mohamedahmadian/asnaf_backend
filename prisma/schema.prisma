@@ -494,7 +494,9 @@ model CaseGeneralSettings {
   editorRoleId      String?
   editorRole        Role?    @relation(fields: [editorRoleId], references: [id], onDelete: SetNull)
   /// مدت قرارداد مجوز؛ ۱ تا ۵ سال
-  contractYears     Int      @default(1)
+  contractYears        Int      @default(1)
+  /// مدت اعتبار کارت مباشرت؛ ۱ تا ۵ سال
+  stewardContractYears Int      @default(1)
   updatedAt         DateTime @updatedAt
 
   @@index([editorRoleId])
@@ -709,17 +711,41 @@ enum CaseFileStatus {
   REVOKED
 }
 
+enum CaseFileKind {
+  LICENSE
+  STEWARDSHIP
+}
+
+/// کسی که ابطال کارت مباشرت را درخواست کرده است
+enum CaseRevokeSource {
+  HOST
+  STEWARD
+  LICENSE
+}
+
 /// یک پروندهٔ فعالیت اقتصادی برای یک شخص و یک شغل. شخص می‌تواند چند پرونده داشته باشد.
 model CaseFile {
   id                   String                 @id @default(uuid())
   userId               String
   user                 User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind                 CaseFileKind           @default(LICENSE)
+  /// پروندهٔ مجوز میزبان؛ فقط برای مباشرت
+  hostCaseFileId       String?
+  hostCaseFile         CaseFile?              @relation("StewardHost", fields: [hostCaseFileId], references: [id], onDelete: Restrict)
+  stewardCases         CaseFile[]             @relation("StewardHost")
   status               CaseFileStatus         @default(ACTIVE)
   revokeReason         String?
+  revokeSource         CaseRevokeSource?
+  /// لحظهٔ ثبت درخواست ابطال مباشرت
+  revokeRequestedAt    DateTime?
   revokedAt            DateTime?
   reactivatedAt        DateTime?
   revokedById          String?
   revokedBy            User?                  @relation("CaseRevocationAuthor", fields: [revokedById], references: [id], onDelete: SetNull)
+  /// شمارهٔ کارت مباشرت؛ جدا از شمارهٔ مجوز فعالیت اقتصادی
+  cardNumber           String?                @unique
+  cardIssuedAt         DateTime?              @db.Date
+  cardExpiresAt        DateTime?              @db.Date
   /// مرحلهٔ درخواست صدور: ۰ هویت، ۱ فعالیت، ۲ محل، ۳ استعلام، ۴ اماکن، ۵ بررسی مدیریت، ۶ صدور
   formationStep        Int                    @default(0)
   trackingCode         String?                @unique
@@ -765,10 +791,13 @@ model CaseFile {
   premiseHistory       CasePremiseHistory[]
   violations           Violation[]
   suspensions          CaseSuspension[]
+  stewardRevokeFile    CaseStewardRevokeFile?
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
 
   @@index([userId])
+  @@index([kind])
+  @@index([hostCaseFileId])
   @@index([status])
   @@index([revokedById])
   @@index([formationStep])
@@ -780,6 +809,20 @@ model CaseFile {
   @@index([licenseExpiresAt])
   @@index([createdAt])
   @@map("case_files")
+}
+
+/// پیوست درخواست ابطال کارت مباشرت. خود فایل در File Storage است.
+model CaseStewardRevokeFile {
+  id           String   @id @default(uuid())
+  caseFileId   String   @unique
+  caseFile     CaseFile @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  createdAt    DateTime @default(now())
+
+  @@map("case_steward_revoke_files")
 }
 
 /// یک دوره تعلیق پرونده. با رفع تعلیق، liftedAt پر می‌شود و پرونده از حالت تعلیق خارج می‌شود.
