@@ -130,6 +130,7 @@ export class CaseInquiriesService {
       requestType as CaseRequestType,
       context.activityJobId,
     );
+    await this.dropStaleInquiries(request.id, centerIds);
     if (!centerIds.length) return;
     await this.prisma.caseInquiry.createMany({
       data: centerIds.map((inquiryCenterId) => ({
@@ -139,6 +140,29 @@ export class CaseInquiriesService {
       })),
       skipDuplicates: true,
     });
+  }
+
+  /** درخواست باز با فهرست فعلی مراکز یکی می‌ماند. درخواست بسته به این تابع نمی‌رسد. */
+  private async dropStaleInquiries(caseRequestId: string, centerIds: string[]) {
+    const stale = await this.prisma.caseInquiry.findMany({
+      where: {
+        caseRequestId,
+        ...(centerIds.length ? { inquiryCenterId: { notIn: centerIds } } : {}),
+      },
+      select: { files: { select: { storageKey: true } } },
+    });
+    if (!stale.length) return;
+    await this.prisma.caseInquiry.deleteMany({
+      where: {
+        caseRequestId,
+        ...(centerIds.length ? { inquiryCenterId: { notIn: centerIds } } : {}),
+      },
+    });
+    for (const row of stale) {
+      for (const file of row.files) {
+        await this.files.remove(file.storageKey);
+      }
+    }
   }
 
   async ensureForUser(caseFileId: string) {

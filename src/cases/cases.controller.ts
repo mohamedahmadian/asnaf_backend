@@ -82,8 +82,14 @@ export class CasesController {
     @Query('caseId') caseId = '',
     @Query('jobId') jobId = '',
     @Query('requestType') requestType = '',
+    @Query('requestId') requestId = '',
   ) {
-    return this.cases.activityRequirements(caseId, jobId || undefined, requestType || undefined);
+    return this.cases.activityRequirements(
+      caseId,
+      jobId || undefined,
+      requestType || undefined,
+      requestId || undefined,
+    );
   }
 
   @Post('location-draft')
@@ -243,8 +249,8 @@ export class CasesController {
   }
 
   @Get('activity-documents')
-  activityDocuments(@Query('caseId') caseId = '') {
-    return this.cases.activityDocuments(caseId);
+  activityDocuments(@Query('caseId') caseId = '', @Query('requestId') requestId = '') {
+    return this.cases.activityDocuments(caseId, requestId || undefined);
   }
 
   @Post('documents')
@@ -259,12 +265,14 @@ export class CasesController {
     @Body('userId') userId: string,
     @Body('documentId') documentId: string,
     @Body('caseId') caseId?: string,
+    @Body('requestId') requestId?: string,
     @Body('jobId') jobId?: string,
   ) {
     return this.cases.uploadDocument({
       userId,
       documentId,
       caseId: caseId?.trim() || undefined,
+      requestId: requestId?.trim() || undefined,
       jobId: jobId?.trim() || undefined,
       buffer: file?.buffer,
       mimeType: file?.mimetype,
@@ -277,8 +285,9 @@ export class CasesController {
     @Param('documentId') documentId: string,
     @Query('userId') userId = '',
     @Query('caseId') caseId = '',
+    @Query('requestId') requestId = '',
   ) {
-    if (caseId) return this.cases.removeActivityDocument(caseId, documentId);
+    if (caseId) return this.cases.removeActivityDocument(caseId, documentId, requestId || undefined);
     return this.cases.removeDocument(userId, documentId);
   }
 

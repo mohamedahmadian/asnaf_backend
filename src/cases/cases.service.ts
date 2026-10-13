@@ -66,6 +66,7 @@ import {
   isProcessType,
   processManagementTitles,
   requestIsDone,
+  requestOnCase,
   openProcessRequest,
   resolveDocumentRequirements,
 } from './request-process';
@@ -1235,7 +1236,7 @@ export class CasesService {
         throw new BadRequestException('اطلاعات محل جدید کامل نیست');
       }
     }
-    if (next >= 2) await this.assertActivityDocumentsDelivered(caseId);
+    if (next >= 2) await this.assertActivityDocumentsDelivered(caseId, request.id);
     if (next >= 3) await this.inquiries.assertDelivered(caseId);
     if ((request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE) && next >= 3) {
       await this.places.ensureForUser(caseId);
@@ -1344,7 +1345,7 @@ export class CasesService {
       }),
     ]);
     if (total === 0 || pending > 0) return null;
-    await this.assertActivityDocumentsDelivered(user.id);
+    await this.assertActivityDocumentsDelivered(user.id, inquiry.caseRequestId);
     await this.inquiries.assertDelivered(user.id);
     await this.places.ensureForUser(user.id);
     const saved = await this.prisma.caseFile.update({
@@ -1383,7 +1384,12 @@ export class CasesService {
             { user: { lastName: containsInsensitive(q) } },
             { user: { fullName: containsInsensitive(q) } },
             ...(licenseQuery ? [{ licenseNumber: containsInsensitive(licenseQuery) }] : []),
-            ...(digits ? [{ user: { phone: { contains: digits } } }] : []),
+            ...(digits
+              ? [
+                  { user: { nationalId: { contains: digits } } },
+                  { user: { phone: { contains: digits } } },
+                ]
+              : []),
           ]
         : undefined,
     };
@@ -2231,6 +2237,7 @@ export class CasesService {
         licenseExpiresAt: true,
         businessUnitTitle: true,
         premiseAddress: true,
+        premiseAddressEn: true,
         premisePlaque: true,
         premiseFloor: true,
         premiseUnitNo: true,
@@ -2249,7 +2256,7 @@ export class CasesService {
             firstName: true,
             lastName: true,
             lastNameEn: true,
-            fatherName: true,
+            gender: true,
             birthDate: true,
             passportNumber: true,
             photoId: true,
@@ -2259,7 +2266,14 @@ export class CasesService {
       },
     });
     if (!file || file.formationStep < 1) throw new NotFoundException('پرونده یافت نشد');
-    if (!file.licenseNumber) return { licenseNumber: null };
+    if (!file.licenseNumber) {
+      return {
+        licenseNumber: null,
+        firstName: file.user.firstName,
+        lastName: file.user.lastName,
+        gender: file.user.gender,
+      };
+    }
     return {
       licenseNumber: file.licenseNumber,
       issuedAt: dateOnly(file.licenseIssuedAt),
@@ -2269,7 +2283,7 @@ export class CasesService {
       firstName: file.user.firstName,
       lastName: file.user.lastName,
       lastNameEn: file.user.lastNameEn,
-      fatherName: file.user.fatherName,
+      gender: file.user.gender,
       birthDate: dateOnly(file.user.birthDate),
       nationalityFa: file.user.country?.nameFa ?? null,
       nationalityEn: file.user.country?.nameEn ?? null,
@@ -2280,6 +2294,7 @@ export class CasesService {
       activityTitleEn: file.activityJob?.titleEn ?? null,
       photoId: file.user.photoId,
       address: file.premiseAddress,
+      addressEn: file.premiseAddressEn,
       plaque: file.premisePlaque,
       floor: file.premiseFloor,
       unitNo: file.premiseUnitNo,
@@ -2299,29 +2314,70 @@ export class CasesService {
     if (!file || file.formationStep < 1) {
       throw new NotFoundException('پرونده یافت نشد');
     }
-    const activityFiles = await this.prisma.caseActivityDocumentVersion.findMany({
-      where: { caseActivityDocument: { caseFileId: file.id } },
-      select: { storageKey: true },
+    const dependents = await this.prisma.caseFile.findMany({
+      where: { hostCaseFileId: file.id },
+      select: { id: true, userId: true },
     });
-    const suspensionFiles = await this.prisma.caseSuspensionFile.findMany({
-      where: { suspension: { caseFileId: file.id } },
-      select: { storageKey: true },
+    const caseIds = [file.id, ...dependents.map((item) => item.id)];
+    const storageKeys = await this.collectCaseStorageKeys(caseIds);
+    await this.prisma.$transaction(async (tx) => {
+      if (dependents.length) {
+        await tx.caseFile.deleteMany({ where: { id: { in: dependents.map((item) => item.id) } } });
+      }
+      await tx.caseFile.delete({ where: { id: file.id } });
     });
-    const stewardRevokeFile = await this.prisma.caseStewardRevokeFile.findUnique({
-      where: { caseFileId: file.id },
-      select: { storageKey: true },
-    });
-    await this.prisma.caseFile.delete({ where: { id: file.id } });
-    await this.removeStorageIfUnused([
+    await this.removeStorageIfUnused(storageKeys);
+    const userIds = [...new Set([file.userId, ...dependents.map((item) => item.userId)])];
+    for (const userId of userIds) {
+      await this.removeCaseOnlyUser(userId);
+    }
+    return { ok: true };
+  }
+
+  private async collectCaseStorageKeys(caseIds: string[]) {
+    const [activityFiles, suspensionFiles, stewardRevokeFiles, inquiryFiles, placesFiles, managementFiles] =
+      await Promise.all([
+        this.prisma.caseActivityDocumentVersion.findMany({
+          where: { caseActivityDocument: { caseFileId: { in: caseIds } } },
+          select: { storageKey: true },
+        }),
+        this.prisma.caseSuspensionFile.findMany({
+          where: { suspension: { caseFileId: { in: caseIds } } },
+          select: { storageKey: true },
+        }),
+        this.prisma.caseStewardRevokeFile.findMany({
+          where: { caseFileId: { in: caseIds } },
+          select: { storageKey: true },
+        }),
+        this.prisma.caseInquiryFile.findMany({
+          where: { caseInquiry: { caseFileId: { in: caseIds } } },
+          select: { storageKey: true },
+        }),
+        this.prisma.casePlacesFile.findMany({
+          where: { review: { caseFileId: { in: caseIds } } },
+          select: { storageKey: true },
+        }),
+        this.prisma.caseManagementReviewFile.findMany({
+          where: { review: { caseFileId: { in: caseIds } } },
+          select: { storageKey: true },
+        }),
+      ]);
+    return [
       ...activityFiles.map((item) => item.storageKey),
       ...suspensionFiles.map((item) => item.storageKey),
-      ...(stewardRevokeFile ? [stewardRevokeFile.storageKey] : []),
-    ]);
-    const remaining = await this.prisma.caseFile.count({ where: { userId: file.userId } });
-    if (remaining > 0) return { ok: true };
+      ...stewardRevokeFiles.map((item) => item.storageKey),
+      ...inquiryFiles.map((item) => item.storageKey),
+      ...placesFiles.map((item) => item.storageKey),
+      ...managementFiles.map((item) => item.storageKey),
+    ];
+  }
+
+  private async removeCaseOnlyUser(userId: string) {
+    const remaining = await this.prisma.caseFile.count({ where: { userId } });
+    if (remaining > 0) return;
 
     const user = await this.prisma.user.findUnique({
-      where: { id: file.userId },
+      where: { id: userId },
       select: {
         id: true,
         orgUnitId: true,
@@ -2335,7 +2391,7 @@ export class CasesService {
         userRoles: { select: { role: { select: { code: true } } } },
       },
     });
-    if (!user) return { ok: true };
+    if (!user) return;
 
     const roleCodes = user.userRoles.map((item) => item.role.code);
     const caseAccountOnly =
@@ -2346,7 +2402,7 @@ export class CasesService {
       !user.workUnitId &&
       !user.staffPostId &&
       (await this.countCaseDeleteBlockers(user.id)) === 0;
-    if (!caseAccountOnly) return { ok: true };
+    if (!caseAccountOnly) return;
 
     const imageIds = [
       user.photoId,
@@ -2361,13 +2417,12 @@ export class CasesService {
         error instanceof Prisma.PrismaClientKnownRequestError &&
         (error.code === 'P2003' || error.code === 'P2014')
       ) {
-        return { ok: true };
+        return;
       }
       throw error;
     }
     await this.files.removePerson(user.id);
     await this.deleteStoredImages(imageIds);
-    return { ok: true };
   }
 
   private async countCaseDeleteBlockers(userId: string) {
@@ -2448,23 +2503,14 @@ export class CasesService {
     }));
   }
 
-  private async currentRequest(caseId: string) {
-    const open = await findOpenRequest(this.prisma, caseId);
-    if (open) return open;
-    return this.prisma.caseRequest.findFirst({
-      where: { caseFileId: caseId, type: CaseRequestType.ISSUANCE },
-      orderBy: { createdAt: 'desc' },
-    });
-  }
-
-  async activityRequirements(caseId: string, jobId?: string, requestType?: string) {
+  async activityRequirements(caseId: string, jobId?: string, requestType?: string, requestId?: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseId },
       select: { id: true, activityJobId: true, user: { select: { gender: true } } },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
-    const request = await this.currentRequest(caseId);
     const explicit = requestType && isProcessType(requestType) ? requestType : null;
+    const request = explicit ? null : await requestOnCase(this.prisma, caseId, requestId);
     const type = explicit ?? (request && isProcessType(request.type) ? request.type : CaseRequestType.ISSUANCE);
     return resolveDocumentRequirements(
       this.prisma,
@@ -2474,13 +2520,13 @@ export class CasesService {
     );
   }
 
-  async activityDocuments(caseId: string) {
+  async activityDocuments(caseId: string, requestId?: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseId },
       select: { id: true },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
-    const request = await this.currentRequest(caseId);
+    const request = await requestOnCase(this.prisma, caseId, requestId);
     if (!request) return [];
     const rows = await this.prisma.caseActivityDocument.findMany({
       where: { caseRequestId: request.id },
@@ -2511,6 +2557,7 @@ export class CasesService {
     userId: string;
     documentId: string;
     caseId?: string;
+    requestId?: string;
     jobId?: string;
     buffer: Buffer;
     mimeType: string;
@@ -2582,6 +2629,7 @@ export class CasesService {
       userId: string;
       documentId: string;
       caseId?: string;
+      requestId?: string;
       jobId?: string;
       buffer: Buffer;
       mimeType: string;
@@ -2599,7 +2647,7 @@ export class CasesService {
     }
     const jobId = input.jobId || caseFile.activityJobId;
     if (!jobId) throw new BadRequestException('قبل از بارگذاری مدرک باید شغل انتخاب شود');
-    const request = await this.currentRequest(caseFile.id);
+    const request = await requestOnCase(this.prisma, caseFile.id, input.requestId);
     if (!request || !isProcessType(request.type)) {
       throw new BadRequestException('درخواست بازی برای این مدرک نیست');
     }
@@ -2666,13 +2714,13 @@ export class CasesService {
     return { ok: true };
   }
 
-  async removeActivityDocument(caseId: string, documentId: string) {
+  async removeActivityDocument(caseId: string, documentId: string, requestId?: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseId },
       select: { id: true },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
-    const request = await this.currentRequest(caseId);
+    const request = await requestOnCase(this.prisma, caseId, requestId);
     if (!request) throw new NotFoundException('مدرک بارگذاری‌شده‌ای یافت نشد');
     const row = await this.prisma.caseActivityDocument.findUnique({
       where: { caseRequestId_documentId: { caseRequestId: request.id, documentId } },
@@ -2738,7 +2786,7 @@ export class CasesService {
     return !docs.some((row) => row.isRequired);
   }
 
-  private async assertActivityDocumentsDelivered(caseFileId: string) {
+  private async assertActivityDocumentsDelivered(caseFileId: string, requestId?: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseFileId },
       select: { activityJobId: true, user: { select: { gender: true } } },
@@ -2746,7 +2794,7 @@ export class CasesService {
     if (!file?.activityJobId) {
       throw new BadRequestException('قبل از مرحله اماکن باید شغل و مدارک آن تکمیل شود');
     }
-    const request = await this.currentRequest(caseFileId);
+    const request = await requestOnCase(this.prisma, caseFileId, requestId);
     if (!request || !isProcessType(request.type)) {
       throw new BadRequestException('قبل از مرحله اماکن باید شغل و مدارک آن تکمیل شود');
     }
