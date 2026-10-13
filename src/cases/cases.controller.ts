@@ -61,8 +61,9 @@ export class CasesController {
   }
 
   @Post('identity')
-  saveIdentity(@Body() dto: SaveCaseIdentityDto) {
-    return this.cases.saveIdentity(dto);
+  saveIdentity(@Body() dto: SaveCaseIdentityDto, @CurrentUser() user: RequestUser | undefined) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.cases.saveIdentity(dto, user.id);
   }
 
   @Post('activity')
@@ -267,6 +268,8 @@ export class CasesController {
     @Body('caseId') caseId?: string,
     @Body('requestId') requestId?: string,
     @Body('jobId') jobId?: string,
+    @Body('editCaseId') editCaseId?: string,
+    @CurrentUser() user?: RequestUser,
   ) {
     return this.cases.uploadDocument({
       userId,
@@ -274,6 +277,8 @@ export class CasesController {
       caseId: caseId?.trim() || undefined,
       requestId: requestId?.trim() || undefined,
       jobId: jobId?.trim() || undefined,
+      editCaseId: editCaseId?.trim() || undefined,
+      actorId: user?.id,
       buffer: file?.buffer,
       mimeType: file?.mimetype,
       originalName: file?.originalname,
@@ -286,9 +291,16 @@ export class CasesController {
     @Query('userId') userId = '',
     @Query('caseId') caseId = '',
     @Query('requestId') requestId = '',
+    @Query('editCaseId') editCaseId = '',
+    @CurrentUser() user: RequestUser | undefined,
   ) {
-    if (caseId) return this.cases.removeActivityDocument(caseId, documentId, requestId || undefined);
-    return this.cases.removeDocument(userId, documentId);
+    if (caseId) {
+      return this.cases.removeActivityDocument(caseId, documentId, requestId || undefined, user?.id);
+    }
+    return this.cases.removeDocument(userId, documentId, {
+      editCaseId: editCaseId || undefined,
+      actorId: user?.id,
+    });
   }
 
   @Get('documents/:versionId/file')

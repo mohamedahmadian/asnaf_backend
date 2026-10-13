@@ -30,6 +30,18 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
+    code: 'reports',
+    kind: 'MODULE',
+    nameKey: 'modules.reports',
+    children: [
+      {
+        code: 'reports.expiring-cases',
+        kind: 'MENU',
+        nameKey: 'menus.expiringCases',
+      },
+    ],
+  },
+  {
     code: 'finance',
     kind: 'MODULE',
     nameKey: 'modules.finance',

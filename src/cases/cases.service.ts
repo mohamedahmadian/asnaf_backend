@@ -339,7 +339,8 @@ function resolveListCaseKind(
 function caseKindWhere(caseKind?: CaseKindFilter): Prisma.CaseFileWhereInput {
   if (caseKind === 'STEWARD_REQUEST') {
     return {
-      requests: { some: { type: CaseRequestType.STEWARDSHIP, status: CaseRequestStatus.OPEN } },
+      kind: CaseFileKind.LICENSE,
+      stewardCases: { some: {} },
     };
   }
   if (caseKind === 'STEWARD_CARD') {
@@ -453,7 +454,8 @@ export class CasesService {
     };
   }
 
-  async saveIdentity(dto: SaveCaseIdentityDto) {
+  async saveIdentity(dto: SaveCaseIdentityDto, actorId: string) {
+    if (dto.caseId) await this.assertCaseEditable(dto.caseId, actorId);
     const nationalId = normalizeNationalId(dto.nationalId);
     await this.assertCountry(dto.countryId);
     await this.assertJob(dto.jobId);
@@ -580,6 +582,16 @@ export class CasesService {
     const tracked = await this.attachTrackingCode({ ...row, formationStep });
     await syncIssuanceRequest(this.prisma, tracked.id);
     return tracked;
+  }
+
+  /** پروندهٔ صادرشده فقط وقتی تنظیم ویرایش روشن است و کاربر نقش انتخاب‌شده را دارد قابل تغییر است. */
+  private async assertCaseEditable(caseId: string, actorId: string) {
+    const file = await this.prisma.caseFile.findUnique({
+      where: { id: caseId },
+      select: { licenseNumber: true },
+    });
+    if (!file) throw new NotFoundException('پرونده یافت نشد');
+    await this.assertIssuedCaseEditable(file.licenseNumber, actorId);
   }
 
   /** پروندهٔ صادرشده فقط برای نقش انتخاب‌شده در تنظیمات کلی قابل ویرایش است. شماره مجوز ثابت می‌ماند. */
@@ -735,7 +747,7 @@ export class CasesService {
           trackingCode: true,
           userId: true,
           businessUnitTitle: true,
-          user: { select: { firstName: true, lastName: true, fullName: true, nationalId: true } },
+          user: { select: { firstName: true, lastName: true, fullName: true, nationalId: true, phone: true } },
           activityJob: { select: { title: true, group: { select: { title: true } } } },
           premiseCityId: true,
           premiseEstablishment: true,
@@ -782,6 +794,7 @@ export class CasesService {
       licenseIssuedAt: date(file?.licenseIssuedAt),
       trackingCode: file?.trackingCode ?? null,
       nationalId: file?.user.nationalId ?? null,
+      phone: file?.user.phone ?? null,
       businessUnitTitle: file?.businessUnitTitle ?? null,
       person: file?.user
         ? { firstName: file.user.firstName, lastName: file.user.lastName, fullName: file.user.fullName }
@@ -1220,7 +1233,7 @@ export class CasesService {
     if (!request || request.type === CaseRequestType.ISSUANCE || !isProcessType(request.type)) {
       throw new BadRequestException('درخواست تمدید یا تغییر مکان باز نیست');
     }
-    const ceiling = request.type === CaseRequestType.RENEWAL ? 5 : request.type === CaseRequestType.LOCATION_CHANGE ? 4 : 3;
+    const ceiling = request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE ? 5 : 3;
     const requested = Math.min(Math.max(step, 0), ceiling);
     let next = Math.max(request.formationStep, Math.min(requested, request.formationStep + 1));
     if (
@@ -1244,7 +1257,7 @@ export class CasesService {
     if ((request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE) && next >= 4) {
       await this.places.assertDelivered(caseId);
     }
-    if (request.type === CaseRequestType.RENEWAL && next >= 5) {
+    if ((request.type === CaseRequestType.RENEWAL || request.type === CaseRequestType.LOCATION_CHANGE) && next >= 5) {
       await this.managementApprovers.assertDelivered(caseId);
     }
     const saved = await this.prisma.caseRequest.update({
@@ -1271,7 +1284,7 @@ export class CasesService {
       await this.places.ensureForUser(caseId);
       await this.managementApprovers.ensureForUser(caseId);
     } else if (request.type === CaseRequestType.LOCATION_CHANGE) {
-      if (request.formationStep < 4) {
+      if (request.formationStep < 5) {
         throw new BadRequestException('مرحله‌های این درخواست هنوز تمام نشده است');
       }
       await this.inquiries.ensureForUser(caseId);
@@ -1418,12 +1431,28 @@ export class CasesService {
       trackingCode: true,
       businessUnitTitle: true,
       status: true,
+      revokeReason: true,
+      revokedAt: true,
+      revokedBy: { select: { fullName: true } },
       cardNumber: true,
       cardIssuedAt: true,
       cardExpiresAt: true,
       hostCaseFile: {
         select: {
           businessUnitTitle: true,
+          licenseNumber: true,
+          licenseIssuedAt: true,
+          licenseExpiresAt: true,
+          status: true,
+          revokeReason: true,
+          revokedAt: true,
+          revokedBy: { select: { fullName: true } },
+          premiseCity: { select: { nameFa: true, nameEn: true } },
+          suspensions: {
+            orderBy: [{ startsAt: 'desc' }, { createdAt: 'desc' }, { id: 'desc' }],
+            select: { startsAt: true, endsAt: true, liftedAt: true },
+          },
+          user: { select: { nationalId: true, fullName: true } },
           activityJob: { select: { id: true, title: true, group: { select: { id: true, title: true } } } },
         },
       },
@@ -1457,8 +1486,7 @@ export class CasesService {
         },
       },
       requests: {
-        orderBy: { createdAt: 'desc' },
-        take: 6,
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
         select: { type: true, status: true },
       },
     } satisfies Prisma.CaseFileSelect;
@@ -1477,9 +1505,17 @@ export class CasesService {
         id: row.id,
         kind: row.kind,
         caseKind: resolveListCaseKind(row.kind, row.requests),
+        requests: row.requests.map((request) => ({
+          type: request.type,
+          status: request.status,
+        })),
         formationStep: row.formationStep,
         trackingCode: row.trackingCode,
         status,
+        revokeReason: status === CaseFileStatus.REVOKED ? row.revokeReason : null,
+        revokedAt: status === CaseFileStatus.REVOKED ? row.revokedAt?.toISOString() ?? null : null,
+        revokedBy:
+          status === CaseFileStatus.REVOKED && row.revokedBy ? { fullName: row.revokedBy.fullName } : null,
         suspensionStartsAt: activeSuspension ? dateOnly(activeSuspension.startsAt) : null,
         licenseNumber: steward ? row.cardNumber : row.licenseNumber,
         licenseIssuedAt: dateOnly(steward ? row.cardIssuedAt : row.licenseIssuedAt),
@@ -1497,6 +1533,35 @@ export class CasesService {
         job: steward ? row.hostCaseFile?.activityJob ?? null : row.activityJob,
         jobTitle: steward ? row.hostCaseFile?.businessUnitTitle ?? null : row.businessUnitTitle,
         city: row.premiseCity,
+        cardNumber: row.cardNumber,
+        cardIssuedAt: dateOnly(row.cardIssuedAt),
+        cardExpiresAt: dateOnly(row.cardExpiresAt),
+        host:
+          steward && row.hostCaseFile
+            ? {
+                licenseNumber: row.hostCaseFile.licenseNumber,
+                licenseIssuedAt: dateOnly(row.hostCaseFile.licenseIssuedAt),
+                licenseExpiresAt: dateOnly(row.hostCaseFile.licenseExpiresAt),
+                city: row.hostCaseFile.premiseCity,
+                nationalId: row.hostCaseFile.user.nationalId,
+                fullName: row.hostCaseFile.user.fullName,
+                status:
+                  row.hostCaseFile.status === CaseFileStatus.REVOKED
+                    ? CaseFileStatus.REVOKED
+                    : row.hostCaseFile.suspensions.some((item) => suspensionIsActive(item, today))
+                      ? CaseFileStatus.SUSPENDED
+                      : CaseFileStatus.ACTIVE,
+                revokeReason: row.hostCaseFile.status === CaseFileStatus.REVOKED ? row.hostCaseFile.revokeReason : null,
+                revokedAt:
+                  row.hostCaseFile.status === CaseFileStatus.REVOKED
+                    ? row.hostCaseFile.revokedAt?.toISOString() ?? null
+                    : null,
+                revokedBy:
+                  row.hostCaseFile.status === CaseFileStatus.REVOKED && row.hostCaseFile.revokedBy
+                    ? { fullName: row.hostCaseFile.revokedBy.fullName }
+                    : null,
+              }
+            : null,
       };
     };
 
@@ -1761,6 +1826,7 @@ export class CasesService {
         revokeReason: true,
         revokeSource: true,
         revokedAt: true,
+        revokedBy: { select: { id: true, fullName: true } },
         reactivatedAt: true,
         cardNumber: true,
         cardIssuedAt: true,
@@ -1917,6 +1983,10 @@ export class CasesService {
         : null,
       revokeReason: file.status === CaseFileStatus.REVOKED ? file.revokeReason : null,
       revokedAt: file.status === CaseFileStatus.REVOKED ? file.revokedAt?.toISOString() ?? null : null,
+      revokedBy:
+        file.status === CaseFileStatus.REVOKED && file.revokedBy
+          ? { id: file.revokedBy.id, fullName: file.revokedBy.fullName }
+          : null,
       reactivatedAt: file.reactivatedAt?.toISOString() ?? null,
       violationCount,
       suspensionCount: suspensions.length,
@@ -2081,7 +2151,7 @@ export class CasesService {
         select: { id: true, startsAt: true, endsAt: true, liftedAt: true },
       });
       const current = rows.find((row) => suspensionIsActive(row, today));
-      if (!current) throw new BadRequestException('این پرونده در حال تعلیق نیست');
+      if (!current) throw new BadRequestException('این پرونده تعلیق نشده است');
       if (end.getTime() < current.startsAt.getTime()) {
         throw new BadRequestException('تاریخ پایان باید همان روز شروع یا بعد از آن باشد');
       }
@@ -2559,10 +2629,16 @@ export class CasesService {
     caseId?: string;
     requestId?: string;
     jobId?: string;
+    editCaseId?: string;
+    actorId?: string;
     buffer: Buffer;
     mimeType: string;
     originalName: string;
   }) {
+    if (input.editCaseId) {
+      if (!input.actorId) throw new UnauthorizedException();
+      await this.assertCaseEditable(input.editCaseId, input.actorId);
+    }
     await this.assertPerson(input.userId);
     const document = await this.prisma.document.findUnique({
       where: { id: input.documentId },
@@ -2631,6 +2707,7 @@ export class CasesService {
       caseId?: string;
       requestId?: string;
       jobId?: string;
+      actorId?: string;
       buffer: Buffer;
       mimeType: string;
       originalName: string;
@@ -2640,10 +2717,20 @@ export class CasesService {
     if (!input.caseId) throw new BadRequestException('مدرک شغلی باید روی پرونده ذخیره شود');
     const caseFile = await this.prisma.caseFile.findUnique({
       where: { id: input.caseId },
-      select: { id: true, userId: true, activityJobId: true, user: { select: { gender: true } } },
+      select: {
+        id: true,
+        userId: true,
+        activityJobId: true,
+        licenseNumber: true,
+        user: { select: { gender: true } },
+      },
     });
     if (!caseFile || caseFile.userId !== input.userId) {
       throw new NotFoundException('پرونده یافت نشد');
+    }
+    if (!input.requestId && caseFile.licenseNumber) {
+      if (!input.actorId) throw new UnauthorizedException();
+      await this.assertIssuedCaseEditable(caseFile.licenseNumber, input.actorId);
     }
     const jobId = input.jobId || caseFile.activityJobId;
     if (!jobId) throw new BadRequestException('قبل از بارگذاری مدرک باید شغل انتخاب شود');
@@ -2697,7 +2784,15 @@ export class CasesService {
     return { documentId: document.id, current: created };
   }
 
-  async removeDocument(userId: string, documentId: string) {
+  async removeDocument(
+    userId: string,
+    documentId: string,
+    guard?: { editCaseId?: string; actorId?: string },
+  ) {
+    if (guard?.editCaseId) {
+      if (!guard.actorId) throw new UnauthorizedException();
+      await this.assertCaseEditable(guard.editCaseId, guard.actorId);
+    }
     await this.assertPerson(userId);
     const row = await this.prisma.personDocument.findUnique({
       where: { userId_documentId: { userId, documentId } },
@@ -2714,12 +2809,16 @@ export class CasesService {
     return { ok: true };
   }
 
-  async removeActivityDocument(caseId: string, documentId: string, requestId?: string) {
+  async removeActivityDocument(caseId: string, documentId: string, requestId?: string, actorId?: string) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id: caseId },
-      select: { id: true },
+      select: { id: true, licenseNumber: true },
     });
     if (!file) throw new NotFoundException('پرونده یافت نشد');
+    if (!requestId && file.licenseNumber) {
+      if (!actorId) throw new UnauthorizedException();
+      await this.assertIssuedCaseEditable(file.licenseNumber, actorId);
+    }
     const request = await requestOnCase(this.prisma, caseId, requestId);
     if (!request) throw new NotFoundException('مدرک بارگذاری‌شده‌ای یافت نشد');
     const row = await this.prisma.caseActivityDocument.findUnique({

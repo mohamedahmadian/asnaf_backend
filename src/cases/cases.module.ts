@@ -17,6 +17,8 @@ import { CasePlacesService } from './case-places.service';
 import { CaseAuctionService } from './case-auction.service';
 import { CaseStewardshipService } from './case-stewardship.service';
 import { CaseRecordsController } from './case-records.controller';
+import { CaseReportsController } from './case-reports.controller';
+import { ExpiringCasesService } from './expiring-cases.service';
 import { CasesController } from './cases.controller';
 import { CasesService } from './cases.service';
 import { PersonFileStorage } from './person-file.storage';
@@ -28,6 +30,7 @@ import { PersonFileStorage } from './person-file.storage';
     CasePlacesController,
     CasePlacesOfficeController,
     CaseRecordsController,
+    CaseReportsController,
     CaseIdentityDocumentsController,
     CaseGeneralSettingsController,
     CaseRequirementsController,
@@ -37,6 +40,7 @@ import { PersonFileStorage } from './person-file.storage';
   ],
   providers: [
     CasesService,
+    ExpiringCasesService,
     CaseAuctionService,
     CaseStewardshipService,
     CaseInquiriesService,
