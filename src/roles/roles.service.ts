@@ -8,7 +8,9 @@ import {
 } from '@nestjs/common';
 import {
   ADMIN_ROLE_CODE,
+  ensureCaseOperatorRole,
   ensureInquiryOfficerRole,
+  ensurePlacesOfficerRole,
   ensureSystemRoles,
   isReservedRoleCode,
   isRolePermissionsLocked,
@@ -71,6 +73,8 @@ export class RolesService implements OnModuleInit {
   async onModuleInit() {
     await ensureSystemRoles(this.prisma);
     await ensureInquiryOfficerRole(this.prisma);
+    await ensurePlacesOfficerRole(this.prisma);
+    await ensureCaseOperatorRole(this.prisma);
     await migrateFinanceMenuPermissions(this.prisma);
     await migrateReportMenuPermissions(this.prisma);
   }
@@ -92,6 +96,7 @@ export class RolesService implements OnModuleInit {
       {
         name: (dir) => ({ name: dir }),
         code: (dir) => ({ code: dir }),
+        isSystem: (dir) => ({ isSystem: dir }),
         createdAt: (dir) => ({ createdAt: dir }),
         userCount: (dir) => ({ users: { _count: dir } }),
       },

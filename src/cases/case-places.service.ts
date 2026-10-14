@@ -5,6 +5,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { ensurePlacesOfficerRole } from '../access/access.constants';
 import {
   containsInsensitive,
   normalizeSearchDigits,
@@ -650,19 +651,27 @@ export class CasePlacesService {
   }
 
   private async ensureOffice() {
-    return this.prisma.casePlacesOffice.upsert({
+    const placesRole = await ensurePlacesOfficerRole(this.prisma);
+    const officeSelect = {
+      id: true,
+      phone: true,
+      officerRoleId: true,
+      letterTitle: true,
+      letterBody: true,
+      responseDays: true,
+      officerRole: { select: { name: true } },
+    } satisfies Prisma.CasePlacesOfficeSelect;
+    const row = await this.prisma.casePlacesOffice.upsert({
       where: { id: OFFICE_ID },
-      create: { id: OFFICE_ID },
+      create: { id: OFFICE_ID, officerRoleId: placesRole.id },
       update: {},
-      select: {
-        id: true,
-        phone: true,
-        officerRoleId: true,
-        letterTitle: true,
-        letterBody: true,
-        responseDays: true,
-        officerRole: { select: { name: true } },
-      },
+      select: officeSelect,
+    });
+    if (row.officerRoleId) return row;
+    return this.prisma.casePlacesOffice.update({
+      where: { id: OFFICE_ID },
+      data: { officerRoleId: placesRole.id },
+      select: officeSelect,
     });
   }
 

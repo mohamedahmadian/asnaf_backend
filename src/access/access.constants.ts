@@ -5,6 +5,10 @@ export const EMPLOYEE_ROLE_CODE = 'EMPLOYEE';
 export const INQUIRY_OFFICER_ROLE_CODE = 'INQUIRY_OFFICER';
 export const JOB_GROUP_REP_ROLE_CODE = 'JOB_GROUP_REP';
 export const ECONOMIC_ACTOR_ROLE_CODE = 'ECONOMIC_ACTOR';
+export const PLACES_OFFICER_ROLE_CODE = 'PLACES_OFFICER';
+export const CASE_OPERATOR_ROLE_CODE = 'CASE_OPERATOR';
+
+const PLACES_OFFICE_ID = 'default';
 
 export const SYSTEM_ROLES = [
   {
@@ -31,6 +35,16 @@ export const SYSTEM_ROLES = [
     code: ECONOMIC_ACTOR_ROLE_CODE,
     name: 'فعال اقتصادی',
     description: 'نقش پیش‌فرض شخص هنگام تشکیل پرونده؛ قابل حذف نیست',
+  },
+  {
+    code: PLACES_OFFICER_ROLE_CODE,
+    name: 'اداره اماکن',
+    description: 'مسئول پیش‌فرض اداره اماکن؛ پرونده‌های دریافتی و گزارش اماکن',
+  },
+  {
+    code: CASE_OPERATOR_ROLE_CODE,
+    name: 'اپراتور پرونده',
+    description: 'تشکیل پرونده و مدیریت پرونده‌ها',
   },
   {
     code: 'SPECIAL_INSPECTOR',
@@ -130,6 +144,62 @@ export async function ensureInquiryOfficerRole(prisma: PrismaClient) {
   });
   await prisma.rolePermission.createMany({
     data: [{ roleId: saved.id, code: 'cases.inquiries' }],
+    skipDuplicates: true,
+  });
+  return saved;
+}
+
+export async function ensurePlacesOfficerRole(prisma: PrismaClient) {
+  const role = SYSTEM_ROLES.find((item) => item.code === PLACES_OFFICER_ROLE_CODE)!;
+  const saved = await prisma.role.upsert({
+    where: { code: role.code },
+    update: { isSystem: true },
+    create: {
+      code: role.code,
+      name: role.name,
+      description: role.description,
+      isSystem: true,
+    },
+    select: { id: true },
+  });
+  await prisma.rolePermission.createMany({
+    data: [
+      { roleId: saved.id, code: 'cases.places' },
+      { roleId: saved.id, code: 'reports.places-cases' },
+    ],
+    skipDuplicates: true,
+  });
+  const office = await prisma.casePlacesOffice.findUnique({
+    where: { id: PLACES_OFFICE_ID },
+    select: { officerRoleId: true },
+  });
+  if (office && !office.officerRoleId) {
+    await prisma.casePlacesOffice.update({
+      where: { id: PLACES_OFFICE_ID },
+      data: { officerRoleId: saved.id },
+    });
+  }
+  return saved;
+}
+
+export async function ensureCaseOperatorRole(prisma: PrismaClient) {
+  const role = SYSTEM_ROLES.find((item) => item.code === CASE_OPERATOR_ROLE_CODE)!;
+  const saved = await prisma.role.upsert({
+    where: { code: role.code },
+    update: { isSystem: true },
+    create: {
+      code: role.code,
+      name: role.name,
+      description: role.description,
+      isSystem: true,
+    },
+    select: { id: true },
+  });
+  await prisma.rolePermission.createMany({
+    data: [
+      { roleId: saved.id, code: 'cases.formation' },
+      { roleId: saved.id, code: 'cases.management' },
+    ],
     skipDuplicates: true,
   });
   return saved;

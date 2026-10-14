@@ -4,7 +4,7 @@ import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 
-export const roleSortFields = ['name', 'code', 'createdAt', 'userCount'] as const;
+export const roleSortFields = ['name', 'code', 'isSystem', 'createdAt', 'userCount'] as const;
 
 export type RoleSortField = (typeof roleSortFields)[number];
 
