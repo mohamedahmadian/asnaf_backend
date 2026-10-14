@@ -67,6 +67,7 @@ export const ModelName = {
   CaseInquiry: 'CaseInquiry',
   CaseInquiryFile: 'CaseInquiryFile',
   CaseGeneralSettings: 'CaseGeneralSettings',
+  CaseLetterhead: 'CaseLetterhead',
   CasePlacesOffice: 'CasePlacesOffice',
   CasePlacesReview: 'CasePlacesReview',
   CasePlacesFile: 'CasePlacesFile',
@@ -370,6 +371,9 @@ export const CaseInquiryScalarFieldEnum = {
   note: 'note',
   decidedById: 'decidedById',
   decidedAt: 'decidedAt',
+  referredAt: 'referredAt',
+  letterNo: 'letterNo',
+  issuedAt: 'issuedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -397,10 +401,28 @@ export const CaseGeneralSettingsScalarFieldEnum = {
   editorRoleId: 'editorRoleId',
   contractYears: 'contractYears',
   stewardContractYears: 'stewardContractYears',
+  inquiryResponseDays: 'inquiryResponseDays',
   updatedAt: 'updatedAt'
 } as const
 
 export type CaseGeneralSettingsScalarFieldEnum = (typeof CaseGeneralSettingsScalarFieldEnum)[keyof typeof CaseGeneralSettingsScalarFieldEnum]
+
+
+export const CaseLetterheadScalarFieldEnum = {
+  id: 'id',
+  organizationName: 'organizationName',
+  address: 'address',
+  phone: 'phone',
+  website: 'website',
+  signerName: 'signerName',
+  signerTitle: 'signerTitle',
+  logoId: 'logoId',
+  signatureId: 'signatureId',
+  nextNumber: 'nextNumber',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseLetterheadScalarFieldEnum = (typeof CaseLetterheadScalarFieldEnum)[keyof typeof CaseLetterheadScalarFieldEnum]
 
 
 export const CasePlacesOfficeScalarFieldEnum = {
@@ -409,6 +431,7 @@ export const CasePlacesOfficeScalarFieldEnum = {
   officerRoleId: 'officerRoleId',
   letterTitle: 'letterTitle',
   letterBody: 'letterBody',
+  responseDays: 'responseDays',
   updatedAt: 'updatedAt'
 } as const
 
@@ -424,6 +447,9 @@ export const CasePlacesReviewScalarFieldEnum = {
   note: 'note',
   decidedById: 'decidedById',
   decidedAt: 'decidedAt',
+  referredAt: 'referredAt',
+  letterNo: 'letterNo',
+  issuedAt: 'issuedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -458,9 +484,6 @@ export type JobDocumentScalarFieldEnum = (typeof JobDocumentScalarFieldEnum)[key
 export const DocumentScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  isRequired: 'isRequired',
-  gender: 'gender',
-  isFixed: 'isFixed',
   code: 'code',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -472,6 +495,7 @@ export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typ
 export const CaseIdentityDocumentScalarFieldEnum = {
   documentId: 'documentId',
   gender: 'gender',
+  isRequired: 'isRequired',
   createdAt: 'createdAt'
 } as const
 
@@ -879,9 +903,6 @@ export const UserScalarFieldEnum = {
   locationNotes: 'locationNotes',
   locationUpdatedAt: 'locationUpdatedAt',
   photoId: 'photoId',
-  nationalCardPhotoId: 'nationalCardPhotoId',
-  passportPhotoId: 'passportPhotoId',
-  identityBookletPhotoId: 'identityBookletPhotoId',
   orgUnitId: 'orgUnitId',
   positionId: 'positionId',
   workUnitId: 'workUnitId',

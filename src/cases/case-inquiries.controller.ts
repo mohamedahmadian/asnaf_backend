@@ -2,9 +2,11 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
+  Put,
   Query,
   Res,
   UnauthorizedException,
@@ -17,9 +19,12 @@ import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { hasPermission } from '../access/access.util';
 import { CaseInquiryChannel } from '../generated/prisma/client';
+import { CaseInquiriesReportService } from './case-inquiries-report.service';
 import { CaseInquiriesService, type InquiryActor } from './case-inquiries.service';
 import { CasesService } from './cases.service';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
+import { UpdateCaseLetterIssueDto } from './dto/update-case-letter-issue.dto';
+import { InquiriesReportQueryDto } from './dto/inquiries-report-query.dto';
 
 type UploadFile = {
   buffer: Buffer;
@@ -52,11 +57,24 @@ export class CaseInquiriesController {
   constructor(
     private readonly inquiries: CaseInquiriesService,
     private readonly cases: CasesService,
+    private readonly inquiriesReport: CaseInquiriesReportService,
   ) {}
 
   @Get()
   inbox(@CurrentUser() user: RequestUser | undefined, @Query() query: FindCaseInquiriesQueryDto) {
     return this.inquiries.inbox(actorOf(user), query);
+  }
+
+  @Get('stats')
+  stats(@CurrentUser() user: RequestUser | undefined) {
+    return this.inquiries.stats(actorOf(user));
+  }
+
+  @Get('report')
+  report(@CurrentUser() user: RequestUser | undefined, @Query() query: InquiriesReportQueryDto) {
+    const access = { isAdmin: Boolean(user?.isAdmin), permissionCodes: user?.permissionCodes ?? [] };
+    const wide = Boolean(user?.isAdmin) || hasPermission(access, 'cases.management');
+    return this.inquiriesReport.build(query, actorOf(user), wide);
   }
 
   @Get('files/:fileId')
@@ -74,9 +92,23 @@ export class CaseInquiriesController {
     res.send(file.data);
   }
 
+  @Delete('files/:fileId')
+  removeFile(@Param('fileId') fileId: string, @CurrentUser() user: RequestUser | undefined) {
+    return this.inquiries.removeFile(fileId, actorOf(user));
+  }
+
   @Get(':id/letter')
   letter(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
     return this.inquiries.letter(id, actorOf(user));
+  }
+
+  @Put(':id/letter')
+  updateLetter(
+    @Param('id') id: string,
+    @Body() dto: UpdateCaseLetterIssueDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.inquiries.updateLetter(id, actorOf(user), dto);
   }
 
   @Get(':id/dossier')

@@ -12,13 +12,13 @@ export async function activityContext(prisma: Db, caseFileId: string) {
       activityJobId: true,
       businessUnitTitle: true,
       premiseAddress: true,
-      activityJob: { select: { title: true } },
+      activityJob: { select: { title: true, group: { select: { title: true } } } },
       hostCaseFile: {
         select: {
           activityJobId: true,
           businessUnitTitle: true,
           premiseAddress: true,
-          activityJob: { select: { title: true } },
+          activityJob: { select: { title: true, group: { select: { title: true } } } },
         },
       },
     },

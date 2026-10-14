@@ -160,24 +160,6 @@ export class CreateUserDto {
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
-  nationalCardPhotoId?: string | null;
-
-  @IsOptional()
-  @Transform(({ value }) => emptyToNull(value))
-  @ValidateIf((_, value) => value != null)
-  @IsUUID('4')
-  passportPhotoId?: string | null;
-
-  @IsOptional()
-  @Transform(({ value }) => emptyToNull(value))
-  @ValidateIf((_, value) => value != null)
-  @IsUUID('4')
-  identityBookletPhotoId?: string | null;
-
-  @IsOptional()
-  @Transform(({ value }) => emptyToNull(value))
-  @ValidateIf((_, value) => value != null)
-  @IsUUID('4')
   orgUnitId?: string | null;
 
   @IsOptional()

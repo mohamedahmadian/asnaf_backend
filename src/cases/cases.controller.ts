@@ -6,6 +6,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   Res,
   UnauthorizedException,
@@ -16,6 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { assertAdminActor, assertCanIssue } from './case-action-access';
 import { CaseInquiryChannel } from '../generated/prisma/client';
 import { CaseInquiriesService } from './case-inquiries.service';
 import { CaseManagementApproversService } from './case-management-approvers.service';
@@ -26,6 +28,7 @@ import { SaveCaseLocationDto } from './dto/save-case-location.dto';
 import { SaveCaseIdentityDto } from './dto/save-case-identity.dto';
 import { SaveFormationStepDto } from './dto/save-formation-step.dto';
 import { SaveRenewalDatesDto } from './dto/save-renewal-dates.dto';
+import { UpdateCaseLetterIssueDto } from './dto/update-case-letter-issue.dto';
 
 type UploadFile = {
   buffer: Buffer;
@@ -34,7 +37,7 @@ type UploadFile = {
   originalname: string;
 };
 
-type RequestUser = { id: string; isAdmin?: boolean };
+type RequestUser = { id: string; isAdmin?: boolean; permissionCodes?: string[] };
 
 function formationActor(user: RequestUser | undefined) {
   if (!user?.id) throw new UnauthorizedException();
@@ -94,28 +97,29 @@ export class CasesController {
   }
 
   @Post('location-draft')
-  saveLocationDraft(@Body() dto: SaveCaseLocationDto) {
-    return this.cases.saveLocationDraft(dto);
+  saveLocationDraft(@Body() dto: SaveCaseLocationDto, @CurrentUser() user: RequestUser | undefined) {
+    return this.cases.saveLocationDraft(dto, user?.id);
   }
 
   @Post('renewal-dates')
-  saveRenewalDates(@Body() dto: SaveRenewalDatesDto) {
-    return this.cases.saveRenewalDates(dto.caseId, dto.nextIssuedAt, dto.nextExpiresAt);
+  saveRenewalDates(@Body() dto: SaveRenewalDatesDto, @CurrentUser() user: RequestUser | undefined) {
+    return this.cases.saveRenewalDates(dto.caseId, dto.nextIssuedAt, dto.nextExpiresAt, user?.id, dto.requestId);
   }
 
   @Post('process-step')
-  advanceProcess(@Body() dto: SaveFormationStepDto) {
-    return this.cases.advanceProcess(dto.caseId, dto.step);
+  advanceProcess(@Body() dto: SaveFormationStepDto, @CurrentUser() user: RequestUser | undefined) {
+    return this.cases.advanceProcess(dto.caseId, dto.step, user);
   }
 
   @Post('complete')
   complete(@Body() dto: SaveFormationStepDto, @CurrentUser() user: RequestUser | undefined) {
-    return this.cases.completeRequest(dto.caseId, user?.id, dto.licenseIssuedAt, dto.licenseExpiresAt);
+    const actor = assertCanIssue(user);
+    return this.cases.completeRequest(dto.caseId, actor.id, dto.licenseIssuedAt, dto.licenseExpiresAt);
   }
 
   @Post('step')
-  advanceStep(@Body() dto: SaveFormationStepDto) {
-    return this.cases.advanceStep(dto);
+  advanceStep(@Body() dto: SaveFormationStepDto, @CurrentUser() user: RequestUser | undefined) {
+    return this.cases.advanceStep(dto, user);
   }
 
   @Get('inquiries')
@@ -146,7 +150,7 @@ export class CasesController {
 
   @Post('management-reviews/:id/decision')
   @UseInterceptors(inquiryFile)
-  decideManagementReview(
+  async decideManagementReview(
     @Param('id') id: string,
     @CurrentUser() user: RequestUser | undefined,
     @UploadedFile() file: UploadFile | undefined,
@@ -154,7 +158,7 @@ export class CasesController {
     @Body('note') note?: string,
   ) {
     const actor = formationActor(user);
-    return this.managementApprovers.decide(id, actor.id, {
+    const saved = await this.managementApprovers.decide(id, actor, {
       status,
       note,
       channel: CaseInquiryChannel.MANUAL,
@@ -162,16 +166,28 @@ export class CasesController {
         ? { buffer: file.buffer, mimeType: file.mimetype, originalName: file.originalname }
         : undefined,
     });
+    await this.managementApprovers.advanceAfterDecision(id);
+    return saved;
   }
 
   @Post('management-reviews/:id/reopen')
-  reopenManagementReview(@Param('id') id: string) {
-    return this.managementApprovers.reopen(id);
+  reopenManagementReview(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
+    const actor = assertAdminActor(user);
+    return this.managementApprovers.reopen(id, actor.id);
   }
 
   @Get('places/:id/letter')
   placesLetter(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
     return this.places.letter(id, formationActor(user));
+  }
+
+  @Put('places/:id/letter')
+  updatePlacesLetter(
+    @Param('id') id: string,
+    @Body() dto: UpdateCaseLetterIssueDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.places.updateLetter(id, formationActor(user), dto);
   }
 
   @Post('places/:id/decision')
@@ -200,8 +216,9 @@ export class CasesController {
   }
 
   @Post('places/:id/reopen')
-  reopenPlaces(@Param('id') id: string) {
-    return this.places.reopen(id);
+  reopenPlaces(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
+    const actor = assertAdminActor(user);
+    return this.places.reopen(id, actor.id);
   }
 
   @Post('inquiries/:id/decision')
@@ -226,8 +243,9 @@ export class CasesController {
   }
 
   @Post('inquiries/:id/reopen')
-  reopenInquiry(@Param('id') id: string) {
-    return this.inquiries.reopen(id);
+  reopenInquiry(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
+    const actor = assertAdminActor(user);
+    return this.inquiries.reopen(id, actor.id);
   }
 
   private async advancePlacesQuietly(inquiryId: string) {

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from '../auth/auth.module';
+import { CasesModule } from '../cases/cases.module';
 import { SmsModule } from '../sms/sms.module';
 import { AccountController } from './account.controller';
 import { PublicAuthController } from './public-auth.controller';
@@ -8,7 +9,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
 @Module({
-  imports: [AuthModule, SmsModule],
+  imports: [AuthModule, SmsModule, CasesModule],
   controllers: [
     AccountController,
     PublicAuthController,

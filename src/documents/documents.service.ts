@@ -20,9 +20,6 @@ import { UpdateDocumentDto } from './dto/update-document.dto';
 const documentSelect = {
   id: true,
   title: true,
-  isRequired: true,
-  gender: true,
-  isFixed: true,
   code: true,
   createdAt: true,
   updatedAt: true,
@@ -34,9 +31,6 @@ export class DocumentsService {
 
   async findAll(query: FindDocumentsQueryDto) {
     const where: Prisma.DocumentWhereInput = {
-      isRequired: query.isRequired,
-      isFixed: query.isFixed,
-      gender: query.gender,
       OR: query.q ? [{ title: containsInsensitive(query.q) }] : undefined,
     };
     const orderBy = resolveSortOrder<Prisma.DocumentOrderByWithRelationInput>(
@@ -44,9 +38,6 @@ export class DocumentsService {
       query.sortDir,
       {
         title: (dir) => ({ title: dir }),
-        isRequired: (dir) => ({ isRequired: dir }),
-        gender: (dir) => ({ gender: dir }),
-        isFixed: (dir) => ({ isFixed: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
     );
@@ -87,9 +78,6 @@ export class DocumentsService {
       return await this.prisma.document.create({
         data: {
           title: dto.title,
-          isRequired: dto.isRequired,
-          gender: dto.gender,
-          isFixed: dto.isFixed,
         },
         select: documentSelect,
       });
@@ -105,9 +93,6 @@ export class DocumentsService {
         where: { id },
         data: {
           title: dto.title,
-          isRequired: dto.isRequired,
-          gender: dto.gender,
-          isFixed: dto.isFixed,
         },
         select: documentSelect,
       });

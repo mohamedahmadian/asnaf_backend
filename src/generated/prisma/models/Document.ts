@@ -27,9 +27,6 @@ export type AggregateDocument = {
 export type DocumentMinAggregateOutputType = {
   id: string | null
   title: string | null
-  isRequired: boolean | null
-  gender: $Enums.DocumentGender | null
-  isFixed: boolean | null
   code: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -38,9 +35,6 @@ export type DocumentMinAggregateOutputType = {
 export type DocumentMaxAggregateOutputType = {
   id: string | null
   title: string | null
-  isRequired: boolean | null
-  gender: $Enums.DocumentGender | null
-  isFixed: boolean | null
   code: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,9 +43,6 @@ export type DocumentMaxAggregateOutputType = {
 export type DocumentCountAggregateOutputType = {
   id: number
   title: number
-  isRequired: number
-  gender: number
-  isFixed: number
   code: number
   createdAt: number
   updatedAt: number
@@ -62,9 +53,6 @@ export type DocumentCountAggregateOutputType = {
 export type DocumentMinAggregateInputType = {
   id?: true
   title?: true
-  isRequired?: true
-  gender?: true
-  isFixed?: true
   code?: true
   createdAt?: true
   updatedAt?: true
@@ -73,9 +61,6 @@ export type DocumentMinAggregateInputType = {
 export type DocumentMaxAggregateInputType = {
   id?: true
   title?: true
-  isRequired?: true
-  gender?: true
-  isFixed?: true
   code?: true
   createdAt?: true
   updatedAt?: true
@@ -84,9 +69,6 @@ export type DocumentMaxAggregateInputType = {
 export type DocumentCountAggregateInputType = {
   id?: true
   title?: true
-  isRequired?: true
-  gender?: true
-  isFixed?: true
   code?: true
   createdAt?: true
   updatedAt?: true
@@ -168,9 +150,6 @@ export type DocumentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type DocumentGroupByOutputType = {
   id: string
   title: string
-  isRequired: boolean
-  gender: $Enums.DocumentGender
-  isFixed: boolean
   code: string | null
   createdAt: Date
   updatedAt: Date
@@ -200,9 +179,6 @@ export type DocumentWhereInput = {
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   id?: Prisma.StringFilter<"Document"> | string
   title?: Prisma.StringFilter<"Document"> | string
-  isRequired?: Prisma.BoolFilter<"Document"> | boolean
-  gender?: Prisma.EnumDocumentGenderFilter<"Document"> | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFilter<"Document"> | boolean
   code?: Prisma.StringNullableFilter<"Document"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
@@ -216,9 +192,6 @@ export type DocumentWhereInput = {
 export type DocumentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isRequired?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  isFixed?: Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -236,9 +209,6 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   OR?: Prisma.DocumentWhereInput[]
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
-  isRequired?: Prisma.BoolFilter<"Document"> | boolean
-  gender?: Prisma.EnumDocumentGenderFilter<"Document"> | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFilter<"Document"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   jobs?: Prisma.JobDocumentListRelationFilter
@@ -251,9 +221,6 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
 export type DocumentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isRequired?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  isFixed?: Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -268,9 +235,6 @@ export type DocumentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DocumentScalarWhereWithAggregatesInput | Prisma.DocumentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Document"> | string
   title?: Prisma.StringWithAggregatesFilter<"Document"> | string
-  isRequired?: Prisma.BoolWithAggregatesFilter<"Document"> | boolean
-  gender?: Prisma.EnumDocumentGenderWithAggregatesFilter<"Document"> | $Enums.DocumentGender
-  isFixed?: Prisma.BoolWithAggregatesFilter<"Document"> | boolean
   code?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
@@ -279,9 +243,6 @@ export type DocumentScalarWhereWithAggregatesInput = {
 export type DocumentCreateInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -295,9 +256,6 @@ export type DocumentCreateInput = {
 export type DocumentUncheckedCreateInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -311,9 +269,6 @@ export type DocumentUncheckedCreateInput = {
 export type DocumentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -327,9 +282,6 @@ export type DocumentUpdateInput = {
 export type DocumentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -343,9 +295,6 @@ export type DocumentUncheckedUpdateInput = {
 export type DocumentCreateManyInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -354,9 +303,6 @@ export type DocumentCreateManyInput = {
 export type DocumentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -365,9 +311,6 @@ export type DocumentUpdateManyMutationInput = {
 export type DocumentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -381,9 +324,6 @@ export type DocumentScalarRelationFilter = {
 export type DocumentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isRequired?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  isFixed?: Prisma.SortOrder
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -392,9 +332,6 @@ export type DocumentCountOrderByAggregateInput = {
 export type DocumentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isRequired?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  isFixed?: Prisma.SortOrder
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -403,9 +340,6 @@ export type DocumentMaxOrderByAggregateInput = {
 export type DocumentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  isRequired?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
-  isFixed?: Prisma.SortOrder
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -484,9 +418,6 @@ export type DocumentUpdateOneRequiredWithoutCaseActivityDocumentsNestedInput = {
 export type DocumentCreateWithoutJobsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -499,9 +430,6 @@ export type DocumentCreateWithoutJobsInput = {
 export type DocumentUncheckedCreateWithoutJobsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -530,9 +458,6 @@ export type DocumentUpdateToOneWithWhereWithoutJobsInput = {
 export type DocumentUpdateWithoutJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -545,9 +470,6 @@ export type DocumentUpdateWithoutJobsInput = {
 export type DocumentUncheckedUpdateWithoutJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -560,9 +482,6 @@ export type DocumentUncheckedUpdateWithoutJobsInput = {
 export type DocumentCreateWithoutCaseIdentityDocumentInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -575,9 +494,6 @@ export type DocumentCreateWithoutCaseIdentityDocumentInput = {
 export type DocumentUncheckedCreateWithoutCaseIdentityDocumentInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -606,9 +522,6 @@ export type DocumentUpdateToOneWithWhereWithoutCaseIdentityDocumentInput = {
 export type DocumentUpdateWithoutCaseIdentityDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -621,9 +534,6 @@ export type DocumentUpdateWithoutCaseIdentityDocumentInput = {
 export type DocumentUncheckedUpdateWithoutCaseIdentityDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -636,9 +546,6 @@ export type DocumentUncheckedUpdateWithoutCaseIdentityDocumentInput = {
 export type DocumentCreateWithoutRequirementsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -651,9 +558,6 @@ export type DocumentCreateWithoutRequirementsInput = {
 export type DocumentUncheckedCreateWithoutRequirementsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -682,9 +586,6 @@ export type DocumentUpdateToOneWithWhereWithoutRequirementsInput = {
 export type DocumentUpdateWithoutRequirementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -697,9 +598,6 @@ export type DocumentUpdateWithoutRequirementsInput = {
 export type DocumentUncheckedUpdateWithoutRequirementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -712,9 +610,6 @@ export type DocumentUncheckedUpdateWithoutRequirementsInput = {
 export type DocumentCreateWithoutPersonDocumentsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -727,9 +622,6 @@ export type DocumentCreateWithoutPersonDocumentsInput = {
 export type DocumentUncheckedCreateWithoutPersonDocumentsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -758,9 +650,6 @@ export type DocumentUpdateToOneWithWhereWithoutPersonDocumentsInput = {
 export type DocumentUpdateWithoutPersonDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -773,9 +662,6 @@ export type DocumentUpdateWithoutPersonDocumentsInput = {
 export type DocumentUncheckedUpdateWithoutPersonDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -788,9 +674,6 @@ export type DocumentUncheckedUpdateWithoutPersonDocumentsInput = {
 export type DocumentCreateWithoutCaseActivityDocumentsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -803,9 +686,6 @@ export type DocumentCreateWithoutCaseActivityDocumentsInput = {
 export type DocumentUncheckedCreateWithoutCaseActivityDocumentsInput = {
   id?: string
   title: string
-  isRequired?: boolean
-  gender?: $Enums.DocumentGender
-  isFixed?: boolean
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -834,9 +714,6 @@ export type DocumentUpdateToOneWithWhereWithoutCaseActivityDocumentsInput = {
 export type DocumentUpdateWithoutCaseActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -849,9 +726,6 @@ export type DocumentUpdateWithoutCaseActivityDocumentsInput = {
 export type DocumentUncheckedUpdateWithoutCaseActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
-  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -922,9 +796,6 @@ export type DocumentCountOutputTypeCountCaseActivityDocumentsArgs<ExtArgs extend
 export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  isRequired?: boolean
-  gender?: boolean
-  isFixed?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -939,9 +810,6 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  isRequired?: boolean
-  gender?: boolean
-  isFixed?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -950,9 +818,6 @@ export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  isRequired?: boolean
-  gender?: boolean
-  isFixed?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -961,15 +826,12 @@ export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type DocumentSelectScalar = {
   id?: boolean
   title?: boolean
-  isRequired?: boolean
-  gender?: boolean
-  isFixed?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "isRequired" | "gender" | "isFixed" | "code" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "code" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | Prisma.Document$jobsArgs<ExtArgs>
   requirements?: boolean | Prisma.Document$requirementsArgs<ExtArgs>
@@ -993,9 +855,6 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
-    isRequired: boolean
-    gender: $Enums.DocumentGender
-    isFixed: boolean
     /**
      * کد پایدار مدرک سیستمی؛ اگر پر باشد حذف و تغییر کد ممنوع است
      */
@@ -1432,9 +1291,6 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
 export interface DocumentFieldRefs {
   readonly id: Prisma.FieldRef<"Document", 'String'>
   readonly title: Prisma.FieldRef<"Document", 'String'>
-  readonly isRequired: Prisma.FieldRef<"Document", 'Boolean'>
-  readonly gender: Prisma.FieldRef<"Document", 'DocumentGender'>
-  readonly isFixed: Prisma.FieldRef<"Document", 'Boolean'>
   readonly code: Prisma.FieldRef<"Document", 'String'>
   readonly createdAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Document", 'DateTime'>

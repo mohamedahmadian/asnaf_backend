@@ -14,6 +14,7 @@ import {
   UserStatus,
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CaseGeneralSettingsService } from './case-general-settings.service';
 import { DecideCaseAuctionDto } from './dto/decide-case-auction.dto';
 import { SaveCaseAuctionDto } from './dto/save-case-auction.dto';
 import { nextRequestNumber } from './formation-steps';
@@ -101,7 +102,10 @@ function assertRange(dto: SaveCaseAuctionDto) {
 
 @Injectable()
 export class CaseAuctionService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly generalSettings: CaseGeneralSettingsService,
+  ) {}
 
   async find(caseId: string, requestId: string, actor?: Actor) {
     await this.syncPhase(requestId);
@@ -168,8 +172,15 @@ export class CaseAuctionService {
     return this.prisma.$transaction(async (tx) => {
       await tx.$queryRaw`SELECT "id" FROM "case_auction_approvals" WHERE "requestId" = ${requestId} FOR UPDATE`;
       const current = await this.load(tx, caseId, requestId);
-      if (!this.isEditable(current.request.status, current.approvals)) {
-        throw new BadRequestException('پس از ثبت نظر، ویرایش درخواست ممکن نیست');
+      if (!(await this.canUpdate(current.request.status, current.approvals, actor))) {
+        const issued =
+          current.request.status === CaseRequestStatus.ISSUED ||
+          current.request.status === CaseRequestStatus.COMPLETED;
+        throw new BadRequestException(
+          issued
+            ? 'ویرایش درخواست بعد از صدور فقط برای نقش تعیین‌شده در تنظیمات پرونده مجاز است'
+            : 'پس از ثبت نظر، ویرایش درخواست ممکن نیست',
+        );
       }
       await this.assertNoOverlap(tx, current.request.caseFile.userId, dto.startsAt, dto.endsAt, requestId);
       await tx.caseAuction.update({
@@ -243,7 +254,7 @@ export class CaseAuctionService {
       if (!(await this.readyToIssue(tx, requestId))) {
         throw new BadRequestException('قبل از صدور مجوز باید تاییدهای مدیریتی ثبت شده باشد');
       }
-      await this.close(tx, requestId, CaseRequestStatus.ISSUED, actor.id, 2);
+      await this.close(tx, requestId, CaseRequestStatus.COMPLETED, actor.id, 2);
       return this.present(tx, caseId, requestId, actor);
     });
   }
@@ -374,7 +385,7 @@ export class CaseAuctionService {
       caseId,
       number: auction.request.number,
       status: auction.request.status,
-      editable: this.isEditable(auction.request.status, approvals),
+      editable: await this.canUpdate(auction.request.status, approvals, actor),
       canIssue: auction.request.status === CaseRequestStatus.OPEN && (await this.readyToIssue(db, requestId)),
       phase: auction.request.formationStep,
       title: auction.title,
@@ -417,6 +428,18 @@ export class CaseAuctionService {
     approvals: { status: CaseInquiryStatus }[],
   ) {
     return status === CaseRequestStatus.OPEN && approvals.every((item) => item.status === CaseInquiryStatus.PENDING);
+  }
+
+  /** پیش‌نویس باز، یا بعد از قفل/صدور اگر تنظیم ویرایش درخواست‌ها روشن باشد و کاربر همان نقش را داشته باشد. */
+  private async canUpdate(
+    status: CaseRequestStatus,
+    approvals: { status: CaseInquiryStatus }[],
+    actor?: Actor,
+  ) {
+    if (status === CaseRequestStatus.REJECTED || status === CaseRequestStatus.CANCELLED) return false;
+    if (this.isEditable(status, approvals)) return true;
+    if (!actor?.id) return false;
+    return (await this.generalSettings.userMayEditIssuedCase(actor.id)) === true;
   }
 
   private canIssue(status: CaseRequestStatus, approvals: { status: CaseInquiryStatus; kind: AuctionApproverKind }[]) {

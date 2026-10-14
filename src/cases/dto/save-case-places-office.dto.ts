@@ -1,5 +1,5 @@
-import { Transform } from 'class-transformer';
-import { IsOptional, IsString, IsUUID, MaxLength, ValidateIf } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { IsInt, IsOptional, IsString, IsUUID, Max, MaxLength, Min, ValidateIf } from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 
 export class SaveCasePlacesOfficeDto {
@@ -26,4 +26,10 @@ export class SaveCasePlacesOfficeDto {
   @IsString()
   @MaxLength(8000)
   letterBody?: string | null;
+
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(90)
+  responseDays: number;
 }

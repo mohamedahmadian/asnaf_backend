@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -11,15 +12,13 @@ import {
 import { resolveSortOrder } from '../common/sort-query';
 import { Prisma } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { PERSONNEL_PHOTO_CODE } from './personnel-photo';
 import { CreateCaseIdentityDocumentDto } from './dto/create-case-identity-document.dto';
 import { FindCaseIdentityDocumentsQueryDto } from './dto/find-case-identity-documents-query.dto';
 
 const documentSelect = {
   id: true,
   title: true,
-  isRequired: true,
-  gender: true,
-  isFixed: true,
 } satisfies Prisma.DocumentSelect;
 
 @Injectable()
@@ -28,16 +27,17 @@ export class CaseIdentityDocumentsService {
 
   async findAll(query: FindCaseIdentityDocumentsQueryDto) {
     const where: Prisma.CaseIdentityDocumentWhereInput = {
-      document: query.q
-        ? { title: containsInsensitive(query.q) }
-        : undefined,
+      document: {
+        ...(query.q ? { title: containsInsensitive(query.q) } : {}),
+        NOT: { code: PERSONNEL_PHOTO_CODE },
+      },
     };
     const orderBy = resolveSortOrder<Prisma.CaseIdentityDocumentOrderByWithRelationInput>(
       query.sortBy,
       query.sortDir,
       {
         title: (dir) => ({ document: { title: dir } }),
-        isRequired: (dir) => ({ document: { isRequired: dir } }),
+        isRequired: (dir) => ({ isRequired: dir }),
         gender: (dir) => ({ gender: dir }),
       },
       [{ createdAt: 'desc' }, { documentId: 'asc' }],
@@ -52,6 +52,7 @@ export class CaseIdentityDocumentsService {
         select: {
           documentId: true,
           gender: true,
+          isRequired: true,
           createdAt: true,
           document: { select: documentSelect },
         },
@@ -62,9 +63,8 @@ export class CaseIdentityDocumentsService {
       rows.map((row) => ({
         documentId: row.documentId,
         title: row.document.title,
-        isRequired: row.document.isRequired,
+        isRequired: row.isRequired,
         gender: row.gender,
-        isFixed: row.document.isFixed,
         createdAt: row.createdAt,
       })),
       total,
@@ -75,23 +75,29 @@ export class CaseIdentityDocumentsService {
 
   options() {
     return this.prisma.document.findMany({
-      where: { caseIdentityDocument: null },
+      where: {
+        caseIdentityDocument: null,
+        NOT: { code: PERSONNEL_PHOTO_CODE },
+      },
       orderBy: { title: 'asc' },
-      select: { id: true, title: true, gender: true },
+      select: { id: true, title: true },
     });
   }
 
   async create(dto: CreateCaseIdentityDocumentDto) {
     const document = await this.prisma.document.findUnique({
       where: { id: dto.documentId },
-      select: { id: true },
+      select: { id: true, code: true },
     });
     if (!document) {
       throw new NotFoundException('مدرک یافت نشد');
     }
+    if (document.code === PERSONNEL_PHOTO_CODE) {
+      throw new BadRequestException('عکس پرسنلی روی مشخصات شخص ذخیره می‌شود');
+    }
     try {
       await this.prisma.caseIdentityDocument.create({
-        data: { documentId: dto.documentId, gender: dto.gender },
+        data: { documentId: dto.documentId, gender: dto.gender, isRequired: dto.isRequired },
       });
     } catch (error) {
       if (

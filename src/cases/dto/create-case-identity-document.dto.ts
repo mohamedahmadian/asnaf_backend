@@ -1,4 +1,4 @@
-import { IsEnum, IsString, Matches } from 'class-validator';
+import { IsBoolean, IsEnum, IsString, Matches } from 'class-validator';
 import { DocumentGender } from '../../generated/prisma/client';
 
 export class CreateCaseIdentityDocumentDto {
@@ -8,4 +8,7 @@ export class CreateCaseIdentityDocumentDto {
 
   @IsEnum(DocumentGender)
   gender: DocumentGender;
+
+  @IsBoolean()
+  isRequired: boolean;
 }

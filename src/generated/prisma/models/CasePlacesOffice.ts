@@ -20,8 +20,18 @@ export type CasePlacesOfficeModel = runtime.Types.Result.DefaultSelection<Prisma
 
 export type AggregateCasePlacesOffice = {
   _count: CasePlacesOfficeCountAggregateOutputType | null
+  _avg: CasePlacesOfficeAvgAggregateOutputType | null
+  _sum: CasePlacesOfficeSumAggregateOutputType | null
   _min: CasePlacesOfficeMinAggregateOutputType | null
   _max: CasePlacesOfficeMaxAggregateOutputType | null
+}
+
+export type CasePlacesOfficeAvgAggregateOutputType = {
+  responseDays: number | null
+}
+
+export type CasePlacesOfficeSumAggregateOutputType = {
+  responseDays: number | null
 }
 
 export type CasePlacesOfficeMinAggregateOutputType = {
@@ -30,6 +40,7 @@ export type CasePlacesOfficeMinAggregateOutputType = {
   officerRoleId: string | null
   letterTitle: string | null
   letterBody: string | null
+  responseDays: number | null
   updatedAt: Date | null
 }
 
@@ -39,6 +50,7 @@ export type CasePlacesOfficeMaxAggregateOutputType = {
   officerRoleId: string | null
   letterTitle: string | null
   letterBody: string | null
+  responseDays: number | null
   updatedAt: Date | null
 }
 
@@ -48,10 +60,19 @@ export type CasePlacesOfficeCountAggregateOutputType = {
   officerRoleId: number
   letterTitle: number
   letterBody: number
+  responseDays: number
   updatedAt: number
   _all: number
 }
 
+
+export type CasePlacesOfficeAvgAggregateInputType = {
+  responseDays?: true
+}
+
+export type CasePlacesOfficeSumAggregateInputType = {
+  responseDays?: true
+}
 
 export type CasePlacesOfficeMinAggregateInputType = {
   id?: true
@@ -59,6 +80,7 @@ export type CasePlacesOfficeMinAggregateInputType = {
   officerRoleId?: true
   letterTitle?: true
   letterBody?: true
+  responseDays?: true
   updatedAt?: true
 }
 
@@ -68,6 +90,7 @@ export type CasePlacesOfficeMaxAggregateInputType = {
   officerRoleId?: true
   letterTitle?: true
   letterBody?: true
+  responseDays?: true
   updatedAt?: true
 }
 
@@ -77,6 +100,7 @@ export type CasePlacesOfficeCountAggregateInputType = {
   officerRoleId?: true
   letterTitle?: true
   letterBody?: true
+  responseDays?: true
   updatedAt?: true
   _all?: true
 }
@@ -119,6 +143,18 @@ export type CasePlacesOfficeAggregateArgs<ExtArgs extends runtime.Types.Extensio
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: CasePlacesOfficeAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: CasePlacesOfficeSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: CasePlacesOfficeMinAggregateInputType
@@ -149,6 +185,8 @@ export type CasePlacesOfficeGroupByArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   _count?: CasePlacesOfficeCountAggregateInputType | true
+  _avg?: CasePlacesOfficeAvgAggregateInputType
+  _sum?: CasePlacesOfficeSumAggregateInputType
   _min?: CasePlacesOfficeMinAggregateInputType
   _max?: CasePlacesOfficeMaxAggregateInputType
 }
@@ -159,8 +197,11 @@ export type CasePlacesOfficeGroupByOutputType = {
   officerRoleId: string | null
   letterTitle: string | null
   letterBody: string | null
+  responseDays: number
   updatedAt: Date
   _count: CasePlacesOfficeCountAggregateOutputType | null
+  _avg: CasePlacesOfficeAvgAggregateOutputType | null
+  _sum: CasePlacesOfficeSumAggregateOutputType | null
   _min: CasePlacesOfficeMinAggregateOutputType | null
   _max: CasePlacesOfficeMaxAggregateOutputType | null
 }
@@ -189,6 +230,7 @@ export type CasePlacesOfficeWhereInput = {
   officerRoleId?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   letterTitle?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   letterBody?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
+  responseDays?: Prisma.IntFilter<"CasePlacesOffice"> | number
   updatedAt?: Prisma.DateTimeFilter<"CasePlacesOffice"> | Date | string
   officerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
 }
@@ -199,6 +241,7 @@ export type CasePlacesOfficeOrderByWithRelationInput = {
   officerRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   letterTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   letterBody?: Prisma.SortOrderInput | Prisma.SortOrder
+  responseDays?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   officerRole?: Prisma.RoleOrderByWithRelationInput
 }
@@ -212,6 +255,7 @@ export type CasePlacesOfficeWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   letterTitle?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
   letterBody?: Prisma.StringNullableFilter<"CasePlacesOffice"> | string | null
+  responseDays?: Prisma.IntFilter<"CasePlacesOffice"> | number
   updatedAt?: Prisma.DateTimeFilter<"CasePlacesOffice"> | Date | string
   officerRole?: Prisma.XOR<Prisma.RoleNullableScalarRelationFilter, Prisma.RoleWhereInput> | null
 }, "id" | "officerRoleId">
@@ -222,10 +266,13 @@ export type CasePlacesOfficeOrderByWithAggregationInput = {
   officerRoleId?: Prisma.SortOrderInput | Prisma.SortOrder
   letterTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   letterBody?: Prisma.SortOrderInput | Prisma.SortOrder
+  responseDays?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CasePlacesOfficeCountOrderByAggregateInput
+  _avg?: Prisma.CasePlacesOfficeAvgOrderByAggregateInput
   _max?: Prisma.CasePlacesOfficeMaxOrderByAggregateInput
   _min?: Prisma.CasePlacesOfficeMinOrderByAggregateInput
+  _sum?: Prisma.CasePlacesOfficeSumOrderByAggregateInput
 }
 
 export type CasePlacesOfficeScalarWhereWithAggregatesInput = {
@@ -237,6 +284,7 @@ export type CasePlacesOfficeScalarWhereWithAggregatesInput = {
   officerRoleId?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
   letterTitle?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
   letterBody?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesOffice"> | string | null
+  responseDays?: Prisma.IntWithAggregatesFilter<"CasePlacesOffice"> | number
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CasePlacesOffice"> | Date | string
 }
 
@@ -245,6 +293,7 @@ export type CasePlacesOfficeCreateInput = {
   phone?: string | null
   letterTitle?: string | null
   letterBody?: string | null
+  responseDays?: number
   updatedAt?: Date | string
   officerRole?: Prisma.RoleCreateNestedOneWithoutPlacesOfficeInput
 }
@@ -255,6 +304,7 @@ export type CasePlacesOfficeUncheckedCreateInput = {
   officerRoleId?: string | null
   letterTitle?: string | null
   letterBody?: string | null
+  responseDays?: number
   updatedAt?: Date | string
 }
 
@@ -263,6 +313,7 @@ export type CasePlacesOfficeUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responseDays?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   officerRole?: Prisma.RoleUpdateOneWithoutPlacesOfficeNestedInput
 }
@@ -273,6 +324,7 @@ export type CasePlacesOfficeUncheckedUpdateInput = {
   officerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responseDays?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -282,6 +334,7 @@ export type CasePlacesOfficeCreateManyInput = {
   officerRoleId?: string | null
   letterTitle?: string | null
   letterBody?: string | null
+  responseDays?: number
   updatedAt?: Date | string
 }
 
@@ -290,6 +343,7 @@ export type CasePlacesOfficeUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responseDays?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -299,6 +353,7 @@ export type CasePlacesOfficeUncheckedUpdateManyInput = {
   officerRoleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responseDays?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -308,7 +363,12 @@ export type CasePlacesOfficeCountOrderByAggregateInput = {
   officerRoleId?: Prisma.SortOrder
   letterTitle?: Prisma.SortOrder
   letterBody?: Prisma.SortOrder
+  responseDays?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CasePlacesOfficeAvgOrderByAggregateInput = {
+  responseDays?: Prisma.SortOrder
 }
 
 export type CasePlacesOfficeMaxOrderByAggregateInput = {
@@ -317,6 +377,7 @@ export type CasePlacesOfficeMaxOrderByAggregateInput = {
   officerRoleId?: Prisma.SortOrder
   letterTitle?: Prisma.SortOrder
   letterBody?: Prisma.SortOrder
+  responseDays?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -326,7 +387,12 @@ export type CasePlacesOfficeMinOrderByAggregateInput = {
   officerRoleId?: Prisma.SortOrder
   letterTitle?: Prisma.SortOrder
   letterBody?: Prisma.SortOrder
+  responseDays?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CasePlacesOfficeSumOrderByAggregateInput = {
+  responseDays?: Prisma.SortOrder
 }
 
 export type CasePlacesOfficeNullableScalarRelationFilter = {
@@ -371,6 +437,7 @@ export type CasePlacesOfficeCreateWithoutOfficerRoleInput = {
   phone?: string | null
   letterTitle?: string | null
   letterBody?: string | null
+  responseDays?: number
   updatedAt?: Date | string
 }
 
@@ -379,6 +446,7 @@ export type CasePlacesOfficeUncheckedCreateWithoutOfficerRoleInput = {
   phone?: string | null
   letterTitle?: string | null
   letterBody?: string | null
+  responseDays?: number
   updatedAt?: Date | string
 }
 
@@ -403,6 +471,7 @@ export type CasePlacesOfficeUpdateWithoutOfficerRoleInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responseDays?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -411,6 +480,7 @@ export type CasePlacesOfficeUncheckedUpdateWithoutOfficerRoleInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   letterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responseDays?: Prisma.IntFieldUpdateOperationsInput | number
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -422,6 +492,7 @@ export type CasePlacesOfficeSelect<ExtArgs extends runtime.Types.Extensions.Inte
   officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
+  responseDays?: boolean
   updatedAt?: boolean
   officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }, ExtArgs["result"]["casePlacesOffice"]>
@@ -432,6 +503,7 @@ export type CasePlacesOfficeSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
+  responseDays?: boolean
   updatedAt?: boolean
   officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }, ExtArgs["result"]["casePlacesOffice"]>
@@ -442,6 +514,7 @@ export type CasePlacesOfficeSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
+  responseDays?: boolean
   updatedAt?: boolean
   officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }, ExtArgs["result"]["casePlacesOffice"]>
@@ -452,10 +525,11 @@ export type CasePlacesOfficeSelectScalar = {
   officerRoleId?: boolean
   letterTitle?: boolean
   letterBody?: boolean
+  responseDays?: boolean
   updatedAt?: boolean
 }
 
-export type CasePlacesOfficeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "phone" | "officerRoleId" | "letterTitle" | "letterBody" | "updatedAt", ExtArgs["result"]["casePlacesOffice"]>
+export type CasePlacesOfficeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "phone" | "officerRoleId" | "letterTitle" | "letterBody" | "responseDays" | "updatedAt", ExtArgs["result"]["casePlacesOffice"]>
 export type CasePlacesOfficeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   officerRole?: boolean | Prisma.CasePlacesOffice$officerRoleArgs<ExtArgs>
 }
@@ -477,6 +551,10 @@ export type $CasePlacesOfficePayload<ExtArgs extends runtime.Types.Extensions.In
     officerRoleId: string | null
     letterTitle: string | null
     letterBody: string | null
+    /**
+     * مهلت پاسخ اداره اماکن، به روز. پروندهٔ بی‌پاسخ بعد از این مدت برای گزارش معوق است.
+     */
+    responseDays: number
     updatedAt: Date
   }, ExtArgs["result"]["casePlacesOffice"]>
   composites: {}
@@ -907,6 +985,7 @@ export interface CasePlacesOfficeFieldRefs {
   readonly officerRoleId: Prisma.FieldRef<"CasePlacesOffice", 'String'>
   readonly letterTitle: Prisma.FieldRef<"CasePlacesOffice", 'String'>
   readonly letterBody: Prisma.FieldRef<"CasePlacesOffice", 'String'>
+  readonly responseDays: Prisma.FieldRef<"CasePlacesOffice", 'Int'>
   readonly updatedAt: Prisma.FieldRef<"CasePlacesOffice", 'DateTime'>
 }
     

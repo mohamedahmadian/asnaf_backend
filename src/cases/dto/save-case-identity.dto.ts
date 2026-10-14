@@ -28,79 +28,79 @@ export class SaveCaseIdentityDto {
   nationalId: string;
 
   @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
-  @IsString()
-  @MinLength(1)
+  @IsString({ message: 'نام را وارد کنید' })
+  @MinLength(1, { message: 'نام را وارد کنید' })
   firstName: string;
 
   @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
-  @IsString()
-  @MinLength(1)
+  @IsString({ message: 'نام خانوادگی را وارد کنید' })
+  @MinLength(1, { message: 'نام خانوادگی را وارد کنید' })
   lastName: string;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'نام پدر معتبر نیست' })
   fatherName?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'نام خانوادگی لاتین معتبر نیست' })
   lastNameEn?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => dateOrNull(value))
   @ValidateIf((_, value) => value != null)
-  @Matches(/^\d{4}-\d{2}-\d{2}$/)
+  @Matches(/^\d{4}-\d{2}-\d{2}$/, { message: 'تاریخ تولد معتبر نیست' })
   birthDate?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsEnum(ResidencyStatus)
+  @IsEnum(ResidencyStatus, { message: 'وضعیت اقامت معتبر نیست' })
   residencyStatus?: ResidencyStatus | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'شماره گذرنامه معتبر نیست' })
   passportNumber?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => dateOrNull(value))
   @ValidateIf((_, value) => value != null)
-  @Matches(/^\d{4}-\d{2}-\d{2}$/)
+  @Matches(/^\d{4}-\d{2}-\d{2}$/, { message: 'تاریخ انقضای کارت ملی معتبر نیست' })
   nationalCardExpiresAt?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => dateOrNull(value))
   @ValidateIf((_, value) => value != null)
-  @Matches(/^\d{4}-\d{2}-\d{2}$/)
+  @Matches(/^\d{4}-\d{2}-\d{2}$/, { message: 'تاریخ انقضای گذرنامه معتبر نیست' })
   passportExpiresAt?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'شماره شناسنامه معتبر نیست' })
   identityCertificateNo?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'محل تولد معتبر نیست' })
   birthPlace?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'محل صدور شناسنامه معتبر نیست' })
   identityIssuedIn?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsUUID('4')
+  @IsUUID('4', { message: 'ملیت معتبر نیست' })
   countryId?: string | null;
 
   @IsOptional()
@@ -108,7 +108,7 @@ export class SaveCaseIdentityDto {
     typeof value === 'string' ? normalizePhone(value) || null : emptyToNull(value),
   )
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'تلفن همراه معتبر نیست' })
   phone?: string | null;
 
   @IsOptional()
@@ -116,19 +116,19 @@ export class SaveCaseIdentityDto {
     typeof value === 'string' ? normalizePhone(value) || null : emptyToNull(value),
   )
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'تلفن ثابت معتبر نیست' })
   homePhone?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'کد پستی معتبر نیست' })
   postalCode?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'نشانی معتبر نیست' })
   address?: string | null;
 
   @IsOptional()
@@ -137,49 +137,49 @@ export class SaveCaseIdentityDto {
     return trimmed || null;
   })
   @ValidateIf((_, value) => value != null)
-  @IsEmail()
+  @IsEmail({}, { message: 'ایمیل معتبر نیست' })
   email?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsEnum(EducationLevel)
+  @IsEnum(EducationLevel, { message: 'سطح تحصیلات معتبر نیست' })
   educationLevel?: EducationLevel | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'گروه شغلی معتبر نیست' })
   citizenGroup?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsUUID('4')
+  @IsUUID('4', { message: 'شغل معتبر نیست' })
   jobId?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsEnum(Religion)
+  @IsEnum(Religion, { message: 'دین معتبر نیست' })
   religion?: Religion | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsString()
+  @IsString({ message: 'دین معتبر نیست' })
   religionOther?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsEnum(UserGender)
+  @IsEnum(UserGender, { message: 'جنسیت معتبر نیست' })
   gender?: UserGender | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
-  @IsUUID('4')
+  @IsUUID('4', { message: 'پرونده معتبر نیست' })
   caseId?: string | null;
 
   @IsOptional()

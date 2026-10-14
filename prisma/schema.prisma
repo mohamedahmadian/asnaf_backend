@@ -163,9 +163,6 @@ model StoredImage {
   height       Int?
   originalName String?
   photoUsers             User[] @relation("UserPhoto")
-  nationalCardUsers      User[] @relation("UserNationalCard")
-  passportUsers          User[] @relation("UserPassport")
-  identityBookletUsers   User[] @relation("UserIdentityBooklet")
   foodPhotos             Food[] @relation("FoodPhoto")
   restaurantLogos        Restaurant[] @relation("RestaurantLogo")
   progressImages         ProjectProgressImage[]
@@ -174,6 +171,8 @@ model StoredImage {
   boardMinutesAttachments BoardMinutesAttachment[]
   violationAttachments    ViolationAttachment[] @relation("ViolationAttachmentImage")
   violationProceedingAttachments ViolationProceedingAttachment[] @relation("ViolationProceedingAttachmentImage")
+  letterheadLogos        CaseLetterhead[] @relation("LetterheadLogo")
+  letterheadSignatures   CaseLetterhead[] @relation("LetterheadSignature")
   createdAt              DateTime @default(now())
 
   @@map("stored_images")
@@ -456,6 +455,11 @@ model CaseInquiry {
   decidedById     String?
   decidedBy       User?               @relation("CaseInquiryDecider", fields: [decidedById], references: [id], onDelete: SetNull)
   decidedAt       DateTime?
+  /// زمان ارجاع همین استعلام به مرکز. خالی یعنی پرونده هنوز به مرحلهٔ استعلام نرسیده است.
+  referredAt      DateTime?
+  /// شمارهٔ نامه؛ با اولین مشاهده یا چاپ ثابت می‌ماند.
+  letterNo        String?             @unique
+  issuedAt        DateTime?
   files           CaseInquiryFile[]
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
@@ -467,6 +471,8 @@ model CaseInquiry {
   @@index([status])
   @@index([decidedById])
   @@index([createdAt])
+  @@index([referredAt])
+  @@index([status, referredAt])
   @@map("case_inquiries")
 }
 
@@ -497,10 +503,32 @@ model CaseGeneralSettings {
   contractYears        Int      @default(1)
   /// مدت اعتبار کارت مباشرت؛ ۱ تا ۵ سال
   stewardContractYears Int      @default(1)
+  /// مهلت پاسخ هر مرکز استعلام، به روز. استعلام بی‌پاسخ بعد از این مدت معوق است.
+  inquiryResponseDays  Int      @default(5)
   updatedAt         DateTime @updatedAt
 
   @@index([editorRoleId])
   @@map("case_general_settings")
+}
+
+/// سربرگ ثابت نامه‌های استعلام و اماکن
+model CaseLetterhead {
+  id               String       @id @default("default")
+  organizationName String?
+  address          String?
+  phone            String?
+  website          String?
+  signerName       String?
+  signerTitle      String?
+  logoId           String?      @unique
+  logo             StoredImage? @relation("LetterheadLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  signatureId      String?      @unique
+  signature        StoredImage? @relation("LetterheadSignature", fields: [signatureId], references: [id], onDelete: SetNull)
+  /// شمارهٔ بعدی نامه. با هر صدور یک واحد زیاد می‌شود.
+  nextNumber       Int          @default(1)
+  updatedAt        DateTime     @updatedAt
+
+  @@map("case_letterheads")
 }
 
 /// تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
@@ -511,6 +539,8 @@ model CasePlacesOffice {
   officerRole   Role?    @relation(fields: [officerRoleId], references: [id], onDelete: SetNull)
   letterTitle   String?
   letterBody    String?
+  /// مهلت پاسخ اداره اماکن، به روز. پروندهٔ بی‌پاسخ بعد از این مدت برای گزارش معوق است.
+  responseDays  Int      @default(5)
   updatedAt     DateTime @updatedAt
 
   @@index([officerRoleId])
@@ -529,6 +559,11 @@ model CasePlacesReview {
   decidedById String?
   decidedBy   User?               @relation("CasePlacesDecider", fields: [decidedById], references: [id], onDelete: SetNull)
   decidedAt   DateTime?
+  /// زمان ورود واقعی پرونده به کارتابل اماکن. خالی یعنی هنوز ارجاع نشده است.
+  referredAt  DateTime?
+  /// شمارهٔ نامه؛ با اولین مشاهده یا چاپ ثابت می‌ماند.
+  letterNo    String?   @unique
+  issuedAt    DateTime?
   files       CasePlacesFile[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
@@ -537,6 +572,8 @@ model CasePlacesReview {
   @@index([status])
   @@index([decidedById])
   @@index([createdAt])
+  @@index([referredAt])
+  @@index([status, referredAt])
   @@map("case_places_reviews")
 }
 
@@ -573,9 +610,6 @@ model JobDocument {
 model Document {
   id         String          @id @default(uuid())
   title      String          @unique
-  isRequired Boolean         @default(true)
-  gender     DocumentGender  @default(BOTH)
-  isFixed    Boolean         @default(false)
   /// کد پایدار مدرک سیستمی؛ اگر پر باشد حذف و تغییر کد ممنوع است
   code       String?         @unique
   jobs       JobDocument[]
@@ -587,9 +621,6 @@ model Document {
   updatedAt  DateTime        @updatedAt
 
   @@index([title])
-  @@index([isRequired])
-  @@index([gender])
-  @@index([isFixed])
   @@index([createdAt])
   @@index([code])
   @@map("documents")
@@ -600,10 +631,12 @@ model CaseIdentityDocument {
   documentId String         @id
   document   Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
   gender     DocumentGender @default(BOTH)
+  isRequired Boolean        @default(true)
   createdAt  DateTime       @default(now())
 
   @@index([createdAt])
   @@index([gender])
+  @@index([isRequired])
   @@map("case_identity_documents")
 }
 
@@ -1220,12 +1253,6 @@ model User {
   locationUpdatedAt  DateTime?
   photoId                  String?
   photo                    StoredImage?          @relation("UserPhoto", fields: [photoId], references: [id], onDelete: SetNull)
-  nationalCardPhotoId      String?
-  nationalCardPhoto        StoredImage?          @relation("UserNationalCard", fields: [nationalCardPhotoId], references: [id], onDelete: SetNull)
-  passportPhotoId          String?
-  passportPhoto            StoredImage?          @relation("UserPassport", fields: [passportPhotoId], references: [id], onDelete: SetNull)
-  identityBookletPhotoId   String?
-  identityBookletPhoto     StoredImage?          @relation("UserIdentityBooklet", fields: [identityBookletPhotoId], references: [id], onDelete: SetNull)
   locationHistories        UserLocationHistory[]
   orgUnitId          String?
   orgUnit            OrganizationUnit?     @relation("UnitEmployees", fields: [orgUnitId], references: [id], onDelete: SetNull)

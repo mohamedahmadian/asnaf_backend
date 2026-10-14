@@ -26,6 +26,10 @@ export class SaveCaseLocationDto {
   @IsUUID('4')
   caseId: string;
 
+  @IsOptional()
+  @IsUUID('4')
+  requestId?: string;
+
   @IsUUID('4')
   cityId: string;
 

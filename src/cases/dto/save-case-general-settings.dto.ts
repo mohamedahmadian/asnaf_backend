@@ -25,4 +25,11 @@ export class SaveCaseGeneralSettingsDto {
   @Min(CONTRACT_DURATION_MIN)
   @Max(CONTRACT_DURATION_MAX)
   stewardContractYears?: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt()
+  @Min(1)
+  @Max(90)
+  inquiryResponseDays?: number;
 }

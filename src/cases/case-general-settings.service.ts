@@ -22,6 +22,7 @@ export class CaseGeneralSettingsService {
       editorRoleId: row.editorRoleId,
       contractYears: clampContractYears(row.contractYears),
       stewardContractYears: clampContractYears(row.stewardContractYears),
+      inquiryResponseDays: row.inquiryResponseDays,
       roles,
     };
   }
@@ -41,6 +42,7 @@ export class CaseGeneralSettingsService {
     const contractYears = dto.contractYears == null ? undefined : clampContractYears(dto.contractYears);
     const stewardContractYears =
       dto.stewardContractYears == null ? undefined : clampContractYears(dto.stewardContractYears);
+    const inquiryResponseDays = dto.inquiryResponseDays == null ? undefined : dto.inquiryResponseDays;
     await this.prisma.caseGeneralSettings.upsert({
       where: { id: SETTINGS_ID },
       create: {
@@ -49,12 +51,14 @@ export class CaseGeneralSettingsService {
         editorRoleId,
         ...(contractYears == null ? {} : { contractYears }),
         ...(stewardContractYears == null ? {} : { stewardContractYears }),
+        ...(inquiryResponseDays == null ? {} : { inquiryResponseDays }),
       },
       update: {
         editAfterIssuance: dto.editAfterIssuance,
         editorRoleId,
         ...(contractYears == null ? {} : { contractYears }),
         ...(stewardContractYears == null ? {} : { stewardContractYears }),
+        ...(inquiryResponseDays == null ? {} : { inquiryResponseDays }),
       },
     });
     return this.get();
@@ -83,7 +87,13 @@ export class CaseGeneralSettingsService {
       where: { id: SETTINGS_ID },
       create: { id: SETTINGS_ID },
       update: {},
-      select: { editAfterIssuance: true, editorRoleId: true, contractYears: true, stewardContractYears: true },
+      select: {
+        editAfterIssuance: true,
+        editorRoleId: true,
+        contractYears: true,
+        stewardContractYears: true,
+        inquiryResponseDays: true,
+      },
     });
   }
 }

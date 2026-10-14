@@ -33,6 +33,9 @@ export type CasePlacesReviewMinAggregateOutputType = {
   note: string | null
   decidedById: string | null
   decidedAt: Date | null
+  referredAt: Date | null
+  letterNo: string | null
+  issuedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,6 +49,9 @@ export type CasePlacesReviewMaxAggregateOutputType = {
   note: string | null
   decidedById: string | null
   decidedAt: Date | null
+  referredAt: Date | null
+  letterNo: string | null
+  issuedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,6 +65,9 @@ export type CasePlacesReviewCountAggregateOutputType = {
   note: number
   decidedById: number
   decidedAt: number
+  referredAt: number
+  letterNo: number
+  issuedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,6 +83,9 @@ export type CasePlacesReviewMinAggregateInputType = {
   note?: true
   decidedById?: true
   decidedAt?: true
+  referredAt?: true
+  letterNo?: true
+  issuedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -87,6 +99,9 @@ export type CasePlacesReviewMaxAggregateInputType = {
   note?: true
   decidedById?: true
   decidedAt?: true
+  referredAt?: true
+  letterNo?: true
+  issuedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +115,9 @@ export type CasePlacesReviewCountAggregateInputType = {
   note?: true
   decidedById?: true
   decidedAt?: true
+  referredAt?: true
+  letterNo?: true
+  issuedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -186,6 +204,9 @@ export type CasePlacesReviewGroupByOutputType = {
   note: string | null
   decidedById: string | null
   decidedAt: Date | null
+  referredAt: Date | null
+  letterNo: string | null
+  issuedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: CasePlacesReviewCountAggregateOutputType | null
@@ -220,6 +241,9 @@ export type CasePlacesReviewWhereInput = {
   note?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
   decidedById?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
   decidedAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
+  letterNo?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
+  issuedAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CasePlacesReview"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CasePlacesReview"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
@@ -237,6 +261,9 @@ export type CasePlacesReviewOrderByWithRelationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedById?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  letterNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  issuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
@@ -248,6 +275,7 @@ export type CasePlacesReviewOrderByWithRelationInput = {
 export type CasePlacesReviewWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   caseRequestId?: string
+  letterNo?: string
   AND?: Prisma.CasePlacesReviewWhereInput | Prisma.CasePlacesReviewWhereInput[]
   OR?: Prisma.CasePlacesReviewWhereInput[]
   NOT?: Prisma.CasePlacesReviewWhereInput | Prisma.CasePlacesReviewWhereInput[]
@@ -257,13 +285,15 @@ export type CasePlacesReviewWhereUniqueInput = Prisma.AtLeast<{
   note?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
   decidedById?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
   decidedAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
+  issuedAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CasePlacesReview"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CasePlacesReview"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
   caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   decidedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   files?: Prisma.CasePlacesFileListRelationFilter
-}, "id" | "caseRequestId">
+}, "id" | "caseRequestId" | "letterNo">
 
 export type CasePlacesReviewOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -274,6 +304,9 @@ export type CasePlacesReviewOrderByWithAggregationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedById?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  letterNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  issuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CasePlacesReviewCountOrderByAggregateInput
@@ -293,6 +326,9 @@ export type CasePlacesReviewScalarWhereWithAggregatesInput = {
   note?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesReview"> | string | null
   decidedById?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesReview"> | string | null
   decidedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CasePlacesReview"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CasePlacesReview"> | Date | string | null
+  letterNo?: Prisma.StringNullableWithAggregatesFilter<"CasePlacesReview"> | string | null
+  issuedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CasePlacesReview"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CasePlacesReview"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CasePlacesReview"> | Date | string
 }
@@ -303,6 +339,9 @@ export type CasePlacesReviewCreateInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutPlacesReviewsInput
@@ -320,6 +359,9 @@ export type CasePlacesReviewUncheckedCreateInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutReviewInput
@@ -331,6 +373,9 @@ export type CasePlacesReviewUpdateInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutPlacesReviewsNestedInput
@@ -348,6 +393,9 @@ export type CasePlacesReviewUncheckedUpdateInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutReviewNestedInput
@@ -362,6 +410,9 @@ export type CasePlacesReviewCreateManyInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -372,6 +423,9 @@ export type CasePlacesReviewUpdateManyMutationInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -385,6 +439,9 @@ export type CasePlacesReviewUncheckedUpdateManyInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -398,6 +455,9 @@ export type CasePlacesReviewCountOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decidedById?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  referredAt?: Prisma.SortOrder
+  letterNo?: Prisma.SortOrder
+  issuedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -411,6 +471,9 @@ export type CasePlacesReviewMaxOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decidedById?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  referredAt?: Prisma.SortOrder
+  letterNo?: Prisma.SortOrder
+  issuedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -424,6 +487,9 @@ export type CasePlacesReviewMinOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decidedById?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  referredAt?: Prisma.SortOrder
+  letterNo?: Prisma.SortOrder
+  issuedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -584,6 +650,9 @@ export type CasePlacesReviewCreateWithoutFilesInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutPlacesReviewsInput
@@ -600,6 +669,9 @@ export type CasePlacesReviewUncheckedCreateWithoutFilesInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -626,6 +698,9 @@ export type CasePlacesReviewUpdateWithoutFilesInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutPlacesReviewsNestedInput
@@ -642,6 +717,9 @@ export type CasePlacesReviewUncheckedUpdateWithoutFilesInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -652,6 +730,9 @@ export type CasePlacesReviewCreateWithoutCaseFileInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseRequest: Prisma.CaseRequestCreateNestedOneWithoutPlacesReviewInput
@@ -667,6 +748,9 @@ export type CasePlacesReviewUncheckedCreateWithoutCaseFileInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutReviewInput
@@ -710,6 +794,9 @@ export type CasePlacesReviewScalarWhereInput = {
   note?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
   decidedById?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
   decidedAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
+  letterNo?: Prisma.StringNullableFilter<"CasePlacesReview"> | string | null
+  issuedAt?: Prisma.DateTimeNullableFilter<"CasePlacesReview"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CasePlacesReview"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CasePlacesReview"> | Date | string
 }
@@ -720,6 +807,9 @@ export type CasePlacesReviewCreateWithoutCaseRequestInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutPlacesReviewsInput
@@ -735,6 +825,9 @@ export type CasePlacesReviewUncheckedCreateWithoutCaseRequestInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutReviewInput
@@ -762,6 +855,9 @@ export type CasePlacesReviewUpdateWithoutCaseRequestInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutPlacesReviewsNestedInput
@@ -777,6 +873,9 @@ export type CasePlacesReviewUncheckedUpdateWithoutCaseRequestInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutReviewNestedInput
@@ -788,6 +887,9 @@ export type CasePlacesReviewCreateWithoutDecidedByInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutPlacesReviewsInput
@@ -803,6 +905,9 @@ export type CasePlacesReviewUncheckedCreateWithoutDecidedByInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutReviewInput
@@ -842,6 +947,9 @@ export type CasePlacesReviewCreateManyCaseFileInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -852,6 +960,9 @@ export type CasePlacesReviewUpdateWithoutCaseFileInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutPlacesReviewNestedInput
@@ -867,6 +978,9 @@ export type CasePlacesReviewUncheckedUpdateWithoutCaseFileInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutReviewNestedInput
@@ -880,6 +994,9 @@ export type CasePlacesReviewUncheckedUpdateManyWithoutCaseFileInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -892,6 +1009,9 @@ export type CasePlacesReviewCreateManyDecidedByInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -902,6 +1022,9 @@ export type CasePlacesReviewUpdateWithoutDecidedByInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutPlacesReviewsNestedInput
@@ -917,6 +1040,9 @@ export type CasePlacesReviewUncheckedUpdateWithoutDecidedByInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutReviewNestedInput
@@ -930,6 +1056,9 @@ export type CasePlacesReviewUncheckedUpdateManyWithoutDecidedByInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -974,6 +1103,9 @@ export type CasePlacesReviewSelect<ExtArgs extends runtime.Types.Extensions.Inte
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -992,6 +1124,9 @@ export type CasePlacesReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -1008,6 +1143,9 @@ export type CasePlacesReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -1024,11 +1162,14 @@ export type CasePlacesReviewSelectScalar = {
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CasePlacesReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "caseRequestId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["casePlacesReview"]>
+export type CasePlacesReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "caseRequestId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "referredAt" | "letterNo" | "issuedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["casePlacesReview"]>
 export type CasePlacesReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
   caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
@@ -1064,6 +1205,15 @@ export type $CasePlacesReviewPayload<ExtArgs extends runtime.Types.Extensions.In
     note: string | null
     decidedById: string | null
     decidedAt: Date | null
+    /**
+     * زمان ورود واقعی پرونده به کارتابل اماکن. خالی یعنی هنوز ارجاع نشده است.
+     */
+    referredAt: Date | null
+    /**
+     * شمارهٔ نامه؛ با اولین مشاهده یا چاپ ثابت می‌ماند.
+     */
+    letterNo: string | null
+    issuedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["casePlacesReview"]>
@@ -1501,6 +1651,9 @@ export interface CasePlacesReviewFieldRefs {
   readonly note: Prisma.FieldRef<"CasePlacesReview", 'String'>
   readonly decidedById: Prisma.FieldRef<"CasePlacesReview", 'String'>
   readonly decidedAt: Prisma.FieldRef<"CasePlacesReview", 'DateTime'>
+  readonly referredAt: Prisma.FieldRef<"CasePlacesReview", 'DateTime'>
+  readonly letterNo: Prisma.FieldRef<"CasePlacesReview", 'String'>
+  readonly issuedAt: Prisma.FieldRef<"CasePlacesReview", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CasePlacesReview", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CasePlacesReview", 'DateTime'>
 }

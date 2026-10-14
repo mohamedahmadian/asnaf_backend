@@ -68,9 +68,6 @@ export type UserMinAggregateOutputType = {
   locationNotes: string | null
   locationUpdatedAt: Date | null
   photoId: string | null
-  nationalCardPhotoId: string | null
-  passportPhotoId: string | null
-  identityBookletPhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
   workUnitId: string | null
@@ -126,9 +123,6 @@ export type UserMaxAggregateOutputType = {
   locationNotes: string | null
   locationUpdatedAt: Date | null
   photoId: string | null
-  nationalCardPhotoId: string | null
-  passportPhotoId: string | null
-  identityBookletPhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
   workUnitId: string | null
@@ -185,9 +179,6 @@ export type UserCountAggregateOutputType = {
   locationNotes: number
   locationUpdatedAt: number
   photoId: number
-  nationalCardPhotoId: number
-  passportPhotoId: number
-  identityBookletPhotoId: number
   orgUnitId: number
   positionId: number
   workUnitId: number
@@ -255,9 +246,6 @@ export type UserMinAggregateInputType = {
   locationNotes?: true
   locationUpdatedAt?: true
   photoId?: true
-  nationalCardPhotoId?: true
-  passportPhotoId?: true
-  identityBookletPhotoId?: true
   orgUnitId?: true
   positionId?: true
   workUnitId?: true
@@ -313,9 +301,6 @@ export type UserMaxAggregateInputType = {
   locationNotes?: true
   locationUpdatedAt?: true
   photoId?: true
-  nationalCardPhotoId?: true
-  passportPhotoId?: true
-  identityBookletPhotoId?: true
   orgUnitId?: true
   positionId?: true
   workUnitId?: true
@@ -372,9 +357,6 @@ export type UserCountAggregateInputType = {
   locationNotes?: true
   locationUpdatedAt?: true
   photoId?: true
-  nationalCardPhotoId?: true
-  passportPhotoId?: true
-  identityBookletPhotoId?: true
   orgUnitId?: true
   positionId?: true
   workUnitId?: true
@@ -518,9 +500,6 @@ export type UserGroupByOutputType = {
   locationNotes: string | null
   locationUpdatedAt: Date | null
   photoId: string | null
-  nationalCardPhotoId: string | null
-  passportPhotoId: string | null
-  identityBookletPhotoId: string | null
   orgUnitId: string | null
   positionId: string | null
   workUnitId: string | null
@@ -600,9 +579,6 @@ export type UserWhereInput = {
   locationNotes?: Prisma.StringNullableFilter<"User"> | string | null
   locationUpdatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   photoId?: Prisma.StringNullableFilter<"User"> | string | null
-  nationalCardPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
-  passportPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
-  identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
   workUnitId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -630,9 +606,6 @@ export type UserWhereInput = {
   locationProvince?: Prisma.XOR<Prisma.ProvinceNullableScalarRelationFilter, Prisma.ProvinceWhereInput> | null
   locationCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   photo?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
-  nationalCardPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
-  passportPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
-  identityBookletPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
   orgUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
   position?: Prisma.XOR<Prisma.OrganizationPositionNullableScalarRelationFilter, Prisma.OrganizationPositionWhereInput> | null
@@ -706,9 +679,6 @@ export type UserOrderByWithRelationInput = {
   locationNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   locationUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   photoId?: Prisma.SortOrderInput | Prisma.SortOrder
-  nationalCardPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
-  passportPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
-  identityBookletPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
   positionId?: Prisma.SortOrderInput | Prisma.SortOrder
   workUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -736,9 +706,6 @@ export type UserOrderByWithRelationInput = {
   locationProvince?: Prisma.ProvinceOrderByWithRelationInput
   locationCity?: Prisma.CityOrderByWithRelationInput
   photo?: Prisma.StoredImageOrderByWithRelationInput
-  nationalCardPhoto?: Prisma.StoredImageOrderByWithRelationInput
-  passportPhoto?: Prisma.StoredImageOrderByWithRelationInput
-  identityBookletPhoto?: Prisma.StoredImageOrderByWithRelationInput
   locationHistories?: Prisma.UserLocationHistoryOrderByRelationAggregateInput
   orgUnit?: Prisma.OrganizationUnitOrderByWithRelationInput
   position?: Prisma.OrganizationPositionOrderByWithRelationInput
@@ -815,9 +782,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   locationNotes?: Prisma.StringNullableFilter<"User"> | string | null
   locationUpdatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   photoId?: Prisma.StringNullableFilter<"User"> | string | null
-  nationalCardPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
-  passportPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
-  identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
   workUnitId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -845,9 +809,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   locationProvince?: Prisma.XOR<Prisma.ProvinceNullableScalarRelationFilter, Prisma.ProvinceWhereInput> | null
   locationCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   photo?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
-  nationalCardPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
-  passportPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
-  identityBookletPhoto?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
   orgUnit?: Prisma.XOR<Prisma.OrganizationUnitNullableScalarRelationFilter, Prisma.OrganizationUnitWhereInput> | null
   position?: Prisma.XOR<Prisma.OrganizationPositionNullableScalarRelationFilter, Prisma.OrganizationPositionWhereInput> | null
@@ -921,9 +882,6 @@ export type UserOrderByWithAggregationInput = {
   locationNotes?: Prisma.SortOrderInput | Prisma.SortOrder
   locationUpdatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   photoId?: Prisma.SortOrderInput | Prisma.SortOrder
-  nationalCardPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
-  passportPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
-  identityBookletPhotoId?: Prisma.SortOrderInput | Prisma.SortOrder
   orgUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
   positionId?: Prisma.SortOrderInput | Prisma.SortOrder
   workUnitId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -988,9 +946,6 @@ export type UserScalarWhereWithAggregatesInput = {
   locationNotes?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   locationUpdatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   photoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  nationalCardPhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  passportPhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  identityBookletPhotoId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   positionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   workUnitId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -1063,9 +1018,6 @@ export type UserCreateInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -1139,9 +1091,6 @@ export type UserUncheckedCreateInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -1247,9 +1196,6 @@ export type UserUpdateInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -1323,9 +1269,6 @@ export type UserUncheckedUpdateInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1415,9 +1358,6 @@ export type UserCreateManyInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -1519,9 +1459,6 @@ export type UserUncheckedUpdateManyInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1606,9 +1543,6 @@ export type UserCountOrderByAggregateInput = {
   locationNotes?: Prisma.SortOrder
   locationUpdatedAt?: Prisma.SortOrder
   photoId?: Prisma.SortOrder
-  nationalCardPhotoId?: Prisma.SortOrder
-  passportPhotoId?: Prisma.SortOrder
-  identityBookletPhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
@@ -1669,9 +1603,6 @@ export type UserMaxOrderByAggregateInput = {
   locationNotes?: Prisma.SortOrder
   locationUpdatedAt?: Prisma.SortOrder
   photoId?: Prisma.SortOrder
-  nationalCardPhotoId?: Prisma.SortOrder
-  passportPhotoId?: Prisma.SortOrder
-  identityBookletPhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
@@ -1727,9 +1658,6 @@ export type UserMinOrderByAggregateInput = {
   locationNotes?: Prisma.SortOrder
   locationUpdatedAt?: Prisma.SortOrder
   photoId?: Prisma.SortOrder
-  nationalCardPhotoId?: Prisma.SortOrder
-  passportPhotoId?: Prisma.SortOrder
-  identityBookletPhotoId?: Prisma.SortOrder
   orgUnitId?: Prisma.SortOrder
   positionId?: Prisma.SortOrder
   workUnitId?: Prisma.SortOrder
@@ -1765,52 +1693,10 @@ export type UserCreateNestedManyWithoutPhotoInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
-export type UserCreateNestedManyWithoutNationalCardPhotoInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNationalCardPhotoInput, Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput> | Prisma.UserCreateWithoutNationalCardPhotoInput[] | Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput | Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput[]
-  createMany?: Prisma.UserCreateManyNationalCardPhotoInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserCreateNestedManyWithoutPassportPhotoInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPassportPhotoInput, Prisma.UserUncheckedCreateWithoutPassportPhotoInput> | Prisma.UserCreateWithoutPassportPhotoInput[] | Prisma.UserUncheckedCreateWithoutPassportPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPassportPhotoInput | Prisma.UserCreateOrConnectWithoutPassportPhotoInput[]
-  createMany?: Prisma.UserCreateManyPassportPhotoInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserCreateNestedManyWithoutIdentityBookletPhotoInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput> | Prisma.UserCreateWithoutIdentityBookletPhotoInput[] | Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput | Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput[]
-  createMany?: Prisma.UserCreateManyIdentityBookletPhotoInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
 export type UserUncheckedCreateNestedManyWithoutPhotoInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPhotoInput, Prisma.UserUncheckedCreateWithoutPhotoInput> | Prisma.UserCreateWithoutPhotoInput[] | Prisma.UserUncheckedCreateWithoutPhotoInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhotoInput | Prisma.UserCreateOrConnectWithoutPhotoInput[]
   createMany?: Prisma.UserCreateManyPhotoInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserUncheckedCreateNestedManyWithoutNationalCardPhotoInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNationalCardPhotoInput, Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput> | Prisma.UserCreateWithoutNationalCardPhotoInput[] | Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput | Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput[]
-  createMany?: Prisma.UserCreateManyNationalCardPhotoInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserUncheckedCreateNestedManyWithoutPassportPhotoInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPassportPhotoInput, Prisma.UserUncheckedCreateWithoutPassportPhotoInput> | Prisma.UserCreateWithoutPassportPhotoInput[] | Prisma.UserUncheckedCreateWithoutPassportPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPassportPhotoInput | Prisma.UserCreateOrConnectWithoutPassportPhotoInput[]
-  createMany?: Prisma.UserCreateManyPassportPhotoInputEnvelope
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserUncheckedCreateNestedManyWithoutIdentityBookletPhotoInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput> | Prisma.UserCreateWithoutIdentityBookletPhotoInput[] | Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput | Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput[]
-  createMany?: Prisma.UserCreateManyIdentityBookletPhotoInputEnvelope
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
@@ -1828,48 +1714,6 @@ export type UserUpdateManyWithoutPhotoNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
-export type UserUpdateManyWithoutNationalCardPhotoNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNationalCardPhotoInput, Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput> | Prisma.UserCreateWithoutNationalCardPhotoInput[] | Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput | Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutNationalCardPhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutNationalCardPhotoInput[]
-  createMany?: Prisma.UserCreateManyNationalCardPhotoInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutNationalCardPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutNationalCardPhotoInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutNationalCardPhotoInput | Prisma.UserUpdateManyWithWhereWithoutNationalCardPhotoInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUpdateManyWithoutPassportPhotoNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPassportPhotoInput, Prisma.UserUncheckedCreateWithoutPassportPhotoInput> | Prisma.UserCreateWithoutPassportPhotoInput[] | Prisma.UserUncheckedCreateWithoutPassportPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPassportPhotoInput | Prisma.UserCreateOrConnectWithoutPassportPhotoInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutPassportPhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutPassportPhotoInput[]
-  createMany?: Prisma.UserCreateManyPassportPhotoInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutPassportPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutPassportPhotoInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutPassportPhotoInput | Prisma.UserUpdateManyWithWhereWithoutPassportPhotoInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUpdateManyWithoutIdentityBookletPhotoNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput> | Prisma.UserCreateWithoutIdentityBookletPhotoInput[] | Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput | Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutIdentityBookletPhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutIdentityBookletPhotoInput[]
-  createMany?: Prisma.UserCreateManyIdentityBookletPhotoInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutIdentityBookletPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutIdentityBookletPhotoInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput | Prisma.UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
 export type UserUncheckedUpdateManyWithoutPhotoNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPhotoInput, Prisma.UserUncheckedCreateWithoutPhotoInput> | Prisma.UserCreateWithoutPhotoInput[] | Prisma.UserUncheckedCreateWithoutPhotoInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPhotoInput | Prisma.UserCreateOrConnectWithoutPhotoInput[]
@@ -1881,48 +1725,6 @@ export type UserUncheckedUpdateManyWithoutPhotoNestedInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
   update?: Prisma.UserUpdateWithWhereUniqueWithoutPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutPhotoInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutPhotoInput | Prisma.UserUpdateManyWithWhereWithoutPhotoInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUncheckedUpdateManyWithoutNationalCardPhotoNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutNationalCardPhotoInput, Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput> | Prisma.UserCreateWithoutNationalCardPhotoInput[] | Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput | Prisma.UserCreateOrConnectWithoutNationalCardPhotoInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutNationalCardPhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutNationalCardPhotoInput[]
-  createMany?: Prisma.UserCreateManyNationalCardPhotoInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutNationalCardPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutNationalCardPhotoInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutNationalCardPhotoInput | Prisma.UserUpdateManyWithWhereWithoutNationalCardPhotoInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUncheckedUpdateManyWithoutPassportPhotoNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPassportPhotoInput, Prisma.UserUncheckedCreateWithoutPassportPhotoInput> | Prisma.UserCreateWithoutPassportPhotoInput[] | Prisma.UserUncheckedCreateWithoutPassportPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPassportPhotoInput | Prisma.UserCreateOrConnectWithoutPassportPhotoInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutPassportPhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutPassportPhotoInput[]
-  createMany?: Prisma.UserCreateManyPassportPhotoInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutPassportPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutPassportPhotoInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutPassportPhotoInput | Prisma.UserUpdateManyWithWhereWithoutPassportPhotoInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput> | Prisma.UserCreateWithoutIdentityBookletPhotoInput[] | Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput | Prisma.UserCreateOrConnectWithoutIdentityBookletPhotoInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutIdentityBookletPhotoInput | Prisma.UserUpsertWithWhereUniqueWithoutIdentityBookletPhotoInput[]
-  createMany?: Prisma.UserCreateManyIdentityBookletPhotoInputEnvelope
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutIdentityBookletPhotoInput | Prisma.UserUpdateWithWhereUniqueWithoutIdentityBookletPhotoInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput | Prisma.UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
@@ -2927,9 +2729,6 @@ export type UserCreateWithoutPhotoInput = {
   city?: Prisma.CityCreateNestedOneWithoutUsersInput
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -3002,9 +2801,6 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -3071,582 +2867,6 @@ export type UserCreateManyPhotoInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type UserCreateWithoutNationalCardPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
-  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
-  city?: Prisma.CityCreateNestedOneWithoutUsersInput
-  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
-  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
-  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
-  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
-  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
-  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
-  workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
-  staffPost?: Prisma.StaffPostCreateNestedOneWithoutUsersInput
-  caseFiles?: Prisma.CaseFileCreateNestedManyWithoutUserInput
-  caseRequestEvents?: Prisma.CaseRequestEventCreateNestedManyWithoutActorInput
-  caseSuspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCreatedByInput
-  caseRevocations?: Prisma.CaseFileCreateNestedManyWithoutRevokedByInput
-  economicJob?: Prisma.JobCreateNestedOneWithoutIdentityUsersInput
-  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutUserInput
-  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
-  inquiryCenters?: Prisma.InquiryCenterCreateNestedManyWithoutOfficerInput
-  caseInquiriesDecided?: Prisma.CaseInquiryCreateNestedManyWithoutDecidedByInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileCreateNestedManyWithoutUploadedByInput
-  casePlacesDecided?: Prisma.CasePlacesReviewCreateNestedManyWithoutDecidedByInput
-  casePlacesFiles?: Prisma.CasePlacesFileCreateNestedManyWithoutUploadedByInput
-  caseManagementDecided?: Prisma.CaseManagementReviewCreateNestedManyWithoutDecidedByInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalCreateNestedManyWithoutDecidedByInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutUploadedByInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutUserInput
-  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
-  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
-  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
-  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
-  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
-  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
-  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
-  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
-  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
-  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
-  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
-  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
-  violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
-  violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserUncheckedCreateWithoutNationalCardPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  countryId?: string | null
-  provinceId?: string | null
-  cityId?: string | null
-  locationProvinceId?: string | null
-  locationCityId?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  photoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
-  orgUnitId?: string | null
-  positionId?: string | null
-  workUnitId?: string | null
-  staffPostId?: string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  jobId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
-  caseFiles?: Prisma.CaseFileUncheckedCreateNestedManyWithoutUserInput
-  caseRequestEvents?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutActorInput
-  caseSuspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCreatedByInput
-  caseRevocations?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRevokedByInput
-  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutUserInput
-  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
-  inquiryCenters?: Prisma.InquiryCenterUncheckedCreateNestedManyWithoutOfficerInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutDecidedByInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutUploadedByInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutDecidedByInput
-  casePlacesFiles?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutUploadedByInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutDecidedByInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedCreateNestedManyWithoutDecidedByInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutUploadedByInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutUserInput
-  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
-  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
-  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
-  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
-  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
-  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
-  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
-  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
-  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
-  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
-  violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
-  violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserCreateOrConnectWithoutNationalCardPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutNationalCardPhotoInput, Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput>
-}
-
-export type UserCreateManyNationalCardPhotoInputEnvelope = {
-  data: Prisma.UserCreateManyNationalCardPhotoInput | Prisma.UserCreateManyNationalCardPhotoInput[]
-  skipDuplicates?: boolean
-}
-
-export type UserCreateWithoutPassportPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
-  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
-  city?: Prisma.CityCreateNestedOneWithoutUsersInput
-  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
-  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
-  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
-  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
-  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
-  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
-  workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
-  staffPost?: Prisma.StaffPostCreateNestedOneWithoutUsersInput
-  caseFiles?: Prisma.CaseFileCreateNestedManyWithoutUserInput
-  caseRequestEvents?: Prisma.CaseRequestEventCreateNestedManyWithoutActorInput
-  caseSuspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCreatedByInput
-  caseRevocations?: Prisma.CaseFileCreateNestedManyWithoutRevokedByInput
-  economicJob?: Prisma.JobCreateNestedOneWithoutIdentityUsersInput
-  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutUserInput
-  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
-  inquiryCenters?: Prisma.InquiryCenterCreateNestedManyWithoutOfficerInput
-  caseInquiriesDecided?: Prisma.CaseInquiryCreateNestedManyWithoutDecidedByInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileCreateNestedManyWithoutUploadedByInput
-  casePlacesDecided?: Prisma.CasePlacesReviewCreateNestedManyWithoutDecidedByInput
-  casePlacesFiles?: Prisma.CasePlacesFileCreateNestedManyWithoutUploadedByInput
-  caseManagementDecided?: Prisma.CaseManagementReviewCreateNestedManyWithoutDecidedByInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalCreateNestedManyWithoutDecidedByInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutUploadedByInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutUserInput
-  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
-  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
-  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
-  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
-  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
-  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
-  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
-  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
-  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
-  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
-  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
-  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
-  violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
-  violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserUncheckedCreateWithoutPassportPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  countryId?: string | null
-  provinceId?: string | null
-  cityId?: string | null
-  locationProvinceId?: string | null
-  locationCityId?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  photoId?: string | null
-  nationalCardPhotoId?: string | null
-  identityBookletPhotoId?: string | null
-  orgUnitId?: string | null
-  positionId?: string | null
-  workUnitId?: string | null
-  staffPostId?: string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  jobId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
-  caseFiles?: Prisma.CaseFileUncheckedCreateNestedManyWithoutUserInput
-  caseRequestEvents?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutActorInput
-  caseSuspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCreatedByInput
-  caseRevocations?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRevokedByInput
-  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutUserInput
-  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
-  inquiryCenters?: Prisma.InquiryCenterUncheckedCreateNestedManyWithoutOfficerInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutDecidedByInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutUploadedByInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutDecidedByInput
-  casePlacesFiles?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutUploadedByInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutDecidedByInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedCreateNestedManyWithoutDecidedByInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutUploadedByInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutUserInput
-  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
-  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
-  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
-  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
-  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
-  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
-  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
-  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
-  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
-  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
-  violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
-  violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserCreateOrConnectWithoutPassportPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutPassportPhotoInput, Prisma.UserUncheckedCreateWithoutPassportPhotoInput>
-}
-
-export type UserCreateManyPassportPhotoInputEnvelope = {
-  data: Prisma.UserCreateManyPassportPhotoInput | Prisma.UserCreateManyPassportPhotoInput[]
-  skipDuplicates?: boolean
-}
-
-export type UserCreateWithoutIdentityBookletPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
-  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
-  city?: Prisma.CityCreateNestedOneWithoutUsersInput
-  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
-  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
-  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
-  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
-  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
-  workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
-  staffPost?: Prisma.StaffPostCreateNestedOneWithoutUsersInput
-  caseFiles?: Prisma.CaseFileCreateNestedManyWithoutUserInput
-  caseRequestEvents?: Prisma.CaseRequestEventCreateNestedManyWithoutActorInput
-  caseSuspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCreatedByInput
-  caseRevocations?: Prisma.CaseFileCreateNestedManyWithoutRevokedByInput
-  economicJob?: Prisma.JobCreateNestedOneWithoutIdentityUsersInput
-  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutUserInput
-  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
-  inquiryCenters?: Prisma.InquiryCenterCreateNestedManyWithoutOfficerInput
-  caseInquiriesDecided?: Prisma.CaseInquiryCreateNestedManyWithoutDecidedByInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileCreateNestedManyWithoutUploadedByInput
-  casePlacesDecided?: Prisma.CasePlacesReviewCreateNestedManyWithoutDecidedByInput
-  casePlacesFiles?: Prisma.CasePlacesFileCreateNestedManyWithoutUploadedByInput
-  caseManagementDecided?: Prisma.CaseManagementReviewCreateNestedManyWithoutDecidedByInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalCreateNestedManyWithoutDecidedByInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutUploadedByInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutUserInput
-  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
-  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
-  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
-  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
-  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
-  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
-  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
-  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
-  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
-  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
-  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
-  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
-  violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
-  violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserUncheckedCreateWithoutIdentityBookletPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  countryId?: string | null
-  provinceId?: string | null
-  cityId?: string | null
-  locationProvinceId?: string | null
-  locationCityId?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  orgUnitId?: string | null
-  positionId?: string | null
-  workUnitId?: string | null
-  staffPostId?: string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  jobId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
-  caseFiles?: Prisma.CaseFileUncheckedCreateNestedManyWithoutUserInput
-  caseRequestEvents?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutActorInput
-  caseSuspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCreatedByInput
-  caseRevocations?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRevokedByInput
-  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutUserInput
-  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
-  inquiryCenters?: Prisma.InquiryCenterUncheckedCreateNestedManyWithoutOfficerInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutDecidedByInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutUploadedByInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutDecidedByInput
-  casePlacesFiles?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutUploadedByInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutDecidedByInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedCreateNestedManyWithoutDecidedByInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutUploadedByInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutUserInput
-  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
-  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
-  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
-  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
-  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
-  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
-  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
-  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
-  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
-  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
-  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
-  violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
-  violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
-}
-
-export type UserCreateOrConnectWithoutIdentityBookletPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput>
-}
-
-export type UserCreateManyIdentityBookletPhotoInputEnvelope = {
-  data: Prisma.UserCreateManyIdentityBookletPhotoInput | Prisma.UserCreateManyIdentityBookletPhotoInput[]
-  skipDuplicates?: boolean
-}
-
 export type UserUpsertWithWhereUniqueWithoutPhotoInput = {
   where: Prisma.UserWhereUniqueInput
   update: Prisma.XOR<Prisma.UserUpdateWithoutPhotoInput, Prisma.UserUncheckedUpdateWithoutPhotoInput>
@@ -3699,9 +2919,6 @@ export type UserScalarWhereInput = {
   locationNotes?: Prisma.StringNullableFilter<"User"> | string | null
   locationUpdatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   photoId?: Prisma.StringNullableFilter<"User"> | string | null
-  nationalCardPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
-  passportPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
-  identityBookletPhotoId?: Prisma.StringNullableFilter<"User"> | string | null
   orgUnitId?: Prisma.StringNullableFilter<"User"> | string | null
   positionId?: Prisma.StringNullableFilter<"User"> | string | null
   workUnitId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -3723,54 +2940,6 @@ export type UserScalarWhereInput = {
   jobId?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-}
-
-export type UserUpsertWithWhereUniqueWithoutNationalCardPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutNationalCardPhotoInput, Prisma.UserUncheckedUpdateWithoutNationalCardPhotoInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutNationalCardPhotoInput, Prisma.UserUncheckedCreateWithoutNationalCardPhotoInput>
-}
-
-export type UserUpdateWithWhereUniqueWithoutNationalCardPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutNationalCardPhotoInput, Prisma.UserUncheckedUpdateWithoutNationalCardPhotoInput>
-}
-
-export type UserUpdateManyWithWhereWithoutNationalCardPhotoInput = {
-  where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutNationalCardPhotoInput>
-}
-
-export type UserUpsertWithWhereUniqueWithoutPassportPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutPassportPhotoInput, Prisma.UserUncheckedUpdateWithoutPassportPhotoInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutPassportPhotoInput, Prisma.UserUncheckedCreateWithoutPassportPhotoInput>
-}
-
-export type UserUpdateWithWhereUniqueWithoutPassportPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutPassportPhotoInput, Prisma.UserUncheckedUpdateWithoutPassportPhotoInput>
-}
-
-export type UserUpdateManyWithWhereWithoutPassportPhotoInput = {
-  where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutPassportPhotoInput>
-}
-
-export type UserUpsertWithWhereUniqueWithoutIdentityBookletPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedUpdateWithoutIdentityBookletPhotoInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedCreateWithoutIdentityBookletPhotoInput>
-}
-
-export type UserUpdateWithWhereUniqueWithoutIdentityBookletPhotoInput = {
-  where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutIdentityBookletPhotoInput, Prisma.UserUncheckedUpdateWithoutIdentityBookletPhotoInput>
-}
-
-export type UserUpdateManyWithWhereWithoutIdentityBookletPhotoInput = {
-  where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput>
 }
 
 export type UserCreateWithoutCountryInput = {
@@ -3821,9 +2990,6 @@ export type UserCreateWithoutCountryInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -3896,9 +3062,6 @@ export type UserUncheckedCreateWithoutCountryInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -4029,9 +3192,6 @@ export type UserCreateWithoutProvinceInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4104,9 +3264,6 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -4221,9 +3378,6 @@ export type UserCreateWithoutLocationProvinceInput = {
   city?: Prisma.CityCreateNestedOneWithoutUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4296,9 +3450,6 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -4445,9 +3596,6 @@ export type UserCreateWithoutCityInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4520,9 +3668,6 @@ export type UserUncheckedCreateWithoutCityInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -4637,9 +3782,6 @@ export type UserCreateWithoutLocationCityInput = {
   city?: Prisma.CityCreateNestedOneWithoutUsersInput
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4712,9 +3854,6 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -4862,9 +4001,6 @@ export type UserCreateWithoutInquiryCentersInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -4937,9 +4073,6 @@ export type UserUncheckedCreateWithoutInquiryCentersInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -5060,9 +4193,6 @@ export type UserUpdateWithoutInquiryCentersInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -5135,9 +4265,6 @@ export type UserUncheckedUpdateWithoutInquiryCentersInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5242,9 +4369,6 @@ export type UserCreateWithoutJobGroupRepresentationsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -5317,9 +4441,6 @@ export type UserUncheckedCreateWithoutJobGroupRepresentationsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -5440,9 +4561,6 @@ export type UserUpdateWithoutJobGroupRepresentationsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -5515,9 +4633,6 @@ export type UserUncheckedUpdateWithoutJobGroupRepresentationsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5622,9 +4737,6 @@ export type UserCreateWithoutEconomicJobInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -5697,9 +4809,6 @@ export type UserUncheckedCreateWithoutEconomicJobInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -5830,9 +4939,6 @@ export type UserCreateWithoutCaseInquiriesDecidedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -5905,9 +5011,6 @@ export type UserUncheckedCreateWithoutCaseInquiriesDecidedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -6028,9 +5131,6 @@ export type UserUpdateWithoutCaseInquiriesDecidedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -6103,9 +5203,6 @@ export type UserUncheckedUpdateWithoutCaseInquiriesDecidedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6210,9 +5307,6 @@ export type UserCreateWithoutCaseInquiryFilesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -6285,9 +5379,6 @@ export type UserUncheckedCreateWithoutCaseInquiryFilesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -6408,9 +5499,6 @@ export type UserUpdateWithoutCaseInquiryFilesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -6483,9 +5571,6 @@ export type UserUncheckedUpdateWithoutCaseInquiryFilesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6590,9 +5675,6 @@ export type UserCreateWithoutCasePlacesDecidedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -6665,9 +5747,6 @@ export type UserUncheckedCreateWithoutCasePlacesDecidedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -6788,9 +5867,6 @@ export type UserUpdateWithoutCasePlacesDecidedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -6863,9 +5939,6 @@ export type UserUncheckedUpdateWithoutCasePlacesDecidedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6970,9 +6043,6 @@ export type UserCreateWithoutCasePlacesFilesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -7045,9 +6115,6 @@ export type UserUncheckedCreateWithoutCasePlacesFilesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -7168,9 +6235,6 @@ export type UserUpdateWithoutCasePlacesFilesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -7243,9 +6307,6 @@ export type UserUncheckedUpdateWithoutCasePlacesFilesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7350,9 +6411,6 @@ export type UserCreateWithoutCaseManagementDecidedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -7425,9 +6483,6 @@ export type UserUncheckedCreateWithoutCaseManagementDecidedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -7548,9 +6603,6 @@ export type UserUpdateWithoutCaseManagementDecidedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -7623,9 +6675,6 @@ export type UserUncheckedUpdateWithoutCaseManagementDecidedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7730,9 +6779,6 @@ export type UserCreateWithoutCaseManagementReviewFilesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -7805,9 +6851,6 @@ export type UserUncheckedCreateWithoutCaseManagementReviewFilesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -7928,9 +6971,6 @@ export type UserUpdateWithoutCaseManagementReviewFilesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -8003,9 +7043,6 @@ export type UserUncheckedUpdateWithoutCaseManagementReviewFilesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8110,9 +7147,6 @@ export type UserCreateWithoutCaseFilesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -8185,9 +7219,6 @@ export type UserUncheckedCreateWithoutCaseFilesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -8297,9 +7328,6 @@ export type UserCreateWithoutCaseRevocationsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -8372,9 +7400,6 @@ export type UserUncheckedCreateWithoutCaseRevocationsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -8495,9 +7520,6 @@ export type UserUpdateWithoutCaseFilesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -8570,9 +7592,6 @@ export type UserUncheckedUpdateWithoutCaseFilesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8688,9 +7707,6 @@ export type UserUpdateWithoutCaseRevocationsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -8763,9 +7779,6 @@ export type UserUncheckedUpdateWithoutCaseRevocationsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8870,9 +7883,6 @@ export type UserCreateWithoutCaseSuspensionsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -8945,9 +7955,6 @@ export type UserUncheckedCreateWithoutCaseSuspensionsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -9068,9 +8075,6 @@ export type UserUpdateWithoutCaseSuspensionsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -9143,9 +8147,6 @@ export type UserUncheckedUpdateWithoutCaseSuspensionsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9250,9 +8251,6 @@ export type UserCreateWithoutCaseRequestEventsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -9325,9 +8323,6 @@ export type UserUncheckedCreateWithoutCaseRequestEventsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -9448,9 +8443,6 @@ export type UserUpdateWithoutCaseRequestEventsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -9523,9 +8515,6 @@ export type UserUncheckedUpdateWithoutCaseRequestEventsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9630,9 +8619,6 @@ export type UserCreateWithoutCaseAuctionDecidedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -9705,9 +8691,6 @@ export type UserUncheckedCreateWithoutCaseAuctionDecidedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -9828,9 +8811,6 @@ export type UserUpdateWithoutCaseAuctionDecidedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -9903,9 +8883,6 @@ export type UserUncheckedUpdateWithoutCaseAuctionDecidedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10010,9 +8987,6 @@ export type UserCreateWithoutPersonDocumentsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -10085,9 +9059,6 @@ export type UserUncheckedCreateWithoutPersonDocumentsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -10208,9 +9179,6 @@ export type UserUpdateWithoutPersonDocumentsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -10283,9 +9251,6 @@ export type UserUncheckedUpdateWithoutPersonDocumentsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10390,9 +9355,6 @@ export type UserCreateWithoutLocationHistoriesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
@@ -10465,9 +9427,6 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -10588,9 +9547,6 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
@@ -10663,9 +9619,6 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10770,9 +9723,6 @@ export type UserCreateWithoutPositionInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
@@ -10845,9 +9795,6 @@ export type UserUncheckedCreateWithoutPositionInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   workUnitId?: string | null
   staffPostId?: string | null
@@ -10978,9 +9925,6 @@ export type UserCreateWithoutNutritionUnitsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -11053,9 +9997,6 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -11165,9 +10106,6 @@ export type UserCreateWithoutOrgUnitInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
   workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
@@ -11240,9 +10178,6 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   positionId?: string | null
   workUnitId?: string | null
   staffPostId?: string | null
@@ -11368,9 +10303,6 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -11443,9 +10375,6 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11566,9 +10495,6 @@ export type UserCreateWithoutFoodReservationsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -11641,9 +10567,6 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -11764,9 +10687,6 @@ export type UserUpdateWithoutFoodReservationsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -11839,9 +10759,6 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11946,9 +10863,6 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12021,9 +10935,6 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -12144,9 +11055,6 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -12219,9 +11127,6 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12326,9 +11231,6 @@ export type UserCreateWithoutUserRolesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12401,9 +11303,6 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -12524,9 +11423,6 @@ export type UserUpdateWithoutUserRolesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -12599,9 +11495,6 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12706,9 +11599,6 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12781,9 +11671,6 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -12893,9 +11780,6 @@ export type UserCreateWithoutSingardRepliesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -12968,9 +11852,6 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -13091,9 +11972,6 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -13166,9 +12044,6 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13284,9 +12159,6 @@ export type UserUpdateWithoutSingardRepliesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -13359,9 +12231,6 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13466,9 +12335,6 @@ export type UserCreateWithoutSingardActivitiesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -13541,9 +12407,6 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -13664,9 +12527,6 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -13739,9 +12599,6 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13846,9 +12703,6 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -13921,9 +12775,6 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -14033,9 +12884,6 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -14108,9 +12956,6 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -14220,9 +13065,6 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -14295,9 +13137,6 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -14407,9 +13246,6 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -14482,9 +13318,6 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -14594,9 +13427,6 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -14669,9 +13499,6 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -14781,9 +13608,6 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -14856,9 +13680,6 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -14979,9 +13800,6 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -15054,9 +13872,6 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15172,9 +13987,6 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -15247,9 +14059,6 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15365,9 +14174,6 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -15440,9 +14246,6 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15558,9 +14361,6 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -15633,9 +14433,6 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15751,9 +14548,6 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -15826,9 +14620,6 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15944,9 +14735,6 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -16019,9 +14807,6 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16126,9 +14911,6 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -16201,9 +14983,6 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -16324,9 +15103,6 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -16399,9 +15175,6 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16506,9 +15279,6 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -16581,9 +15351,6 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -16704,9 +15471,6 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -16779,9 +15543,6 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16886,9 +15647,6 @@ export type UserCreateWithoutWorkUnitInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -16961,9 +15719,6 @@ export type UserUncheckedCreateWithoutWorkUnitInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   staffPostId?: string | null
@@ -17094,9 +15849,6 @@ export type UserCreateWithoutStaffPostInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -17169,9 +15921,6 @@ export type UserUncheckedCreateWithoutStaffPostInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -17302,9 +16051,6 @@ export type UserCreateWithoutViolationCasesInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -17377,9 +16123,6 @@ export type UserUncheckedCreateWithoutViolationCasesInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -17489,9 +16232,6 @@ export type UserCreateWithoutViolationsCreatedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -17564,9 +16304,6 @@ export type UserUncheckedCreateWithoutViolationsCreatedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -17687,9 +16424,6 @@ export type UserUpdateWithoutViolationCasesInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -17762,9 +16496,6 @@ export type UserUncheckedUpdateWithoutViolationCasesInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17880,9 +16611,6 @@ export type UserUpdateWithoutViolationsCreatedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -17955,9 +16683,6 @@ export type UserUncheckedUpdateWithoutViolationsCreatedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18062,9 +16787,6 @@ export type UserCreateWithoutViolationProceedingsCreatedInput = {
   locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
   locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
   photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
-  nationalCardPhoto?: Prisma.StoredImageCreateNestedOneWithoutNationalCardUsersInput
-  passportPhoto?: Prisma.StoredImageCreateNestedOneWithoutPassportUsersInput
-  identityBookletPhoto?: Prisma.StoredImageCreateNestedOneWithoutIdentityBookletUsersInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
   orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
   position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
@@ -18137,9 +16859,6 @@ export type UserUncheckedCreateWithoutViolationProceedingsCreatedInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -18260,9 +16979,6 @@ export type UserUpdateWithoutViolationProceedingsCreatedInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -18335,9 +17051,6 @@ export type UserUncheckedUpdateWithoutViolationProceedingsCreatedInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18425,183 +17138,6 @@ export type UserCreateManyPhotoInput = {
   longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
-  orgUnitId?: string | null
-  positionId?: string | null
-  workUnitId?: string | null
-  staffPostId?: string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  jobId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UserCreateManyNationalCardPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  countryId?: string | null
-  provinceId?: string | null
-  cityId?: string | null
-  locationProvinceId?: string | null
-  locationCityId?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  photoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
-  orgUnitId?: string | null
-  positionId?: string | null
-  workUnitId?: string | null
-  staffPostId?: string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  jobId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UserCreateManyPassportPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  countryId?: string | null
-  provinceId?: string | null
-  cityId?: string | null
-  locationProvinceId?: string | null
-  locationCityId?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  photoId?: string | null
-  nationalCardPhotoId?: string | null
-  identityBookletPhotoId?: string | null
-  orgUnitId?: string | null
-  positionId?: string | null
-  workUnitId?: string | null
-  staffPostId?: string | null
-  fatherName?: string | null
-  lastNameEn?: string | null
-  birthDate?: Date | string | null
-  passportNumber?: string | null
-  nationalCardExpiresAt?: Date | string | null
-  passportExpiresAt?: Date | string | null
-  identityCertificateNo?: string | null
-  birthPlace?: string | null
-  identityIssuedIn?: string | null
-  residencyStatus?: $Enums.ResidencyStatus | null
-  postalCode?: string | null
-  homePhone?: string | null
-  educationLevel?: $Enums.EducationLevel | null
-  citizenGroup?: string | null
-  jobId?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type UserCreateManyIdentityBookletPhotoInput = {
-  id?: string
-  username: string
-  passwordHash: string
-  firstName: string
-  lastName: string
-  fullName: string
-  locale?: string
-  status?: $Enums.UserStatus
-  nationalId?: string | null
-  phone?: string | null
-  email?: string | null
-  gender?: $Enums.UserGender | null
-  address?: string | null
-  notes?: string | null
-  religion?: $Enums.Religion | null
-  religionOther?: string | null
-  telegram?: string | null
-  bale?: string | null
-  eitaa?: string | null
-  whatsapp?: string | null
-  otherSocial?: string | null
-  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
-  countryId?: string | null
-  provinceId?: string | null
-  cityId?: string | null
-  locationProvinceId?: string | null
-  locationCityId?: string | null
-  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: string | null
-  locationUpdatedAt?: Date | string | null
-  photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -18673,9 +17209,6 @@ export type UserUpdateWithoutPhotoInput = {
   city?: Prisma.CityUpdateOneWithoutUsersNestedInput
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -18748,9 +17281,6 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18839,729 +17369,6 @@ export type UserUncheckedUpdateManyWithoutPhotoInput = {
   longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserUpdateWithoutNationalCardPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
-  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
-  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
-  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
-  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
-  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
-  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
-  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
-  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
-  workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
-  staffPost?: Prisma.StaffPostUpdateOneWithoutUsersNestedInput
-  caseFiles?: Prisma.CaseFileUpdateManyWithoutUserNestedInput
-  caseRequestEvents?: Prisma.CaseRequestEventUpdateManyWithoutActorNestedInput
-  caseSuspensions?: Prisma.CaseSuspensionUpdateManyWithoutCreatedByNestedInput
-  caseRevocations?: Prisma.CaseFileUpdateManyWithoutRevokedByNestedInput
-  economicJob?: Prisma.JobUpdateOneWithoutIdentityUsersNestedInput
-  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutUserNestedInput
-  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
-  inquiryCenters?: Prisma.InquiryCenterUpdateManyWithoutOfficerNestedInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUpdateManyWithoutDecidedByNestedInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUpdateManyWithoutUploadedByNestedInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUpdateManyWithoutDecidedByNestedInput
-  casePlacesFiles?: Prisma.CasePlacesFileUpdateManyWithoutUploadedByNestedInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUpdateManyWithoutDecidedByNestedInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUpdateManyWithoutDecidedByNestedInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUpdateManyWithoutUploadedByNestedInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUpdateManyWithoutUserNestedInput
-  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
-  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
-  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
-  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
-  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
-  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
-  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
-  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
-  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
-  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
-  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
-  violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
-  violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutNationalCardPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
-  caseFiles?: Prisma.CaseFileUncheckedUpdateManyWithoutUserNestedInput
-  caseRequestEvents?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutActorNestedInput
-  caseSuspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCreatedByNestedInput
-  caseRevocations?: Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput
-  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutUserNestedInput
-  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
-  inquiryCenters?: Prisma.InquiryCenterUncheckedUpdateManyWithoutOfficerNestedInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutDecidedByNestedInput
-  casePlacesFiles?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutUserNestedInput
-  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
-  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
-  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
-  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
-  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
-  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
-  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
-  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
-  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
-  violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
-  violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
-}
-
-export type UserUncheckedUpdateManyWithoutNationalCardPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserUpdateWithoutPassportPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
-  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
-  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
-  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
-  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
-  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
-  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
-  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
-  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
-  workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
-  staffPost?: Prisma.StaffPostUpdateOneWithoutUsersNestedInput
-  caseFiles?: Prisma.CaseFileUpdateManyWithoutUserNestedInput
-  caseRequestEvents?: Prisma.CaseRequestEventUpdateManyWithoutActorNestedInput
-  caseSuspensions?: Prisma.CaseSuspensionUpdateManyWithoutCreatedByNestedInput
-  caseRevocations?: Prisma.CaseFileUpdateManyWithoutRevokedByNestedInput
-  economicJob?: Prisma.JobUpdateOneWithoutIdentityUsersNestedInput
-  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutUserNestedInput
-  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
-  inquiryCenters?: Prisma.InquiryCenterUpdateManyWithoutOfficerNestedInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUpdateManyWithoutDecidedByNestedInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUpdateManyWithoutUploadedByNestedInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUpdateManyWithoutDecidedByNestedInput
-  casePlacesFiles?: Prisma.CasePlacesFileUpdateManyWithoutUploadedByNestedInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUpdateManyWithoutDecidedByNestedInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUpdateManyWithoutDecidedByNestedInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUpdateManyWithoutUploadedByNestedInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUpdateManyWithoutUserNestedInput
-  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
-  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
-  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
-  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
-  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
-  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
-  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
-  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
-  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
-  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
-  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
-  violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
-  violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutPassportPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
-  caseFiles?: Prisma.CaseFileUncheckedUpdateManyWithoutUserNestedInput
-  caseRequestEvents?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutActorNestedInput
-  caseSuspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCreatedByNestedInput
-  caseRevocations?: Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput
-  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutUserNestedInput
-  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
-  inquiryCenters?: Prisma.InquiryCenterUncheckedUpdateManyWithoutOfficerNestedInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutDecidedByNestedInput
-  casePlacesFiles?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutUserNestedInput
-  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
-  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
-  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
-  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
-  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
-  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
-  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
-  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
-  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
-  violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
-  violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
-}
-
-export type UserUncheckedUpdateManyWithoutPassportPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type UserUpdateWithoutIdentityBookletPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
-  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
-  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
-  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
-  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
-  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
-  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
-  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
-  workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
-  staffPost?: Prisma.StaffPostUpdateOneWithoutUsersNestedInput
-  caseFiles?: Prisma.CaseFileUpdateManyWithoutUserNestedInput
-  caseRequestEvents?: Prisma.CaseRequestEventUpdateManyWithoutActorNestedInput
-  caseSuspensions?: Prisma.CaseSuspensionUpdateManyWithoutCreatedByNestedInput
-  caseRevocations?: Prisma.CaseFileUpdateManyWithoutRevokedByNestedInput
-  economicJob?: Prisma.JobUpdateOneWithoutIdentityUsersNestedInput
-  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutUserNestedInput
-  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
-  inquiryCenters?: Prisma.InquiryCenterUpdateManyWithoutOfficerNestedInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUpdateManyWithoutDecidedByNestedInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUpdateManyWithoutUploadedByNestedInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUpdateManyWithoutDecidedByNestedInput
-  casePlacesFiles?: Prisma.CasePlacesFileUpdateManyWithoutUploadedByNestedInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUpdateManyWithoutDecidedByNestedInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUpdateManyWithoutDecidedByNestedInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUpdateManyWithoutUploadedByNestedInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUpdateManyWithoutUserNestedInput
-  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
-  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
-  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
-  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
-  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
-  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
-  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
-  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
-  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
-  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
-  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
-  violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
-  violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
-}
-
-export type UserUncheckedUpdateWithoutIdentityBookletPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
-  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
-  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
-  caseFiles?: Prisma.CaseFileUncheckedUpdateManyWithoutUserNestedInput
-  caseRequestEvents?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutActorNestedInput
-  caseSuspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCreatedByNestedInput
-  caseRevocations?: Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput
-  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutUserNestedInput
-  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
-  inquiryCenters?: Prisma.InquiryCenterUncheckedUpdateManyWithoutOfficerNestedInput
-  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutDecidedByNestedInput
-  casePlacesFiles?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedUpdateManyWithoutDecidedByNestedInput
-  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutUploadedByNestedInput
-  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutUserNestedInput
-  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
-  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
-  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
-  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
-  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
-  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
-  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
-  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
-  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
-  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
-  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
-  violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
-  violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
-  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
-}
-
-export type UserUncheckedUpdateManyWithoutIdentityBookletPhotoInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
-  firstName?: Prisma.StringFieldUpdateOperationsInput | string
-  lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  locale?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
-  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
-  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19617,9 +17424,6 @@ export type UserCreateManyCountryInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -19691,9 +17495,6 @@ export type UserUpdateWithoutCountryInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -19766,9 +17567,6 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19857,9 +17655,6 @@ export type UserUncheckedUpdateManyWithoutCountryInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19915,9 +17710,6 @@ export type UserCreateManyProvinceInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -19973,9 +17765,6 @@ export type UserCreateManyLocationProvinceInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -20047,9 +17836,6 @@ export type UserUpdateWithoutProvinceInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -20122,9 +17908,6 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20213,9 +17996,6 @@ export type UserUncheckedUpdateManyWithoutProvinceInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20287,9 +18067,6 @@ export type UserUpdateWithoutLocationProvinceInput = {
   city?: Prisma.CityUpdateOneWithoutUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -20362,9 +18139,6 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20453,9 +18227,6 @@ export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20511,9 +18282,6 @@ export type UserCreateManyCityInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -20569,9 +18337,6 @@ export type UserCreateManyLocationCityInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -20643,9 +18408,6 @@ export type UserUpdateWithoutCityInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -20718,9 +18480,6 @@ export type UserUncheckedUpdateWithoutCityInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20809,9 +18568,6 @@ export type UserUncheckedUpdateManyWithoutCityInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20883,9 +18639,6 @@ export type UserUpdateWithoutLocationCityInput = {
   city?: Prisma.CityUpdateOneWithoutUsersNestedInput
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -20958,9 +18711,6 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21049,9 +18799,6 @@ export type UserUncheckedUpdateManyWithoutLocationCityInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21108,9 +18855,6 @@ export type UserCreateManyEconomicJobInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -21182,9 +18926,6 @@ export type UserUpdateWithoutEconomicJobInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -21257,9 +18998,6 @@ export type UserUncheckedUpdateWithoutEconomicJobInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21348,9 +19086,6 @@ export type UserUncheckedUpdateManyWithoutEconomicJobInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21406,9 +19141,6 @@ export type UserCreateManyPositionInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   workUnitId?: string | null
   staffPostId?: string | null
@@ -21480,9 +19212,6 @@ export type UserUpdateWithoutPositionInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
@@ -21555,9 +19284,6 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21646,9 +19372,6 @@ export type UserUncheckedUpdateManyWithoutPositionInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21704,9 +19427,6 @@ export type UserCreateManyOrgUnitInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   positionId?: string | null
   workUnitId?: string | null
   staffPostId?: string | null
@@ -21778,9 +19498,6 @@ export type UserUpdateWithoutOrgUnitInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
   workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
@@ -21853,9 +19570,6 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21944,9 +19658,6 @@ export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22002,9 +19713,6 @@ export type UserCreateManyWorkUnitInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   staffPostId?: string | null
@@ -22076,9 +19784,6 @@ export type UserUpdateWithoutWorkUnitInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -22151,9 +19856,6 @@ export type UserUncheckedUpdateWithoutWorkUnitInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22242,9 +19944,6 @@ export type UserUncheckedUpdateManyWithoutWorkUnitInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22300,9 +19999,6 @@ export type UserCreateManyStaffPostInput = {
   locationNotes?: string | null
   locationUpdatedAt?: Date | string | null
   photoId?: string | null
-  nationalCardPhotoId?: string | null
-  passportPhotoId?: string | null
-  identityBookletPhotoId?: string | null
   orgUnitId?: string | null
   positionId?: string | null
   workUnitId?: string | null
@@ -22374,9 +20070,6 @@ export type UserUpdateWithoutStaffPostInput = {
   locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
   locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
   photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
-  nationalCardPhoto?: Prisma.StoredImageUpdateOneWithoutNationalCardUsersNestedInput
-  passportPhoto?: Prisma.StoredImageUpdateOneWithoutPassportUsersNestedInput
-  identityBookletPhoto?: Prisma.StoredImageUpdateOneWithoutIdentityBookletUsersNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
   orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
   position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
@@ -22449,9 +20142,6 @@ export type UserUncheckedUpdateWithoutStaffPostInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22540,9 +20230,6 @@ export type UserUncheckedUpdateManyWithoutStaffPostInput = {
   locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nationalCardPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  passportPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  identityBookletPhotoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22917,9 +20604,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   locationNotes?: boolean
   locationUpdatedAt?: boolean
   photoId?: boolean
-  nationalCardPhotoId?: boolean
-  passportPhotoId?: boolean
-  identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   workUnitId?: boolean
@@ -22947,9 +20631,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   locationProvince?: boolean | Prisma.User$locationProvinceArgs<ExtArgs>
   locationCity?: boolean | Prisma.User$locationCityArgs<ExtArgs>
   photo?: boolean | Prisma.User$photoArgs<ExtArgs>
-  nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
-  passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
-  identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
   locationHistories?: boolean | Prisma.User$locationHistoriesArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
@@ -23024,9 +20705,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   locationNotes?: boolean
   locationUpdatedAt?: boolean
   photoId?: boolean
-  nationalCardPhotoId?: boolean
-  passportPhotoId?: boolean
-  identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   workUnitId?: boolean
@@ -23054,9 +20732,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   locationProvince?: boolean | Prisma.User$locationProvinceArgs<ExtArgs>
   locationCity?: boolean | Prisma.User$locationCityArgs<ExtArgs>
   photo?: boolean | Prisma.User$photoArgs<ExtArgs>
-  nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
-  passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
-  identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   workUnit?: boolean | Prisma.User$workUnitArgs<ExtArgs>
@@ -23097,9 +20772,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   locationNotes?: boolean
   locationUpdatedAt?: boolean
   photoId?: boolean
-  nationalCardPhotoId?: boolean
-  passportPhotoId?: boolean
-  identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   workUnitId?: boolean
@@ -23127,9 +20799,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   locationProvince?: boolean | Prisma.User$locationProvinceArgs<ExtArgs>
   locationCity?: boolean | Prisma.User$locationCityArgs<ExtArgs>
   photo?: boolean | Prisma.User$photoArgs<ExtArgs>
-  nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
-  passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
-  identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   workUnit?: boolean | Prisma.User$workUnitArgs<ExtArgs>
@@ -23170,9 +20839,6 @@ export type UserSelectScalar = {
   locationNotes?: boolean
   locationUpdatedAt?: boolean
   photoId?: boolean
-  nationalCardPhotoId?: boolean
-  passportPhotoId?: boolean
-  identityBookletPhotoId?: boolean
   orgUnitId?: boolean
   positionId?: boolean
   workUnitId?: boolean
@@ -23196,7 +20862,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "nationalCardPhotoId" | "passportPhotoId" | "identityBookletPhotoId" | "orgUnitId" | "positionId" | "workUnitId" | "staffPostId" | "fatherName" | "lastNameEn" | "birthDate" | "passportNumber" | "nationalCardExpiresAt" | "passportExpiresAt" | "identityCertificateNo" | "birthPlace" | "identityIssuedIn" | "residencyStatus" | "postalCode" | "homePhone" | "educationLevel" | "citizenGroup" | "jobId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "orgUnitId" | "positionId" | "workUnitId" | "staffPostId" | "fatherName" | "lastNameEn" | "birthDate" | "passportNumber" | "nationalCardExpiresAt" | "passportExpiresAt" | "identityCertificateNo" | "birthPlace" | "identityIssuedIn" | "residencyStatus" | "postalCode" | "homePhone" | "educationLevel" | "citizenGroup" | "jobId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
   province?: boolean | Prisma.User$provinceArgs<ExtArgs>
@@ -23204,9 +20870,6 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   locationProvince?: boolean | Prisma.User$locationProvinceArgs<ExtArgs>
   locationCity?: boolean | Prisma.User$locationCityArgs<ExtArgs>
   photo?: boolean | Prisma.User$photoArgs<ExtArgs>
-  nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
-  passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
-  identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
   locationHistories?: boolean | Prisma.User$locationHistoriesArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
@@ -23254,9 +20917,6 @@ export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   locationProvince?: boolean | Prisma.User$locationProvinceArgs<ExtArgs>
   locationCity?: boolean | Prisma.User$locationCityArgs<ExtArgs>
   photo?: boolean | Prisma.User$photoArgs<ExtArgs>
-  nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
-  passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
-  identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   workUnit?: boolean | Prisma.User$workUnitArgs<ExtArgs>
@@ -23270,9 +20930,6 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   locationProvince?: boolean | Prisma.User$locationProvinceArgs<ExtArgs>
   locationCity?: boolean | Prisma.User$locationCityArgs<ExtArgs>
   photo?: boolean | Prisma.User$photoArgs<ExtArgs>
-  nationalCardPhoto?: boolean | Prisma.User$nationalCardPhotoArgs<ExtArgs>
-  passportPhoto?: boolean | Prisma.User$passportPhotoArgs<ExtArgs>
-  identityBookletPhoto?: boolean | Prisma.User$identityBookletPhotoArgs<ExtArgs>
   orgUnit?: boolean | Prisma.User$orgUnitArgs<ExtArgs>
   position?: boolean | Prisma.User$positionArgs<ExtArgs>
   workUnit?: boolean | Prisma.User$workUnitArgs<ExtArgs>
@@ -23289,9 +20946,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     locationProvince: Prisma.$ProvincePayload<ExtArgs> | null
     locationCity: Prisma.$CityPayload<ExtArgs> | null
     photo: Prisma.$StoredImagePayload<ExtArgs> | null
-    nationalCardPhoto: Prisma.$StoredImagePayload<ExtArgs> | null
-    passportPhoto: Prisma.$StoredImagePayload<ExtArgs> | null
-    identityBookletPhoto: Prisma.$StoredImagePayload<ExtArgs> | null
     locationHistories: Prisma.$UserLocationHistoryPayload<ExtArgs>[]
     orgUnit: Prisma.$OrganizationUnitPayload<ExtArgs> | null
     position: Prisma.$OrganizationPositionPayload<ExtArgs> | null
@@ -23364,9 +21018,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     locationNotes: string | null
     locationUpdatedAt: Date | null
     photoId: string | null
-    nationalCardPhotoId: string | null
-    passportPhotoId: string | null
-    identityBookletPhotoId: string | null
     orgUnitId: string | null
     positionId: string | null
     workUnitId: string | null
@@ -23788,9 +21439,6 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   locationProvince<T extends Prisma.User$locationProvinceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$locationProvinceArgs<ExtArgs>>): Prisma.Prisma__ProvinceClient<runtime.Types.Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   locationCity<T extends Prisma.User$locationCityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$locationCityArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   photo<T extends Prisma.User$photoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$photoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  nationalCardPhoto<T extends Prisma.User$nationalCardPhotoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$nationalCardPhotoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  passportPhoto<T extends Prisma.User$passportPhotoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passportPhotoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  identityBookletPhoto<T extends Prisma.User$identityBookletPhotoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$identityBookletPhotoArgs<ExtArgs>>): Prisma.Prisma__StoredImageClient<runtime.Types.Result.GetResult<Prisma.$StoredImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   locationHistories<T extends Prisma.User$locationHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$locationHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLocationHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orgUnit<T extends Prisma.User$orgUnitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$orgUnitArgs<ExtArgs>>): Prisma.Prisma__OrganizationUnitClient<runtime.Types.Result.GetResult<Prisma.$OrganizationUnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   position<T extends Prisma.User$positionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$positionArgs<ExtArgs>>): Prisma.Prisma__OrganizationPositionClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPositionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -23890,9 +21538,6 @@ export interface UserFieldRefs {
   readonly locationNotes: Prisma.FieldRef<"User", 'String'>
   readonly locationUpdatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly photoId: Prisma.FieldRef<"User", 'String'>
-  readonly nationalCardPhotoId: Prisma.FieldRef<"User", 'String'>
-  readonly passportPhotoId: Prisma.FieldRef<"User", 'String'>
-  readonly identityBookletPhotoId: Prisma.FieldRef<"User", 'String'>
   readonly orgUnitId: Prisma.FieldRef<"User", 'String'>
   readonly positionId: Prisma.FieldRef<"User", 'String'>
   readonly workUnitId: Prisma.FieldRef<"User", 'String'>
@@ -24413,63 +22058,6 @@ export type User$locationCityArgs<ExtArgs extends runtime.Types.Extensions.Inter
  * User.photo
  */
 export type User$photoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the StoredImage
-   */
-  select?: Prisma.StoredImageSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the StoredImage
-   */
-  omit?: Prisma.StoredImageOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StoredImageInclude<ExtArgs> | null
-  where?: Prisma.StoredImageWhereInput
-}
-
-/**
- * User.nationalCardPhoto
- */
-export type User$nationalCardPhotoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the StoredImage
-   */
-  select?: Prisma.StoredImageSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the StoredImage
-   */
-  omit?: Prisma.StoredImageOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StoredImageInclude<ExtArgs> | null
-  where?: Prisma.StoredImageWhereInput
-}
-
-/**
- * User.passportPhoto
- */
-export type User$passportPhotoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the StoredImage
-   */
-  select?: Prisma.StoredImageSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the StoredImage
-   */
-  omit?: Prisma.StoredImageOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StoredImageInclude<ExtArgs> | null
-  where?: Prisma.StoredImageWhereInput
-}
-
-/**
- * User.identityBookletPhoto
- */
-export type User$identityBookletPhotoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the StoredImage
    */

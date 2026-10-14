@@ -27,18 +27,21 @@ export type AggregateCaseIdentityDocument = {
 export type CaseIdentityDocumentMinAggregateOutputType = {
   documentId: string | null
   gender: $Enums.DocumentGender | null
+  isRequired: boolean | null
   createdAt: Date | null
 }
 
 export type CaseIdentityDocumentMaxAggregateOutputType = {
   documentId: string | null
   gender: $Enums.DocumentGender | null
+  isRequired: boolean | null
   createdAt: Date | null
 }
 
 export type CaseIdentityDocumentCountAggregateOutputType = {
   documentId: number
   gender: number
+  isRequired: number
   createdAt: number
   _all: number
 }
@@ -47,18 +50,21 @@ export type CaseIdentityDocumentCountAggregateOutputType = {
 export type CaseIdentityDocumentMinAggregateInputType = {
   documentId?: true
   gender?: true
+  isRequired?: true
   createdAt?: true
 }
 
 export type CaseIdentityDocumentMaxAggregateInputType = {
   documentId?: true
   gender?: true
+  isRequired?: true
   createdAt?: true
 }
 
 export type CaseIdentityDocumentCountAggregateInputType = {
   documentId?: true
   gender?: true
+  isRequired?: true
   createdAt?: true
   _all?: true
 }
@@ -138,6 +144,7 @@ export type CaseIdentityDocumentGroupByArgs<ExtArgs extends runtime.Types.Extens
 export type CaseIdentityDocumentGroupByOutputType = {
   documentId: string
   gender: $Enums.DocumentGender
+  isRequired: boolean
   createdAt: Date
   _count: CaseIdentityDocumentCountAggregateOutputType | null
   _min: CaseIdentityDocumentMinAggregateOutputType | null
@@ -165,6 +172,7 @@ export type CaseIdentityDocumentWhereInput = {
   NOT?: Prisma.CaseIdentityDocumentWhereInput | Prisma.CaseIdentityDocumentWhereInput[]
   documentId?: Prisma.StringFilter<"CaseIdentityDocument"> | string
   gender?: Prisma.EnumDocumentGenderFilter<"CaseIdentityDocument"> | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFilter<"CaseIdentityDocument"> | boolean
   createdAt?: Prisma.DateTimeFilter<"CaseIdentityDocument"> | Date | string
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
 }
@@ -172,6 +180,7 @@ export type CaseIdentityDocumentWhereInput = {
 export type CaseIdentityDocumentOrderByWithRelationInput = {
   documentId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   document?: Prisma.DocumentOrderByWithRelationInput
 }
@@ -182,6 +191,7 @@ export type CaseIdentityDocumentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CaseIdentityDocumentWhereInput[]
   NOT?: Prisma.CaseIdentityDocumentWhereInput | Prisma.CaseIdentityDocumentWhereInput[]
   gender?: Prisma.EnumDocumentGenderFilter<"CaseIdentityDocument"> | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFilter<"CaseIdentityDocument"> | boolean
   createdAt?: Prisma.DateTimeFilter<"CaseIdentityDocument"> | Date | string
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
 }, "documentId">
@@ -189,6 +199,7 @@ export type CaseIdentityDocumentWhereUniqueInput = Prisma.AtLeast<{
 export type CaseIdentityDocumentOrderByWithAggregationInput = {
   documentId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.CaseIdentityDocumentCountOrderByAggregateInput
   _max?: Prisma.CaseIdentityDocumentMaxOrderByAggregateInput
@@ -201,11 +212,13 @@ export type CaseIdentityDocumentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CaseIdentityDocumentScalarWhereWithAggregatesInput | Prisma.CaseIdentityDocumentScalarWhereWithAggregatesInput[]
   documentId?: Prisma.StringWithAggregatesFilter<"CaseIdentityDocument"> | string
   gender?: Prisma.EnumDocumentGenderWithAggregatesFilter<"CaseIdentityDocument"> | $Enums.DocumentGender
+  isRequired?: Prisma.BoolWithAggregatesFilter<"CaseIdentityDocument"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseIdentityDocument"> | Date | string
 }
 
 export type CaseIdentityDocumentCreateInput = {
   gender?: $Enums.DocumentGender
+  isRequired?: boolean
   createdAt?: Date | string
   document: Prisma.DocumentCreateNestedOneWithoutCaseIdentityDocumentInput
 }
@@ -213,11 +226,13 @@ export type CaseIdentityDocumentCreateInput = {
 export type CaseIdentityDocumentUncheckedCreateInput = {
   documentId: string
   gender?: $Enums.DocumentGender
+  isRequired?: boolean
   createdAt?: Date | string
 }
 
 export type CaseIdentityDocumentUpdateInput = {
   gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   document?: Prisma.DocumentUpdateOneRequiredWithoutCaseIdentityDocumentNestedInput
 }
@@ -225,23 +240,27 @@ export type CaseIdentityDocumentUpdateInput = {
 export type CaseIdentityDocumentUncheckedUpdateInput = {
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CaseIdentityDocumentCreateManyInput = {
   documentId: string
   gender?: $Enums.DocumentGender
+  isRequired?: boolean
   createdAt?: Date | string
 }
 
 export type CaseIdentityDocumentUpdateManyMutationInput = {
   gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CaseIdentityDocumentUncheckedUpdateManyInput = {
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -253,18 +272,21 @@ export type CaseIdentityDocumentNullableScalarRelationFilter = {
 export type CaseIdentityDocumentCountOrderByAggregateInput = {
   documentId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type CaseIdentityDocumentMaxOrderByAggregateInput = {
   documentId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type CaseIdentityDocumentMinOrderByAggregateInput = {
   documentId?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  isRequired?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -302,11 +324,13 @@ export type CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput = {
 
 export type CaseIdentityDocumentCreateWithoutDocumentInput = {
   gender?: $Enums.DocumentGender
+  isRequired?: boolean
   createdAt?: Date | string
 }
 
 export type CaseIdentityDocumentUncheckedCreateWithoutDocumentInput = {
   gender?: $Enums.DocumentGender
+  isRequired?: boolean
   createdAt?: Date | string
 }
 
@@ -328,11 +352,13 @@ export type CaseIdentityDocumentUpdateToOneWithWhereWithoutDocumentInput = {
 
 export type CaseIdentityDocumentUpdateWithoutDocumentInput = {
   gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CaseIdentityDocumentUncheckedUpdateWithoutDocumentInput = {
   gender?: Prisma.EnumDocumentGenderFieldUpdateOperationsInput | $Enums.DocumentGender
+  isRequired?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -341,6 +367,7 @@ export type CaseIdentityDocumentUncheckedUpdateWithoutDocumentInput = {
 export type CaseIdentityDocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   documentId?: boolean
   gender?: boolean
+  isRequired?: boolean
   createdAt?: boolean
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseIdentityDocument"]>
@@ -348,6 +375,7 @@ export type CaseIdentityDocumentSelect<ExtArgs extends runtime.Types.Extensions.
 export type CaseIdentityDocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   documentId?: boolean
   gender?: boolean
+  isRequired?: boolean
   createdAt?: boolean
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseIdentityDocument"]>
@@ -355,6 +383,7 @@ export type CaseIdentityDocumentSelectCreateManyAndReturn<ExtArgs extends runtim
 export type CaseIdentityDocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   documentId?: boolean
   gender?: boolean
+  isRequired?: boolean
   createdAt?: boolean
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseIdentityDocument"]>
@@ -362,10 +391,11 @@ export type CaseIdentityDocumentSelectUpdateManyAndReturn<ExtArgs extends runtim
 export type CaseIdentityDocumentSelectScalar = {
   documentId?: boolean
   gender?: boolean
+  isRequired?: boolean
   createdAt?: boolean
 }
 
-export type CaseIdentityDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"documentId" | "gender" | "createdAt", ExtArgs["result"]["caseIdentityDocument"]>
+export type CaseIdentityDocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"documentId" | "gender" | "isRequired" | "createdAt", ExtArgs["result"]["caseIdentityDocument"]>
 export type CaseIdentityDocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   document?: boolean | Prisma.DocumentDefaultArgs<ExtArgs>
 }
@@ -384,6 +414,7 @@ export type $CaseIdentityDocumentPayload<ExtArgs extends runtime.Types.Extension
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     documentId: string
     gender: $Enums.DocumentGender
+    isRequired: boolean
     createdAt: Date
   }, ExtArgs["result"]["caseIdentityDocument"]>
   composites: {}
@@ -811,6 +842,7 @@ export interface Prisma__CaseIdentityDocumentClient<T, Null = never, ExtArgs ext
 export interface CaseIdentityDocumentFieldRefs {
   readonly documentId: Prisma.FieldRef<"CaseIdentityDocument", 'String'>
   readonly gender: Prisma.FieldRef<"CaseIdentityDocument", 'DocumentGender'>
+  readonly isRequired: Prisma.FieldRef<"CaseIdentityDocument", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"CaseIdentityDocument", 'DateTime'>
 }
     

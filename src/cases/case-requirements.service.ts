@@ -36,6 +36,15 @@ export class CaseRequirementsService {
         select: { inquiryCenter: { select: { id: true, name: true, isActive: true } } },
       }),
     ]);
+    let inquiryRows = inquiries.map((row) => row.inquiryCenter);
+    if (jobId && type === CaseRequestType.ISSUANCE && inquiryRows.length === 0) {
+      const links = await this.prisma.jobInquiryCenter.findMany({
+        where: { jobId },
+        orderBy: { inquiryCenter: { name: 'asc' } },
+        select: { inquiryCenter: { select: { id: true, name: true, isActive: true } } },
+      });
+      inquiryRows = links.map((row) => row.inquiryCenter);
+    }
     return {
       requestType: type,
       jobId: jobId ?? null,
@@ -45,7 +54,7 @@ export class CaseRequirementsService {
         gender: row.gender,
         isRequired: row.isRequired,
       })),
-      inquiries: inquiries.map((row) => row.inquiryCenter),
+      inquiries: inquiryRows,
     };
   }
 
@@ -97,6 +106,14 @@ export class CaseRequirementsService {
             jobId: jobId ?? null,
           })),
         });
+      }
+      if (jobId && dto.requestType === CaseRequestType.ISSUANCE) {
+        await tx.jobInquiryCenter.deleteMany({ where: { jobId } });
+        if (centers.length) {
+          await tx.jobInquiryCenter.createMany({
+            data: centers.map((inquiryCenterId) => ({ jobId, inquiryCenterId })),
+          });
+        }
       }
     });
     return this.get(dto.requestType, jobId);

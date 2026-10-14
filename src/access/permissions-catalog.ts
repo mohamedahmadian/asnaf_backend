@@ -25,7 +25,8 @@ export const PERMISSION_TREE: PermissionNode[] = [
       { code: 'cases.management', kind: 'MENU', nameKey: 'menus.caseManagement' },
       { code: 'cases.inquiries', kind: 'MENU', nameKey: 'menus.caseInquiries' },
       { code: 'cases.places', kind: 'MENU', nameKey: 'menus.casePlaces' },
-      { code: 'cases.reports', kind: 'MENU', nameKey: 'menus.caseReports' },
+      { code: 'cases.management-reviews', kind: 'MENU', nameKey: 'menus.caseManagementReviews' },
+      { code: 'cases.issuance', kind: 'MENU', nameKey: 'menus.caseIssuance' },
       { code: 'cases.settings', kind: 'MENU', nameKey: 'menus.caseSettings' },
     ],
   },
@@ -34,11 +35,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
     kind: 'MODULE',
     nameKey: 'modules.reports',
     children: [
-      {
-        code: 'reports.expiring-cases',
-        kind: 'MENU',
-        nameKey: 'menus.expiringCases',
-      },
+      { code: 'reports.expiring-cases', kind: 'MENU', nameKey: 'menus.expiringCases' },
+      { code: 'reports.inquiry-centers', kind: 'MENU', nameKey: 'menus.caseInquiriesReports' },
+      { code: 'reports.places-cases', kind: 'MENU', nameKey: 'menus.casePlacesReports' },
+      { code: 'reports.referred-cases', kind: 'MENU', nameKey: 'menus.caseManagementReviewsReports' },
+      { code: 'reports.case-files', kind: 'MENU', nameKey: 'menus.caseReports' },
     ],
   },
   {

@@ -13,8 +13,10 @@ import {
   isReservedRoleCode,
   isRolePermissionsLocked,
 } from '../access/access.constants';
+import { normalizeReportPermissions } from '../access/access.util';
 import { migrateFinanceMenuPermissions } from '../access/finance-menu-migration';
 import { isKnownPermissionCode } from '../access/permissions-catalog';
+import { migrateReportMenuPermissions } from '../access/report-menu-migration';
 import {
   containsInsensitive,
   paginatedResult,
@@ -48,13 +50,13 @@ function mapRole<
   const { permissions, ...rest } = role;
   return {
     ...rest,
-    permissionCodes: permissions.map((item) => item.code),
+    permissionCodes: normalizeReportPermissions(permissions.map((item) => item.code)),
   };
 }
 
 function assertPermissionCodes(codes: string[] | undefined) {
   if (!codes?.length) return [];
-  const unique = [...new Set(codes.map((code) => code.trim()).filter(Boolean))];
+  const unique = normalizeReportPermissions(codes.map((code) => code.trim()).filter(Boolean));
   const unknown = unique.filter((code) => !isKnownPermissionCode(code));
   if (unknown.length) {
     throw new BadRequestException('مجوز انتخاب‌شده معتبر نیست');
@@ -70,6 +72,7 @@ export class RolesService implements OnModuleInit {
     await ensureSystemRoles(this.prisma);
     await ensureInquiryOfficerRole(this.prisma);
     await migrateFinanceMenuPermissions(this.prisma);
+    await migrateReportMenuPermissions(this.prisma);
   }
 
   async findAll(query: FindRolesQueryDto) {

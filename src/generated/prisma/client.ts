@@ -120,6 +120,11 @@ export type CaseInquiryFile = Prisma.CaseInquiryFileModel
  */
 export type CaseGeneralSettings = Prisma.CaseGeneralSettingsModel
 /**
+ * Model CaseLetterhead
+ * سربرگ ثابت نامه‌های استعلام و اماکن
+ */
+export type CaseLetterhead = Prisma.CaseLetterheadModel
+/**
  * Model CasePlacesOffice
  * تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
  */

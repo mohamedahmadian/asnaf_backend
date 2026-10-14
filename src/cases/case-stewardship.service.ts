@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { ensureEconomicActorRole } from '../access/access.constants';
 import { normalizeNationalId } from '../common/national-id';
@@ -16,6 +16,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CaseInquiriesService } from './case-inquiries.service';
 import { CaseManagementApproversService } from './case-management-approvers.service';
 import { CasePlacesService } from './case-places.service';
+import { PERSONNEL_PHOTO_CODE } from './personnel-photo';
 import {
   STEWARDSHIP_INQUIRY_STEP,
   STEWARDSHIP_ISSUANCE_STEP,
@@ -194,11 +195,14 @@ export class CaseStewardshipService {
     return this.present(file);
   }
 
-  async advance(caseId: string, step: number) {
+  async advance(caseId: string, step: number, actor?: { isAdmin?: boolean }) {
     const file = await this.loadSteward(caseId);
     const request = this.openRequest(file);
     const requested = Math.min(Math.max(step, 0), STEWARDSHIP_ISSUANCE_STEP);
     let next = Math.max(request.formationStep, Math.min(requested, request.formationStep + 1));
+    if (!actor?.isAdmin && next > STEWARDSHIP_INQUIRY_STEP) {
+      throw new ForbiddenException('ادامه بعد از ارجاع به استعلام با نقش‌های بعدی انجام می‌شود');
+    }
     if (next >= STEWARDSHIP_INQUIRY_STEP) await this.assertIdentity(file);
     if (next >= STEWARDSHIP_PLACES_STEP) {
       await this.inquiries.ensureForUser(caseId);
@@ -214,6 +218,8 @@ export class CaseStewardshipService {
       this.prisma.caseRequest.update({ where: { id: request.id }, data: { formationStep: next } }),
       this.prisma.caseFile.update({ where: { id: file.id }, data: { formationStep: next } }),
     ]);
+    if (next >= STEWARDSHIP_INQUIRY_STEP) await this.inquiries.referOpenRequest(caseId);
+    if (next >= STEWARDSHIP_PLACES_STEP) await this.places.referOpenRequest(caseId);
     return { formationStep: next };
   }
 
@@ -422,10 +428,11 @@ export class CaseStewardshipService {
       throw new BadRequestException('نام و نام خانوادگی مباشر را کامل کنید');
     }
     const required = await this.prisma.caseIdentityDocument.findMany({
-      select: { documentId: true, gender: true, document: { select: { isRequired: true } } },
+      where: { document: { NOT: { code: PERSONNEL_PHOTO_CODE } } },
+      select: { documentId: true, gender: true, isRequired: true },
     });
     const needed = required.filter(
-      (row) => row.document.isRequired && matchesDocumentGender(row.gender, file.user.gender),
+      (row) => row.isRequired && matchesDocumentGender(row.gender, file.user.gender),
     );
     if (!needed.length) return;
     const stored = await this.prisma.personDocument.findMany({

@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
-import { IsString, Matches, MinLength } from 'class-validator';
+import { IsOptional, IsString, Matches, MinLength, ValidateIf } from 'class-validator';
+import { emptyToNull } from '../../common/dto-transform';
 import { IsIranianNationalId, normalizeNationalId, toLatinDigits } from '../../common/national-id';
 import { normalizeMobile } from '../../common/phone';
 
@@ -18,9 +19,13 @@ export class RegisterUserDto {
   @Matches(/^09\d{9}$/, { message: 'شماره همراه معتبر نیست' })
   phone: string;
 
-  @Transform(({ value }) => (typeof value === 'string' ? normalizeNationalId(value) : value))
+  @IsOptional()
+  @Transform(({ value }) =>
+    typeof value === 'string' ? normalizeNationalId(value) || null : emptyToNull(value),
+  )
+  @ValidateIf((_, value) => value != null && value !== '')
   @IsIranianNationalId()
-  nationalId: string;
+  nationalId?: string | null;
 
   @Transform(({ value }) => (typeof value === 'string' ? toLatinDigits(value) : value))
   @IsString()

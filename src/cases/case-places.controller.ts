@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -18,10 +19,15 @@ import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { hasPermission } from '../access/access.util';
 import { CaseInquiryChannel } from '../generated/prisma/client';
+import { CasePlacesReportService } from './case-places-report.service';
 import { CasePlacesService } from './case-places.service';
+import { CasesService } from './cases.service';
 import { type InquiryActor } from './case-inquiries.service';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
+import { FindCasesQueryDto } from './dto/find-cases-query.dto';
+import { PlacesReportQueryDto } from './dto/places-report-query.dto';
 import { SaveCasePlacesOfficeDto } from './dto/save-case-places-office.dto';
+import { UpdateCaseLetterIssueDto } from './dto/update-case-letter-issue.dto';
 
 type UploadFile = {
   buffer: Buffer;
@@ -71,11 +77,30 @@ export class CasePlacesOfficeController {
 
 @Controller('cases/places')
 export class CasePlacesController {
-  constructor(private readonly places: CasePlacesService) {}
+  constructor(
+    private readonly places: CasePlacesService,
+    private readonly cases: CasesService,
+    private readonly placesReport: CasePlacesReportService,
+  ) {}
 
   @Get()
   inbox(@CurrentUser() user: RequestUser | undefined, @Query() query: FindCaseInquiriesQueryDto) {
     return this.places.inbox(actorOf(user), query);
+  }
+
+  @Get('cases')
+  casesInbox(@Query() query: FindCasesQueryDto) {
+    return this.cases.list(query, { placesOnly: true });
+  }
+
+  @Get('stats')
+  stats() {
+    return this.places.stats();
+  }
+
+  @Get('report')
+  report(@Query() query: PlacesReportQueryDto) {
+    return this.placesReport.build(query);
   }
 
   @Get('files/:fileId')
@@ -93,9 +118,23 @@ export class CasePlacesController {
     res.send(file.data);
   }
 
+  @Delete('files/:fileId')
+  removeFile(@Param('fileId') fileId: string, @CurrentUser() user: RequestUser | undefined) {
+    return this.places.removeFile(fileId, actorOf(user));
+  }
+
   @Get(':id/letter')
   letter(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
     return this.places.letter(id, actorOf(user));
+  }
+
+  @Put(':id/letter')
+  updateLetter(
+    @Param('id') id: string,
+    @Body() dto: UpdateCaseLetterIssueDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.places.updateLetter(id, actorOf(user), dto);
   }
 
   @Get(':id/dossier')

@@ -37,10 +37,28 @@ type RoutePermission = {
 };
 
 const ROUTE_PERMISSIONS: RoutePermission[] = [
+  {
+    prefix: '/cases/inquiries/report',
+    permissions: ['cases.inquiries', 'reports.inquiry-centers'],
+  },
   { prefix: '/cases/inquiries', permissions: ['cases.inquiries', 'cases.formation'] },
+  {
+    prefix: '/cases/places/report',
+    permissions: ['cases.places', 'reports.places-cases'],
+  },
   { prefix: '/cases/places', permissions: ['cases.places', 'cases.formation'] },
+  {
+    prefix: '/cases/management-reviews/report',
+    permissions: ['cases.management-reviews', 'reports.referred-cases'],
+  },
+  {
+    prefix: '/cases/management-reviews',
+    permissions: ['cases.management-reviews', 'cases.formation', 'cases.management'],
+  },
+  { prefix: '/cases/issuance', permissions: ['cases.issuance'] },
   { prefix: '/cases/settings', permissions: ['cases.settings'] },
-  { prefix: '/cases/reports', permissions: ['reports.expiring-cases', 'reports'] },
+  { prefix: '/cases/reports/expiring', permissions: ['reports.expiring-cases', 'reports'] },
+  { prefix: '/cases/reports', permissions: ['reports.case-files', 'reports'] },
   { prefix: '/cases/formation', permissions: ['cases.formation'] },
   { prefix: '/cases', permissions: ['cases.management'] },
   { prefix: '/roles', permissions: ['management.roles'] },
@@ -102,7 +120,7 @@ export type AccessDecision =
   | { kind: 'auth' }
   | { kind: 'permission'; permissions: string[] };
 
-function normalizeApiPath(rawPath: string) {
+export function normalizeApiPath(rawPath: string) {
   const withoutQuery = rawPath.split('?')[0] ?? '';
   const path = withoutQuery.startsWith('/api/')
     ? withoutQuery.slice(4)

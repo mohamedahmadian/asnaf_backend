@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -47,7 +46,7 @@ const jobSelect = {
       gender: true,
       isRequired: true,
       document: {
-        select: { id: true, title: true, isRequired: true, gender: true, isFixed: true },
+        select: { id: true, title: true },
       },
     },
     orderBy: { document: { title: 'asc' as const } },
@@ -533,13 +532,10 @@ export class JobsService {
     }
     const found = await this.prisma.document.findMany({
       where: { id: { in: uniqueIds } },
-      select: { id: true, isFixed: true, isRequired: true },
+      select: { id: true },
     });
     if (found.length !== uniqueIds.length) {
       throw new NotFoundException('مدرک یافت نشد');
-    }
-    if (found.some((item) => item.isFixed && item.isRequired)) {
-      throw new BadRequestException('مدرک ثابت الزامی به شغل وصل نمی‌شود');
     }
     return uniqueIds.map((documentId) => {
       const link = byId.get(documentId);

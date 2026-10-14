@@ -27,11 +27,9 @@ export async function loadUserAccess(
   const isAdmin = roleCodes.includes(ADMIN_ROLE_CODE);
   const permissionCodes = isAdmin
     ? []
-    : [
-        ...new Set(
-          rows.flatMap((row) => row.role.permissions.map((item) => item.code)),
-        ),
-      ];
+    : normalizeReportPermissions([
+        ...new Set(rows.flatMap((row) => row.role.permissions.map((item) => item.code))),
+      ]);
   if (!isAdmin) {
     const officerCenters = await prisma.inquiryCenter.count({
       where: { officerId: userId, isActive: true },
@@ -51,8 +49,43 @@ export async function loadUserAccess(
         permissionCodes.push('cases.places');
       }
     }
+    const approverRole = await prisma.caseProcessManagementRole.findFirst({
+      where: { role: { users: { some: { userId } } } },
+      select: { id: true },
+    });
+    if (
+      approverRole &&
+      !permissionCodes.includes('cases.management-reviews') &&
+      !permissionCodes.includes('cases.formation') &&
+      !permissionCodes.includes('cases.management')
+    ) {
+      permissionCodes.push('cases.management-reviews');
+    }
+    if (permissionCodes.includes('cases.inquiries') && !permissionCodes.includes('reports.inquiry-centers')) {
+      permissionCodes.push('reports.inquiry-centers');
+    }
+    if (permissionCodes.includes('cases.places') && !permissionCodes.includes('reports.places-cases')) {
+      permissionCodes.push('reports.places-cases');
+    }
+    if (
+      permissionCodes.includes('cases.management-reviews') &&
+      !permissionCodes.includes('reports.referred-cases')
+    ) {
+      permissionCodes.push('reports.referred-cases');
+    }
   }
   return { isAdmin, roleCodes, permissionCodes };
+}
+
+const REPORT_PERMISSION_ALIASES: Record<string, string> = {
+  'cases.inquiries-reports': 'reports.inquiry-centers',
+  'cases.places-reports': 'reports.places-cases',
+  'cases.management-reviews-reports': 'reports.referred-cases',
+  'cases.reports': 'reports.case-files',
+};
+
+export function normalizeReportPermissions(codes: string[]) {
+  return [...new Set(codes.map((code) => REPORT_PERMISSION_ALIASES[code] ?? code))];
 }
 
 export function hasPermission(

@@ -33,9 +33,16 @@ export const caseSortFields = [
   'jobTitle',
   'licenseNumber',
   'formationStep',
+  'placesReferredAt',
+  'placesDecidedAt',
+  'placesDecidedBy',
 ] as const;
 
 export type CaseSortField = (typeof caseSortFields)[number];
+
+export const placesViewFilters = ['referred', 'decided', 'reviewing', 'overdue'] as const;
+
+export type PlacesViewFilter = (typeof placesViewFilters)[number];
 
 export class FindCasesQueryDto extends PaginationQueryDto {
   @IsOptional()
@@ -84,6 +91,11 @@ export class FindCasesQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...caseKindFilters])
   caseKind?: CaseKindFilter;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...placesViewFilters])
+  placesView?: PlacesViewFilter;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

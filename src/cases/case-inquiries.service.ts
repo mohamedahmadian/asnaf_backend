@@ -23,8 +23,11 @@ import {
 } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { FindCaseInquiriesQueryDto } from './dto/find-case-inquiries-query.dto';
+import { CaseLetterheadService } from './case-letterhead.service';
+import { UpdateCaseLetterIssueDto } from './dto/update-case-letter-issue.dto';
 import { PersonFileStorage } from './person-file.storage';
 import {
+  assertRequestMutable,
   findOpenRequest,
   inquiryRewindPhase,
   isProcessType,
@@ -34,7 +37,15 @@ import {
   resolveInquiryCenterIds,
   rewindRequestPhase,
 } from './request-process';
+import { INQUIRIES_FORMATION_STEP, STEWARDSHIP_INQUIRY_STEP } from './formation-steps';
 import { activityContext } from './steward-context';
+
+function inquiryReferralStep(type: CaseRequestType) {
+  if (type === CaseRequestType.ISSUANCE) return INQUIRIES_FORMATION_STEP;
+  if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 2;
+  if (type === CaseRequestType.STEWARDSHIP) return STEWARDSHIP_INQUIRY_STEP;
+  return null;
+}
 
 const inquiryInclude = {
   inquiryCenter: {
@@ -85,12 +96,14 @@ function mapInquiry(row: InquiryRecord) {
     channel: row.channel,
     note: row.note,
     createdAt: row.createdAt,
+    referredAt: row.referredAt,
     decidedAt: row.decidedAt,
     decidedBy: row.decidedBy,
     center: {
       id: row.inquiryCenter.id,
       name: row.inquiryCenter.name,
       phone: row.inquiryCenter.phone,
+      officerId: row.inquiryCenter.officerId,
       officerName: row.inquiryCenter.officer?.fullName ?? null,
     },
     files: row.files,
@@ -102,6 +115,7 @@ export class CaseInquiriesService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly files: PersonFileStorage,
+    private readonly letterhead: CaseLetterheadService,
   ) {}
 
   private async targetRequest(caseFileId: string) {
@@ -171,6 +185,17 @@ export class CaseInquiriesService {
     await this.ensureForRequest(request);
   }
 
+  /** زمان ارجاع را یک‌بار، هنگام ورود واقعی به مرحلهٔ استعلام، روی هر مرکز خالی می‌گذارد. */
+  async referOpenRequest(caseFileId: string) {
+    await this.ensureForUser(caseFileId);
+    const request = await findOpenRequest(this.prisma, caseFileId);
+    if (!request) return;
+    await this.prisma.caseInquiry.updateMany({
+      where: { caseRequestId: request.id, referredAt: null },
+      data: { referredAt: new Date() },
+    });
+  }
+
   async assertDelivered(caseFileId: string) {
     await this.ensureForUser(caseFileId);
     const request = await this.targetRequest(caseFileId);
@@ -187,6 +212,13 @@ export class CaseInquiriesService {
     const request = await requestOnCase(this.prisma, caseFileId, requestId);
     if (!request) return [];
     await this.ensureForRequest(request);
+    const referralStep = inquiryReferralStep(request.type);
+    if (requestIsOpen(request.status) && referralStep != null && request.formationStep >= referralStep) {
+      await this.prisma.caseInquiry.updateMany({
+        where: { caseRequestId: request.id, referredAt: null },
+        data: { referredAt: new Date() },
+      });
+    }
     const rows = await this.prisma.caseInquiry.findMany({
       where: { caseRequestId: request.id },
       include: inquiryInclude,
@@ -199,15 +231,19 @@ export class CaseInquiriesService {
     const row = await this.findReadable(id, actor);
     const person = await this.letterSubject(row.caseFileId);
     if (!person) throw new NotFoundException('شخص یافت نشد');
+    const issued = await this.letterhead.openLetter('inquiry', row.id);
     const fields = {
       fullName: person.fullName,
       nationalId: person.nationalId ?? '',
+      identityCertificateNo: person.identityCertificateNo ?? '',
       trackingCode: person.caseTrackingCode ?? '',
       jobTitle: person.activityJob?.title ?? '',
+      jobGroup: person.activityJob?.group?.title ?? '',
       unitTitle: person.businessUnitTitle ?? '',
       address: person.premiseAddress ?? '',
       phone: person.phone ?? '',
-      date: new Date().toISOString().slice(0, 10),
+      date: issued.issuedAt,
+      letterNo: issued.letterNo,
       centerName: row.inquiryCenter.name,
     };
     const center = await this.prisma.inquiryCenter.findUnique({
@@ -219,10 +255,19 @@ export class CaseInquiriesService {
       centerName: center?.name ?? row.inquiryCenter.name,
       centerPhone: center?.phone ?? null,
       nationalId: person.nationalId,
+      letterNo: issued.letterNo,
+      issuedAt: issued.issuedAt,
+      letterhead: issued.letterhead,
       letterTitle: center?.letterTitle?.trim() || `استعلام ${fields.centerName}`,
       letterBody: center?.letterBody?.trim() || DEFAULT_LETTER_BODY,
       fields,
     };
+  }
+
+  async updateLetter(id: string, actor: InquiryActor, dto: UpdateCaseLetterIssueDto) {
+    const row = await this.findReadable(id, actor);
+    await this.letterhead.updateIssue('inquiry', row.id, dto);
+    return this.letter(id, actor);
   }
 
   async decide(
@@ -236,7 +281,8 @@ export class CaseInquiriesService {
     },
   ) {
     const row = await this.findReadable(id, actor);
-    if (input.channel === CaseInquiryChannel.SYSTEM && !actor.isAdmin && row.inquiryCenter.officerId !== actor.id) {
+    await assertRequestMutable(this.prisma, row.caseRequestId, actor.id);
+    if (!actor.isAdmin && row.inquiryCenter.officerId !== actor.id) {
       throw new ForbiddenException('این استعلام برای مرکز شما نیست');
     }
     if (row.status !== CaseInquiryStatus.PENDING) {
@@ -285,9 +331,10 @@ export class CaseInquiriesService {
     return mapInquiry(saved);
   }
 
-  async reopen(id: string) {
+  async reopen(id: string, actorId?: string) {
     const row = await this.prisma.caseInquiry.findUnique({ where: { id }, include: inquiryInclude });
     if (!row) throw new NotFoundException('استعلام یافت نشد');
+    await assertRequestMutable(this.prisma, row.caseRequestId, actorId);
     const saved = await this.prisma.caseInquiry.update({
       where: { id },
       data: {
@@ -304,7 +351,14 @@ export class CaseInquiriesService {
       select: { type: true },
     });
     const phase = owner ? inquiryRewindPhase(owner.type) : null;
-    if (phase != null) await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
+    if (phase != null) {
+      await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
+      // نظرِ هنوز باز اماکن از کارتابل خارج می‌شود تا با ارجاع دوباره، مهلت از نو حساب شود.
+      await this.prisma.casePlacesReview.updateMany({
+        where: { caseRequestId: saved.caseRequestId, status: CaseInquiryStatus.PENDING },
+        data: { referredAt: null },
+      });
+    }
     return mapInquiry(saved);
   }
 
@@ -312,9 +366,12 @@ export class CaseInquiriesService {
     const q = query.q?.trim();
     const digits = q ? normalizeSearchDigits(q) : '';
     const where: Prisma.CaseInquiryWhereInput = {
-      status: query.status,
-      ...(actor.isAdmin ? {} : { inquiryCenter: { officerId: actor.id } }),
-      OR: q
+      AND: [
+        {
+          status: query.status,
+          referredAt: { not: null },
+          ...(actor.isAdmin ? {} : { inquiryCenter: { officerId: actor.id } }),
+          OR: q
         ? [
             { caseFile: { user: { fullName: containsInsensitive(q) } } },
             { caseFile: { businessUnitTitle: containsInsensitive(q) } },
@@ -328,6 +385,9 @@ export class CaseInquiriesService {
               : []),
           ]
         : undefined,
+        },
+        await this.viewFilter(query.inquiryView),
+      ],
     };
     const orderBy = resolveSortOrder<Prisma.CaseInquiryOrderByWithRelationInput>(
       query.sortBy,
@@ -339,15 +399,17 @@ export class CaseInquiriesService {
         job: (dir) => ({ caseFile: { activityJob: { title: dir } } }),
         status: (dir) => ({ status: dir }),
         createdAt: (dir) => ({ createdAt: dir }),
+        referredAt: (dir) => ({ referredAt: dir }),
         decidedAt: (dir) => ({ decidedAt: dir }),
       },
-      [{ createdAt: 'desc' }, { id: 'asc' }],
+      [{ referredAt: 'desc' }, { id: 'asc' }],
     );
     const select = {
       id: true,
       status: true,
       channel: true,
       createdAt: true,
+      referredAt: true,
       decidedAt: true,
       inquiryCenter: { select: { id: true, name: true } },
       caseFile: {
@@ -366,6 +428,7 @@ export class CaseInquiriesService {
       status: row.status,
       channel: row.channel,
       createdAt: row.createdAt,
+      referredAt: row.referredAt,
       decidedAt: row.decidedAt,
       centerName: row.inquiryCenter.name,
       applicantName: row.caseFile.user.fullName,
@@ -389,6 +452,45 @@ export class CaseInquiriesService {
       ...paginatedResult(items.map(mapRow), total, page, pageSize),
       centers: assignedCenters,
     };
+  }
+
+  /** آمار کارتابل استعلام. معوق یعنی هنوز بی‌پاسخ و گذشته از مهلت پاسخ مراکز. */
+  async stats(actor: InquiryActor) {
+    const scope: Prisma.CaseInquiryWhereInput = {
+      referredAt: { not: null },
+      ...(actor.isAdmin ? {} : { inquiryCenter: { officerId: actor.id } }),
+    };
+    const cutoff = new Date(await this.responseCutoffMs());
+    const [referred, decided, reviewing, overdue] = await Promise.all([
+      this.prisma.caseInquiry.count({ where: scope }),
+      this.prisma.caseInquiry.count({ where: { ...scope, status: { not: CaseInquiryStatus.PENDING } } }),
+      this.prisma.caseInquiry.count({
+        where: { ...scope, status: CaseInquiryStatus.PENDING, referredAt: { gte: cutoff } },
+      }),
+      this.prisma.caseInquiry.count({
+        where: { ...scope, status: CaseInquiryStatus.PENDING, referredAt: { lt: cutoff } },
+      }),
+    ]);
+    return { referred, decided, reviewing, overdue };
+  }
+
+  private async viewFilter(view?: 'referred' | 'decided' | 'reviewing' | 'overdue') {
+    if (!view || view === 'referred') return {};
+    if (view === 'decided') return { status: { not: CaseInquiryStatus.PENDING } };
+    const cutoff = new Date(await this.responseCutoffMs());
+    if (view === 'overdue') return { status: CaseInquiryStatus.PENDING, referredAt: { lt: cutoff } };
+    return { status: CaseInquiryStatus.PENDING, referredAt: { gte: cutoff } };
+  }
+
+  private async responseCutoffMs() {
+    const row = await this.prisma.caseGeneralSettings.upsert({
+      where: { id: 'default' },
+      create: { id: 'default' },
+      update: {},
+      select: { inquiryResponseDays: true },
+    });
+    const days = row.inquiryResponseDays > 0 ? row.inquiryResponseDays : 5;
+    return Date.now() - days * 86_400_000;
   }
 
   async summary(actor: InquiryActor) {
@@ -727,6 +829,19 @@ export class CaseInquiriesService {
     };
   }
 
+  async removeFile(fileId: string, actor: InquiryActor) {
+    const file = await this.prisma.caseInquiryFile.findUnique({
+      where: { id: fileId },
+      include: { caseInquiry: { include: inquiryInclude } },
+    });
+    if (!file) throw new NotFoundException('پیوست استعلام یافت نشد');
+    this.assertReadable(file.caseInquiry, actor);
+    await assertRequestMutable(this.prisma, file.caseInquiry.caseRequestId, actor.id);
+    await this.prisma.caseInquiryFile.delete({ where: { id: file.id } });
+    await this.files.remove(file.storageKey);
+    return { ok: true };
+  }
+
   async readFile(fileId: string, actor: InquiryActor) {
     const file = await this.prisma.caseInquiryFile.findUnique({
       where: { id: fileId },
@@ -758,8 +873,8 @@ export class CaseInquiriesService {
         trackingCode: true,
         businessUnitTitle: true,
         premiseAddress: true,
-        activityJob: { select: { title: true } },
-        user: { select: { fullName: true, nationalId: true, phone: true, gender: true } },
+        activityJob: { select: { title: true, group: { select: { title: true } } } },
+        user: { select: { fullName: true, nationalId: true, identityCertificateNo: true, phone: true, gender: true } },
       },
     });
     if (!row) return null;
@@ -768,6 +883,7 @@ export class CaseInquiriesService {
       fullName: row.user.fullName,
       gender: row.user.gender,
       nationalId: row.user.nationalId,
+      identityCertificateNo: row.user.identityCertificateNo,
       phone: row.user.phone,
       caseTrackingCode: row.trackingCode,
       businessUnitTitle: context?.businessUnitTitle ?? row.businessUnitTitle,

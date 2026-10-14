@@ -12,15 +12,26 @@ export const caseInquirySortFields = [
   'job',
   'status',
   'createdAt',
+  'referredAt',
   'decidedAt',
+  'decidedBy',
 ] as const;
 export type CaseInquirySortField = (typeof caseInquirySortFields)[number];
+
+export const inquiryViewFilters = ['referred', 'decided', 'reviewing', 'overdue'] as const;
+
+export type InquiryViewFilter = (typeof inquiryViewFilters)[number];
 
 export class FindCaseInquiriesQueryDto extends PaginationQueryDto {
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
   @IsEnum(CaseInquiryStatus)
   status?: CaseInquiryStatus;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsIn([...inquiryViewFilters])
+  inquiryView?: InquiryViewFilter;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

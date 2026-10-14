@@ -34,6 +34,9 @@ export type CaseInquiryMinAggregateOutputType = {
   note: string | null
   decidedById: string | null
   decidedAt: Date | null
+  referredAt: Date | null
+  letterNo: string | null
+  issuedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -48,6 +51,9 @@ export type CaseInquiryMaxAggregateOutputType = {
   note: string | null
   decidedById: string | null
   decidedAt: Date | null
+  referredAt: Date | null
+  letterNo: string | null
+  issuedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,6 +68,9 @@ export type CaseInquiryCountAggregateOutputType = {
   note: number
   decidedById: number
   decidedAt: number
+  referredAt: number
+  letterNo: number
+  issuedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -78,6 +87,9 @@ export type CaseInquiryMinAggregateInputType = {
   note?: true
   decidedById?: true
   decidedAt?: true
+  referredAt?: true
+  letterNo?: true
+  issuedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -92,6 +104,9 @@ export type CaseInquiryMaxAggregateInputType = {
   note?: true
   decidedById?: true
   decidedAt?: true
+  referredAt?: true
+  letterNo?: true
+  issuedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -106,6 +121,9 @@ export type CaseInquiryCountAggregateInputType = {
   note?: true
   decidedById?: true
   decidedAt?: true
+  referredAt?: true
+  letterNo?: true
+  issuedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -193,6 +211,9 @@ export type CaseInquiryGroupByOutputType = {
   note: string | null
   decidedById: string | null
   decidedAt: Date | null
+  referredAt: Date | null
+  letterNo: string | null
+  issuedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: CaseInquiryCountAggregateOutputType | null
@@ -228,6 +249,9 @@ export type CaseInquiryWhereInput = {
   note?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
   decidedById?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
   decidedAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
+  letterNo?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
+  issuedAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
@@ -247,6 +271,9 @@ export type CaseInquiryOrderByWithRelationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedById?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  letterNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  issuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
@@ -258,6 +285,7 @@ export type CaseInquiryOrderByWithRelationInput = {
 
 export type CaseInquiryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  letterNo?: string
   caseRequestId_inquiryCenterId?: Prisma.CaseInquiryCaseRequestIdInquiryCenterIdCompoundUniqueInput
   AND?: Prisma.CaseInquiryWhereInput | Prisma.CaseInquiryWhereInput[]
   OR?: Prisma.CaseInquiryWhereInput[]
@@ -270,6 +298,8 @@ export type CaseInquiryWhereUniqueInput = Prisma.AtLeast<{
   note?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
   decidedById?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
   decidedAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
+  issuedAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
@@ -277,7 +307,7 @@ export type CaseInquiryWhereUniqueInput = Prisma.AtLeast<{
   inquiryCenter?: Prisma.XOR<Prisma.InquiryCenterScalarRelationFilter, Prisma.InquiryCenterWhereInput>
   decidedBy?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   files?: Prisma.CaseInquiryFileListRelationFilter
-}, "id" | "caseRequestId_inquiryCenterId">
+}, "id" | "letterNo" | "caseRequestId_inquiryCenterId">
 
 export type CaseInquiryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -289,6 +319,9 @@ export type CaseInquiryOrderByWithAggregationInput = {
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedById?: Prisma.SortOrderInput | Prisma.SortOrder
   decidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  referredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  letterNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  issuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CaseInquiryCountOrderByAggregateInput
@@ -309,6 +342,9 @@ export type CaseInquiryScalarWhereWithAggregatesInput = {
   note?: Prisma.StringNullableWithAggregatesFilter<"CaseInquiry"> | string | null
   decidedById?: Prisma.StringNullableWithAggregatesFilter<"CaseInquiry"> | string | null
   decidedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseInquiry"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseInquiry"> | Date | string | null
+  letterNo?: Prisma.StringNullableWithAggregatesFilter<"CaseInquiry"> | string | null
+  issuedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseInquiry"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseInquiry"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CaseInquiry"> | Date | string
 }
@@ -319,6 +355,9 @@ export type CaseInquiryCreateInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
@@ -338,6 +377,9 @@ export type CaseInquiryUncheckedCreateInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutCaseInquiryInput
@@ -349,6 +391,9 @@ export type CaseInquiryUpdateInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
@@ -368,6 +413,9 @@ export type CaseInquiryUncheckedUpdateInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutCaseInquiryNestedInput
@@ -383,6 +431,9 @@ export type CaseInquiryCreateManyInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -393,6 +444,9 @@ export type CaseInquiryUpdateManyMutationInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -407,6 +461,9 @@ export type CaseInquiryUncheckedUpdateManyInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -436,6 +493,9 @@ export type CaseInquiryCountOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decidedById?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  referredAt?: Prisma.SortOrder
+  letterNo?: Prisma.SortOrder
+  issuedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -450,6 +510,9 @@ export type CaseInquiryMaxOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decidedById?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  referredAt?: Prisma.SortOrder
+  letterNo?: Prisma.SortOrder
+  issuedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -464,6 +527,9 @@ export type CaseInquiryMinOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decidedById?: Prisma.SortOrder
   decidedAt?: Prisma.SortOrder
+  referredAt?: Prisma.SortOrder
+  letterNo?: Prisma.SortOrder
+  issuedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -673,6 +739,9 @@ export type CaseInquiryCreateWithoutInquiryCenterInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
@@ -690,6 +759,9 @@ export type CaseInquiryUncheckedCreateWithoutInquiryCenterInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutCaseInquiryInput
@@ -734,6 +806,9 @@ export type CaseInquiryScalarWhereInput = {
   note?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
   decidedById?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
   decidedAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
+  referredAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
+  letterNo?: Prisma.StringNullableFilter<"CaseInquiry"> | string | null
+  issuedAt?: Prisma.DateTimeNullableFilter<"CaseInquiry"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseInquiry"> | Date | string
 }
@@ -744,6 +819,9 @@ export type CaseInquiryCreateWithoutFilesInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
@@ -762,6 +840,9 @@ export type CaseInquiryUncheckedCreateWithoutFilesInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -788,6 +869,9 @@ export type CaseInquiryUpdateWithoutFilesInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
@@ -806,6 +890,9 @@ export type CaseInquiryUncheckedUpdateWithoutFilesInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -816,6 +903,9 @@ export type CaseInquiryCreateWithoutCaseFileInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseRequest: Prisma.CaseRequestCreateNestedOneWithoutInquiriesInput
@@ -833,6 +923,9 @@ export type CaseInquiryUncheckedCreateWithoutCaseFileInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutCaseInquiryInput
@@ -870,6 +963,9 @@ export type CaseInquiryCreateWithoutCaseRequestInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
@@ -887,6 +983,9 @@ export type CaseInquiryUncheckedCreateWithoutCaseRequestInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutCaseInquiryInput
@@ -924,6 +1023,9 @@ export type CaseInquiryCreateWithoutDecidedByInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutInquiriesInput
@@ -941,6 +1043,9 @@ export type CaseInquiryUncheckedCreateWithoutDecidedByInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   files?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutCaseInquiryInput
@@ -981,6 +1086,9 @@ export type CaseInquiryCreateManyInquiryCenterInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -991,6 +1099,9 @@ export type CaseInquiryUpdateWithoutInquiryCenterInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
@@ -1008,6 +1119,9 @@ export type CaseInquiryUncheckedUpdateWithoutInquiryCenterInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutCaseInquiryNestedInput
@@ -1022,6 +1136,9 @@ export type CaseInquiryUncheckedUpdateManyWithoutInquiryCenterInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1035,6 +1152,9 @@ export type CaseInquiryCreateManyCaseFileInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1045,6 +1165,9 @@ export type CaseInquiryUpdateWithoutCaseFileInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseRequest?: Prisma.CaseRequestUpdateOneRequiredWithoutInquiriesNestedInput
@@ -1062,6 +1185,9 @@ export type CaseInquiryUncheckedUpdateWithoutCaseFileInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutCaseInquiryNestedInput
@@ -1076,6 +1202,9 @@ export type CaseInquiryUncheckedUpdateManyWithoutCaseFileInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1089,6 +1218,9 @@ export type CaseInquiryCreateManyCaseRequestInput = {
   note?: string | null
   decidedById?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1099,6 +1231,9 @@ export type CaseInquiryUpdateWithoutCaseRequestInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
@@ -1116,6 +1251,9 @@ export type CaseInquiryUncheckedUpdateWithoutCaseRequestInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutCaseInquiryNestedInput
@@ -1130,6 +1268,9 @@ export type CaseInquiryUncheckedUpdateManyWithoutCaseRequestInput = {
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1143,6 +1284,9 @@ export type CaseInquiryCreateManyDecidedByInput = {
   channel?: $Enums.CaseInquiryChannel | null
   note?: string | null
   decidedAt?: Date | string | null
+  referredAt?: Date | string | null
+  letterNo?: string | null
+  issuedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1153,6 +1297,9 @@ export type CaseInquiryUpdateWithoutDecidedByInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutInquiriesNestedInput
@@ -1170,6 +1317,9 @@ export type CaseInquiryUncheckedUpdateWithoutDecidedByInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   files?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutCaseInquiryNestedInput
@@ -1184,6 +1334,9 @@ export type CaseInquiryUncheckedUpdateManyWithoutDecidedByInput = {
   channel?: Prisma.NullableEnumCaseInquiryChannelFieldUpdateOperationsInput | $Enums.CaseInquiryChannel | null
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  referredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  letterNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  issuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1229,6 +1382,9 @@ export type CaseInquirySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -1249,6 +1405,9 @@ export type CaseInquirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -1267,6 +1426,9 @@ export type CaseInquirySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
@@ -1285,11 +1447,14 @@ export type CaseInquirySelectScalar = {
   note?: boolean
   decidedById?: boolean
   decidedAt?: boolean
+  referredAt?: boolean
+  letterNo?: boolean
+  issuedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CaseInquiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "caseRequestId" | "inquiryCenterId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseInquiry"]>
+export type CaseInquiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "caseRequestId" | "inquiryCenterId" | "status" | "channel" | "note" | "decidedById" | "decidedAt" | "referredAt" | "letterNo" | "issuedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseInquiry"]>
 export type CaseInquiryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
   caseRequest?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
@@ -1330,6 +1495,15 @@ export type $CaseInquiryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     note: string | null
     decidedById: string | null
     decidedAt: Date | null
+    /**
+     * زمان ارجاع همین استعلام به مرکز. خالی یعنی پرونده هنوز به مرحلهٔ استعلام نرسیده است.
+     */
+    referredAt: Date | null
+    /**
+     * شمارهٔ نامه؛ با اولین مشاهده یا چاپ ثابت می‌ماند.
+     */
+    letterNo: string | null
+    issuedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["caseInquiry"]>
@@ -1769,6 +1943,9 @@ export interface CaseInquiryFieldRefs {
   readonly note: Prisma.FieldRef<"CaseInquiry", 'String'>
   readonly decidedById: Prisma.FieldRef<"CaseInquiry", 'String'>
   readonly decidedAt: Prisma.FieldRef<"CaseInquiry", 'DateTime'>
+  readonly referredAt: Prisma.FieldRef<"CaseInquiry", 'DateTime'>
+  readonly letterNo: Prisma.FieldRef<"CaseInquiry", 'String'>
+  readonly issuedAt: Prisma.FieldRef<"CaseInquiry", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CaseInquiry", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CaseInquiry", 'DateTime'>
 }

@@ -64,9 +64,6 @@ const userSelect = {
   locationNotes: true,
   locationUpdatedAt: true,
   photoId: true,
-  nationalCardPhotoId: true,
-  passportPhotoId: true,
-  identityBookletPhotoId: true,
   orgUnitId: true,
   positionId: true,
   workUnitId: true,
@@ -293,9 +290,6 @@ export class UsersService {
         provinceId: dto.provinceId ?? null,
         cityId: dto.cityId ?? null,
         photoId: dto.photoId ?? null,
-        nationalCardPhotoId: dto.nationalCardPhotoId ?? null,
-        passportPhotoId: dto.passportPhotoId ?? null,
-        identityBookletPhotoId: dto.identityBookletPhotoId ?? null,
         orgUnitId: dto.orgUnitId ?? null,
         positionId: dto.positionId ?? null,
         workUnitId: dto.workUnitId ?? null,
@@ -360,9 +354,6 @@ export class UsersService {
       province: optionalConnect(dto.provinceId),
       city: optionalConnect(dto.cityId),
       photo: optionalConnect(dto.photoId),
-      nationalCardPhoto: optionalConnect(dto.nationalCardPhotoId),
-      passportPhoto: optionalConnect(dto.passportPhotoId),
-      identityBookletPhoto: optionalConnect(dto.identityBookletPhotoId),
       orgUnit: optionalConnect(dto.orgUnitId),
       position: optionalConnect(dto.positionId),
       workUnit: optionalConnect(dto.workUnitId),
@@ -699,10 +690,11 @@ export class UsersService {
   }
 
   async register(dto: RegisterUserDto) {
+    const nationalId = dto.nationalId?.trim() || undefined;
     const check = await this.checkRegister({
       phone: dto.phone,
       lastName: dto.lastName,
-      nationalId: dto.nationalId,
+      nationalId,
     });
     if (check.phoneLastNameTaken) {
       throw new ConflictException('کاربری با این تلفن و نام خانوادگی قبلاً ثبت شده است');
@@ -710,12 +702,15 @@ export class UsersService {
     if (check.phoneTaken) {
       throw new ConflictException('این تلفن همراه قبلاً ثبت شده است');
     }
+    if (nationalId && check.nationalIdTaken) {
+      throw new ConflictException('این کد ملی قبلاً ثبت شده است');
+    }
     return this.create({
-      username: dto.nationalId,
+      username: nationalId || dto.phone,
       password: dto.password,
       firstName: dto.firstName,
       lastName: dto.lastName,
-      nationalId: dto.nationalId,
+      nationalId: nationalId ?? null,
       phone: dto.phone,
       locale: 'fa',
       status: UserStatus.ACTIVE,
@@ -775,18 +770,8 @@ export class UsersService {
     }
   }
 
-  private async assertImages(dto: {
-    photoId?: string | null;
-    nationalCardPhotoId?: string | null;
-    passportPhotoId?: string | null;
-    identityBookletPhotoId?: string | null;
-  }) {
-    const ids = [
-      dto.photoId,
-      dto.nationalCardPhotoId,
-      dto.passportPhotoId,
-      dto.identityBookletPhotoId,
-    ].filter((id): id is string => Boolean(id));
+  private async assertImages(dto: { photoId?: string | null }) {
+    const ids = [dto.photoId].filter((id): id is string => Boolean(id));
     if (!ids.length) return;
     const count = await this.prisma.storedImage.count({
       where: { id: { in: ids } },

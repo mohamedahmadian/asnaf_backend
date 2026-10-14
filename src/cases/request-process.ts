@@ -1,4 +1,5 @@
-import { BadRequestException, ConflictException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { PERSONNEL_PHOTO_CODE } from './personnel-photo';
 import {
   CaseInquiryStatus,
   CaseFileStatus,
@@ -12,6 +13,8 @@ import { CONTRACT_DURATION_MAX, CONTRACT_DURATION_MIN, clampContractYears, readC
 import {
   ISSUANCE_FORMATION_STEP,
   MANAGEMENT_FORMATION_STEP,
+  STEWARDSHIP_ISSUANCE_STEP,
+  STEWARDSHIP_MANAGEMENT_STEP,
   assignLicenseNumber,
   nextRequestNumber,
 } from './formation-steps';
@@ -58,6 +61,34 @@ export function requestIsOpen(status: CaseRequestStatus) {
 
 export function requestIsDone(status: CaseRequestStatus) {
   return status === CaseRequestStatus.ISSUED || status === CaseRequestStatus.COMPLETED;
+}
+
+/** درخواست باز آزاد است. درخواست تمام‌شده فقط با تنظیم ویرایش بعد از صدور و نقش انتخاب‌شده عوض می‌شود. */
+export async function assertRequestMutable(prisma: Db, caseRequestId: string, actorId?: string) {
+  const request = await prisma.caseRequest.findUnique({
+    where: { id: caseRequestId },
+    select: { status: true },
+  });
+  if (!request) throw new NotFoundException('درخواست یافت نشد');
+  if (requestIsOpen(request.status)) return;
+  if (!requestIsDone(request.status)) {
+    throw new BadRequestException('این درخواست قابل ویرایش نیست');
+  }
+  if (!actorId) throw new UnauthorizedException();
+  const settings = await prisma.caseGeneralSettings.findUnique({
+    where: { id: 'default' },
+    select: { editAfterIssuance: true, editorRoleId: true },
+  });
+  if (!settings?.editAfterIssuance || !settings.editorRoleId) {
+    throw new BadRequestException('مجوز فعالیت اقتصادی این پرونده صادر شده است');
+  }
+  const match = await prisma.userRole.findUnique({
+    where: { userId_roleId: { userId: actorId, roleId: settings.editorRoleId } },
+    select: { userId: true },
+  });
+  if (!match) {
+    throw new BadRequestException('ویرایش پرونده صادرشده فقط برای نقش تعیین‌شده مجاز است');
+  }
 }
 
 export async function findOpenRequest(prisma: Db, caseFileId: string) {
@@ -111,6 +142,7 @@ export async function resolveDocumentRequirements(
     { id: string; code: string | null; title: string; gender: DocumentGender; isRequired: boolean }
   >();
   for (const row of rows) {
+    if (row.document.code === PERSONNEL_PHOTO_CODE) continue;
     if (!matchesDocumentGender(row.gender, personGender)) continue;
     const current = byId.get(row.document.id);
     if (!current) {
@@ -255,8 +287,34 @@ export function managementRewindPhase(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return MANAGEMENT_FORMATION_STEP;
   if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 4;
   if (type === CaseRequestType.AUCTION) return 1;
-  if (type === CaseRequestType.STEWARDSHIP) return 3;
+  if (type === CaseRequestType.STEWARDSHIP) return STEWARDSHIP_MANAGEMENT_STEP;
   return null;
+}
+
+/** درخواست به مرحلهٔ تایید مدیریتی رسیده است. */
+export function managementReachedWhere(): Prisma.CaseRequestWhereInput {
+  return {
+    OR: [
+      { type: CaseRequestType.ISSUANCE, formationStep: { gte: MANAGEMENT_FORMATION_STEP } },
+      { type: CaseRequestType.RENEWAL, formationStep: { gte: 4 } },
+      { type: CaseRequestType.LOCATION_CHANGE, formationStep: { gte: 4 } },
+      { type: CaseRequestType.AUCTION, formationStep: { gte: 1 } },
+      { type: CaseRequestType.STEWARDSHIP, formationStep: { gte: STEWARDSHIP_MANAGEMENT_STEP } },
+    ],
+  };
+}
+
+/** درخواست به مرحلهٔ صدور رسیده و هنوز باز است. */
+export function issuanceReachedWhere(): Prisma.CaseRequestWhereInput {
+  return {
+    OR: [
+      { type: CaseRequestType.ISSUANCE, formationStep: { gte: ISSUANCE_FORMATION_STEP } },
+      { type: CaseRequestType.RENEWAL, formationStep: { gte: 5 } },
+      { type: CaseRequestType.LOCATION_CHANGE, formationStep: { gte: 5 } },
+      { type: CaseRequestType.AUCTION, formationStep: { gte: 2 } },
+      { type: CaseRequestType.STEWARDSHIP, formationStep: { gte: STEWARDSHIP_ISSUANCE_STEP } },
+    ],
+  };
 }
 
 export async function recordStatus(

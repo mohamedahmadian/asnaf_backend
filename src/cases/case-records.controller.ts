@@ -16,6 +16,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import type { Response } from 'express';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { assertCanIssue } from './case-action-access';
 import { CaseAuctionService } from './case-auction.service';
 import { CaseStewardshipService } from './case-stewardship.service';
 import { CasesService } from './cases.service';
@@ -45,7 +46,7 @@ function suspensionUpload(file: UploadFile | undefined) {
   return { buffer: file.buffer, mimeType: file.mimetype, originalName: file.originalname };
 }
 
-type RequestUser = { id: string; isAdmin?: boolean; roleCodes?: string[] };
+type RequestUser = { id: string; isAdmin?: boolean; roleCodes?: string[]; permissionCodes?: string[] };
 
 function auctionActor(user: RequestUser | undefined, required: true): NonNullable<ReturnType<typeof auctionActorOptional>>;
 function auctionActor(user: RequestUser | undefined, required?: false): ReturnType<typeof auctionActorOptional>;
@@ -108,6 +109,7 @@ export class CaseRecordsController {
     @Param('requestId') requestId: string,
     @CurrentUser() user: RequestUser | undefined,
   ) {
+    assertCanIssue(user);
     return this.auctions.issue(id, requestId, auctionActor(user, true));
   }
 
@@ -138,8 +140,12 @@ export class CaseRecordsController {
   }
 
   @Get(':id/process')
-  processState(@Param('id') id: string) {
-    return this.cases.processState(id);
+  processState(
+    @Param('id') id: string,
+    @Query('requestId') requestId = '',
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.cases.processState(id, requestId || undefined, user?.id);
   }
 
   @Post(':id/requests')
@@ -218,8 +224,12 @@ export class CaseRecordsController {
   }
 
   @Post(':id/stewardship/step')
-  advanceStewardship(@Param('id') id: string, @Body() dto: AdvanceStewardshipDto) {
-    return this.stewardship.advance(id, dto.step);
+  advanceStewardship(
+    @Param('id') id: string,
+    @Body() dto: AdvanceStewardshipDto,
+    @CurrentUser() user: RequestUser | undefined,
+  ) {
+    return this.stewardship.advance(id, dto.step, user);
   }
 
   @Post(':id/stewardship/issue')
@@ -228,7 +238,8 @@ export class CaseRecordsController {
     @Body() dto: IssueStewardshipCardDto,
     @CurrentUser() user: RequestUser | undefined,
   ) {
-    return this.stewardship.issue(id, dto.issuedAt, user?.id);
+    const actor = assertCanIssue(user);
+    return this.stewardship.issue(id, dto.issuedAt, actor.id);
   }
 
   @Post(':id/stewardship/revocation')

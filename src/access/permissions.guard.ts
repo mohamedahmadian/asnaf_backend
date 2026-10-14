@@ -5,8 +5,12 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { hasAnyPermission } from './access.util';
-import { resolveAccessDecision } from './route-permissions';
+import { PrismaService } from '../prisma/prisma.service';
+import { hasAnyPermission, hasPermission } from './access.util';
+import { formationMayPost, issuerCanRead, issuerMayPost } from './issuance-case-read';
+import { managementReviewerCanRead, matchCaseWizardRead } from './management-review-case-read';
+import { placesOfficerCanRead } from './places-case-read';
+import { normalizeApiPath, resolveAccessDecision } from './route-permissions';
 
 type RequestAccessUser = {
   id?: string;
@@ -16,7 +20,9 @@ type RequestAccessUser = {
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
-  canActivate(context: ExecutionContext): boolean {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<{
       method: string;
       originalUrl?: string;
@@ -43,15 +49,53 @@ export class PermissionsGuard implements CanActivate {
       return true;
     }
 
+    const access = {
+      isAdmin: Boolean(user.isAdmin),
+      permissionCodes: user.permissionCodes ?? [],
+    };
+    if (hasAnyPermission(access, decision.permissions)) {
+      return true;
+    }
+
+    const rawPath = request.originalUrl ?? request.url ?? '/';
+    const query = request.query ?? {};
     if (
-      hasAnyPermission(
-        {
-          isAdmin: Boolean(user.isAdmin),
-          permissionCodes: user.permissionCodes ?? [],
-        },
-        decision.permissions,
-      )
+      request.method.toUpperCase() === 'GET' &&
+      hasPermission(access, 'cases.places') &&
+      (await placesOfficerCanRead(this.prisma, rawPath, query))
     ) {
+      return true;
+    }
+    if (
+      request.method.toUpperCase() === 'GET' &&
+      hasPermission(access, 'cases.management-reviews') &&
+      (await managementReviewerCanRead(this.prisma, user.id, rawPath, query))
+    ) {
+      return true;
+    }
+    if (
+      request.method.toUpperCase() === 'GET' &&
+      hasPermission(access, 'cases.issuance') &&
+      (await issuerCanRead(this.prisma, rawPath, query))
+    ) {
+      return true;
+    }
+    if (
+      request.method.toUpperCase() === 'GET' &&
+      hasPermission(access, 'cases.formation') &&
+      !normalizeApiPath(rawPath).startsWith('/violations') &&
+      (await matchCaseWizardRead(this.prisma, rawPath, query, {
+        caseVisible: async () => true,
+        userVisible: async () => true,
+        nationalIdVisible: async () => false,
+      }))
+    ) {
+      return true;
+    }
+    if (request.method.toUpperCase() === 'POST' && hasPermission(access, 'cases.issuance') && issuerMayPost(rawPath)) {
+      return true;
+    }
+    if (request.method.toUpperCase() === 'POST' && hasPermission(access, 'cases.formation') && formationMayPost(rawPath)) {
       return true;
     }
 

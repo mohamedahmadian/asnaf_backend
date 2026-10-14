@@ -413,6 +413,7 @@ export const ModelName = {
   CaseInquiry: 'CaseInquiry',
   CaseInquiryFile: 'CaseInquiryFile',
   CaseGeneralSettings: 'CaseGeneralSettings',
+  CaseLetterhead: 'CaseLetterhead',
   CasePlacesOffice: 'CasePlacesOffice',
   CasePlacesReview: 'CasePlacesReview',
   CasePlacesFile: 'CasePlacesFile',
@@ -512,7 +513,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "discount" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "casePlacesOffice" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1697,6 +1698,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseGeneralSettingsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseGeneralSettingsCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseLetterhead: {
+      payload: Prisma.$CaseLetterheadPayload<ExtArgs>
+      fields: Prisma.CaseLetterheadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseLetterheadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseLetterheadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseLetterheadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseLetterheadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>
+        }
+        findMany: {
+          args: Prisma.CaseLetterheadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>[]
+        }
+        create: {
+          args: Prisma.CaseLetterheadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>
+        }
+        createMany: {
+          args: Prisma.CaseLetterheadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseLetterheadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseLetterheadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>
+        }
+        update: {
+          args: Prisma.CaseLetterheadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseLetterheadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseLetterheadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseLetterheadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseLetterheadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseLetterheadPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseLetterheadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseLetterhead>
+        }
+        groupBy: {
+          args: Prisma.CaseLetterheadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseLetterheadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseLetterheadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseLetterheadCountAggregateOutputType> | number
         }
       }
     }
@@ -8156,6 +8231,9 @@ export const CaseInquiryScalarFieldEnum = {
   note: 'note',
   decidedById: 'decidedById',
   decidedAt: 'decidedAt',
+  referredAt: 'referredAt',
+  letterNo: 'letterNo',
+  issuedAt: 'issuedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -8183,10 +8261,28 @@ export const CaseGeneralSettingsScalarFieldEnum = {
   editorRoleId: 'editorRoleId',
   contractYears: 'contractYears',
   stewardContractYears: 'stewardContractYears',
+  inquiryResponseDays: 'inquiryResponseDays',
   updatedAt: 'updatedAt'
 } as const
 
 export type CaseGeneralSettingsScalarFieldEnum = (typeof CaseGeneralSettingsScalarFieldEnum)[keyof typeof CaseGeneralSettingsScalarFieldEnum]
+
+
+export const CaseLetterheadScalarFieldEnum = {
+  id: 'id',
+  organizationName: 'organizationName',
+  address: 'address',
+  phone: 'phone',
+  website: 'website',
+  signerName: 'signerName',
+  signerTitle: 'signerTitle',
+  logoId: 'logoId',
+  signatureId: 'signatureId',
+  nextNumber: 'nextNumber',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseLetterheadScalarFieldEnum = (typeof CaseLetterheadScalarFieldEnum)[keyof typeof CaseLetterheadScalarFieldEnum]
 
 
 export const CasePlacesOfficeScalarFieldEnum = {
@@ -8195,6 +8291,7 @@ export const CasePlacesOfficeScalarFieldEnum = {
   officerRoleId: 'officerRoleId',
   letterTitle: 'letterTitle',
   letterBody: 'letterBody',
+  responseDays: 'responseDays',
   updatedAt: 'updatedAt'
 } as const
 
@@ -8210,6 +8307,9 @@ export const CasePlacesReviewScalarFieldEnum = {
   note: 'note',
   decidedById: 'decidedById',
   decidedAt: 'decidedAt',
+  referredAt: 'referredAt',
+  letterNo: 'letterNo',
+  issuedAt: 'issuedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -8244,9 +8344,6 @@ export type JobDocumentScalarFieldEnum = (typeof JobDocumentScalarFieldEnum)[key
 export const DocumentScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  isRequired: 'isRequired',
-  gender: 'gender',
-  isFixed: 'isFixed',
   code: 'code',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -8258,6 +8355,7 @@ export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typ
 export const CaseIdentityDocumentScalarFieldEnum = {
   documentId: 'documentId',
   gender: 'gender',
+  isRequired: 'isRequired',
   createdAt: 'createdAt'
 } as const
 
@@ -8665,9 +8763,6 @@ export const UserScalarFieldEnum = {
   locationNotes: 'locationNotes',
   locationUpdatedAt: 'locationUpdatedAt',
   photoId: 'photoId',
-  nationalCardPhotoId: 'nationalCardPhotoId',
-  passportPhotoId: 'passportPhotoId',
-  identityBookletPhotoId: 'identityBookletPhotoId',
   orgUnitId: 'orgUnitId',
   positionId: 'positionId',
   workUnitId: 'workUnitId',
@@ -10403,6 +10498,7 @@ export type GlobalOmitConfig = {
   caseInquiry?: Prisma.CaseInquiryOmit
   caseInquiryFile?: Prisma.CaseInquiryFileOmit
   caseGeneralSettings?: Prisma.CaseGeneralSettingsOmit
+  caseLetterhead?: Prisma.CaseLetterheadOmit
   casePlacesOffice?: Prisma.CasePlacesOfficeOmit
   casePlacesReview?: Prisma.CasePlacesReviewOmit
   casePlacesFile?: Prisma.CasePlacesFileOmit

@@ -250,12 +250,19 @@ export class AuthService {
     extras?: ProfileExtras,
   ) {
     const { orgUnit, position, ...rest } = user;
-    const access = await loadUserAccess(this.prisma, user.id);
-    const roles = await this.prisma.role.findMany({
-      where: { users: { some: { userId: user.id } } },
-      select: { id: true, code: true, name: true },
-      orderBy: [{ name: 'asc' }, { code: 'asc' }],
-    });
+    const [access, roles, inquiryCenters] = await Promise.all([
+      loadUserAccess(this.prisma, user.id),
+      this.prisma.role.findMany({
+        where: { users: { some: { userId: user.id } } },
+        select: { id: true, code: true, name: true },
+        orderBy: [{ name: 'asc' }, { code: 'asc' }],
+      }),
+      this.prisma.inquiryCenter.findMany({
+        where: { officerId: user.id },
+        select: { id: true, name: true },
+        orderBy: [{ name: 'asc' }, { id: 'asc' }],
+      }),
+    ]);
     return {
       ...rest,
       orgUnit: orgUnit ? { id: orgUnit.id, name: orgUnit.name } : null,
@@ -263,6 +270,7 @@ export class AuthService {
         ? { id: position.id, code: position.code, name: position.name }
         : null,
       isNutritionRep: Boolean(orgUnit && orgUnit.nutritionRepId === user.id),
+      inquiryCenters,
       roles,
       isAdmin: access.isAdmin,
       permissionCodes: access.permissionCodes,
