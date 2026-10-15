@@ -45,6 +45,8 @@ export type CaseLetterheadMinAggregateOutputType = {
   logoId: string | null
   signatureId: string | null
   nextNumber: number | null
+  defaultLetterBody: string | null
+  defaultPaper: string | null
   updatedAt: Date | null
 }
 
@@ -59,6 +61,8 @@ export type CaseLetterheadMaxAggregateOutputType = {
   logoId: string | null
   signatureId: string | null
   nextNumber: number | null
+  defaultLetterBody: string | null
+  defaultPaper: string | null
   updatedAt: Date | null
 }
 
@@ -73,6 +77,8 @@ export type CaseLetterheadCountAggregateOutputType = {
   logoId: number
   signatureId: number
   nextNumber: number
+  defaultLetterBody: number
+  defaultPaper: number
   updatedAt: number
   _all: number
 }
@@ -97,6 +103,8 @@ export type CaseLetterheadMinAggregateInputType = {
   logoId?: true
   signatureId?: true
   nextNumber?: true
+  defaultLetterBody?: true
+  defaultPaper?: true
   updatedAt?: true
 }
 
@@ -111,6 +119,8 @@ export type CaseLetterheadMaxAggregateInputType = {
   logoId?: true
   signatureId?: true
   nextNumber?: true
+  defaultLetterBody?: true
+  defaultPaper?: true
   updatedAt?: true
 }
 
@@ -125,6 +135,8 @@ export type CaseLetterheadCountAggregateInputType = {
   logoId?: true
   signatureId?: true
   nextNumber?: true
+  defaultLetterBody?: true
+  defaultPaper?: true
   updatedAt?: true
   _all?: true
 }
@@ -226,6 +238,8 @@ export type CaseLetterheadGroupByOutputType = {
   logoId: string | null
   signatureId: string | null
   nextNumber: number
+  defaultLetterBody: string | null
+  defaultPaper: string
   updatedAt: Date
   _count: CaseLetterheadCountAggregateOutputType | null
   _avg: CaseLetterheadAvgAggregateOutputType | null
@@ -263,6 +277,8 @@ export type CaseLetterheadWhereInput = {
   logoId?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
   signatureId?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
   nextNumber?: Prisma.IntFilter<"CaseLetterhead"> | number
+  defaultLetterBody?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
+  defaultPaper?: Prisma.StringFilter<"CaseLetterhead"> | string
   updatedAt?: Prisma.DateTimeFilter<"CaseLetterhead"> | Date | string
   logo?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   signature?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
@@ -279,6 +295,8 @@ export type CaseLetterheadOrderByWithRelationInput = {
   logoId?: Prisma.SortOrderInput | Prisma.SortOrder
   signatureId?: Prisma.SortOrderInput | Prisma.SortOrder
   nextNumber?: Prisma.SortOrder
+  defaultLetterBody?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultPaper?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   logo?: Prisma.StoredImageOrderByWithRelationInput
   signature?: Prisma.StoredImageOrderByWithRelationInput
@@ -298,6 +316,8 @@ export type CaseLetterheadWhereUniqueInput = Prisma.AtLeast<{
   signerName?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
   signerTitle?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
   nextNumber?: Prisma.IntFilter<"CaseLetterhead"> | number
+  defaultLetterBody?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
+  defaultPaper?: Prisma.StringFilter<"CaseLetterhead"> | string
   updatedAt?: Prisma.DateTimeFilter<"CaseLetterhead"> | Date | string
   logo?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
   signature?: Prisma.XOR<Prisma.StoredImageNullableScalarRelationFilter, Prisma.StoredImageWhereInput> | null
@@ -314,6 +334,8 @@ export type CaseLetterheadOrderByWithAggregationInput = {
   logoId?: Prisma.SortOrderInput | Prisma.SortOrder
   signatureId?: Prisma.SortOrderInput | Prisma.SortOrder
   nextNumber?: Prisma.SortOrder
+  defaultLetterBody?: Prisma.SortOrderInput | Prisma.SortOrder
+  defaultPaper?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CaseLetterheadCountOrderByAggregateInput
   _avg?: Prisma.CaseLetterheadAvgOrderByAggregateInput
@@ -336,6 +358,8 @@ export type CaseLetterheadScalarWhereWithAggregatesInput = {
   logoId?: Prisma.StringNullableWithAggregatesFilter<"CaseLetterhead"> | string | null
   signatureId?: Prisma.StringNullableWithAggregatesFilter<"CaseLetterhead"> | string | null
   nextNumber?: Prisma.IntWithAggregatesFilter<"CaseLetterhead"> | number
+  defaultLetterBody?: Prisma.StringNullableWithAggregatesFilter<"CaseLetterhead"> | string | null
+  defaultPaper?: Prisma.StringWithAggregatesFilter<"CaseLetterhead"> | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CaseLetterhead"> | Date | string
 }
 
@@ -348,6 +372,8 @@ export type CaseLetterheadCreateInput = {
   signerName?: string | null
   signerTitle?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
   logo?: Prisma.StoredImageCreateNestedOneWithoutLetterheadLogosInput
   signature?: Prisma.StoredImageCreateNestedOneWithoutLetterheadSignaturesInput
@@ -364,6 +390,8 @@ export type CaseLetterheadUncheckedCreateInput = {
   logoId?: string | null
   signatureId?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
 }
 
@@ -376,6 +404,8 @@ export type CaseLetterheadUpdateInput = {
   signerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logo?: Prisma.StoredImageUpdateOneWithoutLetterheadLogosNestedInput
   signature?: Prisma.StoredImageUpdateOneWithoutLetterheadSignaturesNestedInput
@@ -392,6 +422,8 @@ export type CaseLetterheadUncheckedUpdateInput = {
   logoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -406,6 +438,8 @@ export type CaseLetterheadCreateManyInput = {
   logoId?: string | null
   signatureId?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
 }
 
@@ -418,6 +452,8 @@ export type CaseLetterheadUpdateManyMutationInput = {
   signerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -432,6 +468,8 @@ export type CaseLetterheadUncheckedUpdateManyInput = {
   logoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -456,6 +494,8 @@ export type CaseLetterheadCountOrderByAggregateInput = {
   logoId?: Prisma.SortOrder
   signatureId?: Prisma.SortOrder
   nextNumber?: Prisma.SortOrder
+  defaultLetterBody?: Prisma.SortOrder
+  defaultPaper?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -474,6 +514,8 @@ export type CaseLetterheadMaxOrderByAggregateInput = {
   logoId?: Prisma.SortOrder
   signatureId?: Prisma.SortOrder
   nextNumber?: Prisma.SortOrder
+  defaultLetterBody?: Prisma.SortOrder
+  defaultPaper?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -488,6 +530,8 @@ export type CaseLetterheadMinOrderByAggregateInput = {
   logoId?: Prisma.SortOrder
   signatureId?: Prisma.SortOrder
   nextNumber?: Prisma.SortOrder
+  defaultLetterBody?: Prisma.SortOrder
+  defaultPaper?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -588,6 +632,8 @@ export type CaseLetterheadCreateWithoutLogoInput = {
   signerName?: string | null
   signerTitle?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
   signature?: Prisma.StoredImageCreateNestedOneWithoutLetterheadSignaturesInput
 }
@@ -602,6 +648,8 @@ export type CaseLetterheadUncheckedCreateWithoutLogoInput = {
   signerTitle?: string | null
   signatureId?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
 }
 
@@ -624,6 +672,8 @@ export type CaseLetterheadCreateWithoutSignatureInput = {
   signerName?: string | null
   signerTitle?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
   logo?: Prisma.StoredImageCreateNestedOneWithoutLetterheadLogosInput
 }
@@ -638,6 +688,8 @@ export type CaseLetterheadUncheckedCreateWithoutSignatureInput = {
   signerTitle?: string | null
   logoId?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
 }
 
@@ -681,6 +733,8 @@ export type CaseLetterheadScalarWhereInput = {
   logoId?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
   signatureId?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
   nextNumber?: Prisma.IntFilter<"CaseLetterhead"> | number
+  defaultLetterBody?: Prisma.StringNullableFilter<"CaseLetterhead"> | string | null
+  defaultPaper?: Prisma.StringFilter<"CaseLetterhead"> | string
   updatedAt?: Prisma.DateTimeFilter<"CaseLetterhead"> | Date | string
 }
 
@@ -710,6 +764,8 @@ export type CaseLetterheadCreateManyLogoInput = {
   signerTitle?: string | null
   signatureId?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
 }
 
@@ -723,6 +779,8 @@ export type CaseLetterheadCreateManySignatureInput = {
   signerTitle?: string | null
   logoId?: string | null
   nextNumber?: number
+  defaultLetterBody?: string | null
+  defaultPaper?: string
   updatedAt?: Date | string
 }
 
@@ -735,6 +793,8 @@ export type CaseLetterheadUpdateWithoutLogoInput = {
   signerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   signature?: Prisma.StoredImageUpdateOneWithoutLetterheadSignaturesNestedInput
 }
@@ -749,6 +809,8 @@ export type CaseLetterheadUncheckedUpdateWithoutLogoInput = {
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -762,6 +824,8 @@ export type CaseLetterheadUncheckedUpdateManyWithoutLogoInput = {
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signatureId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -774,6 +838,8 @@ export type CaseLetterheadUpdateWithoutSignatureInput = {
   signerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   logo?: Prisma.StoredImageUpdateOneWithoutLetterheadLogosNestedInput
 }
@@ -788,6 +854,8 @@ export type CaseLetterheadUncheckedUpdateWithoutSignatureInput = {
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -801,6 +869,8 @@ export type CaseLetterheadUncheckedUpdateManyWithoutSignatureInput = {
   signerTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   logoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextNumber?: Prisma.IntFieldUpdateOperationsInput | number
+  defaultLetterBody?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  defaultPaper?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -817,6 +887,8 @@ export type CaseLetterheadSelect<ExtArgs extends runtime.Types.Extensions.Intern
   logoId?: boolean
   signatureId?: boolean
   nextNumber?: boolean
+  defaultLetterBody?: boolean
+  defaultPaper?: boolean
   updatedAt?: boolean
   logo?: boolean | Prisma.CaseLetterhead$logoArgs<ExtArgs>
   signature?: boolean | Prisma.CaseLetterhead$signatureArgs<ExtArgs>
@@ -833,6 +905,8 @@ export type CaseLetterheadSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   logoId?: boolean
   signatureId?: boolean
   nextNumber?: boolean
+  defaultLetterBody?: boolean
+  defaultPaper?: boolean
   updatedAt?: boolean
   logo?: boolean | Prisma.CaseLetterhead$logoArgs<ExtArgs>
   signature?: boolean | Prisma.CaseLetterhead$signatureArgs<ExtArgs>
@@ -849,6 +923,8 @@ export type CaseLetterheadSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   logoId?: boolean
   signatureId?: boolean
   nextNumber?: boolean
+  defaultLetterBody?: boolean
+  defaultPaper?: boolean
   updatedAt?: boolean
   logo?: boolean | Prisma.CaseLetterhead$logoArgs<ExtArgs>
   signature?: boolean | Prisma.CaseLetterhead$signatureArgs<ExtArgs>
@@ -865,10 +941,12 @@ export type CaseLetterheadSelectScalar = {
   logoId?: boolean
   signatureId?: boolean
   nextNumber?: boolean
+  defaultLetterBody?: boolean
+  defaultPaper?: boolean
   updatedAt?: boolean
 }
 
-export type CaseLetterheadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationName" | "address" | "phone" | "website" | "signerName" | "signerTitle" | "logoId" | "signatureId" | "nextNumber" | "updatedAt", ExtArgs["result"]["caseLetterhead"]>
+export type CaseLetterheadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "organizationName" | "address" | "phone" | "website" | "signerName" | "signerTitle" | "logoId" | "signatureId" | "nextNumber" | "defaultLetterBody" | "defaultPaper" | "updatedAt", ExtArgs["result"]["caseLetterhead"]>
 export type CaseLetterheadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   logo?: boolean | Prisma.CaseLetterhead$logoArgs<ExtArgs>
   signature?: boolean | Prisma.CaseLetterhead$signatureArgs<ExtArgs>
@@ -902,6 +980,14 @@ export type $CaseLetterheadPayload<ExtArgs extends runtime.Types.Extensions.Inte
      * شمارهٔ بعدی نامه. با هر صدور یک واحد زیاد می‌شود.
      */
     nextNumber: number
+    /**
+     * متن پیش‌فرض نامه استعلام برای مراکزی که متن جدا ندارند؛ برای همه مشاغل یکسان است.
+     */
+    defaultLetterBody: string | null
+    /**
+     * اندازه پیش‌فرض چاپ نامه: A4 یا A5
+     */
+    defaultPaper: string
     updatedAt: Date
   }, ExtArgs["result"]["caseLetterhead"]>
   composites: {}
@@ -1338,6 +1424,8 @@ export interface CaseLetterheadFieldRefs {
   readonly logoId: Prisma.FieldRef<"CaseLetterhead", 'String'>
   readonly signatureId: Prisma.FieldRef<"CaseLetterhead", 'String'>
   readonly nextNumber: Prisma.FieldRef<"CaseLetterhead", 'Int'>
+  readonly defaultLetterBody: Prisma.FieldRef<"CaseLetterhead", 'String'>
+  readonly defaultPaper: Prisma.FieldRef<"CaseLetterhead", 'String'>
   readonly updatedAt: Prisma.FieldRef<"CaseLetterhead", 'DateTime'>
 }
     

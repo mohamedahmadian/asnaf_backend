@@ -577,6 +577,7 @@ export type CaseFileWhereInput = {
   violations?: Prisma.ViolationListRelationFilter
   suspensions?: Prisma.CaseSuspensionListRelationFilter
   stewardRevokeFile?: Prisma.XOR<Prisma.CaseStewardRevokeFileNullableScalarRelationFilter, Prisma.CaseStewardRevokeFileWhereInput> | null
+  revocationProcess?: Prisma.XOR<Prisma.CaseRevocationProcessNullableScalarRelationFilter, Prisma.CaseRevocationProcessWhereInput> | null
 }
 
 export type CaseFileOrderByWithRelationInput = {
@@ -644,6 +645,7 @@ export type CaseFileOrderByWithRelationInput = {
   violations?: Prisma.ViolationOrderByRelationAggregateInput
   suspensions?: Prisma.CaseSuspensionOrderByRelationAggregateInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileOrderByWithRelationInput
+  revocationProcess?: Prisma.CaseRevocationProcessOrderByWithRelationInput
 }
 
 export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
@@ -714,6 +716,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   violations?: Prisma.ViolationListRelationFilter
   suspensions?: Prisma.CaseSuspensionListRelationFilter
   stewardRevokeFile?: Prisma.XOR<Prisma.CaseStewardRevokeFileNullableScalarRelationFilter, Prisma.CaseStewardRevokeFileWhereInput> | null
+  revocationProcess?: Prisma.XOR<Prisma.CaseRevocationProcessNullableScalarRelationFilter, Prisma.CaseRevocationProcessWhereInput> | null
 }, "id" | "cardNumber" | "trackingCode" | "licenseNumber">
 
 export type CaseFileOrderByWithAggregationInput = {
@@ -882,6 +885,7 @@ export type CaseFileCreateInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateInput = {
@@ -942,6 +946,7 @@ export type CaseFileUncheckedCreateInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUpdateInput = {
@@ -1002,6 +1007,7 @@ export type CaseFileUpdateInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateInput = {
@@ -1062,6 +1068,7 @@ export type CaseFileUncheckedUpdateInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyInput = {
@@ -1619,6 +1626,20 @@ export type CaseFileUpdateOneRequiredWithoutStewardRevokeFileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutStewardRevokeFileInput, Prisma.CaseFileUpdateWithoutStewardRevokeFileInput>, Prisma.CaseFileUncheckedUpdateWithoutStewardRevokeFileInput>
 }
 
+export type CaseFileCreateNestedOneWithoutRevocationProcessInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutRevocationProcessInput, Prisma.CaseFileUncheckedCreateWithoutRevocationProcessInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutRevocationProcessInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+}
+
+export type CaseFileUpdateOneRequiredWithoutRevocationProcessNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutRevocationProcessInput, Prisma.CaseFileUncheckedCreateWithoutRevocationProcessInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutRevocationProcessInput
+  upsert?: Prisma.CaseFileUpsertWithoutRevocationProcessInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutRevocationProcessInput, Prisma.CaseFileUpdateWithoutRevocationProcessInput>, Prisma.CaseFileUncheckedUpdateWithoutRevocationProcessInput>
+}
+
 export type CaseFileCreateNestedOneWithoutSuspensionsInput = {
   create?: Prisma.XOR<Prisma.CaseFileCreateWithoutSuspensionsInput, Prisma.CaseFileUncheckedCreateWithoutSuspensionsInput>
   connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutSuspensionsInput
@@ -1916,6 +1937,7 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
@@ -1975,6 +1997,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseCityInput = {
@@ -2113,6 +2136,7 @@ export type CaseFileCreateWithoutActivityJobInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityJobInput = {
@@ -2172,6 +2196,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityJobInput = {
@@ -2257,6 +2282,7 @@ export type CaseFileCreateWithoutInquiriesInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutInquiriesInput = {
@@ -2316,6 +2342,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutInquiriesInput = {
@@ -2391,6 +2418,7 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
@@ -2450,6 +2478,7 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPlacesReviewsInput = {
@@ -2509,6 +2538,7 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
@@ -2568,6 +2598,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPlacesReviewsInput = {
@@ -2643,6 +2674,7 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
@@ -2702,6 +2734,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutManagementReviewsInput = {
@@ -2761,6 +2794,7 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
@@ -2820,6 +2854,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutManagementReviewsInput = {
@@ -2895,6 +2930,7 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
@@ -2954,6 +2990,7 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutStewardCasesInput = {
@@ -3013,6 +3050,7 @@ export type CaseFileCreateWithoutStewardCasesInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
@@ -3072,6 +3110,7 @@ export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutStewardCasesInput = {
@@ -3136,6 +3175,7 @@ export type CaseFileCreateWithoutHostCaseFileInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
@@ -3195,6 +3235,7 @@ export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutHostCaseFileInput = {
@@ -3275,6 +3316,7 @@ export type CaseFileUpdateWithoutStewardCasesInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
@@ -3334,6 +3376,7 @@ export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUpsertWithWhereUniqueWithoutHostCaseFileInput = {
@@ -3409,6 +3452,7 @@ export type CaseFileCreateWithoutStewardRevokeFileInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
@@ -3468,6 +3512,7 @@ export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutStewardRevokeFileInput = {
@@ -3543,6 +3588,7 @@ export type CaseFileUpdateWithoutStewardRevokeFileInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
@@ -3602,6 +3648,263 @@ export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
+}
+
+export type CaseFileCreateWithoutRevocationProcessInput = {
+  id?: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutRevocationProcessInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutRevocationProcessInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutRevocationProcessInput, Prisma.CaseFileUncheckedCreateWithoutRevocationProcessInput>
+}
+
+export type CaseFileUpsertWithoutRevocationProcessInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutRevocationProcessInput, Prisma.CaseFileUncheckedUpdateWithoutRevocationProcessInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutRevocationProcessInput, Prisma.CaseFileUncheckedCreateWithoutRevocationProcessInput>
+  where?: Prisma.CaseFileWhereInput
+}
+
+export type CaseFileUpdateToOneWithWhereWithoutRevocationProcessInput = {
+  where?: Prisma.CaseFileWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutRevocationProcessInput, Prisma.CaseFileUncheckedUpdateWithoutRevocationProcessInput>
+}
+
+export type CaseFileUpdateWithoutRevocationProcessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutRevocationProcessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutSuspensionsInput = {
@@ -3661,6 +3964,7 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
@@ -3720,6 +4024,7 @@ export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutSuspensionsInput = {
@@ -3795,6 +4100,7 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
@@ -3854,6 +4160,7 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutRequestsInput = {
@@ -3913,6 +4220,7 @@ export type CaseFileCreateWithoutRequestsInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRequestsInput = {
@@ -3972,6 +4280,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRequestsInput = {
@@ -4047,6 +4356,7 @@ export type CaseFileUpdateWithoutRequestsInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRequestsInput = {
@@ -4106,6 +4416,7 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPremiseHistoryInput = {
@@ -4165,6 +4476,7 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
@@ -4224,6 +4536,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseHistoryInput = {
@@ -4299,6 +4612,7 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
@@ -4358,6 +4672,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutActivityDocumentsInput = {
@@ -4417,6 +4732,7 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
@@ -4476,6 +4792,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityDocumentsInput = {
@@ -4551,6 +4868,7 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
@@ -4610,6 +4928,7 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutUserInput = {
@@ -4669,6 +4988,7 @@ export type CaseFileCreateWithoutUserInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutUserInput = {
@@ -4728,6 +5048,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutUserInput = {
@@ -4797,6 +5118,7 @@ export type CaseFileCreateWithoutRevokedByInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRevokedByInput = {
@@ -4856,6 +5178,7 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRevokedByInput = {
@@ -4957,6 +5280,7 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
@@ -5016,6 +5340,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseComplexInput = {
@@ -5101,6 +5426,7 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
@@ -5160,6 +5486,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRegistrationPlaceInput = {
@@ -5245,6 +5572,7 @@ export type CaseFileCreateWithoutViolationsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutViolationsInput = {
@@ -5304,6 +5632,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutViolationsInput = {
@@ -5379,6 +5708,7 @@ export type CaseFileUpdateWithoutViolationsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutViolationsInput = {
@@ -5438,6 +5768,7 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyPremiseCityInput = {
@@ -5546,6 +5877,7 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
@@ -5605,6 +5937,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
@@ -5762,6 +6095,7 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
@@ -5821,6 +6155,7 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
@@ -5978,6 +6313,7 @@ export type CaseFileUpdateWithoutHostCaseFileInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
@@ -6037,6 +6373,7 @@ export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutHostCaseFileInput = {
@@ -6243,6 +6580,7 @@ export type CaseFileUpdateWithoutUserInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutUserInput = {
@@ -6302,6 +6640,7 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutUserInput = {
@@ -6410,6 +6749,7 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
@@ -6469,6 +6809,7 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
@@ -6626,6 +6967,7 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
@@ -6685,6 +7027,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
@@ -6842,6 +7185,7 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
@@ -6901,6 +7245,7 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
@@ -7120,6 +7465,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
   suspensions?: boolean | Prisma.CaseFile$suspensionsArgs<ExtArgs>
   stewardRevokeFile?: boolean | Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>
+  revocationProcess?: boolean | Prisma.CaseFile$revocationProcessArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseFile"]>
 
@@ -7306,6 +7652,7 @@ export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   violations?: boolean | Prisma.CaseFile$violationsArgs<ExtArgs>
   suspensions?: boolean | Prisma.CaseFile$suspensionsArgs<ExtArgs>
   stewardRevokeFile?: boolean | Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>
+  revocationProcess?: boolean | Prisma.CaseFile$revocationProcessArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -7347,6 +7694,7 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     violations: Prisma.$ViolationPayload<ExtArgs>[]
     suspensions: Prisma.$CaseSuspensionPayload<ExtArgs>[]
     stewardRevokeFile: Prisma.$CaseStewardRevokeFilePayload<ExtArgs> | null
+    revocationProcess: Prisma.$CaseRevocationProcessPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -7822,6 +8170,7 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
   violations<T extends Prisma.CaseFile$violationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$violationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   suspensions<T extends Prisma.CaseFile$suspensionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$suspensionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseSuspensionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stewardRevokeFile<T extends Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>>): Prisma.Prisma__CaseStewardRevokeFileClient<runtime.Types.Result.GetResult<Prisma.$CaseStewardRevokeFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  revocationProcess<T extends Prisma.CaseFile$revocationProcessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$revocationProcessArgs<ExtArgs>>): Prisma.Prisma__CaseRevocationProcessClient<runtime.Types.Result.GetResult<Prisma.$CaseRevocationProcessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8645,6 +8994,25 @@ export type CaseFile$stewardRevokeFileArgs<ExtArgs extends runtime.Types.Extensi
    */
   include?: Prisma.CaseStewardRevokeFileInclude<ExtArgs> | null
   where?: Prisma.CaseStewardRevokeFileWhereInput
+}
+
+/**
+ * CaseFile.revocationProcess
+ */
+export type CaseFile$revocationProcessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRevocationProcess
+   */
+  select?: Prisma.CaseRevocationProcessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRevocationProcess
+   */
+  omit?: Prisma.CaseRevocationProcessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRevocationProcessInclude<ExtArgs> | null
+  where?: Prisma.CaseRevocationProcessWhereInput
 }
 
 /**

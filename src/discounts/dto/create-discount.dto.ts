@@ -1,6 +1,9 @@
 import { Transform, Type } from 'class-transformer';
 import {
+  ArrayUnique,
+  IsArray,
   IsBoolean,
+  IsIn,
   IsInt,
   IsNumber,
   IsOptional,
@@ -13,6 +16,7 @@ import {
 } from 'class-validator';
 import { emptyToNull } from '../../common/dto-transform';
 import { toLatinDigits } from '../../common/national-id';
+import { CaseRequestType } from '../../generated/prisma/client';
 
 function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
@@ -47,6 +51,13 @@ function toPercent(value: unknown) {
   return Number.isFinite(parsed) ? parsed : value;
 }
 
+export const discountProcessTypes = [
+  CaseRequestType.ISSUANCE,
+  CaseRequestType.RENEWAL,
+  CaseRequestType.AUCTION,
+  CaseRequestType.STEWARDSHIP,
+] as const;
+
 export class CreateDiscountDto {
   @Transform(({ value }) => toYear(value))
   @Type(() => Number)
@@ -67,6 +78,12 @@ export class CreateDiscountDto {
   @Min(0)
   @Max(100)
   percent: number;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayUnique()
+  @IsIn([...discountProcessTypes], { each: true })
+  processTypes?: (typeof discountProcessTypes)[number][];
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(trimString(value)))

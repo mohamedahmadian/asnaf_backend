@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsOptional, IsString, IsUUID, MaxLength, ValidateIf } from 'class-validator';
+import { IsIn, IsOptional, IsString, IsUUID, MaxLength, ValidateIf } from 'class-validator';
 
 function emptyToNull({ value }: { value: unknown }) {
   if (value == null) return null;
@@ -56,4 +56,14 @@ export class SaveCaseLetterheadDto {
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
   signatureId?: string | null;
+
+  @Transform(emptyToNull)
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(20000)
+  defaultLetterBody?: string | null;
+
+  @IsOptional()
+  @IsIn(['A4', 'A5'])
+  defaultPaper?: 'A4' | 'A5';
 }

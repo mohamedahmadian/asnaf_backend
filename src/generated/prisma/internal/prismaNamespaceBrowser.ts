@@ -57,6 +57,7 @@ export const ModelName = {
   City: 'City',
   BankAccount: 'BankAccount',
   MunicipalFee: 'MunicipalFee',
+  FinancialHeading: 'FinancialHeading',
   Discount: 'Discount',
   JobType: 'JobType',
   InquiryCenter: 'InquiryCenter',
@@ -69,6 +70,8 @@ export const ModelName = {
   CaseGeneralSettings: 'CaseGeneralSettings',
   CaseLetterhead: 'CaseLetterhead',
   CasePlacesOffice: 'CasePlacesOffice',
+  CaseRevocationSettings: 'CaseRevocationSettings',
+  CaseRevocationOrganization: 'CaseRevocationOrganization',
   CasePlacesReview: 'CasePlacesReview',
   CasePlacesFile: 'CasePlacesFile',
   JobDocument: 'JobDocument',
@@ -80,6 +83,8 @@ export const ModelName = {
   CaseManagementReviewFile: 'CaseManagementReviewFile',
   CaseFile: 'CaseFile',
   CaseStewardRevokeFile: 'CaseStewardRevokeFile',
+  CaseRevocationProcess: 'CaseRevocationProcess',
+  CaseRevocationLetter: 'CaseRevocationLetter',
   CaseSuspension: 'CaseSuspension',
   CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
@@ -259,10 +264,11 @@ export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[key
 export const MunicipalFeeScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  bankAccountId: 'bankAccountId',
+  financialHeadingId: 'financialHeadingId',
   description: 'description',
   isActive: 'isActive',
   amount: 'amount',
+  processTypes: 'processTypes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -270,11 +276,25 @@ export const MunicipalFeeScalarFieldEnum = {
 export type MunicipalFeeScalarFieldEnum = (typeof MunicipalFeeScalarFieldEnum)[keyof typeof MunicipalFeeScalarFieldEnum]
 
 
+export const FinancialHeadingScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  bankAccountId: 'bankAccountId',
+  paymentId: 'paymentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FinancialHeadingScalarFieldEnum = (typeof FinancialHeadingScalarFieldEnum)[keyof typeof FinancialHeadingScalarFieldEnum]
+
+
 export const DiscountScalarFieldEnum = {
   id: 'id',
   year: 'year',
   title: 'title',
   percent: 'percent',
+  processTypes: 'processTypes',
   description: 'description',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -419,6 +439,8 @@ export const CaseLetterheadScalarFieldEnum = {
   logoId: 'logoId',
   signatureId: 'signatureId',
   nextNumber: 'nextNumber',
+  defaultLetterBody: 'defaultLetterBody',
+  defaultPaper: 'defaultPaper',
   updatedAt: 'updatedAt'
 } as const
 
@@ -436,6 +458,29 @@ export const CasePlacesOfficeScalarFieldEnum = {
 } as const
 
 export type CasePlacesOfficeScalarFieldEnum = (typeof CasePlacesOfficeScalarFieldEnum)[keyof typeof CasePlacesOfficeScalarFieldEnum]
+
+
+export const CaseRevocationSettingsScalarFieldEnum = {
+  id: 'id',
+  fixedAmount: 'fixedAmount',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRevocationSettingsScalarFieldEnum = (typeof CaseRevocationSettingsScalarFieldEnum)[keyof typeof CaseRevocationSettingsScalarFieldEnum]
+
+
+export const CaseRevocationOrganizationScalarFieldEnum = {
+  id: 'id',
+  settingsId: 'settingsId',
+  inquiryCenterId: 'inquiryCenterId',
+  letterTitle: 'letterTitle',
+  letterBody: 'letterBody',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRevocationOrganizationScalarFieldEnum = (typeof CaseRevocationOrganizationScalarFieldEnum)[keyof typeof CaseRevocationOrganizationScalarFieldEnum]
 
 
 export const CasePlacesReviewScalarFieldEnum = {
@@ -619,6 +664,36 @@ export const CaseStewardRevokeFileScalarFieldEnum = {
 } as const
 
 export type CaseStewardRevokeFileScalarFieldEnum = (typeof CaseStewardRevokeFileScalarFieldEnum)[keyof typeof CaseStewardRevokeFileScalarFieldEnum]
+
+
+export const CaseRevocationProcessScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  amount: 'amount',
+  revocationDate: 'revocationDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRevocationProcessScalarFieldEnum = (typeof CaseRevocationProcessScalarFieldEnum)[keyof typeof CaseRevocationProcessScalarFieldEnum]
+
+
+export const CaseRevocationLetterScalarFieldEnum = {
+  id: 'id',
+  processId: 'processId',
+  inquiryCenterId: 'inquiryCenterId',
+  centerName: 'centerName',
+  centerPhone: 'centerPhone',
+  letterTitle: 'letterTitle',
+  letterBody: 'letterBody',
+  letterNo: 'letterNo',
+  issuedAt: 'issuedAt',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRevocationLetterScalarFieldEnum = (typeof CaseRevocationLetterScalarFieldEnum)[keyof typeof CaseRevocationLetterScalarFieldEnum]
 
 
 export const CaseSuspensionScalarFieldEnum = {

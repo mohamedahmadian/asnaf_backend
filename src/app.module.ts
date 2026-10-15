@@ -10,6 +10,7 @@ import { CasesModule } from './cases/cases.module';
 import { CommercialComplexesModule } from './commercial-complexes/commercial-complexes.module';
 import { DiscountsModule } from './discounts/discounts.module';
 import { DocumentsModule } from './documents/documents.module';
+import { FinancialHeadingsModule } from './financial-headings/financial-headings.module';
 import { StaffPostsModule } from './staff-posts/staff-posts.module';
 import { GeoModule } from './geo/geo.module';
 import { ImagesModule } from './images/images.module';
@@ -37,6 +38,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     RolesModule,
     GeoModule,
     BankAccountsModule,
+    FinancialHeadingsModule,
     CasesModule,
     MunicipalFeesModule,
     DiscountsModule,

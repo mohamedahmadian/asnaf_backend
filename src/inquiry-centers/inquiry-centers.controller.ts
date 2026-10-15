@@ -32,6 +32,11 @@ export class InquiryCentersController {
     return this.letterhead.view();
   }
 
+  @Get('letter-defaults')
+  letterDefaults() {
+    return this.letterhead.defaults();
+  }
+
   @Post()
   create(@Body() dto: CreateInquiryCenterDto) {
     return this.centers.create(dto);

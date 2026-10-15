@@ -72,13 +72,6 @@ const inquiryInclude = {
 
 type InquiryRecord = Prisma.CaseInquiryGetPayload<{ include: typeof inquiryInclude }>;
 
-const DEFAULT_LETTER_BODY = [
-  'با سلام',
-  'خواهشمند است نسبت به استعلام {{fullName}} به شماره ملی {{nationalId}} با کد پیگیری {{trackingCode}} برای شغل {{jobTitle}} ({{unitTitle}}) اعلام نظر فرمایید.',
-  'نشانی: {{address}}',
-  'تلفن: {{phone}}',
-].join('\n');
-
 export type InquiryActor = {
   id: string;
   isAdmin?: boolean;
@@ -246,10 +239,13 @@ export class CaseInquiriesService {
       letterNo: issued.letterNo,
       centerName: row.inquiryCenter.name,
     };
-    const center = await this.prisma.inquiryCenter.findUnique({
-      where: { id: row.inquiryCenterId },
-      select: { letterTitle: true, letterBody: true, name: true, phone: true },
-    });
+    const [center, defaults] = await Promise.all([
+      this.prisma.inquiryCenter.findUnique({
+        where: { id: row.inquiryCenterId },
+        select: { letterTitle: true, letterBody: true, name: true, phone: true },
+      }),
+      this.letterhead.defaults(),
+    ]);
     return {
       id: row.id,
       centerName: center?.name ?? row.inquiryCenter.name,
@@ -259,7 +255,7 @@ export class CaseInquiriesService {
       issuedAt: issued.issuedAt,
       letterhead: issued.letterhead,
       letterTitle: center?.letterTitle?.trim() || `استعلام ${fields.centerName}`,
-      letterBody: center?.letterBody?.trim() || DEFAULT_LETTER_BODY,
+      letterBody: center?.letterBody?.trim() || defaults.defaultLetterBody,
       fields,
     };
   }

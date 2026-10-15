@@ -6,6 +6,19 @@ import { SaveCaseLetterheadDto } from './dto/save-case-letterhead.dto';
 
 const SETTINGS_ID = 'default';
 
+export const DEFAULT_INQUIRY_LETTER_BODY = [
+  'با سلام',
+  'خواهشمند است نسبت به استعلام {{fullName}} به شماره ملی {{nationalId}} با کد پیگیری {{trackingCode}} برای شغل {{jobTitle}} ({{unitTitle}}) اعلام نظر فرمایید.',
+  'نشانی: {{address}}',
+  'تلفن: {{phone}}',
+].join('\n');
+
+export type LetterPaperSize = 'A4' | 'A5';
+
+function paperSize(value: string | null | undefined): LetterPaperSize {
+  return value === 'A5' ? 'A5' : 'A4';
+}
+
 const IMAGE_USE = {
   photoUsers: true,
   foodPhotos: true,
@@ -20,7 +33,7 @@ const IMAGE_USE = {
   letterheadSignatures: true,
 } satisfies Prisma.StoredImageCountOutputTypeSelect;
 
-type LetterTarget = 'inquiry' | 'places';
+type LetterTarget = 'inquiry' | 'places' | 'revocation';
 
 function jalaliYear(date = new Date()) {
   const year = date.getFullYear();
@@ -77,6 +90,9 @@ export class CaseLetterheadService {
         signerTitle: dto.signerTitle ?? null,
         logoId,
         signatureId,
+        defaultLetterBody:
+          dto.defaultLetterBody === undefined ? current.defaultLetterBody : dto.defaultLetterBody,
+        defaultPaper: dto.defaultPaper === undefined ? current.defaultPaper : dto.defaultPaper,
       },
     });
     const stale = [current.logoId, current.signatureId].filter(
@@ -90,6 +106,14 @@ export class CaseLetterheadService {
 
   view() {
     return this.forLetter();
+  }
+
+  async defaults() {
+    const row = await this.ensure();
+    return {
+      defaultLetterBody: row.defaultLetterBody?.trim() || DEFAULT_INQUIRY_LETTER_BODY,
+      defaultPaper: paperSize(row.defaultPaper),
+    };
   }
 
   /** شماره و تاریخ را بار اول ثابت می‌کند و سربرگ فعلی را برای چاپ برمی‌گرداند. */
@@ -112,7 +136,7 @@ export class CaseLetterheadService {
       throw new BadRequestException('تاریخ صدور معتبر نیست');
     }
     const issuedAt = dateOnlyNoon(input.issuedAt);
-    const [inquiryTaken, placesTaken] = await Promise.all([
+    const [inquiryTaken, placesTaken, revocationTaken] = await Promise.all([
       this.prisma.caseInquiry.findFirst({
         where: {
           letterNo,
@@ -127,8 +151,15 @@ export class CaseLetterheadService {
         },
         select: { id: true },
       }),
+      this.prisma.caseRevocationLetter.findFirst({
+        where: {
+          letterNo,
+          ...(target === 'revocation' ? { NOT: { id } } : {}),
+        },
+        select: { id: true },
+      }),
     ]);
-    if (inquiryTaken || placesTaken) {
+    if (inquiryTaken || placesTaken || revocationTaken) {
       throw new BadRequestException('این شماره نامه قبلاً استفاده شده است');
     }
     try {
@@ -151,6 +182,8 @@ export class CaseLetterheadService {
     signerTitle: string | null;
     logoId: string | null;
     signatureId: string | null;
+    defaultLetterBody: string | null;
+    defaultPaper: string;
   }) {
     return {
       organizationName: row.organizationName,
@@ -161,6 +194,8 @@ export class CaseLetterheadService {
       signerTitle: row.signerTitle,
       logoId: row.logoId,
       signatureId: row.signatureId,
+      defaultLetterBody: row.defaultLetterBody?.trim() || DEFAULT_INQUIRY_LETTER_BODY,
+      defaultPaper: paperSize(row.defaultPaper),
     };
   }
 
@@ -179,6 +214,7 @@ export class CaseLetterheadService {
         signerTitle: null,
         logoDataUrl: null,
         signatureDataUrl: null,
+        defaultPaper: 'A4' as const,
       };
     }
     return {
@@ -190,6 +226,7 @@ export class CaseLetterheadService {
       signerTitle: row.signerTitle,
       logoDataUrl: row.logo ? dataUrl(row.logo) : null,
       signatureDataUrl: row.signature ? dataUrl(row.signature) : null,
+      defaultPaper: paperSize(row.defaultPaper),
     };
   }
 
@@ -201,10 +238,15 @@ export class CaseLetterheadService {
               where: { id },
               select: { letterNo: true, issuedAt: true },
             })
-          : await tx.casePlacesReview.findUnique({
-              where: { id },
-              select: { letterNo: true, issuedAt: true },
-            });
+          : target === 'places'
+            ? await tx.casePlacesReview.findUnique({
+                where: { id },
+                select: { letterNo: true, issuedAt: true },
+              })
+            : await tx.caseRevocationLetter.findUnique({
+                where: { id },
+                select: { letterNo: true, issuedAt: true },
+              });
       if (!current) throw new NotFoundException('نامه یافت نشد');
       if (current.letterNo && current.issuedAt) {
         return { letterNo: current.letterNo, issuedAt: current.issuedAt };
@@ -243,11 +285,12 @@ export class CaseLetterheadService {
   }
 
   private async letterNoTaken(tx: Prisma.TransactionClient, letterNo: string) {
-    const [inquiry, places] = await Promise.all([
+    const [inquiry, places, revocation] = await Promise.all([
       tx.caseInquiry.findFirst({ where: { letterNo }, select: { id: true } }),
       tx.casePlacesReview.findFirst({ where: { letterNo }, select: { id: true } }),
+      tx.caseRevocationLetter.findFirst({ where: { letterNo }, select: { id: true } }),
     ]);
-    return Boolean(inquiry || places);
+    return Boolean(inquiry || places || revocation);
   }
 
   private writeIssue(
@@ -259,7 +302,10 @@ export class CaseLetterheadService {
     if (target === 'inquiry') {
       return tx.caseInquiry.update({ where: { id }, data });
     }
-    return tx.casePlacesReview.update({ where: { id }, data });
+    if (target === 'places') {
+      return tx.casePlacesReview.update({ where: { id }, data });
+    }
+    return tx.caseRevocationLetter.update({ where: { id }, data });
   }
 
   private ensure() {

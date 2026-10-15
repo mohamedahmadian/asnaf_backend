@@ -48,6 +48,11 @@ export type BankAccount = Prisma.BankAccountModel
  */
 export type MunicipalFee = Prisma.MunicipalFeeModel
 /**
+ * Model FinancialHeading
+ * 
+ */
+export type FinancialHeading = Prisma.FinancialHeadingModel
+/**
  * Model Discount
  * 
  */
@@ -108,6 +113,16 @@ export type CaseLetterhead = Prisma.CaseLetterheadModel
  */
 export type CasePlacesOffice = Prisma.CasePlacesOfficeModel
 /**
+ * Model CaseRevocationSettings
+ * تنظیمات درخواست ابطال مجوز؛ یک ردیف ثابت
+ */
+export type CaseRevocationSettings = Prisma.CaseRevocationSettingsModel
+/**
+ * Model CaseRevocationOrganization
+ * سازمانی که هنگام ابطال مجوز باید به آن اطلاع داده شود
+ */
+export type CaseRevocationOrganization = Prisma.CaseRevocationOrganizationModel
+/**
  * Model CasePlacesReview
  * 
  */
@@ -162,6 +177,16 @@ export type CaseFile = Prisma.CaseFileModel
  * پیوست درخواست ابطال کارت مباشرت. خود فایل در File Storage است.
  */
 export type CaseStewardRevokeFile = Prisma.CaseStewardRevokeFileModel
+/**
+ * Model CaseRevocationProcess
+ * فرایند سه‌مرحله‌ای ابطال مجوز اقتصادی
+ */
+export type CaseRevocationProcess = Prisma.CaseRevocationProcessModel
+/**
+ * Model CaseRevocationLetter
+ * نسخهٔ ثابت نامهٔ هر سازمان برای یک فرایند ابطال
+ */
+export type CaseRevocationLetter = Prisma.CaseRevocationLetterModel
 /**
  * Model CaseSuspension
  * یک دوره تعلیق پرونده. با رفع تعلیق، liftedAt پر می‌شود و پرونده از حالت تعلیق خارج می‌شود.

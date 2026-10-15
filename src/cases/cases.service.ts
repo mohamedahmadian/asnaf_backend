@@ -2581,7 +2581,7 @@ export class CasesService {
     }
   }
 
-  async revoke(id: string, dto: RevokeCaseDto, actorId?: string) {
+  async revoke(id: string, dto: RevokeCaseDto, actorId?: string, revokedAt = new Date()) {
     const file = await this.prisma.caseFile.findUnique({
       where: { id },
       select: { id: true, formationStep: true, status: true },
@@ -2590,7 +2590,6 @@ export class CasesService {
     if (file.status === CaseFileStatus.REVOKED) {
       throw new BadRequestException('این پرونده قبلاً ابطال شده است');
     }
-    const revokedAt = new Date();
     await this.prisma.caseFile.update({
       where: { id },
       data: {
@@ -2829,6 +2828,14 @@ export class CasesService {
     ];
   }
 
+  async documentCatalog() {
+    return this.prisma.document.findMany({
+      where: { NOT: { code: PERSONNEL_PHOTO_CODE } },
+      orderBy: { title: 'asc' },
+      select: { id: true, title: true },
+    });
+  }
+
   async documentTypes() {
     const rows = await this.prisma.caseIdentityDocument.findMany({
       where: { document: { NOT: { code: PERSONNEL_PHOTO_CODE } } },
@@ -2964,6 +2971,7 @@ export class CasesService {
     requestId?: string;
     jobId?: string;
     editCaseId?: string;
+    other?: boolean;
     actorId?: string;
     buffer: Buffer;
     mimeType: string;
@@ -2992,7 +3000,9 @@ export class CasesService {
       where: { documentId: document.id },
       select: { documentId: true },
     });
-    if (!linked) throw new NotFoundException('این مدرک در فهرست مدارک اطلاعات هویتی نیست');
+    if (!linked && !input.other) {
+      throw new NotFoundException('این مدرک در فهرست مدارک اطلاعات هویتی نیست');
+    }
 
     const personDocument = await this.prisma.personDocument.upsert({
       where: {
@@ -3044,6 +3054,7 @@ export class CasesService {
       caseId?: string;
       requestId?: string;
       jobId?: string;
+      other?: boolean;
       actorId?: string;
       buffer: Buffer;
       mimeType: string;
@@ -3077,7 +3088,9 @@ export class CasesService {
     }
     await assertRequestMutable(this.prisma, request.id, input.actorId);
     const allowed = await this.isActivityDocument(document, jobId, request.type, caseFile.user.gender);
-    if (!allowed) throw new NotFoundException('این مدرک برای شغل انتخاب‌شده نیست');
+    if (!allowed && !input.other) {
+      throw new NotFoundException('این مدرک برای شغل انتخاب‌شده نیست');
+    }
     const activityDocument = await this.prisma.caseActivityDocument.upsert({
       where: {
         caseRequestId_documentId: { caseRequestId: request.id, documentId: document.id },

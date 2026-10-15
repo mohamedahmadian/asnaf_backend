@@ -262,6 +262,11 @@ export class CasesController {
     return this.cases.documentTypes();
   }
 
+  @Get('document-catalog')
+  documentCatalog() {
+    return this.cases.documentCatalog();
+  }
+
   @Get('documents')
   personDocuments(@Query('userId') userId = '') {
     return this.cases.personDocuments(userId);
@@ -287,6 +292,7 @@ export class CasesController {
     @Body('requestId') requestId?: string,
     @Body('jobId') jobId?: string,
     @Body('editCaseId') editCaseId?: string,
+    @Body('scope') scope?: string,
     @CurrentUser() user?: RequestUser,
   ) {
     return this.cases.uploadDocument({
@@ -296,6 +302,7 @@ export class CasesController {
       requestId: requestId?.trim() || undefined,
       jobId: jobId?.trim() || undefined,
       editCaseId: editCaseId?.trim() || undefined,
+      other: scope === 'other',
       actorId: user?.id,
       buffer: file?.buffer,
       mimeType: file?.mimetype,

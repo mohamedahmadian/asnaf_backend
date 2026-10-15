@@ -14,6 +14,10 @@ import { CaseManagementReviewsReportService } from './case-management-reviews-re
 import { CaseManagementApproversService } from './case-management-approvers.service';
 import { CaseProcessManagementRolesController } from './case-process-management-roles.controller';
 import { CaseProcessManagementRolesService } from './case-process-management-roles.service';
+import { CaseRevocationSettingsController } from './case-revocation-settings.controller';
+import { CaseRevocationSettingsService } from './case-revocation-settings.service';
+import { CaseRevocationProcessController } from './case-revocation-process.controller';
+import { CaseRevocationProcessService } from './case-revocation-process.service';
 import { DashboardController } from './dashboard.controller';
 import { CaseInquiriesController } from './case-inquiries.controller';
 import { CaseInquiriesReportService } from './case-inquiries-report.service';
@@ -46,6 +50,8 @@ import { PersonFileStorage } from './person-file.storage';
     CaseRequirementsController,
     CaseManagementApproversController,
     CaseProcessManagementRolesController,
+    CaseRevocationSettingsController,
+    CaseRevocationProcessController,
     DashboardController,
   ],
   exports: [CasesService],
@@ -65,6 +71,8 @@ import { PersonFileStorage } from './person-file.storage';
     CaseManagementApproversService,
     CaseManagementReviewsReportService,
     CaseProcessManagementRolesService,
+    CaseRevocationSettingsService,
+    CaseRevocationProcessService,
     PersonFileStorage,
   ],
 })

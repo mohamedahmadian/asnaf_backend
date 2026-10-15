@@ -252,16 +252,16 @@ model City {
 }
 
 model BankAccount {
-  id            String   @id @default(uuid())
-  bankName      String
-  accountNumber String
-  cardNumber    String?  @unique
-  iban          String?  @unique
-  description   String?
-  isActive      Boolean  @default(true)
-  municipalFees MunicipalFee[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                String             @id @default(uuid())
+  bankName          String
+  accountNumber     String
+  cardNumber        String?            @unique
+  iban              String?            @unique
+  description       String?
+  isActive          Boolean            @default(true)
+  financialHeadings FinancialHeading[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 
   @@unique([bankName, accountNumber])
   @@index([bankName])
@@ -272,17 +272,18 @@ model BankAccount {
 }
 
 model MunicipalFee {
-  id            String      @id @default(uuid())
-  title         String      @unique
-  bankAccountId String
-  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
-  description   String?
-  isActive      Boolean     @default(true)
-  amount        Decimal     @db.Decimal(18, 0)
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  id                 String           @id @default(uuid())
+  title              String           @unique
+  financialHeadingId String
+  financialHeading   FinancialHeading @relation(fields: [financialHeadingId], references: [id], onDelete: Restrict)
+  description        String?
+  isActive           Boolean          @default(true)
+  amount             Decimal          @db.Decimal(18, 0)
+  processTypes       CaseRequestType[] @default([])
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
 
-  @@index([bankAccountId])
+  @@index([financialHeadingId])
   @@index([title])
   @@index([amount])
   @@index([isActive])
@@ -290,15 +291,34 @@ model MunicipalFee {
   @@map("municipal_fees")
 }
 
+model FinancialHeading {
+  id            String      @id @default(uuid())
+  title         String      @unique
+  description   String?
+  bankAccountId String
+  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  paymentId     String?     @unique
+  municipalFees MunicipalFee[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([title])
+  @@index([bankAccountId])
+  @@index([paymentId])
+  @@index([createdAt])
+  @@map("financial_headings")
+}
+
 model Discount {
-  id          String   @id @default(uuid())
-  year        Int
-  title       String
-  percent     Decimal  @db.Decimal(5, 2)
-  description String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String            @id @default(uuid())
+  year         Int
+  title        String
+  percent      Decimal           @db.Decimal(5, 2)
+  processTypes CaseRequestType[] @default([])
+  description  String?
+  isActive     Boolean           @default(true)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 
   @@unique([year, title])
   @@index([year])
@@ -339,6 +359,7 @@ model InquiryCenter {
   jobs        JobInquiryCenter[]
   caseInquiries CaseInquiry[]
   requirements InquiryRequirement[]
+  revocationOrganizations CaseRevocationOrganization[]
 
   @@index([name])
   @@index([phone])
@@ -526,7 +547,11 @@ model CaseLetterhead {
   signature        StoredImage? @relation("LetterheadSignature", fields: [signatureId], references: [id], onDelete: SetNull)
   /// شمارهٔ بعدی نامه. با هر صدور یک واحد زیاد می‌شود.
   nextNumber       Int          @default(1)
-  updatedAt        DateTime     @updatedAt
+  /// متن پیش‌فرض نامه استعلام برای مراکزی که متن جدا ندارند؛ برای همه مشاغل یکسان است.
+  defaultLetterBody String?
+  /// اندازه پیش‌فرض چاپ نامه: A4 یا A5
+  defaultPaper      String   @default("A4")
+  updatedAt        DateTime @updatedAt
 
   @@map("case_letterheads")
 }
@@ -545,6 +570,36 @@ model CasePlacesOffice {
 
   @@index([officerRoleId])
   @@map("case_places_office")
+}
+
+/// تنظیمات درخواست ابطال مجوز؛ یک ردیف ثابت
+model CaseRevocationSettings {
+  id            String                       @id @default("default")
+  /// مبلغ ثابت ابطال مجوز اقتصادی
+  fixedAmount   Decimal?                     @db.Decimal(18, 0)
+  updatedAt     DateTime                     @updatedAt
+  organizations CaseRevocationOrganization[]
+
+  @@map("case_revocation_settings")
+}
+
+/// سازمانی که هنگام ابطال مجوز باید به آن اطلاع داده شود
+model CaseRevocationOrganization {
+  id              String                 @id @default(uuid())
+  settingsId      String                 @default("default")
+  settings        CaseRevocationSettings @relation(fields: [settingsId], references: [id], onDelete: Cascade)
+  inquiryCenterId String
+  inquiryCenter   InquiryCenter          @relation(fields: [inquiryCenterId], references: [id], onDelete: Restrict)
+  letterTitle     String?
+  letterBody      String?
+  sortOrder       Int                    @default(0)
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+
+  @@unique([settingsId, inquiryCenterId])
+  @@index([inquiryCenterId])
+  @@index([sortOrder])
+  @@map("case_revocation_organizations")
 }
 
 model CasePlacesReview {
@@ -825,6 +880,7 @@ model CaseFile {
   violations           Violation[]
   suspensions          CaseSuspension[]
   stewardRevokeFile    CaseStewardRevokeFile?
+  revocationProcess    CaseRevocationProcess?
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
 
@@ -856,6 +912,42 @@ model CaseStewardRevokeFile {
   createdAt    DateTime @default(now())
 
   @@map("case_steward_revoke_files")
+}
+
+/// فرایند سه‌مرحله‌ای ابطال مجوز اقتصادی
+model CaseRevocationProcess {
+  id               String                 @id @default(uuid())
+  caseFileId       String                 @unique
+  caseFile         CaseFile               @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  amount           Decimal                @db.Decimal(18, 0)
+  revocationDate   DateTime?              @db.Date
+  letters          CaseRevocationLetter[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@index([createdAt])
+  @@map("case_revocation_processes")
+}
+
+/// نسخهٔ ثابت نامهٔ هر سازمان برای یک فرایند ابطال
+model CaseRevocationLetter {
+  id               String                 @id @default(uuid())
+  processId        String
+  process          CaseRevocationProcess  @relation(fields: [processId], references: [id], onDelete: Cascade)
+  inquiryCenterId  String
+  centerName       String
+  centerPhone      String?
+  letterTitle      String
+  letterBody       String
+  letterNo         String?                @unique
+  issuedAt         DateTime?              @db.Date
+  sortOrder        Int                    @default(0)
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@unique([processId, inquiryCenterId])
+  @@index([processId, sortOrder])
+  @@map("case_revocation_letters")
 }
 
 /// یک دوره تعلیق پرونده. با رفع تعلیق، liftedAt پر می‌شود و پرونده از حالت تعلیق خارج می‌شود.

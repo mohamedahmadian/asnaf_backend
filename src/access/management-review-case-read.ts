@@ -117,7 +117,11 @@ export async function matchCaseWizardRead(
   scope: WizardReadScope,
 ) {
   const path = normalizeApiPath(rawPath);
-  if (path === '/cases/formation/document-types' || path === '/cases/settings/general') {
+  if (
+    path === '/cases/formation/document-types' ||
+    path === '/cases/formation/document-catalog' ||
+    path === '/cases/settings/general'
+  ) {
     return true;
   }
 

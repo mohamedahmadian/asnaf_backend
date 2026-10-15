@@ -63,6 +63,7 @@ export type DiscountCountAggregateOutputType = {
   year: number
   title: number
   percent: number
+  processTypes: number
   description: number
   isActive: number
   createdAt: number
@@ -108,6 +109,7 @@ export type DiscountCountAggregateInputType = {
   year?: true
   title?: true
   percent?: true
+  processTypes?: true
   description?: true
   isActive?: true
   createdAt?: true
@@ -206,6 +208,7 @@ export type DiscountGroupByOutputType = {
   year: number
   title: string
   percent: runtime.Decimal
+  processTypes: $Enums.CaseRequestType[]
   description: string | null
   isActive: boolean
   createdAt: Date
@@ -240,6 +243,7 @@ export type DiscountWhereInput = {
   year?: Prisma.IntFilter<"Discount"> | number
   title?: Prisma.StringFilter<"Discount"> | string
   percent?: Prisma.DecimalFilter<"Discount"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"Discount">
   description?: Prisma.StringNullableFilter<"Discount"> | string | null
   isActive?: Prisma.BoolFilter<"Discount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Discount"> | Date | string
@@ -251,6 +255,7 @@ export type DiscountOrderByWithRelationInput = {
   year?: Prisma.SortOrder
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
+  processTypes?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -266,6 +271,7 @@ export type DiscountWhereUniqueInput = Prisma.AtLeast<{
   year?: Prisma.IntFilter<"Discount"> | number
   title?: Prisma.StringFilter<"Discount"> | string
   percent?: Prisma.DecimalFilter<"Discount"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"Discount">
   description?: Prisma.StringNullableFilter<"Discount"> | string | null
   isActive?: Prisma.BoolFilter<"Discount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Discount"> | Date | string
@@ -277,6 +283,7 @@ export type DiscountOrderByWithAggregationInput = {
   year?: Prisma.SortOrder
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
+  processTypes?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -296,6 +303,7 @@ export type DiscountScalarWhereWithAggregatesInput = {
   year?: Prisma.IntWithAggregatesFilter<"Discount"> | number
   title?: Prisma.StringWithAggregatesFilter<"Discount"> | string
   percent?: Prisma.DecimalWithAggregatesFilter<"Discount"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"Discount">
   description?: Prisma.StringNullableWithAggregatesFilter<"Discount"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Discount"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Discount"> | Date | string
@@ -307,6 +315,7 @@ export type DiscountCreateInput = {
   year: number
   title: string
   percent: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
@@ -318,6 +327,7 @@ export type DiscountUncheckedCreateInput = {
   year: number
   title: string
   percent: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
@@ -329,6 +339,7 @@ export type DiscountUpdateInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -340,6 +351,7 @@ export type DiscountUncheckedUpdateInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -351,6 +363,7 @@ export type DiscountCreateManyInput = {
   year: number
   title: string
   percent: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
@@ -362,6 +375,7 @@ export type DiscountUpdateManyMutationInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -373,6 +387,7 @@ export type DiscountUncheckedUpdateManyInput = {
   year?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,6 +404,7 @@ export type DiscountCountOrderByAggregateInput = {
   year?: Prisma.SortOrder
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
+  processTypes?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -427,6 +443,15 @@ export type DiscountSumOrderByAggregateInput = {
   percent?: Prisma.SortOrder
 }
 
+export type DiscountCreateprocessTypesInput = {
+  set: $Enums.CaseRequestType[]
+}
+
+export type DiscountUpdateprocessTypesInput = {
+  set?: $Enums.CaseRequestType[]
+  push?: $Enums.CaseRequestType | $Enums.CaseRequestType[]
+}
+
 
 
 export type DiscountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -434,6 +459,7 @@ export type DiscountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   year?: boolean
   title?: boolean
   percent?: boolean
+  processTypes?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -445,6 +471,7 @@ export type DiscountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   year?: boolean
   title?: boolean
   percent?: boolean
+  processTypes?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -456,6 +483,7 @@ export type DiscountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   year?: boolean
   title?: boolean
   percent?: boolean
+  processTypes?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -467,13 +495,14 @@ export type DiscountSelectScalar = {
   year?: boolean
   title?: boolean
   percent?: boolean
+  processTypes?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DiscountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "year" | "title" | "percent" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["discount"]>
+export type DiscountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "year" | "title" | "percent" | "processTypes" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["discount"]>
 
 export type $DiscountPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Discount"
@@ -483,6 +512,7 @@ export type $DiscountPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     year: number
     title: string
     percent: runtime.Decimal
+    processTypes: $Enums.CaseRequestType[]
     description: string | null
     isActive: boolean
     createdAt: Date
@@ -914,6 +944,7 @@ export interface DiscountFieldRefs {
   readonly year: Prisma.FieldRef<"Discount", 'Int'>
   readonly title: Prisma.FieldRef<"Discount", 'String'>
   readonly percent: Prisma.FieldRef<"Discount", 'Decimal'>
+  readonly processTypes: Prisma.FieldRef<"Discount", 'CaseRequestType[]'>
   readonly description: Prisma.FieldRef<"Discount", 'String'>
   readonly isActive: Prisma.FieldRef<"Discount", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Discount", 'DateTime'>

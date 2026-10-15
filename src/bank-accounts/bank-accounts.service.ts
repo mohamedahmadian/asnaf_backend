@@ -117,7 +117,7 @@ export class BankAccountsService {
         error.code === 'P2003'
       ) {
         throw new ConflictException(
-          'این حساب بانکی در عوارض استفاده شده و قابل حذف نیست',
+          'این حساب بانکی در اطلاعات مالی استفاده شده و قابل حذف نیست',
         );
       }
       throw error;

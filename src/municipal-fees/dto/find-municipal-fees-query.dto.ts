@@ -1,13 +1,16 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsIn, IsOptional, IsUUID } from 'class-validator';
+import { IsBoolean, IsIn, IsOptional, Matches } from 'class-validator';
 import { emptyToUndefined, toOptionalBoolean } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 
+const databaseUuidPattern =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 export const municipalFeeSortFields = [
   'title',
   'amount',
-  'bankAccount',
+  'financialHeading',
   'description',
   'isActive',
 ] as const;
@@ -15,8 +18,8 @@ export const municipalFeeSortFields = [
 export class FindMunicipalFeesQueryDto extends PaginationQueryDto {
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
-  @IsUUID()
-  bankAccountId?: string;
+  @Matches(databaseUuidPattern)
+  financialHeadingId?: string;
 
   @IsOptional()
   @Transform(({ value }) => toOptionalBoolean(value))

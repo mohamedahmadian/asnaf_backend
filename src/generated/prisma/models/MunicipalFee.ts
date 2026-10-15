@@ -37,7 +37,7 @@ export type MunicipalFeeSumAggregateOutputType = {
 export type MunicipalFeeMinAggregateOutputType = {
   id: string | null
   title: string | null
-  bankAccountId: string | null
+  financialHeadingId: string | null
   description: string | null
   isActive: boolean | null
   amount: runtime.Decimal | null
@@ -48,7 +48,7 @@ export type MunicipalFeeMinAggregateOutputType = {
 export type MunicipalFeeMaxAggregateOutputType = {
   id: string | null
   title: string | null
-  bankAccountId: string | null
+  financialHeadingId: string | null
   description: string | null
   isActive: boolean | null
   amount: runtime.Decimal | null
@@ -59,10 +59,11 @@ export type MunicipalFeeMaxAggregateOutputType = {
 export type MunicipalFeeCountAggregateOutputType = {
   id: number
   title: number
-  bankAccountId: number
+  financialHeadingId: number
   description: number
   isActive: number
   amount: number
+  processTypes: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -80,7 +81,7 @@ export type MunicipalFeeSumAggregateInputType = {
 export type MunicipalFeeMinAggregateInputType = {
   id?: true
   title?: true
-  bankAccountId?: true
+  financialHeadingId?: true
   description?: true
   isActive?: true
   amount?: true
@@ -91,7 +92,7 @@ export type MunicipalFeeMinAggregateInputType = {
 export type MunicipalFeeMaxAggregateInputType = {
   id?: true
   title?: true
-  bankAccountId?: true
+  financialHeadingId?: true
   description?: true
   isActive?: true
   amount?: true
@@ -102,10 +103,11 @@ export type MunicipalFeeMaxAggregateInputType = {
 export type MunicipalFeeCountAggregateInputType = {
   id?: true
   title?: true
-  bankAccountId?: true
+  financialHeadingId?: true
   description?: true
   isActive?: true
   amount?: true
+  processTypes?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -200,10 +202,11 @@ export type MunicipalFeeGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type MunicipalFeeGroupByOutputType = {
   id: string
   title: string
-  bankAccountId: string
+  financialHeadingId: string
   description: string | null
   isActive: boolean
   amount: runtime.Decimal
+  processTypes: $Enums.CaseRequestType[]
   createdAt: Date
   updatedAt: Date
   _count: MunicipalFeeCountAggregateOutputType | null
@@ -234,25 +237,27 @@ export type MunicipalFeeWhereInput = {
   NOT?: Prisma.MunicipalFeeWhereInput | Prisma.MunicipalFeeWhereInput[]
   id?: Prisma.StringFilter<"MunicipalFee"> | string
   title?: Prisma.StringFilter<"MunicipalFee"> | string
-  bankAccountId?: Prisma.StringFilter<"MunicipalFee"> | string
+  financialHeadingId?: Prisma.StringFilter<"MunicipalFee"> | string
   description?: Prisma.StringNullableFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
-  bankAccount?: Prisma.XOR<Prisma.BankAccountScalarRelationFilter, Prisma.BankAccountWhereInput>
+  financialHeading?: Prisma.XOR<Prisma.FinancialHeadingScalarRelationFilter, Prisma.FinancialHeadingWhereInput>
 }
 
 export type MunicipalFeeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  bankAccountId?: Prisma.SortOrder
+  financialHeadingId?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  processTypes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  bankAccount?: Prisma.BankAccountOrderByWithRelationInput
+  financialHeading?: Prisma.FinancialHeadingOrderByWithRelationInput
 }
 
 export type MunicipalFeeWhereUniqueInput = Prisma.AtLeast<{
@@ -261,22 +266,24 @@ export type MunicipalFeeWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MunicipalFeeWhereInput | Prisma.MunicipalFeeWhereInput[]
   OR?: Prisma.MunicipalFeeWhereInput[]
   NOT?: Prisma.MunicipalFeeWhereInput | Prisma.MunicipalFeeWhereInput[]
-  bankAccountId?: Prisma.StringFilter<"MunicipalFee"> | string
+  financialHeadingId?: Prisma.StringFilter<"MunicipalFee"> | string
   description?: Prisma.StringNullableFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
-  bankAccount?: Prisma.XOR<Prisma.BankAccountScalarRelationFilter, Prisma.BankAccountWhereInput>
+  financialHeading?: Prisma.XOR<Prisma.FinancialHeadingScalarRelationFilter, Prisma.FinancialHeadingWhereInput>
 }, "id" | "title">
 
 export type MunicipalFeeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
-  bankAccountId?: Prisma.SortOrder
+  financialHeadingId?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  processTypes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MunicipalFeeCountOrderByAggregateInput
@@ -292,10 +299,11 @@ export type MunicipalFeeScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MunicipalFeeScalarWhereWithAggregatesInput | Prisma.MunicipalFeeScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"MunicipalFee"> | string
   title?: Prisma.StringWithAggregatesFilter<"MunicipalFee"> | string
-  bankAccountId?: Prisma.StringWithAggregatesFilter<"MunicipalFee"> | string
+  financialHeadingId?: Prisma.StringWithAggregatesFilter<"MunicipalFee"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalWithAggregatesFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MunicipalFee"> | Date | string
 }
@@ -306,18 +314,20 @@ export type MunicipalFeeCreateInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
-  bankAccount: Prisma.BankAccountCreateNestedOneWithoutMunicipalFeesInput
+  financialHeading: Prisma.FinancialHeadingCreateNestedOneWithoutMunicipalFeesInput
 }
 
 export type MunicipalFeeUncheckedCreateInput = {
   id?: string
   title: string
-  bankAccountId: string
+  financialHeadingId: string
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -328,18 +338,20 @@ export type MunicipalFeeUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutMunicipalFeesNestedInput
+  financialHeading?: Prisma.FinancialHeadingUpdateOneRequiredWithoutMunicipalFeesNestedInput
 }
 
 export type MunicipalFeeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  bankAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  financialHeadingId?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -347,10 +359,11 @@ export type MunicipalFeeUncheckedUpdateInput = {
 export type MunicipalFeeCreateManyInput = {
   id?: string
   title: string
-  bankAccountId: string
+  financialHeadingId: string
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -361,6 +374,7 @@ export type MunicipalFeeUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -368,12 +382,63 @@ export type MunicipalFeeUpdateManyMutationInput = {
 export type MunicipalFeeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
-  bankAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  financialHeadingId?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type EnumCaseRequestTypeNullableListFilter<$PrismaModel = never> = {
+  equals?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel> | null
+  has?: $Enums.CaseRequestType | Prisma.EnumCaseRequestTypeFieldRefInput<$PrismaModel> | null
+  hasEvery?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  hasSome?: $Enums.CaseRequestType[] | Prisma.ListEnumCaseRequestTypeFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
+export type MunicipalFeeCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  financialHeadingId?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  processTypes?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type MunicipalFeeAvgOrderByAggregateInput = {
+  amount?: Prisma.SortOrder
+}
+
+export type MunicipalFeeMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  financialHeadingId?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type MunicipalFeeMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  title?: Prisma.SortOrder
+  financialHeadingId?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  isActive?: Prisma.SortOrder
+  amount?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type MunicipalFeeSumOrderByAggregateInput = {
+  amount?: Prisma.SortOrder
 }
 
 export type MunicipalFeeListRelationFilter = {
@@ -386,87 +451,8 @@ export type MunicipalFeeOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type MunicipalFeeCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  bankAccountId?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  amount?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type MunicipalFeeAvgOrderByAggregateInput = {
-  amount?: Prisma.SortOrder
-}
-
-export type MunicipalFeeMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  bankAccountId?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  amount?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type MunicipalFeeMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  title?: Prisma.SortOrder
-  bankAccountId?: Prisma.SortOrder
-  description?: Prisma.SortOrder
-  isActive?: Prisma.SortOrder
-  amount?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
-}
-
-export type MunicipalFeeSumOrderByAggregateInput = {
-  amount?: Prisma.SortOrder
-}
-
-export type MunicipalFeeCreateNestedManyWithoutBankAccountInput = {
-  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput> | Prisma.MunicipalFeeCreateWithoutBankAccountInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput[]
-  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput | Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput[]
-  createMany?: Prisma.MunicipalFeeCreateManyBankAccountInputEnvelope
-  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-}
-
-export type MunicipalFeeUncheckedCreateNestedManyWithoutBankAccountInput = {
-  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput> | Prisma.MunicipalFeeCreateWithoutBankAccountInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput[]
-  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput | Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput[]
-  createMany?: Prisma.MunicipalFeeCreateManyBankAccountInputEnvelope
-  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-}
-
-export type MunicipalFeeUpdateManyWithoutBankAccountNestedInput = {
-  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput> | Prisma.MunicipalFeeCreateWithoutBankAccountInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput[]
-  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput | Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput[]
-  upsert?: Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutBankAccountInput | Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutBankAccountInput[]
-  createMany?: Prisma.MunicipalFeeCreateManyBankAccountInputEnvelope
-  set?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  disconnect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  delete?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  update?: Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutBankAccountInput | Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutBankAccountInput[]
-  updateMany?: Prisma.MunicipalFeeUpdateManyWithWhereWithoutBankAccountInput | Prisma.MunicipalFeeUpdateManyWithWhereWithoutBankAccountInput[]
-  deleteMany?: Prisma.MunicipalFeeScalarWhereInput | Prisma.MunicipalFeeScalarWhereInput[]
-}
-
-export type MunicipalFeeUncheckedUpdateManyWithoutBankAccountNestedInput = {
-  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput> | Prisma.MunicipalFeeCreateWithoutBankAccountInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput[]
-  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput | Prisma.MunicipalFeeCreateOrConnectWithoutBankAccountInput[]
-  upsert?: Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutBankAccountInput | Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutBankAccountInput[]
-  createMany?: Prisma.MunicipalFeeCreateManyBankAccountInputEnvelope
-  set?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  disconnect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  delete?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
-  update?: Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutBankAccountInput | Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutBankAccountInput[]
-  updateMany?: Prisma.MunicipalFeeUpdateManyWithWhereWithoutBankAccountInput | Prisma.MunicipalFeeUpdateManyWithWhereWithoutBankAccountInput[]
-  deleteMany?: Prisma.MunicipalFeeScalarWhereInput | Prisma.MunicipalFeeScalarWhereInput[]
+export type MunicipalFeeCreateprocessTypesInput = {
+  set: $Enums.CaseRequestType[]
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -477,50 +463,99 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type MunicipalFeeCreateWithoutBankAccountInput = {
+export type MunicipalFeeUpdateprocessTypesInput = {
+  set?: $Enums.CaseRequestType[]
+  push?: $Enums.CaseRequestType | $Enums.CaseRequestType[]
+}
+
+export type MunicipalFeeCreateNestedManyWithoutFinancialHeadingInput = {
+  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput> | Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput[]
+  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput | Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput[]
+  createMany?: Prisma.MunicipalFeeCreateManyFinancialHeadingInputEnvelope
+  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+}
+
+export type MunicipalFeeUncheckedCreateNestedManyWithoutFinancialHeadingInput = {
+  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput> | Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput[]
+  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput | Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput[]
+  createMany?: Prisma.MunicipalFeeCreateManyFinancialHeadingInputEnvelope
+  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+}
+
+export type MunicipalFeeUpdateManyWithoutFinancialHeadingNestedInput = {
+  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput> | Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput[]
+  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput | Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput[]
+  upsert?: Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutFinancialHeadingInput | Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutFinancialHeadingInput[]
+  createMany?: Prisma.MunicipalFeeCreateManyFinancialHeadingInputEnvelope
+  set?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  disconnect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  delete?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  update?: Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutFinancialHeadingInput | Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutFinancialHeadingInput[]
+  updateMany?: Prisma.MunicipalFeeUpdateManyWithWhereWithoutFinancialHeadingInput | Prisma.MunicipalFeeUpdateManyWithWhereWithoutFinancialHeadingInput[]
+  deleteMany?: Prisma.MunicipalFeeScalarWhereInput | Prisma.MunicipalFeeScalarWhereInput[]
+}
+
+export type MunicipalFeeUncheckedUpdateManyWithoutFinancialHeadingNestedInput = {
+  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput> | Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput[] | Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput[]
+  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput | Prisma.MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput[]
+  upsert?: Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutFinancialHeadingInput | Prisma.MunicipalFeeUpsertWithWhereUniqueWithoutFinancialHeadingInput[]
+  createMany?: Prisma.MunicipalFeeCreateManyFinancialHeadingInputEnvelope
+  set?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  disconnect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  delete?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  connect?: Prisma.MunicipalFeeWhereUniqueInput | Prisma.MunicipalFeeWhereUniqueInput[]
+  update?: Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutFinancialHeadingInput | Prisma.MunicipalFeeUpdateWithWhereUniqueWithoutFinancialHeadingInput[]
+  updateMany?: Prisma.MunicipalFeeUpdateManyWithWhereWithoutFinancialHeadingInput | Prisma.MunicipalFeeUpdateManyWithWhereWithoutFinancialHeadingInput[]
+  deleteMany?: Prisma.MunicipalFeeScalarWhereInput | Prisma.MunicipalFeeScalarWhereInput[]
+}
+
+export type MunicipalFeeCreateWithoutFinancialHeadingInput = {
   id?: string
   title: string
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type MunicipalFeeUncheckedCreateWithoutBankAccountInput = {
+export type MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput = {
   id?: string
   title: string
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type MunicipalFeeCreateOrConnectWithoutBankAccountInput = {
+export type MunicipalFeeCreateOrConnectWithoutFinancialHeadingInput = {
   where: Prisma.MunicipalFeeWhereUniqueInput
-  create: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput>
+  create: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput>
 }
 
-export type MunicipalFeeCreateManyBankAccountInputEnvelope = {
-  data: Prisma.MunicipalFeeCreateManyBankAccountInput | Prisma.MunicipalFeeCreateManyBankAccountInput[]
+export type MunicipalFeeCreateManyFinancialHeadingInputEnvelope = {
+  data: Prisma.MunicipalFeeCreateManyFinancialHeadingInput | Prisma.MunicipalFeeCreateManyFinancialHeadingInput[]
   skipDuplicates?: boolean
 }
 
-export type MunicipalFeeUpsertWithWhereUniqueWithoutBankAccountInput = {
+export type MunicipalFeeUpsertWithWhereUniqueWithoutFinancialHeadingInput = {
   where: Prisma.MunicipalFeeWhereUniqueInput
-  update: Prisma.XOR<Prisma.MunicipalFeeUpdateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedUpdateWithoutBankAccountInput>
-  create: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedCreateWithoutBankAccountInput>
+  update: Prisma.XOR<Prisma.MunicipalFeeUpdateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedUpdateWithoutFinancialHeadingInput>
+  create: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedCreateWithoutFinancialHeadingInput>
 }
 
-export type MunicipalFeeUpdateWithWhereUniqueWithoutBankAccountInput = {
+export type MunicipalFeeUpdateWithWhereUniqueWithoutFinancialHeadingInput = {
   where: Prisma.MunicipalFeeWhereUniqueInput
-  data: Prisma.XOR<Prisma.MunicipalFeeUpdateWithoutBankAccountInput, Prisma.MunicipalFeeUncheckedUpdateWithoutBankAccountInput>
+  data: Prisma.XOR<Prisma.MunicipalFeeUpdateWithoutFinancialHeadingInput, Prisma.MunicipalFeeUncheckedUpdateWithoutFinancialHeadingInput>
 }
 
-export type MunicipalFeeUpdateManyWithWhereWithoutBankAccountInput = {
+export type MunicipalFeeUpdateManyWithWhereWithoutFinancialHeadingInput = {
   where: Prisma.MunicipalFeeScalarWhereInput
-  data: Prisma.XOR<Prisma.MunicipalFeeUpdateManyMutationInput, Prisma.MunicipalFeeUncheckedUpdateManyWithoutBankAccountInput>
+  data: Prisma.XOR<Prisma.MunicipalFeeUpdateManyMutationInput, Prisma.MunicipalFeeUncheckedUpdateManyWithoutFinancialHeadingInput>
 }
 
 export type MunicipalFeeScalarWhereInput = {
@@ -529,50 +564,55 @@ export type MunicipalFeeScalarWhereInput = {
   NOT?: Prisma.MunicipalFeeScalarWhereInput | Prisma.MunicipalFeeScalarWhereInput[]
   id?: Prisma.StringFilter<"MunicipalFee"> | string
   title?: Prisma.StringFilter<"MunicipalFee"> | string
-  bankAccountId?: Prisma.StringFilter<"MunicipalFee"> | string
+  financialHeadingId?: Prisma.StringFilter<"MunicipalFee"> | string
   description?: Prisma.StringNullableFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
 }
 
-export type MunicipalFeeCreateManyBankAccountInput = {
+export type MunicipalFeeCreateManyFinancialHeadingInput = {
   id?: string
   title: string
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
-export type MunicipalFeeUpdateWithoutBankAccountInput = {
+export type MunicipalFeeUpdateWithoutFinancialHeadingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type MunicipalFeeUncheckedUpdateWithoutBankAccountInput = {
+export type MunicipalFeeUncheckedUpdateWithoutFinancialHeadingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type MunicipalFeeUncheckedUpdateManyWithoutBankAccountInput = {
+export type MunicipalFeeUncheckedUpdateManyWithoutFinancialHeadingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -582,73 +622,78 @@ export type MunicipalFeeUncheckedUpdateManyWithoutBankAccountInput = {
 export type MunicipalFeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  bankAccountId?: boolean
+  financialHeadingId?: boolean
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
+  financialHeading?: boolean | Prisma.FinancialHeadingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["municipalFee"]>
 
 export type MunicipalFeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  bankAccountId?: boolean
+  financialHeadingId?: boolean
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
+  financialHeading?: boolean | Prisma.FinancialHeadingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["municipalFee"]>
 
 export type MunicipalFeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
-  bankAccountId?: boolean
+  financialHeadingId?: boolean
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
+  financialHeading?: boolean | Prisma.FinancialHeadingDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["municipalFee"]>
 
 export type MunicipalFeeSelectScalar = {
   id?: boolean
   title?: boolean
-  bankAccountId?: boolean
+  financialHeadingId?: boolean
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MunicipalFeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "bankAccountId" | "description" | "isActive" | "amount" | "createdAt" | "updatedAt", ExtArgs["result"]["municipalFee"]>
+export type MunicipalFeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "financialHeadingId" | "description" | "isActive" | "amount" | "processTypes" | "createdAt" | "updatedAt", ExtArgs["result"]["municipalFee"]>
 export type MunicipalFeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
+  financialHeading?: boolean | Prisma.FinancialHeadingDefaultArgs<ExtArgs>
 }
 export type MunicipalFeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
+  financialHeading?: boolean | Prisma.FinancialHeadingDefaultArgs<ExtArgs>
 }
 export type MunicipalFeeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
+  financialHeading?: boolean | Prisma.FinancialHeadingDefaultArgs<ExtArgs>
 }
 
 export type $MunicipalFeePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MunicipalFee"
   objects: {
-    bankAccount: Prisma.$BankAccountPayload<ExtArgs>
+    financialHeading: Prisma.$FinancialHeadingPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
-    bankAccountId: string
+    financialHeadingId: string
     description: string | null
     isActive: boolean
     amount: runtime.Decimal
+    processTypes: $Enums.CaseRequestType[]
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["municipalFee"]>
@@ -1045,7 +1090,7 @@ readonly fields: MunicipalFeeFieldRefs;
  */
 export interface Prisma__MunicipalFeeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  bankAccount<T extends Prisma.BankAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BankAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__BankAccountClient<runtime.Types.Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  financialHeading<T extends Prisma.FinancialHeadingDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FinancialHeadingDefaultArgs<ExtArgs>>): Prisma.Prisma__FinancialHeadingClient<runtime.Types.Result.GetResult<Prisma.$FinancialHeadingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1077,10 +1122,11 @@ export interface Prisma__MunicipalFeeClient<T, Null = never, ExtArgs extends run
 export interface MunicipalFeeFieldRefs {
   readonly id: Prisma.FieldRef<"MunicipalFee", 'String'>
   readonly title: Prisma.FieldRef<"MunicipalFee", 'String'>
-  readonly bankAccountId: Prisma.FieldRef<"MunicipalFee", 'String'>
+  readonly financialHeadingId: Prisma.FieldRef<"MunicipalFee", 'String'>
   readonly description: Prisma.FieldRef<"MunicipalFee", 'String'>
   readonly isActive: Prisma.FieldRef<"MunicipalFee", 'Boolean'>
   readonly amount: Prisma.FieldRef<"MunicipalFee", 'Decimal'>
+  readonly processTypes: Prisma.FieldRef<"MunicipalFee", 'CaseRequestType[]'>
   readonly createdAt: Prisma.FieldRef<"MunicipalFee", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MunicipalFee", 'DateTime'>
 }

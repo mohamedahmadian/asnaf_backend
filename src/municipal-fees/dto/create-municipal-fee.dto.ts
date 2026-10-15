@@ -1,10 +1,13 @@
 import { Transform } from 'class-transformer';
 import {
+  ArrayUnique,
+  IsArray,
   IsBoolean,
+  IsIn,
   IsInt,
   IsOptional,
   IsString,
-  IsUUID,
+  Matches,
   Max,
   MaxLength,
   Min,
@@ -12,7 +15,11 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { emptyToNull } from '../../common/dto-transform';
+import { CaseRequestType } from '../../generated/prisma/client';
 import { toLatinDigits } from '../../common/national-id';
+
+const databaseUuidPattern =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
@@ -33,6 +40,13 @@ function toAmount(value: unknown) {
   return Number.isSafeInteger(parsed) ? parsed : value;
 }
 
+export const municipalFeeProcessTypes = [
+  CaseRequestType.ISSUANCE,
+  CaseRequestType.RENEWAL,
+  CaseRequestType.AUCTION,
+  CaseRequestType.STEWARDSHIP,
+] as const;
+
 export class CreateMunicipalFeeDto {
   @Transform(({ value }) => trimString(value))
   @IsString()
@@ -41,8 +55,8 @@ export class CreateMunicipalFeeDto {
   title: string;
 
   @Transform(({ value }) => trimString(value))
-  @IsUUID()
-  bankAccountId: string;
+  @Matches(databaseUuidPattern)
+  financialHeadingId: string;
 
   @Transform(({ value }) => toAmount(value))
   @IsInt()
@@ -56,6 +70,12 @@ export class CreateMunicipalFeeDto {
   @IsString()
   @MaxLength(2000)
   description?: string | null;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayUnique()
+  @IsIn([...municipalFeeProcessTypes], { each: true })
+  processTypes?: (typeof municipalFeeProcessTypes)[number][];
 
   @IsOptional()
   @IsBoolean()

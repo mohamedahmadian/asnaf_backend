@@ -214,7 +214,7 @@ export type BankAccountWhereInput = {
   isActive?: Prisma.BoolFilter<"BankAccount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
-  municipalFees?: Prisma.MunicipalFeeListRelationFilter
+  financialHeadings?: Prisma.FinancialHeadingListRelationFilter
 }
 
 export type BankAccountOrderByWithRelationInput = {
@@ -227,7 +227,7 @@ export type BankAccountOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  municipalFees?: Prisma.MunicipalFeeOrderByRelationAggregateInput
+  financialHeadings?: Prisma.FinancialHeadingOrderByRelationAggregateInput
 }
 
 export type BankAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -244,7 +244,7 @@ export type BankAccountWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"BankAccount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
-  municipalFees?: Prisma.MunicipalFeeListRelationFilter
+  financialHeadings?: Prisma.FinancialHeadingListRelationFilter
 }, "id" | "cardNumber" | "iban" | "bankName_accountNumber">
 
 export type BankAccountOrderByWithAggregationInput = {
@@ -287,7 +287,7 @@ export type BankAccountCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  municipalFees?: Prisma.MunicipalFeeCreateNestedManyWithoutBankAccountInput
+  financialHeadings?: Prisma.FinancialHeadingCreateNestedManyWithoutBankAccountInput
 }
 
 export type BankAccountUncheckedCreateInput = {
@@ -300,7 +300,7 @@ export type BankAccountUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  municipalFees?: Prisma.MunicipalFeeUncheckedCreateNestedManyWithoutBankAccountInput
+  financialHeadings?: Prisma.FinancialHeadingUncheckedCreateNestedManyWithoutBankAccountInput
 }
 
 export type BankAccountUpdateInput = {
@@ -313,7 +313,7 @@ export type BankAccountUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  municipalFees?: Prisma.MunicipalFeeUpdateManyWithoutBankAccountNestedInput
+  financialHeadings?: Prisma.FinancialHeadingUpdateManyWithoutBankAccountNestedInput
 }
 
 export type BankAccountUncheckedUpdateInput = {
@@ -326,7 +326,7 @@ export type BankAccountUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  municipalFees?: Prisma.MunicipalFeeUncheckedUpdateManyWithoutBankAccountNestedInput
+  financialHeadings?: Prisma.FinancialHeadingUncheckedUpdateManyWithoutBankAccountNestedInput
 }
 
 export type BankAccountCreateManyInput = {
@@ -411,21 +411,21 @@ export type BankAccountScalarRelationFilter = {
   isNot?: Prisma.BankAccountWhereInput
 }
 
-export type BankAccountCreateNestedOneWithoutMunicipalFeesInput = {
-  create?: Prisma.XOR<Prisma.BankAccountCreateWithoutMunicipalFeesInput, Prisma.BankAccountUncheckedCreateWithoutMunicipalFeesInput>
-  connectOrCreate?: Prisma.BankAccountCreateOrConnectWithoutMunicipalFeesInput
+export type BankAccountCreateNestedOneWithoutFinancialHeadingsInput = {
+  create?: Prisma.XOR<Prisma.BankAccountCreateWithoutFinancialHeadingsInput, Prisma.BankAccountUncheckedCreateWithoutFinancialHeadingsInput>
+  connectOrCreate?: Prisma.BankAccountCreateOrConnectWithoutFinancialHeadingsInput
   connect?: Prisma.BankAccountWhereUniqueInput
 }
 
-export type BankAccountUpdateOneRequiredWithoutMunicipalFeesNestedInput = {
-  create?: Prisma.XOR<Prisma.BankAccountCreateWithoutMunicipalFeesInput, Prisma.BankAccountUncheckedCreateWithoutMunicipalFeesInput>
-  connectOrCreate?: Prisma.BankAccountCreateOrConnectWithoutMunicipalFeesInput
-  upsert?: Prisma.BankAccountUpsertWithoutMunicipalFeesInput
+export type BankAccountUpdateOneRequiredWithoutFinancialHeadingsNestedInput = {
+  create?: Prisma.XOR<Prisma.BankAccountCreateWithoutFinancialHeadingsInput, Prisma.BankAccountUncheckedCreateWithoutFinancialHeadingsInput>
+  connectOrCreate?: Prisma.BankAccountCreateOrConnectWithoutFinancialHeadingsInput
+  upsert?: Prisma.BankAccountUpsertWithoutFinancialHeadingsInput
   connect?: Prisma.BankAccountWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BankAccountUpdateToOneWithWhereWithoutMunicipalFeesInput, Prisma.BankAccountUpdateWithoutMunicipalFeesInput>, Prisma.BankAccountUncheckedUpdateWithoutMunicipalFeesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BankAccountUpdateToOneWithWhereWithoutFinancialHeadingsInput, Prisma.BankAccountUpdateWithoutFinancialHeadingsInput>, Prisma.BankAccountUncheckedUpdateWithoutFinancialHeadingsInput>
 }
 
-export type BankAccountCreateWithoutMunicipalFeesInput = {
+export type BankAccountCreateWithoutFinancialHeadingsInput = {
   id?: string
   bankName: string
   accountNumber: string
@@ -437,7 +437,7 @@ export type BankAccountCreateWithoutMunicipalFeesInput = {
   updatedAt?: Date | string
 }
 
-export type BankAccountUncheckedCreateWithoutMunicipalFeesInput = {
+export type BankAccountUncheckedCreateWithoutFinancialHeadingsInput = {
   id?: string
   bankName: string
   accountNumber: string
@@ -449,23 +449,23 @@ export type BankAccountUncheckedCreateWithoutMunicipalFeesInput = {
   updatedAt?: Date | string
 }
 
-export type BankAccountCreateOrConnectWithoutMunicipalFeesInput = {
+export type BankAccountCreateOrConnectWithoutFinancialHeadingsInput = {
   where: Prisma.BankAccountWhereUniqueInput
-  create: Prisma.XOR<Prisma.BankAccountCreateWithoutMunicipalFeesInput, Prisma.BankAccountUncheckedCreateWithoutMunicipalFeesInput>
+  create: Prisma.XOR<Prisma.BankAccountCreateWithoutFinancialHeadingsInput, Prisma.BankAccountUncheckedCreateWithoutFinancialHeadingsInput>
 }
 
-export type BankAccountUpsertWithoutMunicipalFeesInput = {
-  update: Prisma.XOR<Prisma.BankAccountUpdateWithoutMunicipalFeesInput, Prisma.BankAccountUncheckedUpdateWithoutMunicipalFeesInput>
-  create: Prisma.XOR<Prisma.BankAccountCreateWithoutMunicipalFeesInput, Prisma.BankAccountUncheckedCreateWithoutMunicipalFeesInput>
+export type BankAccountUpsertWithoutFinancialHeadingsInput = {
+  update: Prisma.XOR<Prisma.BankAccountUpdateWithoutFinancialHeadingsInput, Prisma.BankAccountUncheckedUpdateWithoutFinancialHeadingsInput>
+  create: Prisma.XOR<Prisma.BankAccountCreateWithoutFinancialHeadingsInput, Prisma.BankAccountUncheckedCreateWithoutFinancialHeadingsInput>
   where?: Prisma.BankAccountWhereInput
 }
 
-export type BankAccountUpdateToOneWithWhereWithoutMunicipalFeesInput = {
+export type BankAccountUpdateToOneWithWhereWithoutFinancialHeadingsInput = {
   where?: Prisma.BankAccountWhereInput
-  data: Prisma.XOR<Prisma.BankAccountUpdateWithoutMunicipalFeesInput, Prisma.BankAccountUncheckedUpdateWithoutMunicipalFeesInput>
+  data: Prisma.XOR<Prisma.BankAccountUpdateWithoutFinancialHeadingsInput, Prisma.BankAccountUncheckedUpdateWithoutFinancialHeadingsInput>
 }
 
-export type BankAccountUpdateWithoutMunicipalFeesInput = {
+export type BankAccountUpdateWithoutFinancialHeadingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.StringFieldUpdateOperationsInput | string
   accountNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -477,7 +477,7 @@ export type BankAccountUpdateWithoutMunicipalFeesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type BankAccountUncheckedUpdateWithoutMunicipalFeesInput = {
+export type BankAccountUncheckedUpdateWithoutFinancialHeadingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   bankName?: Prisma.StringFieldUpdateOperationsInput | string
   accountNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -495,11 +495,11 @@ export type BankAccountUncheckedUpdateWithoutMunicipalFeesInput = {
  */
 
 export type BankAccountCountOutputType = {
-  municipalFees: number
+  financialHeadings: number
 }
 
 export type BankAccountCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  municipalFees?: boolean | BankAccountCountOutputTypeCountMunicipalFeesArgs
+  financialHeadings?: boolean | BankAccountCountOutputTypeCountFinancialHeadingsArgs
 }
 
 /**
@@ -515,8 +515,8 @@ export type BankAccountCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.
 /**
  * BankAccountCountOutputType without action
  */
-export type BankAccountCountOutputTypeCountMunicipalFeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MunicipalFeeWhereInput
+export type BankAccountCountOutputTypeCountFinancialHeadingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FinancialHeadingWhereInput
 }
 
 
@@ -530,7 +530,7 @@ export type BankAccountSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  municipalFees?: boolean | Prisma.BankAccount$municipalFeesArgs<ExtArgs>
+  financialHeadings?: boolean | Prisma.BankAccount$financialHeadingsArgs<ExtArgs>
   _count?: boolean | Prisma.BankAccountCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["bankAccount"]>
 
@@ -572,7 +572,7 @@ export type BankAccountSelectScalar = {
 
 export type BankAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bankName" | "accountNumber" | "cardNumber" | "iban" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["bankAccount"]>
 export type BankAccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  municipalFees?: boolean | Prisma.BankAccount$municipalFeesArgs<ExtArgs>
+  financialHeadings?: boolean | Prisma.BankAccount$financialHeadingsArgs<ExtArgs>
   _count?: boolean | Prisma.BankAccountCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BankAccountIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -581,7 +581,7 @@ export type BankAccountIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type $BankAccountPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BankAccount"
   objects: {
-    municipalFees: Prisma.$MunicipalFeePayload<ExtArgs>[]
+    financialHeadings: Prisma.$FinancialHeadingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -987,7 +987,7 @@ readonly fields: BankAccountFieldRefs;
  */
 export interface Prisma__BankAccountClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  municipalFees<T extends Prisma.BankAccount$municipalFeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BankAccount$municipalFeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MunicipalFeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  financialHeadings<T extends Prisma.BankAccount$financialHeadingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BankAccount$financialHeadingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialHeadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1419,27 +1419,27 @@ export type BankAccountDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * BankAccount.municipalFees
+ * BankAccount.financialHeadings
  */
-export type BankAccount$municipalFeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type BankAccount$financialHeadingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the MunicipalFee
+   * Select specific fields to fetch from the FinancialHeading
    */
-  select?: Prisma.MunicipalFeeSelect<ExtArgs> | null
+  select?: Prisma.FinancialHeadingSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the MunicipalFee
+   * Omit specific fields from the FinancialHeading
    */
-  omit?: Prisma.MunicipalFeeOmit<ExtArgs> | null
+  omit?: Prisma.FinancialHeadingOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MunicipalFeeInclude<ExtArgs> | null
-  where?: Prisma.MunicipalFeeWhereInput
-  orderBy?: Prisma.MunicipalFeeOrderByWithRelationInput | Prisma.MunicipalFeeOrderByWithRelationInput[]
-  cursor?: Prisma.MunicipalFeeWhereUniqueInput
+  include?: Prisma.FinancialHeadingInclude<ExtArgs> | null
+  where?: Prisma.FinancialHeadingWhereInput
+  orderBy?: Prisma.FinancialHeadingOrderByWithRelationInput | Prisma.FinancialHeadingOrderByWithRelationInput[]
+  cursor?: Prisma.FinancialHeadingWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.MunicipalFeeScalarFieldEnum | Prisma.MunicipalFeeScalarFieldEnum[]
+  distinct?: Prisma.FinancialHeadingScalarFieldEnum | Prisma.FinancialHeadingScalarFieldEnum[]
 }
 
 /**
