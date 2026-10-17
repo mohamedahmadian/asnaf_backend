@@ -43,6 +43,7 @@ function toAmount(value: unknown) {
 export const municipalFeeProcessTypes = [
   CaseRequestType.ISSUANCE,
   CaseRequestType.RENEWAL,
+  CaseRequestType.LOCATION_CHANGE,
   CaseRequestType.AUCTION,
   CaseRequestType.STEWARDSHIP,
 ] as const;
@@ -56,7 +57,7 @@ export class CreateMunicipalFeeDto {
 
   @Transform(({ value }) => trimString(value))
   @Matches(databaseUuidPattern)
-  financialHeadingId: string;
+  bankAccountId: string;
 
   @Transform(({ value }) => toAmount(value))
   @IsInt()

@@ -13,6 +13,10 @@ const MENU_MOVES = [
  * وجود مجوز finance روی نقش مدیر نشان می‌دهد انتقال انجام شده است.
  */
 export async function migrateFinanceMenuPermissions(prisma: PrismaClient) {
+  await prisma.rolePermission.deleteMany({
+    where: { code: 'finance.financial-headings' },
+  });
+
   const legacyRows = await prisma.rolePermission.findMany({
     where: { code: { in: MENU_MOVES.map(([from]) => from) } },
     select: { roleId: true, code: true },

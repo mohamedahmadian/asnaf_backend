@@ -25,6 +25,14 @@ export const UserGender = {
 export type UserGender = (typeof UserGender)[keyof typeof UserGender]
 
 
+export const PersonType = {
+  NATURAL: 'NATURAL',
+  LEGAL: 'LEGAL'
+} as const
+
+export type PersonType = (typeof PersonType)[keyof typeof PersonType]
+
+
 export const DocumentGender = {
   MALE: 'MALE',
   FEMALE: 'FEMALE',
@@ -218,6 +226,51 @@ export const ProjectProgressTranscriptionStatus = {
 } as const
 
 export type ProjectProgressTranscriptionStatus = (typeof ProjectProgressTranscriptionStatus)[keyof typeof ProjectProgressTranscriptionStatus]
+
+
+export const PaymentDiscountMode = {
+  MANUAL: 'MANUAL',
+  CATALOG: 'CATALOG'
+} as const
+
+export type PaymentDiscountMode = (typeof PaymentDiscountMode)[keyof typeof PaymentDiscountMode]
+
+
+export const PaymentMethod = {
+  ONLINE: 'ONLINE',
+  POS: 'POS',
+  BANK_RECEIPT: 'BANK_RECEIPT'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const PaymentGatewayChannel = {
+  OPERATOR: 'OPERATOR',
+  PUBLIC_LINK: 'PUBLIC_LINK'
+} as const
+
+export type PaymentGatewayChannel = (typeof PaymentGatewayChannel)[keyof typeof PaymentGatewayChannel]
+
+
+export const PaymentGatewayStatus = {
+  INITIATED: 'INITIATED',
+  VERIFIED: 'VERIFIED',
+  SETTLED: 'SETTLED',
+  FAILED: 'FAILED',
+  REVERSED: 'REVERSED'
+} as const
+
+export type PaymentGatewayStatus = (typeof PaymentGatewayStatus)[keyof typeof PaymentGatewayStatus]
 
 
 export const CaseInquiryStatus = {

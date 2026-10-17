@@ -48,13 +48,11 @@ export const PERMISSION_TREE: PermissionNode[] = [
     nameKey: 'modules.finance',
     children: [
       { code: 'finance.bank-accounts', kind: 'MENU', nameKey: 'menus.bankAccounts' },
-      {
-        code: 'finance.financial-headings',
-        kind: 'MENU',
-        nameKey: 'menus.financialHeadings',
-      },
       { code: 'finance.municipal-fees', kind: 'MENU', nameKey: 'menus.municipalFees' },
       { code: 'finance.discounts', kind: 'MENU', nameKey: 'menus.discounts' },
+      { code: 'finance.settings', kind: 'MENU', nameKey: 'menus.financialSettings' },
+      { code: 'finance.payments', kind: 'MENU', nameKey: 'menus.payments' },
+      { code: 'finance.payment-history', kind: 'MENU', nameKey: 'menus.paymentHistory' },
     ],
   },
   {

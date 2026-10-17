@@ -57,8 +57,14 @@ export const ModelName = {
   City: 'City',
   BankAccount: 'BankAccount',
   MunicipalFee: 'MunicipalFee',
-  FinancialHeading: 'FinancialHeading',
+  FinancialRequestSetting: 'FinancialRequestSetting',
   Discount: 'Discount',
+  PaymentGroup: 'PaymentGroup',
+  PaymentGroupItem: 'PaymentGroupItem',
+  Payment: 'Payment',
+  PaymentLine: 'PaymentLine',
+  PaymentReceipt: 'PaymentReceipt',
+  PaymentGatewayTransaction: 'PaymentGatewayTransaction',
   JobType: 'JobType',
   InquiryCenter: 'InquiryCenter',
   JobGroup: 'JobGroup',
@@ -252,6 +258,7 @@ export const BankAccountScalarFieldEnum = {
   accountNumber: 'accountNumber',
   cardNumber: 'cardNumber',
   iban: 'iban',
+  paymentId: 'paymentId',
   description: 'description',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -264,7 +271,7 @@ export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[key
 export const MunicipalFeeScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  financialHeadingId: 'financialHeadingId',
+  bankAccountId: 'bankAccountId',
   description: 'description',
   isActive: 'isActive',
   amount: 'amount',
@@ -276,17 +283,13 @@ export const MunicipalFeeScalarFieldEnum = {
 export type MunicipalFeeScalarFieldEnum = (typeof MunicipalFeeScalarFieldEnum)[keyof typeof MunicipalFeeScalarFieldEnum]
 
 
-export const FinancialHeadingScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  description: 'description',
+export const FinancialRequestSettingScalarFieldEnum = {
+  requestType: 'requestType',
   bankAccountId: 'bankAccountId',
-  paymentId: 'paymentId',
-  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type FinancialHeadingScalarFieldEnum = (typeof FinancialHeadingScalarFieldEnum)[keyof typeof FinancialHeadingScalarFieldEnum]
+export type FinancialRequestSettingScalarFieldEnum = (typeof FinancialRequestSettingScalarFieldEnum)[keyof typeof FinancialRequestSettingScalarFieldEnum]
 
 
 export const DiscountScalarFieldEnum = {
@@ -295,6 +298,7 @@ export const DiscountScalarFieldEnum = {
   title: 'title',
   percent: 'percent',
   processTypes: 'processTypes',
+  appliesToAllRequests: 'appliesToAllRequests',
   description: 'description',
   isActive: 'isActive',
   createdAt: 'createdAt',
@@ -302,6 +306,114 @@ export const DiscountScalarFieldEnum = {
 } as const
 
 export type DiscountScalarFieldEnum = (typeof DiscountScalarFieldEnum)[keyof typeof DiscountScalarFieldEnum]
+
+
+export const PaymentGroupScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  bankAccountId: 'bankAccountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentGroupScalarFieldEnum = (typeof PaymentGroupScalarFieldEnum)[keyof typeof PaymentGroupScalarFieldEnum]
+
+
+export const PaymentGroupItemScalarFieldEnum = {
+  id: 'id',
+  paymentGroupId: 'paymentGroupId',
+  municipalFeeId: 'municipalFeeId',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type PaymentGroupItemScalarFieldEnum = (typeof PaymentGroupItemScalarFieldEnum)[keyof typeof PaymentGroupItemScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  payerUserId: 'payerUserId',
+  personType: 'personType',
+  nationalId: 'nationalId',
+  companyName: 'companyName',
+  companyNationalId: 'companyNationalId',
+  companyRegistrationNo: 'companyRegistrationNo',
+  payerName: 'payerName',
+  recordedById: 'recordedById',
+  description: 'description',
+  paymentGroupId: 'paymentGroupId',
+  paymentGroupTitle: 'paymentGroupTitle',
+  bankAccountId: 'bankAccountId',
+  discountMode: 'discountMode',
+  discountId: 'discountId',
+  discountTitle: 'discountTitle',
+  discountPercent: 'discountPercent',
+  feeCount: 'feeCount',
+  subtotal: 'subtotal',
+  discountAmount: 'discountAmount',
+  finalAmount: 'finalAmount',
+  method: 'method',
+  status: 'status',
+  trackingCode: 'trackingCode',
+  receiptNumber: 'receiptNumber',
+  caseRequestId: 'caseRequestId',
+  paidAt: 'paidAt',
+  payLinkToken: 'payLinkToken',
+  payLinkExpiresAt: 'payLinkExpiresAt',
+  payLinkSentAt: 'payLinkSentAt',
+  deletedAt: 'deletedAt',
+  deletedById: 'deletedById',
+  deleteReason: 'deleteReason',
+  createdAt: 'createdAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const PaymentLineScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  municipalFeeId: 'municipalFeeId',
+  title: 'title',
+  amount: 'amount',
+  sortOrder: 'sortOrder'
+} as const
+
+export type PaymentLineScalarFieldEnum = (typeof PaymentLineScalarFieldEnum)[keyof typeof PaymentLineScalarFieldEnum]
+
+
+export const PaymentReceiptScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  imageId: 'imageId',
+  originalName: 'originalName',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type PaymentReceiptScalarFieldEnum = (typeof PaymentReceiptScalarFieldEnum)[keyof typeof PaymentReceiptScalarFieldEnum]
+
+
+export const PaymentGatewayTransactionScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  gateway: 'gateway',
+  channel: 'channel',
+  orderId: 'orderId',
+  amount: 'amount',
+  status: 'status',
+  refId: 'refId',
+  resCode: 'resCode',
+  saleReferenceId: 'saleReferenceId',
+  cardHolderPan: 'cardHolderPan',
+  rawResponse: 'rawResponse',
+  createdAt: 'createdAt',
+  verifiedAt: 'verifiedAt',
+  settledAt: 'settledAt'
+} as const
+
+export type PaymentGatewayTransactionScalarFieldEnum = (typeof PaymentGatewayTransactionScalarFieldEnum)[keyof typeof PaymentGatewayTransactionScalarFieldEnum]
 
 
 export const JobTypeScalarFieldEnum = {
@@ -958,6 +1070,12 @@ export const UserScalarFieldEnum = {
   phone: 'phone',
   email: 'email',
   gender: 'gender',
+  personType: 'personType',
+  companyName: 'companyName',
+  companyNationalId: 'companyNationalId',
+  companyRegistrationNo: 'companyRegistrationNo',
+  companyRegisteredAt: 'companyRegisteredAt',
+  economicCode: 'economicCode',
   address: 'address',
   notes: 'notes',
   religion: 'religion',

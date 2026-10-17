@@ -19,6 +19,11 @@ enum UserGender {
   FEMALE
 }
 
+enum PersonType {
+  NATURAL
+  LEGAL
+}
+
 enum DocumentGender {
   MALE
   FEMALE
@@ -173,6 +178,7 @@ model StoredImage {
   violationProceedingAttachments ViolationProceedingAttachment[] @relation("ViolationProceedingAttachmentImage")
   letterheadLogos        CaseLetterhead[] @relation("LetterheadLogo")
   letterheadSignatures   CaseLetterhead[] @relation("LetterheadSignature")
+  paymentReceipts        PaymentReceipt[] @relation("PaymentReceiptImage")
   createdAt              DateTime @default(now())
 
   @@map("stored_images")
@@ -252,38 +258,45 @@ model City {
 }
 
 model BankAccount {
-  id                String             @id @default(uuid())
-  bankName          String
-  accountNumber     String
-  cardNumber        String?            @unique
-  iban              String?            @unique
-  description       String?
-  isActive          Boolean            @default(true)
-  financialHeadings FinancialHeading[]
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
+  id            String         @id @default(uuid())
+  bankName      String
+  accountNumber String
+  cardNumber    String?        @unique
+  iban          String?        @unique
+  paymentId     String?        @unique
+  description   String?
+  isActive      Boolean        @default(true)
+  municipalFees MunicipalFee[]
+  financialRequestSettings FinancialRequestSetting[]
+  paymentGroups PaymentGroup[]
+  payments      Payment[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 
   @@unique([bankName, accountNumber])
   @@index([bankName])
   @@index([accountNumber])
+  @@index([paymentId])
   @@index([isActive])
   @@index([createdAt])
   @@map("bank_accounts")
 }
 
 model MunicipalFee {
-  id                 String           @id @default(uuid())
-  title              String           @unique
-  financialHeadingId String
-  financialHeading   FinancialHeading @relation(fields: [financialHeadingId], references: [id], onDelete: Restrict)
-  description        String?
-  isActive           Boolean          @default(true)
-  amount             Decimal          @db.Decimal(18, 0)
-  processTypes       CaseRequestType[] @default([])
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
+  id            String            @id @default(uuid())
+  title         String            @unique
+  bankAccountId String
+  bankAccount       BankAccount        @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  paymentGroupItems PaymentGroupItem[]
+  paymentLines      PaymentLine[]
+  description       String?
+  isActive      Boolean           @default(true)
+  amount        Decimal           @db.Decimal(18, 0)
+  processTypes  CaseRequestType[] @default([])
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
 
-  @@index([financialHeadingId])
+  @@index([bankAccountId])
   @@index([title])
   @@index([amount])
   @@index([isActive])
@@ -291,22 +304,14 @@ model MunicipalFee {
   @@map("municipal_fees")
 }
 
-model FinancialHeading {
-  id            String      @id @default(uuid())
-  title         String      @unique
-  description   String?
+model FinancialRequestSetting {
+  requestType   CaseRequestType @id
   bankAccountId String
-  bankAccount   BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
-  paymentId     String?     @unique
-  municipalFees MunicipalFee[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  bankAccount   BankAccount     @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  updatedAt     DateTime        @updatedAt
 
-  @@index([title])
   @@index([bankAccountId])
-  @@index([paymentId])
-  @@index([createdAt])
-  @@map("financial_headings")
+  @@map("financial_request_settings")
 }
 
 model Discount {
@@ -315,8 +320,11 @@ model Discount {
   title        String
   percent      Decimal           @db.Decimal(5, 2)
   processTypes CaseRequestType[] @default([])
+  /// اگر روشن باشد این تخفیف روی همهٔ انواع درخواست، از جمله انواعی که بعداً اضافه می‌شوند، دیده می‌شود
+  appliesToAllRequests Boolean   @default(false)
   description  String?
   isActive     Boolean           @default(true)
+  payments     Payment[]
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 
@@ -324,8 +332,201 @@ model Discount {
   @@index([year])
   @@index([title])
   @@index([isActive])
+  @@index([appliesToAllRequests])
   @@index([createdAt])
   @@map("discounts")
+}
+
+enum PaymentDiscountMode {
+  MANUAL
+  CATALOG
+}
+
+/// دستهٔ هزینه‌های یک حساب برای ثبت سریع پرداخت
+model PaymentGroup {
+  id            String             @id @default(uuid())
+  title         String
+  bankAccountId String
+  bankAccount   BankAccount        @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  items         PaymentGroupItem[]
+  payments      Payment[]
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@index([bankAccountId])
+  @@index([title])
+  @@index([createdAt])
+  @@map("payment_groups")
+}
+
+model PaymentGroupItem {
+  id             String        @id @default(uuid())
+  paymentGroupId String
+  paymentGroup   PaymentGroup  @relation(fields: [paymentGroupId], references: [id], onDelete: Cascade)
+  municipalFeeId String
+  municipalFee   MunicipalFee  @relation(fields: [municipalFeeId], references: [id], onDelete: Restrict)
+  sortOrder      Int           @default(0)
+  createdAt      DateTime      @default(now())
+
+  @@unique([paymentGroupId, municipalFeeId])
+  @@index([municipalFeeId])
+  @@index([sortOrder])
+  @@map("payment_group_items")
+}
+
+/// یک پرداخت ثبت‌شده روی پرونده، با تصویر مبلغ‌ها در همان لحظه
+model Payment {
+  id                 String              @id @default(uuid())
+  caseFileId         String?
+  caseFile           CaseFile?           @relation(fields: [caseFileId], references: [id], onDelete: Restrict)
+  payerUserId        String
+  payer              User                @relation("PaymentPayer", fields: [payerUserId], references: [id], onDelete: Restrict)
+  personType         PersonType          @default(NATURAL)
+  nationalId         String?
+  companyName        String?
+  companyNationalId  String?
+  companyRegistrationNo String?
+  payerName          String
+  recordedById       String
+  recordedBy         User                @relation("PaymentRecorder", fields: [recordedById], references: [id], onDelete: Restrict)
+  description        String?
+  paymentGroupId     String?
+  paymentGroup       PaymentGroup?       @relation(fields: [paymentGroupId], references: [id], onDelete: SetNull)
+  paymentGroupTitle  String?
+  bankAccountId      String
+  bankAccount        BankAccount         @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  discountMode       PaymentDiscountMode
+  discountId         String?
+  discount           Discount?           @relation(fields: [discountId], references: [id], onDelete: SetNull)
+  discountTitle      String?
+  discountPercent    Decimal?            @db.Decimal(5, 2)
+  feeCount           Int
+  subtotal           Decimal             @db.Decimal(18, 0)
+  discountAmount     Decimal             @db.Decimal(18, 0)
+  finalAmount        Decimal             @db.Decimal(18, 0)
+  method             PaymentMethod
+  status             PaymentStatus       @default(PAID)
+  /// مرجع بانکی: RRN کارت‌خوان، شمارهٔ فیش یا SaleReferenceId درگاه
+  trackingCode       String?
+  receiptNumber      String              @unique
+  caseRequestId      String?
+  caseRequest        CaseRequest?        @relation(fields: [caseRequestId], references: [id], onDelete: SetNull)
+  /// برای پرداخت آنلاین با تأیید درگاه به‌روز می‌شود
+  paidAt             DateTime            @default(now())
+  payLinkToken       String?             @unique
+  payLinkExpiresAt   DateTime?
+  payLinkSentAt      DateTime?
+  deletedAt          DateTime?
+  deletedById        String?
+  deletedBy          User?               @relation("PaymentDeleter", fields: [deletedById], references: [id], onDelete: SetNull)
+  deleteReason       String?
+  lines              PaymentLine[]
+  receipts           PaymentReceipt[]
+  gatewayTransactions PaymentGatewayTransaction[]
+  createdAt          DateTime            @default(now())
+
+  @@index([method])
+  @@index([status])
+  @@index([trackingCode])
+  @@index([caseRequestId])
+  @@index([deletedAt])
+  @@index([caseFileId])
+  @@index([payerUserId])
+  @@index([personType])
+  @@index([nationalId])
+  @@index([companyNationalId])
+  @@index([recordedById])
+  @@index([paymentGroupId])
+  @@index([bankAccountId])
+  @@index([discountId])
+  @@index([paidAt])
+  @@index([finalAmount])
+  @@index([subtotal])
+  @@index([feeCount])
+  @@index([createdAt])
+  @@map("payments")
+}
+
+model PaymentLine {
+  id             String        @id @default(uuid())
+  paymentId      String
+  payment        Payment       @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  municipalFeeId String?
+  municipalFee   MunicipalFee? @relation(fields: [municipalFeeId], references: [id], onDelete: SetNull)
+  title          String
+  amount         Decimal       @db.Decimal(18, 0)
+  sortOrder      Int           @default(0)
+
+  @@index([paymentId])
+  @@index([municipalFeeId])
+  @@index([sortOrder])
+  @@map("payment_lines")
+}
+
+model PaymentReceipt {
+  id           String      @id @default(uuid())
+  paymentId    String
+  payment      Payment     @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  imageId      String
+  image        StoredImage @relation("PaymentReceiptImage", fields: [imageId], references: [id], onDelete: Restrict)
+  originalName String?
+  uploadedById String
+  uploadedBy   User        @relation("PaymentReceiptUploader", fields: [uploadedById], references: [id], onDelete: Restrict)
+  createdAt    DateTime    @default(now())
+
+  @@index([paymentId, createdAt])
+  @@index([imageId])
+  @@index([uploadedById])
+  @@map("payment_receipts")
+}
+
+enum PaymentMethod {
+  ONLINE
+  POS
+  BANK_RECEIPT
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum PaymentGatewayChannel {
+  OPERATOR
+  PUBLIC_LINK
+}
+
+enum PaymentGatewayStatus {
+  INITIATED
+  VERIFIED
+  SETTLED
+  FAILED
+  REVERSED
+}
+
+model PaymentGatewayTransaction {
+  id              String                @id @default(uuid())
+  paymentId       String
+  payment         Payment               @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  gateway         String
+  channel         PaymentGatewayChannel
+  orderId         BigInt                @unique
+  amount          Decimal               @db.Decimal(18, 0)
+  status          PaymentGatewayStatus  @default(INITIATED)
+  refId           String?
+  resCode         String?
+  saleReferenceId String?
+  cardHolderPan   String?
+  rawResponse     Json?
+  createdAt       DateTime              @default(now())
+  verifiedAt      DateTime?
+  settledAt       DateTime?
+
+  @@index([paymentId, createdAt])
+  @@index([status, createdAt])
+  @@index([refId])
+  @@map("payment_gateway_transactions")
 }
 
 model JobType {
@@ -881,6 +1082,7 @@ model CaseFile {
   suspensions          CaseSuspension[]
   stewardRevokeFile    CaseStewardRevokeFile?
   revocationProcess    CaseRevocationProcess?
+  payments             Payment[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
 
@@ -1016,6 +1218,7 @@ model CaseRequest {
   locationDraft CaseLocationDraft?
   replacedPremise CasePremiseHistory?
   auction       CaseAuction?
+  payments      Payment[]
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
 
@@ -1319,6 +1522,12 @@ model User {
   phone              String?               @unique
   email              String?               @unique
   gender             UserGender?
+  personType         PersonType            @default(NATURAL)
+  companyName        String?
+  companyNationalId  String?               @unique
+  companyRegistrationNo String?
+  companyRegisteredAt DateTime?             @db.Date
+  economicCode       String?
   address            String?
   notes              String?
   religion           Religion?
@@ -1402,10 +1611,15 @@ model User {
   violationsCreated       Violation[] @relation("ViolationAuthor")
   violationCases          Violation[] @relation("ViolationCase")
   violationProceedingsCreated ViolationProceeding[] @relation("ViolationProceedingAuthor")
+  recordedPayments            Payment[] @relation("PaymentRecorder")
+  paymentsAsPayer             Payment[] @relation("PaymentPayer")
+  uploadedPaymentReceipts     PaymentReceipt[] @relation("PaymentReceiptUploader")
+  deletedPayments             Payment[] @relation("PaymentDeleter")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
   @@index([status])
+  @@index([personType])
   @@index([fullName])
   @@index([createdAt])
   @@index([countryId])

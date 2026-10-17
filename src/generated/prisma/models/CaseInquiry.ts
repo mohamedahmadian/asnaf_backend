@@ -589,10 +589,6 @@ export type NullableEnumCaseInquiryChannelFieldUpdateOperationsInput = {
   set?: $Enums.CaseInquiryChannel | null
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type CaseInquiryCreateNestedOneWithoutFilesInput = {
   create?: Prisma.XOR<Prisma.CaseInquiryCreateWithoutFilesInput, Prisma.CaseInquiryUncheckedCreateWithoutFilesInput>
   connectOrCreate?: Prisma.CaseInquiryCreateOrConnectWithoutFilesInput

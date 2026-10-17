@@ -24,6 +24,7 @@ const accountSelect = {
   accountNumber: true,
   cardNumber: true,
   iban: true,
+  paymentId: true,
   description: true,
   isActive: true,
   createdAt: true,
@@ -47,6 +48,7 @@ export class BankAccountsService {
         accountNumber: (dir) => ({ accountNumber: dir }),
         cardNumber: (dir) => ({ cardNumber: dir }),
         iban: (dir) => ({ iban: dir }),
+        paymentId: (dir) => ({ paymentId: dir }),
         isActive: (dir) => ({ isActive: dir }),
       },
       [{ createdAt: 'desc' }, { id: 'asc' }],
@@ -140,6 +142,7 @@ export class BankAccountsService {
       filters.push(
         { accountNumber: containsInsensitive(digits) },
         { cardNumber: containsInsensitive(digits) },
+        { paymentId: containsInsensitive(digits) },
       );
     }
     if (ibanTerm) {
@@ -154,6 +157,7 @@ export class BankAccountsService {
       accountNumber: dto.accountNumber,
       cardNumber: dto.cardNumber,
       iban: dto.iban,
+      paymentId: dto.paymentId,
       description: dto.description,
       isActive: dto.isActive,
     };
@@ -179,6 +183,9 @@ export class BankAccountsService {
     }
     if (fields.includes('iban')) {
       return 'این شماره شبا قبلاً ثبت شده است';
+    }
+    if (fields.includes('paymentId')) {
+      return 'این شناسه پرداخت قبلاً ثبت شده است';
     }
     if (fields.includes('accountNumber') || fields.includes('bankName')) {
       return 'این شماره حساب برای این بانک قبلاً ثبت شده است';

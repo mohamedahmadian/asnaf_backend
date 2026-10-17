@@ -19,7 +19,7 @@ import {
 import { normalizePhone, phoneLookupValues } from '../common/phone';
 import { resolveSortOrder } from '../common/sort-query';
 import { ensureEmployeeRole } from '../access/access.constants';
-import { Prisma, UserStatus } from '../generated/prisma/client';
+import { PersonType, Prisma, UserStatus } from '../generated/prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { SmsService } from '../sms/sms.service';
 import { joinFullName, normalizePersonName } from './user-profile.util';
@@ -41,6 +41,12 @@ const userSelect = {
   locale: true,
   status: true,
   gender: true,
+  personType: true,
+  companyName: true,
+  companyNationalId: true,
+  companyRegistrationNo: true,
+  companyRegisteredAt: true,
+  economicCode: true,
   nationalId: true,
   phone: true,
   email: true,
@@ -118,6 +124,44 @@ function formatDateOnly(value: Date | string | null | undefined) {
   return value.toISOString().slice(0, 10);
 }
 
+function parseDateOnly(value: string | null | undefined) {
+  if (!value) return null;
+  return new Date(`${value.slice(0, 10)}T00:00:00.000Z`);
+}
+
+function legalUserData(dto: {
+  personType?: PersonType;
+  companyName?: string | null;
+  companyNationalId?: string | null;
+  companyRegistrationNo?: string | null;
+  companyRegisteredAt?: string | null;
+  economicCode?: string | null;
+}) {
+  const personType = dto.personType ?? PersonType.NATURAL;
+  if (personType !== PersonType.LEGAL) {
+    return {
+      personType: PersonType.NATURAL,
+      companyName: null,
+      companyNationalId: null,
+      companyRegistrationNo: null,
+      companyRegisteredAt: null,
+      economicCode: null,
+    };
+  }
+  const companyName = dto.companyName?.trim() ?? '';
+  if (!companyName) {
+    throw new BadRequestException('نام شرکت را وارد کنید');
+  }
+  return {
+    personType: PersonType.LEGAL,
+    companyName,
+    companyNationalId: dto.companyNationalId || null,
+    companyRegistrationNo: dto.companyRegistrationNo?.trim() || null,
+    companyRegisteredAt: parseDateOnly(dto.companyRegisteredAt),
+    economicCode: dto.economicCode || null,
+  };
+}
+
 function mapUser<
   T extends {
     latitude: Prisma.Decimal | null;
@@ -126,9 +170,11 @@ function mapUser<
     birthDate?: Date | null;
     nationalCardExpiresAt?: Date | null;
     passportExpiresAt?: Date | null;
+    companyRegisteredAt?: Date | null;
   },
 >(user: T) {
-  const { userRoles, birthDate, nationalCardExpiresAt, passportExpiresAt, ...rest } = user;
+  const { userRoles, birthDate, nationalCardExpiresAt, passportExpiresAt, companyRegisteredAt, ...rest } =
+    user;
   return {
     ...rest,
     latitude: toCoord(user.latitude),
@@ -137,6 +183,7 @@ function mapUser<
     birthDate: formatDateOnly(birthDate),
     nationalCardExpiresAt: formatDateOnly(nationalCardExpiresAt),
     passportExpiresAt: formatDateOnly(passportExpiresAt),
+    companyRegisteredAt: formatDateOnly(companyRegisteredAt),
     activityStartYear: null,
     issuingOrganizationId: null,
     issuingOrganization: null,
@@ -159,6 +206,7 @@ export class UsersService {
     const digits = q ? normalizeSearchDigits(q) : '';
     const where: Prisma.UserWhereInput = {
       status: query.status,
+      personType: query.personType,
       countryId: query.countryId,
       orgUnitId: query.orgUnitId,
       positionId: query.positionId,
@@ -174,12 +222,17 @@ export class UsersService {
             { fullName: containsInsensitive(q) },
             { firstName: containsInsensitive(q) },
             { lastName: containsInsensitive(q) },
+            { companyName: containsInsensitive(q) },
             { username: containsInsensitive(q) },
             { email: containsInsensitive(q) },
+            { companyRegistrationNo: containsInsensitive(q) },
             ...(digits
               ? [
                   { nationalId: { contains: digits } },
                   { phone: { contains: digits } },
+                  { companyNationalId: { contains: digits } },
+                  { companyRegistrationNo: { contains: digits } },
+                  { economicCode: { contains: digits } },
                 ]
               : []),
           ]
@@ -194,6 +247,8 @@ export class UsersService {
         phone: (dir) => ({ phone: dir }),
         status: (dir) => ({ status: dir }),
         nationalId: (dir) => ({ nationalId: dir }),
+        personType: (dir) => ({ personType: dir }),
+        companyName: (dir) => ({ companyName: dir }),
         city: (dir) => ({ city: { nameFa: dir } }),
         createdAt: (dir) => ({ createdAt: dir }),
         orgUnit: (dir) => ({ orgUnit: { name: dir } }),
@@ -257,7 +312,10 @@ export class UsersService {
   }
 
   async create(dto: CreateUserDto) {
-    await this.assertUnique(dto);
+    await this.assertUnique({
+      ...dto,
+      companyNationalId: dto.personType === PersonType.LEGAL ? dto.companyNationalId : null,
+    });
     await this.assertGeo(dto.countryId, dto.provinceId, dto.cityId);
     await this.assertImages(dto);
     await this.assertOrgAssignment(dto.orgUnitId, dto.positionId);
@@ -273,6 +331,7 @@ export class UsersService {
         locale: dto.locale ?? 'fa',
         status: dto.status ?? UserStatus.ACTIVE,
         gender: dto.gender ?? null,
+        ...legalUserData(dto),
         nationalId: dto.nationalId || null,
         phone: dto.phone || null,
         email: dto.email || null,
@@ -303,7 +362,14 @@ export class UsersService {
 
   async update(id: string, dto: UpdateUserDto) {
     const existing = await this.findOne(id);
-    await this.assertUnique(dto, id);
+    await this.assertUnique(
+      {
+        ...dto,
+        companyNationalId:
+          dto.personType === PersonType.NATURAL ? null : dto.companyNationalId,
+      },
+      id,
+    );
     await this.assertImages(dto);
     if (dto.orgUnitId !== undefined || dto.positionId !== undefined) {
       const current = await this.prisma.user.findUnique({ where: { id } });
@@ -337,6 +403,7 @@ export class UsersService {
       locale: dto.locale,
       status: dto.status,
       gender: dto.gender === undefined ? undefined : dto.gender,
+      ...(dto.personType !== undefined ? legalUserData(dto) : {}),
       nationalId: dto.nationalId === undefined ? undefined : dto.nationalId,
       phone: dto.phone === undefined ? undefined : dto.phone,
       email: dto.email === undefined ? undefined : dto.email,
@@ -721,6 +788,7 @@ export class UsersService {
     dto: {
       username?: string;
       nationalId?: string | null;
+      companyNationalId?: string | null;
       phone?: string | null;
       email?: string | null;
     },
@@ -744,6 +812,17 @@ export class UsersService {
       });
       if (taken) {
         throw new ConflictException('این کد ملی قبلاً ثبت شده است');
+      }
+    }
+    if (dto.companyNationalId) {
+      const taken = await this.prisma.user.findFirst({
+        where: {
+          companyNationalId: dto.companyNationalId,
+          id: excludeId ? { not: excludeId } : undefined,
+        },
+      });
+      if (taken) {
+        throw new ConflictException('این شناسه ملی قبلاً ثبت شده است');
       }
     }
     if (dto.phone) {

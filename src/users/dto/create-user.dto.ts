@@ -7,13 +7,20 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  Matches,
   MinLength,
   ValidateIf,
 } from 'class-validator';
-import { Religion, UserGender, UserStatus } from '../../generated/prisma/client';
+import { PersonType, Religion, UserGender, UserStatus } from '../../generated/prisma/client';
 import { emptyToNull } from '../../common/dto-transform';
-import { normalizeNationalId } from '../../common/national-id';
+import { normalizeNationalId, toLatinDigits } from '../../common/national-id';
 import { normalizePhone } from '../../common/phone';
+
+function digitsOrNull(value: unknown, max: number) {
+  if (typeof value !== 'string') return emptyToNull(value);
+  const digits = toLatinDigits(value).replace(/\D/g, '').slice(0, max);
+  return digits || null;
+}
 
 export const APP_LOCALES = ['fa', 'ar', 'ur', 'hi', 'en'] as const;
 
@@ -47,6 +54,40 @@ export class CreateUserDto {
   @ValidateIf((_, value) => value != null)
   @IsEnum(UserGender)
   gender?: UserGender | null;
+
+  @IsOptional()
+  @IsEnum(PersonType)
+  personType?: PersonType;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  companyName?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => digitsOrNull(value, 11))
+  @ValidateIf((_, value) => value != null)
+  @Matches(/^\d{11}$/, { message: 'شناسه ملی باید ۱۱ رقم باشد' })
+  companyNationalId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  companyRegistrationNo?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @Matches(/^\d{4}-\d{2}-\d{2}$/, { message: 'تاریخ ثبت معتبر نیست' })
+  companyRegisteredAt?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => digitsOrNull(value, 14))
+  @ValidateIf((_, value) => value != null)
+  @Matches(/^\d{1,14}$/, { message: 'کد اقتصادی معتبر نیست' })
+  economicCode?: string | null;
 
   @IsOptional()
   @Transform(({ value }) =>

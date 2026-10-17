@@ -2,6 +2,8 @@ const PUBLIC_ROUTES: { method?: string; prefix: string }[] = [
   { method: 'POST', prefix: '/auth/login' },
   { method: 'POST', prefix: '/auth/forgot-password' },
   { prefix: '/public/profiles' },
+  { prefix: '/public/payments' },
+  { method: 'POST', prefix: '/public/payment-gateway/mellat/callback' },
   { method: 'GET', prefix: '/images' },
 ];
 
@@ -12,7 +14,6 @@ const LOOKUP_COLLECTIONS = new Set([
   '/provinces',
   '/cities',
   '/bank-accounts',
-  '/financial-headings',
   '/municipal-fees',
   '/discounts',
   '/job-types',
@@ -71,12 +72,15 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
     permissions: ['base-info.commercial-complexes'],
   },
   { prefix: '/bank-accounts', permissions: ['finance.bank-accounts'] },
-  {
-    prefix: '/financial-headings',
-    permissions: ['finance.financial-headings'],
-  },
   { prefix: '/municipal-fees', permissions: ['finance.municipal-fees'] },
   { prefix: '/discounts', permissions: ['finance.discounts'] },
+  { prefix: '/financial-settings', permissions: ['finance.settings'] },
+  {
+    prefix: '/payment-groups',
+    permissions: ['finance.payments', 'finance.payment-history'],
+  },
+  { prefix: '/payment-history', permissions: ['finance.payment-history'] },
+  { prefix: '/payments', permissions: ['finance.payments'] },
   { prefix: '/job-types', permissions: ['base-info.job-types'] },
   { prefix: '/inquiry-centers', permissions: ['base-info.inquiry-centers'] },
   { prefix: '/job-groups', permissions: ['base-info.job-groups'] },

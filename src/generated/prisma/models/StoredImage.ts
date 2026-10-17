@@ -259,6 +259,7 @@ export type StoredImageWhereInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentListRelationFilter
   letterheadLogos?: Prisma.CaseLetterheadListRelationFilter
   letterheadSignatures?: Prisma.CaseLetterheadListRelationFilter
+  paymentReceipts?: Prisma.PaymentReceiptListRelationFilter
 }
 
 export type StoredImageOrderByWithRelationInput = {
@@ -281,6 +282,7 @@ export type StoredImageOrderByWithRelationInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentOrderByRelationAggregateInput
   letterheadLogos?: Prisma.CaseLetterheadOrderByRelationAggregateInput
   letterheadSignatures?: Prisma.CaseLetterheadOrderByRelationAggregateInput
+  paymentReceipts?: Prisma.PaymentReceiptOrderByRelationAggregateInput
 }
 
 export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
@@ -306,6 +308,7 @@ export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentListRelationFilter
   letterheadLogos?: Prisma.CaseLetterheadListRelationFilter
   letterheadSignatures?: Prisma.CaseLetterheadListRelationFilter
+  paymentReceipts?: Prisma.PaymentReceiptListRelationFilter
 }, "id">
 
 export type StoredImageOrderByWithAggregationInput = {
@@ -358,6 +361,7 @@ export type StoredImageCreateInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateInput = {
@@ -380,6 +384,7 @@ export type StoredImageUncheckedCreateInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUpdateInput = {
@@ -402,6 +407,7 @@ export type StoredImageUpdateInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateInput = {
@@ -424,6 +430,7 @@ export type StoredImageUncheckedUpdateInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateManyInput = {
@@ -504,14 +511,14 @@ export type StoredImageSumOrderByAggregateInput = {
   height?: Prisma.SortOrder
 }
 
-export type StoredImageNullableScalarRelationFilter = {
-  is?: Prisma.StoredImageWhereInput | null
-  isNot?: Prisma.StoredImageWhereInput | null
-}
-
 export type StoredImageScalarRelationFilter = {
   is?: Prisma.StoredImageWhereInput
   isNot?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageNullableScalarRelationFilter = {
+  is?: Prisma.StoredImageWhereInput | null
+  isNot?: Prisma.StoredImageWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -544,6 +551,20 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type StoredImageCreateNestedOneWithoutPaymentReceiptsInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutPaymentReceiptsInput, Prisma.StoredImageUncheckedCreateWithoutPaymentReceiptsInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutPaymentReceiptsInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+}
+
+export type StoredImageUpdateOneRequiredWithoutPaymentReceiptsNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutPaymentReceiptsInput, Prisma.StoredImageUncheckedCreateWithoutPaymentReceiptsInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutPaymentReceiptsInput
+  upsert?: Prisma.StoredImageUpsertWithoutPaymentReceiptsInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutPaymentReceiptsInput, Prisma.StoredImageUpdateWithoutPaymentReceiptsInput>, Prisma.StoredImageUncheckedUpdateWithoutPaymentReceiptsInput>
 }
 
 export type StoredImageCreateNestedOneWithoutLetterheadLogosInput = {
@@ -720,6 +741,110 @@ export type StoredImageUpdateOneWithoutViolationProceedingAttachmentsNestedInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutViolationProceedingAttachmentsInput, Prisma.StoredImageUpdateWithoutViolationProceedingAttachmentsInput>, Prisma.StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput>
 }
 
+export type StoredImageCreateWithoutPaymentReceiptsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
+  foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
+  letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
+  letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+}
+
+export type StoredImageUncheckedCreateWithoutPaymentReceiptsInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
+  foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
+  letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
+  letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+}
+
+export type StoredImageCreateOrConnectWithoutPaymentReceiptsInput = {
+  where: Prisma.StoredImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutPaymentReceiptsInput, Prisma.StoredImageUncheckedCreateWithoutPaymentReceiptsInput>
+}
+
+export type StoredImageUpsertWithoutPaymentReceiptsInput = {
+  update: Prisma.XOR<Prisma.StoredImageUpdateWithoutPaymentReceiptsInput, Prisma.StoredImageUncheckedUpdateWithoutPaymentReceiptsInput>
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutPaymentReceiptsInput, Prisma.StoredImageUncheckedCreateWithoutPaymentReceiptsInput>
+  where?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageUpdateToOneWithWhereWithoutPaymentReceiptsInput = {
+  where?: Prisma.StoredImageWhereInput
+  data: Prisma.XOR<Prisma.StoredImageUpdateWithoutPaymentReceiptsInput, Prisma.StoredImageUncheckedUpdateWithoutPaymentReceiptsInput>
+}
+
+export type StoredImageUpdateWithoutPaymentReceiptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
+  foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
+  letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
+  letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+}
+
+export type StoredImageUncheckedUpdateWithoutPaymentReceiptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
+  foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
+  letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+}
+
 export type StoredImageCreateWithoutLetterheadLogosInput = {
   id?: string
   mimeType: string
@@ -739,6 +864,7 @@ export type StoredImageCreateWithoutLetterheadLogosInput = {
   violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutLetterheadLogosInput = {
@@ -760,6 +886,7 @@ export type StoredImageUncheckedCreateWithoutLetterheadLogosInput = {
   violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutLetterheadLogosInput = {
@@ -786,6 +913,7 @@ export type StoredImageCreateWithoutLetterheadSignaturesInput = {
   violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutLetterheadSignaturesInput = {
@@ -807,6 +935,7 @@ export type StoredImageUncheckedCreateWithoutLetterheadSignaturesInput = {
   violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutLetterheadSignaturesInput = {
@@ -844,6 +973,7 @@ export type StoredImageUpdateWithoutLetterheadLogosInput = {
   violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutLetterheadLogosInput = {
@@ -865,6 +995,7 @@ export type StoredImageUncheckedUpdateWithoutLetterheadLogosInput = {
   violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUpsertWithoutLetterheadSignaturesInput = {
@@ -897,6 +1028,7 @@ export type StoredImageUpdateWithoutLetterheadSignaturesInput = {
   violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutLetterheadSignaturesInput = {
@@ -918,6 +1050,7 @@ export type StoredImageUncheckedUpdateWithoutLetterheadSignaturesInput = {
   violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutPhotoUsersInput = {
@@ -939,6 +1072,7 @@ export type StoredImageCreateWithoutPhotoUsersInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
@@ -960,6 +1094,7 @@ export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutPhotoUsersInput = {
@@ -997,6 +1132,7 @@ export type StoredImageUpdateWithoutPhotoUsersInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
@@ -1018,6 +1154,7 @@ export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutProgressImagesInput = {
@@ -1039,6 +1176,7 @@ export type StoredImageCreateWithoutProgressImagesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
@@ -1060,6 +1198,7 @@ export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutProgressImagesInput = {
@@ -1097,6 +1236,7 @@ export type StoredImageUpdateWithoutProgressImagesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
@@ -1118,6 +1258,7 @@ export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutFoodPhotosInput = {
@@ -1139,6 +1280,7 @@ export type StoredImageCreateWithoutFoodPhotosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
@@ -1160,6 +1302,7 @@ export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutFoodPhotosInput = {
@@ -1197,6 +1340,7 @@ export type StoredImageUpdateWithoutFoodPhotosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
@@ -1218,6 +1362,7 @@ export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutRestaurantLogosInput = {
@@ -1239,6 +1384,7 @@ export type StoredImageCreateWithoutRestaurantLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
@@ -1260,6 +1406,7 @@ export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutRestaurantLogosInput = {
@@ -1297,6 +1444,7 @@ export type StoredImageUpdateWithoutRestaurantLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
@@ -1318,6 +1466,7 @@ export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutSingardAttachmentsInput = {
@@ -1339,6 +1488,7 @@ export type StoredImageCreateWithoutSingardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutSingardAttachmentsInput = {
@@ -1360,6 +1510,7 @@ export type StoredImageUncheckedCreateWithoutSingardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutSingardAttachmentsInput = {
@@ -1397,6 +1548,7 @@ export type StoredImageUpdateWithoutSingardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutSingardAttachmentsInput = {
@@ -1418,6 +1570,7 @@ export type StoredImageUncheckedUpdateWithoutSingardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutBoardAttachmentsInput = {
@@ -1439,6 +1592,7 @@ export type StoredImageCreateWithoutBoardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutBoardAttachmentsInput = {
@@ -1460,6 +1614,7 @@ export type StoredImageUncheckedCreateWithoutBoardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutBoardAttachmentsInput = {
@@ -1497,6 +1652,7 @@ export type StoredImageUpdateWithoutBoardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutBoardAttachmentsInput = {
@@ -1518,6 +1674,7 @@ export type StoredImageUncheckedUpdateWithoutBoardAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutBoardMinutesAttachmentsInput = {
@@ -1539,6 +1696,7 @@ export type StoredImageCreateWithoutBoardMinutesAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
@@ -1560,6 +1718,7 @@ export type StoredImageUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutBoardMinutesAttachmentsInput = {
@@ -1597,6 +1756,7 @@ export type StoredImageUpdateWithoutBoardMinutesAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
@@ -1618,6 +1778,7 @@ export type StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutViolationAttachmentsInput = {
@@ -1639,6 +1800,7 @@ export type StoredImageCreateWithoutViolationAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutViolationAttachmentsInput = {
@@ -1660,6 +1822,7 @@ export type StoredImageUncheckedCreateWithoutViolationAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutViolationAttachmentsInput = {
@@ -1697,6 +1860,7 @@ export type StoredImageUpdateWithoutViolationAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutViolationAttachmentsInput = {
@@ -1718,6 +1882,7 @@ export type StoredImageUncheckedUpdateWithoutViolationAttachmentsInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageCreateWithoutViolationProceedingAttachmentsInput = {
@@ -1739,6 +1904,7 @@ export type StoredImageCreateWithoutViolationProceedingAttachmentsInput = {
   violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput = {
@@ -1760,6 +1926,7 @@ export type StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput
   violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
 export type StoredImageCreateOrConnectWithoutViolationProceedingAttachmentsInput = {
@@ -1797,6 +1964,7 @@ export type StoredImageUpdateWithoutViolationProceedingAttachmentsInput = {
   violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput = {
@@ -1818,6 +1986,7 @@ export type StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput
   violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
 
@@ -1837,6 +2006,7 @@ export type StoredImageCountOutputType = {
   violationProceedingAttachments: number
   letterheadLogos: number
   letterheadSignatures: number
+  paymentReceipts: number
 }
 
 export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1851,6 +2021,7 @@ export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   violationProceedingAttachments?: boolean | StoredImageCountOutputTypeCountViolationProceedingAttachmentsArgs
   letterheadLogos?: boolean | StoredImageCountOutputTypeCountLetterheadLogosArgs
   letterheadSignatures?: boolean | StoredImageCountOutputTypeCountLetterheadSignaturesArgs
+  paymentReceipts?: boolean | StoredImageCountOutputTypeCountPaymentReceiptsArgs
 }
 
 /**
@@ -1940,6 +2111,13 @@ export type StoredImageCountOutputTypeCountLetterheadSignaturesArgs<ExtArgs exte
   where?: Prisma.CaseLetterheadWhereInput
 }
 
+/**
+ * StoredImageCountOutputType without action
+ */
+export type StoredImageCountOutputTypeCountPaymentReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentReceiptWhereInput
+}
+
 
 export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1961,6 +2139,7 @@ export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   violationProceedingAttachments?: boolean | Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs>
   letterheadLogos?: boolean | Prisma.StoredImage$letterheadLogosArgs<ExtArgs>
   letterheadSignatures?: boolean | Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs>
+  paymentReceipts?: boolean | Prisma.StoredImage$paymentReceiptsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["storedImage"]>
 
@@ -2010,6 +2189,7 @@ export type StoredImageInclude<ExtArgs extends runtime.Types.Extensions.Internal
   violationProceedingAttachments?: boolean | Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs>
   letterheadLogos?: boolean | Prisma.StoredImage$letterheadLogosArgs<ExtArgs>
   letterheadSignatures?: boolean | Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs>
+  paymentReceipts?: boolean | Prisma.StoredImage$paymentReceiptsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StoredImageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2029,6 +2209,7 @@ export type $StoredImagePayload<ExtArgs extends runtime.Types.Extensions.Interna
     violationProceedingAttachments: Prisma.$ViolationProceedingAttachmentPayload<ExtArgs>[]
     letterheadLogos: Prisma.$CaseLetterheadPayload<ExtArgs>[]
     letterheadSignatures: Prisma.$CaseLetterheadPayload<ExtArgs>[]
+    paymentReceipts: Prisma.$PaymentReceiptPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2444,6 +2625,7 @@ export interface Prisma__StoredImageClient<T, Null = never, ExtArgs extends runt
   violationProceedingAttachments<T extends Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$violationProceedingAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationProceedingAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   letterheadLogos<T extends Prisma.StoredImage$letterheadLogosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$letterheadLogosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLetterheadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   letterheadSignatures<T extends Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLetterheadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  paymentReceipts<T extends Prisma.StoredImage$paymentReceiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$paymentReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3135,6 +3317,30 @@ export type StoredImage$letterheadSignaturesArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.CaseLetterheadScalarFieldEnum | Prisma.CaseLetterheadScalarFieldEnum[]
+}
+
+/**
+ * StoredImage.paymentReceipts
+ */
+export type StoredImage$paymentReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentReceipt
+   */
+  select?: Prisma.PaymentReceiptSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentReceipt
+   */
+  omit?: Prisma.PaymentReceiptOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentReceiptInclude<ExtArgs> | null
+  where?: Prisma.PaymentReceiptWhereInput
+  orderBy?: Prisma.PaymentReceiptOrderByWithRelationInput | Prisma.PaymentReceiptOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentReceiptWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentReceiptScalarFieldEnum | Prisma.PaymentReceiptScalarFieldEnum[]
 }
 
 /**

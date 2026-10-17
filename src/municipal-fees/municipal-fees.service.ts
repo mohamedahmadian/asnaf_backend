@@ -21,27 +21,21 @@ const bankAccountSelect = {
   id: true,
   bankName: true,
   accountNumber: true,
+  paymentId: true,
   isActive: true,
 } satisfies Prisma.BankAccountSelect;
-
-const financialHeadingSelect = {
-  id: true,
-  title: true,
-  paymentId: true,
-  bankAccount: { select: bankAccountSelect },
-} satisfies Prisma.FinancialHeadingSelect;
 
 const feeSelect = {
   id: true,
   title: true,
   amount: true,
   processTypes: true,
-  financialHeadingId: true,
+  bankAccountId: true,
   description: true,
   isActive: true,
   createdAt: true,
   updatedAt: true,
-  financialHeading: { select: financialHeadingSelect },
+  bankAccount: { select: bankAccountSelect },
 } satisfies Prisma.MunicipalFeeSelect;
 
 function toAmountNumber(value: Prisma.Decimal | number) {
@@ -58,7 +52,7 @@ export class MunicipalFeesService {
 
   async findAll(query: FindMunicipalFeesQueryDto) {
     const where: Prisma.MunicipalFeeWhereInput = {
-      financialHeadingId: query.financialHeadingId,
+      bankAccountId: query.bankAccountId,
       isActive: query.isActive,
       OR: this.searchFilter(query.q),
     };
@@ -68,9 +62,9 @@ export class MunicipalFeesService {
       {
         title: (dir) => ({ title: dir }),
         amount: (dir) => ({ amount: dir }),
-        financialHeading: (dir) => [
-          { financialHeading: { title: dir } },
-          { financialHeading: { paymentId: dir } },
+        bankAccount: (dir) => [
+          { bankAccount: { bankName: dir } },
+          { bankAccount: { accountNumber: dir } },
         ],
         description: (dir) => ({ description: dir }),
         isActive: (dir) => ({ isActive: dir }),
@@ -111,7 +105,7 @@ export class MunicipalFeesService {
   }
 
   async create(dto: CreateMunicipalFeeDto) {
-    await this.assertFinancialHeading(dto.financialHeadingId);
+    await this.assertBankAccount(dto.bankAccountId);
     try {
       return withAmount(
         await this.prisma.municipalFee.create({
@@ -126,8 +120,8 @@ export class MunicipalFeesService {
 
   async update(id: string, dto: UpdateMunicipalFeeDto) {
     await this.findOne(id);
-    if (dto.financialHeadingId) {
-      await this.assertFinancialHeading(dto.financialHeadingId);
+    if (dto.bankAccountId) {
+      await this.assertBankAccount(dto.bankAccountId);
     }
     try {
       return withAmount(
@@ -144,17 +138,29 @@ export class MunicipalFeesService {
 
   async remove(id: string) {
     await this.findOne(id);
-    await this.prisma.municipalFee.delete({ where: { id } });
+    try {
+      await this.prisma.municipalFee.delete({ where: { id } });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2003'
+      ) {
+        throw new ConflictException(
+          'این هزینه در گروه پرداخت استفاده شده و قابل حذف نیست',
+        );
+      }
+      throw error;
+    }
     return { ok: true };
   }
 
-  private async assertFinancialHeading(id: string) {
-    const heading = await this.prisma.financialHeading.findUnique({
+  private async assertBankAccount(id: string) {
+    const account = await this.prisma.bankAccount.findUnique({
       where: { id },
       select: { id: true },
     });
-    if (!heading) {
-      throw new NotFoundException('سرفصل مالی یافت نشد');
+    if (!account) {
+      throw new NotFoundException('حساب بانکی یافت نشد');
     }
   }
 
@@ -166,24 +172,13 @@ export class MunicipalFeesService {
     const filters: Prisma.MunicipalFeeWhereInput[] = [
       { title: containsInsensitive(term) },
       { description: containsInsensitive(term) },
-      { financialHeading: { title: containsInsensitive(term) } },
-      {
-        financialHeading: {
-          bankAccount: { bankName: containsInsensitive(term) },
-        },
-      },
+      { bankAccount: { bankName: containsInsensitive(term) } },
     ];
     const digits = normalizeSearchDigits(term);
     if (digits) {
       filters.push(
-        {
-          financialHeading: { paymentId: containsInsensitive(digits) },
-        },
-        {
-          financialHeading: {
-            bankAccount: { accountNumber: containsInsensitive(digits) },
-          },
-        },
+        { bankAccount: { paymentId: containsInsensitive(digits) } },
+        { bankAccount: { accountNumber: containsInsensitive(digits) } },
       );
       const asAmount = Number(digits);
       if (Number.isSafeInteger(asAmount)) {
@@ -198,7 +193,7 @@ export class MunicipalFeesService {
       title: dto.title,
       amount:
         dto.amount === undefined ? undefined : new Prisma.Decimal(dto.amount),
-      financialHeadingId: dto.financialHeadingId,
+      bankAccountId: dto.bankAccountId,
       processTypes: dto.processTypes,
       description: dto.description,
       isActive: dto.isActive,

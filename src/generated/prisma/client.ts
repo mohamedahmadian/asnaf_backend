@@ -70,15 +70,45 @@ export type BankAccount = Prisma.BankAccountModel
  */
 export type MunicipalFee = Prisma.MunicipalFeeModel
 /**
- * Model FinancialHeading
+ * Model FinancialRequestSetting
  * 
  */
-export type FinancialHeading = Prisma.FinancialHeadingModel
+export type FinancialRequestSetting = Prisma.FinancialRequestSettingModel
 /**
  * Model Discount
  * 
  */
 export type Discount = Prisma.DiscountModel
+/**
+ * Model PaymentGroup
+ * دستهٔ هزینه‌های یک حساب برای ثبت سریع پرداخت
+ */
+export type PaymentGroup = Prisma.PaymentGroupModel
+/**
+ * Model PaymentGroupItem
+ * 
+ */
+export type PaymentGroupItem = Prisma.PaymentGroupItemModel
+/**
+ * Model Payment
+ * یک پرداخت ثبت‌شده روی پرونده، با تصویر مبلغ‌ها در همان لحظه
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model PaymentLine
+ * 
+ */
+export type PaymentLine = Prisma.PaymentLineModel
+/**
+ * Model PaymentReceipt
+ * 
+ */
+export type PaymentReceipt = Prisma.PaymentReceiptModel
+/**
+ * Model PaymentGatewayTransaction
+ * 
+ */
+export type PaymentGatewayTransaction = Prisma.PaymentGatewayTransactionModel
 /**
  * Model JobType
  * 

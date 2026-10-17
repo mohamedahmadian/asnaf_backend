@@ -323,10 +323,6 @@ export type CaseProcessManagementRoleOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type EnumCaseRequestTypeFieldUpdateOperationsInput = {
-  set?: $Enums.CaseRequestType
-}
-
 export type CaseProcessManagementRoleCreateNestedManyWithoutRoleInput = {
   create?: Prisma.XOR<Prisma.CaseProcessManagementRoleCreateWithoutRoleInput, Prisma.CaseProcessManagementRoleUncheckedCreateWithoutRoleInput> | Prisma.CaseProcessManagementRoleCreateWithoutRoleInput[] | Prisma.CaseProcessManagementRoleUncheckedCreateWithoutRoleInput[]
   connectOrCreate?: Prisma.CaseProcessManagementRoleCreateOrConnectWithoutRoleInput | Prisma.CaseProcessManagementRoleCreateOrConnectWithoutRoleInput[]

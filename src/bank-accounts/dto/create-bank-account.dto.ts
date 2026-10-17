@@ -16,6 +16,7 @@ import {
   normalizeIban,
 } from '../../common/bank-account';
 import { emptyToNull } from '../../common/dto-transform';
+import { toLatinDigits } from '../../common/national-id';
 
 function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
@@ -30,6 +31,14 @@ function optionalNormalized(
   }
   const normalized = normalize(value);
   return normalized || null;
+}
+
+function normalizePaymentId(value: unknown) {
+  if (typeof value !== 'string') {
+    return emptyToNull(value);
+  }
+  const digits = toLatinDigits(value).replace(/\D/g, '');
+  return digits || null;
 }
 
 export class CreateBankAccountDto {
@@ -59,6 +68,14 @@ export class CreateBankAccountDto {
   @IsString()
   @IsIranianIban()
   iban?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => normalizePaymentId(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(100)
+  @Matches(/^\d+$/)
+  paymentId?: string | null;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(trimString(value)))

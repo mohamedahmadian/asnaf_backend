@@ -54,6 +54,7 @@ function toPercent(value: unknown) {
 export const discountProcessTypes = [
   CaseRequestType.ISSUANCE,
   CaseRequestType.RENEWAL,
+  CaseRequestType.LOCATION_CHANGE,
   CaseRequestType.AUCTION,
   CaseRequestType.STEWARDSHIP,
 ] as const;
@@ -84,6 +85,10 @@ export class CreateDiscountDto {
   @ArrayUnique()
   @IsIn([...discountProcessTypes], { each: true })
   processTypes?: (typeof discountProcessTypes)[number][];
+
+  @IsOptional()
+  @IsBoolean()
+  appliesToAllRequests?: boolean;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(trimString(value)))

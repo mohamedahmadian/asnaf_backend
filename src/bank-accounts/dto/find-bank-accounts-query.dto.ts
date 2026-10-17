@@ -9,6 +9,7 @@ export const bankAccountSortFields = [
   'accountNumber',
   'cardNumber',
   'iban',
+  'paymentId',
   'isActive',
 ] as const;
 

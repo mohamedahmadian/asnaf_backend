@@ -10,7 +10,7 @@ import { CasesModule } from './cases/cases.module';
 import { CommercialComplexesModule } from './commercial-complexes/commercial-complexes.module';
 import { DiscountsModule } from './discounts/discounts.module';
 import { DocumentsModule } from './documents/documents.module';
-import { FinancialHeadingsModule } from './financial-headings/financial-headings.module';
+import { FinancialSettingsModule } from './financial-settings/financial-settings.module';
 import { StaffPostsModule } from './staff-posts/staff-posts.module';
 import { GeoModule } from './geo/geo.module';
 import { ImagesModule } from './images/images.module';
@@ -18,6 +18,7 @@ import { InquiryCentersModule } from './inquiry-centers/inquiry-centers.module';
 import { JobGroupsModule } from './job-groups/job-groups.module';
 import { JobTypesModule } from './job-types/job-types.module';
 import { MunicipalFeesModule } from './municipal-fees/municipal-fees.module';
+import { PaymentsModule } from './payments/payments.module';
 import { OrganizationModule } from './organization/organization.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { RegistrationPlacesModule } from './registration-places/registration-places.module';
@@ -38,10 +39,11 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     RolesModule,
     GeoModule,
     BankAccountsModule,
-    FinancialHeadingsModule,
     CasesModule,
     MunicipalFeesModule,
     DiscountsModule,
+    FinancialSettingsModule,
+    PaymentsModule,
     JobTypesModule,
     InquiryCentersModule,
     JobGroupsModule,

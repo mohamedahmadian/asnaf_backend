@@ -49,6 +49,12 @@ export type UserMinAggregateOutputType = {
   phone: string | null
   email: string | null
   gender: $Enums.UserGender | null
+  personType: $Enums.PersonType | null
+  companyName: string | null
+  companyNationalId: string | null
+  companyRegistrationNo: string | null
+  companyRegisteredAt: Date | null
+  economicCode: string | null
   address: string | null
   notes: string | null
   religion: $Enums.Religion | null
@@ -104,6 +110,12 @@ export type UserMaxAggregateOutputType = {
   phone: string | null
   email: string | null
   gender: $Enums.UserGender | null
+  personType: $Enums.PersonType | null
+  companyName: string | null
+  companyNationalId: string | null
+  companyRegistrationNo: string | null
+  companyRegisteredAt: Date | null
+  economicCode: string | null
   address: string | null
   notes: string | null
   religion: $Enums.Religion | null
@@ -159,6 +171,12 @@ export type UserCountAggregateOutputType = {
   phone: number
   email: number
   gender: number
+  personType: number
+  companyName: number
+  companyNationalId: number
+  companyRegistrationNo: number
+  companyRegisteredAt: number
+  economicCode: number
   address: number
   notes: number
   religion: number
@@ -227,6 +245,12 @@ export type UserMinAggregateInputType = {
   phone?: true
   email?: true
   gender?: true
+  personType?: true
+  companyName?: true
+  companyNationalId?: true
+  companyRegistrationNo?: true
+  companyRegisteredAt?: true
+  economicCode?: true
   address?: true
   notes?: true
   religion?: true
@@ -282,6 +306,12 @@ export type UserMaxAggregateInputType = {
   phone?: true
   email?: true
   gender?: true
+  personType?: true
+  companyName?: true
+  companyNationalId?: true
+  companyRegistrationNo?: true
+  companyRegisteredAt?: true
+  economicCode?: true
   address?: true
   notes?: true
   religion?: true
@@ -337,6 +367,12 @@ export type UserCountAggregateInputType = {
   phone?: true
   email?: true
   gender?: true
+  personType?: true
+  companyName?: true
+  companyNationalId?: true
+  companyRegistrationNo?: true
+  companyRegisteredAt?: true
+  economicCode?: true
   address?: true
   notes?: true
   religion?: true
@@ -480,6 +516,12 @@ export type UserGroupByOutputType = {
   phone: string | null
   email: string | null
   gender: $Enums.UserGender | null
+  personType: $Enums.PersonType
+  companyName: string | null
+  companyNationalId: string | null
+  companyRegistrationNo: string | null
+  companyRegisteredAt: Date | null
+  economicCode: string | null
   address: string | null
   notes: string | null
   religion: $Enums.Religion | null
@@ -559,6 +601,12 @@ export type UserWhereInput = {
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumUserGenderNullableFilter<"User"> | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFilter<"User"> | $Enums.PersonType
+  companyName?: Prisma.StringNullableFilter<"User"> | string | null
+  companyNationalId?: Prisma.StringNullableFilter<"User"> | string | null
+  companyRegistrationNo?: Prisma.StringNullableFilter<"User"> | string | null
+  companyRegisteredAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  economicCode?: Prisma.StringNullableFilter<"User"> | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   notes?: Prisma.StringNullableFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableFilter<"User"> | $Enums.Religion | null
@@ -644,6 +692,10 @@ export type UserWhereInput = {
   violationsCreated?: Prisma.ViolationListRelationFilter
   violationCases?: Prisma.ViolationListRelationFilter
   violationProceedingsCreated?: Prisma.ViolationProceedingListRelationFilter
+  recordedPayments?: Prisma.PaymentListRelationFilter
+  paymentsAsPayer?: Prisma.PaymentListRelationFilter
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptListRelationFilter
+  deletedPayments?: Prisma.PaymentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -659,6 +711,12 @@ export type UserOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  personType?: Prisma.SortOrder
+  companyName?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyNationalId?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyRegistrationNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyRegisteredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  economicCode?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   religion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -744,6 +802,10 @@ export type UserOrderByWithRelationInput = {
   violationsCreated?: Prisma.ViolationOrderByRelationAggregateInput
   violationCases?: Prisma.ViolationOrderByRelationAggregateInput
   violationProceedingsCreated?: Prisma.ViolationProceedingOrderByRelationAggregateInput
+  recordedPayments?: Prisma.PaymentOrderByRelationAggregateInput
+  paymentsAsPayer?: Prisma.PaymentOrderByRelationAggregateInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptOrderByRelationAggregateInput
+  deletedPayments?: Prisma.PaymentOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -752,6 +814,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   nationalId?: string
   phone?: string
   email?: string
+  companyNationalId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -762,6 +825,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   locale?: Prisma.StringFilter<"User"> | string
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   gender?: Prisma.EnumUserGenderNullableFilter<"User"> | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFilter<"User"> | $Enums.PersonType
+  companyName?: Prisma.StringNullableFilter<"User"> | string | null
+  companyRegistrationNo?: Prisma.StringNullableFilter<"User"> | string | null
+  companyRegisteredAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  economicCode?: Prisma.StringNullableFilter<"User"> | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   notes?: Prisma.StringNullableFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableFilter<"User"> | $Enums.Religion | null
@@ -847,7 +915,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   violationsCreated?: Prisma.ViolationListRelationFilter
   violationCases?: Prisma.ViolationListRelationFilter
   violationProceedingsCreated?: Prisma.ViolationProceedingListRelationFilter
-}, "id" | "username" | "nationalId" | "phone" | "email">
+  recordedPayments?: Prisma.PaymentListRelationFilter
+  paymentsAsPayer?: Prisma.PaymentListRelationFilter
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptListRelationFilter
+  deletedPayments?: Prisma.PaymentListRelationFilter
+}, "id" | "username" | "nationalId" | "phone" | "email" | "companyNationalId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -862,6 +934,12 @@ export type UserOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
+  personType?: Prisma.SortOrder
+  companyName?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyNationalId?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyRegistrationNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  companyRegisteredAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  economicCode?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   religion?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -926,6 +1004,12 @@ export type UserScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   gender?: Prisma.EnumUserGenderNullableWithAggregatesFilter<"User"> | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeWithAggregatesFilter<"User"> | $Enums.PersonType
+  companyName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  companyNationalId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  companyRegistrationNo?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  companyRegisteredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+  economicCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableWithAggregatesFilter<"User"> | $Enums.Religion | null
@@ -982,6 +1066,12 @@ export type UserCreateInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -1056,6 +1146,10 @@ export type UserCreateInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -1071,6 +1165,12 @@ export type UserUncheckedCreateInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -1145,6 +1245,10 @@ export type UserUncheckedCreateInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUpdateInput = {
@@ -1160,6 +1264,12 @@ export type UserUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -1234,6 +1344,10 @@ export type UserUpdateInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -1249,6 +1363,12 @@ export type UserUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -1323,6 +1443,10 @@ export type UserUncheckedUpdateInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -1338,6 +1462,12 @@ export type UserCreateManyInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -1394,6 +1524,12 @@ export type UserUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -1439,6 +1575,12 @@ export type UserUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -1492,14 +1634,14 @@ export type UserOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
-}
-
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringNullableListFilter<$PrismaModel = never> = {
@@ -1523,6 +1665,12 @@ export type UserCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  personType?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  companyNationalId?: Prisma.SortOrder
+  companyRegistrationNo?: Prisma.SortOrder
+  companyRegisteredAt?: Prisma.SortOrder
+  economicCode?: Prisma.SortOrder
   address?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   religion?: Prisma.SortOrder
@@ -1584,6 +1732,12 @@ export type UserMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  personType?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  companyNationalId?: Prisma.SortOrder
+  companyRegistrationNo?: Prisma.SortOrder
+  companyRegisteredAt?: Prisma.SortOrder
+  economicCode?: Prisma.SortOrder
   address?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   religion?: Prisma.SortOrder
@@ -1639,6 +1793,12 @@ export type UserMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
   gender?: Prisma.SortOrder
+  personType?: Prisma.SortOrder
+  companyName?: Prisma.SortOrder
+  companyNationalId?: Prisma.SortOrder
+  companyRegistrationNo?: Prisma.SortOrder
+  companyRegisteredAt?: Prisma.SortOrder
+  economicCode?: Prisma.SortOrder
   address?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   religion?: Prisma.SortOrder
@@ -1936,6 +2096,64 @@ export type UserUncheckedUpdateManyWithoutLocationCityNestedInput = {
   update?: Prisma.UserUpdateWithWhereUniqueWithoutLocationCityInput | Prisma.UserUpdateWithWhereUniqueWithoutLocationCityInput[]
   updateMany?: Prisma.UserUpdateManyWithWhereWithoutLocationCityInput | Prisma.UserUpdateManyWithWhereWithoutLocationCityInput[]
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserCreateNestedOneWithoutPaymentsAsPayerInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsAsPayerInput, Prisma.UserUncheckedCreateWithoutPaymentsAsPayerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsAsPayerInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutRecordedPaymentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRecordedPaymentsInput, Prisma.UserUncheckedCreateWithoutRecordedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecordedPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutDeletedPaymentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedPaymentsInput, Prisma.UserUncheckedCreateWithoutDeletedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPaymentsAsPayerNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPaymentsAsPayerInput, Prisma.UserUncheckedCreateWithoutPaymentsAsPayerInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPaymentsAsPayerInput
+  upsert?: Prisma.UserUpsertWithoutPaymentsAsPayerInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPaymentsAsPayerInput, Prisma.UserUpdateWithoutPaymentsAsPayerInput>, Prisma.UserUncheckedUpdateWithoutPaymentsAsPayerInput>
+}
+
+export type UserUpdateOneRequiredWithoutRecordedPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRecordedPaymentsInput, Prisma.UserUncheckedCreateWithoutRecordedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecordedPaymentsInput
+  upsert?: Prisma.UserUpsertWithoutRecordedPaymentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRecordedPaymentsInput, Prisma.UserUpdateWithoutRecordedPaymentsInput>, Prisma.UserUncheckedUpdateWithoutRecordedPaymentsInput>
+}
+
+export type UserUpdateOneWithoutDeletedPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDeletedPaymentsInput, Prisma.UserUncheckedCreateWithoutDeletedPaymentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDeletedPaymentsInput
+  upsert?: Prisma.UserUpsertWithoutDeletedPaymentsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDeletedPaymentsInput, Prisma.UserUpdateWithoutDeletedPaymentsInput>, Prisma.UserUncheckedUpdateWithoutDeletedPaymentsInput>
+}
+
+export type UserCreateNestedOneWithoutUploadedPaymentReceiptsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUploadedPaymentReceiptsInput, Prisma.UserUncheckedCreateWithoutUploadedPaymentReceiptsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUploadedPaymentReceiptsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutUploadedPaymentReceiptsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutUploadedPaymentReceiptsInput, Prisma.UserUncheckedCreateWithoutUploadedPaymentReceiptsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutUploadedPaymentReceiptsInput
+  upsert?: Prisma.UserUpsertWithoutUploadedPaymentReceiptsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutUploadedPaymentReceiptsInput, Prisma.UserUpdateWithoutUploadedPaymentReceiptsInput>, Prisma.UserUncheckedUpdateWithoutUploadedPaymentReceiptsInput>
 }
 
 export type UserCreateNestedOneWithoutInquiryCentersInput = {
@@ -2694,6 +2912,12 @@ export type UserCreateWithoutPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2767,6 +2991,10 @@ export type UserCreateWithoutPhotoInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutPhotoInput = {
@@ -2782,6 +3010,12 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -2855,6 +3089,10 @@ export type UserUncheckedCreateWithoutPhotoInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutPhotoInput = {
@@ -2899,6 +3137,12 @@ export type UserScalarWhereInput = {
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumUserGenderNullableFilter<"User"> | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFilter<"User"> | $Enums.PersonType
+  companyName?: Prisma.StringNullableFilter<"User"> | string | null
+  companyNationalId?: Prisma.StringNullableFilter<"User"> | string | null
+  companyRegistrationNo?: Prisma.StringNullableFilter<"User"> | string | null
+  companyRegisteredAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
+  economicCode?: Prisma.StringNullableFilter<"User"> | string | null
   address?: Prisma.StringNullableFilter<"User"> | string | null
   notes?: Prisma.StringNullableFilter<"User"> | string | null
   religion?: Prisma.EnumReligionNullableFilter<"User"> | $Enums.Religion | null
@@ -2955,6 +3199,12 @@ export type UserCreateWithoutCountryInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3028,6 +3278,10 @@ export type UserCreateWithoutCountryInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCountryInput = {
@@ -3043,6 +3297,12 @@ export type UserUncheckedCreateWithoutCountryInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3116,6 +3376,10 @@ export type UserUncheckedCreateWithoutCountryInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCountryInput = {
@@ -3157,6 +3421,12 @@ export type UserCreateWithoutProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3230,6 +3500,10 @@ export type UserCreateWithoutProvinceInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutProvinceInput = {
@@ -3245,6 +3519,12 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3318,6 +3598,10 @@ export type UserUncheckedCreateWithoutProvinceInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutProvinceInput = {
@@ -3343,6 +3627,12 @@ export type UserCreateWithoutLocationProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3416,6 +3706,10 @@ export type UserCreateWithoutLocationProvinceInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutLocationProvinceInput = {
@@ -3431,6 +3725,12 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3504,6 +3804,10 @@ export type UserUncheckedCreateWithoutLocationProvinceInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutLocationProvinceInput = {
@@ -3561,6 +3865,12 @@ export type UserCreateWithoutCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3634,6 +3944,10 @@ export type UserCreateWithoutCityInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCityInput = {
@@ -3649,6 +3963,12 @@ export type UserUncheckedCreateWithoutCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3722,6 +4042,10 @@ export type UserUncheckedCreateWithoutCityInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCityInput = {
@@ -3747,6 +4071,12 @@ export type UserCreateWithoutLocationCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3820,6 +4150,10 @@ export type UserCreateWithoutLocationCityInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutLocationCityInput = {
@@ -3835,6 +4169,12 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -3908,6 +4248,10 @@ export type UserUncheckedCreateWithoutLocationCityInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutLocationCityInput = {
@@ -3952,6 +4296,1638 @@ export type UserUpdateManyWithWhereWithoutLocationCityInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutLocationCityInput>
 }
 
+export type UserCreateWithoutPaymentsAsPayerInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
+  staffPost?: Prisma.StaffPostCreateNestedOneWithoutUsersInput
+  caseFiles?: Prisma.CaseFileCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileCreateNestedManyWithoutRevokedByInput
+  economicJob?: Prisma.JobCreateNestedOneWithoutIdentityUsersInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutPaymentsAsPayerInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  workUnitId?: string | null
+  staffPostId?: string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  jobId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  caseFiles?: Prisma.CaseFileUncheckedCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRevokedByInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutPaymentsAsPayerInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaymentsAsPayerInput, Prisma.UserUncheckedCreateWithoutPaymentsAsPayerInput>
+}
+
+export type UserCreateWithoutRecordedPaymentsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
+  staffPost?: Prisma.StaffPostCreateNestedOneWithoutUsersInput
+  caseFiles?: Prisma.CaseFileCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileCreateNestedManyWithoutRevokedByInput
+  economicJob?: Prisma.JobCreateNestedOneWithoutIdentityUsersInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutRecordedPaymentsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  workUnitId?: string | null
+  staffPostId?: string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  jobId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  caseFiles?: Prisma.CaseFileUncheckedCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRevokedByInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutRecordedPaymentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRecordedPaymentsInput, Prisma.UserUncheckedCreateWithoutRecordedPaymentsInput>
+}
+
+export type UserCreateWithoutDeletedPaymentsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
+  staffPost?: Prisma.StaffPostCreateNestedOneWithoutUsersInput
+  caseFiles?: Prisma.CaseFileCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileCreateNestedManyWithoutRevokedByInput
+  economicJob?: Prisma.JobCreateNestedOneWithoutIdentityUsersInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+}
+
+export type UserUncheckedCreateWithoutDeletedPaymentsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  workUnitId?: string | null
+  staffPostId?: string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  jobId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  caseFiles?: Prisma.CaseFileUncheckedCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRevokedByInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+}
+
+export type UserCreateOrConnectWithoutDeletedPaymentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeletedPaymentsInput, Prisma.UserUncheckedCreateWithoutDeletedPaymentsInput>
+}
+
+export type UserUpsertWithoutPaymentsAsPayerInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPaymentsAsPayerInput, Prisma.UserUncheckedUpdateWithoutPaymentsAsPayerInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPaymentsAsPayerInput, Prisma.UserUncheckedCreateWithoutPaymentsAsPayerInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPaymentsAsPayerInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPaymentsAsPayerInput, Prisma.UserUncheckedUpdateWithoutPaymentsAsPayerInput>
+}
+
+export type UserUpdateWithoutPaymentsAsPayerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
+  staffPost?: Prisma.StaffPostUpdateOneWithoutUsersNestedInput
+  caseFiles?: Prisma.CaseFileUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUpdateManyWithoutRevokedByNestedInput
+  economicJob?: Prisma.JobUpdateOneWithoutIdentityUsersNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPaymentsAsPayerInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  caseFiles?: Prisma.CaseFileUncheckedUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUpsertWithoutRecordedPaymentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRecordedPaymentsInput, Prisma.UserUncheckedUpdateWithoutRecordedPaymentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRecordedPaymentsInput, Prisma.UserUncheckedCreateWithoutRecordedPaymentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRecordedPaymentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRecordedPaymentsInput, Prisma.UserUncheckedUpdateWithoutRecordedPaymentsInput>
+}
+
+export type UserUpdateWithoutRecordedPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
+  staffPost?: Prisma.StaffPostUpdateOneWithoutUsersNestedInput
+  caseFiles?: Prisma.CaseFileUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUpdateManyWithoutRevokedByNestedInput
+  economicJob?: Prisma.JobUpdateOneWithoutIdentityUsersNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRecordedPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  caseFiles?: Prisma.CaseFileUncheckedUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUpsertWithoutDeletedPaymentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDeletedPaymentsInput, Prisma.UserUncheckedUpdateWithoutDeletedPaymentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDeletedPaymentsInput, Prisma.UserUncheckedCreateWithoutDeletedPaymentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDeletedPaymentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDeletedPaymentsInput, Prisma.UserUncheckedUpdateWithoutDeletedPaymentsInput>
+}
+
+export type UserUpdateWithoutDeletedPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
+  staffPost?: Prisma.StaffPostUpdateOneWithoutUsersNestedInput
+  caseFiles?: Prisma.CaseFileUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUpdateManyWithoutRevokedByNestedInput
+  economicJob?: Prisma.JobUpdateOneWithoutIdentityUsersNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDeletedPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  caseFiles?: Prisma.CaseFileUncheckedUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+}
+
+export type UserCreateWithoutUploadedPaymentReceiptsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  country?: Prisma.CountryCreateNestedOneWithoutUsersInput
+  province?: Prisma.ProvinceCreateNestedOneWithoutUsersInput
+  city?: Prisma.CityCreateNestedOneWithoutUsersInput
+  locationProvince?: Prisma.ProvinceCreateNestedOneWithoutLocatedUsersInput
+  locationCity?: Prisma.CityCreateNestedOneWithoutLocatedUsersInput
+  photo?: Prisma.StoredImageCreateNestedOneWithoutPhotoUsersInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutUserInput
+  orgUnit?: Prisma.OrganizationUnitCreateNestedOneWithoutEmployeesInput
+  position?: Prisma.OrganizationPositionCreateNestedOneWithoutUsersInput
+  workUnit?: Prisma.WorkUnitCreateNestedOneWithoutUsersInput
+  staffPost?: Prisma.StaffPostCreateNestedOneWithoutUsersInput
+  caseFiles?: Prisma.CaseFileCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileCreateNestedManyWithoutRevokedByInput
+  economicJob?: Prisma.JobCreateNestedOneWithoutIdentityUsersInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserUncheckedCreateWithoutUploadedPaymentReceiptsInput = {
+  id?: string
+  username: string
+  passwordHash: string
+  firstName: string
+  lastName: string
+  fullName: string
+  locale?: string
+  status?: $Enums.UserStatus
+  nationalId?: string | null
+  phone?: string | null
+  email?: string | null
+  gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
+  address?: string | null
+  notes?: string | null
+  religion?: $Enums.Religion | null
+  religionOther?: string | null
+  telegram?: string | null
+  bale?: string | null
+  eitaa?: string | null
+  whatsapp?: string | null
+  otherSocial?: string | null
+  vehiclePlates?: Prisma.UserCreatevehiclePlatesInput | string[]
+  countryId?: string | null
+  provinceId?: string | null
+  cityId?: string | null
+  locationProvinceId?: string | null
+  locationCityId?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: string | null
+  locationUpdatedAt?: Date | string | null
+  photoId?: string | null
+  orgUnitId?: string | null
+  positionId?: string | null
+  workUnitId?: string | null
+  staffPostId?: string | null
+  fatherName?: string | null
+  lastNameEn?: string | null
+  birthDate?: Date | string | null
+  passportNumber?: string | null
+  nationalCardExpiresAt?: Date | string | null
+  passportExpiresAt?: Date | string | null
+  identityCertificateNo?: string | null
+  birthPlace?: string | null
+  identityIssuedIn?: string | null
+  residencyStatus?: $Enums.ResidencyStatus | null
+  postalCode?: string | null
+  homePhone?: string | null
+  educationLevel?: $Enums.EducationLevel | null
+  citizenGroup?: string | null
+  jobId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutUserInput
+  caseFiles?: Prisma.CaseFileUncheckedCreateNestedManyWithoutUserInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutActorInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCreatedByInput
+  caseRevocations?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRevokedByInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutUserInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedCreateNestedManyWithoutNutritionRepInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedCreateNestedManyWithoutOfficerInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutDecidedByInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedCreateNestedManyWithoutUploadedByInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedCreateNestedManyWithoutUploadedByInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutDecidedByInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedCreateNestedManyWithoutDecidedByInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedCreateNestedManyWithoutUploadedByInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedCreateNestedManyWithoutUserInput
+  foodReservations?: Prisma.FoodReservationUncheckedCreateNestedManyWithoutUserInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedCreateNestedManyWithoutPersonInput
+  userRoles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutUserInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedCreateNestedManyWithoutRepliedByInput
+  singardActivities?: Prisma.SingardActivityUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutRejectedByInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutManagementByInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutLegalByInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutBudgetByInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedCreateNestedManyWithoutSecretaryByInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedCreateNestedManyWithoutCreatedByInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
+  violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
+  violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
+}
+
+export type UserCreateOrConnectWithoutUploadedPaymentReceiptsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutUploadedPaymentReceiptsInput, Prisma.UserUncheckedCreateWithoutUploadedPaymentReceiptsInput>
+}
+
+export type UserUpsertWithoutUploadedPaymentReceiptsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutUploadedPaymentReceiptsInput, Prisma.UserUncheckedUpdateWithoutUploadedPaymentReceiptsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutUploadedPaymentReceiptsInput, Prisma.UserUncheckedCreateWithoutUploadedPaymentReceiptsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutUploadedPaymentReceiptsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutUploadedPaymentReceiptsInput, Prisma.UserUncheckedUpdateWithoutUploadedPaymentReceiptsInput>
+}
+
+export type UserUpdateWithoutUploadedPaymentReceiptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  country?: Prisma.CountryUpdateOneWithoutUsersNestedInput
+  province?: Prisma.ProvinceUpdateOneWithoutUsersNestedInput
+  city?: Prisma.CityUpdateOneWithoutUsersNestedInput
+  locationProvince?: Prisma.ProvinceUpdateOneWithoutLocatedUsersNestedInput
+  locationCity?: Prisma.CityUpdateOneWithoutLocatedUsersNestedInput
+  photo?: Prisma.StoredImageUpdateOneWithoutPhotoUsersNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutUserNestedInput
+  orgUnit?: Prisma.OrganizationUnitUpdateOneWithoutEmployeesNestedInput
+  position?: Prisma.OrganizationPositionUpdateOneWithoutUsersNestedInput
+  workUnit?: Prisma.WorkUnitUpdateOneWithoutUsersNestedInput
+  staffPost?: Prisma.StaffPostUpdateOneWithoutUsersNestedInput
+  caseFiles?: Prisma.CaseFileUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUpdateManyWithoutRevokedByNestedInput
+  economicJob?: Prisma.JobUpdateOneWithoutIdentityUsersNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutUploadedPaymentReceiptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  locale?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  nationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
+  religionOther?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bale?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  eitaa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  whatsapp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  otherSocial?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehiclePlates?: Prisma.UserUpdatevehiclePlatesInput | string[]
+  countryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationProvinceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  locationNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  locationUpdatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  photoId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orgUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  positionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workUnitId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staffPostId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fatherName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastNameEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nationalCardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passportExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  identityCertificateNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  birthPlace?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  identityIssuedIn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  residencyStatus?: Prisma.NullableEnumResidencyStatusFieldUpdateOperationsInput | $Enums.ResidencyStatus | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  homePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  educationLevel?: Prisma.NullableEnumEducationLevelFieldUpdateOperationsInput | $Enums.EducationLevel | null
+  citizenGroup?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  jobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutUserNestedInput
+  caseFiles?: Prisma.CaseFileUncheckedUpdateManyWithoutUserNestedInput
+  caseRequestEvents?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutActorNestedInput
+  caseSuspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCreatedByNestedInput
+  caseRevocations?: Prisma.CaseFileUncheckedUpdateManyWithoutRevokedByNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutUserNestedInput
+  nutritionUnits?: Prisma.OrganizationUnitUncheckedUpdateManyWithoutNutritionRepNestedInput
+  inquiryCenters?: Prisma.InquiryCenterUncheckedUpdateManyWithoutOfficerNestedInput
+  caseInquiriesDecided?: Prisma.CaseInquiryUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseInquiryFiles?: Prisma.CaseInquiryFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  casePlacesDecided?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  casePlacesFiles?: Prisma.CasePlacesFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  caseManagementDecided?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseAuctionDecided?: Prisma.CaseAuctionApprovalUncheckedUpdateManyWithoutDecidedByNestedInput
+  caseManagementReviewFiles?: Prisma.CaseManagementReviewFileUncheckedUpdateManyWithoutUploadedByNestedInput
+  jobGroupRepresentations?: Prisma.JobGroupRepresentativeUncheckedUpdateManyWithoutUserNestedInput
+  foodReservations?: Prisma.FoodReservationUncheckedUpdateManyWithoutUserNestedInput
+  vehicleAssignments?: Prisma.VehicleAssignmentUncheckedUpdateManyWithoutPersonNestedInput
+  userRoles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  singardFeedbacks?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutUserNestedInput
+  singardReplies?: Prisma.SingardFeedbackUncheckedUpdateManyWithoutRepliedByNestedInput
+  singardActivities?: Prisma.SingardActivityUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsCreated?: Prisma.BoardRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardRequestsRejected?: Prisma.BoardRequestUncheckedUpdateManyWithoutRejectedByNestedInput
+  boardManagementReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutManagementByNestedInput
+  boardLegalReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutLegalByNestedInput
+  boardBudgetReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutBudgetByNestedInput
+  boardSecretaryReviews?: Prisma.BoardRequestUncheckedUpdateManyWithoutSecretaryByNestedInput
+  boardMinutesCreated?: Prisma.BoardMinutesUncheckedUpdateManyWithoutCreatedByNestedInput
+  boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
+  violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
+  violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
+  violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
+}
+
 export type UserCreateWithoutInquiryCentersInput = {
   id?: string
   username: string
@@ -3965,6 +5941,12 @@ export type UserCreateWithoutInquiryCentersInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4038,6 +6020,10 @@ export type UserCreateWithoutInquiryCentersInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutInquiryCentersInput = {
@@ -4053,6 +6039,12 @@ export type UserUncheckedCreateWithoutInquiryCentersInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4126,6 +6118,10 @@ export type UserUncheckedCreateWithoutInquiryCentersInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutInquiryCentersInput = {
@@ -4157,6 +6153,12 @@ export type UserUpdateWithoutInquiryCentersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4230,6 +6232,10 @@ export type UserUpdateWithoutInquiryCentersInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInquiryCentersInput = {
@@ -4245,6 +6251,12 @@ export type UserUncheckedUpdateWithoutInquiryCentersInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4318,6 +6330,10 @@ export type UserUncheckedUpdateWithoutInquiryCentersInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutJobGroupRepresentationsInput = {
@@ -4333,6 +6349,12 @@ export type UserCreateWithoutJobGroupRepresentationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4406,6 +6428,10 @@ export type UserCreateWithoutJobGroupRepresentationsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutJobGroupRepresentationsInput = {
@@ -4421,6 +6447,12 @@ export type UserUncheckedCreateWithoutJobGroupRepresentationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4494,6 +6526,10 @@ export type UserUncheckedCreateWithoutJobGroupRepresentationsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutJobGroupRepresentationsInput = {
@@ -4525,6 +6561,12 @@ export type UserUpdateWithoutJobGroupRepresentationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4598,6 +6640,10 @@ export type UserUpdateWithoutJobGroupRepresentationsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJobGroupRepresentationsInput = {
@@ -4613,6 +6659,12 @@ export type UserUncheckedUpdateWithoutJobGroupRepresentationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -4686,6 +6738,10 @@ export type UserUncheckedUpdateWithoutJobGroupRepresentationsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutEconomicJobInput = {
@@ -4701,6 +6757,12 @@ export type UserCreateWithoutEconomicJobInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4774,6 +6836,10 @@ export type UserCreateWithoutEconomicJobInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutEconomicJobInput = {
@@ -4789,6 +6855,12 @@ export type UserUncheckedCreateWithoutEconomicJobInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4862,6 +6934,10 @@ export type UserUncheckedCreateWithoutEconomicJobInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutEconomicJobInput = {
@@ -4903,6 +6979,12 @@ export type UserCreateWithoutCaseInquiriesDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -4976,6 +7058,10 @@ export type UserCreateWithoutCaseInquiriesDecidedInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseInquiriesDecidedInput = {
@@ -4991,6 +7077,12 @@ export type UserUncheckedCreateWithoutCaseInquiriesDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5064,6 +7156,10 @@ export type UserUncheckedCreateWithoutCaseInquiriesDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseInquiriesDecidedInput = {
@@ -5095,6 +7191,12 @@ export type UserUpdateWithoutCaseInquiriesDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5168,6 +7270,10 @@ export type UserUpdateWithoutCaseInquiriesDecidedInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseInquiriesDecidedInput = {
@@ -5183,6 +7289,12 @@ export type UserUncheckedUpdateWithoutCaseInquiriesDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5256,6 +7368,10 @@ export type UserUncheckedUpdateWithoutCaseInquiriesDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCaseInquiryFilesInput = {
@@ -5271,6 +7387,12 @@ export type UserCreateWithoutCaseInquiryFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5344,6 +7466,10 @@ export type UserCreateWithoutCaseInquiryFilesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseInquiryFilesInput = {
@@ -5359,6 +7485,12 @@ export type UserUncheckedCreateWithoutCaseInquiryFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5432,6 +7564,10 @@ export type UserUncheckedCreateWithoutCaseInquiryFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseInquiryFilesInput = {
@@ -5463,6 +7599,12 @@ export type UserUpdateWithoutCaseInquiryFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5536,6 +7678,10 @@ export type UserUpdateWithoutCaseInquiryFilesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseInquiryFilesInput = {
@@ -5551,6 +7697,12 @@ export type UserUncheckedUpdateWithoutCaseInquiryFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5624,6 +7776,10 @@ export type UserUncheckedUpdateWithoutCaseInquiryFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCasePlacesDecidedInput = {
@@ -5639,6 +7795,12 @@ export type UserCreateWithoutCasePlacesDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5712,6 +7874,10 @@ export type UserCreateWithoutCasePlacesDecidedInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCasePlacesDecidedInput = {
@@ -5727,6 +7893,12 @@ export type UserUncheckedCreateWithoutCasePlacesDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -5800,6 +7972,10 @@ export type UserUncheckedCreateWithoutCasePlacesDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCasePlacesDecidedInput = {
@@ -5831,6 +8007,12 @@ export type UserUpdateWithoutCasePlacesDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5904,6 +8086,10 @@ export type UserUpdateWithoutCasePlacesDecidedInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCasePlacesDecidedInput = {
@@ -5919,6 +8105,12 @@ export type UserUncheckedUpdateWithoutCasePlacesDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -5992,6 +8184,10 @@ export type UserUncheckedUpdateWithoutCasePlacesDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCasePlacesFilesInput = {
@@ -6007,6 +8203,12 @@ export type UserCreateWithoutCasePlacesFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6080,6 +8282,10 @@ export type UserCreateWithoutCasePlacesFilesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCasePlacesFilesInput = {
@@ -6095,6 +8301,12 @@ export type UserUncheckedCreateWithoutCasePlacesFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6168,6 +8380,10 @@ export type UserUncheckedCreateWithoutCasePlacesFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCasePlacesFilesInput = {
@@ -6199,6 +8415,12 @@ export type UserUpdateWithoutCasePlacesFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6272,6 +8494,10 @@ export type UserUpdateWithoutCasePlacesFilesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCasePlacesFilesInput = {
@@ -6287,6 +8513,12 @@ export type UserUncheckedUpdateWithoutCasePlacesFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6360,6 +8592,10 @@ export type UserUncheckedUpdateWithoutCasePlacesFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCaseManagementDecidedInput = {
@@ -6375,6 +8611,12 @@ export type UserCreateWithoutCaseManagementDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6448,6 +8690,10 @@ export type UserCreateWithoutCaseManagementDecidedInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseManagementDecidedInput = {
@@ -6463,6 +8709,12 @@ export type UserUncheckedCreateWithoutCaseManagementDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6536,6 +8788,10 @@ export type UserUncheckedCreateWithoutCaseManagementDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseManagementDecidedInput = {
@@ -6567,6 +8823,12 @@ export type UserUpdateWithoutCaseManagementDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6640,6 +8902,10 @@ export type UserUpdateWithoutCaseManagementDecidedInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseManagementDecidedInput = {
@@ -6655,6 +8921,12 @@ export type UserUncheckedUpdateWithoutCaseManagementDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -6728,6 +9000,10 @@ export type UserUncheckedUpdateWithoutCaseManagementDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCaseManagementReviewFilesInput = {
@@ -6743,6 +9019,12 @@ export type UserCreateWithoutCaseManagementReviewFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6816,6 +9098,10 @@ export type UserCreateWithoutCaseManagementReviewFilesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseManagementReviewFilesInput = {
@@ -6831,6 +9117,12 @@ export type UserUncheckedCreateWithoutCaseManagementReviewFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -6904,6 +9196,10 @@ export type UserUncheckedCreateWithoutCaseManagementReviewFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseManagementReviewFilesInput = {
@@ -6935,6 +9231,12 @@ export type UserUpdateWithoutCaseManagementReviewFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7008,6 +9310,10 @@ export type UserUpdateWithoutCaseManagementReviewFilesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseManagementReviewFilesInput = {
@@ -7023,6 +9329,12 @@ export type UserUncheckedUpdateWithoutCaseManagementReviewFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7096,6 +9408,10 @@ export type UserUncheckedUpdateWithoutCaseManagementReviewFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCaseFilesInput = {
@@ -7111,6 +9427,12 @@ export type UserCreateWithoutCaseFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7184,6 +9506,10 @@ export type UserCreateWithoutCaseFilesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseFilesInput = {
@@ -7199,6 +9525,12 @@ export type UserUncheckedCreateWithoutCaseFilesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7272,6 +9604,10 @@ export type UserUncheckedCreateWithoutCaseFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseFilesInput = {
@@ -7292,6 +9628,12 @@ export type UserCreateWithoutCaseRevocationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7365,6 +9707,10 @@ export type UserCreateWithoutCaseRevocationsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseRevocationsInput = {
@@ -7380,6 +9726,12 @@ export type UserUncheckedCreateWithoutCaseRevocationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7453,6 +9805,10 @@ export type UserUncheckedCreateWithoutCaseRevocationsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseRevocationsInput = {
@@ -7484,6 +9840,12 @@ export type UserUpdateWithoutCaseFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7557,6 +9919,10 @@ export type UserUpdateWithoutCaseFilesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseFilesInput = {
@@ -7572,6 +9938,12 @@ export type UserUncheckedUpdateWithoutCaseFilesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7645,6 +10017,10 @@ export type UserUncheckedUpdateWithoutCaseFilesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutCaseRevocationsInput = {
@@ -7671,6 +10047,12 @@ export type UserUpdateWithoutCaseRevocationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7744,6 +10126,10 @@ export type UserUpdateWithoutCaseRevocationsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseRevocationsInput = {
@@ -7759,6 +10145,12 @@ export type UserUncheckedUpdateWithoutCaseRevocationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -7832,6 +10224,10 @@ export type UserUncheckedUpdateWithoutCaseRevocationsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCaseSuspensionsInput = {
@@ -7847,6 +10243,12 @@ export type UserCreateWithoutCaseSuspensionsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -7920,6 +10322,10 @@ export type UserCreateWithoutCaseSuspensionsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseSuspensionsInput = {
@@ -7935,6 +10341,12 @@ export type UserUncheckedCreateWithoutCaseSuspensionsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8008,6 +10420,10 @@ export type UserUncheckedCreateWithoutCaseSuspensionsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseSuspensionsInput = {
@@ -8039,6 +10455,12 @@ export type UserUpdateWithoutCaseSuspensionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8112,6 +10534,10 @@ export type UserUpdateWithoutCaseSuspensionsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseSuspensionsInput = {
@@ -8127,6 +10553,12 @@ export type UserUncheckedUpdateWithoutCaseSuspensionsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8200,6 +10632,10 @@ export type UserUncheckedUpdateWithoutCaseSuspensionsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCaseRequestEventsInput = {
@@ -8215,6 +10651,12 @@ export type UserCreateWithoutCaseRequestEventsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8288,6 +10730,10 @@ export type UserCreateWithoutCaseRequestEventsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseRequestEventsInput = {
@@ -8303,6 +10749,12 @@ export type UserUncheckedCreateWithoutCaseRequestEventsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8376,6 +10828,10 @@ export type UserUncheckedCreateWithoutCaseRequestEventsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseRequestEventsInput = {
@@ -8407,6 +10863,12 @@ export type UserUpdateWithoutCaseRequestEventsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8480,6 +10942,10 @@ export type UserUpdateWithoutCaseRequestEventsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseRequestEventsInput = {
@@ -8495,6 +10961,12 @@ export type UserUncheckedUpdateWithoutCaseRequestEventsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8568,6 +11040,10 @@ export type UserUncheckedUpdateWithoutCaseRequestEventsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutCaseAuctionDecidedInput = {
@@ -8583,6 +11059,12 @@ export type UserCreateWithoutCaseAuctionDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8656,6 +11138,10 @@ export type UserCreateWithoutCaseAuctionDecidedInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutCaseAuctionDecidedInput = {
@@ -8671,6 +11157,12 @@ export type UserUncheckedCreateWithoutCaseAuctionDecidedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -8744,6 +11236,10 @@ export type UserUncheckedCreateWithoutCaseAuctionDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutCaseAuctionDecidedInput = {
@@ -8775,6 +11271,12 @@ export type UserUpdateWithoutCaseAuctionDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8848,6 +11350,10 @@ export type UserUpdateWithoutCaseAuctionDecidedInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCaseAuctionDecidedInput = {
@@ -8863,6 +11369,12 @@ export type UserUncheckedUpdateWithoutCaseAuctionDecidedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -8936,6 +11448,10 @@ export type UserUncheckedUpdateWithoutCaseAuctionDecidedInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutPersonDocumentsInput = {
@@ -8951,6 +11467,12 @@ export type UserCreateWithoutPersonDocumentsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9024,6 +11546,10 @@ export type UserCreateWithoutPersonDocumentsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutPersonDocumentsInput = {
@@ -9039,6 +11565,12 @@ export type UserUncheckedCreateWithoutPersonDocumentsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9112,6 +11644,10 @@ export type UserUncheckedCreateWithoutPersonDocumentsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutPersonDocumentsInput = {
@@ -9143,6 +11679,12 @@ export type UserUpdateWithoutPersonDocumentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9216,6 +11758,10 @@ export type UserUpdateWithoutPersonDocumentsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPersonDocumentsInput = {
@@ -9231,6 +11777,12 @@ export type UserUncheckedUpdateWithoutPersonDocumentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9304,6 +11856,10 @@ export type UserUncheckedUpdateWithoutPersonDocumentsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutLocationHistoriesInput = {
@@ -9319,6 +11875,12 @@ export type UserCreateWithoutLocationHistoriesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9392,6 +11954,10 @@ export type UserCreateWithoutLocationHistoriesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutLocationHistoriesInput = {
@@ -9407,6 +11973,12 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9480,6 +12052,10 @@ export type UserUncheckedCreateWithoutLocationHistoriesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutLocationHistoriesInput = {
@@ -9511,6 +12087,12 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9584,6 +12166,10 @@ export type UserUpdateWithoutLocationHistoriesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
@@ -9599,6 +12185,12 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -9672,6 +12264,10 @@ export type UserUncheckedUpdateWithoutLocationHistoriesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutPositionInput = {
@@ -9687,6 +12283,12 @@ export type UserCreateWithoutPositionInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9760,6 +12362,10 @@ export type UserCreateWithoutPositionInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutPositionInput = {
@@ -9775,6 +12381,12 @@ export type UserUncheckedCreateWithoutPositionInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9848,6 +12460,10 @@ export type UserUncheckedCreateWithoutPositionInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutPositionInput = {
@@ -9889,6 +12505,12 @@ export type UserCreateWithoutNutritionUnitsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -9962,6 +12584,10 @@ export type UserCreateWithoutNutritionUnitsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutNutritionUnitsInput = {
@@ -9977,6 +12603,12 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -10050,6 +12682,10 @@ export type UserUncheckedCreateWithoutNutritionUnitsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutNutritionUnitsInput = {
@@ -10070,6 +12706,12 @@ export type UserCreateWithoutOrgUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -10143,6 +12785,10 @@ export type UserCreateWithoutOrgUnitInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutOrgUnitInput = {
@@ -10158,6 +12804,12 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -10231,6 +12883,10 @@ export type UserUncheckedCreateWithoutOrgUnitInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutOrgUnitInput = {
@@ -10267,6 +12923,12 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -10340,6 +13002,10 @@ export type UserUpdateWithoutNutritionUnitsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
@@ -10355,6 +13021,12 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -10428,6 +13100,10 @@ export type UserUncheckedUpdateWithoutNutritionUnitsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutOrgUnitInput = {
@@ -10459,6 +13135,12 @@ export type UserCreateWithoutFoodReservationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -10532,6 +13214,10 @@ export type UserCreateWithoutFoodReservationsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutFoodReservationsInput = {
@@ -10547,6 +13233,12 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -10620,6 +13312,10 @@ export type UserUncheckedCreateWithoutFoodReservationsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutFoodReservationsInput = {
@@ -10651,6 +13347,12 @@ export type UserUpdateWithoutFoodReservationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -10724,6 +13426,10 @@ export type UserUpdateWithoutFoodReservationsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFoodReservationsInput = {
@@ -10739,6 +13445,12 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -10812,6 +13524,10 @@ export type UserUncheckedUpdateWithoutFoodReservationsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutVehicleAssignmentsInput = {
@@ -10827,6 +13543,12 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -10900,6 +13622,10 @@ export type UserCreateWithoutVehicleAssignmentsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
@@ -10915,6 +13641,12 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -10988,6 +13720,10 @@ export type UserUncheckedCreateWithoutVehicleAssignmentsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutVehicleAssignmentsInput = {
@@ -11019,6 +13755,12 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -11092,6 +13834,10 @@ export type UserUpdateWithoutVehicleAssignmentsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
@@ -11107,6 +13853,12 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -11180,6 +13932,10 @@ export type UserUncheckedUpdateWithoutVehicleAssignmentsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutUserRolesInput = {
@@ -11195,6 +13951,12 @@ export type UserCreateWithoutUserRolesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -11268,6 +14030,10 @@ export type UserCreateWithoutUserRolesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -11283,6 +14049,12 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -11356,6 +14128,10 @@ export type UserUncheckedCreateWithoutUserRolesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -11387,6 +14163,12 @@ export type UserUpdateWithoutUserRolesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -11460,6 +14242,10 @@ export type UserUpdateWithoutUserRolesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -11475,6 +14261,12 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -11548,6 +14340,10 @@ export type UserUncheckedUpdateWithoutUserRolesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutSingardFeedbacksInput = {
@@ -11563,6 +14359,12 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -11636,6 +14438,10 @@ export type UserCreateWithoutSingardFeedbacksInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
@@ -11651,6 +14457,12 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -11724,6 +14536,10 @@ export type UserUncheckedCreateWithoutSingardFeedbacksInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutSingardFeedbacksInput = {
@@ -11744,6 +14560,12 @@ export type UserCreateWithoutSingardRepliesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -11817,6 +14639,10 @@ export type UserCreateWithoutSingardRepliesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutSingardRepliesInput = {
@@ -11832,6 +14658,12 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -11905,6 +14737,10 @@ export type UserUncheckedCreateWithoutSingardRepliesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutSingardRepliesInput = {
@@ -11936,6 +14772,12 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -12009,6 +14851,10 @@ export type UserUpdateWithoutSingardFeedbacksInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
@@ -12024,6 +14870,12 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -12097,6 +14949,10 @@ export type UserUncheckedUpdateWithoutSingardFeedbacksInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutSingardRepliesInput = {
@@ -12123,6 +14979,12 @@ export type UserUpdateWithoutSingardRepliesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -12196,6 +15058,10 @@ export type UserUpdateWithoutSingardRepliesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSingardRepliesInput = {
@@ -12211,6 +15077,12 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -12284,6 +15156,10 @@ export type UserUncheckedUpdateWithoutSingardRepliesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutSingardActivitiesInput = {
@@ -12299,6 +15175,12 @@ export type UserCreateWithoutSingardActivitiesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -12372,6 +15254,10 @@ export type UserCreateWithoutSingardActivitiesInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutSingardActivitiesInput = {
@@ -12387,6 +15273,12 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -12460,6 +15352,10 @@ export type UserUncheckedCreateWithoutSingardActivitiesInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutSingardActivitiesInput = {
@@ -12491,6 +15387,12 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -12564,6 +15466,10 @@ export type UserUpdateWithoutSingardActivitiesInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
@@ -12579,6 +15485,12 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -12652,6 +15564,10 @@ export type UserUncheckedUpdateWithoutSingardActivitiesInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutBoardRequestsCreatedInput = {
@@ -12667,6 +15583,12 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -12740,6 +15662,10 @@ export type UserCreateWithoutBoardRequestsCreatedInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
@@ -12755,6 +15681,12 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -12828,6 +15760,10 @@ export type UserUncheckedCreateWithoutBoardRequestsCreatedInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardRequestsCreatedInput = {
@@ -12848,6 +15784,12 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -12921,6 +15863,10 @@ export type UserCreateWithoutBoardManagementReviewsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
@@ -12936,6 +15882,12 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13009,6 +15961,10 @@ export type UserUncheckedCreateWithoutBoardManagementReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardManagementReviewsInput = {
@@ -13029,6 +15985,12 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13102,6 +16064,10 @@ export type UserCreateWithoutBoardLegalReviewsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
@@ -13117,6 +16083,12 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13190,6 +16162,10 @@ export type UserUncheckedCreateWithoutBoardLegalReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardLegalReviewsInput = {
@@ -13210,6 +16186,12 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13283,6 +16265,10 @@ export type UserCreateWithoutBoardBudgetReviewsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
@@ -13298,6 +16284,12 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13371,6 +16363,10 @@ export type UserUncheckedCreateWithoutBoardBudgetReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardBudgetReviewsInput = {
@@ -13391,6 +16387,12 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13464,6 +16466,10 @@ export type UserCreateWithoutBoardSecretaryReviewsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
@@ -13479,6 +16485,12 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13552,6 +16564,10 @@ export type UserUncheckedCreateWithoutBoardSecretaryReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardSecretaryReviewsInput = {
@@ -13572,6 +16588,12 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13645,6 +16667,10 @@ export type UserCreateWithoutBoardRequestsRejectedInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
@@ -13660,6 +16686,12 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -13733,6 +16765,10 @@ export type UserUncheckedCreateWithoutBoardRequestsRejectedInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardRequestsRejectedInput = {
@@ -13764,6 +16800,12 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -13837,6 +16879,10 @@ export type UserUpdateWithoutBoardRequestsCreatedInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
@@ -13852,6 +16898,12 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -13925,6 +16977,10 @@ export type UserUncheckedUpdateWithoutBoardRequestsCreatedInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutBoardManagementReviewsInput = {
@@ -13951,6 +17007,12 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14024,6 +17086,10 @@ export type UserUpdateWithoutBoardManagementReviewsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
@@ -14039,6 +17105,12 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14112,6 +17184,10 @@ export type UserUncheckedUpdateWithoutBoardManagementReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutBoardLegalReviewsInput = {
@@ -14138,6 +17214,12 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14211,6 +17293,10 @@ export type UserUpdateWithoutBoardLegalReviewsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
@@ -14226,6 +17312,12 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14299,6 +17391,10 @@ export type UserUncheckedUpdateWithoutBoardLegalReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutBoardBudgetReviewsInput = {
@@ -14325,6 +17421,12 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14398,6 +17500,10 @@ export type UserUpdateWithoutBoardBudgetReviewsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
@@ -14413,6 +17519,12 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14486,6 +17598,10 @@ export type UserUncheckedUpdateWithoutBoardBudgetReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutBoardSecretaryReviewsInput = {
@@ -14512,6 +17628,12 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14585,6 +17707,10 @@ export type UserUpdateWithoutBoardSecretaryReviewsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
@@ -14600,6 +17726,12 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14673,6 +17805,10 @@ export type UserUncheckedUpdateWithoutBoardSecretaryReviewsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutBoardRequestsRejectedInput = {
@@ -14699,6 +17835,12 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14772,6 +17914,10 @@ export type UserUpdateWithoutBoardRequestsRejectedInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
@@ -14787,6 +17933,12 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -14860,6 +18012,10 @@ export type UserUncheckedUpdateWithoutBoardRequestsRejectedInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutBoardMinutesCreatedInput = {
@@ -14875,6 +18031,12 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -14948,6 +18110,10 @@ export type UserCreateWithoutBoardMinutesCreatedInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
@@ -14963,6 +18129,12 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -15036,6 +18208,10 @@ export type UserUncheckedCreateWithoutBoardMinutesCreatedInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardMinutesCreatedInput = {
@@ -15067,6 +18243,12 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -15140,6 +18322,10 @@ export type UserUpdateWithoutBoardMinutesCreatedInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
@@ -15155,6 +18341,12 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -15228,6 +18420,10 @@ export type UserUncheckedUpdateWithoutBoardMinutesCreatedInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutBoardMinutesMembershipsInput = {
@@ -15243,6 +18439,12 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -15316,6 +18518,10 @@ export type UserCreateWithoutBoardMinutesMembershipsInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
@@ -15331,6 +18537,12 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -15404,6 +18616,10 @@ export type UserUncheckedCreateWithoutBoardMinutesMembershipsInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutBoardMinutesMembershipsInput = {
@@ -15435,6 +18651,12 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -15508,6 +18730,10 @@ export type UserUpdateWithoutBoardMinutesMembershipsInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
@@ -15523,6 +18749,12 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -15596,6 +18828,10 @@ export type UserUncheckedUpdateWithoutBoardMinutesMembershipsInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutWorkUnitInput = {
@@ -15611,6 +18847,12 @@ export type UserCreateWithoutWorkUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -15684,6 +18926,10 @@ export type UserCreateWithoutWorkUnitInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutWorkUnitInput = {
@@ -15699,6 +18945,12 @@ export type UserUncheckedCreateWithoutWorkUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -15772,6 +19024,10 @@ export type UserUncheckedCreateWithoutWorkUnitInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutWorkUnitInput = {
@@ -15813,6 +19069,12 @@ export type UserCreateWithoutStaffPostInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -15886,6 +19148,10 @@ export type UserCreateWithoutStaffPostInput = {
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutStaffPostInput = {
@@ -15901,6 +19167,12 @@ export type UserUncheckedCreateWithoutStaffPostInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -15974,6 +19246,10 @@ export type UserUncheckedCreateWithoutStaffPostInput = {
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutStaffPostInput = {
@@ -16015,6 +19291,12 @@ export type UserCreateWithoutViolationCasesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -16088,6 +19370,10 @@ export type UserCreateWithoutViolationCasesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutViolationCasesInput = {
@@ -16103,6 +19389,12 @@ export type UserUncheckedCreateWithoutViolationCasesInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -16176,6 +19468,10 @@ export type UserUncheckedCreateWithoutViolationCasesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutViolationCasesInput = {
@@ -16196,6 +19492,12 @@ export type UserCreateWithoutViolationsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -16269,6 +19571,10 @@ export type UserCreateWithoutViolationsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutViolationsCreatedInput = {
@@ -16284,6 +19590,12 @@ export type UserUncheckedCreateWithoutViolationsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -16357,6 +19669,10 @@ export type UserUncheckedCreateWithoutViolationsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedCreateNestedManyWithoutCreatedByInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutViolationsCreatedInput = {
@@ -16388,6 +19704,12 @@ export type UserUpdateWithoutViolationCasesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -16461,6 +19783,10 @@ export type UserUpdateWithoutViolationCasesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutViolationCasesInput = {
@@ -16476,6 +19802,12 @@ export type UserUncheckedUpdateWithoutViolationCasesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -16549,6 +19881,10 @@ export type UserUncheckedUpdateWithoutViolationCasesInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUpsertWithoutViolationsCreatedInput = {
@@ -16575,6 +19911,12 @@ export type UserUpdateWithoutViolationsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -16648,6 +19990,10 @@ export type UserUpdateWithoutViolationsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutViolationsCreatedInput = {
@@ -16663,6 +20009,12 @@ export type UserUncheckedUpdateWithoutViolationsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -16736,6 +20088,10 @@ export type UserUncheckedUpdateWithoutViolationsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateWithoutViolationProceedingsCreatedInput = {
@@ -16751,6 +20107,12 @@ export type UserCreateWithoutViolationProceedingsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -16824,6 +20186,10 @@ export type UserCreateWithoutViolationProceedingsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberCreateNestedManyWithoutUserInput
   violationsCreated?: Prisma.ViolationCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationCreateNestedManyWithoutCaseUserInput
+  recordedPayments?: Prisma.PaymentCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserUncheckedCreateWithoutViolationProceedingsCreatedInput = {
@@ -16839,6 +20205,12 @@ export type UserUncheckedCreateWithoutViolationProceedingsCreatedInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -16912,6 +20284,10 @@ export type UserUncheckedCreateWithoutViolationProceedingsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedCreateNestedManyWithoutUserInput
   violationsCreated?: Prisma.ViolationUncheckedCreateNestedManyWithoutCreatedByInput
   violationCases?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseUserInput
+  recordedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutRecordedByInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedCreateNestedManyWithoutPayerInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutUploadedByInput
+  deletedPayments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDeletedByInput
 }
 
 export type UserCreateOrConnectWithoutViolationProceedingsCreatedInput = {
@@ -16943,6 +20319,12 @@ export type UserUpdateWithoutViolationProceedingsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17016,6 +20398,10 @@ export type UserUpdateWithoutViolationProceedingsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUpdateManyWithoutUserNestedInput
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutViolationProceedingsCreatedInput = {
@@ -17031,6 +20417,12 @@ export type UserUncheckedUpdateWithoutViolationProceedingsCreatedInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17104,6 +20496,10 @@ export type UserUncheckedUpdateWithoutViolationProceedingsCreatedInput = {
   boardMinutesMemberships?: Prisma.BoardMinutesMemberUncheckedUpdateManyWithoutUserNestedInput
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserCreateManyPhotoInput = {
@@ -17119,6 +20515,12 @@ export type UserCreateManyPhotoInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -17174,6 +20576,12 @@ export type UserUpdateWithoutPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17247,6 +20655,10 @@ export type UserUpdateWithoutPhotoInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPhotoInput = {
@@ -17262,6 +20674,12 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17335,6 +20753,10 @@ export type UserUncheckedUpdateWithoutPhotoInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPhotoInput = {
@@ -17350,6 +20772,12 @@ export type UserUncheckedUpdateManyWithoutPhotoInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17405,6 +20833,12 @@ export type UserCreateManyCountryInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -17460,6 +20894,12 @@ export type UserUpdateWithoutCountryInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17533,6 +20973,10 @@ export type UserUpdateWithoutCountryInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCountryInput = {
@@ -17548,6 +20992,12 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17621,6 +21071,10 @@ export type UserUncheckedUpdateWithoutCountryInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCountryInput = {
@@ -17636,6 +21090,12 @@ export type UserUncheckedUpdateManyWithoutCountryInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17691,6 +21151,12 @@ export type UserCreateManyProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -17746,6 +21212,12 @@ export type UserCreateManyLocationProvinceInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -17801,6 +21273,12 @@ export type UserUpdateWithoutProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17874,6 +21352,10 @@ export type UserUpdateWithoutProvinceInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProvinceInput = {
@@ -17889,6 +21371,12 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -17962,6 +21450,10 @@ export type UserUncheckedUpdateWithoutProvinceInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutProvinceInput = {
@@ -17977,6 +21469,12 @@ export type UserUncheckedUpdateManyWithoutProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18032,6 +21530,12 @@ export type UserUpdateWithoutLocationProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18105,6 +21609,10 @@ export type UserUpdateWithoutLocationProvinceInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLocationProvinceInput = {
@@ -18120,6 +21628,12 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18193,6 +21707,10 @@ export type UserUncheckedUpdateWithoutLocationProvinceInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
@@ -18208,6 +21726,12 @@ export type UserUncheckedUpdateManyWithoutLocationProvinceInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18263,6 +21787,12 @@ export type UserCreateManyCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -18318,6 +21848,12 @@ export type UserCreateManyLocationCityInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -18373,6 +21909,12 @@ export type UserUpdateWithoutCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18446,6 +21988,10 @@ export type UserUpdateWithoutCityInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCityInput = {
@@ -18461,6 +22007,12 @@ export type UserUncheckedUpdateWithoutCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18534,6 +22086,10 @@ export type UserUncheckedUpdateWithoutCityInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCityInput = {
@@ -18549,6 +22105,12 @@ export type UserUncheckedUpdateManyWithoutCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18604,6 +22166,12 @@ export type UserUpdateWithoutLocationCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18677,6 +22245,10 @@ export type UserUpdateWithoutLocationCityInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLocationCityInput = {
@@ -18692,6 +22264,12 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18765,6 +22343,10 @@ export type UserUncheckedUpdateWithoutLocationCityInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutLocationCityInput = {
@@ -18780,6 +22362,12 @@ export type UserUncheckedUpdateManyWithoutLocationCityInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18835,6 +22423,12 @@ export type UserCreateManyEconomicJobInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -18890,6 +22484,12 @@ export type UserUpdateWithoutEconomicJobInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -18963,6 +22563,10 @@ export type UserUpdateWithoutEconomicJobInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEconomicJobInput = {
@@ -18978,6 +22582,12 @@ export type UserUncheckedUpdateWithoutEconomicJobInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19051,6 +22661,10 @@ export type UserUncheckedUpdateWithoutEconomicJobInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutEconomicJobInput = {
@@ -19066,6 +22680,12 @@ export type UserUncheckedUpdateManyWithoutEconomicJobInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19121,6 +22741,12 @@ export type UserCreateManyPositionInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -19176,6 +22802,12 @@ export type UserUpdateWithoutPositionInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19249,6 +22881,10 @@ export type UserUpdateWithoutPositionInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPositionInput = {
@@ -19264,6 +22900,12 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19337,6 +22979,10 @@ export type UserUncheckedUpdateWithoutPositionInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutPositionInput = {
@@ -19352,6 +22998,12 @@ export type UserUncheckedUpdateManyWithoutPositionInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19407,6 +23059,12 @@ export type UserCreateManyOrgUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -19462,6 +23120,12 @@ export type UserUpdateWithoutOrgUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19535,6 +23199,10 @@ export type UserUpdateWithoutOrgUnitInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrgUnitInput = {
@@ -19550,6 +23218,12 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19623,6 +23297,10 @@ export type UserUncheckedUpdateWithoutOrgUnitInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
@@ -19638,6 +23316,12 @@ export type UserUncheckedUpdateManyWithoutOrgUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19693,6 +23377,12 @@ export type UserCreateManyWorkUnitInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -19748,6 +23438,12 @@ export type UserUpdateWithoutWorkUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19821,6 +23517,10 @@ export type UserUpdateWithoutWorkUnitInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorkUnitInput = {
@@ -19836,6 +23536,12 @@ export type UserUncheckedUpdateWithoutWorkUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19909,6 +23615,10 @@ export type UserUncheckedUpdateWithoutWorkUnitInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutWorkUnitInput = {
@@ -19924,6 +23634,12 @@ export type UserUncheckedUpdateManyWithoutWorkUnitInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -19979,6 +23695,12 @@ export type UserCreateManyStaffPostInput = {
   phone?: string | null
   email?: string | null
   gender?: $Enums.UserGender | null
+  personType?: $Enums.PersonType
+  companyName?: string | null
+  companyNationalId?: string | null
+  companyRegistrationNo?: string | null
+  companyRegisteredAt?: Date | string | null
+  economicCode?: string | null
   address?: string | null
   notes?: string | null
   religion?: $Enums.Religion | null
@@ -20034,6 +23756,12 @@ export type UserUpdateWithoutStaffPostInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -20107,6 +23835,10 @@ export type UserUpdateWithoutStaffPostInput = {
   violationsCreated?: Prisma.ViolationUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffPostInput = {
@@ -20122,6 +23854,12 @@ export type UserUncheckedUpdateWithoutStaffPostInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -20195,6 +23933,10 @@ export type UserUncheckedUpdateWithoutStaffPostInput = {
   violationsCreated?: Prisma.ViolationUncheckedUpdateManyWithoutCreatedByNestedInput
   violationCases?: Prisma.ViolationUncheckedUpdateManyWithoutCaseUserNestedInput
   violationProceedingsCreated?: Prisma.ViolationProceedingUncheckedUpdateManyWithoutCreatedByNestedInput
+  recordedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutRecordedByNestedInput
+  paymentsAsPayer?: Prisma.PaymentUncheckedUpdateManyWithoutPayerNestedInput
+  uploadedPaymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutUploadedByNestedInput
+  deletedPayments?: Prisma.PaymentUncheckedUpdateManyWithoutDeletedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutStaffPostInput = {
@@ -20210,6 +23952,12 @@ export type UserUncheckedUpdateManyWithoutStaffPostInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   gender?: Prisma.NullableEnumUserGenderFieldUpdateOperationsInput | $Enums.UserGender | null
+  personType?: Prisma.EnumPersonTypeFieldUpdateOperationsInput | $Enums.PersonType
+  companyName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegistrationNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  companyRegisteredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  economicCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   religion?: Prisma.NullableEnumReligionFieldUpdateOperationsInput | $Enums.Religion | null
@@ -20291,6 +24039,10 @@ export type UserCountOutputType = {
   violationsCreated: number
   violationCases: number
   violationProceedingsCreated: number
+  recordedPayments: number
+  paymentsAsPayer: number
+  uploadedPaymentReceipts: number
+  deletedPayments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -20327,6 +24079,10 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   violationsCreated?: boolean | UserCountOutputTypeCountViolationsCreatedArgs
   violationCases?: boolean | UserCountOutputTypeCountViolationCasesArgs
   violationProceedingsCreated?: boolean | UserCountOutputTypeCountViolationProceedingsCreatedArgs
+  recordedPayments?: boolean | UserCountOutputTypeCountRecordedPaymentsArgs
+  paymentsAsPayer?: boolean | UserCountOutputTypeCountPaymentsAsPayerArgs
+  uploadedPaymentReceipts?: boolean | UserCountOutputTypeCountUploadedPaymentReceiptsArgs
+  deletedPayments?: boolean | UserCountOutputTypeCountDeletedPaymentsArgs
 }
 
 /**
@@ -20570,6 +24326,34 @@ export type UserCountOutputTypeCountViolationProceedingsCreatedArgs<ExtArgs exte
   where?: Prisma.ViolationProceedingWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRecordedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPaymentsAsPayerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountUploadedPaymentReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentReceiptWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDeletedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -20584,6 +24368,12 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   phone?: boolean
   email?: boolean
   gender?: boolean
+  personType?: boolean
+  companyName?: boolean
+  companyNationalId?: boolean
+  companyRegistrationNo?: boolean
+  companyRegisteredAt?: boolean
+  economicCode?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -20669,6 +24459,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   violationsCreated?: boolean | Prisma.User$violationsCreatedArgs<ExtArgs>
   violationCases?: boolean | Prisma.User$violationCasesArgs<ExtArgs>
   violationProceedingsCreated?: boolean | Prisma.User$violationProceedingsCreatedArgs<ExtArgs>
+  recordedPayments?: boolean | Prisma.User$recordedPaymentsArgs<ExtArgs>
+  paymentsAsPayer?: boolean | Prisma.User$paymentsAsPayerArgs<ExtArgs>
+  uploadedPaymentReceipts?: boolean | Prisma.User$uploadedPaymentReceiptsArgs<ExtArgs>
+  deletedPayments?: boolean | Prisma.User$deletedPaymentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -20685,6 +24479,12 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   email?: boolean
   gender?: boolean
+  personType?: boolean
+  companyName?: boolean
+  companyNationalId?: boolean
+  companyRegistrationNo?: boolean
+  companyRegisteredAt?: boolean
+  economicCode?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -20752,6 +24552,12 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   email?: boolean
   gender?: boolean
+  personType?: boolean
+  companyName?: boolean
+  companyNationalId?: boolean
+  companyRegistrationNo?: boolean
+  companyRegisteredAt?: boolean
+  economicCode?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -20819,6 +24625,12 @@ export type UserSelectScalar = {
   phone?: boolean
   email?: boolean
   gender?: boolean
+  personType?: boolean
+  companyName?: boolean
+  companyNationalId?: boolean
+  companyRegistrationNo?: boolean
+  companyRegisteredAt?: boolean
+  economicCode?: boolean
   address?: boolean
   notes?: boolean
   religion?: boolean
@@ -20862,7 +24674,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "orgUnitId" | "positionId" | "workUnitId" | "staffPostId" | "fatherName" | "lastNameEn" | "birthDate" | "passportNumber" | "nationalCardExpiresAt" | "passportExpiresAt" | "identityCertificateNo" | "birthPlace" | "identityIssuedIn" | "residencyStatus" | "postalCode" | "homePhone" | "educationLevel" | "citizenGroup" | "jobId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "username" | "passwordHash" | "firstName" | "lastName" | "fullName" | "locale" | "status" | "nationalId" | "phone" | "email" | "gender" | "personType" | "companyName" | "companyNationalId" | "companyRegistrationNo" | "companyRegisteredAt" | "economicCode" | "address" | "notes" | "religion" | "religionOther" | "telegram" | "bale" | "eitaa" | "whatsapp" | "otherSocial" | "vehiclePlates" | "countryId" | "provinceId" | "cityId" | "locationProvinceId" | "locationCityId" | "latitude" | "longitude" | "locationNotes" | "locationUpdatedAt" | "photoId" | "orgUnitId" | "positionId" | "workUnitId" | "staffPostId" | "fatherName" | "lastNameEn" | "birthDate" | "passportNumber" | "nationalCardExpiresAt" | "passportExpiresAt" | "identityCertificateNo" | "birthPlace" | "identityIssuedIn" | "residencyStatus" | "postalCode" | "homePhone" | "educationLevel" | "citizenGroup" | "jobId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   country?: boolean | Prisma.User$countryArgs<ExtArgs>
   province?: boolean | Prisma.User$provinceArgs<ExtArgs>
@@ -20908,6 +24720,10 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   violationsCreated?: boolean | Prisma.User$violationsCreatedArgs<ExtArgs>
   violationCases?: boolean | Prisma.User$violationCasesArgs<ExtArgs>
   violationProceedingsCreated?: boolean | Prisma.User$violationProceedingsCreatedArgs<ExtArgs>
+  recordedPayments?: boolean | Prisma.User$recordedPaymentsArgs<ExtArgs>
+  paymentsAsPayer?: boolean | Prisma.User$paymentsAsPayerArgs<ExtArgs>
+  uploadedPaymentReceipts?: boolean | Prisma.User$uploadedPaymentReceiptsArgs<ExtArgs>
+  deletedPayments?: boolean | Prisma.User$deletedPaymentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -20984,6 +24800,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     violationsCreated: Prisma.$ViolationPayload<ExtArgs>[]
     violationCases: Prisma.$ViolationPayload<ExtArgs>[]
     violationProceedingsCreated: Prisma.$ViolationProceedingPayload<ExtArgs>[]
+    recordedPayments: Prisma.$PaymentPayload<ExtArgs>[]
+    paymentsAsPayer: Prisma.$PaymentPayload<ExtArgs>[]
+    uploadedPaymentReceipts: Prisma.$PaymentReceiptPayload<ExtArgs>[]
+    deletedPayments: Prisma.$PaymentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -20998,6 +24818,12 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     phone: string | null
     email: string | null
     gender: $Enums.UserGender | null
+    personType: $Enums.PersonType
+    companyName: string | null
+    companyNationalId: string | null
+    companyRegistrationNo: string | null
+    companyRegisteredAt: Date | null
+    economicCode: string | null
     address: string | null
     notes: string | null
     religion: $Enums.Religion | null
@@ -21477,6 +25303,10 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   violationsCreated<T extends Prisma.User$violationsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$violationsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   violationCases<T extends Prisma.User$violationCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$violationCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   violationProceedingsCreated<T extends Prisma.User$violationProceedingsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$violationProceedingsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ViolationProceedingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recordedPayments<T extends Prisma.User$recordedPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$recordedPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  paymentsAsPayer<T extends Prisma.User$paymentsAsPayerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$paymentsAsPayerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  uploadedPaymentReceipts<T extends Prisma.User$uploadedPaymentReceiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedPaymentReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deletedPayments<T extends Prisma.User$deletedPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$deletedPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21518,6 +25348,12 @@ export interface UserFieldRefs {
   readonly phone: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly gender: Prisma.FieldRef<"User", 'UserGender'>
+  readonly personType: Prisma.FieldRef<"User", 'PersonType'>
+  readonly companyName: Prisma.FieldRef<"User", 'String'>
+  readonly companyNationalId: Prisma.FieldRef<"User", 'String'>
+  readonly companyRegistrationNo: Prisma.FieldRef<"User", 'String'>
+  readonly companyRegisteredAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly economicCode: Prisma.FieldRef<"User", 'String'>
   readonly address: Prisma.FieldRef<"User", 'String'>
   readonly notes: Prisma.FieldRef<"User", 'String'>
   readonly religion: Prisma.FieldRef<"User", 'Religion'>
@@ -22958,6 +26794,102 @@ export type User$violationProceedingsCreatedArgs<ExtArgs extends runtime.Types.E
   take?: number
   skip?: number
   distinct?: Prisma.ViolationProceedingScalarFieldEnum | Prisma.ViolationProceedingScalarFieldEnum[]
+}
+
+/**
+ * User.recordedPayments
+ */
+export type User$recordedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * User.paymentsAsPayer
+ */
+export type User$paymentsAsPayerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * User.uploadedPaymentReceipts
+ */
+export type User$uploadedPaymentReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentReceipt
+   */
+  select?: Prisma.PaymentReceiptSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentReceipt
+   */
+  omit?: Prisma.PaymentReceiptOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentReceiptInclude<ExtArgs> | null
+  where?: Prisma.PaymentReceiptWhereInput
+  orderBy?: Prisma.PaymentReceiptOrderByWithRelationInput | Prisma.PaymentReceiptOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentReceiptWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentReceiptScalarFieldEnum | Prisma.PaymentReceiptScalarFieldEnum[]
+}
+
+/**
+ * User.deletedPayments
+ */
+export type User$deletedPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
 }
 
 /**

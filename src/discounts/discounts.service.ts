@@ -24,6 +24,7 @@ const discountSelect = {
   title: true,
   percent: true,
   processTypes: true,
+  appliesToAllRequests: true,
   description: true,
   isActive: true,
   createdAt: true,
@@ -153,7 +154,8 @@ export class DiscountsService {
       title: dto.title,
       percent:
         dto.percent === undefined ? undefined : new Prisma.Decimal(dto.percent),
-      processTypes: dto.processTypes,
+      appliesToAllRequests: dto.appliesToAllRequests,
+      processTypes: dto.appliesToAllRequests ? [] : dto.processTypes,
       description: dto.description,
       isActive: dto.isActive,
     };

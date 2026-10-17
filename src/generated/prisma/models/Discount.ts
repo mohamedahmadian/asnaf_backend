@@ -41,6 +41,7 @@ export type DiscountMinAggregateOutputType = {
   year: number | null
   title: string | null
   percent: runtime.Decimal | null
+  appliesToAllRequests: boolean | null
   description: string | null
   isActive: boolean | null
   createdAt: Date | null
@@ -52,6 +53,7 @@ export type DiscountMaxAggregateOutputType = {
   year: number | null
   title: string | null
   percent: runtime.Decimal | null
+  appliesToAllRequests: boolean | null
   description: string | null
   isActive: boolean | null
   createdAt: Date | null
@@ -64,6 +66,7 @@ export type DiscountCountAggregateOutputType = {
   title: number
   percent: number
   processTypes: number
+  appliesToAllRequests: number
   description: number
   isActive: number
   createdAt: number
@@ -87,6 +90,7 @@ export type DiscountMinAggregateInputType = {
   year?: true
   title?: true
   percent?: true
+  appliesToAllRequests?: true
   description?: true
   isActive?: true
   createdAt?: true
@@ -98,6 +102,7 @@ export type DiscountMaxAggregateInputType = {
   year?: true
   title?: true
   percent?: true
+  appliesToAllRequests?: true
   description?: true
   isActive?: true
   createdAt?: true
@@ -110,6 +115,7 @@ export type DiscountCountAggregateInputType = {
   title?: true
   percent?: true
   processTypes?: true
+  appliesToAllRequests?: true
   description?: true
   isActive?: true
   createdAt?: true
@@ -209,6 +215,7 @@ export type DiscountGroupByOutputType = {
   title: string
   percent: runtime.Decimal
   processTypes: $Enums.CaseRequestType[]
+  appliesToAllRequests: boolean
   description: string | null
   isActive: boolean
   createdAt: Date
@@ -244,10 +251,12 @@ export type DiscountWhereInput = {
   title?: Prisma.StringFilter<"Discount"> | string
   percent?: Prisma.DecimalFilter<"Discount"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"Discount">
+  appliesToAllRequests?: Prisma.BoolFilter<"Discount"> | boolean
   description?: Prisma.StringNullableFilter<"Discount"> | string | null
   isActive?: Prisma.BoolFilter<"Discount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Discount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Discount"> | Date | string
+  payments?: Prisma.PaymentListRelationFilter
 }
 
 export type DiscountOrderByWithRelationInput = {
@@ -256,10 +265,12 @@ export type DiscountOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
   processTypes?: Prisma.SortOrder
+  appliesToAllRequests?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
 }
 
 export type DiscountWhereUniqueInput = Prisma.AtLeast<{
@@ -272,10 +283,12 @@ export type DiscountWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Discount"> | string
   percent?: Prisma.DecimalFilter<"Discount"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"Discount">
+  appliesToAllRequests?: Prisma.BoolFilter<"Discount"> | boolean
   description?: Prisma.StringNullableFilter<"Discount"> | string | null
   isActive?: Prisma.BoolFilter<"Discount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Discount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Discount"> | Date | string
+  payments?: Prisma.PaymentListRelationFilter
 }, "id" | "year_title">
 
 export type DiscountOrderByWithAggregationInput = {
@@ -284,6 +297,7 @@ export type DiscountOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
   processTypes?: Prisma.SortOrder
+  appliesToAllRequests?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -304,6 +318,7 @@ export type DiscountScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Discount"> | string
   percent?: Prisma.DecimalWithAggregatesFilter<"Discount"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"Discount">
+  appliesToAllRequests?: Prisma.BoolWithAggregatesFilter<"Discount"> | boolean
   description?: Prisma.StringNullableWithAggregatesFilter<"Discount"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Discount"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Discount"> | Date | string
@@ -316,10 +331,12 @@ export type DiscountCreateInput = {
   title: string
   percent: runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: boolean
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  payments?: Prisma.PaymentCreateNestedManyWithoutDiscountInput
 }
 
 export type DiscountUncheckedCreateInput = {
@@ -328,10 +345,12 @@ export type DiscountUncheckedCreateInput = {
   title: string
   percent: runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: boolean
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutDiscountInput
 }
 
 export type DiscountUpdateInput = {
@@ -340,10 +359,12 @@ export type DiscountUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUpdateManyWithoutDiscountNestedInput
 }
 
 export type DiscountUncheckedUpdateInput = {
@@ -352,10 +373,12 @@ export type DiscountUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutDiscountNestedInput
 }
 
 export type DiscountCreateManyInput = {
@@ -364,6 +387,7 @@ export type DiscountCreateManyInput = {
   title: string
   percent: runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: boolean
   description?: string | null
   isActive?: boolean
   createdAt?: Date | string
@@ -376,6 +400,7 @@ export type DiscountUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -388,6 +413,7 @@ export type DiscountUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: Prisma.BoolFieldUpdateOperationsInput | boolean
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -405,6 +431,7 @@ export type DiscountCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
   processTypes?: Prisma.SortOrder
+  appliesToAllRequests?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -421,6 +448,7 @@ export type DiscountMaxOrderByAggregateInput = {
   year?: Prisma.SortOrder
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
+  appliesToAllRequests?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -432,6 +460,7 @@ export type DiscountMinOrderByAggregateInput = {
   year?: Prisma.SortOrder
   title?: Prisma.SortOrder
   percent?: Prisma.SortOrder
+  appliesToAllRequests?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -443,6 +472,11 @@ export type DiscountSumOrderByAggregateInput = {
   percent?: Prisma.SortOrder
 }
 
+export type DiscountNullableScalarRelationFilter = {
+  is?: Prisma.DiscountWhereInput | null
+  isNot?: Prisma.DiscountWhereInput | null
+}
+
 export type DiscountCreateprocessTypesInput = {
   set: $Enums.CaseRequestType[]
 }
@@ -452,6 +486,119 @@ export type DiscountUpdateprocessTypesInput = {
   push?: $Enums.CaseRequestType | $Enums.CaseRequestType[]
 }
 
+export type DiscountCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.DiscountCreateWithoutPaymentsInput, Prisma.DiscountUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.DiscountCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.DiscountWhereUniqueInput
+}
+
+export type DiscountUpdateOneWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DiscountCreateWithoutPaymentsInput, Prisma.DiscountUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.DiscountCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.DiscountUpsertWithoutPaymentsInput
+  disconnect?: Prisma.DiscountWhereInput | boolean
+  delete?: Prisma.DiscountWhereInput | boolean
+  connect?: Prisma.DiscountWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DiscountUpdateToOneWithWhereWithoutPaymentsInput, Prisma.DiscountUpdateWithoutPaymentsInput>, Prisma.DiscountUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type DiscountCreateWithoutPaymentsInput = {
+  id?: string
+  year: number
+  title: string
+  percent: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: boolean
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DiscountUncheckedCreateWithoutPaymentsInput = {
+  id?: string
+  year: number
+  title: string
+  percent: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountCreateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: boolean
+  description?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DiscountCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.DiscountWhereUniqueInput
+  create: Prisma.XOR<Prisma.DiscountCreateWithoutPaymentsInput, Prisma.DiscountUncheckedCreateWithoutPaymentsInput>
+}
+
+export type DiscountUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.DiscountUpdateWithoutPaymentsInput, Prisma.DiscountUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.DiscountCreateWithoutPaymentsInput, Prisma.DiscountUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.DiscountWhereInput
+}
+
+export type DiscountUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.DiscountWhereInput
+  data: Prisma.XOR<Prisma.DiscountUpdateWithoutPaymentsInput, Prisma.DiscountUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type DiscountUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DiscountUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  year?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  percent?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.DiscountUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  appliesToAllRequests?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type DiscountCountOutputType
+ */
+
+export type DiscountCountOutputType = {
+  payments: number
+}
+
+export type DiscountCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  payments?: boolean | DiscountCountOutputTypeCountPaymentsArgs
+}
+
+/**
+ * DiscountCountOutputType without action
+ */
+export type DiscountCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DiscountCountOutputType
+   */
+  select?: Prisma.DiscountCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DiscountCountOutputType without action
+ */
+export type DiscountCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
 
 
 export type DiscountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -460,10 +607,13 @@ export type DiscountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   title?: boolean
   percent?: boolean
   processTypes?: boolean
+  appliesToAllRequests?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  payments?: boolean | Prisma.Discount$paymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.DiscountCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["discount"]>
 
 export type DiscountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -472,6 +622,7 @@ export type DiscountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   title?: boolean
   percent?: boolean
   processTypes?: boolean
+  appliesToAllRequests?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -484,6 +635,7 @@ export type DiscountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   title?: boolean
   percent?: boolean
   processTypes?: boolean
+  appliesToAllRequests?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
@@ -496,23 +648,36 @@ export type DiscountSelectScalar = {
   title?: boolean
   percent?: boolean
   processTypes?: boolean
+  appliesToAllRequests?: boolean
   description?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DiscountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "year" | "title" | "percent" | "processTypes" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["discount"]>
+export type DiscountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "year" | "title" | "percent" | "processTypes" | "appliesToAllRequests" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["discount"]>
+export type DiscountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  payments?: boolean | Prisma.Discount$paymentsArgs<ExtArgs>
+  _count?: boolean | Prisma.DiscountCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type DiscountIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type DiscountIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $DiscountPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Discount"
-  objects: {}
+  objects: {
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     year: number
     title: string
     percent: runtime.Decimal
     processTypes: $Enums.CaseRequestType[]
+    /**
+     * اگر روشن باشد این تخفیف روی همهٔ انواع درخواست، از جمله انواعی که بعداً اضافه می‌شوند، دیده می‌شود
+     */
+    appliesToAllRequests: boolean
     description: string | null
     isActive: boolean
     createdAt: Date
@@ -911,6 +1076,7 @@ readonly fields: DiscountFieldRefs;
  */
 export interface Prisma__DiscountClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  payments<T extends Prisma.Discount$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Discount$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -945,6 +1111,7 @@ export interface DiscountFieldRefs {
   readonly title: Prisma.FieldRef<"Discount", 'String'>
   readonly percent: Prisma.FieldRef<"Discount", 'Decimal'>
   readonly processTypes: Prisma.FieldRef<"Discount", 'CaseRequestType[]'>
+  readonly appliesToAllRequests: Prisma.FieldRef<"Discount", 'Boolean'>
   readonly description: Prisma.FieldRef<"Discount", 'String'>
   readonly isActive: Prisma.FieldRef<"Discount", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Discount", 'DateTime'>
@@ -966,6 +1133,10 @@ export type DiscountFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
+  /**
    * Filter, which Discount to fetch.
    */
   where: Prisma.DiscountWhereUniqueInput
@@ -984,6 +1155,10 @@ export type DiscountFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
+  /**
    * Filter, which Discount to fetch.
    */
   where: Prisma.DiscountWhereUniqueInput
@@ -1001,6 +1176,10 @@ export type DiscountFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Discount
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
   /**
    * Filter, which Discount to fetch.
    */
@@ -1050,6 +1229,10 @@ export type DiscountFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
+  /**
    * Filter, which Discount to fetch.
    */
   where?: Prisma.DiscountWhereInput
@@ -1097,6 +1280,10 @@ export type DiscountFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Discount
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
   /**
    * Filter, which Discounts to fetch.
    */
@@ -1146,6 +1333,10 @@ export type DiscountCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
+  /**
    * The data needed to create a Discount.
    */
   data: Prisma.XOR<Prisma.DiscountCreateInput, Prisma.DiscountUncheckedCreateInput>
@@ -1193,6 +1384,10 @@ export type DiscountUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Discount
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
   /**
    * The data needed to update a Discount.
    */
@@ -1260,6 +1455,10 @@ export type DiscountUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
+  /**
    * The filter to search for the Discount to update in case it exists.
    */
   where: Prisma.DiscountWhereUniqueInput
@@ -1286,6 +1485,10 @@ export type DiscountDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
+  /**
    * Filter which Discount to delete.
    */
   where: Prisma.DiscountWhereUniqueInput
@@ -1306,6 +1509,30 @@ export type DiscountDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Discount.payments
+ */
+export type Discount$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
  * Discount without action
  */
 export type DiscountDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1317,4 +1544,8 @@ export type DiscountDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Discount
    */
   omit?: Prisma.DiscountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DiscountInclude<ExtArgs> | null
 }

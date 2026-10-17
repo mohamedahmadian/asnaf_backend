@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
-import { UserStatus } from '../../generated/prisma/client';
+import { PersonType, UserStatus } from '../../generated/prisma/client';
 import { emptyToUndefined, toOptionalBoolean } from '../../common/dto-transform';
 
 export const userSortFields = [
@@ -18,6 +18,8 @@ export const userSortFields = [
   'phone',
   'status',
   'nationalId',
+  'personType',
+  'companyName',
   'city',
   'createdAt',
   'orgUnit',
@@ -49,6 +51,11 @@ export class FindUsersQueryDto extends PaginationQueryDto {
   @Transform(({ value }) => emptyToUndefined(value))
   @IsEnum(UserStatus)
   status?: UserStatus;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @IsEnum(PersonType)
+  personType?: PersonType;
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))

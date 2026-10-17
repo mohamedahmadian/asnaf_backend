@@ -10,7 +10,7 @@ const databaseUuidPattern =
 export const municipalFeeSortFields = [
   'title',
   'amount',
-  'financialHeading',
+  'bankAccount',
   'description',
   'isActive',
 ] as const;
@@ -19,7 +19,7 @@ export class FindMunicipalFeesQueryDto extends PaginationQueryDto {
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
   @Matches(databaseUuidPattern)
-  financialHeadingId?: string;
+  bankAccountId?: string;
 
   @IsOptional()
   @Transform(({ value }) => toOptionalBoolean(value))
