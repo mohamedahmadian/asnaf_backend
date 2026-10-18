@@ -268,6 +268,7 @@ model BankAccount {
   isActive      Boolean        @default(true)
   municipalFees MunicipalFee[]
   financialRequestSettings FinancialRequestSetting[]
+  caseRequestFinances CaseRequestFinance[]
   paymentGroups PaymentGroup[]
   payments      Payment[]
   createdAt     DateTime       @default(now())
@@ -289,6 +290,7 @@ model MunicipalFee {
   bankAccount       BankAccount        @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
   paymentGroupItems PaymentGroupItem[]
   paymentLines      PaymentLine[]
+  caseRequestFees   CaseRequestFee[]
   description       String?
   isActive      Boolean           @default(true)
   amount        Decimal           @db.Decimal(18, 0)
@@ -1219,6 +1221,7 @@ model CaseRequest {
   replacedPremise CasePremiseHistory?
   auction       CaseAuction?
   payments      Payment[]
+  finance       CaseRequestFinance?
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
 
@@ -1228,6 +1231,37 @@ model CaseRequest {
   @@index([formationStep])
   @@index([createdAt])
   @@map("case_requests")
+}
+
+/// حساب و هزینه‌های همین درخواست. با اولین باز شدن از تنظیمات مالی همان نوع درخواست پر می‌شود.
+model CaseRequestFinance {
+  requestId     String           @id
+  request       CaseRequest      @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  bankAccountId String
+  bankAccount   BankAccount      @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  fees          CaseRequestFee[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  @@index([bankAccountId])
+  @@map("case_request_finances")
+}
+
+/// مبلغ این هزینه برای همین درخواست؛ با تغییر مبلغ پایهٔ هزینه عوض نمی‌شود
+model CaseRequestFee {
+  id             String             @id @default(uuid())
+  requestId      String
+  finance        CaseRequestFinance @relation(fields: [requestId], references: [requestId], onDelete: Cascade)
+  municipalFeeId String
+  municipalFee   MunicipalFee       @relation(fields: [municipalFeeId], references: [id], onDelete: Restrict)
+  title          String
+  amount         Decimal            @db.Decimal(18, 0)
+  sortOrder      Int                @default(0)
+  createdAt      DateTime           @default(now())
+
+  @@unique([requestId, municipalFeeId])
+  @@index([municipalFeeId])
+  @@map("case_request_fees")
 }
 
 /// تغییر وضعیت درخواست

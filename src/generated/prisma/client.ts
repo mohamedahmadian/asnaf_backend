@@ -256,6 +256,16 @@ export type CaseSuspensionFile = Prisma.CaseSuspensionFileModel
  */
 export type CaseRequest = Prisma.CaseRequestModel
 /**
+ * Model CaseRequestFinance
+ * حساب و هزینه‌های همین درخواست. با اولین باز شدن از تنظیمات مالی همان نوع درخواست پر می‌شود.
+ */
+export type CaseRequestFinance = Prisma.CaseRequestFinanceModel
+/**
+ * Model CaseRequestFee
+ * مبلغ این هزینه برای همین درخواست؛ با تغییر مبلغ پایهٔ هزینه عوض نمی‌شود
+ */
+export type CaseRequestFee = Prisma.CaseRequestFeeModel
+/**
  * Model CaseRequestEvent
  * تغییر وضعیت درخواست
  */

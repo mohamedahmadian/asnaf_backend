@@ -6,6 +6,7 @@ import { PermissionsGuard } from './access/permissions.guard';
 import { AuthModule } from './auth/auth.module';
 import { JwtUserGuard } from './auth/jwt-user.guard';
 import { BankAccountsModule } from './bank-accounts/bank-accounts.module';
+import { CaseFinanceModule } from './case-finance/case-finance.module';
 import { CasesModule } from './cases/cases.module';
 import { CommercialComplexesModule } from './commercial-complexes/commercial-complexes.module';
 import { DiscountsModule } from './discounts/discounts.module';
@@ -40,6 +41,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     GeoModule,
     BankAccountsModule,
     CasesModule,
+    CaseFinanceModule,
     MunicipalFeesModule,
     DiscountsModule,
     FinancialSettingsModule,

@@ -76,6 +76,10 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/discounts', permissions: ['finance.discounts'] },
   { prefix: '/financial-settings', permissions: ['finance.settings'] },
   {
+    prefix: '/case-finance',
+    permissions: ['cases.management', 'cases.formation', 'finance.payments'],
+  },
+  {
     prefix: '/payment-groups',
     permissions: ['finance.payments', 'finance.payment-history'],
   },

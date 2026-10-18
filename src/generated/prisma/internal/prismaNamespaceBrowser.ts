@@ -94,6 +94,8 @@ export const ModelName = {
   CaseSuspension: 'CaseSuspension',
   CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
+  CaseRequestFinance: 'CaseRequestFinance',
+  CaseRequestFee: 'CaseRequestFee',
   CaseRequestEvent: 'CaseRequestEvent',
   CaseRenewalTerms: 'CaseRenewalTerms',
   CaseLocationDraft: 'CaseLocationDraft',
@@ -850,6 +852,29 @@ export const CaseRequestScalarFieldEnum = {
 } as const
 
 export type CaseRequestScalarFieldEnum = (typeof CaseRequestScalarFieldEnum)[keyof typeof CaseRequestScalarFieldEnum]
+
+
+export const CaseRequestFinanceScalarFieldEnum = {
+  requestId: 'requestId',
+  bankAccountId: 'bankAccountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRequestFinanceScalarFieldEnum = (typeof CaseRequestFinanceScalarFieldEnum)[keyof typeof CaseRequestFinanceScalarFieldEnum]
+
+
+export const CaseRequestFeeScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  municipalFeeId: 'municipalFeeId',
+  title: 'title',
+  amount: 'amount',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseRequestFeeScalarFieldEnum = (typeof CaseRequestFeeScalarFieldEnum)[keyof typeof CaseRequestFeeScalarFieldEnum]
 
 
 export const CaseRequestEventScalarFieldEnum = {

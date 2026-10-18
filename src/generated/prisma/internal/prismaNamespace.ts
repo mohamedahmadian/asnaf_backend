@@ -440,6 +440,8 @@ export const ModelName = {
   CaseSuspension: 'CaseSuspension',
   CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
+  CaseRequestFinance: 'CaseRequestFinance',
+  CaseRequestFee: 'CaseRequestFee',
   CaseRequestEvent: 'CaseRequestEvent',
   CaseRenewalTerms: 'CaseRenewalTerms',
   CaseLocationDraft: 'CaseLocationDraft',
@@ -524,7 +526,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestFinance" | "caseRequestFee" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3707,6 +3709,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseRequestCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseRequestFinance: {
+      payload: Prisma.$CaseRequestFinancePayload<ExtArgs>
+      fields: Prisma.CaseRequestFinanceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseRequestFinanceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseRequestFinanceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>
+        }
+        findFirst: {
+          args: Prisma.CaseRequestFinanceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseRequestFinanceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>
+        }
+        findMany: {
+          args: Prisma.CaseRequestFinanceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>[]
+        }
+        create: {
+          args: Prisma.CaseRequestFinanceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>
+        }
+        createMany: {
+          args: Prisma.CaseRequestFinanceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseRequestFinanceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>[]
+        }
+        delete: {
+          args: Prisma.CaseRequestFinanceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>
+        }
+        update: {
+          args: Prisma.CaseRequestFinanceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseRequestFinanceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseRequestFinanceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseRequestFinanceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseRequestFinanceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFinancePayload>
+        }
+        aggregate: {
+          args: Prisma.CaseRequestFinanceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseRequestFinance>
+        }
+        groupBy: {
+          args: Prisma.CaseRequestFinanceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRequestFinanceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseRequestFinanceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRequestFinanceCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseRequestFee: {
+      payload: Prisma.$CaseRequestFeePayload<ExtArgs>
+      fields: Prisma.CaseRequestFeeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseRequestFeeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseRequestFeeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>
+        }
+        findFirst: {
+          args: Prisma.CaseRequestFeeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseRequestFeeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>
+        }
+        findMany: {
+          args: Prisma.CaseRequestFeeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>[]
+        }
+        create: {
+          args: Prisma.CaseRequestFeeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>
+        }
+        createMany: {
+          args: Prisma.CaseRequestFeeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseRequestFeeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>[]
+        }
+        delete: {
+          args: Prisma.CaseRequestFeeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>
+        }
+        update: {
+          args: Prisma.CaseRequestFeeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseRequestFeeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseRequestFeeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseRequestFeeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseRequestFeeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRequestFeePayload>
+        }
+        aggregate: {
+          args: Prisma.CaseRequestFeeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseRequestFee>
+        }
+        groupBy: {
+          args: Prisma.CaseRequestFeeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRequestFeeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseRequestFeeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRequestFeeCountAggregateOutputType> | number
         }
       }
     }
@@ -9526,6 +9676,29 @@ export const CaseRequestScalarFieldEnum = {
 export type CaseRequestScalarFieldEnum = (typeof CaseRequestScalarFieldEnum)[keyof typeof CaseRequestScalarFieldEnum]
 
 
+export const CaseRequestFinanceScalarFieldEnum = {
+  requestId: 'requestId',
+  bankAccountId: 'bankAccountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRequestFinanceScalarFieldEnum = (typeof CaseRequestFinanceScalarFieldEnum)[keyof typeof CaseRequestFinanceScalarFieldEnum]
+
+
+export const CaseRequestFeeScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  municipalFeeId: 'municipalFeeId',
+  title: 'title',
+  amount: 'amount',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseRequestFeeScalarFieldEnum = (typeof CaseRequestFeeScalarFieldEnum)[keyof typeof CaseRequestFeeScalarFieldEnum]
+
+
 export const CaseRequestEventScalarFieldEnum = {
   id: 'id',
   requestId: 'requestId',
@@ -11630,6 +11803,8 @@ export type GlobalOmitConfig = {
   caseSuspension?: Prisma.CaseSuspensionOmit
   caseSuspensionFile?: Prisma.CaseSuspensionFileOmit
   caseRequest?: Prisma.CaseRequestOmit
+  caseRequestFinance?: Prisma.CaseRequestFinanceOmit
+  caseRequestFee?: Prisma.CaseRequestFeeOmit
   caseRequestEvent?: Prisma.CaseRequestEventOmit
   caseRenewalTerms?: Prisma.CaseRenewalTermsOmit
   caseLocationDraft?: Prisma.CaseLocationDraftOmit

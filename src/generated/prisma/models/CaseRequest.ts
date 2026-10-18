@@ -260,6 +260,7 @@ export type CaseRequestWhereInput = {
   replacedPremise?: Prisma.XOR<Prisma.CasePremiseHistoryNullableScalarRelationFilter, Prisma.CasePremiseHistoryWhereInput> | null
   auction?: Prisma.XOR<Prisma.CaseAuctionNullableScalarRelationFilter, Prisma.CaseAuctionWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
+  finance?: Prisma.XOR<Prisma.CaseRequestFinanceNullableScalarRelationFilter, Prisma.CaseRequestFinanceWhereInput> | null
 }
 
 export type CaseRequestOrderByWithRelationInput = {
@@ -283,6 +284,7 @@ export type CaseRequestOrderByWithRelationInput = {
   replacedPremise?: Prisma.CasePremiseHistoryOrderByWithRelationInput
   auction?: Prisma.CaseAuctionOrderByWithRelationInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  finance?: Prisma.CaseRequestFinanceOrderByWithRelationInput
 }
 
 export type CaseRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -309,6 +311,7 @@ export type CaseRequestWhereUniqueInput = Prisma.AtLeast<{
   replacedPremise?: Prisma.XOR<Prisma.CasePremiseHistoryNullableScalarRelationFilter, Prisma.CasePremiseHistoryWhereInput> | null
   auction?: Prisma.XOR<Prisma.CaseAuctionNullableScalarRelationFilter, Prisma.CaseAuctionWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
+  finance?: Prisma.XOR<Prisma.CaseRequestFinanceNullableScalarRelationFilter, Prisma.CaseRequestFinanceWhereInput> | null
 }, "id" | "number">
 
 export type CaseRequestOrderByWithAggregationInput = {
@@ -363,6 +366,7 @@ export type CaseRequestCreateInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateInput = {
@@ -385,6 +389,7 @@ export type CaseRequestUncheckedCreateInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUpdateInput = {
@@ -407,6 +412,7 @@ export type CaseRequestUpdateInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateInput = {
@@ -429,6 +435,7 @@ export type CaseRequestUncheckedUpdateInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateManyInput = {
@@ -634,6 +641,20 @@ export type EnumCaseRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.CaseRequestStatus
 }
 
+export type CaseRequestCreateNestedOneWithoutFinanceInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutFinanceInput, Prisma.CaseRequestUncheckedCreateWithoutFinanceInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutFinanceInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutFinanceNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutFinanceInput, Prisma.CaseRequestUncheckedCreateWithoutFinanceInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutFinanceInput
+  upsert?: Prisma.CaseRequestUpsertWithoutFinanceInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutFinanceInput, Prisma.CaseRequestUpdateWithoutFinanceInput>, Prisma.CaseRequestUncheckedUpdateWithoutFinanceInput>
+}
+
 export type CaseRequestCreateNestedOneWithoutEventsInput = {
   create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutEventsInput, Prisma.CaseRequestUncheckedCreateWithoutEventsInput>
   connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutEventsInput
@@ -739,6 +760,7 @@ export type CaseRequestCreateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutPaymentsInput = {
@@ -760,6 +782,7 @@ export type CaseRequestUncheckedCreateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutPaymentsInput = {
@@ -797,6 +820,7 @@ export type CaseRequestUpdateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutPaymentsInput = {
@@ -818,6 +842,7 @@ export type CaseRequestUncheckedUpdateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutInquiriesInput = {
@@ -839,6 +864,7 @@ export type CaseRequestCreateWithoutInquiriesInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutInquiriesInput = {
@@ -860,6 +886,7 @@ export type CaseRequestUncheckedCreateWithoutInquiriesInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutInquiriesInput = {
@@ -897,6 +924,7 @@ export type CaseRequestUpdateWithoutInquiriesInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutInquiriesInput = {
@@ -918,6 +946,7 @@ export type CaseRequestUncheckedUpdateWithoutInquiriesInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutPlacesReviewInput = {
@@ -939,6 +968,7 @@ export type CaseRequestCreateWithoutPlacesReviewInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutPlacesReviewInput = {
@@ -960,6 +990,7 @@ export type CaseRequestUncheckedCreateWithoutPlacesReviewInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutPlacesReviewInput = {
@@ -997,6 +1028,7 @@ export type CaseRequestUpdateWithoutPlacesReviewInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutPlacesReviewInput = {
@@ -1018,6 +1050,7 @@ export type CaseRequestUncheckedUpdateWithoutPlacesReviewInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutManagementReviewsInput = {
@@ -1039,6 +1072,7 @@ export type CaseRequestCreateWithoutManagementReviewsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutManagementReviewsInput = {
@@ -1060,6 +1094,7 @@ export type CaseRequestUncheckedCreateWithoutManagementReviewsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutManagementReviewsInput = {
@@ -1097,6 +1132,7 @@ export type CaseRequestUpdateWithoutManagementReviewsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutManagementReviewsInput = {
@@ -1118,6 +1154,7 @@ export type CaseRequestUncheckedUpdateWithoutManagementReviewsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutCaseFileInput = {
@@ -1139,6 +1176,7 @@ export type CaseRequestCreateWithoutCaseFileInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutCaseFileInput = {
@@ -1160,6 +1198,7 @@ export type CaseRequestUncheckedCreateWithoutCaseFileInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutCaseFileInput = {
@@ -1203,6 +1242,110 @@ export type CaseRequestScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
 }
 
+export type CaseRequestCreateWithoutFinanceInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutFinanceInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutFinanceInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutFinanceInput, Prisma.CaseRequestUncheckedCreateWithoutFinanceInput>
+}
+
+export type CaseRequestUpsertWithoutFinanceInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutFinanceInput, Prisma.CaseRequestUncheckedUpdateWithoutFinanceInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutFinanceInput, Prisma.CaseRequestUncheckedCreateWithoutFinanceInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutFinanceInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutFinanceInput, Prisma.CaseRequestUncheckedUpdateWithoutFinanceInput>
+}
+
+export type CaseRequestUpdateWithoutFinanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutFinanceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+}
+
 export type CaseRequestCreateWithoutEventsInput = {
   id?: string
   type: $Enums.CaseRequestType
@@ -1222,6 +1365,7 @@ export type CaseRequestCreateWithoutEventsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutEventsInput = {
@@ -1243,6 +1387,7 @@ export type CaseRequestUncheckedCreateWithoutEventsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutEventsInput = {
@@ -1280,6 +1425,7 @@ export type CaseRequestUpdateWithoutEventsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutEventsInput = {
@@ -1301,6 +1447,7 @@ export type CaseRequestUncheckedUpdateWithoutEventsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutRenewalTermsInput = {
@@ -1322,6 +1469,7 @@ export type CaseRequestCreateWithoutRenewalTermsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutRenewalTermsInput = {
@@ -1343,6 +1491,7 @@ export type CaseRequestUncheckedCreateWithoutRenewalTermsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutRenewalTermsInput = {
@@ -1380,6 +1529,7 @@ export type CaseRequestUpdateWithoutRenewalTermsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutRenewalTermsInput = {
@@ -1401,6 +1551,7 @@ export type CaseRequestUncheckedUpdateWithoutRenewalTermsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutLocationDraftInput = {
@@ -1422,6 +1573,7 @@ export type CaseRequestCreateWithoutLocationDraftInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutLocationDraftInput = {
@@ -1443,6 +1595,7 @@ export type CaseRequestUncheckedCreateWithoutLocationDraftInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutLocationDraftInput = {
@@ -1480,6 +1633,7 @@ export type CaseRequestUpdateWithoutLocationDraftInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutLocationDraftInput = {
@@ -1501,6 +1655,7 @@ export type CaseRequestUncheckedUpdateWithoutLocationDraftInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutReplacedPremiseInput = {
@@ -1522,6 +1677,7 @@ export type CaseRequestCreateWithoutReplacedPremiseInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutReplacedPremiseInput = {
@@ -1543,6 +1699,7 @@ export type CaseRequestUncheckedCreateWithoutReplacedPremiseInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutReplacedPremiseInput = {
@@ -1580,6 +1737,7 @@ export type CaseRequestUpdateWithoutReplacedPremiseInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutReplacedPremiseInput = {
@@ -1601,6 +1759,7 @@ export type CaseRequestUncheckedUpdateWithoutReplacedPremiseInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutAuctionInput = {
@@ -1622,6 +1781,7 @@ export type CaseRequestCreateWithoutAuctionInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutAuctionInput = {
@@ -1643,6 +1803,7 @@ export type CaseRequestUncheckedCreateWithoutAuctionInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutAuctionInput = {
@@ -1680,6 +1841,7 @@ export type CaseRequestUpdateWithoutAuctionInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutAuctionInput = {
@@ -1701,6 +1863,7 @@ export type CaseRequestUncheckedUpdateWithoutAuctionInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateWithoutActivityDocumentsInput = {
@@ -1722,6 +1885,7 @@ export type CaseRequestCreateWithoutActivityDocumentsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestUncheckedCreateWithoutActivityDocumentsInput = {
@@ -1743,6 +1907,7 @@ export type CaseRequestUncheckedCreateWithoutActivityDocumentsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
 export type CaseRequestCreateOrConnectWithoutActivityDocumentsInput = {
@@ -1780,6 +1945,7 @@ export type CaseRequestUpdateWithoutActivityDocumentsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutActivityDocumentsInput = {
@@ -1801,6 +1967,7 @@ export type CaseRequestUncheckedUpdateWithoutActivityDocumentsInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestCreateManyCaseFileInput = {
@@ -1833,6 +2000,7 @@ export type CaseRequestUpdateWithoutCaseFileInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateWithoutCaseFileInput = {
@@ -1854,6 +2022,7 @@ export type CaseRequestUncheckedUpdateWithoutCaseFileInput = {
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
 export type CaseRequestUncheckedUpdateManyWithoutCaseFileInput = {
@@ -1955,6 +2124,7 @@ export type CaseRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   replacedPremise?: boolean | Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>
   auction?: boolean | Prisma.CaseRequest$auctionArgs<ExtArgs>
   payments?: boolean | Prisma.CaseRequest$paymentsArgs<ExtArgs>
+  finance?: boolean | Prisma.CaseRequest$financeArgs<ExtArgs>
   _count?: boolean | Prisma.CaseRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseRequest"]>
 
@@ -2009,6 +2179,7 @@ export type CaseRequestInclude<ExtArgs extends runtime.Types.Extensions.Internal
   replacedPremise?: boolean | Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>
   auction?: boolean | Prisma.CaseRequest$auctionArgs<ExtArgs>
   payments?: boolean | Prisma.CaseRequest$paymentsArgs<ExtArgs>
+  finance?: boolean | Prisma.CaseRequest$financeArgs<ExtArgs>
   _count?: boolean | Prisma.CaseRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2032,6 +2203,7 @@ export type $CaseRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
     replacedPremise: Prisma.$CasePremiseHistoryPayload<ExtArgs> | null
     auction: Prisma.$CaseAuctionPayload<ExtArgs> | null
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    finance: Prisma.$CaseRequestFinancePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2451,6 +2623,7 @@ export interface Prisma__CaseRequestClient<T, Null = never, ExtArgs extends runt
   replacedPremise<T extends Prisma.CaseRequest$replacedPremiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>>): Prisma.Prisma__CasePremiseHistoryClient<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   auction<T extends Prisma.CaseRequest$auctionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$auctionArgs<ExtArgs>>): Prisma.Prisma__CaseAuctionClient<runtime.Types.Result.GetResult<Prisma.$CaseAuctionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.CaseRequest$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  finance<T extends Prisma.CaseRequest$financeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$financeArgs<ExtArgs>>): Prisma.Prisma__CaseRequestFinanceClient<runtime.Types.Result.GetResult<Prisma.$CaseRequestFinancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3102,6 +3275,25 @@ export type CaseRequest$paymentsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * CaseRequest.finance
+ */
+export type CaseRequest$financeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRequestFinance
+   */
+  select?: Prisma.CaseRequestFinanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRequestFinance
+   */
+  omit?: Prisma.CaseRequestFinanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRequestFinanceInclude<ExtArgs> | null
+  where?: Prisma.CaseRequestFinanceWhereInput
 }
 
 /**

@@ -13,6 +13,7 @@ import {
 } from '../common/pagination';
 import { resolveSortOrder } from '../common/sort-query';
 import { PersonType, Prisma } from '../generated/prisma/client';
+import { requestFeeStatuses } from '../case-finance/request-fee-status';
 import { ImagesService } from '../images/images.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { parseDateOnly } from '../violations/calendar';
@@ -114,9 +115,8 @@ export class PaymentsService {
           select: {
             ...caseSelect,
             requests: {
-              where: { status: 'OPEN' },
               orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
-              select: { id: true, number: true, type: true },
+              select: { id: true, number: true, type: true, status: true },
             },
           },
         },
@@ -136,7 +136,7 @@ export class PaymentsService {
           ? []
           : person.caseFiles.map(({ requests, ...file }) => ({
               ...mapCaseFile(file),
-              openRequests: requests,
+              requests,
             })),
     }));
   }
@@ -205,6 +205,17 @@ export class PaymentsService {
     }
 
     const source = await this.resolveSource(dto.paymentGroupId ?? null, dto.bankAccountId);
+    if (caseRequestId) {
+      const requestFees = await this.prisma.caseRequestFee.findMany({
+        where: { requestId: caseRequestId, finance: { bankAccountId: source.bankAccountId } },
+        select: { municipalFeeId: true },
+      });
+      for (const fee of requestFees) source.allowedFeeIds.add(fee.municipalFeeId);
+      const statuses = await requestFeeStatuses(this.prisma, caseRequestId);
+      if (feeIds.some((feeId) => statuses.has(feeId))) {
+        throw new BadRequestException('برخی هزینه‌ها برای این درخواست قبلاً پرداخت شده یا در انتظار پرداخت است');
+      }
+    }
     for (const feeId of feeIds) {
       if (!source.allowedFeeIds.has(feeId)) {
         throw new BadRequestException('هزینه در این پرداخت مجاز نیست');
@@ -229,6 +240,11 @@ export class PaymentsService {
     const finalAmount = subtotal - dto.discountAmount;
 
     const isOnline = dto.method === 'ONLINE';
+    if (!isOnline && finalAmount > 0 && !dto.trackingCode) {
+      throw new BadRequestException(
+        dto.method === 'POS' ? 'شماره پیگیری کارت‌خوان را وارد کنید' : 'شماره فیش بانکی را وارد کنید',
+      );
+    }
     if (isOnline && finalAmount < MIN_ONLINE_AMOUNT) {
       throw new BadRequestException('مبلغ پرداخت آنلاین باید حداقل ۱٬۰۰۰ ریال باشد');
     }
@@ -546,6 +562,13 @@ export class PaymentsService {
             lt: toStart ? new Date(toStart.getTime() + 24 * 60 * 60 * 1000) : undefined,
           }
         : undefined;
+    if (query.minAmount && query.maxAmount && BigInt(query.minAmount) > BigInt(query.maxAmount)) {
+      throw new BadRequestException('بازه مبلغ نامعتبر است');
+    }
+    const finalAmount =
+      query.minAmount || query.maxAmount
+        ? { gte: query.minAmount, lte: query.maxAmount }
+        : undefined;
     const deletedAt =
       query.deleted === 'only' ? { not: null } : query.deleted === 'true' ? undefined : null;
     return {
@@ -555,6 +578,7 @@ export class PaymentsService {
       status: query.status,
       deletedAt,
       paidAt,
+      finalAmount,
       OR: this.searchFilter(query.q),
     };
   }

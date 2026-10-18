@@ -53,6 +53,16 @@ export class FindPaymentsQueryDto extends PaginationQueryDto {
 
   @IsOptional()
   @Transform(({ value }) => emptyToUndefined(value))
+  @Matches(/^\d{1,15}$/)
+  minAmount?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
+  @Matches(/^\d{1,15}$/)
+  maxAmount?: string;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToUndefined(value))
   @IsIn([...paymentMethods])
   method?: (typeof paymentMethods)[number];
 

@@ -82,9 +82,10 @@ export class CreatePaymentDto {
   @IsIn([...onlineChannels])
   onlineChannel?: (typeof onlineChannels)[number];
 
-  @ValidateIf((dto: CreatePaymentDto) => dto.method !== 'ONLINE')
+  /** برای پرداخت غیرآنلاین با مبلغ نهایی بیشتر از صفر اجباری است (در سرویس بررسی می‌شود) */
+  @ValidateIf((dto: CreatePaymentDto) => dto.method !== 'ONLINE' && dto.trackingCode != null)
   @Transform(({ value }) => {
-    const trimmed = trimString(value);
+    const trimmed = emptyToNull(trimString(value));
     return typeof trimmed === 'string' ? toLatinDigits(trimmed) : trimmed;
   })
   @IsString()

@@ -247,6 +247,7 @@ export type MunicipalFeeWhereInput = {
   bankAccount?: Prisma.XOR<Prisma.BankAccountScalarRelationFilter, Prisma.BankAccountWhereInput>
   paymentGroupItems?: Prisma.PaymentGroupItemListRelationFilter
   paymentLines?: Prisma.PaymentLineListRelationFilter
+  caseRequestFees?: Prisma.CaseRequestFeeListRelationFilter
 }
 
 export type MunicipalFeeOrderByWithRelationInput = {
@@ -262,6 +263,7 @@ export type MunicipalFeeOrderByWithRelationInput = {
   bankAccount?: Prisma.BankAccountOrderByWithRelationInput
   paymentGroupItems?: Prisma.PaymentGroupItemOrderByRelationAggregateInput
   paymentLines?: Prisma.PaymentLineOrderByRelationAggregateInput
+  caseRequestFees?: Prisma.CaseRequestFeeOrderByRelationAggregateInput
 }
 
 export type MunicipalFeeWhereUniqueInput = Prisma.AtLeast<{
@@ -280,6 +282,7 @@ export type MunicipalFeeWhereUniqueInput = Prisma.AtLeast<{
   bankAccount?: Prisma.XOR<Prisma.BankAccountScalarRelationFilter, Prisma.BankAccountWhereInput>
   paymentGroupItems?: Prisma.PaymentGroupItemListRelationFilter
   paymentLines?: Prisma.PaymentLineListRelationFilter
+  caseRequestFees?: Prisma.CaseRequestFeeListRelationFilter
 }, "id" | "title">
 
 export type MunicipalFeeOrderByWithAggregationInput = {
@@ -326,6 +329,7 @@ export type MunicipalFeeCreateInput = {
   bankAccount: Prisma.BankAccountCreateNestedOneWithoutMunicipalFeesInput
   paymentGroupItems?: Prisma.PaymentGroupItemCreateNestedManyWithoutMunicipalFeeInput
   paymentLines?: Prisma.PaymentLineCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeUncheckedCreateInput = {
@@ -340,6 +344,7 @@ export type MunicipalFeeUncheckedCreateInput = {
   updatedAt?: Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemUncheckedCreateNestedManyWithoutMunicipalFeeInput
   paymentLines?: Prisma.PaymentLineUncheckedCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeUpdateInput = {
@@ -354,6 +359,7 @@ export type MunicipalFeeUpdateInput = {
   bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutMunicipalFeesNestedInput
   paymentGroupItems?: Prisma.PaymentGroupItemUpdateManyWithoutMunicipalFeeNestedInput
   paymentLines?: Prisma.PaymentLineUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeUncheckedUpdateInput = {
@@ -368,6 +374,7 @@ export type MunicipalFeeUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemUncheckedUpdateManyWithoutMunicipalFeeNestedInput
   paymentLines?: Prisma.PaymentLineUncheckedUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeCreateManyInput = {
@@ -564,6 +571,20 @@ export type MunicipalFeeUpdateOneWithoutPaymentLinesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MunicipalFeeUpdateToOneWithWhereWithoutPaymentLinesInput, Prisma.MunicipalFeeUpdateWithoutPaymentLinesInput>, Prisma.MunicipalFeeUncheckedUpdateWithoutPaymentLinesInput>
 }
 
+export type MunicipalFeeCreateNestedOneWithoutCaseRequestFeesInput = {
+  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutCaseRequestFeesInput, Prisma.MunicipalFeeUncheckedCreateWithoutCaseRequestFeesInput>
+  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutCaseRequestFeesInput
+  connect?: Prisma.MunicipalFeeWhereUniqueInput
+}
+
+export type MunicipalFeeUpdateOneRequiredWithoutCaseRequestFeesNestedInput = {
+  create?: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutCaseRequestFeesInput, Prisma.MunicipalFeeUncheckedCreateWithoutCaseRequestFeesInput>
+  connectOrCreate?: Prisma.MunicipalFeeCreateOrConnectWithoutCaseRequestFeesInput
+  upsert?: Prisma.MunicipalFeeUpsertWithoutCaseRequestFeesInput
+  connect?: Prisma.MunicipalFeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MunicipalFeeUpdateToOneWithWhereWithoutCaseRequestFeesInput, Prisma.MunicipalFeeUpdateWithoutCaseRequestFeesInput>, Prisma.MunicipalFeeUncheckedUpdateWithoutCaseRequestFeesInput>
+}
+
 export type MunicipalFeeCreateWithoutBankAccountInput = {
   id?: string
   title: string
@@ -575,6 +596,7 @@ export type MunicipalFeeCreateWithoutBankAccountInput = {
   updatedAt?: Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemCreateNestedManyWithoutMunicipalFeeInput
   paymentLines?: Prisma.PaymentLineCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeUncheckedCreateWithoutBankAccountInput = {
@@ -588,6 +610,7 @@ export type MunicipalFeeUncheckedCreateWithoutBankAccountInput = {
   updatedAt?: Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemUncheckedCreateNestedManyWithoutMunicipalFeeInput
   paymentLines?: Prisma.PaymentLineUncheckedCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeCreateOrConnectWithoutBankAccountInput = {
@@ -642,6 +665,7 @@ export type MunicipalFeeCreateWithoutPaymentGroupItemsInput = {
   updatedAt?: Date | string
   bankAccount: Prisma.BankAccountCreateNestedOneWithoutMunicipalFeesInput
   paymentLines?: Prisma.PaymentLineCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeUncheckedCreateWithoutPaymentGroupItemsInput = {
@@ -655,6 +679,7 @@ export type MunicipalFeeUncheckedCreateWithoutPaymentGroupItemsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   paymentLines?: Prisma.PaymentLineUncheckedCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeCreateOrConnectWithoutPaymentGroupItemsInput = {
@@ -684,6 +709,7 @@ export type MunicipalFeeUpdateWithoutPaymentGroupItemsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutMunicipalFeesNestedInput
   paymentLines?: Prisma.PaymentLineUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeUncheckedUpdateWithoutPaymentGroupItemsInput = {
@@ -697,6 +723,7 @@ export type MunicipalFeeUncheckedUpdateWithoutPaymentGroupItemsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentLines?: Prisma.PaymentLineUncheckedUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeCreateWithoutPaymentLinesInput = {
@@ -710,6 +737,7 @@ export type MunicipalFeeCreateWithoutPaymentLinesInput = {
   updatedAt?: Date | string
   bankAccount: Prisma.BankAccountCreateNestedOneWithoutMunicipalFeesInput
   paymentGroupItems?: Prisma.PaymentGroupItemCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeUncheckedCreateWithoutPaymentLinesInput = {
@@ -723,6 +751,7 @@ export type MunicipalFeeUncheckedCreateWithoutPaymentLinesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemUncheckedCreateNestedManyWithoutMunicipalFeeInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedCreateNestedManyWithoutMunicipalFeeInput
 }
 
 export type MunicipalFeeCreateOrConnectWithoutPaymentLinesInput = {
@@ -752,6 +781,7 @@ export type MunicipalFeeUpdateWithoutPaymentLinesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutMunicipalFeesNestedInput
   paymentGroupItems?: Prisma.PaymentGroupItemUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeUncheckedUpdateWithoutPaymentLinesInput = {
@@ -765,6 +795,79 @@ export type MunicipalFeeUncheckedUpdateWithoutPaymentLinesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemUncheckedUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedUpdateManyWithoutMunicipalFeeNestedInput
+}
+
+export type MunicipalFeeCreateWithoutCaseRequestFeesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bankAccount: Prisma.BankAccountCreateNestedOneWithoutMunicipalFeesInput
+  paymentGroupItems?: Prisma.PaymentGroupItemCreateNestedManyWithoutMunicipalFeeInput
+  paymentLines?: Prisma.PaymentLineCreateNestedManyWithoutMunicipalFeeInput
+}
+
+export type MunicipalFeeUncheckedCreateWithoutCaseRequestFeesInput = {
+  id?: string
+  title: string
+  bankAccountId: string
+  description?: string | null
+  isActive?: boolean
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  paymentGroupItems?: Prisma.PaymentGroupItemUncheckedCreateNestedManyWithoutMunicipalFeeInput
+  paymentLines?: Prisma.PaymentLineUncheckedCreateNestedManyWithoutMunicipalFeeInput
+}
+
+export type MunicipalFeeCreateOrConnectWithoutCaseRequestFeesInput = {
+  where: Prisma.MunicipalFeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutCaseRequestFeesInput, Prisma.MunicipalFeeUncheckedCreateWithoutCaseRequestFeesInput>
+}
+
+export type MunicipalFeeUpsertWithoutCaseRequestFeesInput = {
+  update: Prisma.XOR<Prisma.MunicipalFeeUpdateWithoutCaseRequestFeesInput, Prisma.MunicipalFeeUncheckedUpdateWithoutCaseRequestFeesInput>
+  create: Prisma.XOR<Prisma.MunicipalFeeCreateWithoutCaseRequestFeesInput, Prisma.MunicipalFeeUncheckedCreateWithoutCaseRequestFeesInput>
+  where?: Prisma.MunicipalFeeWhereInput
+}
+
+export type MunicipalFeeUpdateToOneWithWhereWithoutCaseRequestFeesInput = {
+  where?: Prisma.MunicipalFeeWhereInput
+  data: Prisma.XOR<Prisma.MunicipalFeeUpdateWithoutCaseRequestFeesInput, Prisma.MunicipalFeeUncheckedUpdateWithoutCaseRequestFeesInput>
+}
+
+export type MunicipalFeeUpdateWithoutCaseRequestFeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutMunicipalFeesNestedInput
+  paymentGroupItems?: Prisma.PaymentGroupItemUpdateManyWithoutMunicipalFeeNestedInput
+  paymentLines?: Prisma.PaymentLineUpdateManyWithoutMunicipalFeeNestedInput
+}
+
+export type MunicipalFeeUncheckedUpdateWithoutCaseRequestFeesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  bankAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  paymentGroupItems?: Prisma.PaymentGroupItemUncheckedUpdateManyWithoutMunicipalFeeNestedInput
+  paymentLines?: Prisma.PaymentLineUncheckedUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeCreateManyBankAccountInput = {
@@ -789,6 +892,7 @@ export type MunicipalFeeUpdateWithoutBankAccountInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemUpdateManyWithoutMunicipalFeeNestedInput
   paymentLines?: Prisma.PaymentLineUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeUncheckedUpdateWithoutBankAccountInput = {
@@ -802,6 +906,7 @@ export type MunicipalFeeUncheckedUpdateWithoutBankAccountInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentGroupItems?: Prisma.PaymentGroupItemUncheckedUpdateManyWithoutMunicipalFeeNestedInput
   paymentLines?: Prisma.PaymentLineUncheckedUpdateManyWithoutMunicipalFeeNestedInput
+  caseRequestFees?: Prisma.CaseRequestFeeUncheckedUpdateManyWithoutMunicipalFeeNestedInput
 }
 
 export type MunicipalFeeUncheckedUpdateManyWithoutBankAccountInput = {
@@ -823,11 +928,13 @@ export type MunicipalFeeUncheckedUpdateManyWithoutBankAccountInput = {
 export type MunicipalFeeCountOutputType = {
   paymentGroupItems: number
   paymentLines: number
+  caseRequestFees: number
 }
 
 export type MunicipalFeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   paymentGroupItems?: boolean | MunicipalFeeCountOutputTypeCountPaymentGroupItemsArgs
   paymentLines?: boolean | MunicipalFeeCountOutputTypeCountPaymentLinesArgs
+  caseRequestFees?: boolean | MunicipalFeeCountOutputTypeCountCaseRequestFeesArgs
 }
 
 /**
@@ -854,6 +961,13 @@ export type MunicipalFeeCountOutputTypeCountPaymentLinesArgs<ExtArgs extends run
   where?: Prisma.PaymentLineWhereInput
 }
 
+/**
+ * MunicipalFeeCountOutputType without action
+ */
+export type MunicipalFeeCountOutputTypeCountCaseRequestFeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseRequestFeeWhereInput
+}
+
 
 export type MunicipalFeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -868,6 +982,7 @@ export type MunicipalFeeSelect<ExtArgs extends runtime.Types.Extensions.Internal
   bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
   paymentGroupItems?: boolean | Prisma.MunicipalFee$paymentGroupItemsArgs<ExtArgs>
   paymentLines?: boolean | Prisma.MunicipalFee$paymentLinesArgs<ExtArgs>
+  caseRequestFees?: boolean | Prisma.MunicipalFee$caseRequestFeesArgs<ExtArgs>
   _count?: boolean | Prisma.MunicipalFeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["municipalFee"]>
 
@@ -914,6 +1029,7 @@ export type MunicipalFeeInclude<ExtArgs extends runtime.Types.Extensions.Interna
   bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
   paymentGroupItems?: boolean | Prisma.MunicipalFee$paymentGroupItemsArgs<ExtArgs>
   paymentLines?: boolean | Prisma.MunicipalFee$paymentLinesArgs<ExtArgs>
+  caseRequestFees?: boolean | Prisma.MunicipalFee$caseRequestFeesArgs<ExtArgs>
   _count?: boolean | Prisma.MunicipalFeeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MunicipalFeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -929,6 +1045,7 @@ export type $MunicipalFeePayload<ExtArgs extends runtime.Types.Extensions.Intern
     bankAccount: Prisma.$BankAccountPayload<ExtArgs>
     paymentGroupItems: Prisma.$PaymentGroupItemPayload<ExtArgs>[]
     paymentLines: Prisma.$PaymentLinePayload<ExtArgs>[]
+    caseRequestFees: Prisma.$CaseRequestFeePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1337,6 +1454,7 @@ export interface Prisma__MunicipalFeeClient<T, Null = never, ExtArgs extends run
   bankAccount<T extends Prisma.BankAccountDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BankAccountDefaultArgs<ExtArgs>>): Prisma.Prisma__BankAccountClient<runtime.Types.Result.GetResult<Prisma.$BankAccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   paymentGroupItems<T extends Prisma.MunicipalFee$paymentGroupItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MunicipalFee$paymentGroupItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentGroupItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentLines<T extends Prisma.MunicipalFee$paymentLinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MunicipalFee$paymentLinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentLinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  caseRequestFees<T extends Prisma.MunicipalFee$caseRequestFeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MunicipalFee$caseRequestFeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseRequestFeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1821,6 +1939,30 @@ export type MunicipalFee$paymentLinesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.PaymentLineScalarFieldEnum | Prisma.PaymentLineScalarFieldEnum[]
+}
+
+/**
+ * MunicipalFee.caseRequestFees
+ */
+export type MunicipalFee$caseRequestFeesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRequestFee
+   */
+  select?: Prisma.CaseRequestFeeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRequestFee
+   */
+  omit?: Prisma.CaseRequestFeeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRequestFeeInclude<ExtArgs> | null
+  where?: Prisma.CaseRequestFeeWhereInput
+  orderBy?: Prisma.CaseRequestFeeOrderByWithRelationInput | Prisma.CaseRequestFeeOrderByWithRelationInput[]
+  cursor?: Prisma.CaseRequestFeeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseRequestFeeScalarFieldEnum | Prisma.CaseRequestFeeScalarFieldEnum[]
 }
 
 /**
