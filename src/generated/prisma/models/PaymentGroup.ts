@@ -28,6 +28,7 @@ export type PaymentGroupMinAggregateOutputType = {
   id: string | null
   title: string | null
   bankAccountId: string | null
+  isDefault: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -36,6 +37,7 @@ export type PaymentGroupMaxAggregateOutputType = {
   id: string | null
   title: string | null
   bankAccountId: string | null
+  isDefault: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -44,6 +46,7 @@ export type PaymentGroupCountAggregateOutputType = {
   id: number
   title: number
   bankAccountId: number
+  isDefault: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -54,6 +57,7 @@ export type PaymentGroupMinAggregateInputType = {
   id?: true
   title?: true
   bankAccountId?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -62,6 +66,7 @@ export type PaymentGroupMaxAggregateInputType = {
   id?: true
   title?: true
   bankAccountId?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -70,6 +75,7 @@ export type PaymentGroupCountAggregateInputType = {
   id?: true
   title?: true
   bankAccountId?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -151,6 +157,7 @@ export type PaymentGroupGroupByOutputType = {
   id: string
   title: string
   bankAccountId: string
+  isDefault: boolean
   createdAt: Date
   updatedAt: Date
   _count: PaymentGroupCountAggregateOutputType | null
@@ -180,6 +187,7 @@ export type PaymentGroupWhereInput = {
   id?: Prisma.StringFilter<"PaymentGroup"> | string
   title?: Prisma.StringFilter<"PaymentGroup"> | string
   bankAccountId?: Prisma.StringFilter<"PaymentGroup"> | string
+  isDefault?: Prisma.BoolFilter<"PaymentGroup"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PaymentGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PaymentGroup"> | Date | string
   bankAccount?: Prisma.XOR<Prisma.BankAccountScalarRelationFilter, Prisma.BankAccountWhereInput>
@@ -191,6 +199,7 @@ export type PaymentGroupOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   bankAccountId?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   bankAccount?: Prisma.BankAccountOrderByWithRelationInput
@@ -205,6 +214,7 @@ export type PaymentGroupWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PaymentGroupWhereInput | Prisma.PaymentGroupWhereInput[]
   title?: Prisma.StringFilter<"PaymentGroup"> | string
   bankAccountId?: Prisma.StringFilter<"PaymentGroup"> | string
+  isDefault?: Prisma.BoolFilter<"PaymentGroup"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PaymentGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PaymentGroup"> | Date | string
   bankAccount?: Prisma.XOR<Prisma.BankAccountScalarRelationFilter, Prisma.BankAccountWhereInput>
@@ -216,6 +226,7 @@ export type PaymentGroupOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   bankAccountId?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PaymentGroupCountOrderByAggregateInput
@@ -230,6 +241,7 @@ export type PaymentGroupScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"PaymentGroup"> | string
   title?: Prisma.StringWithAggregatesFilter<"PaymentGroup"> | string
   bankAccountId?: Prisma.StringWithAggregatesFilter<"PaymentGroup"> | string
+  isDefault?: Prisma.BoolWithAggregatesFilter<"PaymentGroup"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentGroup"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentGroup"> | Date | string
 }
@@ -237,6 +249,7 @@ export type PaymentGroupScalarWhereWithAggregatesInput = {
 export type PaymentGroupCreateInput = {
   id?: string
   title: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount: Prisma.BankAccountCreateNestedOneWithoutPaymentGroupsInput
@@ -248,6 +261,7 @@ export type PaymentGroupUncheckedCreateInput = {
   id?: string
   title: string
   bankAccountId: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.PaymentGroupItemUncheckedCreateNestedManyWithoutPaymentGroupInput
@@ -257,6 +271,7 @@ export type PaymentGroupUncheckedCreateInput = {
 export type PaymentGroupUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutPaymentGroupsNestedInput
@@ -268,6 +283,7 @@ export type PaymentGroupUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.PaymentGroupItemUncheckedUpdateManyWithoutPaymentGroupNestedInput
@@ -278,6 +294,7 @@ export type PaymentGroupCreateManyInput = {
   id?: string
   title: string
   bankAccountId: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -285,6 +302,7 @@ export type PaymentGroupCreateManyInput = {
 export type PaymentGroupUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -293,6 +311,7 @@ export type PaymentGroupUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -311,6 +330,7 @@ export type PaymentGroupCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   bankAccountId?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -319,6 +339,7 @@ export type PaymentGroupMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   bankAccountId?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -327,6 +348,7 @@ export type PaymentGroupMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   bankAccountId?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -416,6 +438,7 @@ export type PaymentGroupUpdateOneWithoutPaymentsNestedInput = {
 export type PaymentGroupCreateWithoutBankAccountInput = {
   id?: string
   title: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.PaymentGroupItemCreateNestedManyWithoutPaymentGroupInput
@@ -425,6 +448,7 @@ export type PaymentGroupCreateWithoutBankAccountInput = {
 export type PaymentGroupUncheckedCreateWithoutBankAccountInput = {
   id?: string
   title: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.PaymentGroupItemUncheckedCreateNestedManyWithoutPaymentGroupInput
@@ -464,6 +488,7 @@ export type PaymentGroupScalarWhereInput = {
   id?: Prisma.StringFilter<"PaymentGroup"> | string
   title?: Prisma.StringFilter<"PaymentGroup"> | string
   bankAccountId?: Prisma.StringFilter<"PaymentGroup"> | string
+  isDefault?: Prisma.BoolFilter<"PaymentGroup"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PaymentGroup"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"PaymentGroup"> | Date | string
 }
@@ -471,6 +496,7 @@ export type PaymentGroupScalarWhereInput = {
 export type PaymentGroupCreateWithoutItemsInput = {
   id?: string
   title: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount: Prisma.BankAccountCreateNestedOneWithoutPaymentGroupsInput
@@ -481,6 +507,7 @@ export type PaymentGroupUncheckedCreateWithoutItemsInput = {
   id?: string
   title: string
   bankAccountId: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutPaymentGroupInput
@@ -505,6 +532,7 @@ export type PaymentGroupUpdateToOneWithWhereWithoutItemsInput = {
 export type PaymentGroupUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutPaymentGroupsNestedInput
@@ -515,6 +543,7 @@ export type PaymentGroupUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutPaymentGroupNestedInput
@@ -523,6 +552,7 @@ export type PaymentGroupUncheckedUpdateWithoutItemsInput = {
 export type PaymentGroupCreateWithoutPaymentsInput = {
   id?: string
   title: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   bankAccount: Prisma.BankAccountCreateNestedOneWithoutPaymentGroupsInput
@@ -533,6 +563,7 @@ export type PaymentGroupUncheckedCreateWithoutPaymentsInput = {
   id?: string
   title: string
   bankAccountId: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.PaymentGroupItemUncheckedCreateNestedManyWithoutPaymentGroupInput
@@ -557,6 +588,7 @@ export type PaymentGroupUpdateToOneWithWhereWithoutPaymentsInput = {
 export type PaymentGroupUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bankAccount?: Prisma.BankAccountUpdateOneRequiredWithoutPaymentGroupsNestedInput
@@ -567,6 +599,7 @@ export type PaymentGroupUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   bankAccountId?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.PaymentGroupItemUncheckedUpdateManyWithoutPaymentGroupNestedInput
@@ -575,6 +608,7 @@ export type PaymentGroupUncheckedUpdateWithoutPaymentsInput = {
 export type PaymentGroupCreateManyBankAccountInput = {
   id?: string
   title: string
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -582,6 +616,7 @@ export type PaymentGroupCreateManyBankAccountInput = {
 export type PaymentGroupUpdateWithoutBankAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.PaymentGroupItemUpdateManyWithoutPaymentGroupNestedInput
@@ -591,6 +626,7 @@ export type PaymentGroupUpdateWithoutBankAccountInput = {
 export type PaymentGroupUncheckedUpdateWithoutBankAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.PaymentGroupItemUncheckedUpdateManyWithoutPaymentGroupNestedInput
@@ -600,6 +636,7 @@ export type PaymentGroupUncheckedUpdateWithoutBankAccountInput = {
 export type PaymentGroupUncheckedUpdateManyWithoutBankAccountInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -648,6 +685,7 @@ export type PaymentGroupSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   title?: boolean
   bankAccountId?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
@@ -660,6 +698,7 @@ export type PaymentGroupSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   title?: boolean
   bankAccountId?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
@@ -669,6 +708,7 @@ export type PaymentGroupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   title?: boolean
   bankAccountId?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
@@ -678,11 +718,12 @@ export type PaymentGroupSelectScalar = {
   id?: boolean
   title?: boolean
   bankAccountId?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PaymentGroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "bankAccountId" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentGroup"]>
+export type PaymentGroupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "bankAccountId" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentGroup"]>
 export type PaymentGroupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
   items?: boolean | Prisma.PaymentGroup$itemsArgs<ExtArgs>
@@ -707,6 +748,7 @@ export type $PaymentGroupPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: string
     title: string
     bankAccountId: string
+    isDefault: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["paymentGroup"]>
@@ -1138,6 +1180,7 @@ export interface PaymentGroupFieldRefs {
   readonly id: Prisma.FieldRef<"PaymentGroup", 'String'>
   readonly title: Prisma.FieldRef<"PaymentGroup", 'String'>
   readonly bankAccountId: Prisma.FieldRef<"PaymentGroup", 'String'>
+  readonly isDefault: Prisma.FieldRef<"PaymentGroup", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"PaymentGroup", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"PaymentGroup", 'DateTime'>
 }

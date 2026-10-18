@@ -21,6 +21,7 @@ const accountSelect = {
   bankName: true,
   accountNumber: true,
   isActive: true,
+  isDefault: true,
 } satisfies Prisma.BankAccountSelect;
 
 const feeSelect = {
@@ -40,7 +41,12 @@ export class FinancialSettingsService {
     const [accounts, fees, settings] = await Promise.all([
       this.prisma.bankAccount.findMany({
         select: accountSelect,
-        orderBy: [{ bankName: 'asc' }, { accountNumber: 'asc' }, { id: 'asc' }],
+        orderBy: [
+          { isDefault: 'desc' },
+          { bankName: 'asc' },
+          { accountNumber: 'asc' },
+          { id: 'asc' },
+        ],
       }),
       this.prisma.municipalFee.findMany({
         select: feeSelect,

@@ -11,6 +11,7 @@ export const bankAccountSortFields = [
   'iban',
   'paymentId',
   'isActive',
+  'isDefault',
 ] as const;
 
 export class FindBankAccountsQueryDto extends PaginationQueryDto {

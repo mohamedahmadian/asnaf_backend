@@ -21,6 +21,16 @@ export class PaymentGroupsController {
     return this.groups.update(id, dto);
   }
 
+  @Post(':id/default')
+  setDefault(@Param('id') id: string) {
+    return this.groups.setDefault(id);
+  }
+
+  @Delete(':id/default')
+  clearDefault(@Param('id') id: string) {
+    return this.groups.clearDefault(id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.groups.remove(id);

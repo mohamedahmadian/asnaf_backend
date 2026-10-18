@@ -32,11 +32,12 @@ export class PaymentGroupsService {
 
   async findAll() {
     const items = await this.prisma.paymentGroup.findMany({
-      orderBy: [{ title: 'asc' }, { id: 'asc' }],
+      orderBy: [{ isDefault: 'desc' }, { title: 'asc' }, { id: 'asc' }],
       select: {
         id: true,
         title: true,
         bankAccountId: true,
+        isDefault: true,
         createdAt: true,
         updatedAt: true,
         bankAccount: { select: bankAccountSelect },
@@ -98,6 +99,33 @@ export class PaymentGroupsService {
     return { ok: true };
   }
 
+  async setDefault(id: string) {
+    const group = await this.findOne(id);
+    if (group.isDefault) {
+      return group;
+    }
+    await this.prisma.$transaction([
+      this.prisma.paymentGroup.updateMany({
+        where: { isDefault: true, id: { not: id } },
+        data: { isDefault: false },
+      }),
+      this.prisma.paymentGroup.update({
+        where: { id },
+        data: { isDefault: true },
+      }),
+    ]);
+    return this.findOne(id);
+  }
+
+  async clearDefault(id: string) {
+    await this.findOne(id);
+    await this.prisma.paymentGroup.update({
+      where: { id },
+      data: { isDefault: false },
+    });
+    return this.findOne(id);
+  }
+
   private async findOne(id: string) {
     const group = await this.prisma.paymentGroup.findUnique({
       where: { id },
@@ -105,6 +133,7 @@ export class PaymentGroupsService {
         id: true,
         title: true,
         bankAccountId: true,
+        isDefault: true,
         createdAt: true,
         updatedAt: true,
         bankAccount: { select: bankAccountSelect },
@@ -127,6 +156,7 @@ export class PaymentGroupsService {
     id: string;
     title: string;
     bankAccountId: string;
+    isDefault: boolean;
     createdAt: Date;
     updatedAt: Date;
     bankAccount: {
@@ -150,6 +180,7 @@ export class PaymentGroupsService {
       id: group.id,
       title: group.title,
       bankAccountId: group.bankAccountId,
+      isDefault: group.isDefault,
       createdAt: group.createdAt,
       updatedAt: group.updatedAt,
       bankAccount: group.bankAccount,

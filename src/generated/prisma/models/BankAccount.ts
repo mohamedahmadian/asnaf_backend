@@ -33,6 +33,7 @@ export type BankAccountMinAggregateOutputType = {
   paymentId: string | null
   description: string | null
   isActive: boolean | null
+  isDefault: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,6 +47,7 @@ export type BankAccountMaxAggregateOutputType = {
   paymentId: string | null
   description: string | null
   isActive: boolean | null
+  isDefault: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,6 +61,7 @@ export type BankAccountCountAggregateOutputType = {
   paymentId: number
   description: number
   isActive: number
+  isDefault: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,6 +77,7 @@ export type BankAccountMinAggregateInputType = {
   paymentId?: true
   description?: true
   isActive?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -87,6 +91,7 @@ export type BankAccountMaxAggregateInputType = {
   paymentId?: true
   description?: true
   isActive?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +105,7 @@ export type BankAccountCountAggregateInputType = {
   paymentId?: true
   description?: true
   isActive?: true
+  isDefault?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -186,6 +192,7 @@ export type BankAccountGroupByOutputType = {
   paymentId: string | null
   description: string | null
   isActive: boolean
+  isDefault: boolean
   createdAt: Date
   updatedAt: Date
   _count: BankAccountCountAggregateOutputType | null
@@ -220,6 +227,7 @@ export type BankAccountWhereInput = {
   paymentId?: Prisma.StringNullableFilter<"BankAccount"> | string | null
   description?: Prisma.StringNullableFilter<"BankAccount"> | string | null
   isActive?: Prisma.BoolFilter<"BankAccount"> | boolean
+  isDefault?: Prisma.BoolFilter<"BankAccount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   municipalFees?: Prisma.MunicipalFeeListRelationFilter
@@ -238,6 +246,7 @@ export type BankAccountOrderByWithRelationInput = {
   paymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   municipalFees?: Prisma.MunicipalFeeOrderByRelationAggregateInput
@@ -260,6 +269,7 @@ export type BankAccountWhereUniqueInput = Prisma.AtLeast<{
   accountNumber?: Prisma.StringFilter<"BankAccount"> | string
   description?: Prisma.StringNullableFilter<"BankAccount"> | string | null
   isActive?: Prisma.BoolFilter<"BankAccount"> | boolean
+  isDefault?: Prisma.BoolFilter<"BankAccount"> | boolean
   createdAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"BankAccount"> | Date | string
   municipalFees?: Prisma.MunicipalFeeListRelationFilter
@@ -278,6 +288,7 @@ export type BankAccountOrderByWithAggregationInput = {
   paymentId?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BankAccountCountOrderByAggregateInput
@@ -297,6 +308,7 @@ export type BankAccountScalarWhereWithAggregatesInput = {
   paymentId?: Prisma.StringNullableWithAggregatesFilter<"BankAccount"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"BankAccount"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"BankAccount"> | boolean
+  isDefault?: Prisma.BoolWithAggregatesFilter<"BankAccount"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BankAccount"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"BankAccount"> | Date | string
 }
@@ -310,6 +322,7 @@ export type BankAccountCreateInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeCreateNestedManyWithoutBankAccountInput
@@ -328,6 +341,7 @@ export type BankAccountUncheckedCreateInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedCreateNestedManyWithoutBankAccountInput
@@ -346,6 +360,7 @@ export type BankAccountUpdateInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUpdateManyWithoutBankAccountNestedInput
@@ -364,6 +379,7 @@ export type BankAccountUncheckedUpdateInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedUpdateManyWithoutBankAccountNestedInput
@@ -382,6 +398,7 @@ export type BankAccountCreateManyInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -395,6 +412,7 @@ export type BankAccountUpdateManyMutationInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -408,6 +426,7 @@ export type BankAccountUncheckedUpdateManyInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -426,6 +445,7 @@ export type BankAccountCountOrderByAggregateInput = {
   paymentId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -439,6 +459,7 @@ export type BankAccountMaxOrderByAggregateInput = {
   paymentId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -452,6 +473,7 @@ export type BankAccountMinOrderByAggregateInput = {
   paymentId?: Prisma.SortOrder
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDefault?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -540,6 +562,7 @@ export type BankAccountCreateWithoutMunicipalFeesInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   financialRequestSettings?: Prisma.FinancialRequestSettingCreateNestedManyWithoutBankAccountInput
@@ -557,6 +580,7 @@ export type BankAccountUncheckedCreateWithoutMunicipalFeesInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   financialRequestSettings?: Prisma.FinancialRequestSettingUncheckedCreateNestedManyWithoutBankAccountInput
@@ -590,6 +614,7 @@ export type BankAccountUpdateWithoutMunicipalFeesInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financialRequestSettings?: Prisma.FinancialRequestSettingUpdateManyWithoutBankAccountNestedInput
@@ -607,6 +632,7 @@ export type BankAccountUncheckedUpdateWithoutMunicipalFeesInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financialRequestSettings?: Prisma.FinancialRequestSettingUncheckedUpdateManyWithoutBankAccountNestedInput
@@ -624,6 +650,7 @@ export type BankAccountCreateWithoutFinancialRequestSettingsInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeCreateNestedManyWithoutBankAccountInput
@@ -641,6 +668,7 @@ export type BankAccountUncheckedCreateWithoutFinancialRequestSettingsInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedCreateNestedManyWithoutBankAccountInput
@@ -674,6 +702,7 @@ export type BankAccountUpdateWithoutFinancialRequestSettingsInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUpdateManyWithoutBankAccountNestedInput
@@ -691,6 +720,7 @@ export type BankAccountUncheckedUpdateWithoutFinancialRequestSettingsInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedUpdateManyWithoutBankAccountNestedInput
@@ -708,6 +738,7 @@ export type BankAccountCreateWithoutPaymentGroupsInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeCreateNestedManyWithoutBankAccountInput
@@ -725,6 +756,7 @@ export type BankAccountUncheckedCreateWithoutPaymentGroupsInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedCreateNestedManyWithoutBankAccountInput
@@ -758,6 +790,7 @@ export type BankAccountUpdateWithoutPaymentGroupsInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUpdateManyWithoutBankAccountNestedInput
@@ -775,6 +808,7 @@ export type BankAccountUncheckedUpdateWithoutPaymentGroupsInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedUpdateManyWithoutBankAccountNestedInput
@@ -792,6 +826,7 @@ export type BankAccountCreateWithoutPaymentsInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeCreateNestedManyWithoutBankAccountInput
@@ -809,6 +844,7 @@ export type BankAccountUncheckedCreateWithoutPaymentsInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedCreateNestedManyWithoutBankAccountInput
@@ -842,6 +878,7 @@ export type BankAccountUpdateWithoutPaymentsInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUpdateManyWithoutBankAccountNestedInput
@@ -859,6 +896,7 @@ export type BankAccountUncheckedUpdateWithoutPaymentsInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedUpdateManyWithoutBankAccountNestedInput
@@ -876,6 +914,7 @@ export type BankAccountCreateWithoutCaseRequestFinancesInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeCreateNestedManyWithoutBankAccountInput
@@ -893,6 +932,7 @@ export type BankAccountUncheckedCreateWithoutCaseRequestFinancesInput = {
   paymentId?: string | null
   description?: string | null
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedCreateNestedManyWithoutBankAccountInput
@@ -926,6 +966,7 @@ export type BankAccountUpdateWithoutCaseRequestFinancesInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUpdateManyWithoutBankAccountNestedInput
@@ -943,6 +984,7 @@ export type BankAccountUncheckedUpdateWithoutCaseRequestFinancesInput = {
   paymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFees?: Prisma.MunicipalFeeUncheckedUpdateManyWithoutBankAccountNestedInput
@@ -1027,6 +1069,7 @@ export type BankAccountSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   paymentId?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   municipalFees?: boolean | Prisma.BankAccount$municipalFeesArgs<ExtArgs>
@@ -1046,6 +1089,7 @@ export type BankAccountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   paymentId?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["bankAccount"]>
@@ -1059,6 +1103,7 @@ export type BankAccountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   paymentId?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["bankAccount"]>
@@ -1072,11 +1117,12 @@ export type BankAccountSelectScalar = {
   paymentId?: boolean
   description?: boolean
   isActive?: boolean
+  isDefault?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BankAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bankName" | "accountNumber" | "cardNumber" | "iban" | "paymentId" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["bankAccount"]>
+export type BankAccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bankName" | "accountNumber" | "cardNumber" | "iban" | "paymentId" | "description" | "isActive" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["bankAccount"]>
 export type BankAccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   municipalFees?: boolean | Prisma.BankAccount$municipalFeesArgs<ExtArgs>
   financialRequestSettings?: boolean | Prisma.BankAccount$financialRequestSettingsArgs<ExtArgs>
@@ -1106,6 +1152,7 @@ export type $BankAccountPayload<ExtArgs extends runtime.Types.Extensions.Interna
     paymentId: string | null
     description: string | null
     isActive: boolean
+    isDefault: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["bankAccount"]>
@@ -1544,6 +1591,7 @@ export interface BankAccountFieldRefs {
   readonly paymentId: Prisma.FieldRef<"BankAccount", 'String'>
   readonly description: Prisma.FieldRef<"BankAccount", 'String'>
   readonly isActive: Prisma.FieldRef<"BankAccount", 'Boolean'>
+  readonly isDefault: Prisma.FieldRef<"BankAccount", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"BankAccount", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"BankAccount", 'DateTime'>
 }

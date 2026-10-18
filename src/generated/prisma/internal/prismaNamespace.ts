@@ -9085,6 +9085,7 @@ export const BankAccountScalarFieldEnum = {
   paymentId: 'paymentId',
   description: 'description',
   isActive: 'isActive',
+  isDefault: 'isDefault',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -9136,6 +9137,7 @@ export const PaymentGroupScalarFieldEnum = {
   id: 'id',
   title: 'title',
   bankAccountId: 'bankAccountId',
+  isDefault: 'isDefault',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

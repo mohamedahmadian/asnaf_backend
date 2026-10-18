@@ -37,6 +37,11 @@ export class BankAccountsController {
     return this.accounts.update(id, dto);
   }
 
+  @Post(':id/default')
+  setDefault(@Param('id') id: string) {
+    return this.accounts.setDefault(id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.accounts.remove(id);

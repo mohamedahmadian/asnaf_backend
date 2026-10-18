@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -27,6 +28,7 @@ const accountSelect = {
   paymentId: true,
   description: true,
   isActive: true,
+  isDefault: true,
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.BankAccountSelect;
@@ -50,8 +52,9 @@ export class BankAccountsService {
         iban: (dir) => ({ iban: dir }),
         paymentId: (dir) => ({ paymentId: dir }),
         isActive: (dir) => ({ isActive: dir }),
+        isDefault: (dir) => ({ isDefault: dir }),
       },
-      [{ createdAt: 'desc' }, { id: 'asc' }],
+      [{ isDefault: 'desc' }, { createdAt: 'desc' }, { id: 'asc' }],
     );
     if (!wantsPagination(query)) {
       return this.prisma.bankAccount.findMany({
@@ -86,10 +89,16 @@ export class BankAccountsService {
   }
 
   async create(dto: CreateBankAccountDto) {
+    const isDefault = this.resolveDefault(dto.isActive ?? true, dto.isDefault);
     try {
-      return await this.prisma.bankAccount.create({
-        data: this.toData(dto),
-        select: accountSelect,
+      return await this.prisma.$transaction(async (tx) => {
+        if (isDefault) {
+          await this.clearDefault(tx);
+        }
+        return tx.bankAccount.create({
+          data: { ...this.toData(dto), isDefault },
+          select: accountSelect,
+        });
       });
     } catch (error) {
       this.rethrowUnique(error);
@@ -97,16 +106,58 @@ export class BankAccountsService {
   }
 
   async update(id: string, dto: UpdateBankAccountDto) {
-    await this.findOne(id);
+    const current = await this.findOne(id);
+    const isActive = dto.isActive ?? current.isActive;
+    const isDefault = this.resolveDefault(
+      isActive,
+      dto.isDefault ?? (isActive ? current.isDefault : false),
+    );
     try {
-      return await this.prisma.bankAccount.update({
-        where: { id },
-        data: this.toData(dto),
-        select: accountSelect,
+      return await this.prisma.$transaction(async (tx) => {
+        if (isDefault && !current.isDefault) {
+          await this.clearDefault(tx, id);
+        }
+        return tx.bankAccount.update({
+          where: { id },
+          data: { ...this.toData(dto), isDefault },
+          select: accountSelect,
+        });
       });
     } catch (error) {
       this.rethrowUnique(error);
     }
+  }
+
+  async setDefault(id: string) {
+    const current = await this.findOne(id);
+    if (!current.isActive) {
+      throw new BadRequestException('حساب بانکی غیرفعال نمی‌تواند پیش‌فرض باشد');
+    }
+    if (current.isDefault) {
+      return current;
+    }
+    return this.prisma.$transaction(async (tx) => {
+      await this.clearDefault(tx, id);
+      return tx.bankAccount.update({
+        where: { id },
+        data: { isDefault: true },
+        select: accountSelect,
+      });
+    });
+  }
+
+  private resolveDefault(isActive: boolean, isDefault?: boolean) {
+    if (isDefault && !isActive) {
+      throw new BadRequestException('حساب بانکی غیرفعال نمی‌تواند پیش‌فرض باشد');
+    }
+    return Boolean(isDefault);
+  }
+
+  private clearDefault(tx: Prisma.TransactionClient, exceptId?: string) {
+    return tx.bankAccount.updateMany({
+      where: { isDefault: true, ...(exceptId ? { id: { not: exceptId } } : {}) },
+      data: { isDefault: false },
+    });
   }
 
   async remove(id: string) {

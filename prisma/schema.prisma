@@ -266,6 +266,7 @@ model BankAccount {
   paymentId     String?        @unique
   description   String?
   isActive      Boolean        @default(true)
+  isDefault     Boolean        @default(false)
   municipalFees MunicipalFee[]
   financialRequestSettings FinancialRequestSetting[]
   caseRequestFinances CaseRequestFinance[]
@@ -350,6 +351,7 @@ model PaymentGroup {
   title         String
   bankAccountId String
   bankAccount   BankAccount        @relation(fields: [bankAccountId], references: [id], onDelete: Restrict)
+  isDefault     Boolean            @default(false)
   items         PaymentGroupItem[]
   payments      Payment[]
   createdAt     DateTime           @default(now())

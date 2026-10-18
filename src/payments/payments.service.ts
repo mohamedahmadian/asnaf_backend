@@ -11,6 +11,7 @@ import {
   paginatedResult,
   paginationArgs,
 } from '../common/pagination';
+import { normalizeMobile } from '../common/phone';
 import { resolveSortOrder } from '../common/sort-query';
 import { PersonType, Prisma } from '../generated/prisma/client';
 import { requestFeeStatuses } from '../case-finance/request-fee-status';
@@ -80,6 +81,7 @@ export class PaymentsService {
     const term = raw.trim();
     if (term.length < 2) return [];
     const digits = normalizeSearchDigits(term);
+    const mobile = digits ? normalizeMobile(term) : '';
     const people = await this.prisma.user.findMany({
       where: {
         OR: [
@@ -93,10 +95,12 @@ export class PaymentsService {
           ...(digits
             ? [
                 { nationalId: { contains: digits } },
+                { phone: { contains: digits } },
                 { companyNationalId: { contains: digits } },
                 { companyRegistrationNo: { contains: digits } },
               ]
             : []),
+          ...(mobile && mobile !== digits ? [{ phone: { contains: mobile } }] : []),
         ],
       },
       orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
