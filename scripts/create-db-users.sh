@@ -65,11 +65,35 @@ if [ "$ASNAF_ENV" != "local" ] && [ "$ASNAF_ENV" != "server" ]; then
   exit 1
 fi
 
+load_env_file() {
+  local file=$1
+  local line key value
+  while IFS= read -r line || [ -n "$line" ]; do
+    line=${line%$'\r'}
+    case "$line" in
+      ''|\#*|\;*) continue ;;
+    esac
+    case "$line" in
+      *=*) ;;
+      *) continue ;;
+    esac
+    key=${line%%=*}
+    value=${line#*=}
+    case "$key" in
+      *[!A-Za-z0-9_]*) continue ;;
+    esac
+    if [ "${#value}" -ge 2 ]; then
+      case "$value" in
+        \'*\') value=${value#\'}; value=${value%\'} ;;
+        \"*\") value=${value#\"}; value=${value%\"} ;;
+      esac
+    fi
+    export "$key=$value"
+  done < "$file"
+}
+
 if [ -f "$ENV_FILE" ]; then
-  set -a
-  # shellcheck disable=SC1090
-  . "$ENV_FILE"
-  set +a
+  load_env_file "$ENV_FILE"
 fi
 
 PGHOST="${PGHOST:-127.0.0.1}"
