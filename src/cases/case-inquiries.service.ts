@@ -43,6 +43,7 @@ import { activityContext } from './steward-context';
 function inquiryReferralStep(type: CaseRequestType) {
   if (type === CaseRequestType.ISSUANCE) return INQUIRIES_FORMATION_STEP;
   if (type === CaseRequestType.RENEWAL || type === CaseRequestType.LOCATION_CHANGE) return 2;
+  if (type === CaseRequestType.AUCTION) return 1;
   if (type === CaseRequestType.STEWARDSHIP) return STEWARDSHIP_INQUIRY_STEP;
   return null;
 }
@@ -127,7 +128,12 @@ export class CaseInquiriesService {
     status: CaseRequestStatus;
   }) {
     const requestType = request.type;
-    if (!requestIsOpen(request.status) || (!isProcessType(requestType) && requestType !== CaseRequestType.STEWARDSHIP)) {
+    if (
+      !requestIsOpen(request.status) ||
+      (!isProcessType(requestType) &&
+        requestType !== CaseRequestType.STEWARDSHIP &&
+        requestType !== CaseRequestType.AUCTION)
+    ) {
       return;
     }
     const context = await activityContext(this.prisma, request.caseFileId);

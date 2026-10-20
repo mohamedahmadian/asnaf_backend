@@ -315,6 +315,7 @@ export type CaseRequestStatus = (typeof CaseRequestStatus)[keyof typeof CaseRequ
 export const CaseFileStatus = {
   ACTIVE: 'ACTIVE',
   SUSPENDED: 'SUSPENDED',
+  EXPIRED: 'EXPIRED',
   REVOKED: 'REVOKED'
 } as const
 
@@ -459,3 +460,21 @@ export const ViolationAttachmentKind = {
 } as const
 
 export type ViolationAttachmentKind = (typeof ViolationAttachmentKind)[keyof typeof ViolationAttachmentKind]
+
+
+export const ScheduledJobTrigger = {
+  SYSTEM: 'SYSTEM',
+  MANUAL: 'MANUAL'
+} as const
+
+export type ScheduledJobTrigger = (typeof ScheduledJobTrigger)[keyof typeof ScheduledJobTrigger]
+
+
+export const ScheduledJobRunStatus = {
+  RUNNING: 'RUNNING',
+  SUCCESS: 'SUCCESS',
+  FAILED: 'FAILED',
+  SKIPPED: 'SKIPPED'
+} as const
+
+export type ScheduledJobRunStatus = (typeof ScheduledJobRunStatus)[keyof typeof ScheduledJobRunStatus]

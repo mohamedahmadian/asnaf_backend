@@ -122,6 +122,12 @@ export class CasesController {
     return this.cases.advanceStep(dto, user);
   }
 
+  @Post('approve-intake')
+  approveIntake(@Body() dto: SaveFormationStepDto, @CurrentUser() user: RequestUser | undefined) {
+    assertAdminActor(user);
+    return this.cases.approveIntake(dto.caseId);
+  }
+
   @Get('inquiries')
   caseInquiries(@Query('caseId') caseId = '', @Query('requestId') requestId = '') {
     return this.inquiries.listForCase(caseId, requestId || undefined);

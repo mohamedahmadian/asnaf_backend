@@ -42,6 +42,7 @@ export type CaseRequestMinAggregateOutputType = {
   number: string | null
   status: $Enums.CaseRequestStatus | null
   formationStep: number | null
+  intakeSubmittedAt: Date | null
   completedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,6 +55,7 @@ export type CaseRequestMaxAggregateOutputType = {
   number: string | null
   status: $Enums.CaseRequestStatus | null
   formationStep: number | null
+  intakeSubmittedAt: Date | null
   completedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -66,6 +68,7 @@ export type CaseRequestCountAggregateOutputType = {
   number: number
   status: number
   formationStep: number
+  intakeSubmittedAt: number
   completedAt: number
   createdAt: number
   updatedAt: number
@@ -88,6 +91,7 @@ export type CaseRequestMinAggregateInputType = {
   number?: true
   status?: true
   formationStep?: true
+  intakeSubmittedAt?: true
   completedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -100,6 +104,7 @@ export type CaseRequestMaxAggregateInputType = {
   number?: true
   status?: true
   formationStep?: true
+  intakeSubmittedAt?: true
   completedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -112,6 +117,7 @@ export type CaseRequestCountAggregateInputType = {
   number?: true
   status?: true
   formationStep?: true
+  intakeSubmittedAt?: true
   completedAt?: true
   createdAt?: true
   updatedAt?: true
@@ -211,6 +217,7 @@ export type CaseRequestGroupByOutputType = {
   number: string
   status: $Enums.CaseRequestStatus
   formationStep: number
+  intakeSubmittedAt: Date | null
   completedAt: Date | null
   createdAt: Date
   updatedAt: Date
@@ -246,6 +253,7 @@ export type CaseRequestWhereInput = {
   number?: Prisma.StringFilter<"CaseRequest"> | string
   status?: Prisma.EnumCaseRequestStatusFilter<"CaseRequest"> | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFilter<"CaseRequest"> | number
+  intakeSubmittedAt?: Prisma.DateTimeNullableFilter<"CaseRequest"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"CaseRequest"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
@@ -270,6 +278,7 @@ export type CaseRequestOrderByWithRelationInput = {
   number?: Prisma.SortOrder
   status?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
+  intakeSubmittedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -297,6 +306,7 @@ export type CaseRequestWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumCaseRequestTypeFilter<"CaseRequest"> | $Enums.CaseRequestType
   status?: Prisma.EnumCaseRequestStatusFilter<"CaseRequest"> | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFilter<"CaseRequest"> | number
+  intakeSubmittedAt?: Prisma.DateTimeNullableFilter<"CaseRequest"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"CaseRequest"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
@@ -321,6 +331,7 @@ export type CaseRequestOrderByWithAggregationInput = {
   number?: Prisma.SortOrder
   status?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
+  intakeSubmittedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -341,6 +352,7 @@ export type CaseRequestScalarWhereWithAggregatesInput = {
   number?: Prisma.StringWithAggregatesFilter<"CaseRequest"> | string
   status?: Prisma.EnumCaseRequestStatusWithAggregatesFilter<"CaseRequest"> | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntWithAggregatesFilter<"CaseRequest"> | number
+  intakeSubmittedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseRequest"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseRequest"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CaseRequest"> | Date | string
@@ -352,6 +364,7 @@ export type CaseRequestCreateInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -376,6 +389,7 @@ export type CaseRequestUncheckedCreateInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -398,6 +412,7 @@ export type CaseRequestUpdateInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -422,6 +437,7 @@ export type CaseRequestUncheckedUpdateInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -445,6 +461,7 @@ export type CaseRequestCreateManyInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -456,6 +473,7 @@ export type CaseRequestUpdateManyMutationInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -468,6 +486,7 @@ export type CaseRequestUncheckedUpdateManyInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -500,6 +519,7 @@ export type CaseRequestCountOrderByAggregateInput = {
   number?: Prisma.SortOrder
   status?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
+  intakeSubmittedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -516,6 +536,7 @@ export type CaseRequestMaxOrderByAggregateInput = {
   number?: Prisma.SortOrder
   status?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
+  intakeSubmittedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -528,6 +549,7 @@ export type CaseRequestMinOrderByAggregateInput = {
   number?: Prisma.SortOrder
   status?: Prisma.SortOrder
   formationStep?: Prisma.SortOrder
+  intakeSubmittedAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -747,6 +769,7 @@ export type CaseRequestCreateWithoutPaymentsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -770,6 +793,7 @@ export type CaseRequestUncheckedCreateWithoutPaymentsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -807,6 +831,7 @@ export type CaseRequestUpdateWithoutPaymentsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -830,6 +855,7 @@ export type CaseRequestUncheckedUpdateWithoutPaymentsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -851,6 +877,7 @@ export type CaseRequestCreateWithoutInquiriesInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -874,6 +901,7 @@ export type CaseRequestUncheckedCreateWithoutInquiriesInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -911,6 +939,7 @@ export type CaseRequestUpdateWithoutInquiriesInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -934,6 +963,7 @@ export type CaseRequestUncheckedUpdateWithoutInquiriesInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -955,6 +985,7 @@ export type CaseRequestCreateWithoutPlacesReviewInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -978,6 +1009,7 @@ export type CaseRequestUncheckedCreateWithoutPlacesReviewInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1015,6 +1047,7 @@ export type CaseRequestUpdateWithoutPlacesReviewInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1038,6 +1071,7 @@ export type CaseRequestUncheckedUpdateWithoutPlacesReviewInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1059,6 +1093,7 @@ export type CaseRequestCreateWithoutManagementReviewsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1082,6 +1117,7 @@ export type CaseRequestUncheckedCreateWithoutManagementReviewsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1119,6 +1155,7 @@ export type CaseRequestUpdateWithoutManagementReviewsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1142,6 +1179,7 @@ export type CaseRequestUncheckedUpdateWithoutManagementReviewsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1163,6 +1201,7 @@ export type CaseRequestCreateWithoutCaseFileInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1185,6 +1224,7 @@ export type CaseRequestUncheckedCreateWithoutCaseFileInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1237,6 +1277,7 @@ export type CaseRequestScalarWhereInput = {
   number?: Prisma.StringFilter<"CaseRequest"> | string
   status?: Prisma.EnumCaseRequestStatusFilter<"CaseRequest"> | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFilter<"CaseRequest"> | number
+  intakeSubmittedAt?: Prisma.DateTimeNullableFilter<"CaseRequest"> | Date | string | null
   completedAt?: Prisma.DateTimeNullableFilter<"CaseRequest"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
@@ -1248,6 +1289,7 @@ export type CaseRequestCreateWithoutFinanceInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1271,6 +1313,7 @@ export type CaseRequestUncheckedCreateWithoutFinanceInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1308,6 +1351,7 @@ export type CaseRequestUpdateWithoutFinanceInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1331,6 +1375,7 @@ export type CaseRequestUncheckedUpdateWithoutFinanceInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1352,6 +1397,7 @@ export type CaseRequestCreateWithoutEventsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1375,6 +1421,7 @@ export type CaseRequestUncheckedCreateWithoutEventsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1412,6 +1459,7 @@ export type CaseRequestUpdateWithoutEventsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1435,6 +1483,7 @@ export type CaseRequestUncheckedUpdateWithoutEventsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1456,6 +1505,7 @@ export type CaseRequestCreateWithoutRenewalTermsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1479,6 +1529,7 @@ export type CaseRequestUncheckedCreateWithoutRenewalTermsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1516,6 +1567,7 @@ export type CaseRequestUpdateWithoutRenewalTermsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1539,6 +1591,7 @@ export type CaseRequestUncheckedUpdateWithoutRenewalTermsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1560,6 +1613,7 @@ export type CaseRequestCreateWithoutLocationDraftInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1583,6 +1637,7 @@ export type CaseRequestUncheckedCreateWithoutLocationDraftInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1620,6 +1675,7 @@ export type CaseRequestUpdateWithoutLocationDraftInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1643,6 +1699,7 @@ export type CaseRequestUncheckedUpdateWithoutLocationDraftInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1664,6 +1721,7 @@ export type CaseRequestCreateWithoutReplacedPremiseInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1687,6 +1745,7 @@ export type CaseRequestUncheckedCreateWithoutReplacedPremiseInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1724,6 +1783,7 @@ export type CaseRequestUpdateWithoutReplacedPremiseInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1747,6 +1807,7 @@ export type CaseRequestUncheckedUpdateWithoutReplacedPremiseInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1768,6 +1829,7 @@ export type CaseRequestCreateWithoutAuctionInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1791,6 +1853,7 @@ export type CaseRequestUncheckedCreateWithoutAuctionInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1828,6 +1891,7 @@ export type CaseRequestUpdateWithoutAuctionInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1851,6 +1915,7 @@ export type CaseRequestUncheckedUpdateWithoutAuctionInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1872,6 +1937,7 @@ export type CaseRequestCreateWithoutActivityDocumentsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1895,6 +1961,7 @@ export type CaseRequestUncheckedCreateWithoutActivityDocumentsInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1932,6 +1999,7 @@ export type CaseRequestUpdateWithoutActivityDocumentsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1955,6 +2023,7 @@ export type CaseRequestUncheckedUpdateWithoutActivityDocumentsInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1976,6 +2045,7 @@ export type CaseRequestCreateManyCaseFileInput = {
   number: string
   status?: $Enums.CaseRequestStatus
   formationStep?: number
+  intakeSubmittedAt?: Date | string | null
   completedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1987,6 +2057,7 @@ export type CaseRequestUpdateWithoutCaseFileInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2009,6 +2080,7 @@ export type CaseRequestUncheckedUpdateWithoutCaseFileInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2031,6 +2103,7 @@ export type CaseRequestUncheckedUpdateManyWithoutCaseFileInput = {
   number?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
   formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2110,6 +2183,7 @@ export type CaseRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   number?: boolean
   status?: boolean
   formationStep?: boolean
+  intakeSubmittedAt?: boolean
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2135,6 +2209,7 @@ export type CaseRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   number?: boolean
   status?: boolean
   formationStep?: boolean
+  intakeSubmittedAt?: boolean
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2148,6 +2223,7 @@ export type CaseRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   number?: boolean
   status?: boolean
   formationStep?: boolean
+  intakeSubmittedAt?: boolean
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -2161,12 +2237,13 @@ export type CaseRequestSelectScalar = {
   number?: boolean
   status?: boolean
   formationStep?: boolean
+  intakeSubmittedAt?: boolean
   completedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CaseRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "type" | "number" | "status" | "formationStep" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseRequest"]>
+export type CaseRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "type" | "number" | "status" | "formationStep" | "intakeSubmittedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["caseRequest"]>
 export type CaseRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
   inquiries?: boolean | Prisma.CaseRequest$inquiriesArgs<ExtArgs>
@@ -2215,6 +2292,10 @@ export type $CaseRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
      * مرحلهٔ همین درخواست. برای صدور همان ۰ تا ۶ است. نوع‌های دیگر مرحلهٔ جدا دارند.
      */
     formationStep: number
+    /**
+     * ثبت اولیهٔ متقاضی؛ تا تأیید مدیریت، ارجاع استعلام ساخته نمی‌شود.
+     */
+    intakeSubmittedAt: Date | null
     completedAt: Date | null
     createdAt: Date
     updatedAt: Date
@@ -2659,6 +2740,7 @@ export interface CaseRequestFieldRefs {
   readonly number: Prisma.FieldRef<"CaseRequest", 'String'>
   readonly status: Prisma.FieldRef<"CaseRequest", 'CaseRequestStatus'>
   readonly formationStep: Prisma.FieldRef<"CaseRequest", 'Int'>
+  readonly intakeSubmittedAt: Prisma.FieldRef<"CaseRequest", 'DateTime'>
   readonly completedAt: Prisma.FieldRef<"CaseRequest", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CaseRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CaseRequest", 'DateTime'>

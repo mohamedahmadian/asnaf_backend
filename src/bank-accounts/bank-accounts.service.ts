@@ -54,7 +54,7 @@ export class BankAccountsService {
         isActive: (dir) => ({ isActive: dir }),
         isDefault: (dir) => ({ isDefault: dir }),
       },
-      [{ isDefault: 'desc' }, { createdAt: 'desc' }, { id: 'asc' }],
+      [{ createdAt: 'desc' }, { id: 'asc' }],
     );
     if (!wantsPagination(query)) {
       return this.prisma.bankAccount.findMany({

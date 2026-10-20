@@ -117,6 +117,9 @@ export class CaseAuctionService {
     if (file.status === CaseFileStatus.REVOKED) {
       throw new BadRequestException('روی پرونده ابطال‌شده درخواست جدید ثبت نمی‌شود');
     }
+    if (file.status === CaseFileStatus.EXPIRED) {
+      throw new BadRequestException('روی پرونده منقضی‌شده درخواست حراج ثبت نمی‌شود');
+    }
     assertRange(dto);
     for (let attempt = 0; attempt < 4; attempt++) {
       const number = await nextRequestNumber(this.prisma);
@@ -304,6 +307,7 @@ export class CaseAuctionService {
             type: true,
             status: true,
             formationStep: true,
+            intakeSubmittedAt: true,
             caseFile: { select: { userId: true } },
           },
         },
@@ -323,9 +327,17 @@ export class CaseAuctionService {
   private async refreshOpenPhase(db: Db, requestId: string) {
     const request = await db.caseRequest.findUnique({
       where: { id: requestId },
-      select: { id: true, caseFileId: true, type: true, status: true, formationStep: true },
+      select: {
+        id: true,
+        caseFileId: true,
+        type: true,
+        status: true,
+        formationStep: true,
+        intakeSubmittedAt: true,
+      },
     });
     if (!request || request.type !== CaseRequestType.AUCTION || request.status !== CaseRequestStatus.OPEN) return;
+    if (request.intakeSubmittedAt && request.formationStep < 1) return;
     const roles = await processManagementTitles(db, CaseRequestType.AUCTION);
     if (roles.length) {
       await db.caseManagementReview.createMany({
@@ -388,6 +400,11 @@ export class CaseAuctionService {
       editable: await this.canUpdate(auction.request.status, approvals, actor),
       canIssue: auction.request.status === CaseRequestStatus.OPEN && (await this.readyToIssue(db, requestId)),
       phase: auction.request.formationStep,
+      intakeSubmittedAt: auction.request.intakeSubmittedAt?.toISOString() ?? null,
+      awaitingIntake:
+        auction.request.status === CaseRequestStatus.OPEN &&
+        Boolean(auction.request.intakeSubmittedAt) &&
+        auction.request.formationStep < 1,
       title: auction.title,
       startsAt: dateOnly(auction.startsAt),
       endsAt: dateOnly(auction.endsAt),

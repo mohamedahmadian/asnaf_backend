@@ -114,6 +114,7 @@ export class PaymentsService {
         companyName: true,
         companyNationalId: true,
         companyRegistrationNo: true,
+        photoId: true,
         caseFiles: {
           orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],
           select: {
@@ -135,6 +136,7 @@ export class PaymentsService {
       companyName: person.companyName,
       companyNationalId: person.companyNationalId,
       companyRegistrationNo: person.companyRegistrationNo,
+      photoId: person.photoId,
       cases:
         person.personType === PersonType.LEGAL
           ? []

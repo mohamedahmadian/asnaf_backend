@@ -24,6 +24,7 @@ import { OrganizationModule } from './organization/organization.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { RegistrationPlacesModule } from './registration-places/registration-places.module';
 import { RolesModule } from './roles/roles.module';
+import { ScheduledJobsModule } from './scheduled-jobs/scheduled-jobs.module';
 import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
 import { ViolationTypesModule } from './violation-types/violation-types.module';
@@ -38,6 +39,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     AuthModule,
     UsersModule,
     RolesModule,
+    ScheduledJobsModule,
     GeoModule,
     BankAccountsModule,
     CasesModule,

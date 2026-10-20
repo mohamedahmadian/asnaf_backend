@@ -75,6 +75,7 @@ export const ModelName = {
   CaseInquiryFile: 'CaseInquiryFile',
   CaseGeneralSettings: 'CaseGeneralSettings',
   CaseLetterhead: 'CaseLetterhead',
+  CaseActivityLicenseSettings: 'CaseActivityLicenseSettings',
   CasePlacesOffice: 'CasePlacesOffice',
   CaseRevocationSettings: 'CaseRevocationSettings',
   CaseRevocationOrganization: 'CaseRevocationOrganization',
@@ -164,7 +165,9 @@ export const ModelName = {
   ViolationAttachment: 'ViolationAttachment',
   ViolationProceeding: 'ViolationProceeding',
   ViolationProceedingAttachment: 'ViolationProceedingAttachment',
-  SmsSettings: 'SmsSettings'
+  SmsSettings: 'SmsSettings',
+  ScheduledJob: 'ScheduledJob',
+  ScheduledJobRun: 'ScheduledJobRun'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -563,6 +566,17 @@ export const CaseLetterheadScalarFieldEnum = {
 export type CaseLetterheadScalarFieldEnum = (typeof CaseLetterheadScalarFieldEnum)[keyof typeof CaseLetterheadScalarFieldEnum]
 
 
+export const CaseActivityLicenseSettingsScalarFieldEnum = {
+  id: 'id',
+  signerName: 'signerName',
+  signerTitle: 'signerTitle',
+  signatureId: 'signatureId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseActivityLicenseSettingsScalarFieldEnum = (typeof CaseActivityLicenseSettingsScalarFieldEnum)[keyof typeof CaseActivityLicenseSettingsScalarFieldEnum]
+
+
 export const CasePlacesOfficeScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -848,6 +862,7 @@ export const CaseRequestScalarFieldEnum = {
   number: 'number',
   status: 'status',
   formationStep: 'formationStep',
+  intakeSubmittedAt: 'intakeSubmittedAt',
   completedAt: 'completedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1950,6 +1965,35 @@ export const SmsSettingsScalarFieldEnum = {
 } as const
 
 export type SmsSettingsScalarFieldEnum = (typeof SmsSettingsScalarFieldEnum)[keyof typeof SmsSettingsScalarFieldEnum]
+
+
+export const ScheduledJobScalarFieldEnum = {
+  code: 'code',
+  enabled: 'enabled',
+  lastRunAt: 'lastRunAt',
+  lastStatus: 'lastStatus',
+  lastMessage: 'lastMessage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ScheduledJobScalarFieldEnum = (typeof ScheduledJobScalarFieldEnum)[keyof typeof ScheduledJobScalarFieldEnum]
+
+
+export const ScheduledJobRunScalarFieldEnum = {
+  id: 'id',
+  jobCode: 'jobCode',
+  trigger: 'trigger',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  message: 'message',
+  detail: 'detail',
+  triggeredById: 'triggeredById',
+  createdAt: 'createdAt'
+} as const
+
+export type ScheduledJobRunScalarFieldEnum = (typeof ScheduledJobRunScalarFieldEnum)[keyof typeof ScheduledJobRunScalarFieldEnum]
 
 
 export const SortOrder = {

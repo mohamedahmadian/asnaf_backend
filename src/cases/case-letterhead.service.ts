@@ -31,6 +31,7 @@ const IMAGE_USE = {
   violationProceedingAttachments: true,
   letterheadLogos: true,
   letterheadSignatures: true,
+  activityLicenseSignatures: true,
 } satisfies Prisma.StoredImageCountOutputTypeSelect;
 
 type LetterTarget = 'inquiry' | 'places' | 'revocation';

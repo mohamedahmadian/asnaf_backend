@@ -117,6 +117,12 @@ export class CreateUserDto {
   @IsOptional()
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
+  @Matches(/^\d{4}-\d{2}-\d{2}$/, { message: 'تاریخ تولد معتبر نیست' })
+  birthDate?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
   @IsString()
   address?: string | null;
 

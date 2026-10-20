@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post, Query } from '@nestjs/common';
+import { FindSmsHistoryQueryDto } from './dto/find-sms-history.dto';
 import { SendSmsDto } from './dto/send-sms.dto';
 import { UpdateSmsSettingsDto } from './dto/update-sms-settings.dto';
 import { SmsSettingsService } from './sms-settings.service';
@@ -21,9 +22,14 @@ export class SmsController {
     return this.settings.update(dto);
   }
 
+  @Get('history')
+  listHistory(@Query() query: FindSmsHistoryQueryDto) {
+    return this.sms.listHistory(query);
+  }
+
   @Post('messages')
   async send(@Body() dto: SendSmsDto) {
-    await this.sms.send({ phone: dto.phone, body: dto.body });
+    await this.sms.send({ phone: dto.phone, body: dto.body, source: 'MANUAL' });
     return { mocked: true };
   }
 }

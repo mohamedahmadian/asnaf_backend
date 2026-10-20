@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { CaseGeneralSettingsController } from './case-general-settings.controller';
 import { CaseGeneralSettingsService } from './case-general-settings.service';
+import { CaseActivityLicenseSettingsController } from './case-activity-license-settings.controller';
+import { CaseActivityLicenseSettingsService } from './case-activity-license-settings.service';
 import { CaseLetterheadController } from './case-letterhead.controller';
 import { CaseLetterheadService } from './case-letterhead.service';
 import { CaseRequirementsController } from './case-requirements.controller';
@@ -26,10 +28,13 @@ import { CasePlacesController, CasePlacesOfficeController } from './case-places.
 import { CasePlacesReportService } from './case-places-report.service';
 import { CasePlacesService } from './case-places.service';
 import { CaseAuctionService } from './case-auction.service';
+import { CaseExpiryController } from './case-expiry.controller';
+import { CaseExpiryService } from './case-expiry.service';
 import { CaseStewardshipService } from './case-stewardship.service';
 import { CaseRecordsController } from './case-records.controller';
 import { CaseReportsController } from './case-reports.controller';
 import { ExpiringCasesService } from './expiring-cases.service';
+import { CaseStatusService } from './case-status.service';
 import { CasesController } from './cases.controller';
 import { CasesService } from './cases.service';
 import { PersonFileStorage } from './person-file.storage';
@@ -44,9 +49,11 @@ import { PersonFileStorage } from './person-file.storage';
     CaseIssuanceController,
     CaseRecordsController,
     CaseReportsController,
+    CaseExpiryController,
     CaseIdentityDocumentsController,
     CaseGeneralSettingsController,
     CaseLetterheadController,
+    CaseActivityLicenseSettingsController,
     CaseRequirementsController,
     CaseManagementApproversController,
     CaseProcessManagementRolesController,
@@ -54,10 +61,12 @@ import { PersonFileStorage } from './person-file.storage';
     CaseRevocationProcessController,
     DashboardController,
   ],
-  exports: [CasesService],
+  exports: [CasesService, CaseStatusService],
   providers: [
     CasesService,
+    CaseStatusService,
     ExpiringCasesService,
+    CaseExpiryService,
     CaseAuctionService,
     CaseStewardshipService,
     CaseInquiriesService,
@@ -67,6 +76,7 @@ import { PersonFileStorage } from './person-file.storage';
     CaseIdentityDocumentsService,
     CaseGeneralSettingsService,
     CaseLetterheadService,
+    CaseActivityLicenseSettingsService,
     CaseRequirementsService,
     CaseManagementApproversService,
     CaseManagementReviewsReportService,

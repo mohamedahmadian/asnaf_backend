@@ -5,7 +5,7 @@ import {
   tehranDate,
 } from '../violations/calendar';
 
-export const expiringRanges = ['this-week', 'two-weeks', 'three-weeks', 'this-month'] as const;
+export const expiringRanges = ['this-week', 'two-weeks', 'three-weeks', 'this-month', 'expired'] as const;
 
 export type ExpiringRange = (typeof expiringRanges)[number];
 
@@ -19,10 +19,19 @@ function addUtcDays(date: Date, days: number) {
   return next;
 }
 
-/** امروز تا پایان بازه؛ پرونده‌هایی که هنوز منقضی نشده‌اند. هفته از شنبه شروع می‌شود. */
-export function expiringWindow(range: ExpiringRange, now = new Date()) {
+/**
+ * امروز تا پایان بازه؛ پرونده‌هایی که هنوز منقضی نشده‌اند. هفته از شنبه شروع می‌شود.
+ * `expired` بدون شروع است و تا دیروز را می‌گیرد.
+ */
+export function expiringWindow(
+  range: ExpiringRange,
+  now = new Date(),
+): { start: Date | null; end: Date; today: Date } {
   const todayParts = tehranDate(now);
   const start = utcDateOnly(todayParts.year, todayParts.month, todayParts.day);
+  if (range === 'expired') {
+    return { start: null, end: addUtcDays(start, -1), today: start };
+  }
   const weekDay = start.getUTCDay();
   const untilFriday = (5 - weekDay + 7) % 7;
 

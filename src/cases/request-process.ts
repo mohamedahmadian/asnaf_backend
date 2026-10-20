@@ -18,6 +18,7 @@ import {
   assignLicenseNumber,
   nextRequestNumber,
 } from './formation-steps';
+import { syncCaseStatus } from './case-status';
 
 export type Db = PrismaService | Prisma.TransactionClient;
 
@@ -354,6 +355,9 @@ export async function openProcessRequest(
   if (file?.status === CaseFileStatus.REVOKED) {
     throw new BadRequestException('روی پرونده ابطال‌شده درخواست جدید ثبت نمی‌شود');
   }
+  if (file?.status === CaseFileStatus.EXPIRED && type !== CaseRequestType.RENEWAL) {
+    throw new BadRequestException('روی پرونده منقضی‌شده فقط درخواست تمدید ثبت می‌شود');
+  }
   if (!file?.licenseNumber || !file.licenseIssuedAt || !file.licenseExpiresAt) {
     throw new BadRequestException('قبل از این درخواست باید مجوز صادر شده باشد');
   }
@@ -609,6 +613,12 @@ export async function completeOpenRequest(
     });
     if (closed.count !== 1) throw new ConflictException('درخواست قبلاً تکمیل شده است');
     await recordStatus(tx, request.id, CaseRequestStatus.OPEN, CaseRequestStatus.COMPLETED, actorId);
+    if (
+      request.type === CaseRequestType.ISSUANCE ||
+      request.type === CaseRequestType.RENEWAL
+    ) {
+      await syncCaseStatus(tx, file.id);
+    }
     return { id: request.id, type: request.type, status: CaseRequestStatus.COMPLETED };
   });
 }

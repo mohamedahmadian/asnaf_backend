@@ -27,6 +27,7 @@ import {
 } from './formation-steps';
 import { PersonFileStorage } from './person-file.storage';
 import { matchesDocumentGender, recordStatus } from './request-process';
+import { syncCaseStatus } from './case-status';
 
 const ECONOMIC_ACTOR_INITIAL_PASSWORD = '11111111';
 
@@ -122,6 +123,9 @@ export class CaseStewardshipService {
     if (!host.licenseNumber) throw new BadRequestException('قبل از افزودن مباشر باید مجوز صادر شده باشد');
     if (host.status === CaseFileStatus.REVOKED) {
       throw new BadRequestException('روی پرونده ابطال‌شده مباشر اضافه نمی‌شود');
+    }
+    if (host.status === CaseFileStatus.EXPIRED) {
+      throw new BadRequestException('روی پرونده منقضی‌شده مباشر اضافه نمی‌شود');
     }
     if (host.status === CaseFileStatus.SUSPENDED || host.suspensions.some((row) => suspensionCoversToday(row))) {
       throw new BadRequestException('روی پرونده معلق مباشر اضافه نمی‌شود');
@@ -253,7 +257,8 @@ export class CaseStewardshipService {
         },
       });
       if (closed.count !== 1) throw new ConflictException('درخواست قبلاً تکمیل شده است');
-        await recordStatus(tx, request.id, CaseRequestStatus.OPEN, CaseRequestStatus.COMPLETED, actorId);
+      await recordStatus(tx, request.id, CaseRequestStatus.OPEN, CaseRequestStatus.COMPLETED, actorId);
+      await syncCaseStatus(tx, file.id);
       return {
         id: file.id,
         cardNumber: card.cardNumber,
@@ -491,6 +496,20 @@ export class CaseStewardshipService {
       formationStep: request?.status === CaseRequestStatus.OPEN ? request.formationStep : file.formationStep,
       revokeReason: file.status === CaseFileStatus.REVOKED ? file.revokeReason : null,
       revokeSource: file.status === CaseFileStatus.REVOKED ? file.revokeSource : null,
+      revokeRequestedAt:
+        file.status === CaseFileStatus.REVOKED
+          ? (file.revokeRequestedAt?.toISOString() ?? null)
+          : null,
+      revokedAt:
+        file.status === CaseFileStatus.REVOKED ? dateOnly(file.revokedAt) : null,
+      revokedBy:
+        file.status === CaseFileStatus.REVOKED && file.revokedBy
+          ? {
+              firstName: file.revokedBy.firstName,
+              lastName: file.revokedBy.lastName,
+              fullName: file.revokedBy.fullName,
+            }
+          : null,
       cardNumber: file.cardNumber,
       cardIssuedAt: dateOnly(file.cardIssuedAt),
       cardExpiresAt: dateOnly(file.cardExpiresAt),
@@ -549,7 +568,7 @@ const stewardListSelect = {
   requests: {
     orderBy: [{ createdAt: 'desc' as const }, { id: 'desc' as const }],
     take: 1,
-    select: { number: true, status: true },
+    select: { number: true, status: true, createdAt: true },
   },
 } satisfies Prisma.CaseFileSelect;
 
@@ -564,6 +583,7 @@ function mapStewardRow(row: Prisma.CaseFileGetPayload<{ select: typeof stewardLi
     nationalId: row.user.nationalId,
     requestNumber: request?.number ?? null,
     requestStatus: request?.status ?? null,
+    requestCreatedAt: dateOnly(request?.createdAt ?? null),
     cardNumber: row.cardNumber,
     cardIssuedAt: dateOnly(row.cardIssuedAt),
     cardExpiresAt: dateOnly(row.cardExpiresAt),
@@ -580,6 +600,9 @@ const stewardStateSelect = {
   trackingCode: true,
   revokeReason: true,
   revokeSource: true,
+  revokeRequestedAt: true,
+  revokedAt: true,
+  revokedBy: { select: { firstName: true, lastName: true, fullName: true } },
   cardNumber: true,
   cardIssuedAt: true,
   cardExpiresAt: true,

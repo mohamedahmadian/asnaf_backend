@@ -635,7 +635,7 @@ export class ViolationsService {
     const people = nationalIds.length
       ? await this.prisma.user.findMany({
           where: { nationalId: { in: nationalIds } },
-          select: { id: true, nationalId: true, fullName: true },
+          select: { id: true, nationalId: true, fullName: true, photoId: true },
         })
       : [];
     const byNationalId = new Map(
@@ -648,7 +648,7 @@ export class ViolationsService {
       return {
         ...this.mapDates(item),
         person: person
-          ? { id: person.id, fullName: person.fullName }
+          ? { id: person.id, fullName: person.fullName, photoId: person.photoId }
           : null,
       };
     });

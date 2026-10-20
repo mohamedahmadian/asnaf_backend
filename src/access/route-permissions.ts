@@ -64,6 +64,8 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/cases/formation', permissions: ['cases.formation'] },
   { prefix: '/cases', permissions: ['cases.management'] },
   { prefix: '/roles', permissions: ['management.roles'] },
+  { prefix: '/case-expiry', permissions: ['management.case-expiry'] },
+  { prefix: '/scheduled-jobs', permissions: ['management.schedules'] },
   { prefix: '/countries', permissions: ['base-info.countries'] },
   { prefix: '/provinces', permissions: ['base-info.provinces'] },
   { prefix: '/cities', permissions: ['base-info.cities'] },

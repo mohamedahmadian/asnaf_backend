@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { ECONOMIC_ACTOR_ROLE_CODE } from '../access/access.constants';
 import { loadUserAccess } from '../access/access.util';
 import { normalizeNationalId, toLatinDigits } from '../common/national-id';
 import { phoneLookupValues } from '../common/phone';
@@ -135,6 +136,16 @@ export class AuthService {
     }
     if (target.status !== UserStatus.ACTIVE) {
       throw new BadRequestException('ورود به پنل کاربر غیرفعال ممکن نیست');
+    }
+
+    const economicActor = await this.prisma.userRole.findFirst({
+      where: { userId: targetUserId, role: { code: ECONOMIC_ACTOR_ROLE_CODE } },
+      select: { id: true },
+    });
+    if (economicActor) {
+      throw new BadRequestException(
+        'برای ورود به پنل کاربری این شخص می بایست به پورتال فعالان اقتصادی مراجعه کنید',
+      );
     }
 
     const actor = await this.prisma.user.findUnique({

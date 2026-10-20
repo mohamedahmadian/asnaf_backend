@@ -97,26 +97,40 @@ export class ExpiringCasesService {
   async list(query: FindExpiringCasesQueryDto) {
     const range: ExpiringRange = query.range ?? 'this-week';
     const { start, end, today } = expiringWindow(range);
+    const expired = range === 'expired';
+    const expiresWithin = start ? { gte: start, lte: end } : { lte: end };
     const q = query.q?.trim();
     const digits = q ? normalizeSearchDigits(q) : '';
     const licenseQuery = q ? toLatinDigits(q).trim() : '';
     const where: Prisma.CaseFileWhereInput = {
       AND: [
-        {
-          OR: [
-            {
-              kind: CaseFileKind.LICENSE,
-              licenseNumber: { not: null },
-              licenseExpiresAt: { gte: start, lte: end },
+        expired
+          ? {
+              status: CaseFileStatus.EXPIRED,
+              OR: [
+                { kind: CaseFileKind.LICENSE, licenseNumber: { not: null } },
+                { kind: CaseFileKind.STEWARDSHIP, cardNumber: { not: null } },
+              ],
+            }
+          : {
+              OR: [
+                {
+                  kind: CaseFileKind.LICENSE,
+                  licenseNumber: { not: null },
+                  licenseExpiresAt: expiresWithin,
+                },
+                {
+                  kind: CaseFileKind.STEWARDSHIP,
+                  cardNumber: { not: null },
+                  cardExpiresAt: expiresWithin,
+                },
+              ],
             },
-            {
-              kind: CaseFileKind.STEWARDSHIP,
-              cardNumber: { not: null },
-              cardExpiresAt: { gte: start, lte: end },
-            },
-          ],
-        },
-        { status: query.status ?? { not: CaseFileStatus.REVOKED } },
+        expired
+          ? query.status
+            ? { status: query.status }
+            : {}
+          : { status: query.status ?? { not: CaseFileStatus.REVOKED } },
         query.jobId
           ? {
               OR: [
@@ -160,8 +174,14 @@ export class ExpiringCasesService {
     };
 
     const rows = await this.prisma.caseFile.findMany({ where, select: expiringSelect });
-    const dir = query.sortDir === 'desc' ? -1 : 1;
     const sortBy = query.sortBy ?? 'daysRemaining';
+    const dir = query.sortDir
+      ? query.sortDir === 'desc'
+        ? -1
+        : 1
+      : !query.sortBy && range === 'expired'
+        ? -1
+        : 1;
     rows.sort((left, right) => {
       const a = displayOf(left);
       const b = displayOf(right);

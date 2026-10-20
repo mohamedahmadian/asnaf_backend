@@ -178,6 +178,7 @@ model StoredImage {
   violationProceedingAttachments ViolationProceedingAttachment[] @relation("ViolationProceedingAttachmentImage")
   letterheadLogos        CaseLetterhead[] @relation("LetterheadLogo")
   letterheadSignatures   CaseLetterhead[] @relation("LetterheadSignature")
+  activityLicenseSignatures CaseActivityLicenseSettings[] @relation("ActivityLicenseSignature")
   paymentReceipts        PaymentReceipt[] @relation("PaymentReceiptImage")
   createdAt              DateTime @default(now())
 
@@ -761,6 +762,18 @@ model CaseLetterhead {
   @@map("case_letterheads")
 }
 
+/// امضای ثابت مجوز فعالیت اقتصادی؛ یک ردیف
+model CaseActivityLicenseSettings {
+  id          String       @id @default("default")
+  signerName  String?
+  signerTitle String?
+  signatureId String?      @unique
+  signature   StoredImage? @relation("ActivityLicenseSignature", fields: [signatureId], references: [id], onDelete: SetNull)
+  updatedAt   DateTime     @updatedAt
+
+  @@map("case_activity_license_settings")
+}
+
 /// تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
 model CasePlacesOffice {
   id            String   @id @default("default")
@@ -997,10 +1010,13 @@ enum CaseRequestStatus {
   CANCELLED
 }
 
-/// وضعیت عملیاتی پرونده. تعلیق فعال تا پایان بازه، پرونده را معلق نگه می‌دارد. ابطال با فعال‌سازی مجدد برداشته می‌شود.
+/// وضعیت ذخیره‌شدهٔ پرونده با اولویت ابطال > تعلیق > انقضا > فعال.
+/// فقط `syncCaseStatus` (رویدادها) و جاب شبانهٔ `CaseStatusService` آن را محاسبه می‌کنند؛ ابطال با فعال‌سازی مجدد برداشته می‌شود.
+/// کارت مباشرت با انقضای مجوز میزبان هم منقضی می‌شود.
 enum CaseFileStatus {
   ACTIVE
   SUSPENDED
+  EXPIRED
   REVOKED
 }
 
@@ -1212,6 +1228,8 @@ model CaseRequest {
   status        CaseRequestStatus @default(OPEN)
   /// مرحلهٔ همین درخواست. برای صدور همان ۰ تا ۶ است. نوع‌های دیگر مرحلهٔ جدا دارند.
   formationStep Int               @default(0)
+  /// ثبت اولیهٔ متقاضی؛ تا تأیید مدیریت، ارجاع استعلام ساخته نمی‌شود.
+  intakeSubmittedAt DateTime?
   completedAt   DateTime?
   inquiries     CaseInquiry[]
   placesReview  CasePlacesReview?
@@ -1651,6 +1669,7 @@ model User {
   paymentsAsPayer             Payment[] @relation("PaymentPayer")
   uploadedPaymentReceipts     PaymentReceipt[] @relation("PaymentReceiptUploader")
   deletedPayments             Payment[] @relation("PaymentDeleter")
+  scheduledJobRuns            ScheduledJobRun[] @relation("ScheduledJobRunner")
   createdAt          DateTime              @default(now())
   updatedAt          DateTime              @updatedAt
 
@@ -2834,4 +2853,80 @@ model SmsSettings {
   updatedAt    DateTime @updatedAt
 
   @@map("sms_settings")
+}
+
+enum SmsMessageStatus {
+  SKIPPED
+  SENT
+  FAILED
+}
+
+enum SmsMessageSource {
+  MANUAL
+  PASSWORD
+  PAYMENT_LINK
+  STEWARDSHIP
+}
+
+/// هر دستور ارسال پیامک؛ ارسال واقعی هنوز وصل نیست.
+model SmsMessage {
+  id           String           @id @default(uuid())
+  phone        String
+  body         String
+  status       SmsMessageStatus
+  source       SmsMessageSource @default(MANUAL)
+  errorMessage String?
+  createdAt    DateTime         @default(now())
+
+  @@index([createdAt])
+  @@index([phone])
+  @@index([status])
+  @@index([source])
+  @@map("sms_messages")
+}
+
+enum ScheduledJobTrigger {
+  SYSTEM
+  MANUAL
+}
+
+enum ScheduledJobRunStatus {
+  RUNNING
+  SUCCESS
+  FAILED
+  SKIPPED
+}
+
+/// تعریف پایدار کارهای زمان‌بندی؛ متادیتای نمایشی در رجیستری کد است.
+model ScheduledJob {
+  code        String                 @id
+  enabled     Boolean                @default(true)
+  lastRunAt   DateTime?
+  lastStatus  ScheduledJobRunStatus?
+  lastMessage String?
+  runs        ScheduledJobRun[]
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+
+  @@map("scheduled_jobs")
+}
+
+model ScheduledJobRun {
+  id            String                @id @default(uuid())
+  jobCode       String
+  job           ScheduledJob          @relation(fields: [jobCode], references: [code], onDelete: Cascade)
+  trigger       ScheduledJobTrigger
+  status        ScheduledJobRunStatus
+  startedAt     DateTime              @default(now())
+  finishedAt    DateTime?
+  message       String?
+  detail        Json?
+  triggeredById String?
+  triggeredBy   User?                 @relation("ScheduledJobRunner", fields: [triggeredById], references: [id], onDelete: SetNull)
+  createdAt     DateTime              @default(now())
+
+  @@index([jobCode, startedAt])
+  @@index([status])
+  @@index([triggeredById])
+  @@map("scheduled_job_runs")
 }

@@ -1,5 +1,13 @@
 import { Transform, Type } from 'class-transformer';
-import { IsEnum, IsIn, IsInt, IsOptional, IsUUID, Max, Min } from 'class-validator';
+import {
+  IsEnum,
+  IsIn,
+  IsInt,
+  IsOptional,
+  IsUUID,
+  Max,
+  Min,
+} from 'class-validator';
 import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
@@ -40,7 +48,12 @@ export const caseSortFields = [
 
 export type CaseSortField = (typeof caseSortFields)[number];
 
-export const placesViewFilters = ['referred', 'decided', 'reviewing', 'overdue'] as const;
+export const placesViewFilters = [
+  'referred',
+  'decided',
+  'reviewing',
+  'overdue',
+] as const;
 
 export type PlacesViewFilter = (typeof placesViewFilters)[number];
 

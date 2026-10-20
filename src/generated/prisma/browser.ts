@@ -138,6 +138,11 @@ export type CaseGeneralSettings = Prisma.CaseGeneralSettingsModel
  */
 export type CaseLetterhead = Prisma.CaseLetterheadModel
 /**
+ * Model CaseActivityLicenseSettings
+ * امضای ثابت مجوز فعالیت اقتصادی؛ یک ردیف
+ */
+export type CaseActivityLicenseSettings = Prisma.CaseActivityLicenseSettingsModel
+/**
  * Model CasePlacesOffice
  * تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
  */
@@ -588,3 +593,13 @@ export type ViolationProceedingAttachment = Prisma.ViolationProceedingAttachment
  * 
  */
 export type SmsSettings = Prisma.SmsSettingsModel
+/**
+ * Model ScheduledJob
+ * تعریف پایدار کارهای زمان‌بندی؛ متادیتای نمایشی در رجیستری کد است.
+ */
+export type ScheduledJob = Prisma.ScheduledJobModel
+/**
+ * Model ScheduledJobRun
+ * 
+ */
+export type ScheduledJobRun = Prisma.ScheduledJobRunModel

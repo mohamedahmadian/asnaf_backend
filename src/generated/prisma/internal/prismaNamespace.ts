@@ -421,6 +421,7 @@ export const ModelName = {
   CaseInquiryFile: 'CaseInquiryFile',
   CaseGeneralSettings: 'CaseGeneralSettings',
   CaseLetterhead: 'CaseLetterhead',
+  CaseActivityLicenseSettings: 'CaseActivityLicenseSettings',
   CasePlacesOffice: 'CasePlacesOffice',
   CaseRevocationSettings: 'CaseRevocationSettings',
   CaseRevocationOrganization: 'CaseRevocationOrganization',
@@ -510,7 +511,9 @@ export const ModelName = {
   ViolationAttachment: 'ViolationAttachment',
   ViolationProceeding: 'ViolationProceeding',
   ViolationProceedingAttachment: 'ViolationProceedingAttachment',
-  SmsSettings: 'SmsSettings'
+  SmsSettings: 'SmsSettings',
+  ScheduledJob: 'ScheduledJob',
+  ScheduledJobRun: 'ScheduledJobRun'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -526,7 +529,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestFinance" | "caseRequestFee" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "caseActivityLicenseSettings" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestFinance" | "caseRequestFee" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings" | "scheduledJob" | "scheduledJobRun"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2303,6 +2306,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseLetterheadCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseLetterheadCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseActivityLicenseSettings: {
+      payload: Prisma.$CaseActivityLicenseSettingsPayload<ExtArgs>
+      fields: Prisma.CaseActivityLicenseSettingsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseActivityLicenseSettingsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseActivityLicenseSettingsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseActivityLicenseSettingsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseActivityLicenseSettingsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>
+        }
+        findMany: {
+          args: Prisma.CaseActivityLicenseSettingsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>[]
+        }
+        create: {
+          args: Prisma.CaseActivityLicenseSettingsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>
+        }
+        createMany: {
+          args: Prisma.CaseActivityLicenseSettingsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseActivityLicenseSettingsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseActivityLicenseSettingsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>
+        }
+        update: {
+          args: Prisma.CaseActivityLicenseSettingsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseActivityLicenseSettingsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseActivityLicenseSettingsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseActivityLicenseSettingsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseActivityLicenseSettingsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseActivityLicenseSettingsPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseActivityLicenseSettingsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseActivityLicenseSettings>
+        }
+        groupBy: {
+          args: Prisma.CaseActivityLicenseSettingsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseActivityLicenseSettingsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseActivityLicenseSettingsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseActivityLicenseSettingsCountAggregateOutputType> | number
         }
       }
     }
@@ -8966,6 +9043,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ScheduledJob: {
+      payload: Prisma.$ScheduledJobPayload<ExtArgs>
+      fields: Prisma.ScheduledJobFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ScheduledJobFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ScheduledJobFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>
+        }
+        findFirst: {
+          args: Prisma.ScheduledJobFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ScheduledJobFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>
+        }
+        findMany: {
+          args: Prisma.ScheduledJobFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>[]
+        }
+        create: {
+          args: Prisma.ScheduledJobCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>
+        }
+        createMany: {
+          args: Prisma.ScheduledJobCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ScheduledJobCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>[]
+        }
+        delete: {
+          args: Prisma.ScheduledJobDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>
+        }
+        update: {
+          args: Prisma.ScheduledJobUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>
+        }
+        deleteMany: {
+          args: Prisma.ScheduledJobDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ScheduledJobUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ScheduledJobUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>[]
+        }
+        upsert: {
+          args: Prisma.ScheduledJobUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobPayload>
+        }
+        aggregate: {
+          args: Prisma.ScheduledJobAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateScheduledJob>
+        }
+        groupBy: {
+          args: Prisma.ScheduledJobGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScheduledJobGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ScheduledJobCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScheduledJobCountAggregateOutputType> | number
+        }
+      }
+    }
+    ScheduledJobRun: {
+      payload: Prisma.$ScheduledJobRunPayload<ExtArgs>
+      fields: Prisma.ScheduledJobRunFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ScheduledJobRunFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ScheduledJobRunFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>
+        }
+        findFirst: {
+          args: Prisma.ScheduledJobRunFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ScheduledJobRunFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>
+        }
+        findMany: {
+          args: Prisma.ScheduledJobRunFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>[]
+        }
+        create: {
+          args: Prisma.ScheduledJobRunCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>
+        }
+        createMany: {
+          args: Prisma.ScheduledJobRunCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ScheduledJobRunCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>[]
+        }
+        delete: {
+          args: Prisma.ScheduledJobRunDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>
+        }
+        update: {
+          args: Prisma.ScheduledJobRunUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>
+        }
+        deleteMany: {
+          args: Prisma.ScheduledJobRunDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ScheduledJobRunUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ScheduledJobRunUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>[]
+        }
+        upsert: {
+          args: Prisma.ScheduledJobRunUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ScheduledJobRunPayload>
+        }
+        aggregate: {
+          args: Prisma.ScheduledJobRunAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateScheduledJobRun>
+        }
+        groupBy: {
+          args: Prisma.ScheduledJobRunGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScheduledJobRunGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ScheduledJobRunCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ScheduledJobRunCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -9385,6 +9610,17 @@ export const CaseLetterheadScalarFieldEnum = {
 export type CaseLetterheadScalarFieldEnum = (typeof CaseLetterheadScalarFieldEnum)[keyof typeof CaseLetterheadScalarFieldEnum]
 
 
+export const CaseActivityLicenseSettingsScalarFieldEnum = {
+  id: 'id',
+  signerName: 'signerName',
+  signerTitle: 'signerTitle',
+  signatureId: 'signatureId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseActivityLicenseSettingsScalarFieldEnum = (typeof CaseActivityLicenseSettingsScalarFieldEnum)[keyof typeof CaseActivityLicenseSettingsScalarFieldEnum]
+
+
 export const CasePlacesOfficeScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -9670,6 +9906,7 @@ export const CaseRequestScalarFieldEnum = {
   number: 'number',
   status: 'status',
   formationStep: 'formationStep',
+  intakeSubmittedAt: 'intakeSubmittedAt',
   completedAt: 'completedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -10774,6 +11011,35 @@ export const SmsSettingsScalarFieldEnum = {
 export type SmsSettingsScalarFieldEnum = (typeof SmsSettingsScalarFieldEnum)[keyof typeof SmsSettingsScalarFieldEnum]
 
 
+export const ScheduledJobScalarFieldEnum = {
+  code: 'code',
+  enabled: 'enabled',
+  lastRunAt: 'lastRunAt',
+  lastStatus: 'lastStatus',
+  lastMessage: 'lastMessage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ScheduledJobScalarFieldEnum = (typeof ScheduledJobScalarFieldEnum)[keyof typeof ScheduledJobScalarFieldEnum]
+
+
+export const ScheduledJobRunScalarFieldEnum = {
+  id: 'id',
+  jobCode: 'jobCode',
+  trigger: 'trigger',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  message: 'message',
+  detail: 'detail',
+  triggeredById: 'triggeredById',
+  createdAt: 'createdAt'
+} as const
+
+export type ScheduledJobRunScalarFieldEnum = (typeof ScheduledJobRunScalarFieldEnum)[keyof typeof ScheduledJobRunScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -11599,6 +11865,34 @@ export type ListEnumViolationAttachmentKindFieldRefInput<$PrismaModel> = FieldRe
 
 
 /**
+ * Reference to a field of type 'ScheduledJobRunStatus'
+ */
+export type EnumScheduledJobRunStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduledJobRunStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ScheduledJobRunStatus[]'
+ */
+export type ListEnumScheduledJobRunStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduledJobRunStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ScheduledJobTrigger'
+ */
+export type EnumScheduledJobTriggerFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduledJobTrigger'>
+    
+
+
+/**
+ * Reference to a field of type 'ScheduledJobTrigger[]'
+ */
+export type ListEnumScheduledJobTriggerFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduledJobTrigger[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -11786,6 +12080,7 @@ export type GlobalOmitConfig = {
   caseInquiryFile?: Prisma.CaseInquiryFileOmit
   caseGeneralSettings?: Prisma.CaseGeneralSettingsOmit
   caseLetterhead?: Prisma.CaseLetterheadOmit
+  caseActivityLicenseSettings?: Prisma.CaseActivityLicenseSettingsOmit
   casePlacesOffice?: Prisma.CasePlacesOfficeOmit
   caseRevocationSettings?: Prisma.CaseRevocationSettingsOmit
   caseRevocationOrganization?: Prisma.CaseRevocationOrganizationOmit
@@ -11876,6 +12171,8 @@ export type GlobalOmitConfig = {
   violationProceeding?: Prisma.ViolationProceedingOmit
   violationProceedingAttachment?: Prisma.ViolationProceedingAttachmentOmit
   smsSettings?: Prisma.SmsSettingsOmit
+  scheduledJob?: Prisma.ScheduledJobOmit
+  scheduledJobRun?: Prisma.ScheduledJobRunOmit
 }
 
 /* Types for Logging */

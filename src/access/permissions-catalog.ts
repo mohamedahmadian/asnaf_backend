@@ -31,18 +31,6 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
-    code: 'reports',
-    kind: 'MODULE',
-    nameKey: 'modules.reports',
-    children: [
-      { code: 'reports.expiring-cases', kind: 'MENU', nameKey: 'menus.expiringCases' },
-      { code: 'reports.inquiry-centers', kind: 'MENU', nameKey: 'menus.caseInquiriesReports' },
-      { code: 'reports.places-cases', kind: 'MENU', nameKey: 'menus.casePlacesReports' },
-      { code: 'reports.referred-cases', kind: 'MENU', nameKey: 'menus.caseManagementReviewsReports' },
-      { code: 'reports.case-files', kind: 'MENU', nameKey: 'menus.caseReports' },
-    ],
-  },
-  {
     code: 'finance',
     kind: 'MODULE',
     nameKey: 'modules.finance',
@@ -53,6 +41,18 @@ export const PERMISSION_TREE: PermissionNode[] = [
       { code: 'finance.settings', kind: 'MENU', nameKey: 'menus.financialSettings' },
       { code: 'finance.payments', kind: 'MENU', nameKey: 'menus.payments' },
       { code: 'finance.payment-history', kind: 'MENU', nameKey: 'menus.paymentHistory' },
+    ],
+  },
+  {
+    code: 'reports',
+    kind: 'MODULE',
+    nameKey: 'modules.reports',
+    children: [
+      { code: 'reports.expiring-cases', kind: 'MENU', nameKey: 'menus.expiringCases' },
+      { code: 'reports.inquiry-centers', kind: 'MENU', nameKey: 'menus.caseInquiriesReports' },
+      { code: 'reports.places-cases', kind: 'MENU', nameKey: 'menus.casePlacesReports' },
+      { code: 'reports.referred-cases', kind: 'MENU', nameKey: 'menus.caseManagementReviewsReports' },
+      { code: 'reports.case-files', kind: 'MENU', nameKey: 'menus.caseReports' },
     ],
   },
   {
@@ -143,6 +143,8 @@ export const PERMISSION_TREE: PermissionNode[] = [
       },
       { code: 'management.users', kind: 'MENU', nameKey: 'menus.users' },
       { code: 'management.roles', kind: 'MENU', nameKey: 'menus.roles' },
+      { code: 'management.case-expiry', kind: 'MENU', nameKey: 'menus.caseExpiry' },
+      { code: 'management.schedules', kind: 'MENU', nameKey: 'menus.schedules' },
     ],
   },
 ];
