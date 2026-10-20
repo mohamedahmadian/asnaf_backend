@@ -237,8 +237,8 @@ ADMIN_URL="postgresql://${ADMIN_USER}:$(uri_encode "$ADMIN_PASSWORD")@${PGHOST}:
 PORTAL_URL="postgresql://${PORTAL_USER}:$(uri_encode "$PORTAL_PASSWORD")@${PGHOST}:${PGPORT}/${PGDATABASE}?schema=public"
 
 echo
-echo "تمام شد. این مقادیر را در .env بگذارید:"
-echo "  backend/.env            DATABASE_URL=$ADMIN_URL"
-echo "  asnaf-portal-backend/.env DATABASE_URL=$PORTAL_URL"
+echo "تمام شد. این مقادیر را در DATABASE_URL هر سرویس بگذارید:"
+echo "  مدیریت   DATABASE_URL=$ADMIN_URL"
+echo "  پورتال   DATABASE_URL=$PORTAL_URL"
 echo
 echo "بعد از prisma migrate، همین اسکریپت را دوباره اجرا کنید تا دسترسی پورتال روی جدول‌های جدید اعمال شود."

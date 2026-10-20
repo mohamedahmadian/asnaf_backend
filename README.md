@@ -33,10 +33,12 @@ npm run db:users:server   # سرور
 
 | نقش | پروژه | دسترسی |
 |---|---|---|
-| `asnaf_admin` | همین بک‌اند | مالک اسکیما، DDL + DML، `prisma migrate` |
-| `asnaf_portal` | `asnaf-portal-backend` | فقط DML روی جداول پرونده/هویت؛ بدون ALTER/DROP و بدون ماژول‌های داخلی |
+| `asnaf_admin` | همین بک‌اند | مالک اسکیما، DDL + DML؛ لوکال `migrate dev`، سرور `migrate deploy` |
+| `asnaf_portal` | API پورتال | فقط DML روی جداول پرونده/هویت؛ بدون ALTER/DROP و بدون ماژول‌های داخلی |
 
 `DATABASE_URL` مدیریت را روی `asnaf_admin` و پورتال را روی `asnaf_portal` بگذارید. بعد از مایگریشن جدید، همان اسکریپت را دوباره اجرا کنید.
+
+روی سرور فقط `npm run prisma:migrate:deploy` بزنید. `prisma migrate dev` دیتابیس سایه می‌سازد و `asnaf_admin` آنجا `CREATEDB` ندارد.
 
 ورود پیش‌فرض: `admin` / `Admin1234`
 
