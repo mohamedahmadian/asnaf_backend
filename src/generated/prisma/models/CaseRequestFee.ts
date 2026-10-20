@@ -42,6 +42,7 @@ export type CaseRequestFeeMinAggregateOutputType = {
   municipalFeeId: string | null
   title: string | null
   amount: runtime.Decimal | null
+  calcKind: $Enums.MunicipalFeeCalcKind | null
   sortOrder: number | null
   createdAt: Date | null
 }
@@ -52,6 +53,7 @@ export type CaseRequestFeeMaxAggregateOutputType = {
   municipalFeeId: string | null
   title: string | null
   amount: runtime.Decimal | null
+  calcKind: $Enums.MunicipalFeeCalcKind | null
   sortOrder: number | null
   createdAt: Date | null
 }
@@ -62,6 +64,8 @@ export type CaseRequestFeeCountAggregateOutputType = {
   municipalFeeId: number
   title: number
   amount: number
+  calcKind: number
+  calcInputs: number
   sortOrder: number
   createdAt: number
   _all: number
@@ -84,6 +88,7 @@ export type CaseRequestFeeMinAggregateInputType = {
   municipalFeeId?: true
   title?: true
   amount?: true
+  calcKind?: true
   sortOrder?: true
   createdAt?: true
 }
@@ -94,6 +99,7 @@ export type CaseRequestFeeMaxAggregateInputType = {
   municipalFeeId?: true
   title?: true
   amount?: true
+  calcKind?: true
   sortOrder?: true
   createdAt?: true
 }
@@ -104,6 +110,8 @@ export type CaseRequestFeeCountAggregateInputType = {
   municipalFeeId?: true
   title?: true
   amount?: true
+  calcKind?: true
+  calcInputs?: true
   sortOrder?: true
   createdAt?: true
   _all?: true
@@ -201,6 +209,8 @@ export type CaseRequestFeeGroupByOutputType = {
   municipalFeeId: string
   title: string
   amount: runtime.Decimal
+  calcKind: $Enums.MunicipalFeeCalcKind
+  calcInputs: runtime.JsonValue | null
   sortOrder: number
   createdAt: Date
   _count: CaseRequestFeeCountAggregateOutputType | null
@@ -234,6 +244,8 @@ export type CaseRequestFeeWhereInput = {
   municipalFeeId?: Prisma.StringFilter<"CaseRequestFee"> | string
   title?: Prisma.StringFilter<"CaseRequestFee"> | string
   amount?: Prisma.DecimalFilter<"CaseRequestFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFilter<"CaseRequestFee"> | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.JsonNullableFilter<"CaseRequestFee">
   sortOrder?: Prisma.IntFilter<"CaseRequestFee"> | number
   createdAt?: Prisma.DateTimeFilter<"CaseRequestFee"> | Date | string
   finance?: Prisma.XOR<Prisma.CaseRequestFinanceScalarRelationFilter, Prisma.CaseRequestFinanceWhereInput>
@@ -246,6 +258,8 @@ export type CaseRequestFeeOrderByWithRelationInput = {
   municipalFeeId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
+  calcInputs?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   finance?: Prisma.CaseRequestFinanceOrderByWithRelationInput
@@ -262,6 +276,8 @@ export type CaseRequestFeeWhereUniqueInput = Prisma.AtLeast<{
   municipalFeeId?: Prisma.StringFilter<"CaseRequestFee"> | string
   title?: Prisma.StringFilter<"CaseRequestFee"> | string
   amount?: Prisma.DecimalFilter<"CaseRequestFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFilter<"CaseRequestFee"> | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.JsonNullableFilter<"CaseRequestFee">
   sortOrder?: Prisma.IntFilter<"CaseRequestFee"> | number
   createdAt?: Prisma.DateTimeFilter<"CaseRequestFee"> | Date | string
   finance?: Prisma.XOR<Prisma.CaseRequestFinanceScalarRelationFilter, Prisma.CaseRequestFinanceWhereInput>
@@ -274,6 +290,8 @@ export type CaseRequestFeeOrderByWithAggregationInput = {
   municipalFeeId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
+  calcInputs?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.CaseRequestFeeCountOrderByAggregateInput
@@ -292,6 +310,8 @@ export type CaseRequestFeeScalarWhereWithAggregatesInput = {
   municipalFeeId?: Prisma.StringWithAggregatesFilter<"CaseRequestFee"> | string
   title?: Prisma.StringWithAggregatesFilter<"CaseRequestFee"> | string
   amount?: Prisma.DecimalWithAggregatesFilter<"CaseRequestFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindWithAggregatesFilter<"CaseRequestFee"> | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.JsonNullableWithAggregatesFilter<"CaseRequestFee">
   sortOrder?: Prisma.IntWithAggregatesFilter<"CaseRequestFee"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseRequestFee"> | Date | string
 }
@@ -300,6 +320,8 @@ export type CaseRequestFeeCreateInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
   finance: Prisma.CaseRequestFinanceCreateNestedOneWithoutFeesInput
@@ -312,6 +334,8 @@ export type CaseRequestFeeUncheckedCreateInput = {
   municipalFeeId: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -320,6 +344,8 @@ export type CaseRequestFeeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finance?: Prisma.CaseRequestFinanceUpdateOneRequiredWithoutFeesNestedInput
@@ -332,6 +358,8 @@ export type CaseRequestFeeUncheckedUpdateInput = {
   municipalFeeId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -342,6 +370,8 @@ export type CaseRequestFeeCreateManyInput = {
   municipalFeeId: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -350,6 +380,8 @@ export type CaseRequestFeeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -360,6 +392,8 @@ export type CaseRequestFeeUncheckedUpdateManyInput = {
   municipalFeeId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -385,6 +419,8 @@ export type CaseRequestFeeCountOrderByAggregateInput = {
   municipalFeeId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
+  calcInputs?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -400,6 +436,7 @@ export type CaseRequestFeeMaxOrderByAggregateInput = {
   municipalFeeId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -410,6 +447,7 @@ export type CaseRequestFeeMinOrderByAggregateInput = {
   municipalFeeId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -507,6 +545,8 @@ export type CaseRequestFeeCreateWithoutMunicipalFeeInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
   finance: Prisma.CaseRequestFinanceCreateNestedOneWithoutFeesInput
@@ -517,6 +557,8 @@ export type CaseRequestFeeUncheckedCreateWithoutMunicipalFeeInput = {
   requestId: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -556,6 +598,8 @@ export type CaseRequestFeeScalarWhereInput = {
   municipalFeeId?: Prisma.StringFilter<"CaseRequestFee"> | string
   title?: Prisma.StringFilter<"CaseRequestFee"> | string
   amount?: Prisma.DecimalFilter<"CaseRequestFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFilter<"CaseRequestFee"> | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.JsonNullableFilter<"CaseRequestFee">
   sortOrder?: Prisma.IntFilter<"CaseRequestFee"> | number
   createdAt?: Prisma.DateTimeFilter<"CaseRequestFee"> | Date | string
 }
@@ -564,6 +608,8 @@ export type CaseRequestFeeCreateWithoutFinanceInput = {
   id?: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
   municipalFee: Prisma.MunicipalFeeCreateNestedOneWithoutCaseRequestFeesInput
@@ -574,6 +620,8 @@ export type CaseRequestFeeUncheckedCreateWithoutFinanceInput = {
   municipalFeeId: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -609,6 +657,8 @@ export type CaseRequestFeeCreateManyMunicipalFeeInput = {
   requestId: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -617,6 +667,8 @@ export type CaseRequestFeeUpdateWithoutMunicipalFeeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finance?: Prisma.CaseRequestFinanceUpdateOneRequiredWithoutFeesNestedInput
@@ -627,6 +679,8 @@ export type CaseRequestFeeUncheckedUpdateWithoutMunicipalFeeInput = {
   requestId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -636,6 +690,8 @@ export type CaseRequestFeeUncheckedUpdateManyWithoutMunicipalFeeInput = {
   requestId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -645,6 +701,8 @@ export type CaseRequestFeeCreateManyFinanceInput = {
   municipalFeeId: string
   title: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: number
   createdAt?: Date | string
 }
@@ -653,6 +711,8 @@ export type CaseRequestFeeUpdateWithoutFinanceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   municipalFee?: Prisma.MunicipalFeeUpdateOneRequiredWithoutCaseRequestFeesNestedInput
@@ -663,6 +723,8 @@ export type CaseRequestFeeUncheckedUpdateWithoutFinanceInput = {
   municipalFeeId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -672,6 +734,8 @@ export type CaseRequestFeeUncheckedUpdateManyWithoutFinanceInput = {
   municipalFeeId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
+  calcInputs?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -684,6 +748,8 @@ export type CaseRequestFeeSelect<ExtArgs extends runtime.Types.Extensions.Intern
   municipalFeeId?: boolean
   title?: boolean
   amount?: boolean
+  calcKind?: boolean
+  calcInputs?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   finance?: boolean | Prisma.CaseRequestFinanceDefaultArgs<ExtArgs>
@@ -696,6 +762,8 @@ export type CaseRequestFeeSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   municipalFeeId?: boolean
   title?: boolean
   amount?: boolean
+  calcKind?: boolean
+  calcInputs?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   finance?: boolean | Prisma.CaseRequestFinanceDefaultArgs<ExtArgs>
@@ -708,6 +776,8 @@ export type CaseRequestFeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   municipalFeeId?: boolean
   title?: boolean
   amount?: boolean
+  calcKind?: boolean
+  calcInputs?: boolean
   sortOrder?: boolean
   createdAt?: boolean
   finance?: boolean | Prisma.CaseRequestFinanceDefaultArgs<ExtArgs>
@@ -720,11 +790,13 @@ export type CaseRequestFeeSelectScalar = {
   municipalFeeId?: boolean
   title?: boolean
   amount?: boolean
+  calcKind?: boolean
+  calcInputs?: boolean
   sortOrder?: boolean
   createdAt?: boolean
 }
 
-export type CaseRequestFeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requestId" | "municipalFeeId" | "title" | "amount" | "sortOrder" | "createdAt", ExtArgs["result"]["caseRequestFee"]>
+export type CaseRequestFeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requestId" | "municipalFeeId" | "title" | "amount" | "calcKind" | "calcInputs" | "sortOrder" | "createdAt", ExtArgs["result"]["caseRequestFee"]>
 export type CaseRequestFeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   finance?: boolean | Prisma.CaseRequestFinanceDefaultArgs<ExtArgs>
   municipalFee?: boolean | Prisma.MunicipalFeeDefaultArgs<ExtArgs>
@@ -750,6 +822,11 @@ export type $CaseRequestFeePayload<ExtArgs extends runtime.Types.Extensions.Inte
     municipalFeeId: string
     title: string
     amount: runtime.Decimal
+    calcKind: $Enums.MunicipalFeeCalcKind
+    /**
+     * ورودی‌های محاسبه‌شده هنگام ساخت سطر؛ برای نمایش و رد
+     */
+    calcInputs: runtime.JsonValue | null
     sortOrder: number
     createdAt: Date
   }, ExtArgs["result"]["caseRequestFee"]>
@@ -1182,6 +1259,8 @@ export interface CaseRequestFeeFieldRefs {
   readonly municipalFeeId: Prisma.FieldRef<"CaseRequestFee", 'String'>
   readonly title: Prisma.FieldRef<"CaseRequestFee", 'String'>
   readonly amount: Prisma.FieldRef<"CaseRequestFee", 'Decimal'>
+  readonly calcKind: Prisma.FieldRef<"CaseRequestFee", 'MunicipalFeeCalcKind'>
+  readonly calcInputs: Prisma.FieldRef<"CaseRequestFee", 'Json'>
   readonly sortOrder: Prisma.FieldRef<"CaseRequestFee", 'Int'>
   readonly createdAt: Prisma.FieldRef<"CaseRequestFee", 'DateTime'>
 }

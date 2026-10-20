@@ -28,10 +28,12 @@ export type AggregateJobType = {
 
 export type JobTypeAvgAggregateOutputType = {
   annualFee: runtime.Decimal | null
+  annualAreaTariff: runtime.Decimal | null
 }
 
 export type JobTypeSumAggregateOutputType = {
   annualFee: runtime.Decimal | null
+  annualAreaTariff: runtime.Decimal | null
 }
 
 export type JobTypeMinAggregateOutputType = {
@@ -39,6 +41,7 @@ export type JobTypeMinAggregateOutputType = {
   title: string | null
   description: string | null
   annualFee: runtime.Decimal | null
+  annualAreaTariff: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -48,6 +51,7 @@ export type JobTypeMaxAggregateOutputType = {
   title: string | null
   description: string | null
   annualFee: runtime.Decimal | null
+  annualAreaTariff: runtime.Decimal | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -57,6 +61,7 @@ export type JobTypeCountAggregateOutputType = {
   title: number
   description: number
   annualFee: number
+  annualAreaTariff: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -65,10 +70,12 @@ export type JobTypeCountAggregateOutputType = {
 
 export type JobTypeAvgAggregateInputType = {
   annualFee?: true
+  annualAreaTariff?: true
 }
 
 export type JobTypeSumAggregateInputType = {
   annualFee?: true
+  annualAreaTariff?: true
 }
 
 export type JobTypeMinAggregateInputType = {
@@ -76,6 +83,7 @@ export type JobTypeMinAggregateInputType = {
   title?: true
   description?: true
   annualFee?: true
+  annualAreaTariff?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -85,6 +93,7 @@ export type JobTypeMaxAggregateInputType = {
   title?: true
   description?: true
   annualFee?: true
+  annualAreaTariff?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -94,6 +103,7 @@ export type JobTypeCountAggregateInputType = {
   title?: true
   description?: true
   annualFee?: true
+  annualAreaTariff?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -190,6 +200,7 @@ export type JobTypeGroupByOutputType = {
   title: string
   description: string | null
   annualFee: runtime.Decimal | null
+  annualAreaTariff: runtime.Decimal | null
   createdAt: Date
   updatedAt: Date
   _count: JobTypeCountAggregateOutputType | null
@@ -222,6 +233,7 @@ export type JobTypeWhereInput = {
   title?: Prisma.StringFilter<"JobType"> | string
   description?: Prisma.StringNullableFilter<"JobType"> | string | null
   annualFee?: Prisma.DecimalNullableFilter<"JobType"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.DecimalNullableFilter<"JobType"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"JobType"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"JobType"> | Date | string
   jobs?: Prisma.JobListRelationFilter
@@ -232,6 +244,7 @@ export type JobTypeOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   annualFee?: Prisma.SortOrderInput | Prisma.SortOrder
+  annualAreaTariff?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   jobs?: Prisma.JobOrderByRelationAggregateInput
@@ -245,6 +258,7 @@ export type JobTypeWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.JobTypeWhereInput | Prisma.JobTypeWhereInput[]
   description?: Prisma.StringNullableFilter<"JobType"> | string | null
   annualFee?: Prisma.DecimalNullableFilter<"JobType"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.DecimalNullableFilter<"JobType"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFilter<"JobType"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"JobType"> | Date | string
   jobs?: Prisma.JobListRelationFilter
@@ -255,6 +269,7 @@ export type JobTypeOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   annualFee?: Prisma.SortOrderInput | Prisma.SortOrder
+  annualAreaTariff?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.JobTypeCountOrderByAggregateInput
@@ -272,6 +287,7 @@ export type JobTypeScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"JobType"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"JobType"> | string | null
   annualFee?: Prisma.DecimalNullableWithAggregatesFilter<"JobType"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.DecimalNullableWithAggregatesFilter<"JobType"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"JobType"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"JobType"> | Date | string
 }
@@ -281,6 +297,7 @@ export type JobTypeCreateInput = {
   title: string
   description?: string | null
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobCreateNestedManyWithoutJobTypeInput
@@ -291,6 +308,7 @@ export type JobTypeUncheckedCreateInput = {
   title: string
   description?: string | null
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   jobs?: Prisma.JobUncheckedCreateNestedManyWithoutJobTypeInput
@@ -301,6 +319,7 @@ export type JobTypeUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobUpdateManyWithoutJobTypeNestedInput
@@ -311,6 +330,7 @@ export type JobTypeUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jobs?: Prisma.JobUncheckedUpdateManyWithoutJobTypeNestedInput
@@ -321,6 +341,7 @@ export type JobTypeCreateManyInput = {
   title: string
   description?: string | null
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -330,6 +351,7 @@ export type JobTypeUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -339,6 +361,7 @@ export type JobTypeUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -348,12 +371,14 @@ export type JobTypeCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   annualFee?: Prisma.SortOrder
+  annualAreaTariff?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type JobTypeAvgOrderByAggregateInput = {
   annualFee?: Prisma.SortOrder
+  annualAreaTariff?: Prisma.SortOrder
 }
 
 export type JobTypeMaxOrderByAggregateInput = {
@@ -361,6 +386,7 @@ export type JobTypeMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   annualFee?: Prisma.SortOrder
+  annualAreaTariff?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -370,12 +396,14 @@ export type JobTypeMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   annualFee?: Prisma.SortOrder
+  annualAreaTariff?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type JobTypeSumOrderByAggregateInput = {
   annualFee?: Prisma.SortOrder
+  annualAreaTariff?: Prisma.SortOrder
 }
 
 export type JobTypeScalarRelationFilter = {
@@ -402,6 +430,7 @@ export type JobTypeCreateWithoutJobsInput = {
   title: string
   description?: string | null
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -411,6 +440,7 @@ export type JobTypeUncheckedCreateWithoutJobsInput = {
   title: string
   description?: string | null
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -436,6 +466,7 @@ export type JobTypeUpdateWithoutJobsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -445,6 +476,7 @@ export type JobTypeUncheckedUpdateWithoutJobsInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  annualAreaTariff?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -485,6 +517,7 @@ export type JobTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   title?: boolean
   description?: boolean
   annualFee?: boolean
+  annualAreaTariff?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   jobs?: boolean | Prisma.JobType$jobsArgs<ExtArgs>
@@ -496,6 +529,7 @@ export type JobTypeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   description?: boolean
   annualFee?: boolean
+  annualAreaTariff?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["jobType"]>
@@ -505,6 +539,7 @@ export type JobTypeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   description?: boolean
   annualFee?: boolean
+  annualAreaTariff?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["jobType"]>
@@ -514,11 +549,12 @@ export type JobTypeSelectScalar = {
   title?: boolean
   description?: boolean
   annualFee?: boolean
+  annualAreaTariff?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type JobTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "annualFee" | "createdAt" | "updatedAt", ExtArgs["result"]["jobType"]>
+export type JobTypeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "annualFee" | "annualAreaTariff" | "createdAt" | "updatedAt", ExtArgs["result"]["jobType"]>
 export type JobTypeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | Prisma.JobType$jobsArgs<ExtArgs>
   _count?: boolean | Prisma.JobTypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -539,6 +575,10 @@ export type $JobTypePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
      * عوارض سالیانه؛ برای شغل‌هایی که عوارض جداگانه ندارند در محاسبه استفاده می‌شود
      */
     annualFee: runtime.Decimal | null
+    /**
+     * تعرفه سالیانه متراژ سازمان؛ برای همه شغل‌های این نوع خدمت
+     */
+    annualAreaTariff: runtime.Decimal | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["jobType"]>
@@ -969,6 +1009,7 @@ export interface JobTypeFieldRefs {
   readonly title: Prisma.FieldRef<"JobType", 'String'>
   readonly description: Prisma.FieldRef<"JobType", 'String'>
   readonly annualFee: Prisma.FieldRef<"JobType", 'Decimal'>
+  readonly annualAreaTariff: Prisma.FieldRef<"JobType", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"JobType", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"JobType", 'DateTime'>
 }

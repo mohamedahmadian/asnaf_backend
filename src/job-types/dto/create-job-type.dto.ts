@@ -54,4 +54,12 @@ export class CreateJobTypeDto {
   @Min(0)
   @Max(9_007_199_254_740_991)
   annualFee?: number | null;
+
+  @IsOptional()
+  @Transform(({ value }) => toOptionalFee(value))
+  @ValidateIf((_, value) => value != null)
+  @IsInt()
+  @Min(0)
+  @Max(9_007_199_254_740_991)
+  annualAreaTariff?: number | null;
 }

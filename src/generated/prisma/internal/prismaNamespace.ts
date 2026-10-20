@@ -9400,6 +9400,7 @@ export const MunicipalFeeScalarFieldEnum = {
   description: 'description',
   isActive: 'isActive',
   amount: 'amount',
+  calcKind: 'calcKind',
   processTypes: 'processTypes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -9547,6 +9548,7 @@ export const JobTypeScalarFieldEnum = {
   title: 'title',
   description: 'description',
   annualFee: 'annualFee',
+  annualAreaTariff: 'annualAreaTariff',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -9868,6 +9870,7 @@ export const CaseFileScalarFieldEnum = {
   trackingCode: 'trackingCode',
   licenseNumber: 'licenseNumber',
   licenseIssuedAt: 'licenseIssuedAt',
+  firstIssuedAt: 'firstIssuedAt',
   licenseExpiresAt: 'licenseExpiresAt',
   businessUnitTitle: 'businessUnitTitle',
   activityJobId: 'activityJobId',
@@ -10006,6 +10009,8 @@ export const CaseRequestFeeScalarFieldEnum = {
   municipalFeeId: 'municipalFeeId',
   title: 'title',
   amount: 'amount',
+  calcKind: 'calcKind',
+  calcInputs: 'calcInputs',
   sortOrder: 'sortOrder',
   createdAt: 'createdAt'
 } as const
@@ -11249,6 +11254,20 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MunicipalFeeCalcKind'
+ */
+export type EnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunicipalFeeCalcKind'>
+    
+
+
+/**
+ * Reference to a field of type 'MunicipalFeeCalcKind[]'
+ */
+export type ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MunicipalFeeCalcKind[]'>
     
 
 

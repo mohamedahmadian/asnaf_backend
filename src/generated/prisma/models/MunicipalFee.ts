@@ -41,6 +41,7 @@ export type MunicipalFeeMinAggregateOutputType = {
   description: string | null
   isActive: boolean | null
   amount: runtime.Decimal | null
+  calcKind: $Enums.MunicipalFeeCalcKind | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -52,6 +53,7 @@ export type MunicipalFeeMaxAggregateOutputType = {
   description: string | null
   isActive: boolean | null
   amount: runtime.Decimal | null
+  calcKind: $Enums.MunicipalFeeCalcKind | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,6 +65,7 @@ export type MunicipalFeeCountAggregateOutputType = {
   description: number
   isActive: number
   amount: number
+  calcKind: number
   processTypes: number
   createdAt: number
   updatedAt: number
@@ -85,6 +88,7 @@ export type MunicipalFeeMinAggregateInputType = {
   description?: true
   isActive?: true
   amount?: true
+  calcKind?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -96,6 +100,7 @@ export type MunicipalFeeMaxAggregateInputType = {
   description?: true
   isActive?: true
   amount?: true
+  calcKind?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -107,6 +112,7 @@ export type MunicipalFeeCountAggregateInputType = {
   description?: true
   isActive?: true
   amount?: true
+  calcKind?: true
   processTypes?: true
   createdAt?: true
   updatedAt?: true
@@ -206,6 +212,7 @@ export type MunicipalFeeGroupByOutputType = {
   description: string | null
   isActive: boolean
   amount: runtime.Decimal
+  calcKind: $Enums.MunicipalFeeCalcKind
   processTypes: $Enums.CaseRequestType[]
   createdAt: Date
   updatedAt: Date
@@ -241,6 +248,7 @@ export type MunicipalFeeWhereInput = {
   description?: Prisma.StringNullableFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFilter<"MunicipalFee"> | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
@@ -257,6 +265,7 @@ export type MunicipalFeeOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
   processTypes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -276,6 +285,7 @@ export type MunicipalFeeWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFilter<"MunicipalFee"> | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
@@ -292,6 +302,7 @@ export type MunicipalFeeOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
   processTypes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -312,6 +323,7 @@ export type MunicipalFeeScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalWithAggregatesFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindWithAggregatesFilter<"MunicipalFee"> | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"MunicipalFee"> | Date | string
@@ -323,6 +335,7 @@ export type MunicipalFeeCreateInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -339,6 +352,7 @@ export type MunicipalFeeUncheckedCreateInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -353,6 +367,7 @@ export type MunicipalFeeUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -369,6 +384,7 @@ export type MunicipalFeeUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -384,6 +400,7 @@ export type MunicipalFeeCreateManyInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -395,6 +412,7 @@ export type MunicipalFeeUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -407,6 +425,7 @@ export type MunicipalFeeUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -437,6 +456,7 @@ export type MunicipalFeeCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
   processTypes?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -453,6 +473,7 @@ export type MunicipalFeeMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -464,6 +485,7 @@ export type MunicipalFeeMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  calcKind?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -536,6 +558,10 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type EnumMunicipalFeeCalcKindFieldUpdateOperationsInput = {
+  set?: $Enums.MunicipalFeeCalcKind
+}
+
 export type MunicipalFeeUpdateprocessTypesInput = {
   set?: $Enums.CaseRequestType[]
   push?: $Enums.CaseRequestType | $Enums.CaseRequestType[]
@@ -591,6 +617,7 @@ export type MunicipalFeeCreateWithoutBankAccountInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -605,6 +632,7 @@ export type MunicipalFeeUncheckedCreateWithoutBankAccountInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -649,6 +677,7 @@ export type MunicipalFeeScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"MunicipalFee"> | string | null
   isActive?: Prisma.BoolFilter<"MunicipalFee"> | boolean
   amount?: Prisma.DecimalFilter<"MunicipalFee"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFilter<"MunicipalFee"> | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.EnumCaseRequestTypeNullableListFilter<"MunicipalFee">
   createdAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"MunicipalFee"> | Date | string
@@ -660,6 +689,7 @@ export type MunicipalFeeCreateWithoutPaymentGroupItemsInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -675,6 +705,7 @@ export type MunicipalFeeUncheckedCreateWithoutPaymentGroupItemsInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -704,6 +735,7 @@ export type MunicipalFeeUpdateWithoutPaymentGroupItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -719,6 +751,7 @@ export type MunicipalFeeUncheckedUpdateWithoutPaymentGroupItemsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -732,6 +765,7 @@ export type MunicipalFeeCreateWithoutPaymentLinesInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -747,6 +781,7 @@ export type MunicipalFeeUncheckedCreateWithoutPaymentLinesInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -776,6 +811,7 @@ export type MunicipalFeeUpdateWithoutPaymentLinesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -791,6 +827,7 @@ export type MunicipalFeeUncheckedUpdateWithoutPaymentLinesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -804,6 +841,7 @@ export type MunicipalFeeCreateWithoutCaseRequestFeesInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -819,6 +857,7 @@ export type MunicipalFeeUncheckedCreateWithoutCaseRequestFeesInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -848,6 +887,7 @@ export type MunicipalFeeUpdateWithoutCaseRequestFeesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -863,6 +903,7 @@ export type MunicipalFeeUncheckedUpdateWithoutCaseRequestFeesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -876,6 +917,7 @@ export type MunicipalFeeCreateManyBankAccountInput = {
   description?: string | null
   isActive?: boolean
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeCreateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -887,6 +929,7 @@ export type MunicipalFeeUpdateWithoutBankAccountInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -901,6 +944,7 @@ export type MunicipalFeeUncheckedUpdateWithoutBankAccountInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -915,6 +959,7 @@ export type MunicipalFeeUncheckedUpdateManyWithoutBankAccountInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  calcKind?: Prisma.EnumMunicipalFeeCalcKindFieldUpdateOperationsInput | $Enums.MunicipalFeeCalcKind
   processTypes?: Prisma.MunicipalFeeUpdateprocessTypesInput | $Enums.CaseRequestType[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -976,6 +1021,7 @@ export type MunicipalFeeSelect<ExtArgs extends runtime.Types.Extensions.Internal
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  calcKind?: boolean
   processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -993,6 +1039,7 @@ export type MunicipalFeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  calcKind?: boolean
   processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1006,6 +1053,7 @@ export type MunicipalFeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  calcKind?: boolean
   processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1019,12 +1067,13 @@ export type MunicipalFeeSelectScalar = {
   description?: boolean
   isActive?: boolean
   amount?: boolean
+  calcKind?: boolean
   processTypes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MunicipalFeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "bankAccountId" | "description" | "isActive" | "amount" | "processTypes" | "createdAt" | "updatedAt", ExtArgs["result"]["municipalFee"]>
+export type MunicipalFeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "bankAccountId" | "description" | "isActive" | "amount" | "calcKind" | "processTypes" | "createdAt" | "updatedAt", ExtArgs["result"]["municipalFee"]>
 export type MunicipalFeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bankAccount?: boolean | Prisma.BankAccountDefaultArgs<ExtArgs>
   paymentGroupItems?: boolean | Prisma.MunicipalFee$paymentGroupItemsArgs<ExtArgs>
@@ -1053,7 +1102,11 @@ export type $MunicipalFeePayload<ExtArgs extends runtime.Types.Extensions.Intern
     bankAccountId: string
     description: string | null
     isActive: boolean
+    /**
+     * مبلغ ثابت؛ برای calcKindهای فرمولی استفاده نمی‌شود
+     */
     amount: runtime.Decimal
+    calcKind: $Enums.MunicipalFeeCalcKind
     processTypes: $Enums.CaseRequestType[]
     createdAt: Date
     updatedAt: Date
@@ -1490,6 +1543,7 @@ export interface MunicipalFeeFieldRefs {
   readonly description: Prisma.FieldRef<"MunicipalFee", 'String'>
   readonly isActive: Prisma.FieldRef<"MunicipalFee", 'Boolean'>
   readonly amount: Prisma.FieldRef<"MunicipalFee", 'Decimal'>
+  readonly calcKind: Prisma.FieldRef<"MunicipalFee", 'MunicipalFeeCalcKind'>
   readonly processTypes: Prisma.FieldRef<"MunicipalFee", 'CaseRequestType[]'>
   readonly createdAt: Prisma.FieldRef<"MunicipalFee", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"MunicipalFee", 'DateTime'>

@@ -54,6 +54,7 @@ import { CaseInquiriesService } from './case-inquiries.service';
 import { CasePlacesService } from './case-places.service';
 import { CaseGeneralSettingsService } from './case-general-settings.service';
 import { PERSONNEL_PHOTO_CODE } from './personnel-photo';
+import { unpaidDebtForCase } from '../case-finance/request-fee-status';
 import { CaseManagementApproversService } from './case-management-approvers.service';
 import {
   INQUIRIES_FORMATION_STEP,
@@ -2915,11 +2916,14 @@ export class CasesService {
       files: row.files,
       active: suspensionIsActive(row, today),
     }));
-    const violationCount = file.user.nationalId
-      ? await this.prisma.violation.count({
-          where: { nationalId: file.user.nationalId },
-        })
-      : 0;
+    const [violationCount, unpaidDebt] = await Promise.all([
+      file.user.nationalId
+        ? this.prisma.violation.count({
+            where: { nationalId: file.user.nationalId },
+          })
+        : 0,
+      unpaidDebtForCase(this.prisma, file.id),
+    ]);
     const ownLicense =
       file.kind === CaseFileKind.STEWARDSHIP
         ? await this.prisma.caseFile.findFirst({
@@ -2984,6 +2988,7 @@ export class CasesService {
           : null,
       reactivatedAt: file.reactivatedAt?.toISOString() ?? null,
       violationCount,
+      unpaidDebt,
       suspensionCount: suspensions.length,
       suspensions,
       formationStep: file.formationStep,

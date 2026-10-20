@@ -10,6 +10,7 @@ const databaseUuidPattern =
 export const municipalFeeSortFields = [
   'title',
   'amount',
+  'calcKind',
   'bankAccount',
   'description',
   'isActive',

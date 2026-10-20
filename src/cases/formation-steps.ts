@@ -71,7 +71,12 @@ export async function assignLicenseNumber(
     try {
       const updated = await prisma.caseFile.updateMany({
         where: { id: caseFileId, licenseNumber: null },
-        data: { licenseNumber, licenseIssuedAt: issuedAt, licenseExpiresAt: expiresAt },
+        data: {
+          licenseNumber,
+          licenseIssuedAt: issuedAt,
+          firstIssuedAt: issuedAt,
+          licenseExpiresAt: expiresAt,
+        },
       });
       if (updated.count === 1) return licenseNumber;
       const row = await prisma.caseFile.findUnique({

@@ -228,6 +228,17 @@ export const ProjectProgressTranscriptionStatus = {
 export type ProjectProgressTranscriptionStatus = (typeof ProjectProgressTranscriptionStatus)[keyof typeof ProjectProgressTranscriptionStatus]
 
 
+export const MunicipalFeeCalcKind = {
+  FIXED: 'FIXED',
+  ANNUAL_MEMBERSHIP: 'ANNUAL_MEMBERSHIP',
+  AREA_LEVY: 'AREA_LEVY',
+  LATE_MEMBERSHIP: 'LATE_MEMBERSHIP',
+  LATE_AREA_LEVY: 'LATE_AREA_LEVY'
+} as const
+
+export type MunicipalFeeCalcKind = (typeof MunicipalFeeCalcKind)[keyof typeof MunicipalFeeCalcKind]
+
+
 export const PaymentDiscountMode = {
   MANUAL: 'MANUAL',
   CATALOG: 'CATALOG'

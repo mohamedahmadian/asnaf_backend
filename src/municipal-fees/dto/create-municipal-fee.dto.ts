@@ -15,7 +15,8 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { emptyToNull } from '../../common/dto-transform';
-import { CaseRequestType } from '../../generated/prisma/client';
+import { CaseRequestType, MunicipalFeeCalcKind } from '../../generated/prisma/client';
+import { municipalFeeCalcKinds } from '../../case-finance/fee-calculator';
 import { toLatinDigits } from '../../common/national-id';
 
 const databaseUuidPattern =
@@ -59,11 +60,17 @@ export class CreateMunicipalFeeDto {
   @Matches(databaseUuidPattern)
   bankAccountId: string;
 
+  @IsOptional()
+  @IsIn([...municipalFeeCalcKinds])
+  calcKind?: MunicipalFeeCalcKind;
+
+  @IsOptional()
   @Transform(({ value }) => toAmount(value))
+  @ValidateIf((_, value) => value != null)
   @IsInt()
   @Min(0)
   @Max(9_007_199_254_740_991)
-  amount: number;
+  amount?: number;
 
   @IsOptional()
   @Transform(({ value }) => emptyToNull(trimString(value)))

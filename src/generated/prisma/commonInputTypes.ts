@@ -232,6 +232,13 @@ export type DecimalFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type EnumMunicipalFeeCalcKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunicipalFeeCalcKind | Prisma.EnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMunicipalFeeCalcKindFilter<$PrismaModel> | $Enums.MunicipalFeeCalcKind
+}
+
 export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -246,6 +253,16 @@ export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
+}
+
+export type EnumMunicipalFeeCalcKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunicipalFeeCalcKind | Prisma.EnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMunicipalFeeCalcKindWithAggregatesFilter<$PrismaModel> | $Enums.MunicipalFeeCalcKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunicipalFeeCalcKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunicipalFeeCalcKindFilter<$PrismaModel>
 }
 
 export type EnumCaseRequestTypeFilter<$PrismaModel = never> = {
@@ -1547,6 +1564,13 @@ export type NestedDecimalFilter<$PrismaModel = never> = {
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type NestedEnumMunicipalFeeCalcKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunicipalFeeCalcKind | Prisma.EnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMunicipalFeeCalcKindFilter<$PrismaModel> | $Enums.MunicipalFeeCalcKind
+}
+
 export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[] | Prisma.ListDecimalFieldRefInput<$PrismaModel>
@@ -1561,6 +1585,16 @@ export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
+}
+
+export type NestedEnumMunicipalFeeCalcKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.MunicipalFeeCalcKind | Prisma.EnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  in?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.MunicipalFeeCalcKind[] | Prisma.ListEnumMunicipalFeeCalcKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumMunicipalFeeCalcKindWithAggregatesFilter<$PrismaModel> | $Enums.MunicipalFeeCalcKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumMunicipalFeeCalcKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumMunicipalFeeCalcKindFilter<$PrismaModel>
 }
 
 export type NestedEnumCaseRequestTypeFilter<$PrismaModel = never> = {

@@ -4,7 +4,14 @@ import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 
-export const jobTypeSortFields = ['title', 'description', 'annualFee', 'dailyFee'] as const;
+export const jobTypeSortFields = [
+  'title',
+  'description',
+  'annualFee',
+  'dailyFee',
+  'annualAreaTariff',
+  'dailyAreaTariff',
+] as const;
 
 export class FindJobTypesQueryDto extends PaginationQueryDto {
   @IsOptional()

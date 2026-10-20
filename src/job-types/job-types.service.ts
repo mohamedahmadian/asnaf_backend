@@ -21,6 +21,7 @@ const jobTypeSelect = {
   title: true,
   description: true,
   annualFee: true,
+  annualAreaTariff: true,
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.JobTypeSelect;
@@ -30,8 +31,17 @@ function toFeeNumber(value: Prisma.Decimal | number | null) {
   return typeof value === 'number' ? value : Number(value);
 }
 
-function withFee<T extends { annualFee: Prisma.Decimal | number | null }>(item: T) {
-  return { ...item, annualFee: toFeeNumber(item.annualFee) };
+function withFee<
+  T extends {
+    annualFee: Prisma.Decimal | number | null;
+    annualAreaTariff: Prisma.Decimal | number | null;
+  },
+>(item: T) {
+  return {
+    ...item,
+    annualFee: toFeeNumber(item.annualFee),
+    annualAreaTariff: toFeeNumber(item.annualAreaTariff),
+  };
 }
 
 @Injectable()
@@ -55,6 +65,8 @@ export class JobTypesService {
         description: (dir) => ({ description: dir }),
         annualFee: (dir) => ({ annualFee: dir }),
         dailyFee: (dir) => ({ annualFee: dir }),
+        annualAreaTariff: (dir) => ({ annualAreaTariff: dir }),
+        dailyAreaTariff: (dir) => ({ annualAreaTariff: dir }),
       },
       [{ createdAt: 'asc' }, { id: 'asc' }],
     );
@@ -98,6 +110,7 @@ export class JobTypesService {
           title: dto.title,
           description: dto.description,
           annualFee: dto.annualFee,
+          annualAreaTariff: dto.annualAreaTariff,
         },
         select: jobTypeSelect,
       });
@@ -116,6 +129,7 @@ export class JobTypesService {
           title: dto.title,
           description: dto.description,
           annualFee: dto.annualFee,
+          annualAreaTariff: dto.annualAreaTariff,
         },
         select: jobTypeSelect,
       });

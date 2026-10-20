@@ -28,6 +28,7 @@ const feeSelect = {
   id: true,
   title: true,
   amount: true,
+  calcKind: true,
   bankAccountId: true,
   isActive: true,
   processTypes: true,

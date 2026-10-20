@@ -10,7 +10,13 @@ export const caseSelect = {
   licenseNumber: true,
   cardNumber: true,
   businessUnitTitle: true,
-  activityJob: { select: { title: true, group: { select: { title: true } } } },
+  activityJob: {
+    select: {
+      title: true,
+      group: { select: { title: true } },
+      jobType: { select: { title: true } },
+    },
+  },
 } satisfies Prisma.CaseFileSelect;
 
 const bankAccountSelect = {
@@ -89,6 +95,7 @@ export function mapCaseFile(file: Prisma.CaseFileGetPayload<{ select: typeof cas
     businessUnitTitle: file.businessUnitTitle,
     activityJobTitle: file.activityJob?.title ?? null,
     jobGroupTitle: file.activityJob?.group?.title ?? null,
+    jobTypeTitle: file.activityJob?.jobType?.title ?? null,
   };
 }
 

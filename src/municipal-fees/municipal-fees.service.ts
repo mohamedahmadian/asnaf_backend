@@ -1,8 +1,10 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { MunicipalFeeCalcKind } from '../generated/prisma/client';
 import {
   containsInsensitive,
   normalizeSearchDigits,
@@ -29,6 +31,7 @@ const feeSelect = {
   id: true,
   title: true,
   amount: true,
+  calcKind: true,
   processTypes: true,
   bankAccountId: true,
   description: true,
@@ -62,6 +65,7 @@ export class MunicipalFeesService {
       {
         title: (dir) => ({ title: dir }),
         amount: (dir) => ({ amount: dir }),
+        calcKind: (dir) => ({ calcKind: dir }),
         bankAccount: (dir) => [
           { bankAccount: { bankName: dir } },
           { bankAccount: { accountNumber: dir } },
@@ -105,6 +109,9 @@ export class MunicipalFeesService {
   }
 
   async create(dto: CreateMunicipalFeeDto) {
+    if ((dto.calcKind ?? MunicipalFeeCalcKind.FIXED) === MunicipalFeeCalcKind.FIXED && dto.amount == null) {
+      throw new BadRequestException('مبلغ هزینه را وارد کنید');
+    }
     await this.assertBankAccount(dto.bankAccountId);
     try {
       return withAmount(
@@ -189,10 +196,16 @@ export class MunicipalFeesService {
   }
 
   private toData(dto: CreateMunicipalFeeDto | UpdateMunicipalFeeDto) {
+    const kind = dto.calcKind ?? MunicipalFeeCalcKind.FIXED;
     return {
       title: dto.title,
+      calcKind: dto.calcKind,
       amount:
-        dto.amount === undefined ? undefined : new Prisma.Decimal(dto.amount),
+        dto.amount === undefined
+          ? kind === MunicipalFeeCalcKind.FIXED
+            ? undefined
+            : new Prisma.Decimal(0)
+          : new Prisma.Decimal(dto.amount),
       bankAccountId: dto.bankAccountId,
       processTypes: dto.processTypes,
       description: dto.description,

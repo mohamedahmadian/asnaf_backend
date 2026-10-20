@@ -57,6 +57,7 @@ export type CaseFileMinAggregateOutputType = {
   trackingCode: string | null
   licenseNumber: string | null
   licenseIssuedAt: Date | null
+  firstIssuedAt: Date | null
   licenseExpiresAt: Date | null
   businessUnitTitle: string | null
   activityJobId: string | null
@@ -107,6 +108,7 @@ export type CaseFileMaxAggregateOutputType = {
   trackingCode: string | null
   licenseNumber: string | null
   licenseIssuedAt: Date | null
+  firstIssuedAt: Date | null
   licenseExpiresAt: Date | null
   businessUnitTitle: string | null
   activityJobId: string | null
@@ -157,6 +159,7 @@ export type CaseFileCountAggregateOutputType = {
   trackingCode: number
   licenseNumber: number
   licenseIssuedAt: number
+  firstIssuedAt: number
   licenseExpiresAt: number
   businessUnitTitle: number
   activityJobId: number
@@ -221,6 +224,7 @@ export type CaseFileMinAggregateInputType = {
   trackingCode?: true
   licenseNumber?: true
   licenseIssuedAt?: true
+  firstIssuedAt?: true
   licenseExpiresAt?: true
   businessUnitTitle?: true
   activityJobId?: true
@@ -271,6 +275,7 @@ export type CaseFileMaxAggregateInputType = {
   trackingCode?: true
   licenseNumber?: true
   licenseIssuedAt?: true
+  firstIssuedAt?: true
   licenseExpiresAt?: true
   businessUnitTitle?: true
   activityJobId?: true
@@ -321,6 +326,7 @@ export type CaseFileCountAggregateInputType = {
   trackingCode?: true
   licenseNumber?: true
   licenseIssuedAt?: true
+  firstIssuedAt?: true
   licenseExpiresAt?: true
   businessUnitTitle?: true
   activityJobId?: true
@@ -458,6 +464,7 @@ export type CaseFileGroupByOutputType = {
   trackingCode: string | null
   licenseNumber: string | null
   licenseIssuedAt: Date | null
+  firstIssuedAt: Date | null
   licenseExpiresAt: Date | null
   businessUnitTitle: string | null
   activityJobId: string | null
@@ -531,6 +538,7 @@ export type CaseFileWhereInput = {
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  firstIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   licenseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   businessUnitTitle?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   activityJobId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -600,6 +608,7 @@ export type CaseFileOrderByWithRelationInput = {
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   businessUnitTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   activityJobId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -672,6 +681,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   cardExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   formationStep?: Prisma.IntFilter<"CaseFile"> | number
   licenseIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  firstIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   licenseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   businessUnitTitle?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   activityJobId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -741,6 +751,7 @@ export type CaseFileOrderByWithAggregationInput = {
   trackingCode?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstIssuedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   businessUnitTitle?: Prisma.SortOrderInput | Prisma.SortOrder
   activityJobId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -799,6 +810,7 @@ export type CaseFileScalarWhereWithAggregatesInput = {
   trackingCode?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   licenseIssuedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
+  firstIssuedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   licenseExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   businessUnitTitle?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   activityJobId?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
@@ -846,6 +858,7 @@ export type CaseFileCreateInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -911,6 +924,7 @@ export type CaseFileUncheckedCreateInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -970,6 +984,7 @@ export type CaseFileUpdateInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -1035,6 +1050,7 @@ export type CaseFileUncheckedUpdateInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1097,6 +1113,7 @@ export type CaseFileCreateManyInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -1144,6 +1161,7 @@ export type CaseFileUpdateManyMutationInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -1190,6 +1208,7 @@ export type CaseFileUncheckedUpdateManyInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1260,6 +1279,7 @@ export type CaseFileCountOrderByAggregateInput = {
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
   licenseIssuedAt?: Prisma.SortOrder
+  firstIssuedAt?: Prisma.SortOrder
   licenseExpiresAt?: Prisma.SortOrder
   businessUnitTitle?: Prisma.SortOrder
   activityJobId?: Prisma.SortOrder
@@ -1316,6 +1336,7 @@ export type CaseFileMaxOrderByAggregateInput = {
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
   licenseIssuedAt?: Prisma.SortOrder
+  firstIssuedAt?: Prisma.SortOrder
   licenseExpiresAt?: Prisma.SortOrder
   businessUnitTitle?: Prisma.SortOrder
   activityJobId?: Prisma.SortOrder
@@ -1366,6 +1387,7 @@ export type CaseFileMinOrderByAggregateInput = {
   trackingCode?: Prisma.SortOrder
   licenseNumber?: Prisma.SortOrder
   licenseIssuedAt?: Prisma.SortOrder
+  firstIssuedAt?: Prisma.SortOrder
   licenseExpiresAt?: Prisma.SortOrder
   businessUnitTitle?: Prisma.SortOrder
   activityJobId?: Prisma.SortOrder
@@ -1919,6 +1941,7 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -1983,6 +2006,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -2073,6 +2097,7 @@ export type CaseFileScalarWhereInput = {
   trackingCode?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseNumber?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   licenseIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
+  firstIssuedAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   licenseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   businessUnitTitle?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   activityJobId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -2120,6 +2145,7 @@ export type CaseFileCreateWithoutPaymentsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -2184,6 +2210,7 @@ export type CaseFileUncheckedCreateWithoutPaymentsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -2258,6 +2285,7 @@ export type CaseFileUpdateWithoutPaymentsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -2322,6 +2350,7 @@ export type CaseFileUncheckedUpdateWithoutPaymentsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2380,6 +2409,7 @@ export type CaseFileCreateWithoutActivityJobInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -2444,6 +2474,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -2528,6 +2559,7 @@ export type CaseFileCreateWithoutInquiriesInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -2592,6 +2624,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -2666,6 +2699,7 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -2730,6 +2764,7 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2788,6 +2823,7 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -2852,6 +2888,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -2926,6 +2963,7 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -2990,6 +3028,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3048,6 +3087,7 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -3112,6 +3152,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -3186,6 +3227,7 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -3250,6 +3292,7 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3308,6 +3351,7 @@ export type CaseFileCreateWithoutStewardCasesInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -3372,6 +3416,7 @@ export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -3435,6 +3480,7 @@ export type CaseFileCreateWithoutHostCaseFileInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -3498,6 +3544,7 @@ export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -3578,6 +3625,7 @@ export type CaseFileUpdateWithoutStewardCasesInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -3642,6 +3690,7 @@ export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3716,6 +3765,7 @@ export type CaseFileCreateWithoutStewardRevokeFileInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -3780,6 +3830,7 @@ export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -3854,6 +3905,7 @@ export type CaseFileUpdateWithoutStewardRevokeFileInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -3918,6 +3970,7 @@ export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3976,6 +4029,7 @@ export type CaseFileCreateWithoutRevocationProcessInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -4040,6 +4094,7 @@ export type CaseFileUncheckedCreateWithoutRevocationProcessInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -4114,6 +4169,7 @@ export type CaseFileUpdateWithoutRevocationProcessInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -4178,6 +4234,7 @@ export type CaseFileUncheckedUpdateWithoutRevocationProcessInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4236,6 +4293,7 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -4300,6 +4358,7 @@ export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -4374,6 +4433,7 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -4438,6 +4498,7 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4496,6 +4557,7 @@ export type CaseFileCreateWithoutRequestsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -4560,6 +4622,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -4634,6 +4697,7 @@ export type CaseFileUpdateWithoutRequestsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -4698,6 +4762,7 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4756,6 +4821,7 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -4820,6 +4886,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -4894,6 +4961,7 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -4958,6 +5026,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5016,6 +5085,7 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -5080,6 +5150,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -5154,6 +5225,7 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -5218,6 +5290,7 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5276,6 +5349,7 @@ export type CaseFileCreateWithoutUserInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -5339,6 +5413,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -5408,6 +5483,7 @@ export type CaseFileCreateWithoutRevokedByInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -5471,6 +5547,7 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -5572,6 +5649,7 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -5636,6 +5714,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -5720,6 +5799,7 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -5784,6 +5864,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -5868,6 +5949,7 @@ export type CaseFileCreateWithoutViolationsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -5932,6 +6014,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -6006,6 +6089,7 @@ export type CaseFileUpdateWithoutViolationsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -6070,6 +6154,7 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6131,6 +6216,7 @@ export type CaseFileCreateManyPremiseCityInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -6177,6 +6263,7 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -6241,6 +6328,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6302,6 +6390,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6351,6 +6440,7 @@ export type CaseFileCreateManyActivityJobInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   previousOccupation?: $Enums.PreviousOccupation | null
@@ -6397,6 +6487,7 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -6461,6 +6552,7 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -6522,6 +6614,7 @@ export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -6570,6 +6663,7 @@ export type CaseFileCreateManyHostCaseFileInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -6617,6 +6711,7 @@ export type CaseFileUpdateWithoutHostCaseFileInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -6680,6 +6775,7 @@ export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6741,6 +6837,7 @@ export type CaseFileUncheckedUpdateManyWithoutHostCaseFileInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6790,6 +6887,7 @@ export type CaseFileCreateManyUserInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -6839,6 +6937,7 @@ export type CaseFileCreateManyRevokedByInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -6886,6 +6985,7 @@ export type CaseFileUpdateWithoutUserInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -6949,6 +7049,7 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7010,6 +7111,7 @@ export type CaseFileUncheckedUpdateManyWithoutUserInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7057,6 +7159,7 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -7120,6 +7223,7 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7181,6 +7285,7 @@ export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7231,6 +7336,7 @@ export type CaseFileCreateManyPremiseComplexInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -7277,6 +7383,7 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -7341,6 +7448,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7402,6 +7510,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7451,6 +7560,7 @@ export type CaseFileCreateManyRegistrationPlaceInput = {
   trackingCode?: string | null
   licenseNumber?: string | null
   licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
   licenseExpiresAt?: Date | string | null
   businessUnitTitle?: string | null
   activityJobId?: string | null
@@ -7497,6 +7607,7 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
@@ -7561,6 +7672,7 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7622,6 +7734,7 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
   trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7783,6 +7896,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   trackingCode?: boolean
   licenseNumber?: boolean
   licenseIssuedAt?: boolean
+  firstIssuedAt?: boolean
   licenseExpiresAt?: boolean
   businessUnitTitle?: boolean
   activityJobId?: boolean
@@ -7853,6 +7967,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   trackingCode?: boolean
   licenseNumber?: boolean
   licenseIssuedAt?: boolean
+  firstIssuedAt?: boolean
   licenseExpiresAt?: boolean
   businessUnitTitle?: boolean
   activityJobId?: boolean
@@ -7910,6 +8025,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   trackingCode?: boolean
   licenseNumber?: boolean
   licenseIssuedAt?: boolean
+  firstIssuedAt?: boolean
   licenseExpiresAt?: boolean
   businessUnitTitle?: boolean
   activityJobId?: boolean
@@ -7967,6 +8083,7 @@ export type CaseFileSelectScalar = {
   trackingCode?: boolean
   licenseNumber?: boolean
   licenseIssuedAt?: boolean
+  firstIssuedAt?: boolean
   licenseExpiresAt?: boolean
   businessUnitTitle?: boolean
   activityJobId?: boolean
@@ -7998,7 +8115,7 @@ export type CaseFileSelectScalar = {
   updatedAt?: boolean
 }
 
-export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "kind" | "hostCaseFileId" | "status" | "revokeReason" | "revokeSource" | "revokeRequestedAt" | "revokedAt" | "reactivatedAt" | "revokedById" | "cardNumber" | "cardIssuedAt" | "cardExpiresAt" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
+export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "kind" | "hostCaseFileId" | "status" | "revokeReason" | "revokeSource" | "revokeRequestedAt" | "revokedAt" | "reactivatedAt" | "revokedById" | "cardNumber" | "cardIssuedAt" | "cardExpiresAt" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "firstIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
 export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
@@ -8097,6 +8214,10 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
      */
     licenseNumber: string | null
     licenseIssuedAt: Date | null
+    /**
+     * تاریخ اولین صدور مجوز؛ با تمدید عوض نمی‌شود
+     */
+    firstIssuedAt: Date | null
     licenseExpiresAt: Date | null
     businessUnitTitle: string | null
     activityJobId: string | null
@@ -8586,6 +8707,7 @@ export interface CaseFileFieldRefs {
   readonly trackingCode: Prisma.FieldRef<"CaseFile", 'String'>
   readonly licenseNumber: Prisma.FieldRef<"CaseFile", 'String'>
   readonly licenseIssuedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
+  readonly firstIssuedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly licenseExpiresAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly businessUnitTitle: Prisma.FieldRef<"CaseFile", 'String'>
   readonly activityJobId: Prisma.FieldRef<"CaseFile", 'String'>

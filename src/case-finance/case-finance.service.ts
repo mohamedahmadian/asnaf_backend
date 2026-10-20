@@ -1,12 +1,18 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { requestOnCase } from '../cases/request-process';
-import { CaseRequestType, PaymentStatus, Prisma } from '../generated/prisma/client';
+import { CaseRequestType, MunicipalFeeCalcKind, PaymentStatus, Prisma } from '../generated/prisma/client';
 import { caseSelect, mapCaseFile, mapPayment, money, paymentSelect } from '../payments/payment-records';
 import { PrismaService } from '../prisma/prisma.service';
 import { SaveCaseRequestFeesDto } from './dto/save-case-request-fees.dto';
 import { financialRequestTypes } from '../financial-settings/financial-settings.service';
 import { requestFeeStates, requestFeeStatuses } from './request-fee-status';
+import {
+  computeFeeAmount,
+  enrichCalcInputs,
+  loadFeeCalcContext,
+  mapCalcInputs,
+} from './fee-calculator';
 
 const payerSelect = {
   id: true,
@@ -31,6 +37,8 @@ const financeSelect = {
       municipalFeeId: true,
       title: true,
       amount: true,
+      calcKind: true,
+      calcInputs: true,
       municipalFee: { select: { isActive: true } },
     },
   },
@@ -106,6 +114,7 @@ export class CaseFinanceService {
       requestFeeStates(this.prisma, request.id),
     ]);
 
+    const ctx = await loadFeeCalcContext(this.prisma, request.id);
     const fees = (finance?.fees ?? []).map((fee) => {
       const state = states.get(fee.municipalFeeId);
       return {
@@ -113,12 +122,14 @@ export class CaseFinanceService {
         municipalFeeId: fee.municipalFeeId,
         title: fee.title,
         amount: money(fee.amount),
+        calcKind: fee.calcKind,
+        calcInputs: enrichCalcInputs(mapCalcInputs(fee.calcInputs), ctx),
         isActive: fee.municipalFee.isActive,
         status: state?.status ?? 'UNPAID',
         discount: state?.discount ?? 0,
       };
     });
-    const availableFees = finance
+    const catalogAvailable = finance
       ? await this.prisma.municipalFee.findMany({
           where: {
             bankAccountId: finance.bankAccount.id,
@@ -126,9 +137,20 @@ export class CaseFinanceService {
             id: { notIn: fees.map((fee) => fee.municipalFeeId) },
           },
           orderBy: [{ title: 'asc' }, { id: 'asc' }],
-          select: { id: true, title: true, amount: true },
+          select: { id: true, title: true, amount: true, calcKind: true },
         })
       : [];
+    const availableFees = catalogAvailable
+      .map((fee) => {
+        const computed = computeFeeAmount(fee.calcKind, money(fee.amount), ctx);
+        return {
+          id: fee.id,
+          title: fee.title,
+          amount: computed.amount,
+          calcKind: fee.calcKind,
+          calcInputs: computed.inputs,
+        };
+      });
     const paid = payments.filter((item) => !item.deletedAt && item.status === PaymentStatus.PAID);
     const sumFees = (status: string) =>
       fees.filter((fee) => fee.status === status).reduce((sum, fee) => sum + fee.amount, 0);
@@ -148,7 +170,7 @@ export class CaseFinanceService {
         ? {
             bankAccount: finance.bankAccount,
             fees,
-            availableFees: availableFees.map((fee) => ({ ...fee, amount: money(fee.amount) })),
+            availableFees,
           }
         : null,
       payments: payments.map((row) => mapPayment(row, this.config.get<string>('PUBLIC_APP_URL'))),
@@ -189,7 +211,7 @@ export class CaseFinanceService {
       .filter((id) => !currentIds.has(id));
     const added = await this.prisma.municipalFee.findMany({
       where: { id: { in: addedIds } },
-      select: { id: true, title: true, bankAccountId: true, isActive: true },
+      select: { id: true, title: true, amount: true, calcKind: true, bankAccountId: true, isActive: true },
     });
     if (added.length !== addedIds.length) {
       throw new NotFoundException('برخی هزینه‌ها یافت نشد');
@@ -201,6 +223,10 @@ export class CaseFinanceService {
       throw new BadRequestException('هزینه غیرفعال قابل افزودن نیست');
     }
     const titles = new Map(added.map((fee) => [fee.id, fee.title]));
+    const ctx = addedIds.length ? await loadFeeCalcContext(this.prisma, request.id) : null;
+    const computedAdds = new Map(
+      added.map((fee) => [fee.id, computeFeeAmount(fee.calcKind, money(fee.amount), ctx!)]),
+    );
 
     await this.prisma.$transaction(async (tx) => {
       await tx.caseRequestFee.deleteMany({
@@ -215,12 +241,15 @@ export class CaseFinanceService {
             data: { amount: line.amount, sortOrder },
           });
         } else {
+          const computed = computedAdds.get(line.municipalFeeId);
           await tx.caseRequestFee.create({
             data: {
               requestId: request.id,
               municipalFeeId: line.municipalFeeId,
               title: titles.get(line.municipalFeeId) ?? '',
-              amount: line.amount,
+              amount: computed?.amount ?? line.amount,
+              calcKind: computed?.calcKind ?? MunicipalFeeCalcKind.FIXED,
+              calcInputs: computed?.inputs ?? undefined,
               sortOrder,
             },
           });
@@ -283,20 +312,28 @@ export class CaseFinanceService {
         processTypes: { has: type },
       },
       orderBy: [{ title: 'asc' }, { id: 'asc' }],
-      select: { id: true, title: true, amount: true },
+      select: { id: true, title: true, amount: true, calcKind: true },
     });
+    const ctx = await loadFeeCalcContext(this.prisma, requestId);
+    const lines = fees
+      .map((fee, sortOrder) => {
+        const computed = computeFeeAmount(fee.calcKind, money(fee.amount), ctx);
+        return {
+          municipalFeeId: fee.id,
+          title: fee.title,
+          amount: computed.amount,
+          calcKind: computed.calcKind,
+          calcInputs: computed.inputs,
+          sortOrder,
+        };
+      });
     try {
       await this.prisma.caseRequestFinance.create({
         data: {
           requestId,
           bankAccountId: setting.bankAccountId,
           fees: {
-            create: fees.map((fee, sortOrder) => ({
-              municipalFeeId: fee.id,
-              title: fee.title,
-              amount: fee.amount,
-              sortOrder,
-            })),
+            create: lines,
           },
         },
       });
