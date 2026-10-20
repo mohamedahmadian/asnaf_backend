@@ -12,7 +12,9 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:deploy": "prisma migrate deploy",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "prisma db seed",
+    "db:users": "bash scripts/create-db-users.sh --env local",
+    "db:users:server": "bash scripts/create-db-users.sh --env server"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

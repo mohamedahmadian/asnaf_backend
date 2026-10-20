@@ -12,6 +12,7 @@ build/
 .env
 .env.*
 !.env.example
+scripts/db-users.env
 
 # Logs
 
