@@ -17,6 +17,7 @@ import {
 } from '../access/access.constants';
 import { normalizeReportPermissions } from '../access/access.util';
 import { migrateFinanceMenuPermissions } from '../access/finance-menu-migration';
+import { migrateSmsHistoryMenuPermissions } from '../access/sms-history-menu-migration';
 import { isKnownPermissionCode } from '../access/permissions-catalog';
 import { migrateReportMenuPermissions } from '../access/report-menu-migration';
 import {
@@ -77,6 +78,7 @@ export class RolesService implements OnModuleInit {
     await ensureCaseOperatorRole(this.prisma);
     await migrateFinanceMenuPermissions(this.prisma);
     await migrateReportMenuPermissions(this.prisma);
+    await migrateSmsHistoryMenuPermissions(this.prisma);
   }
 
   async findAll(query: FindRolesQueryDto) {

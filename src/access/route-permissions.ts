@@ -99,6 +99,7 @@ const ROUTE_PERMISSIONS: RoutePermission[] = [
   { prefix: '/work-units', permissions: ['base-info.work-units'] },
   { prefix: '/staff-posts', permissions: ['base-info.staff-posts'] },
   { prefix: '/sms/settings', permissions: ['sms.settings'] },
+  { prefix: '/sms/history', permissions: ['sms.history'] },
   { prefix: '/sms/messages', permissions: ['sms.send'] },
   { prefix: '/violation-types', permissions: ['inspection.violation-types'] },
   {

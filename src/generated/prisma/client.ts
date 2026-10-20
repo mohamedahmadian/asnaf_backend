@@ -616,6 +616,11 @@ export type ViolationProceedingAttachment = Prisma.ViolationProceedingAttachment
  */
 export type SmsSettings = Prisma.SmsSettingsModel
 /**
+ * Model SmsMessage
+ * هر دستور ارسال پیامک؛ ارسال واقعی هنوز وصل نیست.
+ */
+export type SmsMessage = Prisma.SmsMessageModel
+/**
  * Model ScheduledJob
  * تعریف پایدار کارهای زمان‌بندی؛ متادیتای نمایشی در رجیستری کد است.
  */

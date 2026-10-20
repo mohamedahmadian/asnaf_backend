@@ -140,7 +140,7 @@ export class AuthService {
 
     const economicActor = await this.prisma.userRole.findFirst({
       where: { userId: targetUserId, role: { code: ECONOMIC_ACTOR_ROLE_CODE } },
-      select: { id: true },
+      select: { userId: true },
     });
     if (economicActor) {
       throw new BadRequestException(

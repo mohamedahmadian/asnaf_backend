@@ -166,6 +166,7 @@ export const ModelName = {
   ViolationProceeding: 'ViolationProceeding',
   ViolationProceedingAttachment: 'ViolationProceedingAttachment',
   SmsSettings: 'SmsSettings',
+  SmsMessage: 'SmsMessage',
   ScheduledJob: 'ScheduledJob',
   ScheduledJobRun: 'ScheduledJobRun'
 } as const
@@ -1965,6 +1966,19 @@ export const SmsSettingsScalarFieldEnum = {
 } as const
 
 export type SmsSettingsScalarFieldEnum = (typeof SmsSettingsScalarFieldEnum)[keyof typeof SmsSettingsScalarFieldEnum]
+
+
+export const SmsMessageScalarFieldEnum = {
+  id: 'id',
+  phone: 'phone',
+  body: 'body',
+  status: 'status',
+  source: 'source',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt'
+} as const
+
+export type SmsMessageScalarFieldEnum = (typeof SmsMessageScalarFieldEnum)[keyof typeof SmsMessageScalarFieldEnum]
 
 
 export const ScheduledJobScalarFieldEnum = {

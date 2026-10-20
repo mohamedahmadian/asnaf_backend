@@ -454,7 +454,9 @@ export class UsersService {
       data,
       select: userSelect,
     });
-    const sentSms = passwordSms ? await this.sms.send(passwordSms) : undefined;
+    const sentSms = passwordSms
+      ? await this.sms.send({ ...passwordSms, source: 'PASSWORD' })
+      : undefined;
     if (dto.roleIds !== undefined) {
       await this.syncUserRoles(id, dto.roleIds);
       const fresh = await this.findOne(id);
@@ -647,6 +649,7 @@ export class UsersService {
     const sms = await this.sms.send({
       phone: user.phone,
       body: `رمز عبور موقت شما: ${password}`,
+      source: 'PASSWORD',
     });
     return {
       status: 'sent' as const,

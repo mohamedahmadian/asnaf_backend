@@ -129,6 +129,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
     children: [
       { code: 'sms.settings', kind: 'MENU', nameKey: 'menus.smsSettings' },
       { code: 'sms.send', kind: 'MENU', nameKey: 'menus.smsSend' },
+      { code: 'sms.history', kind: 'MENU', nameKey: 'menus.smsHistory' },
     ],
   },
   {

@@ -126,7 +126,7 @@ export class PaymentOnlineService implements OnModuleInit, OnModuleDestroy {
     const body =
       `${payment.payerName} گرامی، مبلغ ${amount} ریال بابت رسید ${payment.receiptNumber} قابل پرداخت است:\n` +
       payLinkUrl(this.appUrl, payment.payLinkToken);
-    const result = await this.sms.send({ phone, body });
+    const result = await this.sms.send({ phone, body, source: 'PAYMENT_LINK' });
     await this.prisma.payment.update({
       where: { id: payment.id },
       data: { payLinkSentAt: new Date() },

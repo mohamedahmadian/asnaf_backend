@@ -462,6 +462,25 @@ export const ViolationAttachmentKind = {
 export type ViolationAttachmentKind = (typeof ViolationAttachmentKind)[keyof typeof ViolationAttachmentKind]
 
 
+export const SmsMessageStatus = {
+  SKIPPED: 'SKIPPED',
+  SENT: 'SENT',
+  FAILED: 'FAILED'
+} as const
+
+export type SmsMessageStatus = (typeof SmsMessageStatus)[keyof typeof SmsMessageStatus]
+
+
+export const SmsMessageSource = {
+  MANUAL: 'MANUAL',
+  PASSWORD: 'PASSWORD',
+  PAYMENT_LINK: 'PAYMENT_LINK',
+  STEWARDSHIP: 'STEWARDSHIP'
+} as const
+
+export type SmsMessageSource = (typeof SmsMessageSource)[keyof typeof SmsMessageSource]
+
+
 export const ScheduledJobTrigger = {
   SYSTEM: 'SYSTEM',
   MANUAL: 'MANUAL'

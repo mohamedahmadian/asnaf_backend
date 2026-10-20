@@ -512,6 +512,7 @@ export const ModelName = {
   ViolationProceeding: 'ViolationProceeding',
   ViolationProceedingAttachment: 'ViolationProceedingAttachment',
   SmsSettings: 'SmsSettings',
+  SmsMessage: 'SmsMessage',
   ScheduledJob: 'ScheduledJob',
   ScheduledJobRun: 'ScheduledJobRun'
 } as const
@@ -529,7 +530,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "caseActivityLicenseSettings" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestFinance" | "caseRequestFee" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings" | "scheduledJob" | "scheduledJobRun"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "caseActivityLicenseSettings" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestFinance" | "caseRequestFee" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings" | "smsMessage" | "scheduledJob" | "scheduledJobRun"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -9043,6 +9044,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SmsMessage: {
+      payload: Prisma.$SmsMessagePayload<ExtArgs>
+      fields: Prisma.SmsMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SmsMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SmsMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.SmsMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SmsMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>
+        }
+        findMany: {
+          args: Prisma.SmsMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>[]
+        }
+        create: {
+          args: Prisma.SmsMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>
+        }
+        createMany: {
+          args: Prisma.SmsMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SmsMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.SmsMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>
+        }
+        update: {
+          args: Prisma.SmsMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.SmsMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SmsMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SmsMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.SmsMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmsMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.SmsMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSmsMessage>
+        }
+        groupBy: {
+          args: Prisma.SmsMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmsMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SmsMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmsMessageCountAggregateOutputType> | number
+        }
+      }
+    }
     ScheduledJob: {
       payload: Prisma.$ScheduledJobPayload<ExtArgs>
       fields: Prisma.ScheduledJobFieldRefs
@@ -11011,6 +11086,19 @@ export const SmsSettingsScalarFieldEnum = {
 export type SmsSettingsScalarFieldEnum = (typeof SmsSettingsScalarFieldEnum)[keyof typeof SmsSettingsScalarFieldEnum]
 
 
+export const SmsMessageScalarFieldEnum = {
+  id: 'id',
+  phone: 'phone',
+  body: 'body',
+  status: 'status',
+  source: 'source',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt'
+} as const
+
+export type SmsMessageScalarFieldEnum = (typeof SmsMessageScalarFieldEnum)[keyof typeof SmsMessageScalarFieldEnum]
+
+
 export const ScheduledJobScalarFieldEnum = {
   code: 'code',
   enabled: 'enabled',
@@ -11865,6 +11953,34 @@ export type ListEnumViolationAttachmentKindFieldRefInput<$PrismaModel> = FieldRe
 
 
 /**
+ * Reference to a field of type 'SmsMessageStatus'
+ */
+export type EnumSmsMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmsMessageStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SmsMessageStatus[]'
+ */
+export type ListEnumSmsMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmsMessageStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SmsMessageSource'
+ */
+export type EnumSmsMessageSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmsMessageSource'>
+    
+
+
+/**
+ * Reference to a field of type 'SmsMessageSource[]'
+ */
+export type ListEnumSmsMessageSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmsMessageSource[]'>
+    
+
+
+/**
  * Reference to a field of type 'ScheduledJobRunStatus'
  */
 export type EnumScheduledJobRunStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScheduledJobRunStatus'>
@@ -12171,6 +12287,7 @@ export type GlobalOmitConfig = {
   violationProceeding?: Prisma.ViolationProceedingOmit
   violationProceedingAttachment?: Prisma.ViolationProceedingAttachmentOmit
   smsSettings?: Prisma.SmsSettingsOmit
+  smsMessage?: Prisma.SmsMessageOmit
   scheduledJob?: Prisma.ScheduledJobOmit
   scheduledJobRun?: Prisma.ScheduledJobRunOmit
 }
