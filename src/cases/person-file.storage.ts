@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Jimp, JimpMime } from 'jimp';
+import { loadJimp } from '../common/lazy-modules';
 import { mkdir, readFile, rm, writeFile } from 'fs/promises';
-import { dirname, join, normalize, sep } from 'path';
+import { dirname, join, resolve as resolvePath } from 'path';
 
 const MAX_EDGE = 1600;
 const JPEG_QUALITY = 88;
@@ -14,10 +14,26 @@ export type StoredPersonFile = {
   originalName: string;
 };
 
+function configuredStorageDir() {
+  return process.env.FILE_STORAGE_DIR?.trim().replace(/^['"]+|['"]+$/g, '') ?? '';
+}
+
+/** Reject `..` / drive keys. Do not compare Windows slash styles. */
+function resolveStoredPath(root: string, storageKey: string) {
+  const segments = storageKey.split(/[\\/]+/).filter(Boolean);
+  if (
+    segments.length === 0 ||
+    segments.some((part) => part === '.' || part === '..' || part.includes(':') || part.includes('\0'))
+  ) {
+    throw new BadRequestException('مسیر فایل نامعتبر است');
+  }
+  return resolvePath(root, ...segments);
+}
+
 @Injectable()
 export class PersonFileStorage {
   private root() {
-    return process.env.FILE_STORAGE_DIR?.trim() || join(process.cwd(), 'storage');
+    return resolvePath(configuredStorageDir() || join(process.cwd(), 'storage'));
   }
 
   async save(input: {
@@ -234,12 +250,7 @@ export class PersonFileStorage {
   }
 
   private resolve(storageKey: string) {
-    const root = this.root();
-    const absolute = normalize(join(root, storageKey));
-    if (absolute !== root && !absolute.startsWith(root + sep)) {
-      throw new BadRequestException('مسیر فایل نامعتبر است');
-    }
-    return absolute;
+    return resolveStoredPath(this.root(), storageKey);
   }
 
   private asAudio(buffer: Buffer, mimeType: string, originalName: string) {
@@ -287,6 +298,7 @@ export class PersonFileStorage {
   }
 
   private async prepareImage(buffer: Buffer) {
+    const { Jimp, JimpMime } = await loadJimp();
     let image;
     try {
       image = await Jimp.read(buffer);
