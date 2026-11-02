@@ -4,7 +4,7 @@ import { emptyToUndefined } from '../../common/dto-transform';
 import { PaginationQueryDto } from '../../common/pagination';
 import { sortDirections } from '../../common/sort-query';
 
-export const documentSortFields = ['title'] as const;
+export const documentSortFields = ['title', 'description'] as const;
 
 export class FindDocumentsQueryDto extends PaginationQueryDto {
   @IsOptional()

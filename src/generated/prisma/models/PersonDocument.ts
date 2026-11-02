@@ -200,7 +200,6 @@ export type PersonDocumentOrderByWithRelationInput = {
 
 export type PersonDocumentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  userId_documentId?: Prisma.PersonDocumentUserIdDocumentIdCompoundUniqueInput
   AND?: Prisma.PersonDocumentWhereInput | Prisma.PersonDocumentWhereInput[]
   OR?: Prisma.PersonDocumentWhereInput[]
   NOT?: Prisma.PersonDocumentWhereInput | Prisma.PersonDocumentWhereInput[]
@@ -211,7 +210,7 @@ export type PersonDocumentWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   versions?: Prisma.PersonDocumentVersionListRelationFilter
-}, "id" | "userId_documentId">
+}, "id">
 
 export type PersonDocumentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -301,11 +300,6 @@ export type PersonDocumentListRelationFilter = {
 
 export type PersonDocumentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type PersonDocumentUserIdDocumentIdCompoundUniqueInput = {
-  userId: string
-  documentId: string
 }
 
 export type PersonDocumentCountOrderByAggregateInput = {

@@ -203,6 +203,8 @@ export type RoleWhereInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
   caseManagementReviews?: Prisma.CaseManagementReviewListRelationFilter
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleListRelationFilter
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleListRelationFilter
+  rentalManagementReviews?: Prisma.RentalManagementReviewListRelationFilter
   placesOffice?: Prisma.XOR<Prisma.CasePlacesOfficeNullableScalarRelationFilter, Prisma.CasePlacesOfficeWhereInput> | null
   caseGeneralSettings?: Prisma.CaseGeneralSettingsListRelationFilter
 }
@@ -220,6 +222,8 @@ export type RoleOrderByWithRelationInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverOrderByRelationAggregateInput
   caseManagementReviews?: Prisma.CaseManagementReviewOrderByRelationAggregateInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleOrderByRelationAggregateInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleOrderByRelationAggregateInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewOrderByRelationAggregateInput
   placesOffice?: Prisma.CasePlacesOfficeOrderByWithRelationInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsOrderByRelationAggregateInput
 }
@@ -240,6 +244,8 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<{
   caseManagementApprovers?: Prisma.CaseManagementApproverListRelationFilter
   caseManagementReviews?: Prisma.CaseManagementReviewListRelationFilter
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleListRelationFilter
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleListRelationFilter
+  rentalManagementReviews?: Prisma.RentalManagementReviewListRelationFilter
   placesOffice?: Prisma.XOR<Prisma.CasePlacesOfficeNullableScalarRelationFilter, Prisma.CasePlacesOfficeWhereInput> | null
   caseGeneralSettings?: Prisma.CaseGeneralSettingsListRelationFilter
 }, "id" | "code">
@@ -283,6 +289,8 @@ export type RoleCreateInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
@@ -300,6 +308,8 @@ export type RoleUncheckedCreateInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
@@ -317,6 +327,8 @@ export type RoleUpdateInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
@@ -334,6 +346,8 @@ export type RoleUncheckedUpdateInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
@@ -422,6 +436,34 @@ export type RoleUpdateOneWithoutCaseGeneralSettingsNestedInput = {
   delete?: Prisma.RoleWhereInput | boolean
   connect?: Prisma.RoleWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutCaseGeneralSettingsInput, Prisma.RoleUpdateWithoutCaseGeneralSettingsInput>, Prisma.RoleUncheckedUpdateWithoutCaseGeneralSettingsInput>
+}
+
+export type RoleCreateNestedOneWithoutRentalProcessManagementRolesInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutRentalProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutRentalProcessManagementRolesInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutRentalProcessManagementRolesInput
+  connect?: Prisma.RoleWhereUniqueInput
+}
+
+export type RoleUpdateOneRequiredWithoutRentalProcessManagementRolesNestedInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutRentalProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutRentalProcessManagementRolesInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutRentalProcessManagementRolesInput
+  upsert?: Prisma.RoleUpsertWithoutRentalProcessManagementRolesInput
+  connect?: Prisma.RoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutRentalProcessManagementRolesInput, Prisma.RoleUpdateWithoutRentalProcessManagementRolesInput>, Prisma.RoleUncheckedUpdateWithoutRentalProcessManagementRolesInput>
+}
+
+export type RoleCreateNestedOneWithoutRentalManagementReviewsInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutRentalManagementReviewsInput, Prisma.RoleUncheckedCreateWithoutRentalManagementReviewsInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutRentalManagementReviewsInput
+  connect?: Prisma.RoleWhereUniqueInput
+}
+
+export type RoleUpdateOneRequiredWithoutRentalManagementReviewsNestedInput = {
+  create?: Prisma.XOR<Prisma.RoleCreateWithoutRentalManagementReviewsInput, Prisma.RoleUncheckedCreateWithoutRentalManagementReviewsInput>
+  connectOrCreate?: Prisma.RoleCreateOrConnectWithoutRentalManagementReviewsInput
+  upsert?: Prisma.RoleUpsertWithoutRentalManagementReviewsInput
+  connect?: Prisma.RoleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RoleUpdateToOneWithWhereWithoutRentalManagementReviewsInput, Prisma.RoleUpdateWithoutRentalManagementReviewsInput>, Prisma.RoleUncheckedUpdateWithoutRentalManagementReviewsInput>
 }
 
 export type RoleCreateNestedOneWithoutPlacesOfficeInput = {
@@ -523,6 +565,8 @@ export type RoleCreateWithoutCaseGeneralSettingsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
 }
 
@@ -539,6 +583,8 @@ export type RoleUncheckedCreateWithoutCaseGeneralSettingsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
 }
 
@@ -571,6 +617,8 @@ export type RoleUpdateWithoutCaseGeneralSettingsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
 }
 
@@ -587,7 +635,185 @@ export type RoleUncheckedUpdateWithoutCaseGeneralSettingsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
+}
+
+export type RoleCreateWithoutRentalProcessManagementRolesInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleUncheckedCreateWithoutRentalProcessManagementRolesInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleCreateOrConnectWithoutRentalProcessManagementRolesInput = {
+  where: Prisma.RoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoleCreateWithoutRentalProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutRentalProcessManagementRolesInput>
+}
+
+export type RoleUpsertWithoutRentalProcessManagementRolesInput = {
+  update: Prisma.XOR<Prisma.RoleUpdateWithoutRentalProcessManagementRolesInput, Prisma.RoleUncheckedUpdateWithoutRentalProcessManagementRolesInput>
+  create: Prisma.XOR<Prisma.RoleCreateWithoutRentalProcessManagementRolesInput, Prisma.RoleUncheckedCreateWithoutRentalProcessManagementRolesInput>
+  where?: Prisma.RoleWhereInput
+}
+
+export type RoleUpdateToOneWithWhereWithoutRentalProcessManagementRolesInput = {
+  where?: Prisma.RoleWhereInput
+  data: Prisma.XOR<Prisma.RoleUpdateWithoutRentalProcessManagementRolesInput, Prisma.RoleUncheckedUpdateWithoutRentalProcessManagementRolesInput>
+}
+
+export type RoleUpdateWithoutRentalProcessManagementRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
+}
+
+export type RoleUncheckedUpdateWithoutRentalProcessManagementRolesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
+}
+
+export type RoleCreateWithoutRentalManagementReviewsInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleUncheckedCreateWithoutRentalManagementReviewsInput = {
+  id?: string
+  code: string
+  name: string
+  description?: string | null
+  isSystem?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserRoleUncheckedCreateNestedManyWithoutRoleInput
+  permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
+}
+
+export type RoleCreateOrConnectWithoutRentalManagementReviewsInput = {
+  where: Prisma.RoleWhereUniqueInput
+  create: Prisma.XOR<Prisma.RoleCreateWithoutRentalManagementReviewsInput, Prisma.RoleUncheckedCreateWithoutRentalManagementReviewsInput>
+}
+
+export type RoleUpsertWithoutRentalManagementReviewsInput = {
+  update: Prisma.XOR<Prisma.RoleUpdateWithoutRentalManagementReviewsInput, Prisma.RoleUncheckedUpdateWithoutRentalManagementReviewsInput>
+  create: Prisma.XOR<Prisma.RoleCreateWithoutRentalManagementReviewsInput, Prisma.RoleUncheckedCreateWithoutRentalManagementReviewsInput>
+  where?: Prisma.RoleWhereInput
+}
+
+export type RoleUpdateToOneWithWhereWithoutRentalManagementReviewsInput = {
+  where?: Prisma.RoleWhereInput
+  data: Prisma.XOR<Prisma.RoleUpdateWithoutRentalManagementReviewsInput, Prisma.RoleUncheckedUpdateWithoutRentalManagementReviewsInput>
+}
+
+export type RoleUpdateWithoutRentalManagementReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
+}
+
+export type RoleUncheckedUpdateWithoutRentalManagementReviewsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+  permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
+  caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
+  caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
 export type RoleCreateWithoutPlacesOfficeInput = {
@@ -603,6 +829,8 @@ export type RoleCreateWithoutPlacesOfficeInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -619,6 +847,8 @@ export type RoleUncheckedCreateWithoutPlacesOfficeInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
 
@@ -651,6 +881,8 @@ export type RoleUpdateWithoutPlacesOfficeInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -667,6 +899,8 @@ export type RoleUncheckedUpdateWithoutPlacesOfficeInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
 
@@ -682,6 +916,8 @@ export type RoleCreateWithoutCaseManagementApproversInput = {
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
@@ -698,6 +934,8 @@ export type RoleUncheckedCreateWithoutCaseManagementApproversInput = {
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
@@ -730,6 +968,8 @@ export type RoleUpdateWithoutCaseManagementApproversInput = {
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
@@ -746,6 +986,8 @@ export type RoleUncheckedUpdateWithoutCaseManagementApproversInput = {
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
@@ -762,6 +1004,8 @@ export type RoleCreateWithoutCaseProcessManagementRolesInput = {
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
@@ -778,6 +1022,8 @@ export type RoleUncheckedCreateWithoutCaseProcessManagementRolesInput = {
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
@@ -810,6 +1056,8 @@ export type RoleUpdateWithoutCaseProcessManagementRolesInput = {
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
@@ -826,6 +1074,8 @@ export type RoleUncheckedUpdateWithoutCaseProcessManagementRolesInput = {
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
@@ -842,6 +1092,8 @@ export type RoleCreateWithoutCaseManagementReviewsInput = {
   permissions?: Prisma.RolePermissionCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
@@ -858,6 +1110,8 @@ export type RoleUncheckedCreateWithoutCaseManagementReviewsInput = {
   permissions?: Prisma.RolePermissionUncheckedCreateNestedManyWithoutRoleInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
@@ -890,6 +1144,8 @@ export type RoleUpdateWithoutCaseManagementReviewsInput = {
   permissions?: Prisma.RolePermissionUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
@@ -906,6 +1162,8 @@ export type RoleUncheckedUpdateWithoutCaseManagementReviewsInput = {
   permissions?: Prisma.RolePermissionUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
@@ -922,6 +1180,8 @@ export type RoleCreateWithoutUsersInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
@@ -938,6 +1198,8 @@ export type RoleUncheckedCreateWithoutUsersInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
@@ -970,6 +1232,8 @@ export type RoleUpdateWithoutUsersInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
@@ -986,6 +1250,8 @@ export type RoleUncheckedUpdateWithoutUsersInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
@@ -1002,6 +1268,8 @@ export type RoleCreateWithoutPermissionsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsCreateNestedManyWithoutEditorRoleInput
 }
@@ -1018,6 +1286,8 @@ export type RoleUncheckedCreateWithoutPermissionsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedCreateNestedManyWithoutRoleInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedCreateNestedManyWithoutRoleInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedCreateNestedManyWithoutRoleInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedCreateNestedOneWithoutOfficerRoleInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedCreateNestedManyWithoutEditorRoleInput
 }
@@ -1050,6 +1320,8 @@ export type RoleUpdateWithoutPermissionsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUpdateManyWithoutEditorRoleNestedInput
 }
@@ -1066,6 +1338,8 @@ export type RoleUncheckedUpdateWithoutPermissionsInput = {
   caseManagementApprovers?: Prisma.CaseManagementApproverUncheckedUpdateManyWithoutRoleNestedInput
   caseManagementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   caseProcessManagementRoles?: Prisma.CaseProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalProcessManagementRoles?: Prisma.RentalProcessManagementRoleUncheckedUpdateManyWithoutRoleNestedInput
+  rentalManagementReviews?: Prisma.RentalManagementReviewUncheckedUpdateManyWithoutRoleNestedInput
   placesOffice?: Prisma.CasePlacesOfficeUncheckedUpdateOneWithoutOfficerRoleNestedInput
   caseGeneralSettings?: Prisma.CaseGeneralSettingsUncheckedUpdateManyWithoutEditorRoleNestedInput
 }
@@ -1081,6 +1355,8 @@ export type RoleCountOutputType = {
   caseManagementApprovers: number
   caseManagementReviews: number
   caseProcessManagementRoles: number
+  rentalProcessManagementRoles: number
+  rentalManagementReviews: number
   caseGeneralSettings: number
 }
 
@@ -1090,6 +1366,8 @@ export type RoleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   caseManagementApprovers?: boolean | RoleCountOutputTypeCountCaseManagementApproversArgs
   caseManagementReviews?: boolean | RoleCountOutputTypeCountCaseManagementReviewsArgs
   caseProcessManagementRoles?: boolean | RoleCountOutputTypeCountCaseProcessManagementRolesArgs
+  rentalProcessManagementRoles?: boolean | RoleCountOutputTypeCountRentalProcessManagementRolesArgs
+  rentalManagementReviews?: boolean | RoleCountOutputTypeCountRentalManagementReviewsArgs
   caseGeneralSettings?: boolean | RoleCountOutputTypeCountCaseGeneralSettingsArgs
 }
 
@@ -1141,6 +1419,20 @@ export type RoleCountOutputTypeCountCaseProcessManagementRolesArgs<ExtArgs exten
 /**
  * RoleCountOutputType without action
  */
+export type RoleCountOutputTypeCountRentalProcessManagementRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalProcessManagementRoleWhereInput
+}
+
+/**
+ * RoleCountOutputType without action
+ */
+export type RoleCountOutputTypeCountRentalManagementReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalManagementReviewWhereInput
+}
+
+/**
+ * RoleCountOutputType without action
+ */
 export type RoleCountOutputTypeCountCaseGeneralSettingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CaseGeneralSettingsWhereInput
 }
@@ -1159,6 +1451,8 @@ export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   caseManagementApprovers?: boolean | Prisma.Role$caseManagementApproversArgs<ExtArgs>
   caseManagementReviews?: boolean | Prisma.Role$caseManagementReviewsArgs<ExtArgs>
   caseProcessManagementRoles?: boolean | Prisma.Role$caseProcessManagementRolesArgs<ExtArgs>
+  rentalProcessManagementRoles?: boolean | Prisma.Role$rentalProcessManagementRolesArgs<ExtArgs>
+  rentalManagementReviews?: boolean | Prisma.Role$rentalManagementReviewsArgs<ExtArgs>
   placesOffice?: boolean | Prisma.Role$placesOfficeArgs<ExtArgs>
   caseGeneralSettings?: boolean | Prisma.Role$caseGeneralSettingsArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -1201,6 +1495,8 @@ export type RoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   caseManagementApprovers?: boolean | Prisma.Role$caseManagementApproversArgs<ExtArgs>
   caseManagementReviews?: boolean | Prisma.Role$caseManagementReviewsArgs<ExtArgs>
   caseProcessManagementRoles?: boolean | Prisma.Role$caseProcessManagementRolesArgs<ExtArgs>
+  rentalProcessManagementRoles?: boolean | Prisma.Role$rentalProcessManagementRolesArgs<ExtArgs>
+  rentalManagementReviews?: boolean | Prisma.Role$rentalManagementReviewsArgs<ExtArgs>
   placesOffice?: boolean | Prisma.Role$placesOfficeArgs<ExtArgs>
   caseGeneralSettings?: boolean | Prisma.Role$caseGeneralSettingsArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -1216,6 +1512,8 @@ export type $RolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     caseManagementApprovers: Prisma.$CaseManagementApproverPayload<ExtArgs>[]
     caseManagementReviews: Prisma.$CaseManagementReviewPayload<ExtArgs>[]
     caseProcessManagementRoles: Prisma.$CaseProcessManagementRolePayload<ExtArgs>[]
+    rentalProcessManagementRoles: Prisma.$RentalProcessManagementRolePayload<ExtArgs>[]
+    rentalManagementReviews: Prisma.$RentalManagementReviewPayload<ExtArgs>[]
     placesOffice: Prisma.$CasePlacesOfficePayload<ExtArgs> | null
     caseGeneralSettings: Prisma.$CaseGeneralSettingsPayload<ExtArgs>[]
   }
@@ -1626,6 +1924,8 @@ export interface Prisma__RoleClient<T, Null = never, ExtArgs extends runtime.Typ
   caseManagementApprovers<T extends Prisma.Role$caseManagementApproversArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseManagementApproversArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementApproverPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseManagementReviews<T extends Prisma.Role$caseManagementReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseManagementReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseProcessManagementRoles<T extends Prisma.Role$caseProcessManagementRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseProcessManagementRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseProcessManagementRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rentalProcessManagementRoles<T extends Prisma.Role$rentalProcessManagementRolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$rentalProcessManagementRolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalProcessManagementRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rentalManagementReviews<T extends Prisma.Role$rentalManagementReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$rentalManagementReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalManagementReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   placesOffice<T extends Prisma.Role$placesOfficeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$placesOfficeArgs<ExtArgs>>): Prisma.Prisma__CasePlacesOfficeClient<runtime.Types.Result.GetResult<Prisma.$CasePlacesOfficePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   caseGeneralSettings<T extends Prisma.Role$caseGeneralSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Role$caseGeneralSettingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseGeneralSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -2174,6 +2474,54 @@ export type Role$caseProcessManagementRolesArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.CaseProcessManagementRoleScalarFieldEnum | Prisma.CaseProcessManagementRoleScalarFieldEnum[]
+}
+
+/**
+ * Role.rentalProcessManagementRoles
+ */
+export type Role$rentalProcessManagementRolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalProcessManagementRole
+   */
+  select?: Prisma.RentalProcessManagementRoleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalProcessManagementRole
+   */
+  omit?: Prisma.RentalProcessManagementRoleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalProcessManagementRoleInclude<ExtArgs> | null
+  where?: Prisma.RentalProcessManagementRoleWhereInput
+  orderBy?: Prisma.RentalProcessManagementRoleOrderByWithRelationInput | Prisma.RentalProcessManagementRoleOrderByWithRelationInput[]
+  cursor?: Prisma.RentalProcessManagementRoleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalProcessManagementRoleScalarFieldEnum | Prisma.RentalProcessManagementRoleScalarFieldEnum[]
+}
+
+/**
+ * Role.rentalManagementReviews
+ */
+export type Role$rentalManagementReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalManagementReview
+   */
+  select?: Prisma.RentalManagementReviewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalManagementReview
+   */
+  omit?: Prisma.RentalManagementReviewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalManagementReviewInclude<ExtArgs> | null
+  where?: Prisma.RentalManagementReviewWhereInput
+  orderBy?: Prisma.RentalManagementReviewOrderByWithRelationInput | Prisma.RentalManagementReviewOrderByWithRelationInput[]
+  cursor?: Prisma.RentalManagementReviewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalManagementReviewScalarFieldEnum | Prisma.RentalManagementReviewScalarFieldEnum[]
 }
 
 /**

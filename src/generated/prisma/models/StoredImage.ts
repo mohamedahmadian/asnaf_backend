@@ -260,6 +260,7 @@ export type StoredImageWhereInput = {
   letterheadLogos?: Prisma.CaseLetterheadListRelationFilter
   letterheadSignatures?: Prisma.CaseLetterheadListRelationFilter
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsListRelationFilter
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsListRelationFilter
   paymentReceipts?: Prisma.PaymentReceiptListRelationFilter
 }
 
@@ -284,6 +285,7 @@ export type StoredImageOrderByWithRelationInput = {
   letterheadLogos?: Prisma.CaseLetterheadOrderByRelationAggregateInput
   letterheadSignatures?: Prisma.CaseLetterheadOrderByRelationAggregateInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsOrderByRelationAggregateInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsOrderByRelationAggregateInput
   paymentReceipts?: Prisma.PaymentReceiptOrderByRelationAggregateInput
 }
 
@@ -311,6 +313,7 @@ export type StoredImageWhereUniqueInput = Prisma.AtLeast<{
   letterheadLogos?: Prisma.CaseLetterheadListRelationFilter
   letterheadSignatures?: Prisma.CaseLetterheadListRelationFilter
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsListRelationFilter
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsListRelationFilter
   paymentReceipts?: Prisma.PaymentReceiptListRelationFilter
 }, "id">
 
@@ -365,6 +368,7 @@ export type StoredImageCreateInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -389,6 +393,7 @@ export type StoredImageUncheckedCreateInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -413,6 +418,7 @@ export type StoredImageUpdateInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -437,6 +443,7 @@ export type StoredImageUncheckedUpdateInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -622,6 +629,22 @@ export type StoredImageUpdateOneWithoutActivityLicenseSignaturesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutActivityLicenseSignaturesInput, Prisma.StoredImageUpdateWithoutActivityLicenseSignaturesInput>, Prisma.StoredImageUncheckedUpdateWithoutActivityLicenseSignaturesInput>
 }
 
+export type StoredImageCreateNestedOneWithoutRentalLicenseSignaturesInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutRentalLicenseSignaturesInput, Prisma.StoredImageUncheckedCreateWithoutRentalLicenseSignaturesInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutRentalLicenseSignaturesInput
+  connect?: Prisma.StoredImageWhereUniqueInput
+}
+
+export type StoredImageUpdateOneWithoutRentalLicenseSignaturesNestedInput = {
+  create?: Prisma.XOR<Prisma.StoredImageCreateWithoutRentalLicenseSignaturesInput, Prisma.StoredImageUncheckedCreateWithoutRentalLicenseSignaturesInput>
+  connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutRentalLicenseSignaturesInput
+  upsert?: Prisma.StoredImageUpsertWithoutRentalLicenseSignaturesInput
+  disconnect?: Prisma.StoredImageWhereInput | boolean
+  delete?: Prisma.StoredImageWhereInput | boolean
+  connect?: Prisma.StoredImageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StoredImageUpdateToOneWithWhereWithoutRentalLicenseSignaturesInput, Prisma.StoredImageUpdateWithoutRentalLicenseSignaturesInput>, Prisma.StoredImageUncheckedUpdateWithoutRentalLicenseSignaturesInput>
+}
+
 export type StoredImageCreateNestedOneWithoutPhotoUsersInput = {
   create?: Prisma.XOR<Prisma.StoredImageCreateWithoutPhotoUsersInput, Prisma.StoredImageUncheckedCreateWithoutPhotoUsersInput>
   connectOrCreate?: Prisma.StoredImageCreateOrConnectWithoutPhotoUsersInput
@@ -785,6 +808,7 @@ export type StoredImageCreateWithoutPaymentReceiptsInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
 }
 
 export type StoredImageUncheckedCreateWithoutPaymentReceiptsInput = {
@@ -808,6 +832,7 @@ export type StoredImageUncheckedCreateWithoutPaymentReceiptsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
 }
 
 export type StoredImageCreateOrConnectWithoutPaymentReceiptsInput = {
@@ -847,6 +872,7 @@ export type StoredImageUpdateWithoutPaymentReceiptsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
 }
 
 export type StoredImageUncheckedUpdateWithoutPaymentReceiptsInput = {
@@ -870,6 +896,7 @@ export type StoredImageUncheckedUpdateWithoutPaymentReceiptsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
 }
 
 export type StoredImageCreateWithoutLetterheadLogosInput = {
@@ -892,6 +919,7 @@ export type StoredImageCreateWithoutLetterheadLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -915,6 +943,7 @@ export type StoredImageUncheckedCreateWithoutLetterheadLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -943,6 +972,7 @@ export type StoredImageCreateWithoutLetterheadSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -966,6 +996,7 @@ export type StoredImageUncheckedCreateWithoutLetterheadSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1005,6 +1036,7 @@ export type StoredImageUpdateWithoutLetterheadLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1028,6 +1060,7 @@ export type StoredImageUncheckedUpdateWithoutLetterheadLogosInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1062,6 +1095,7 @@ export type StoredImageUpdateWithoutLetterheadSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1085,6 +1119,7 @@ export type StoredImageUncheckedUpdateWithoutLetterheadSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1108,6 +1143,7 @@ export type StoredImageCreateWithoutActivityLicenseSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1131,6 +1167,7 @@ export type StoredImageUncheckedCreateWithoutActivityLicenseSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1170,6 +1207,7 @@ export type StoredImageUpdateWithoutActivityLicenseSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1193,6 +1231,119 @@ export type StoredImageUncheckedUpdateWithoutActivityLicenseSignaturesInput = {
   violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageCreateWithoutRentalLicenseSignaturesInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserCreateNestedManyWithoutPhotoInput
+  foodPhotos?: Prisma.FoodCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentCreateNestedManyWithoutImageInput
+  letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
+  letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
+  activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageUncheckedCreateWithoutRentalLicenseSignaturesInput = {
+  id?: string
+  mimeType: string
+  data: runtime.Bytes
+  byteSize: number
+  width?: number | null
+  height?: number | null
+  originalName?: string | null
+  createdAt?: Date | string
+  photoUsers?: Prisma.UserUncheckedCreateNestedManyWithoutPhotoInput
+  foodPhotos?: Prisma.FoodUncheckedCreateNestedManyWithoutPhotoInput
+  restaurantLogos?: Prisma.RestaurantUncheckedCreateNestedManyWithoutLogoInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedCreateNestedManyWithoutImageInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedCreateNestedManyWithoutImageInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedCreateNestedManyWithoutImageInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedCreateNestedManyWithoutImageInput
+  letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
+  letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
+  activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
+}
+
+export type StoredImageCreateOrConnectWithoutRentalLicenseSignaturesInput = {
+  where: Prisma.StoredImageWhereUniqueInput
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutRentalLicenseSignaturesInput, Prisma.StoredImageUncheckedCreateWithoutRentalLicenseSignaturesInput>
+}
+
+export type StoredImageUpsertWithoutRentalLicenseSignaturesInput = {
+  update: Prisma.XOR<Prisma.StoredImageUpdateWithoutRentalLicenseSignaturesInput, Prisma.StoredImageUncheckedUpdateWithoutRentalLicenseSignaturesInput>
+  create: Prisma.XOR<Prisma.StoredImageCreateWithoutRentalLicenseSignaturesInput, Prisma.StoredImageUncheckedCreateWithoutRentalLicenseSignaturesInput>
+  where?: Prisma.StoredImageWhereInput
+}
+
+export type StoredImageUpdateToOneWithWhereWithoutRentalLicenseSignaturesInput = {
+  where?: Prisma.StoredImageWhereInput
+  data: Prisma.XOR<Prisma.StoredImageUpdateWithoutRentalLicenseSignaturesInput, Prisma.StoredImageUncheckedUpdateWithoutRentalLicenseSignaturesInput>
+}
+
+export type StoredImageUpdateWithoutRentalLicenseSignaturesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUpdateManyWithoutPhotoNestedInput
+  foodPhotos?: Prisma.FoodUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUpdateManyWithoutImageNestedInput
+  letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
+  letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
+  activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
+}
+
+export type StoredImageUncheckedUpdateWithoutRentalLicenseSignaturesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  mimeType?: Prisma.StringFieldUpdateOperationsInput | string
+  data?: Prisma.BytesFieldUpdateOperationsInput | runtime.Bytes
+  byteSize?: Prisma.IntFieldUpdateOperationsInput | number
+  width?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  originalName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  photoUsers?: Prisma.UserUncheckedUpdateManyWithoutPhotoNestedInput
+  foodPhotos?: Prisma.FoodUncheckedUpdateManyWithoutPhotoNestedInput
+  restaurantLogos?: Prisma.RestaurantUncheckedUpdateManyWithoutLogoNestedInput
+  progressImages?: Prisma.ProjectProgressImageUncheckedUpdateManyWithoutImageNestedInput
+  singardAttachments?: Prisma.SingardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardAttachments?: Prisma.BoardAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  boardMinutesAttachments?: Prisma.BoardMinutesAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationAttachments?: Prisma.ViolationAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  violationProceedingAttachments?: Prisma.ViolationProceedingAttachmentUncheckedUpdateManyWithoutImageNestedInput
+  letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
+  letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
+  activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1216,6 +1367,7 @@ export type StoredImageCreateWithoutPhotoUsersInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1239,6 +1391,7 @@ export type StoredImageUncheckedCreateWithoutPhotoUsersInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1278,6 +1431,7 @@ export type StoredImageUpdateWithoutPhotoUsersInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1301,6 +1455,7 @@ export type StoredImageUncheckedUpdateWithoutPhotoUsersInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1324,6 +1479,7 @@ export type StoredImageCreateWithoutProgressImagesInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1347,6 +1503,7 @@ export type StoredImageUncheckedCreateWithoutProgressImagesInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1386,6 +1543,7 @@ export type StoredImageUpdateWithoutProgressImagesInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1409,6 +1567,7 @@ export type StoredImageUncheckedUpdateWithoutProgressImagesInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1432,6 +1591,7 @@ export type StoredImageCreateWithoutFoodPhotosInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1455,6 +1615,7 @@ export type StoredImageUncheckedCreateWithoutFoodPhotosInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1494,6 +1655,7 @@ export type StoredImageUpdateWithoutFoodPhotosInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1517,6 +1679,7 @@ export type StoredImageUncheckedUpdateWithoutFoodPhotosInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1540,6 +1703,7 @@ export type StoredImageCreateWithoutRestaurantLogosInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1563,6 +1727,7 @@ export type StoredImageUncheckedCreateWithoutRestaurantLogosInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1602,6 +1767,7 @@ export type StoredImageUpdateWithoutRestaurantLogosInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1625,6 +1791,7 @@ export type StoredImageUncheckedUpdateWithoutRestaurantLogosInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1648,6 +1815,7 @@ export type StoredImageCreateWithoutSingardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1671,6 +1839,7 @@ export type StoredImageUncheckedCreateWithoutSingardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1710,6 +1879,7 @@ export type StoredImageUpdateWithoutSingardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1733,6 +1903,7 @@ export type StoredImageUncheckedUpdateWithoutSingardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1756,6 +1927,7 @@ export type StoredImageCreateWithoutBoardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1779,6 +1951,7 @@ export type StoredImageUncheckedCreateWithoutBoardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1818,6 +1991,7 @@ export type StoredImageUpdateWithoutBoardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1841,6 +2015,7 @@ export type StoredImageUncheckedUpdateWithoutBoardAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1864,6 +2039,7 @@ export type StoredImageCreateWithoutBoardMinutesAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1887,6 +2063,7 @@ export type StoredImageUncheckedCreateWithoutBoardMinutesAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -1926,6 +2103,7 @@ export type StoredImageUpdateWithoutBoardMinutesAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -1949,6 +2127,7 @@ export type StoredImageUncheckedUpdateWithoutBoardMinutesAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -1972,6 +2151,7 @@ export type StoredImageCreateWithoutViolationAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -1995,6 +2175,7 @@ export type StoredImageUncheckedCreateWithoutViolationAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -2034,6 +2215,7 @@ export type StoredImageUpdateWithoutViolationAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -2057,6 +2239,7 @@ export type StoredImageUncheckedUpdateWithoutViolationAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -2080,6 +2263,7 @@ export type StoredImageCreateWithoutViolationProceedingAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptCreateNestedManyWithoutImageInput
 }
 
@@ -2103,6 +2287,7 @@ export type StoredImageUncheckedCreateWithoutViolationProceedingAttachmentsInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutLogoInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedCreateNestedManyWithoutSignatureInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedCreateNestedManyWithoutSignatureInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedCreateNestedManyWithoutImageInput
 }
 
@@ -2142,6 +2327,7 @@ export type StoredImageUpdateWithoutViolationProceedingAttachmentsInput = {
   letterheadLogos?: Prisma.CaseLetterheadUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUpdateManyWithoutImageNestedInput
 }
 
@@ -2165,6 +2351,7 @@ export type StoredImageUncheckedUpdateWithoutViolationProceedingAttachmentsInput
   letterheadLogos?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutLogoNestedInput
   letterheadSignatures?: Prisma.CaseLetterheadUncheckedUpdateManyWithoutSignatureNestedInput
   activityLicenseSignatures?: Prisma.CaseActivityLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
+  rentalLicenseSignatures?: Prisma.RentalLicenseSettingsUncheckedUpdateManyWithoutSignatureNestedInput
   paymentReceipts?: Prisma.PaymentReceiptUncheckedUpdateManyWithoutImageNestedInput
 }
 
@@ -2186,6 +2373,7 @@ export type StoredImageCountOutputType = {
   letterheadLogos: number
   letterheadSignatures: number
   activityLicenseSignatures: number
+  rentalLicenseSignatures: number
   paymentReceipts: number
 }
 
@@ -2202,6 +2390,7 @@ export type StoredImageCountOutputTypeSelect<ExtArgs extends runtime.Types.Exten
   letterheadLogos?: boolean | StoredImageCountOutputTypeCountLetterheadLogosArgs
   letterheadSignatures?: boolean | StoredImageCountOutputTypeCountLetterheadSignaturesArgs
   activityLicenseSignatures?: boolean | StoredImageCountOutputTypeCountActivityLicenseSignaturesArgs
+  rentalLicenseSignatures?: boolean | StoredImageCountOutputTypeCountRentalLicenseSignaturesArgs
   paymentReceipts?: boolean | StoredImageCountOutputTypeCountPaymentReceiptsArgs
 }
 
@@ -2302,6 +2491,13 @@ export type StoredImageCountOutputTypeCountActivityLicenseSignaturesArgs<ExtArgs
 /**
  * StoredImageCountOutputType without action
  */
+export type StoredImageCountOutputTypeCountRentalLicenseSignaturesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalLicenseSettingsWhereInput
+}
+
+/**
+ * StoredImageCountOutputType without action
+ */
 export type StoredImageCountOutputTypeCountPaymentReceiptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PaymentReceiptWhereInput
 }
@@ -2328,6 +2524,7 @@ export type StoredImageSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   letterheadLogos?: boolean | Prisma.StoredImage$letterheadLogosArgs<ExtArgs>
   letterheadSignatures?: boolean | Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs>
   activityLicenseSignatures?: boolean | Prisma.StoredImage$activityLicenseSignaturesArgs<ExtArgs>
+  rentalLicenseSignatures?: boolean | Prisma.StoredImage$rentalLicenseSignaturesArgs<ExtArgs>
   paymentReceipts?: boolean | Prisma.StoredImage$paymentReceiptsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["storedImage"]>
@@ -2379,6 +2576,7 @@ export type StoredImageInclude<ExtArgs extends runtime.Types.Extensions.Internal
   letterheadLogos?: boolean | Prisma.StoredImage$letterheadLogosArgs<ExtArgs>
   letterheadSignatures?: boolean | Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs>
   activityLicenseSignatures?: boolean | Prisma.StoredImage$activityLicenseSignaturesArgs<ExtArgs>
+  rentalLicenseSignatures?: boolean | Prisma.StoredImage$rentalLicenseSignaturesArgs<ExtArgs>
   paymentReceipts?: boolean | Prisma.StoredImage$paymentReceiptsArgs<ExtArgs>
   _count?: boolean | Prisma.StoredImageCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2400,6 +2598,7 @@ export type $StoredImagePayload<ExtArgs extends runtime.Types.Extensions.Interna
     letterheadLogos: Prisma.$CaseLetterheadPayload<ExtArgs>[]
     letterheadSignatures: Prisma.$CaseLetterheadPayload<ExtArgs>[]
     activityLicenseSignatures: Prisma.$CaseActivityLicenseSettingsPayload<ExtArgs>[]
+    rentalLicenseSignatures: Prisma.$RentalLicenseSettingsPayload<ExtArgs>[]
     paymentReceipts: Prisma.$PaymentReceiptPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -2817,6 +3016,7 @@ export interface Prisma__StoredImageClient<T, Null = never, ExtArgs extends runt
   letterheadLogos<T extends Prisma.StoredImage$letterheadLogosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$letterheadLogosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLetterheadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   letterheadSignatures<T extends Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$letterheadSignaturesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLetterheadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activityLicenseSignatures<T extends Prisma.StoredImage$activityLicenseSignaturesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$activityLicenseSignaturesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseActivityLicenseSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rentalLicenseSignatures<T extends Prisma.StoredImage$rentalLicenseSignaturesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$rentalLicenseSignaturesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalLicenseSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   paymentReceipts<T extends Prisma.StoredImage$paymentReceiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StoredImage$paymentReceiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3533,6 +3733,30 @@ export type StoredImage$activityLicenseSignaturesArgs<ExtArgs extends runtime.Ty
   take?: number
   skip?: number
   distinct?: Prisma.CaseActivityLicenseSettingsScalarFieldEnum | Prisma.CaseActivityLicenseSettingsScalarFieldEnum[]
+}
+
+/**
+ * StoredImage.rentalLicenseSignatures
+ */
+export type StoredImage$rentalLicenseSignaturesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalLicenseSettings
+   */
+  select?: Prisma.RentalLicenseSettingsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalLicenseSettings
+   */
+  omit?: Prisma.RentalLicenseSettingsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalLicenseSettingsInclude<ExtArgs> | null
+  where?: Prisma.RentalLicenseSettingsWhereInput
+  orderBy?: Prisma.RentalLicenseSettingsOrderByWithRelationInput | Prisma.RentalLicenseSettingsOrderByWithRelationInput[]
+  cursor?: Prisma.RentalLicenseSettingsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalLicenseSettingsScalarFieldEnum | Prisma.RentalLicenseSettingsScalarFieldEnum[]
 }
 
 /**

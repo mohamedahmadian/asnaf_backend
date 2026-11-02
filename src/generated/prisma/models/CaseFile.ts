@@ -68,6 +68,7 @@ export type CaseFileMinAggregateOutputType = {
   premiseComplexId: string | null
   premiseAddress: string | null
   premiseAddressEn: string | null
+  urbanZoneId: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -85,6 +86,7 @@ export type CaseFileMinAggregateOutputType = {
   leaseExpiresAt: Date | null
   leaseAgency: string | null
   premiseOwnerName: string | null
+  premiseOwnerNationalId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -119,6 +121,7 @@ export type CaseFileMaxAggregateOutputType = {
   premiseComplexId: string | null
   premiseAddress: string | null
   premiseAddressEn: string | null
+  urbanZoneId: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -136,6 +139,7 @@ export type CaseFileMaxAggregateOutputType = {
   leaseExpiresAt: Date | null
   leaseAgency: string | null
   premiseOwnerName: string | null
+  premiseOwnerNationalId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -170,6 +174,7 @@ export type CaseFileCountAggregateOutputType = {
   premiseComplexId: number
   premiseAddress: number
   premiseAddressEn: number
+  urbanZoneId: number
   premisePlaque: number
   premisePlaqueSeries: number
   premiseFloor: number
@@ -187,6 +192,7 @@ export type CaseFileCountAggregateOutputType = {
   leaseExpiresAt: number
   leaseAgency: number
   premiseOwnerName: number
+  premiseOwnerNationalId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -235,6 +241,7 @@ export type CaseFileMinAggregateInputType = {
   premiseComplexId?: true
   premiseAddress?: true
   premiseAddressEn?: true
+  urbanZoneId?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -252,6 +259,7 @@ export type CaseFileMinAggregateInputType = {
   leaseExpiresAt?: true
   leaseAgency?: true
   premiseOwnerName?: true
+  premiseOwnerNationalId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -286,6 +294,7 @@ export type CaseFileMaxAggregateInputType = {
   premiseComplexId?: true
   premiseAddress?: true
   premiseAddressEn?: true
+  urbanZoneId?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -303,6 +312,7 @@ export type CaseFileMaxAggregateInputType = {
   leaseExpiresAt?: true
   leaseAgency?: true
   premiseOwnerName?: true
+  premiseOwnerNationalId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -337,6 +347,7 @@ export type CaseFileCountAggregateInputType = {
   premiseComplexId?: true
   premiseAddress?: true
   premiseAddressEn?: true
+  urbanZoneId?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -354,6 +365,7 @@ export type CaseFileCountAggregateInputType = {
   leaseExpiresAt?: true
   leaseAgency?: true
   premiseOwnerName?: true
+  premiseOwnerNationalId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -475,6 +487,7 @@ export type CaseFileGroupByOutputType = {
   premiseComplexId: string | null
   premiseAddress: string | null
   premiseAddressEn: string | null
+  urbanZoneId: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -492,6 +505,7 @@ export type CaseFileGroupByOutputType = {
   leaseExpiresAt: Date | null
   leaseAgency: string | null
   premiseOwnerName: string | null
+  premiseOwnerNationalId: string | null
   createdAt: Date
   updatedAt: Date
   _count: CaseFileCountAggregateOutputType | null
@@ -549,6 +563,7 @@ export type CaseFileWhereInput = {
   premiseComplexId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddressEn?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  urbanZoneId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -566,6 +581,7 @@ export type CaseFileWhereInput = {
   leaseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   leaseAgency?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseOwnerName?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -575,7 +591,9 @@ export type CaseFileWhereInput = {
   activityJob?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
+  urbanZone?: Prisma.XOR<Prisma.UrbanZoneNullableScalarRelationFilter, Prisma.UrbanZoneWhereInput> | null
   registrationPlace?: Prisma.XOR<Prisma.RegistrationPlaceNullableScalarRelationFilter, Prisma.RegistrationPlaceWhereInput> | null
+  premiseFiles?: Prisma.CasePremiseFileListRelationFilter
   inquiries?: Prisma.CaseInquiryListRelationFilter
   placesReviews?: Prisma.CasePlacesReviewListRelationFilter
   managementReviews?: Prisma.CaseManagementReviewListRelationFilter
@@ -587,6 +605,7 @@ export type CaseFileWhereInput = {
   stewardRevokeFile?: Prisma.XOR<Prisma.CaseStewardRevokeFileNullableScalarRelationFilter, Prisma.CaseStewardRevokeFileWhereInput> | null
   revocationProcess?: Prisma.XOR<Prisma.CaseRevocationProcessNullableScalarRelationFilter, Prisma.CaseRevocationProcessWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
+  assetAccounts?: Prisma.CaseAssetAccountListRelationFilter
 }
 
 export type CaseFileOrderByWithRelationInput = {
@@ -619,6 +638,7 @@ export type CaseFileOrderByWithRelationInput = {
   premiseComplexId?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaque?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseFloor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -636,6 +656,7 @@ export type CaseFileOrderByWithRelationInput = {
   leaseExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   leaseAgency?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -645,7 +666,9 @@ export type CaseFileOrderByWithRelationInput = {
   activityJob?: Prisma.JobOrderByWithRelationInput
   premiseCity?: Prisma.CityOrderByWithRelationInput
   premiseComplex?: Prisma.CommercialComplexOrderByWithRelationInput
+  urbanZone?: Prisma.UrbanZoneOrderByWithRelationInput
   registrationPlace?: Prisma.RegistrationPlaceOrderByWithRelationInput
+  premiseFiles?: Prisma.CasePremiseFileOrderByRelationAggregateInput
   inquiries?: Prisma.CaseInquiryOrderByRelationAggregateInput
   placesReviews?: Prisma.CasePlacesReviewOrderByRelationAggregateInput
   managementReviews?: Prisma.CaseManagementReviewOrderByRelationAggregateInput
@@ -657,6 +680,7 @@ export type CaseFileOrderByWithRelationInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileOrderByWithRelationInput
   revocationProcess?: Prisma.CaseRevocationProcessOrderByWithRelationInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
+  assetAccounts?: Prisma.CaseAssetAccountOrderByRelationAggregateInput
 }
 
 export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
@@ -692,6 +716,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   premiseComplexId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddressEn?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  urbanZoneId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -709,6 +734,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   leaseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   leaseAgency?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseOwnerName?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -718,7 +744,9 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   activityJob?: Prisma.XOR<Prisma.JobNullableScalarRelationFilter, Prisma.JobWhereInput> | null
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
+  urbanZone?: Prisma.XOR<Prisma.UrbanZoneNullableScalarRelationFilter, Prisma.UrbanZoneWhereInput> | null
   registrationPlace?: Prisma.XOR<Prisma.RegistrationPlaceNullableScalarRelationFilter, Prisma.RegistrationPlaceWhereInput> | null
+  premiseFiles?: Prisma.CasePremiseFileListRelationFilter
   inquiries?: Prisma.CaseInquiryListRelationFilter
   placesReviews?: Prisma.CasePlacesReviewListRelationFilter
   managementReviews?: Prisma.CaseManagementReviewListRelationFilter
@@ -730,6 +758,7 @@ export type CaseFileWhereUniqueInput = Prisma.AtLeast<{
   stewardRevokeFile?: Prisma.XOR<Prisma.CaseStewardRevokeFileNullableScalarRelationFilter, Prisma.CaseStewardRevokeFileWhereInput> | null
   revocationProcess?: Prisma.XOR<Prisma.CaseRevocationProcessNullableScalarRelationFilter, Prisma.CaseRevocationProcessWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
+  assetAccounts?: Prisma.CaseAssetAccountListRelationFilter
 }, "id" | "cardNumber" | "trackingCode" | "licenseNumber">
 
 export type CaseFileOrderByWithAggregationInput = {
@@ -762,6 +791,7 @@ export type CaseFileOrderByWithAggregationInput = {
   premiseComplexId?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaque?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseFloor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -779,6 +809,7 @@ export type CaseFileOrderByWithAggregationInput = {
   leaseExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   leaseAgency?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CaseFileCountOrderByAggregateInput
@@ -821,6 +852,7 @@ export type CaseFileScalarWhereWithAggregatesInput = {
   premiseComplexId?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premiseAddressEn?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
+  urbanZoneId?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
@@ -838,6 +870,7 @@ export type CaseFileScalarWhereWithAggregatesInput = {
   leaseExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseFile"> | Date | string | null
   leaseAgency?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   premiseOwnerName?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableWithAggregatesFilter<"CaseFile"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CaseFile"> | Date | string
 }
@@ -882,6 +915,7 @@ export type CaseFileCreateInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -891,7 +925,9 @@ export type CaseFileCreateInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -903,6 +939,7 @@ export type CaseFileCreateInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateInput = {
@@ -935,6 +972,7 @@ export type CaseFileUncheckedCreateInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -952,9 +990,11 @@ export type CaseFileUncheckedCreateInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -966,6 +1006,7 @@ export type CaseFileUncheckedCreateInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUpdateInput = {
@@ -1008,6 +1049,7 @@ export type CaseFileUpdateInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -1017,7 +1059,9 @@ export type CaseFileUpdateInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -1029,6 +1073,7 @@ export type CaseFileUpdateInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateInput = {
@@ -1061,6 +1106,7 @@ export type CaseFileUncheckedUpdateInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1078,9 +1124,11 @@ export type CaseFileUncheckedUpdateInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -1092,6 +1140,7 @@ export type CaseFileUncheckedUpdateInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyInput = {
@@ -1124,6 +1173,7 @@ export type CaseFileCreateManyInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1141,6 +1191,7 @@ export type CaseFileCreateManyInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1185,6 +1236,7 @@ export type CaseFileUpdateManyMutationInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1219,6 +1271,7 @@ export type CaseFileUncheckedUpdateManyInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1236,6 +1289,7 @@ export type CaseFileUncheckedUpdateManyInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1290,6 +1344,7 @@ export type CaseFileCountOrderByAggregateInput = {
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -1307,6 +1362,7 @@ export type CaseFileCountOrderByAggregateInput = {
   leaseExpiresAt?: Prisma.SortOrder
   leaseAgency?: Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1347,6 +1403,7 @@ export type CaseFileMaxOrderByAggregateInput = {
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -1364,6 +1421,7 @@ export type CaseFileMaxOrderByAggregateInput = {
   leaseExpiresAt?: Prisma.SortOrder
   leaseAgency?: Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1398,6 +1456,7 @@ export type CaseFileMinOrderByAggregateInput = {
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -1415,6 +1474,7 @@ export type CaseFileMinOrderByAggregateInput = {
   leaseExpiresAt?: Prisma.SortOrder
   leaseAgency?: Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1603,18 +1663,6 @@ export type NullableEnumPreviousOccupationFieldUpdateOperationsInput = {
   set?: $Enums.PreviousOccupation | null
 }
 
-export type NullableEnumPremiseEstablishmentFieldUpdateOperationsInput = {
-  set?: $Enums.PremiseEstablishment | null
-}
-
-export type NullableEnumPremiseGeoPositionFieldUpdateOperationsInput = {
-  set?: $Enums.PremiseGeoPosition | null
-}
-
-export type NullableEnumPremisePublicAccessFieldUpdateOperationsInput = {
-  set?: $Enums.PremisePublicAccess | null
-}
-
 export type NullableEnumPremiseOwnershipFieldUpdateOperationsInput = {
   set?: $Enums.PremiseOwnership | null
 }
@@ -1655,6 +1703,34 @@ export type CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput = {
   update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput[]
   updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutHostCaseFileInput | Prisma.CaseFileUpdateManyWithWhereWithoutHostCaseFileInput[]
   deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
+}
+
+export type CaseFileCreateNestedOneWithoutAssetAccountsInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutAssetAccountsInput, Prisma.CaseFileUncheckedCreateWithoutAssetAccountsInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutAssetAccountsInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+}
+
+export type CaseFileUpdateOneRequiredWithoutAssetAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutAssetAccountsInput, Prisma.CaseFileUncheckedCreateWithoutAssetAccountsInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutAssetAccountsInput
+  upsert?: Prisma.CaseFileUpsertWithoutAssetAccountsInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutAssetAccountsInput, Prisma.CaseFileUpdateWithoutAssetAccountsInput>, Prisma.CaseFileUncheckedUpdateWithoutAssetAccountsInput>
+}
+
+export type CaseFileCreateNestedOneWithoutPremiseFilesInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseFilesInput, Prisma.CaseFileUncheckedCreateWithoutPremiseFilesInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPremiseFilesInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+}
+
+export type CaseFileUpdateOneRequiredWithoutPremiseFilesNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseFilesInput, Prisma.CaseFileUncheckedCreateWithoutPremiseFilesInput>
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutPremiseFilesInput
+  upsert?: Prisma.CaseFileUpsertWithoutPremiseFilesInput
+  connect?: Prisma.CaseFileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseFileUpdateToOneWithWhereWithoutPremiseFilesInput, Prisma.CaseFileUpdateWithoutPremiseFilesInput>, Prisma.CaseFileUncheckedUpdateWithoutPremiseFilesInput>
 }
 
 export type CaseFileCreateNestedOneWithoutStewardRevokeFileInput = {
@@ -1867,6 +1943,48 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexNestedInput = {
   deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
 }
 
+export type CaseFileCreateNestedManyWithoutUrbanZoneInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseFileCreateWithoutUrbanZoneInput[] | Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseFileCreateManyUrbanZoneInputEnvelope
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+}
+
+export type CaseFileUncheckedCreateNestedManyWithoutUrbanZoneInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseFileCreateWithoutUrbanZoneInput[] | Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseFileCreateManyUrbanZoneInputEnvelope
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+}
+
+export type CaseFileUpdateManyWithoutUrbanZoneNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseFileCreateWithoutUrbanZoneInput[] | Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput[]
+  upsert?: Prisma.CaseFileUpsertWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseFileUpsertWithWhereUniqueWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseFileCreateManyUrbanZoneInputEnvelope
+  set?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  disconnect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  delete?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutUrbanZoneInput[]
+  updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutUrbanZoneInput | Prisma.CaseFileUpdateManyWithWhereWithoutUrbanZoneInput[]
+  deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
+}
+
+export type CaseFileUncheckedUpdateManyWithoutUrbanZoneNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseFileCreateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseFileCreateWithoutUrbanZoneInput[] | Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseFileCreateOrConnectWithoutUrbanZoneInput[]
+  upsert?: Prisma.CaseFileUpsertWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseFileUpsertWithWhereUniqueWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseFileCreateManyUrbanZoneInputEnvelope
+  set?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  disconnect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  delete?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  connect?: Prisma.CaseFileWhereUniqueInput | Prisma.CaseFileWhereUniqueInput[]
+  update?: Prisma.CaseFileUpdateWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseFileUpdateWithWhereUniqueWithoutUrbanZoneInput[]
+  updateMany?: Prisma.CaseFileUpdateManyWithWhereWithoutUrbanZoneInput | Prisma.CaseFileUpdateManyWithWhereWithoutUrbanZoneInput[]
+  deleteMany?: Prisma.CaseFileScalarWhereInput | Prisma.CaseFileScalarWhereInput[]
+}
+
 export type CaseFileCreateNestedManyWithoutRegistrationPlaceInput = {
   create?: Prisma.XOR<Prisma.CaseFileCreateWithoutRegistrationPlaceInput, Prisma.CaseFileUncheckedCreateWithoutRegistrationPlaceInput> | Prisma.CaseFileCreateWithoutRegistrationPlaceInput[] | Prisma.CaseFileUncheckedCreateWithoutRegistrationPlaceInput[]
   connectOrCreate?: Prisma.CaseFileCreateOrConnectWithoutRegistrationPlaceInput | Prisma.CaseFileCreateOrConnectWithoutRegistrationPlaceInput[]
@@ -1965,6 +2083,7 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -1973,7 +2092,9 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -1985,6 +2106,7 @@ export type CaseFileCreateWithoutPremiseCityInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
@@ -2016,6 +2138,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2033,9 +2156,11 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2047,6 +2172,7 @@ export type CaseFileUncheckedCreateWithoutPremiseCityInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseCityInput = {
@@ -2108,6 +2234,7 @@ export type CaseFileScalarWhereInput = {
   premiseComplexId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseAddressEn?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  urbanZoneId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseFile"> | string | null
@@ -2125,6 +2252,7 @@ export type CaseFileScalarWhereInput = {
   leaseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseFile"> | Date | string | null
   leaseAgency?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   premiseOwnerName?: Prisma.StringNullableFilter<"CaseFile"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableFilter<"CaseFile"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseFile"> | Date | string
 }
@@ -2169,6 +2297,7 @@ export type CaseFileCreateWithoutPaymentsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -2178,7 +2307,9 @@ export type CaseFileCreateWithoutPaymentsInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -2189,6 +2320,7 @@ export type CaseFileCreateWithoutPaymentsInput = {
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPaymentsInput = {
@@ -2221,6 +2353,7 @@ export type CaseFileUncheckedCreateWithoutPaymentsInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2238,9 +2371,11 @@ export type CaseFileUncheckedCreateWithoutPaymentsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2251,6 +2386,7 @@ export type CaseFileUncheckedCreateWithoutPaymentsInput = {
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPaymentsInput = {
@@ -2309,6 +2445,7 @@ export type CaseFileUpdateWithoutPaymentsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -2318,7 +2455,9 @@ export type CaseFileUpdateWithoutPaymentsInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -2329,6 +2468,7 @@ export type CaseFileUpdateWithoutPaymentsInput = {
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPaymentsInput = {
@@ -2361,6 +2501,7 @@ export type CaseFileUncheckedUpdateWithoutPaymentsInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2378,9 +2519,11 @@ export type CaseFileUncheckedUpdateWithoutPaymentsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -2391,6 +2534,7 @@ export type CaseFileUncheckedUpdateWithoutPaymentsInput = {
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutActivityJobInput = {
@@ -2433,6 +2577,7 @@ export type CaseFileCreateWithoutActivityJobInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -2441,7 +2586,9 @@ export type CaseFileCreateWithoutActivityJobInput = {
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -2453,6 +2600,7 @@ export type CaseFileCreateWithoutActivityJobInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityJobInput = {
@@ -2484,6 +2632,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2501,9 +2650,11 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2515,6 +2666,7 @@ export type CaseFileUncheckedCreateWithoutActivityJobInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityJobInput = {
@@ -2583,6 +2735,7 @@ export type CaseFileCreateWithoutInquiriesInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -2592,7 +2745,9 @@ export type CaseFileCreateWithoutInquiriesInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
@@ -2603,6 +2758,7 @@ export type CaseFileCreateWithoutInquiriesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutInquiriesInput = {
@@ -2635,6 +2791,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2652,9 +2809,11 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2665,6 +2824,7 @@ export type CaseFileUncheckedCreateWithoutInquiriesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutInquiriesInput = {
@@ -2723,6 +2883,7 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -2732,7 +2893,9 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
@@ -2743,6 +2906,7 @@ export type CaseFileUpdateWithoutInquiriesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
@@ -2775,6 +2939,7 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2792,9 +2957,11 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -2805,6 +2972,7 @@ export type CaseFileUncheckedUpdateWithoutInquiriesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPlacesReviewsInput = {
@@ -2847,6 +3015,7 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -2856,7 +3025,9 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
@@ -2867,6 +3038,7 @@ export type CaseFileCreateWithoutPlacesReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
@@ -2899,6 +3071,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -2916,9 +3089,11 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
@@ -2929,6 +3104,7 @@ export type CaseFileUncheckedCreateWithoutPlacesReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPlacesReviewsInput = {
@@ -2987,6 +3163,7 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -2996,7 +3173,9 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
@@ -3007,6 +3186,7 @@ export type CaseFileUpdateWithoutPlacesReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
@@ -3039,6 +3219,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3056,9 +3237,11 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -3069,6 +3252,7 @@ export type CaseFileUncheckedUpdateWithoutPlacesReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutManagementReviewsInput = {
@@ -3111,6 +3295,7 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -3120,7 +3305,9 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
@@ -3131,6 +3318,7 @@ export type CaseFileCreateWithoutManagementReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
@@ -3163,6 +3351,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3180,9 +3369,11 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3193,6 +3384,7 @@ export type CaseFileUncheckedCreateWithoutManagementReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutManagementReviewsInput = {
@@ -3251,6 +3443,7 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -3260,7 +3453,9 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
@@ -3271,6 +3466,7 @@ export type CaseFileUpdateWithoutManagementReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
@@ -3303,6 +3499,7 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3320,9 +3517,11 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -3333,6 +3532,7 @@ export type CaseFileUncheckedUpdateWithoutManagementReviewsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutStewardCasesInput = {
@@ -3375,6 +3575,7 @@ export type CaseFileCreateWithoutStewardCasesInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -3383,7 +3584,9 @@ export type CaseFileCreateWithoutStewardCasesInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -3395,6 +3598,7 @@ export type CaseFileCreateWithoutStewardCasesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
@@ -3427,6 +3631,7 @@ export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3444,8 +3649,10 @@ export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3457,6 +3664,7 @@ export type CaseFileUncheckedCreateWithoutStewardCasesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutStewardCasesInput = {
@@ -3504,6 +3712,7 @@ export type CaseFileCreateWithoutHostCaseFileInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -3512,7 +3721,9 @@ export type CaseFileCreateWithoutHostCaseFileInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -3524,6 +3735,7 @@ export type CaseFileCreateWithoutHostCaseFileInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
@@ -3555,6 +3767,7 @@ export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3572,9 +3785,11 @@ export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3586,6 +3801,7 @@ export type CaseFileUncheckedCreateWithoutHostCaseFileInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutHostCaseFileInput = {
@@ -3649,6 +3865,7 @@ export type CaseFileUpdateWithoutStewardCasesInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -3657,7 +3874,9 @@ export type CaseFileUpdateWithoutStewardCasesInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -3669,6 +3888,7 @@ export type CaseFileUpdateWithoutStewardCasesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
@@ -3701,6 +3921,7 @@ export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3718,8 +3939,10 @@ export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -3731,6 +3954,7 @@ export type CaseFileUncheckedUpdateWithoutStewardCasesInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUpsertWithWhereUniqueWithoutHostCaseFileInput = {
@@ -3747,6 +3971,566 @@ export type CaseFileUpdateWithWhereUniqueWithoutHostCaseFileInput = {
 export type CaseFileUpdateManyWithWhereWithoutHostCaseFileInput = {
   where: Prisma.CaseFileScalarWhereInput
   data: Prisma.XOR<Prisma.CaseFileUpdateManyMutationInput, Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileInput>
+}
+
+export type CaseFileCreateWithoutAssetAccountsInput = {
+  id?: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutAssetAccountsInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  urbanZoneId?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutAssetAccountsInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutAssetAccountsInput, Prisma.CaseFileUncheckedCreateWithoutAssetAccountsInput>
+}
+
+export type CaseFileUpsertWithoutAssetAccountsInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutAssetAccountsInput, Prisma.CaseFileUncheckedUpdateWithoutAssetAccountsInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutAssetAccountsInput, Prisma.CaseFileUncheckedCreateWithoutAssetAccountsInput>
+  where?: Prisma.CaseFileWhereInput
+}
+
+export type CaseFileUpdateToOneWithWhereWithoutAssetAccountsInput = {
+  where?: Prisma.CaseFileWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutAssetAccountsInput, Prisma.CaseFileUncheckedUpdateWithoutAssetAccountsInput>
+}
+
+export type CaseFileUpdateWithoutAssetAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutAssetAccountsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileCreateWithoutPremiseFilesInput = {
+  id?: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutPremiseFilesInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  urbanZoneId?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutPremiseFilesInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseFilesInput, Prisma.CaseFileUncheckedCreateWithoutPremiseFilesInput>
+}
+
+export type CaseFileUpsertWithoutPremiseFilesInput = {
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutPremiseFilesInput, Prisma.CaseFileUncheckedUpdateWithoutPremiseFilesInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutPremiseFilesInput, Prisma.CaseFileUncheckedCreateWithoutPremiseFilesInput>
+  where?: Prisma.CaseFileWhereInput
+}
+
+export type CaseFileUpdateToOneWithWhereWithoutPremiseFilesInput = {
+  where?: Prisma.CaseFileWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutPremiseFilesInput, Prisma.CaseFileUncheckedUpdateWithoutPremiseFilesInput>
+}
+
+export type CaseFileUpdateWithoutPremiseFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutPremiseFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutStewardRevokeFileInput = {
@@ -3789,6 +4573,7 @@ export type CaseFileCreateWithoutStewardRevokeFileInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -3798,7 +4583,9 @@ export type CaseFileCreateWithoutStewardRevokeFileInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -3809,6 +4596,7 @@ export type CaseFileCreateWithoutStewardRevokeFileInput = {
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
@@ -3841,6 +4629,7 @@ export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -3858,9 +4647,11 @@ export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -3871,6 +4662,7 @@ export type CaseFileUncheckedCreateWithoutStewardRevokeFileInput = {
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutStewardRevokeFileInput = {
@@ -3929,6 +4721,7 @@ export type CaseFileUpdateWithoutStewardRevokeFileInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -3938,7 +4731,9 @@ export type CaseFileUpdateWithoutStewardRevokeFileInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -3949,6 +4744,7 @@ export type CaseFileUpdateWithoutStewardRevokeFileInput = {
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
@@ -3981,6 +4777,7 @@ export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3998,9 +4795,11 @@ export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4011,6 +4810,7 @@ export type CaseFileUncheckedUpdateWithoutStewardRevokeFileInput = {
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutRevocationProcessInput = {
@@ -4053,6 +4853,7 @@ export type CaseFileCreateWithoutRevocationProcessInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -4062,7 +4863,9 @@ export type CaseFileCreateWithoutRevocationProcessInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -4073,6 +4876,7 @@ export type CaseFileCreateWithoutRevocationProcessInput = {
   suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRevocationProcessInput = {
@@ -4105,6 +4909,7 @@ export type CaseFileUncheckedCreateWithoutRevocationProcessInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -4122,9 +4927,11 @@ export type CaseFileUncheckedCreateWithoutRevocationProcessInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -4135,6 +4942,7 @@ export type CaseFileUncheckedCreateWithoutRevocationProcessInput = {
   suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRevocationProcessInput = {
@@ -4193,6 +5001,7 @@ export type CaseFileUpdateWithoutRevocationProcessInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -4202,7 +5011,9 @@ export type CaseFileUpdateWithoutRevocationProcessInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -4213,6 +5024,7 @@ export type CaseFileUpdateWithoutRevocationProcessInput = {
   suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRevocationProcessInput = {
@@ -4245,6 +5057,7 @@ export type CaseFileUncheckedUpdateWithoutRevocationProcessInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4262,9 +5075,11 @@ export type CaseFileUncheckedUpdateWithoutRevocationProcessInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4275,6 +5090,7 @@ export type CaseFileUncheckedUpdateWithoutRevocationProcessInput = {
   suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutSuspensionsInput = {
@@ -4317,6 +5133,7 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -4326,7 +5143,9 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -4337,6 +5156,7 @@ export type CaseFileCreateWithoutSuspensionsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
@@ -4369,6 +5189,7 @@ export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -4386,9 +5207,11 @@ export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -4399,6 +5222,7 @@ export type CaseFileUncheckedCreateWithoutSuspensionsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutSuspensionsInput = {
@@ -4457,6 +5281,7 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -4466,7 +5291,9 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -4477,6 +5304,7 @@ export type CaseFileUpdateWithoutSuspensionsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
@@ -4509,6 +5337,7 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4526,9 +5355,11 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4539,6 +5370,7 @@ export type CaseFileUncheckedUpdateWithoutSuspensionsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutRequestsInput = {
@@ -4581,6 +5413,7 @@ export type CaseFileCreateWithoutRequestsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -4590,7 +5423,9 @@ export type CaseFileCreateWithoutRequestsInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -4601,6 +5436,7 @@ export type CaseFileCreateWithoutRequestsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRequestsInput = {
@@ -4633,6 +5469,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -4650,9 +5487,11 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -4663,6 +5502,7 @@ export type CaseFileUncheckedCreateWithoutRequestsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRequestsInput = {
@@ -4721,6 +5561,7 @@ export type CaseFileUpdateWithoutRequestsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -4730,7 +5571,9 @@ export type CaseFileUpdateWithoutRequestsInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -4741,6 +5584,7 @@ export type CaseFileUpdateWithoutRequestsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRequestsInput = {
@@ -4773,6 +5617,7 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4790,9 +5635,11 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -4803,6 +5650,7 @@ export type CaseFileUncheckedUpdateWithoutRequestsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutPremiseHistoryInput = {
@@ -4845,6 +5693,7 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -4854,7 +5703,9 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -4865,6 +5716,7 @@ export type CaseFileCreateWithoutPremiseHistoryInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
@@ -4897,6 +5749,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -4914,9 +5767,11 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -4927,6 +5782,7 @@ export type CaseFileUncheckedCreateWithoutPremiseHistoryInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseHistoryInput = {
@@ -4985,6 +5841,7 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -4994,7 +5851,9 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -5005,6 +5864,7 @@ export type CaseFileUpdateWithoutPremiseHistoryInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
@@ -5037,6 +5897,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5054,9 +5915,11 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -5067,6 +5930,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseHistoryInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutActivityDocumentsInput = {
@@ -5109,6 +5973,7 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -5118,7 +5983,9 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -5129,6 +5996,7 @@ export type CaseFileCreateWithoutActivityDocumentsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
@@ -5161,6 +6029,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -5178,9 +6047,11 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -5191,6 +6062,7 @@ export type CaseFileUncheckedCreateWithoutActivityDocumentsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutActivityDocumentsInput = {
@@ -5249,6 +6121,7 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -5258,7 +6131,9 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -5269,6 +6144,7 @@ export type CaseFileUpdateWithoutActivityDocumentsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
@@ -5301,6 +6177,7 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5318,9 +6195,11 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -5331,6 +6210,7 @@ export type CaseFileUncheckedUpdateWithoutActivityDocumentsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateWithoutUserInput = {
@@ -5373,6 +6253,7 @@ export type CaseFileCreateWithoutUserInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
@@ -5381,7 +6262,9 @@ export type CaseFileCreateWithoutUserInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -5393,6 +6276,7 @@ export type CaseFileCreateWithoutUserInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutUserInput = {
@@ -5424,6 +6308,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -5441,9 +6326,11 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -5455,6 +6342,7 @@ export type CaseFileUncheckedCreateWithoutUserInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutUserInput = {
@@ -5507,6 +6395,7 @@ export type CaseFileCreateWithoutRevokedByInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -5515,7 +6404,9 @@ export type CaseFileCreateWithoutRevokedByInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -5527,6 +6418,7 @@ export type CaseFileCreateWithoutRevokedByInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRevokedByInput = {
@@ -5558,6 +6450,7 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -5575,9 +6468,11 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -5589,6 +6484,7 @@ export type CaseFileUncheckedCreateWithoutRevokedByInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRevokedByInput = {
@@ -5673,6 +6569,7 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -5681,7 +6578,9 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -5693,6 +6592,7 @@ export type CaseFileCreateWithoutPremiseComplexInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
@@ -5724,6 +6624,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -5741,9 +6642,11 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -5755,6 +6658,7 @@ export type CaseFileUncheckedCreateWithoutPremiseComplexInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutPremiseComplexInput = {
@@ -5781,6 +6685,164 @@ export type CaseFileUpdateWithWhereUniqueWithoutPremiseComplexInput = {
 export type CaseFileUpdateManyWithWhereWithoutPremiseComplexInput = {
   where: Prisma.CaseFileScalarWhereInput
   data: Prisma.XOR<Prisma.CaseFileUpdateManyMutationInput, Prisma.CaseFileUncheckedUpdateManyWithoutPremiseComplexInput>
+}
+
+export type CaseFileCreateWithoutUrbanZoneInput = {
+  id?: string
+  kind?: $Enums.CaseFileKind
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
+  hostCaseFile?: Prisma.CaseFileCreateNestedOneWithoutStewardCasesInput
+  stewardCases?: Prisma.CaseFileCreateNestedManyWithoutHostCaseFileInput
+  revokedBy?: Prisma.UserCreateNestedOneWithoutCaseRevocationsInput
+  activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileUncheckedCreateWithoutUrbanZoneInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
+  requests?: Prisma.CaseRequestUncheckedCreateNestedManyWithoutCaseFileInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseFileInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutCaseFileInput
+  violations?: Prisma.ViolationUncheckedCreateNestedManyWithoutCaseFileInput
+  suspensions?: Prisma.CaseSuspensionUncheckedCreateNestedManyWithoutCaseFileInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
+}
+
+export type CaseFileCreateOrConnectWithoutUrbanZoneInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput>
+}
+
+export type CaseFileCreateManyUrbanZoneInputEnvelope = {
+  data: Prisma.CaseFileCreateManyUrbanZoneInput | Prisma.CaseFileCreateManyUrbanZoneInput[]
+  skipDuplicates?: boolean
+}
+
+export type CaseFileUpsertWithWhereUniqueWithoutUrbanZoneInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseFileUpdateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedUpdateWithoutUrbanZoneInput>
+  create: Prisma.XOR<Prisma.CaseFileCreateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedCreateWithoutUrbanZoneInput>
+}
+
+export type CaseFileUpdateWithWhereUniqueWithoutUrbanZoneInput = {
+  where: Prisma.CaseFileWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateWithoutUrbanZoneInput, Prisma.CaseFileUncheckedUpdateWithoutUrbanZoneInput>
+}
+
+export type CaseFileUpdateManyWithWhereWithoutUrbanZoneInput = {
+  where: Prisma.CaseFileScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseFileUpdateManyMutationInput, Prisma.CaseFileUncheckedUpdateManyWithoutUrbanZoneInput>
 }
 
 export type CaseFileCreateWithoutRegistrationPlaceInput = {
@@ -5823,6 +6885,7 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -5832,6 +6895,8 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -5843,6 +6908,7 @@ export type CaseFileCreateWithoutRegistrationPlaceInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
@@ -5875,6 +6941,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -5891,9 +6958,11 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -5905,6 +6974,7 @@ export type CaseFileUncheckedCreateWithoutRegistrationPlaceInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutRegistrationPlaceInput = {
@@ -5973,6 +7043,7 @@ export type CaseFileCreateWithoutViolationsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCaseFilesInput
@@ -5982,7 +7053,9 @@ export type CaseFileCreateWithoutViolationsInput = {
   activityJob?: Prisma.JobCreateNestedOneWithoutActivityCasesInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutPremiseCasesInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutPremiseCasesInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutCaseFilesInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput
+  premiseFiles?: Prisma.CasePremiseFileCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseFileInput
@@ -5993,6 +7066,7 @@ export type CaseFileCreateWithoutViolationsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileUncheckedCreateWithoutViolationsInput = {
@@ -6025,6 +7099,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -6042,9 +7117,11 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   stewardCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutHostCaseFileInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedCreateNestedManyWithoutCaseFileInput
   inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseFileInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedCreateNestedManyWithoutCaseFileInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseFileInput
@@ -6055,6 +7132,7 @@ export type CaseFileUncheckedCreateWithoutViolationsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedCreateNestedOneWithoutCaseFileInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutCaseFileInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseFileInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedCreateNestedManyWithoutCaseFileInput
 }
 
 export type CaseFileCreateOrConnectWithoutViolationsInput = {
@@ -6113,6 +7191,7 @@ export type CaseFileUpdateWithoutViolationsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -6122,7 +7201,9 @@ export type CaseFileUpdateWithoutViolationsInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -6133,6 +7214,7 @@ export type CaseFileUpdateWithoutViolationsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutViolationsInput = {
@@ -6165,6 +7247,7 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6182,9 +7265,11 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -6195,6 +7280,7 @@ export type CaseFileUncheckedUpdateWithoutViolationsInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileCreateManyPremiseCityInput = {
@@ -6226,6 +7312,7 @@ export type CaseFileCreateManyPremiseCityInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -6243,6 +7330,7 @@ export type CaseFileCreateManyPremiseCityInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -6287,6 +7375,7 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -6295,7 +7384,9 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -6307,6 +7398,7 @@ export type CaseFileUpdateWithoutPremiseCityInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
@@ -6338,6 +7430,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6355,9 +7448,11 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -6369,6 +7464,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseCityInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
@@ -6400,6 +7496,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6417,6 +7514,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseCityInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -6450,6 +7548,7 @@ export type CaseFileCreateManyActivityJobInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -6467,6 +7566,7 @@ export type CaseFileCreateManyActivityJobInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -6511,6 +7611,7 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -6519,7 +7620,9 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -6531,6 +7634,7 @@ export type CaseFileUpdateWithoutActivityJobInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
@@ -6562,6 +7666,7 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6579,9 +7684,11 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -6593,6 +7700,7 @@ export type CaseFileUncheckedUpdateWithoutActivityJobInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
@@ -6624,6 +7732,7 @@ export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6641,6 +7750,7 @@ export type CaseFileUncheckedUpdateManyWithoutActivityJobInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -6674,6 +7784,7 @@ export type CaseFileCreateManyHostCaseFileInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -6691,6 +7802,7 @@ export type CaseFileCreateManyHostCaseFileInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -6735,6 +7847,7 @@ export type CaseFileUpdateWithoutHostCaseFileInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -6743,7 +7856,9 @@ export type CaseFileUpdateWithoutHostCaseFileInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -6755,6 +7870,7 @@ export type CaseFileUpdateWithoutHostCaseFileInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
@@ -6786,6 +7902,7 @@ export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6803,9 +7920,11 @@ export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -6817,6 +7936,7 @@ export type CaseFileUncheckedUpdateWithoutHostCaseFileInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutHostCaseFileInput = {
@@ -6848,6 +7968,7 @@ export type CaseFileUncheckedUpdateManyWithoutHostCaseFileInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6865,6 +7986,7 @@ export type CaseFileUncheckedUpdateManyWithoutHostCaseFileInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -6898,6 +8020,7 @@ export type CaseFileCreateManyUserInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -6915,6 +8038,7 @@ export type CaseFileCreateManyUserInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -6948,6 +8072,7 @@ export type CaseFileCreateManyRevokedByInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -6965,6 +8090,7 @@ export type CaseFileCreateManyRevokedByInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -7009,6 +8135,7 @@ export type CaseFileUpdateWithoutUserInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
@@ -7017,7 +8144,9 @@ export type CaseFileUpdateWithoutUserInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -7029,6 +8158,7 @@ export type CaseFileUpdateWithoutUserInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutUserInput = {
@@ -7060,6 +8190,7 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7077,9 +8208,11 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -7091,6 +8224,7 @@ export type CaseFileUncheckedUpdateWithoutUserInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutUserInput = {
@@ -7122,6 +8256,7 @@ export type CaseFileUncheckedUpdateManyWithoutUserInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7139,6 +8274,7 @@ export type CaseFileUncheckedUpdateManyWithoutUserInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -7183,6 +8319,7 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -7191,7 +8328,9 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -7203,6 +8342,7 @@ export type CaseFileUpdateWithoutRevokedByInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
@@ -7234,6 +8374,7 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7251,9 +8392,11 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -7265,6 +8408,7 @@ export type CaseFileUncheckedUpdateWithoutRevokedByInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
@@ -7296,6 +8440,7 @@ export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7313,6 +8458,7 @@ export type CaseFileUncheckedUpdateManyWithoutRevokedByInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -7346,6 +8492,7 @@ export type CaseFileCreateManyPremiseComplexInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -7363,6 +8510,7 @@ export type CaseFileCreateManyPremiseComplexInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -7407,6 +8555,7 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -7415,7 +8564,9 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -7427,6 +8578,7 @@ export type CaseFileUpdateWithoutPremiseComplexInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
@@ -7458,6 +8610,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7475,9 +8628,11 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -7489,6 +8644,7 @@ export type CaseFileUncheckedUpdateWithoutPremiseComplexInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
@@ -7520,6 +8676,7 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7537,11 +8694,12 @@ export type CaseFileUncheckedUpdateManyWithoutPremiseComplexInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type CaseFileCreateManyRegistrationPlaceInput = {
+export type CaseFileCreateManyUrbanZoneInput = {
   id?: string
   userId: string
   kind?: $Enums.CaseFileKind
@@ -7580,6 +8738,7 @@ export type CaseFileCreateManyRegistrationPlaceInput = {
   premiseFax?: string | null
   premiseGeoPosition?: $Enums.PremiseGeoPosition | null
   premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
   premiseOwnership?: $Enums.PremiseOwnership | null
   premiseDeedNo?: string | null
   premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7587,6 +8746,243 @@ export type CaseFileCreateManyRegistrationPlaceInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type CaseFileUpdateWithoutUrbanZoneInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
+  hostCaseFile?: Prisma.CaseFileUpdateOneWithoutStewardCasesNestedInput
+  stewardCases?: Prisma.CaseFileUpdateManyWithoutHostCaseFileNestedInput
+  revokedBy?: Prisma.UserUpdateOneWithoutCaseRevocationsNestedInput
+  activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutPremiseCasesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateWithoutUrbanZoneInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
+  placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
+  requests?: Prisma.CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseFileNestedInput
+  premiseHistory?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutCaseFileNestedInput
+  violations?: Prisma.ViolationUncheckedUpdateManyWithoutCaseFileNestedInput
+  suspensions?: Prisma.CaseSuspensionUncheckedUpdateManyWithoutCaseFileNestedInput
+  stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
+}
+
+export type CaseFileUncheckedUpdateManyWithoutUrbanZoneInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumCaseFileKindFieldUpdateOperationsInput | $Enums.CaseFileKind
+  hostCaseFileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumCaseFileStatusFieldUpdateOperationsInput | $Enums.CaseFileStatus
+  revokeReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  revokeSource?: Prisma.NullableEnumCaseRevokeSourceFieldUpdateOperationsInput | $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  revokedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  trackingCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  licenseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  businessUnitTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activityJobId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  previousOccupation?: Prisma.NullableEnumPreviousOccupationFieldUpdateOperationsInput | $Enums.PreviousOccupation | null
+  posDeviceCount?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseFileCreateManyRegistrationPlaceInput = {
+  id?: string
+  userId: string
+  kind?: $Enums.CaseFileKind
+  hostCaseFileId?: string | null
+  status?: $Enums.CaseFileStatus
+  revokeReason?: string | null
+  revokeSource?: $Enums.CaseRevokeSource | null
+  revokeRequestedAt?: Date | string | null
+  revokedAt?: Date | string | null
+  reactivatedAt?: Date | string | null
+  revokedById?: string | null
+  cardNumber?: string | null
+  cardIssuedAt?: Date | string | null
+  cardExpiresAt?: Date | string | null
+  formationStep?: number
+  trackingCode?: string | null
+  licenseNumber?: string | null
+  licenseIssuedAt?: Date | string | null
+  firstIssuedAt?: Date | string | null
+  licenseExpiresAt?: Date | string | null
+  businessUnitTitle?: string | null
+  activityJobId?: string | null
+  previousOccupation?: $Enums.PreviousOccupation | null
+  posDeviceCount?: number | null
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  urbanZoneId?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -7631,6 +9027,7 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCaseFilesNestedInput
@@ -7640,6 +9037,8 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   activityJob?: Prisma.JobUpdateOneWithoutActivityCasesNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutPremiseCasesNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutPremiseCasesNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutCaseFilesNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseFileNestedInput
@@ -7651,6 +9050,7 @@ export type CaseFileUpdateWithoutRegistrationPlaceInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
@@ -7683,6 +9083,7 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7699,9 +9100,11 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stewardCases?: Prisma.CaseFileUncheckedUpdateManyWithoutHostCaseFileNestedInput
+  premiseFiles?: Prisma.CasePremiseFileUncheckedUpdateManyWithoutCaseFileNestedInput
   inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseFileNestedInput
   placesReviews?: Prisma.CasePlacesReviewUncheckedUpdateManyWithoutCaseFileNestedInput
   managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseFileNestedInput
@@ -7713,6 +9116,7 @@ export type CaseFileUncheckedUpdateWithoutRegistrationPlaceInput = {
   stewardRevokeFile?: Prisma.CaseStewardRevokeFileUncheckedUpdateOneWithoutCaseFileNestedInput
   revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseFileNestedInput
+  assetAccounts?: Prisma.CaseAssetAccountUncheckedUpdateManyWithoutCaseFileNestedInput
 }
 
 export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
@@ -7745,6 +9149,7 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7761,6 +9166,7 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -7772,6 +9178,7 @@ export type CaseFileUncheckedUpdateManyWithoutRegistrationPlaceInput = {
 
 export type CaseFileCountOutputType = {
   stewardCases: number
+  premiseFiles: number
   inquiries: number
   placesReviews: number
   managementReviews: number
@@ -7781,10 +9188,12 @@ export type CaseFileCountOutputType = {
   violations: number
   suspensions: number
   payments: number
+  assetAccounts: number
 }
 
 export type CaseFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stewardCases?: boolean | CaseFileCountOutputTypeCountStewardCasesArgs
+  premiseFiles?: boolean | CaseFileCountOutputTypeCountPremiseFilesArgs
   inquiries?: boolean | CaseFileCountOutputTypeCountInquiriesArgs
   placesReviews?: boolean | CaseFileCountOutputTypeCountPlacesReviewsArgs
   managementReviews?: boolean | CaseFileCountOutputTypeCountManagementReviewsArgs
@@ -7794,6 +9203,7 @@ export type CaseFileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   violations?: boolean | CaseFileCountOutputTypeCountViolationsArgs
   suspensions?: boolean | CaseFileCountOutputTypeCountSuspensionsArgs
   payments?: boolean | CaseFileCountOutputTypeCountPaymentsArgs
+  assetAccounts?: boolean | CaseFileCountOutputTypeCountAssetAccountsArgs
 }
 
 /**
@@ -7811,6 +9221,13 @@ export type CaseFileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
  */
 export type CaseFileCountOutputTypeCountStewardCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CaseFileWhereInput
+}
+
+/**
+ * CaseFileCountOutputType without action
+ */
+export type CaseFileCountOutputTypeCountPremiseFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CasePremiseFileWhereInput
 }
 
 /**
@@ -7876,6 +9293,13 @@ export type CaseFileCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Typ
   where?: Prisma.PaymentWhereInput
 }
 
+/**
+ * CaseFileCountOutputType without action
+ */
+export type CaseFileCountOutputTypeCountAssetAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseAssetAccountWhereInput
+}
+
 
 export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -7907,6 +9331,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -7924,6 +9349,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -7933,7 +9359,9 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseFile$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
+  premiseFiles?: boolean | Prisma.CaseFile$premiseFilesArgs<ExtArgs>
   inquiries?: boolean | Prisma.CaseFile$inquiriesArgs<ExtArgs>
   placesReviews?: boolean | Prisma.CaseFile$placesReviewsArgs<ExtArgs>
   managementReviews?: boolean | Prisma.CaseFile$managementReviewsArgs<ExtArgs>
@@ -7945,6 +9373,7 @@ export type CaseFileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   stewardRevokeFile?: boolean | Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>
   revocationProcess?: boolean | Prisma.CaseFile$revocationProcessArgs<ExtArgs>
   payments?: boolean | Prisma.CaseFile$paymentsArgs<ExtArgs>
+  assetAccounts?: boolean | Prisma.CaseFile$assetAccountsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseFile"]>
 
@@ -7978,6 +9407,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -7995,6 +9425,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -8003,6 +9434,7 @@ export type CaseFileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseFile$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
 }, ExtArgs["result"]["caseFile"]>
 
@@ -8036,6 +9468,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -8053,6 +9486,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -8061,6 +9495,7 @@ export type CaseFileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseFile$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
 }, ExtArgs["result"]["caseFile"]>
 
@@ -8094,6 +9529,7 @@ export type CaseFileSelectScalar = {
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -8111,11 +9547,12 @@ export type CaseFileSelectScalar = {
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "kind" | "hostCaseFileId" | "status" | "revokeReason" | "revokeSource" | "revokeRequestedAt" | "revokedAt" | "reactivatedAt" | "revokedById" | "cardNumber" | "cardIssuedAt" | "cardExpiresAt" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "firstIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
+export type CaseFileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "kind" | "hostCaseFileId" | "status" | "revokeReason" | "revokeSource" | "revokeRequestedAt" | "revokedAt" | "reactivatedAt" | "revokedById" | "cardNumber" | "cardIssuedAt" | "cardExpiresAt" | "formationStep" | "trackingCode" | "licenseNumber" | "licenseIssuedAt" | "firstIssuedAt" | "licenseExpiresAt" | "businessUnitTitle" | "activityJobId" | "previousOccupation" | "posDeviceCount" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "urbanZoneId" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "premiseOwnerNationalId" | "createdAt" | "updatedAt", ExtArgs["result"]["caseFile"]>
 export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   hostCaseFile?: boolean | Prisma.CaseFile$hostCaseFileArgs<ExtArgs>
@@ -8124,7 +9561,9 @@ export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseFile$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
+  premiseFiles?: boolean | Prisma.CaseFile$premiseFilesArgs<ExtArgs>
   inquiries?: boolean | Prisma.CaseFile$inquiriesArgs<ExtArgs>
   placesReviews?: boolean | Prisma.CaseFile$placesReviewsArgs<ExtArgs>
   managementReviews?: boolean | Prisma.CaseFile$managementReviewsArgs<ExtArgs>
@@ -8136,6 +9575,7 @@ export type CaseFileInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   stewardRevokeFile?: boolean | Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>
   revocationProcess?: boolean | Prisma.CaseFile$revocationProcessArgs<ExtArgs>
   payments?: boolean | Prisma.CaseFile$paymentsArgs<ExtArgs>
+  assetAccounts?: boolean | Prisma.CaseFile$assetAccountsArgs<ExtArgs>
   _count?: boolean | Prisma.CaseFileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8145,6 +9585,7 @@ export type CaseFileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseFile$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
 }
 export type CaseFileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8154,6 +9595,7 @@ export type CaseFileIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   activityJob?: boolean | Prisma.CaseFile$activityJobArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseFile$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseFile$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseFile$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseFile$registrationPlaceArgs<ExtArgs>
 }
 
@@ -8167,7 +9609,9 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     activityJob: Prisma.$JobPayload<ExtArgs> | null
     premiseCity: Prisma.$CityPayload<ExtArgs> | null
     premiseComplex: Prisma.$CommercialComplexPayload<ExtArgs> | null
+    urbanZone: Prisma.$UrbanZonePayload<ExtArgs> | null
     registrationPlace: Prisma.$RegistrationPlacePayload<ExtArgs> | null
+    premiseFiles: Prisma.$CasePremiseFilePayload<ExtArgs>[]
     inquiries: Prisma.$CaseInquiryPayload<ExtArgs>[]
     placesReviews: Prisma.$CasePlacesReviewPayload<ExtArgs>[]
     managementReviews: Prisma.$CaseManagementReviewPayload<ExtArgs>[]
@@ -8179,6 +9623,7 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     stewardRevokeFile: Prisma.$CaseStewardRevokeFilePayload<ExtArgs> | null
     revocationProcess: Prisma.$CaseRevocationProcessPayload<ExtArgs> | null
     payments: Prisma.$PaymentPayload<ExtArgs>[]
+    assetAccounts: Prisma.$CaseAssetAccountPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -8228,6 +9673,7 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     premiseComplexId: string | null
     premiseAddress: string | null
     premiseAddressEn: string | null
+    urbanZoneId: string | null
     premisePlaque: string | null
     premisePlaqueSeries: string | null
     premiseFloor: string | null
@@ -8245,6 +9691,7 @@ export type $CaseFilePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     leaseExpiresAt: Date | null
     leaseAgency: string | null
     premiseOwnerName: string | null
+    premiseOwnerNationalId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["caseFile"]>
@@ -8648,7 +10095,9 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
   activityJob<T extends Prisma.CaseFile$activityJobArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$activityJobArgs<ExtArgs>>): Prisma.Prisma__JobClient<runtime.Types.Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   premiseCity<T extends Prisma.CaseFile$premiseCityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseCityArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   premiseComplex<T extends Prisma.CaseFile$premiseComplexArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseComplexArgs<ExtArgs>>): Prisma.Prisma__CommercialComplexClient<runtime.Types.Result.GetResult<Prisma.$CommercialComplexPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  urbanZone<T extends Prisma.CaseFile$urbanZoneArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$urbanZoneArgs<ExtArgs>>): Prisma.Prisma__UrbanZoneClient<runtime.Types.Result.GetResult<Prisma.$UrbanZonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   registrationPlace<T extends Prisma.CaseFile$registrationPlaceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$registrationPlaceArgs<ExtArgs>>): Prisma.Prisma__RegistrationPlaceClient<runtime.Types.Result.GetResult<Prisma.$RegistrationPlacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  premiseFiles<T extends Prisma.CaseFile$premiseFilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$premiseFilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inquiries<T extends Prisma.CaseFile$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseInquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   placesReviews<T extends Prisma.CaseFile$placesReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$placesReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePlacesReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   managementReviews<T extends Prisma.CaseFile$managementReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$managementReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseManagementReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8660,6 +10109,7 @@ export interface Prisma__CaseFileClient<T, Null = never, ExtArgs extends runtime
   stewardRevokeFile<T extends Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$stewardRevokeFileArgs<ExtArgs>>): Prisma.Prisma__CaseStewardRevokeFileClient<runtime.Types.Result.GetResult<Prisma.$CaseStewardRevokeFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   revocationProcess<T extends Prisma.CaseFile$revocationProcessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$revocationProcessArgs<ExtArgs>>): Prisma.Prisma__CaseRevocationProcessClient<runtime.Types.Result.GetResult<Prisma.$CaseRevocationProcessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.CaseFile$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assetAccounts<T extends Prisma.CaseFile$assetAccountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFile$assetAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseAssetAccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8718,6 +10168,7 @@ export interface CaseFileFieldRefs {
   readonly premiseComplexId: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premiseAddress: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premiseAddressEn: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly urbanZoneId: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premisePlaque: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premisePlaqueSeries: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premiseFloor: Prisma.FieldRef<"CaseFile", 'String'>
@@ -8735,6 +10186,7 @@ export interface CaseFileFieldRefs {
   readonly leaseExpiresAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly leaseAgency: Prisma.FieldRef<"CaseFile", 'String'>
   readonly premiseOwnerName: Prisma.FieldRef<"CaseFile", 'String'>
+  readonly premiseOwnerNationalId: Prisma.FieldRef<"CaseFile", 'String'>
   readonly createdAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CaseFile", 'DateTime'>
 }
@@ -9257,6 +10709,25 @@ export type CaseFile$premiseComplexArgs<ExtArgs extends runtime.Types.Extensions
 }
 
 /**
+ * CaseFile.urbanZone
+ */
+export type CaseFile$urbanZoneArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UrbanZone
+   */
+  select?: Prisma.UrbanZoneSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UrbanZone
+   */
+  omit?: Prisma.UrbanZoneOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UrbanZoneInclude<ExtArgs> | null
+  where?: Prisma.UrbanZoneWhereInput
+}
+
+/**
  * CaseFile.registrationPlace
  */
 export type CaseFile$registrationPlaceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -9273,6 +10744,30 @@ export type CaseFile$registrationPlaceArgs<ExtArgs extends runtime.Types.Extensi
    */
   include?: Prisma.RegistrationPlaceInclude<ExtArgs> | null
   where?: Prisma.RegistrationPlaceWhereInput
+}
+
+/**
+ * CaseFile.premiseFiles
+ */
+export type CaseFile$premiseFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CasePremiseFile
+   */
+  select?: Prisma.CasePremiseFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CasePremiseFile
+   */
+  omit?: Prisma.CasePremiseFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CasePremiseFileInclude<ExtArgs> | null
+  where?: Prisma.CasePremiseFileWhereInput
+  orderBy?: Prisma.CasePremiseFileOrderByWithRelationInput | Prisma.CasePremiseFileOrderByWithRelationInput[]
+  cursor?: Prisma.CasePremiseFileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CasePremiseFileScalarFieldEnum | Prisma.CasePremiseFileScalarFieldEnum[]
 }
 
 /**
@@ -9527,6 +11022,30 @@ export type CaseFile$paymentsArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * CaseFile.assetAccounts
+ */
+export type CaseFile$assetAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseAssetAccount
+   */
+  select?: Prisma.CaseAssetAccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseAssetAccount
+   */
+  omit?: Prisma.CaseAssetAccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseAssetAccountInclude<ExtArgs> | null
+  where?: Prisma.CaseAssetAccountWhereInput
+  orderBy?: Prisma.CaseAssetAccountOrderByWithRelationInput | Prisma.CaseAssetAccountOrderByWithRelationInput[]
+  cursor?: Prisma.CaseAssetAccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseAssetAccountScalarFieldEnum | Prisma.CaseAssetAccountScalarFieldEnum[]
 }
 
 /**

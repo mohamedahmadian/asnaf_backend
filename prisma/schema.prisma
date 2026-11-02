@@ -179,6 +179,7 @@ model StoredImage {
   letterheadLogos        CaseLetterhead[] @relation("LetterheadLogo")
   letterheadSignatures   CaseLetterhead[] @relation("LetterheadSignature")
   activityLicenseSignatures CaseActivityLicenseSettings[] @relation("ActivityLicenseSignature")
+  rentalLicenseSignatures RentalLicenseSettings[] @relation("RentalLicenseSignature")
   paymentReceipts        PaymentReceipt[] @relation("PaymentReceiptImage")
   createdAt              DateTime @default(now())
 
@@ -247,6 +248,7 @@ model City {
   users              User[]                @relation("UserHomeCity")
   locatedUsers       User[]                @relation("UserLocationCity")
   premiseCases       CaseFile[]            @relation("CasePremiseCity")
+  rentalPremiseLicenses RentalLicense[]    @relation("RentalPremiseCity")
   locationDrafts     CaseLocationDraft[]   @relation("LocationDraftCity")
   premiseHistories   CasePremiseHistory[]  @relation("PremiseHistoryCity")
   locationHistories  UserLocationHistory[] @relation("UserLocationHistoryCity")
@@ -631,7 +633,10 @@ model Job {
   title       String
   titleEn     String?
   taxIntaCode String?  @unique
+  /// توضیحات تکمیلی شغل
   description String?
+  /// لینک ویدئوی راهنما یا معرفی شغل
+  videoUrl    String?
   code        String
   jobTypeId   String
   jobType     JobType            @relation(fields: [jobTypeId], references: [id], onDelete: Restrict)
@@ -788,6 +793,257 @@ model CaseActivityLicenseSettings {
   @@map("case_activity_license_settings")
 }
 
+enum RentalRequestType {
+  ISSUANCE
+  RENEWAL
+}
+
+enum RentalRequestStatus {
+  OPEN
+  ISSUED
+  COMPLETED
+  REJECTED
+  CANCELLED
+}
+
+enum RentalLicenseStatus {
+  DRAFT
+  ACTIVE
+  EXPIRED
+}
+
+/// تنظیمات مجوز اجاره‌داری؛ یک ردیف ثابت
+model RentalLicenseSettings {
+  id            String       @id @default("default")
+  contractYears Int          @default(1)
+  signerName    String?
+  signerTitle   String?
+  signatureId   String?      @unique
+  signature     StoredImage? @relation("RentalLicenseSignature", fields: [signatureId], references: [id], onDelete: SetNull)
+  updatedAt     DateTime     @updatedAt
+
+  @@map("rental_license_settings")
+}
+
+/// مدارک هویتی مرحلهٔ اول درخواست مجوز اجاره‌داری
+model RentalIdentityDocument {
+  documentId String         @id
+  document   Document       @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  gender     DocumentGender @default(BOTH)
+  isRequired Boolean        @default(true)
+  createdAt  DateTime       @default(now())
+
+  @@index([createdAt])
+  @@index([gender])
+  @@index([isRequired])
+  @@map("rental_identity_documents")
+}
+
+/// مدارک لازم برای درخواست/تمدید مجوز اجاره‌داری
+model RentalDocumentRequirement {
+  id         String         @id @default(uuid())
+  documentId String
+  document   Document       @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  gender     DocumentGender @default(BOTH)
+  isRequired Boolean        @default(true)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
+  @@unique([documentId])
+  @@index([createdAt])
+  @@map("rental_document_requirements")
+}
+
+/// نقش‌های تایید مدیریتی مجوز اجاره‌داری
+model RentalProcessManagementRole {
+  id        String   @id @default(uuid())
+  roleId    String
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  title     String
+  createdAt DateTime @default(now())
+
+  @@unique([roleId])
+  @@index([createdAt])
+  @@map("rental_process_management_roles")
+}
+
+/// مجوز اجاره‌داری یک شخص؛ تمدید روی همین ردیف است
+model RentalLicense {
+  id                   String                 @id @default(uuid())
+  userId               String                 @unique
+  user                 User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status               RentalLicenseStatus    @default(DRAFT)
+  /// ۰ هویت، ۱ محل و قرارداد، ۲ تایید مدیریتی، ۳ صدور
+  formationStep        Int                    @default(0)
+  trackingCode         String?                @unique
+  licenseNumber        String?                @unique
+  licenseIssuedAt      DateTime?              @db.Date
+  firstIssuedAt        DateTime?              @db.Date
+  licenseExpiresAt     DateTime?              @db.Date
+  premiseCityId        String?
+  premiseCity          City?                  @relation("RentalPremiseCity", fields: [premiseCityId], references: [id], onDelete: SetNull)
+  premiseEstablishment PremiseEstablishment?
+  premiseComplexId     String?
+  premiseComplex       CommercialComplex?     @relation("RentalPremiseComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
+  premiseAddress       String?
+  premiseAddressEn     String?
+  urbanZoneId          String?
+  urbanZone            UrbanZone?             @relation("RentalUrbanZone", fields: [urbanZoneId], references: [id], onDelete: SetNull)
+  premisePlaque        String?
+  premisePlaqueSeries  String?
+  premiseFloor         String?
+  premiseUnitNo        String?
+  premisePostalCode    String?
+  premisePhone         String?
+  premiseFax           String?
+  premiseGeoPosition   PremiseGeoPosition?
+  premisePublicAccess  PremisePublicAccess?
+  registrationPlaceId  String?
+  registrationPlace    RegistrationPlace?     @relation("RentalRegistrationPlace", fields: [registrationPlaceId], references: [id], onDelete: SetNull)
+  premiseOwnership     PremiseOwnership       @default(RENTED)
+  premiseDeedNo        String?
+  premiseArea          Decimal?               @db.Decimal(12, 2)
+  leaseIssuedAt        DateTime?              @db.Date
+  leaseExpiresAt       DateTime?              @db.Date
+  leaseAgency          String?
+  premiseOwnerName     String?
+  premiseOwnerNationalId String?
+  premiseFiles         RentalPremiseFile[]
+  requests             RentalRequest[]
+  managementReviews    RentalManagementReview[]
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+
+  @@index([status])
+  @@index([formationStep])
+  @@index([premiseCityId])
+  @@index([premiseComplexId])
+  @@index([urbanZoneId])
+  @@index([registrationPlaceId])
+  @@index([licenseIssuedAt])
+  @@index([licenseExpiresAt])
+  @@index([createdAt])
+  @@map("rental_licenses")
+}
+
+model RentalPremiseFile {
+  id           String              @id @default(uuid())
+  licenseId    String
+  license      RentalLicense       @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  kind         CasePremiseFileKind
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  @@index([licenseId])
+  @@index([storageKey])
+  @@map("rental_premise_files")
+}
+
+model RentalRequest {
+  id                String              @id @default(uuid())
+  licenseId         String
+  license           RentalLicense       @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  type              RentalRequestType
+  number            String              @unique
+  status            RentalRequestStatus @default(OPEN)
+  formationStep     Int                 @default(0)
+  intakeSubmittedAt DateTime?
+  completedAt       DateTime?
+  documents         RentalRequestDocument[]
+  managementReviews RentalManagementReview[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  @@index([licenseId])
+  @@index([type])
+  @@index([status])
+  @@index([formationStep])
+  @@index([createdAt])
+  @@map("rental_requests")
+}
+
+model RentalRequestDocument {
+  id         String                         @id @default(uuid())
+  requestId  String
+  request    RentalRequest                  @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  documentId String
+  document   Document                       @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  versions   RentalRequestDocumentVersion[]
+  createdAt  DateTime                       @default(now())
+  updatedAt  DateTime                       @updatedAt
+
+  @@index([requestId])
+  @@index([documentId])
+  @@map("rental_request_documents")
+}
+
+model RentalRequestDocumentVersion {
+  id           String                @id @default(uuid())
+  documentRowId String
+  documentRow  RentalRequestDocument @relation(fields: [documentRowId], references: [id], onDelete: Cascade)
+  version      Int
+  source       DocumentSource        @default(MANUAL)
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  createdAt    DateTime              @default(now())
+
+  @@unique([documentRowId, version])
+  @@index([documentRowId])
+  @@index([storageKey])
+  @@map("rental_request_document_versions")
+}
+
+model RentalManagementReview {
+  id          String            @id @default(uuid())
+  licenseId   String
+  license     RentalLicense     @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  requestId   String
+  request     RentalRequest     @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  roleId      String
+  role        Role              @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  status      CaseInquiryStatus @default(PENDING)
+  channel     CaseInquiryChannel?
+  note        String?
+  decidedById String?
+  decidedBy   User?             @relation("RentalManagementDecider", fields: [decidedById], references: [id], onDelete: SetNull)
+  decidedAt   DateTime?
+  files       RentalManagementReviewFile[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([requestId, roleId])
+  @@index([licenseId])
+  @@index([requestId])
+  @@index([roleId])
+  @@index([status])
+  @@index([decidedById])
+  @@index([createdAt])
+  @@map("rental_management_reviews")
+}
+
+model RentalManagementReviewFile {
+  id           String                 @id @default(uuid())
+  reviewId     String
+  review       RentalManagementReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  uploadedById String?
+  uploadedBy   User?                  @relation("RentalManagementFileUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime               @default(now())
+
+  @@index([reviewId])
+  @@index([uploadedById])
+  @@map("rental_management_review_files")
+}
+
 /// تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
 model CasePlacesOffice {
   id            String   @id @default("default")
@@ -895,15 +1151,20 @@ model JobDocument {
 }
 
 model Document {
-  id         String          @id @default(uuid())
-  title      String          @unique
+  id          String          @id @default(uuid())
+  title       String          @unique
+  description String?
+  link        String?
   /// کد پایدار مدرک سیستمی؛ اگر پر باشد حذف و تغییر کد ممنوع است
-  code       String?         @unique
+  code        String?         @unique
   jobs       JobDocument[]
   requirements DocumentRequirement[]
   personDocuments PersonDocument[]
   caseActivityDocuments CaseActivityDocument[]
   caseIdentityDocument CaseIdentityDocument?
+  rentalIdentityDocument RentalIdentityDocument?
+  rentalDocumentRequirements RentalDocumentRequirement[]
+  rentalRequestDocuments RentalRequestDocument[]
   createdAt  DateTime        @default(now())
   updatedAt  DateTime        @updatedAt
 
@@ -1014,6 +1275,7 @@ enum CaseRequestType {
   LOCATION_CHANGE
   STEWARDSHIP
   AUCTION
+  REVOCATION
 }
 
 enum CaseRequestStatus {
@@ -1090,6 +1352,8 @@ model CaseFile {
   premiseComplex       CommercialComplex?     @relation("CasePremiseComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
   premiseAddress       String?
   premiseAddressEn     String?
+  urbanZoneId          String?
+  urbanZone            UrbanZone?             @relation("CaseUrbanZone", fields: [urbanZoneId], references: [id], onDelete: SetNull)
   premisePlaque        String?
   premisePlaqueSeries  String?
   premiseFloor         String?
@@ -1108,6 +1372,8 @@ model CaseFile {
   leaseExpiresAt       DateTime?              @db.Date
   leaseAgency          String?
   premiseOwnerName     String?
+  premiseOwnerNationalId String?
+  premiseFiles         CasePremiseFile[]
   inquiries            CaseInquiry[]
   placesReviews        CasePlacesReview[]
   managementReviews    CaseManagementReview[]
@@ -1119,6 +1385,7 @@ model CaseFile {
   stewardRevokeFile    CaseStewardRevokeFile?
   revocationProcess    CaseRevocationProcess?
   payments             Payment[]
+  assetAccounts        CaseAssetAccount[]
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
 
@@ -1131,12 +1398,51 @@ model CaseFile {
   @@index([activityJobId])
   @@index([premiseCityId])
   @@index([premiseComplexId])
+  @@index([urbanZoneId])
   @@index([registrationPlaceId])
   @@index([licenseIssuedAt])
   @@index([firstIssuedAt])
   @@index([licenseExpiresAt])
   @@index([createdAt])
   @@map("case_files")
+}
+
+/// حساب دارایی متقاضی روی پرونده (نام بانک و شبا)
+model CaseAssetAccount {
+  id         String   @id @default(uuid())
+  caseFileId String
+  caseFile   CaseFile @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  bankName   String
+  iban       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([caseFileId, iban])
+  @@index([caseFileId])
+  @@map("case_asset_accounts")
+}
+
+enum CasePremiseFileKind {
+  DEED
+  AUTHORIZATION_LETTER
+}
+
+/// پیوست سند ملک یا اجازه نامه روی پرونده. خود فایل در File Storage است.
+model CasePremiseFile {
+  id           String              @id @default(uuid())
+  caseFileId   String
+  caseFile     CaseFile            @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  kind         CasePremiseFileKind
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  @@index([caseFileId])
+  @@index([storageKey])
+  @@map("case_premise_files")
 }
 
 /// پیوست درخواست ابطال کارت مباشرت. خود فایل در File Storage است.
@@ -1155,17 +1461,39 @@ model CaseStewardRevokeFile {
 
 /// فرایند سه‌مرحله‌ای ابطال مجوز اقتصادی
 model CaseRevocationProcess {
-  id               String                 @id @default(uuid())
-  caseFileId       String                 @unique
-  caseFile         CaseFile               @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
-  amount           Decimal                @db.Decimal(18, 0)
-  revocationDate   DateTime?              @db.Date
+  id               String                     @id @default(uuid())
+  caseFileId       String                     @unique
+  caseFile         CaseFile                   @relation(fields: [caseFileId], references: [id], onDelete: Cascade)
+  requestId        String?                    @unique
+  request          CaseRequest?               @relation(fields: [requestId], references: [id], onDelete: SetNull)
+  amount           Decimal                    @db.Decimal(18, 0)
+  revocationDate   DateTime?                  @db.Date
   letters          CaseRevocationLetter[]
-  createdAt        DateTime               @default(now())
-  updatedAt        DateTime               @updatedAt
+  files            CaseRevocationProcessFile[]
+  createdAt        DateTime                   @default(now())
+  updatedAt        DateTime                   @updatedAt
 
   @@index([createdAt])
   @@map("case_revocation_processes")
+}
+
+/// پیوست فرایند مدیریتی ابطال. خود فایل در File Storage است.
+model CaseRevocationProcessFile {
+  id           String                @id @default(uuid())
+  processId    String
+  process      CaseRevocationProcess @relation(fields: [processId], references: [id], onDelete: Cascade)
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  uploadedById String?
+  uploadedBy   User?                 @relation("CaseRevocationProcessFileUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime              @default(now())
+
+  @@index([processId])
+  @@index([uploadedById])
+  @@index([storageKey])
+  @@map("case_revocation_process_files")
 }
 
 /// نسخهٔ ثابت نامهٔ هر سازمان برای یک فرایند ابطال
@@ -1257,6 +1585,8 @@ model CaseRequest {
   locationDraft CaseLocationDraft?
   replacedPremise CasePremiseHistory?
   auction       CaseAuction?
+  revocation    CaseRevocationRequest?
+  revocationProcess CaseRevocationProcess?
   payments      Payment[]
   finance       CaseRequestFinance?
   createdAt     DateTime          @default(now())
@@ -1268,6 +1598,34 @@ model CaseRequest {
   @@index([formationStep])
   @@index([createdAt])
   @@map("case_requests")
+}
+
+/// درخواست ابطال مجوز از پورتال متقاضی
+model CaseRevocationRequest {
+  requestId String                     @id
+  request   CaseRequest                @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  reason    String
+  files     CaseRevocationRequestFile[]
+  createdAt DateTime                   @default(now())
+  updatedAt DateTime                   @updatedAt
+
+  @@map("case_revocation_requests")
+}
+
+/// پیوست درخواست ابطال متقاضی. خود فایل در File Storage است.
+model CaseRevocationRequestFile {
+  id           String                @id @default(uuid())
+  requestId    String
+  request      CaseRevocationRequest @relation(fields: [requestId], references: [requestId], onDelete: Cascade)
+  storageKey   String
+  originalName String?
+  mimeType     String
+  byteSize     Int
+  createdAt    DateTime              @default(now())
+
+  @@index([requestId])
+  @@index([storageKey])
+  @@map("case_revocation_request_files")
 }
 
 /// حساب و هزینه‌های همین درخواست. با اولین باز شدن از تنظیمات مالی همان نوع درخواست پر می‌شود.
@@ -1347,6 +1705,8 @@ model CaseLocationDraft {
   premiseComplex       CommercialComplex?     @relation("LocationDraftComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
   premiseAddress       String?
   premiseAddressEn     String?
+  urbanZoneId          String?
+  urbanZone            UrbanZone?             @relation("LocationDraftUrbanZone", fields: [urbanZoneId], references: [id], onDelete: SetNull)
   premisePlaque        String?
   premisePlaqueSeries  String?
   premiseFloor         String?
@@ -1365,10 +1725,12 @@ model CaseLocationDraft {
   leaseExpiresAt       DateTime?              @db.Date
   leaseAgency          String?
   premiseOwnerName     String?
+  premiseOwnerNationalId String?
   updatedAt            DateTime               @updatedAt
 
   @@index([premiseCityId])
   @@index([premiseComplexId])
+  @@index([urbanZoneId])
   @@index([registrationPlaceId])
   @@map("case_location_drafts")
 }
@@ -1389,6 +1751,8 @@ model CasePremiseHistory {
   premiseComplex       CommercialComplex?     @relation("PremiseHistoryComplex", fields: [premiseComplexId], references: [id], onDelete: SetNull)
   premiseAddress       String?
   premiseAddressEn     String?
+  urbanZoneId          String?
+  urbanZone            UrbanZone?             @relation("PremiseHistoryUrbanZone", fields: [urbanZoneId], references: [id], onDelete: SetNull)
   premisePlaque        String?
   premisePlaqueSeries  String?
   premiseFloor         String?
@@ -1407,10 +1771,12 @@ model CasePremiseHistory {
   leaseExpiresAt       DateTime?              @db.Date
   leaseAgency          String?
   premiseOwnerName     String?
+  premiseOwnerNationalId String?
 
   @@index([caseFileId, endedAt])
   @@index([premiseCityId])
   @@index([premiseComplexId])
+  @@index([urbanZoneId])
   @@index([registrationPlaceId])
   @@map("case_premise_history")
 }
@@ -1519,7 +1885,6 @@ model PersonDocument {
   createdAt  DateTime                @default(now())
   updatedAt  DateTime                @updatedAt
 
-  @@unique([userId, documentId])
   @@index([userId])
   @@index([documentId])
   @@map("person_documents")
@@ -1557,7 +1922,6 @@ model CaseActivityDocument {
   createdAt     DateTime                       @default(now())
   updatedAt     DateTime                       @updatedAt
 
-  @@unique([caseRequestId, documentId])
   @@index([caseFileId])
   @@index([caseRequestId])
   @@index([documentId])
@@ -1652,6 +2016,9 @@ model User {
   educationLevel     EducationLevel?
   citizenGroup       String?
   caseFiles          CaseFile[]
+  rentalLicenses     RentalLicense[]
+  rentalManagementDecided RentalManagementReview[] @relation("RentalManagementDecider")
+  rentalManagementReviewFiles RentalManagementReviewFile[] @relation("RentalManagementFileUploader")
   caseRequestEvents  CaseRequestEvent[] @relation("CaseRequestEventActor")
   caseSuspensions    CaseSuspension[]   @relation("CaseSuspensionAuthor")
   caseRevocations    CaseFile[]         @relation("CaseRevocationAuthor")
@@ -1667,6 +2034,7 @@ model User {
   caseManagementDecided CaseManagementReview[] @relation("CaseManagementDecider")
   caseAuctionDecided CaseAuctionApproval[] @relation("CaseAuctionDecider")
   caseManagementReviewFiles CaseManagementReviewFile[] @relation("CaseManagementFileUploader")
+  caseRevocationProcessFiles CaseRevocationProcessFile[] @relation("CaseRevocationProcessFileUploader")
   jobGroupRepresentations JobGroupRepresentative[]
   foodReservations   FoodReservation[]
   vehicleAssignments VehicleAssignment[] @relation("VehicleAssignmentPerson")
@@ -2270,6 +2638,8 @@ model Role {
   caseManagementApprovers CaseManagementApprover[]
   caseManagementReviews CaseManagementReview[]
   caseProcessManagementRoles CaseProcessManagementRole[]
+  rentalProcessManagementRoles RentalProcessManagementRole[]
+  rentalManagementReviews RentalManagementReview[]
   placesOffice CasePlacesOffice?
   caseGeneralSettings CaseGeneralSettings[]
 
@@ -2630,6 +3000,7 @@ model CommercialComplex {
   isActive   Boolean           @default(true)
   floors       CommercialFloor[]
   premiseCases CaseFile[]        @relation("CasePremiseComplex")
+  rentalPremiseLicenses RentalLicense[] @relation("RentalPremiseComplex")
   locationDrafts CaseLocationDraft[] @relation("LocationDraftComplex")
   premiseHistories CasePremiseHistory[] @relation("PremiseHistoryComplex")
   createdAt    DateTime          @default(now())
@@ -2723,6 +3094,24 @@ model StaffPost {
   @@map("staff_posts")
 }
 
+model UrbanZone {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?
+  isActive    Boolean  @default(true)
+  caseFiles   CaseFile[] @relation("CaseUrbanZone")
+  rentalLicenses RentalLicense[] @relation("RentalUrbanZone")
+  locationDrafts CaseLocationDraft[] @relation("LocationDraftUrbanZone")
+  premiseHistories CasePremiseHistory[] @relation("PremiseHistoryUrbanZone")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([title])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("urban_zones")
+}
+
 model ViolationType {
   id          String      @id @default(uuid())
   title       String      @unique
@@ -2745,6 +3134,7 @@ model RegistrationPlace {
   isActive     Boolean    @default(true)
   isDefault    Boolean    @default(false)
   premiseCases CaseFile[] @relation("CaseRegistrationPlace")
+  rentalPremiseLicenses RentalLicense[] @relation("RentalRegistrationPlace")
   locationDrafts CaseLocationDraft[] @relation("LocationDraftRegistration")
   premiseHistories CasePremiseHistory[] @relation("PremiseHistoryRegistration")
   createdAt    DateTime   @default(now())

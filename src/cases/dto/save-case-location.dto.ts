@@ -12,6 +12,7 @@ import {
   ValidateIf,
 } from 'class-validator';
 import { emptyToNull } from '../../common/dto-transform';
+import { IsIranianNationalId, normalizeNationalId } from '../../common/national-id';
 
 export const premiseEstablishments = ['INDEPENDENT', 'COMMERCIAL_COMPLEX', 'RESIDENTIAL_COMPLEX'] as const;
 export const premiseGeoPositions = ['MAIN_FRONTAGE', 'SIDE_FRONTAGE', 'ALLEY'] as const;
@@ -111,6 +112,12 @@ export class SaveCaseLocationDto {
   @Transform(({ value }) => emptyToNull(value))
   @ValidateIf((_, value) => value != null)
   @IsUUID('4')
+  urbanZoneId?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => emptyToNull(value))
+  @ValidateIf((_, value) => value != null)
+  @IsUUID('4')
   registrationPlaceId?: string | null;
 
   @IsIn(premiseOwnerships)
@@ -155,4 +162,14 @@ export class SaveCaseLocationDto {
   @ValidateIf((_, value) => value != null)
   @IsString()
   ownerName?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => {
+    if (typeof value !== 'string') return emptyToNull(value);
+    const id = normalizeNationalId(value);
+    return id || null;
+  })
+  @ValidateIf((_, value) => value != null)
+  @IsIranianNationalId()
+  ownerNationalId?: string | null;
 }

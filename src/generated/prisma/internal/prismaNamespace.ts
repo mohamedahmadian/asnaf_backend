@@ -422,6 +422,17 @@ export const ModelName = {
   CaseGeneralSettings: 'CaseGeneralSettings',
   CaseLetterhead: 'CaseLetterhead',
   CaseActivityLicenseSettings: 'CaseActivityLicenseSettings',
+  RentalLicenseSettings: 'RentalLicenseSettings',
+  RentalIdentityDocument: 'RentalIdentityDocument',
+  RentalDocumentRequirement: 'RentalDocumentRequirement',
+  RentalProcessManagementRole: 'RentalProcessManagementRole',
+  RentalLicense: 'RentalLicense',
+  RentalPremiseFile: 'RentalPremiseFile',
+  RentalRequest: 'RentalRequest',
+  RentalRequestDocument: 'RentalRequestDocument',
+  RentalRequestDocumentVersion: 'RentalRequestDocumentVersion',
+  RentalManagementReview: 'RentalManagementReview',
+  RentalManagementReviewFile: 'RentalManagementReviewFile',
   CasePlacesOffice: 'CasePlacesOffice',
   CaseRevocationSettings: 'CaseRevocationSettings',
   CaseRevocationOrganization: 'CaseRevocationOrganization',
@@ -435,12 +446,17 @@ export const ModelName = {
   CaseManagementReview: 'CaseManagementReview',
   CaseManagementReviewFile: 'CaseManagementReviewFile',
   CaseFile: 'CaseFile',
+  CaseAssetAccount: 'CaseAssetAccount',
+  CasePremiseFile: 'CasePremiseFile',
   CaseStewardRevokeFile: 'CaseStewardRevokeFile',
   CaseRevocationProcess: 'CaseRevocationProcess',
+  CaseRevocationProcessFile: 'CaseRevocationProcessFile',
   CaseRevocationLetter: 'CaseRevocationLetter',
   CaseSuspension: 'CaseSuspension',
   CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
+  CaseRevocationRequest: 'CaseRevocationRequest',
+  CaseRevocationRequestFile: 'CaseRevocationRequestFile',
   CaseRequestFinance: 'CaseRequestFinance',
   CaseRequestFee: 'CaseRequestFee',
   CaseRequestEvent: 'CaseRequestEvent',
@@ -505,6 +521,7 @@ export const ModelName = {
   CommercialUnit: 'CommercialUnit',
   WorkUnit: 'WorkUnit',
   StaffPost: 'StaffPost',
+  UrbanZone: 'UrbanZone',
   ViolationType: 'ViolationType',
   RegistrationPlace: 'RegistrationPlace',
   Violation: 'Violation',
@@ -530,7 +547,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "caseActivityLicenseSettings" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRequestFinance" | "caseRequestFee" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings" | "smsMessage" | "scheduledJob" | "scheduledJobRun"
+    modelProps: "storedImage" | "country" | "province" | "city" | "bankAccount" | "municipalFee" | "financialRequestSetting" | "discount" | "paymentGroup" | "paymentGroupItem" | "payment" | "paymentLine" | "paymentReceipt" | "paymentGatewayTransaction" | "jobType" | "inquiryCenter" | "jobGroup" | "jobGroupRepresentative" | "job" | "jobInquiryCenter" | "caseInquiry" | "caseInquiryFile" | "caseGeneralSettings" | "caseLetterhead" | "caseActivityLicenseSettings" | "rentalLicenseSettings" | "rentalIdentityDocument" | "rentalDocumentRequirement" | "rentalProcessManagementRole" | "rentalLicense" | "rentalPremiseFile" | "rentalRequest" | "rentalRequestDocument" | "rentalRequestDocumentVersion" | "rentalManagementReview" | "rentalManagementReviewFile" | "casePlacesOffice" | "caseRevocationSettings" | "caseRevocationOrganization" | "casePlacesReview" | "casePlacesFile" | "jobDocument" | "document" | "caseIdentityDocument" | "caseManagementApprover" | "caseProcessManagementRole" | "caseManagementReview" | "caseManagementReviewFile" | "caseFile" | "caseAssetAccount" | "casePremiseFile" | "caseStewardRevokeFile" | "caseRevocationProcess" | "caseRevocationProcessFile" | "caseRevocationLetter" | "caseSuspension" | "caseSuspensionFile" | "caseRequest" | "caseRevocationRequest" | "caseRevocationRequestFile" | "caseRequestFinance" | "caseRequestFee" | "caseRequestEvent" | "caseRenewalTerms" | "caseLocationDraft" | "casePremiseHistory" | "caseAuction" | "caseAuctionItem" | "caseAuctionApproval" | "documentRequirement" | "inquiryRequirement" | "personDocument" | "personDocumentVersion" | "caseActivityDocument" | "caseActivityDocumentVersion" | "user" | "userLocationHistory" | "projectGroup" | "project" | "projectDocument" | "projectOperator" | "projectPhase" | "storedFile" | "projectProgressEntry" | "projectProgressImage" | "projectContractor" | "projectContractorProject" | "projectContractorMember" | "projectContractorPhase" | "projectContractorPayment" | "food" | "restaurant" | "restaurantMenuItem" | "organization" | "organizationPhone" | "organizationPosition" | "organizationUnitKind" | "organizationUnit" | "organizationUnitRestaurant" | "foodReservation" | "vehicleBrand" | "vehicle" | "vehicleAssignment" | "role" | "userRole" | "rolePermission" | "singardCategory" | "singardFeedback" | "singardAttachment" | "singardActivity" | "boardRequest" | "boardAttachment" | "boardStageUnit" | "boardStagePosition" | "boardMinutes" | "boardMinutesMember" | "boardMinutesAttachment" | "boardMinutesResolution" | "commercialComplex" | "commercialFloor" | "commercialLane" | "commercialUnit" | "workUnit" | "staffPost" | "urbanZone" | "violationType" | "registrationPlace" | "violation" | "violationAttachment" | "violationProceeding" | "violationProceedingAttachment" | "smsSettings" | "smsMessage" | "scheduledJob" | "scheduledJobRun"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2384,6 +2401,820 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RentalLicenseSettings: {
+      payload: Prisma.$RentalLicenseSettingsPayload<ExtArgs>
+      fields: Prisma.RentalLicenseSettingsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalLicenseSettingsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalLicenseSettingsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalLicenseSettingsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalLicenseSettingsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>
+        }
+        findMany: {
+          args: Prisma.RentalLicenseSettingsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>[]
+        }
+        create: {
+          args: Prisma.RentalLicenseSettingsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>
+        }
+        createMany: {
+          args: Prisma.RentalLicenseSettingsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalLicenseSettingsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalLicenseSettingsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>
+        }
+        update: {
+          args: Prisma.RentalLicenseSettingsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalLicenseSettingsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalLicenseSettingsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalLicenseSettingsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalLicenseSettingsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicenseSettingsPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalLicenseSettingsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalLicenseSettings>
+        }
+        groupBy: {
+          args: Prisma.RentalLicenseSettingsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalLicenseSettingsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalLicenseSettingsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalLicenseSettingsCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalIdentityDocument: {
+      payload: Prisma.$RentalIdentityDocumentPayload<ExtArgs>
+      fields: Prisma.RentalIdentityDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalIdentityDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalIdentityDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalIdentityDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalIdentityDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.RentalIdentityDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.RentalIdentityDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.RentalIdentityDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalIdentityDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalIdentityDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>
+        }
+        update: {
+          args: Prisma.RentalIdentityDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalIdentityDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalIdentityDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalIdentityDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalIdentityDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalIdentityDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalIdentityDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalIdentityDocument>
+        }
+        groupBy: {
+          args: Prisma.RentalIdentityDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalIdentityDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalIdentityDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalIdentityDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalDocumentRequirement: {
+      payload: Prisma.$RentalDocumentRequirementPayload<ExtArgs>
+      fields: Prisma.RentalDocumentRequirementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalDocumentRequirementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalDocumentRequirementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalDocumentRequirementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalDocumentRequirementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>
+        }
+        findMany: {
+          args: Prisma.RentalDocumentRequirementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>[]
+        }
+        create: {
+          args: Prisma.RentalDocumentRequirementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>
+        }
+        createMany: {
+          args: Prisma.RentalDocumentRequirementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalDocumentRequirementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalDocumentRequirementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>
+        }
+        update: {
+          args: Prisma.RentalDocumentRequirementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalDocumentRequirementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalDocumentRequirementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalDocumentRequirementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalDocumentRequirementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalDocumentRequirementPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalDocumentRequirementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalDocumentRequirement>
+        }
+        groupBy: {
+          args: Prisma.RentalDocumentRequirementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalDocumentRequirementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalDocumentRequirementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalDocumentRequirementCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalProcessManagementRole: {
+      payload: Prisma.$RentalProcessManagementRolePayload<ExtArgs>
+      fields: Prisma.RentalProcessManagementRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalProcessManagementRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalProcessManagementRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>
+        }
+        findFirst: {
+          args: Prisma.RentalProcessManagementRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalProcessManagementRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>
+        }
+        findMany: {
+          args: Prisma.RentalProcessManagementRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>[]
+        }
+        create: {
+          args: Prisma.RentalProcessManagementRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>
+        }
+        createMany: {
+          args: Prisma.RentalProcessManagementRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalProcessManagementRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>[]
+        }
+        delete: {
+          args: Prisma.RentalProcessManagementRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>
+        }
+        update: {
+          args: Prisma.RentalProcessManagementRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalProcessManagementRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalProcessManagementRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalProcessManagementRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalProcessManagementRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalProcessManagementRolePayload>
+        }
+        aggregate: {
+          args: Prisma.RentalProcessManagementRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalProcessManagementRole>
+        }
+        groupBy: {
+          args: Prisma.RentalProcessManagementRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalProcessManagementRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalProcessManagementRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalProcessManagementRoleCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalLicense: {
+      payload: Prisma.$RentalLicensePayload<ExtArgs>
+      fields: Prisma.RentalLicenseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalLicenseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalLicenseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>
+        }
+        findFirst: {
+          args: Prisma.RentalLicenseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalLicenseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>
+        }
+        findMany: {
+          args: Prisma.RentalLicenseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>[]
+        }
+        create: {
+          args: Prisma.RentalLicenseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>
+        }
+        createMany: {
+          args: Prisma.RentalLicenseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalLicenseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>[]
+        }
+        delete: {
+          args: Prisma.RentalLicenseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>
+        }
+        update: {
+          args: Prisma.RentalLicenseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalLicenseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalLicenseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalLicenseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalLicenseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalLicensePayload>
+        }
+        aggregate: {
+          args: Prisma.RentalLicenseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalLicense>
+        }
+        groupBy: {
+          args: Prisma.RentalLicenseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalLicenseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalLicenseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalLicenseCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalPremiseFile: {
+      payload: Prisma.$RentalPremiseFilePayload<ExtArgs>
+      fields: Prisma.RentalPremiseFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalPremiseFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalPremiseFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>
+        }
+        findFirst: {
+          args: Prisma.RentalPremiseFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalPremiseFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>
+        }
+        findMany: {
+          args: Prisma.RentalPremiseFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>[]
+        }
+        create: {
+          args: Prisma.RentalPremiseFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>
+        }
+        createMany: {
+          args: Prisma.RentalPremiseFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalPremiseFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>[]
+        }
+        delete: {
+          args: Prisma.RentalPremiseFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>
+        }
+        update: {
+          args: Prisma.RentalPremiseFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalPremiseFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalPremiseFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalPremiseFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalPremiseFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalPremiseFilePayload>
+        }
+        aggregate: {
+          args: Prisma.RentalPremiseFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalPremiseFile>
+        }
+        groupBy: {
+          args: Prisma.RentalPremiseFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalPremiseFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalPremiseFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalPremiseFileCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalRequest: {
+      payload: Prisma.$RentalRequestPayload<ExtArgs>
+      fields: Prisma.RentalRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>
+        }
+        findMany: {
+          args: Prisma.RentalRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>[]
+        }
+        create: {
+          args: Prisma.RentalRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>
+        }
+        createMany: {
+          args: Prisma.RentalRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>
+        }
+        update: {
+          args: Prisma.RentalRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalRequest>
+        }
+        groupBy: {
+          args: Prisma.RentalRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalRequestDocument: {
+      payload: Prisma.$RentalRequestDocumentPayload<ExtArgs>
+      fields: Prisma.RentalRequestDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalRequestDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalRequestDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalRequestDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalRequestDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.RentalRequestDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.RentalRequestDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.RentalRequestDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalRequestDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalRequestDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>
+        }
+        update: {
+          args: Prisma.RentalRequestDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalRequestDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalRequestDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalRequestDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalRequestDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalRequestDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalRequestDocument>
+        }
+        groupBy: {
+          args: Prisma.RentalRequestDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalRequestDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalRequestDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalRequestDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalRequestDocumentVersion: {
+      payload: Prisma.$RentalRequestDocumentVersionPayload<ExtArgs>
+      fields: Prisma.RentalRequestDocumentVersionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalRequestDocumentVersionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalRequestDocumentVersionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalRequestDocumentVersionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalRequestDocumentVersionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>
+        }
+        findMany: {
+          args: Prisma.RentalRequestDocumentVersionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>[]
+        }
+        create: {
+          args: Prisma.RentalRequestDocumentVersionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>
+        }
+        createMany: {
+          args: Prisma.RentalRequestDocumentVersionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalRequestDocumentVersionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalRequestDocumentVersionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>
+        }
+        update: {
+          args: Prisma.RentalRequestDocumentVersionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalRequestDocumentVersionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalRequestDocumentVersionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalRequestDocumentVersionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalRequestDocumentVersionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalRequestDocumentVersionPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalRequestDocumentVersionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalRequestDocumentVersion>
+        }
+        groupBy: {
+          args: Prisma.RentalRequestDocumentVersionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalRequestDocumentVersionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalRequestDocumentVersionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalRequestDocumentVersionCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalManagementReview: {
+      payload: Prisma.$RentalManagementReviewPayload<ExtArgs>
+      fields: Prisma.RentalManagementReviewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalManagementReviewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalManagementReviewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalManagementReviewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalManagementReviewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>
+        }
+        findMany: {
+          args: Prisma.RentalManagementReviewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>[]
+        }
+        create: {
+          args: Prisma.RentalManagementReviewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>
+        }
+        createMany: {
+          args: Prisma.RentalManagementReviewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalManagementReviewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalManagementReviewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>
+        }
+        update: {
+          args: Prisma.RentalManagementReviewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalManagementReviewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalManagementReviewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalManagementReviewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalManagementReviewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalManagementReviewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalManagementReview>
+        }
+        groupBy: {
+          args: Prisma.RentalManagementReviewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalManagementReviewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalManagementReviewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalManagementReviewCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalManagementReviewFile: {
+      payload: Prisma.$RentalManagementReviewFilePayload<ExtArgs>
+      fields: Prisma.RentalManagementReviewFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalManagementReviewFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalManagementReviewFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>
+        }
+        findFirst: {
+          args: Prisma.RentalManagementReviewFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalManagementReviewFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>
+        }
+        findMany: {
+          args: Prisma.RentalManagementReviewFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>[]
+        }
+        create: {
+          args: Prisma.RentalManagementReviewFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>
+        }
+        createMany: {
+          args: Prisma.RentalManagementReviewFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalManagementReviewFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>[]
+        }
+        delete: {
+          args: Prisma.RentalManagementReviewFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>
+        }
+        update: {
+          args: Prisma.RentalManagementReviewFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalManagementReviewFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalManagementReviewFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalManagementReviewFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalManagementReviewFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalManagementReviewFilePayload>
+        }
+        aggregate: {
+          args: Prisma.RentalManagementReviewFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalManagementReviewFile>
+        }
+        groupBy: {
+          args: Prisma.RentalManagementReviewFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalManagementReviewFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalManagementReviewFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalManagementReviewFileCountAggregateOutputType> | number
+        }
+      }
+    }
     CasePlacesOffice: {
       payload: Prisma.$CasePlacesOfficePayload<ExtArgs>
       fields: Prisma.CasePlacesOfficeFieldRefs
@@ -3346,6 +4177,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CaseAssetAccount: {
+      payload: Prisma.$CaseAssetAccountPayload<ExtArgs>
+      fields: Prisma.CaseAssetAccountFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseAssetAccountFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseAssetAccountFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseAssetAccountFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseAssetAccountFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>
+        }
+        findMany: {
+          args: Prisma.CaseAssetAccountFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>[]
+        }
+        create: {
+          args: Prisma.CaseAssetAccountCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>
+        }
+        createMany: {
+          args: Prisma.CaseAssetAccountCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseAssetAccountCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseAssetAccountDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>
+        }
+        update: {
+          args: Prisma.CaseAssetAccountUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseAssetAccountDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseAssetAccountUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseAssetAccountUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseAssetAccountUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseAssetAccountPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseAssetAccountAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseAssetAccount>
+        }
+        groupBy: {
+          args: Prisma.CaseAssetAccountGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseAssetAccountGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseAssetAccountCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseAssetAccountCountAggregateOutputType> | number
+        }
+      }
+    }
+    CasePremiseFile: {
+      payload: Prisma.$CasePremiseFilePayload<ExtArgs>
+      fields: Prisma.CasePremiseFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CasePremiseFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CasePremiseFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>
+        }
+        findFirst: {
+          args: Prisma.CasePremiseFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CasePremiseFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>
+        }
+        findMany: {
+          args: Prisma.CasePremiseFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>[]
+        }
+        create: {
+          args: Prisma.CasePremiseFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>
+        }
+        createMany: {
+          args: Prisma.CasePremiseFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CasePremiseFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>[]
+        }
+        delete: {
+          args: Prisma.CasePremiseFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>
+        }
+        update: {
+          args: Prisma.CasePremiseFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.CasePremiseFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CasePremiseFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CasePremiseFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.CasePremiseFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CasePremiseFilePayload>
+        }
+        aggregate: {
+          args: Prisma.CasePremiseFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCasePremiseFile>
+        }
+        groupBy: {
+          args: Prisma.CasePremiseFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CasePremiseFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CasePremiseFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CasePremiseFileCountAggregateOutputType> | number
+        }
+      }
+    }
     CaseStewardRevokeFile: {
       payload: Prisma.$CaseStewardRevokeFilePayload<ExtArgs>
       fields: Prisma.CaseStewardRevokeFileFieldRefs
@@ -3491,6 +4470,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseRevocationProcessCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseRevocationProcessCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseRevocationProcessFile: {
+      payload: Prisma.$CaseRevocationProcessFilePayload<ExtArgs>
+      fields: Prisma.CaseRevocationProcessFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseRevocationProcessFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseRevocationProcessFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>
+        }
+        findFirst: {
+          args: Prisma.CaseRevocationProcessFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseRevocationProcessFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>
+        }
+        findMany: {
+          args: Prisma.CaseRevocationProcessFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>[]
+        }
+        create: {
+          args: Prisma.CaseRevocationProcessFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>
+        }
+        createMany: {
+          args: Prisma.CaseRevocationProcessFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseRevocationProcessFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>[]
+        }
+        delete: {
+          args: Prisma.CaseRevocationProcessFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>
+        }
+        update: {
+          args: Prisma.CaseRevocationProcessFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseRevocationProcessFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseRevocationProcessFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseRevocationProcessFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseRevocationProcessFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationProcessFilePayload>
+        }
+        aggregate: {
+          args: Prisma.CaseRevocationProcessFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseRevocationProcessFile>
+        }
+        groupBy: {
+          args: Prisma.CaseRevocationProcessFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRevocationProcessFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseRevocationProcessFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRevocationProcessFileCountAggregateOutputType> | number
         }
       }
     }
@@ -3787,6 +4840,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CaseRequestCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CaseRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseRevocationRequest: {
+      payload: Prisma.$CaseRevocationRequestPayload<ExtArgs>
+      fields: Prisma.CaseRevocationRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseRevocationRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseRevocationRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.CaseRevocationRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseRevocationRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>
+        }
+        findMany: {
+          args: Prisma.CaseRevocationRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>[]
+        }
+        create: {
+          args: Prisma.CaseRevocationRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>
+        }
+        createMany: {
+          args: Prisma.CaseRevocationRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseRevocationRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.CaseRevocationRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>
+        }
+        update: {
+          args: Prisma.CaseRevocationRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseRevocationRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseRevocationRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseRevocationRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseRevocationRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.CaseRevocationRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseRevocationRequest>
+        }
+        groupBy: {
+          args: Prisma.CaseRevocationRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRevocationRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseRevocationRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRevocationRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    CaseRevocationRequestFile: {
+      payload: Prisma.$CaseRevocationRequestFilePayload<ExtArgs>
+      fields: Prisma.CaseRevocationRequestFileFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CaseRevocationRequestFileFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CaseRevocationRequestFileFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>
+        }
+        findFirst: {
+          args: Prisma.CaseRevocationRequestFileFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CaseRevocationRequestFileFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>
+        }
+        findMany: {
+          args: Prisma.CaseRevocationRequestFileFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>[]
+        }
+        create: {
+          args: Prisma.CaseRevocationRequestFileCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>
+        }
+        createMany: {
+          args: Prisma.CaseRevocationRequestFileCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CaseRevocationRequestFileCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>[]
+        }
+        delete: {
+          args: Prisma.CaseRevocationRequestFileDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>
+        }
+        update: {
+          args: Prisma.CaseRevocationRequestFileUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>
+        }
+        deleteMany: {
+          args: Prisma.CaseRevocationRequestFileDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CaseRevocationRequestFileUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CaseRevocationRequestFileUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>[]
+        }
+        upsert: {
+          args: Prisma.CaseRevocationRequestFileUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CaseRevocationRequestFilePayload>
+        }
+        aggregate: {
+          args: Prisma.CaseRevocationRequestFileAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCaseRevocationRequestFile>
+        }
+        groupBy: {
+          args: Prisma.CaseRevocationRequestFileGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRevocationRequestFileGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CaseRevocationRequestFileCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CaseRevocationRequestFileCountAggregateOutputType> | number
         }
       }
     }
@@ -8526,6 +9727,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UrbanZone: {
+      payload: Prisma.$UrbanZonePayload<ExtArgs>
+      fields: Prisma.UrbanZoneFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UrbanZoneFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UrbanZoneFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>
+        }
+        findFirst: {
+          args: Prisma.UrbanZoneFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UrbanZoneFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>
+        }
+        findMany: {
+          args: Prisma.UrbanZoneFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>[]
+        }
+        create: {
+          args: Prisma.UrbanZoneCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>
+        }
+        createMany: {
+          args: Prisma.UrbanZoneCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UrbanZoneCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>[]
+        }
+        delete: {
+          args: Prisma.UrbanZoneDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>
+        }
+        update: {
+          args: Prisma.UrbanZoneUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>
+        }
+        deleteMany: {
+          args: Prisma.UrbanZoneDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UrbanZoneUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UrbanZoneUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>[]
+        }
+        upsert: {
+          args: Prisma.UrbanZoneUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrbanZonePayload>
+        }
+        aggregate: {
+          args: Prisma.UrbanZoneAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUrbanZone>
+        }
+        groupBy: {
+          args: Prisma.UrbanZoneGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UrbanZoneGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UrbanZoneCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UrbanZoneCountAggregateOutputType> | number
+        }
+      }
+    }
     ViolationType: {
       payload: Prisma.$ViolationTypePayload<ExtArgs>
       fields: Prisma.ViolationTypeFieldRefs
@@ -9602,6 +10877,7 @@ export const JobScalarFieldEnum = {
   titleEn: 'titleEn',
   taxIntaCode: 'taxIntaCode',
   description: 'description',
+  videoUrl: 'videoUrl',
   code: 'code',
   jobTypeId: 'jobTypeId',
   annualFee: 'annualFee',
@@ -9698,6 +10974,179 @@ export const CaseActivityLicenseSettingsScalarFieldEnum = {
 export type CaseActivityLicenseSettingsScalarFieldEnum = (typeof CaseActivityLicenseSettingsScalarFieldEnum)[keyof typeof CaseActivityLicenseSettingsScalarFieldEnum]
 
 
+export const RentalLicenseSettingsScalarFieldEnum = {
+  id: 'id',
+  contractYears: 'contractYears',
+  signerName: 'signerName',
+  signerTitle: 'signerTitle',
+  signatureId: 'signatureId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalLicenseSettingsScalarFieldEnum = (typeof RentalLicenseSettingsScalarFieldEnum)[keyof typeof RentalLicenseSettingsScalarFieldEnum]
+
+
+export const RentalIdentityDocumentScalarFieldEnum = {
+  documentId: 'documentId',
+  gender: 'gender',
+  isRequired: 'isRequired',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalIdentityDocumentScalarFieldEnum = (typeof RentalIdentityDocumentScalarFieldEnum)[keyof typeof RentalIdentityDocumentScalarFieldEnum]
+
+
+export const RentalDocumentRequirementScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  gender: 'gender',
+  isRequired: 'isRequired',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalDocumentRequirementScalarFieldEnum = (typeof RentalDocumentRequirementScalarFieldEnum)[keyof typeof RentalDocumentRequirementScalarFieldEnum]
+
+
+export const RentalProcessManagementRoleScalarFieldEnum = {
+  id: 'id',
+  roleId: 'roleId',
+  title: 'title',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalProcessManagementRoleScalarFieldEnum = (typeof RentalProcessManagementRoleScalarFieldEnum)[keyof typeof RentalProcessManagementRoleScalarFieldEnum]
+
+
+export const RentalLicenseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  formationStep: 'formationStep',
+  trackingCode: 'trackingCode',
+  licenseNumber: 'licenseNumber',
+  licenseIssuedAt: 'licenseIssuedAt',
+  firstIssuedAt: 'firstIssuedAt',
+  licenseExpiresAt: 'licenseExpiresAt',
+  premiseCityId: 'premiseCityId',
+  premiseEstablishment: 'premiseEstablishment',
+  premiseComplexId: 'premiseComplexId',
+  premiseAddress: 'premiseAddress',
+  premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
+  premisePlaque: 'premisePlaque',
+  premisePlaqueSeries: 'premisePlaqueSeries',
+  premiseFloor: 'premiseFloor',
+  premiseUnitNo: 'premiseUnitNo',
+  premisePostalCode: 'premisePostalCode',
+  premisePhone: 'premisePhone',
+  premiseFax: 'premiseFax',
+  premiseGeoPosition: 'premiseGeoPosition',
+  premisePublicAccess: 'premisePublicAccess',
+  registrationPlaceId: 'registrationPlaceId',
+  premiseOwnership: 'premiseOwnership',
+  premiseDeedNo: 'premiseDeedNo',
+  premiseArea: 'premiseArea',
+  leaseIssuedAt: 'leaseIssuedAt',
+  leaseExpiresAt: 'leaseExpiresAt',
+  leaseAgency: 'leaseAgency',
+  premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalLicenseScalarFieldEnum = (typeof RentalLicenseScalarFieldEnum)[keyof typeof RentalLicenseScalarFieldEnum]
+
+
+export const RentalPremiseFileScalarFieldEnum = {
+  id: 'id',
+  licenseId: 'licenseId',
+  kind: 'kind',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalPremiseFileScalarFieldEnum = (typeof RentalPremiseFileScalarFieldEnum)[keyof typeof RentalPremiseFileScalarFieldEnum]
+
+
+export const RentalRequestScalarFieldEnum = {
+  id: 'id',
+  licenseId: 'licenseId',
+  type: 'type',
+  number: 'number',
+  status: 'status',
+  formationStep: 'formationStep',
+  intakeSubmittedAt: 'intakeSubmittedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalRequestScalarFieldEnum = (typeof RentalRequestScalarFieldEnum)[keyof typeof RentalRequestScalarFieldEnum]
+
+
+export const RentalRequestDocumentScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  documentId: 'documentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalRequestDocumentScalarFieldEnum = (typeof RentalRequestDocumentScalarFieldEnum)[keyof typeof RentalRequestDocumentScalarFieldEnum]
+
+
+export const RentalRequestDocumentVersionScalarFieldEnum = {
+  id: 'id',
+  documentRowId: 'documentRowId',
+  version: 'version',
+  source: 'source',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalRequestDocumentVersionScalarFieldEnum = (typeof RentalRequestDocumentVersionScalarFieldEnum)[keyof typeof RentalRequestDocumentVersionScalarFieldEnum]
+
+
+export const RentalManagementReviewScalarFieldEnum = {
+  id: 'id',
+  licenseId: 'licenseId',
+  requestId: 'requestId',
+  roleId: 'roleId',
+  status: 'status',
+  channel: 'channel',
+  note: 'note',
+  decidedById: 'decidedById',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalManagementReviewScalarFieldEnum = (typeof RentalManagementReviewScalarFieldEnum)[keyof typeof RentalManagementReviewScalarFieldEnum]
+
+
+export const RentalManagementReviewFileScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalManagementReviewFileScalarFieldEnum = (typeof RentalManagementReviewFileScalarFieldEnum)[keyof typeof RentalManagementReviewFileScalarFieldEnum]
+
+
 export const CasePlacesOfficeScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -9780,6 +11229,8 @@ export type JobDocumentScalarFieldEnum = (typeof JobDocumentScalarFieldEnum)[key
 export const DocumentScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  description: 'description',
+  link: 'link',
   code: 'code',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -9881,6 +11332,7 @@ export const CaseFileScalarFieldEnum = {
   premiseComplexId: 'premiseComplexId',
   premiseAddress: 'premiseAddress',
   premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
   premisePlaque: 'premisePlaque',
   premisePlaqueSeries: 'premisePlaqueSeries',
   premiseFloor: 'premiseFloor',
@@ -9898,11 +11350,39 @@ export const CaseFileScalarFieldEnum = {
   leaseExpiresAt: 'leaseExpiresAt',
   leaseAgency: 'leaseAgency',
   premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CaseFileScalarFieldEnum = (typeof CaseFileScalarFieldEnum)[keyof typeof CaseFileScalarFieldEnum]
+
+
+export const CaseAssetAccountScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  bankName: 'bankName',
+  iban: 'iban',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseAssetAccountScalarFieldEnum = (typeof CaseAssetAccountScalarFieldEnum)[keyof typeof CaseAssetAccountScalarFieldEnum]
+
+
+export const CasePremiseFileScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  kind: 'kind',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CasePremiseFileScalarFieldEnum = (typeof CasePremiseFileScalarFieldEnum)[keyof typeof CasePremiseFileScalarFieldEnum]
 
 
 export const CaseStewardRevokeFileScalarFieldEnum = {
@@ -9921,6 +11401,7 @@ export type CaseStewardRevokeFileScalarFieldEnum = (typeof CaseStewardRevokeFile
 export const CaseRevocationProcessScalarFieldEnum = {
   id: 'id',
   caseFileId: 'caseFileId',
+  requestId: 'requestId',
   amount: 'amount',
   revocationDate: 'revocationDate',
   createdAt: 'createdAt',
@@ -9928,6 +11409,20 @@ export const CaseRevocationProcessScalarFieldEnum = {
 } as const
 
 export type CaseRevocationProcessScalarFieldEnum = (typeof CaseRevocationProcessScalarFieldEnum)[keyof typeof CaseRevocationProcessScalarFieldEnum]
+
+
+export const CaseRevocationProcessFileScalarFieldEnum = {
+  id: 'id',
+  processId: 'processId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseRevocationProcessFileScalarFieldEnum = (typeof CaseRevocationProcessFileScalarFieldEnum)[keyof typeof CaseRevocationProcessFileScalarFieldEnum]
 
 
 export const CaseRevocationLetterScalarFieldEnum = {
@@ -9993,6 +11488,29 @@ export const CaseRequestScalarFieldEnum = {
 export type CaseRequestScalarFieldEnum = (typeof CaseRequestScalarFieldEnum)[keyof typeof CaseRequestScalarFieldEnum]
 
 
+export const CaseRevocationRequestScalarFieldEnum = {
+  requestId: 'requestId',
+  reason: 'reason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRevocationRequestScalarFieldEnum = (typeof CaseRevocationRequestScalarFieldEnum)[keyof typeof CaseRevocationRequestScalarFieldEnum]
+
+
+export const CaseRevocationRequestFileScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseRevocationRequestFileScalarFieldEnum = (typeof CaseRevocationRequestFileScalarFieldEnum)[keyof typeof CaseRevocationRequestFileScalarFieldEnum]
+
+
 export const CaseRequestFinanceScalarFieldEnum = {
   requestId: 'requestId',
   bankAccountId: 'bankAccountId',
@@ -10049,6 +11567,7 @@ export const CaseLocationDraftScalarFieldEnum = {
   premiseComplexId: 'premiseComplexId',
   premiseAddress: 'premiseAddress',
   premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
   premisePlaque: 'premisePlaque',
   premisePlaqueSeries: 'premisePlaqueSeries',
   premiseFloor: 'premiseFloor',
@@ -10066,6 +11585,7 @@ export const CaseLocationDraftScalarFieldEnum = {
   leaseExpiresAt: 'leaseExpiresAt',
   leaseAgency: 'leaseAgency',
   premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId',
   updatedAt: 'updatedAt'
 } as const
 
@@ -10083,6 +11603,7 @@ export const CasePremiseHistoryScalarFieldEnum = {
   premiseComplexId: 'premiseComplexId',
   premiseAddress: 'premiseAddress',
   premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
   premisePlaque: 'premisePlaque',
   premisePlaqueSeries: 'premisePlaqueSeries',
   premiseFloor: 'premiseFloor',
@@ -10099,7 +11620,8 @@ export const CasePremiseHistoryScalarFieldEnum = {
   leaseIssuedAt: 'leaseIssuedAt',
   leaseExpiresAt: 'leaseExpiresAt',
   leaseAgency: 'leaseAgency',
-  premiseOwnerName: 'premiseOwnerName'
+  premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId'
 } as const
 
 export type CasePremiseHistoryScalarFieldEnum = (typeof CasePremiseHistoryScalarFieldEnum)[keyof typeof CasePremiseHistoryScalarFieldEnum]
@@ -10992,6 +12514,18 @@ export const StaffPostScalarFieldEnum = {
 export type StaffPostScalarFieldEnum = (typeof StaffPostScalarFieldEnum)[keyof typeof StaffPostScalarFieldEnum]
 
 
+export const UrbanZoneScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UrbanZoneScalarFieldEnum = (typeof UrbanZoneScalarFieldEnum)[keyof typeof UrbanZoneScalarFieldEnum]
+
+
 export const ViolationTypeScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -11440,58 +12974,16 @@ export type ListEnumDocumentGenderFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
- * Reference to a field of type 'CaseFileKind'
+ * Reference to a field of type 'RentalLicenseStatus'
  */
-export type EnumCaseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileKind'>
+export type EnumRentalLicenseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalLicenseStatus'>
     
 
 
 /**
- * Reference to a field of type 'CaseFileKind[]'
+ * Reference to a field of type 'RentalLicenseStatus[]'
  */
-export type ListEnumCaseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileKind[]'>
-    
-
-
-/**
- * Reference to a field of type 'CaseFileStatus'
- */
-export type EnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus'>
-    
-
-
-/**
- * Reference to a field of type 'CaseFileStatus[]'
- */
-export type ListEnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'CaseRevokeSource'
- */
-export type EnumCaseRevokeSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRevokeSource'>
-    
-
-
-/**
- * Reference to a field of type 'CaseRevokeSource[]'
- */
-export type ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRevokeSource[]'>
-    
-
-
-/**
- * Reference to a field of type 'PreviousOccupation'
- */
-export type EnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation'>
-    
-
-
-/**
- * Reference to a field of type 'PreviousOccupation[]'
- */
-export type ListEnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation[]'>
+export type ListEnumRentalLicenseStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalLicenseStatus[]'>
     
 
 
@@ -11552,6 +13044,118 @@ export type ListEnumPremiseOwnershipFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'CasePremiseFileKind'
+ */
+export type EnumCasePremiseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CasePremiseFileKind'>
+    
+
+
+/**
+ * Reference to a field of type 'CasePremiseFileKind[]'
+ */
+export type ListEnumCasePremiseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CasePremiseFileKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RentalRequestType'
+ */
+export type EnumRentalRequestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalRequestType'>
+    
+
+
+/**
+ * Reference to a field of type 'RentalRequestType[]'
+ */
+export type ListEnumRentalRequestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalRequestType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RentalRequestStatus'
+ */
+export type EnumRentalRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'RentalRequestStatus[]'
+ */
+export type ListEnumRentalRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RentalRequestStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DocumentSource'
+ */
+export type EnumDocumentSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentSource'>
+    
+
+
+/**
+ * Reference to a field of type 'DocumentSource[]'
+ */
+export type ListEnumDocumentSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseFileKind'
+ */
+export type EnumCaseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileKind'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseFileKind[]'
+ */
+export type ListEnumCaseFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseFileStatus'
+ */
+export type EnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseFileStatus[]'
+ */
+export type ListEnumCaseFileStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseFileStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRevokeSource'
+ */
+export type EnumCaseRevokeSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRevokeSource'>
+    
+
+
+/**
+ * Reference to a field of type 'CaseRevokeSource[]'
+ */
+export type ListEnumCaseRevokeSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseRevokeSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PreviousOccupation'
+ */
+export type EnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation'>
+    
+
+
+/**
+ * Reference to a field of type 'PreviousOccupation[]'
+ */
+export type ListEnumPreviousOccupationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreviousOccupation[]'>
+    
+
+
+/**
  * Reference to a field of type 'CaseSuspensionFileKind'
  */
 export type EnumCaseSuspensionFileKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CaseSuspensionFileKind'>
@@ -11590,20 +13194,6 @@ export type EnumAuctionApproverKindFieldRefInput<$PrismaModel> = FieldRefInputTy
  * Reference to a field of type 'AuctionApproverKind[]'
  */
 export type ListEnumAuctionApproverKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuctionApproverKind[]'>
-    
-
-
-/**
- * Reference to a field of type 'DocumentSource'
- */
-export type EnumDocumentSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentSource'>
-    
-
-
-/**
- * Reference to a field of type 'DocumentSource[]'
- */
-export type ListEnumDocumentSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DocumentSource[]'>
     
 
 
@@ -12216,6 +13806,17 @@ export type GlobalOmitConfig = {
   caseGeneralSettings?: Prisma.CaseGeneralSettingsOmit
   caseLetterhead?: Prisma.CaseLetterheadOmit
   caseActivityLicenseSettings?: Prisma.CaseActivityLicenseSettingsOmit
+  rentalLicenseSettings?: Prisma.RentalLicenseSettingsOmit
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentOmit
+  rentalDocumentRequirement?: Prisma.RentalDocumentRequirementOmit
+  rentalProcessManagementRole?: Prisma.RentalProcessManagementRoleOmit
+  rentalLicense?: Prisma.RentalLicenseOmit
+  rentalPremiseFile?: Prisma.RentalPremiseFileOmit
+  rentalRequest?: Prisma.RentalRequestOmit
+  rentalRequestDocument?: Prisma.RentalRequestDocumentOmit
+  rentalRequestDocumentVersion?: Prisma.RentalRequestDocumentVersionOmit
+  rentalManagementReview?: Prisma.RentalManagementReviewOmit
+  rentalManagementReviewFile?: Prisma.RentalManagementReviewFileOmit
   casePlacesOffice?: Prisma.CasePlacesOfficeOmit
   caseRevocationSettings?: Prisma.CaseRevocationSettingsOmit
   caseRevocationOrganization?: Prisma.CaseRevocationOrganizationOmit
@@ -12229,12 +13830,17 @@ export type GlobalOmitConfig = {
   caseManagementReview?: Prisma.CaseManagementReviewOmit
   caseManagementReviewFile?: Prisma.CaseManagementReviewFileOmit
   caseFile?: Prisma.CaseFileOmit
+  caseAssetAccount?: Prisma.CaseAssetAccountOmit
+  casePremiseFile?: Prisma.CasePremiseFileOmit
   caseStewardRevokeFile?: Prisma.CaseStewardRevokeFileOmit
   caseRevocationProcess?: Prisma.CaseRevocationProcessOmit
+  caseRevocationProcessFile?: Prisma.CaseRevocationProcessFileOmit
   caseRevocationLetter?: Prisma.CaseRevocationLetterOmit
   caseSuspension?: Prisma.CaseSuspensionOmit
   caseSuspensionFile?: Prisma.CaseSuspensionFileOmit
   caseRequest?: Prisma.CaseRequestOmit
+  caseRevocationRequest?: Prisma.CaseRevocationRequestOmit
+  caseRevocationRequestFile?: Prisma.CaseRevocationRequestFileOmit
   caseRequestFinance?: Prisma.CaseRequestFinanceOmit
   caseRequestFee?: Prisma.CaseRequestFeeOmit
   caseRequestEvent?: Prisma.CaseRequestEventOmit
@@ -12299,6 +13905,7 @@ export type GlobalOmitConfig = {
   commercialUnit?: Prisma.CommercialUnitOmit
   workUnit?: Prisma.WorkUnitOmit
   staffPost?: Prisma.StaffPostOmit
+  urbanZone?: Prisma.UrbanZoneOmit
   violationType?: Prisma.ViolationTypeOmit
   registrationPlace?: Prisma.RegistrationPlaceOmit
   violation?: Prisma.ViolationOmit

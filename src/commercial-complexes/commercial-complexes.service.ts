@@ -89,6 +89,53 @@ export class CommercialComplexesService {
     return item;
   }
 
+  async findStructure(id: string) {
+    const item = await this.prisma.commercialComplex.findUnique({
+      where: { id },
+      select: {
+        ...complexSelect,
+        floors: {
+          orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            code: true,
+            createdAt: true,
+            updatedAt: true,
+            lanes: {
+              orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+              select: {
+                id: true,
+                title: true,
+                description: true,
+                code: true,
+                createdAt: true,
+                updatedAt: true,
+                units: {
+                  orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+                  select: {
+                    id: true,
+                    plaque: true,
+                    description: true,
+                    code: true,
+                    isActive: true,
+                    createdAt: true,
+                    updatedAt: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!item) {
+      throw new NotFoundException('مجتمع تجاری یافت نشد');
+    }
+    return item;
+  }
+
   async create(dto: CreateCommercialComplexDto) {
     return this.prisma.commercialComplex.create({
       data: {

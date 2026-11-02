@@ -308,6 +308,7 @@ export type CityWhereInput = {
   users?: Prisma.UserListRelationFilter
   locatedUsers?: Prisma.UserListRelationFilter
   premiseCases?: Prisma.CaseFileListRelationFilter
+  rentalPremiseLicenses?: Prisma.RentalLicenseListRelationFilter
   locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
   premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
@@ -333,6 +334,7 @@ export type CityOrderByWithRelationInput = {
   users?: Prisma.UserOrderByRelationAggregateInput
   locatedUsers?: Prisma.UserOrderByRelationAggregateInput
   premiseCases?: Prisma.CaseFileOrderByRelationAggregateInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseOrderByRelationAggregateInput
   locationDrafts?: Prisma.CaseLocationDraftOrderByRelationAggregateInput
   premiseHistories?: Prisma.CasePremiseHistoryOrderByRelationAggregateInput
   locationHistories?: Prisma.UserLocationHistoryOrderByRelationAggregateInput
@@ -362,6 +364,7 @@ export type CityWhereUniqueInput = Prisma.AtLeast<{
   users?: Prisma.UserListRelationFilter
   locatedUsers?: Prisma.UserListRelationFilter
   premiseCases?: Prisma.CaseFileListRelationFilter
+  rentalPremiseLicenses?: Prisma.RentalLicenseListRelationFilter
   locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
   premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
   locationHistories?: Prisma.UserLocationHistoryListRelationFilter
@@ -430,6 +433,7 @@ export type CityCreateInput = {
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
@@ -454,6 +458,7 @@ export type CityUncheckedCreateInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
@@ -478,6 +483,7 @@ export type CityUpdateInput = {
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
@@ -502,6 +508,7 @@ export type CityUncheckedUpdateInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
@@ -688,6 +695,22 @@ export type CityUncheckedUpdateManyWithoutProvinceNestedInput = {
   deleteMany?: Prisma.CityScalarWhereInput | Prisma.CityScalarWhereInput[]
 }
 
+export type CityCreateNestedOneWithoutRentalPremiseLicensesInput = {
+  create?: Prisma.XOR<Prisma.CityCreateWithoutRentalPremiseLicensesInput, Prisma.CityUncheckedCreateWithoutRentalPremiseLicensesInput>
+  connectOrCreate?: Prisma.CityCreateOrConnectWithoutRentalPremiseLicensesInput
+  connect?: Prisma.CityWhereUniqueInput
+}
+
+export type CityUpdateOneWithoutRentalPremiseLicensesNestedInput = {
+  create?: Prisma.XOR<Prisma.CityCreateWithoutRentalPremiseLicensesInput, Prisma.CityUncheckedCreateWithoutRentalPremiseLicensesInput>
+  connectOrCreate?: Prisma.CityCreateOrConnectWithoutRentalPremiseLicensesInput
+  upsert?: Prisma.CityUpsertWithoutRentalPremiseLicensesInput
+  disconnect?: Prisma.CityWhereInput | boolean
+  delete?: Prisma.CityWhereInput | boolean
+  connect?: Prisma.CityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutRentalPremiseLicensesInput, Prisma.CityUpdateWithoutRentalPremiseLicensesInput>, Prisma.CityUncheckedUpdateWithoutRentalPremiseLicensesInput>
+}
+
 export type CityCreateNestedOneWithoutPremiseCasesInput = {
   create?: Prisma.XOR<Prisma.CityCreateWithoutPremiseCasesInput, Prisma.CityUncheckedCreateWithoutPremiseCasesInput>
   connectOrCreate?: Prisma.CityCreateOrConnectWithoutPremiseCasesInput
@@ -802,6 +825,7 @@ export type CityCreateWithoutProvinceInput = {
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
@@ -825,6 +849,7 @@ export type CityUncheckedCreateWithoutProvinceInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
@@ -877,6 +902,118 @@ export type CityScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"City"> | Date | string
 }
 
+export type CityCreateWithoutRentalPremiseLicensesInput = {
+  id?: string
+  code: string
+  nameFa: string
+  nameEn: string
+  neshanAddress?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: boolean
+  hasRailway?: boolean
+  hasAirport?: boolean
+  isActive?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
+  users?: Prisma.UserCreateNestedManyWithoutCityInput
+  locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
+  locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
+}
+
+export type CityUncheckedCreateWithoutRentalPremiseLicensesInput = {
+  id?: string
+  provinceId: string
+  code: string
+  nameFa: string
+  nameEn: string
+  neshanAddress?: string | null
+  latitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: boolean
+  hasRailway?: boolean
+  hasAirport?: boolean
+  isActive?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
+  locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
+  locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
+}
+
+export type CityCreateOrConnectWithoutRentalPremiseLicensesInput = {
+  where: Prisma.CityWhereUniqueInput
+  create: Prisma.XOR<Prisma.CityCreateWithoutRentalPremiseLicensesInput, Prisma.CityUncheckedCreateWithoutRentalPremiseLicensesInput>
+}
+
+export type CityUpsertWithoutRentalPremiseLicensesInput = {
+  update: Prisma.XOR<Prisma.CityUpdateWithoutRentalPremiseLicensesInput, Prisma.CityUncheckedUpdateWithoutRentalPremiseLicensesInput>
+  create: Prisma.XOR<Prisma.CityCreateWithoutRentalPremiseLicensesInput, Prisma.CityUncheckedCreateWithoutRentalPremiseLicensesInput>
+  where?: Prisma.CityWhereInput
+}
+
+export type CityUpdateToOneWithWhereWithoutRentalPremiseLicensesInput = {
+  where?: Prisma.CityWhereInput
+  data: Prisma.XOR<Prisma.CityUpdateWithoutRentalPremiseLicensesInput, Prisma.CityUncheckedUpdateWithoutRentalPremiseLicensesInput>
+}
+
+export type CityUpdateWithoutRentalPremiseLicensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  nameFa?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  neshanAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRailway?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirport?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
+  users?: Prisma.UserUpdateManyWithoutCityNestedInput
+  locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
+}
+
+export type CityUncheckedUpdateWithoutRentalPremiseLicensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  nameFa?: Prisma.StringFieldUpdateOperationsInput | string
+  nameEn?: Prisma.StringFieldUpdateOperationsInput | string
+  neshanAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  latitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  longitude?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  isProvinceCapital?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasRailway?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  hasAirport?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
+  locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
+  locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
+}
+
 export type CityCreateWithoutPremiseCasesInput = {
   id?: string
   code: string
@@ -895,6 +1032,7 @@ export type CityCreateWithoutPremiseCasesInput = {
   province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
@@ -918,6 +1056,7 @@ export type CityUncheckedCreateWithoutPremiseCasesInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
@@ -957,6 +1096,7 @@ export type CityUpdateWithoutPremiseCasesInput = {
   province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
@@ -980,6 +1120,7 @@ export type CityUncheckedUpdateWithoutPremiseCasesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
@@ -1004,6 +1145,7 @@ export type CityCreateWithoutLocationDraftsInput = {
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
 }
@@ -1027,6 +1169,7 @@ export type CityUncheckedCreateWithoutLocationDraftsInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
 }
@@ -1066,6 +1209,7 @@ export type CityUpdateWithoutLocationDraftsInput = {
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
 }
@@ -1089,6 +1233,7 @@ export type CityUncheckedUpdateWithoutLocationDraftsInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
 }
@@ -1112,6 +1257,7 @@ export type CityCreateWithoutPremiseHistoriesInput = {
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
 }
@@ -1135,6 +1281,7 @@ export type CityUncheckedCreateWithoutPremiseHistoriesInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
 }
@@ -1174,6 +1321,7 @@ export type CityUpdateWithoutPremiseHistoriesInput = {
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
 }
@@ -1197,6 +1345,7 @@ export type CityUncheckedUpdateWithoutPremiseHistoriesInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
 }
@@ -1219,6 +1368,7 @@ export type CityCreateWithoutUsersInput = {
   province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
@@ -1242,6 +1392,7 @@ export type CityUncheckedCreateWithoutUsersInput = {
   updatedAt?: Date | string
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
@@ -1270,6 +1421,7 @@ export type CityCreateWithoutLocatedUsersInput = {
   province: Prisma.ProvinceCreateNestedOneWithoutCitiesInput
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryCreateNestedManyWithoutCityInput
@@ -1293,6 +1445,7 @@ export type CityUncheckedCreateWithoutLocatedUsersInput = {
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedCreateNestedManyWithoutCityInput
@@ -1332,6 +1485,7 @@ export type CityUpdateWithoutUsersInput = {
   province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
@@ -1355,6 +1509,7 @@ export type CityUncheckedUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
@@ -1389,6 +1544,7 @@ export type CityUpdateWithoutLocatedUsersInput = {
   province?: Prisma.ProvinceUpdateOneRequiredWithoutCitiesNestedInput
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
@@ -1412,6 +1568,7 @@ export type CityUncheckedUpdateWithoutLocatedUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
@@ -1436,6 +1593,7 @@ export type CityCreateWithoutLocationHistoriesInput = {
   users?: Prisma.UserCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutPremiseCityInput
 }
@@ -1459,6 +1617,7 @@ export type CityUncheckedCreateWithoutLocationHistoriesInput = {
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCityInput
   locatedUsers?: Prisma.UserUncheckedCreateNestedManyWithoutLocationCityInput
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutPremiseCityInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutPremiseCityInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutPremiseCityInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutPremiseCityInput
 }
@@ -1498,6 +1657,7 @@ export type CityUpdateWithoutLocationHistoriesInput = {
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
 }
@@ -1521,6 +1681,7 @@ export type CityUncheckedUpdateWithoutLocationHistoriesInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
 }
@@ -1560,6 +1721,7 @@ export type CityUpdateWithoutProvinceInput = {
   users?: Prisma.UserUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUpdateManyWithoutCityNestedInput
@@ -1583,6 +1745,7 @@ export type CityUncheckedUpdateWithoutProvinceInput = {
   users?: Prisma.UserUncheckedUpdateManyWithoutCityNestedInput
   locatedUsers?: Prisma.UserUncheckedUpdateManyWithoutLocationCityNestedInput
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutPremiseCityNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutPremiseCityNestedInput
   locationHistories?: Prisma.UserLocationHistoryUncheckedUpdateManyWithoutCityNestedInput
@@ -1614,6 +1777,7 @@ export type CityCountOutputType = {
   users: number
   locatedUsers: number
   premiseCases: number
+  rentalPremiseLicenses: number
   locationDrafts: number
   premiseHistories: number
   locationHistories: number
@@ -1623,6 +1787,7 @@ export type CityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   users?: boolean | CityCountOutputTypeCountUsersArgs
   locatedUsers?: boolean | CityCountOutputTypeCountLocatedUsersArgs
   premiseCases?: boolean | CityCountOutputTypeCountPremiseCasesArgs
+  rentalPremiseLicenses?: boolean | CityCountOutputTypeCountRentalPremiseLicensesArgs
   locationDrafts?: boolean | CityCountOutputTypeCountLocationDraftsArgs
   premiseHistories?: boolean | CityCountOutputTypeCountPremiseHistoriesArgs
   locationHistories?: boolean | CityCountOutputTypeCountLocationHistoriesArgs
@@ -1657,6 +1822,13 @@ export type CityCountOutputTypeCountLocatedUsersArgs<ExtArgs extends runtime.Typ
  */
 export type CityCountOutputTypeCountPremiseCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CaseFileWhereInput
+}
+
+/**
+ * CityCountOutputType without action
+ */
+export type CityCountOutputTypeCountRentalPremiseLicensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalLicenseWhereInput
 }
 
 /**
@@ -1701,6 +1873,7 @@ export type CitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   users?: boolean | Prisma.City$usersArgs<ExtArgs>
   locatedUsers?: boolean | Prisma.City$locatedUsersArgs<ExtArgs>
   premiseCases?: boolean | Prisma.City$premiseCasesArgs<ExtArgs>
+  rentalPremiseLicenses?: boolean | Prisma.City$rentalPremiseLicensesArgs<ExtArgs>
   locationDrafts?: boolean | Prisma.City$locationDraftsArgs<ExtArgs>
   premiseHistories?: boolean | Prisma.City$premiseHistoriesArgs<ExtArgs>
   locationHistories?: boolean | Prisma.City$locationHistoriesArgs<ExtArgs>
@@ -1769,6 +1942,7 @@ export type CityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   users?: boolean | Prisma.City$usersArgs<ExtArgs>
   locatedUsers?: boolean | Prisma.City$locatedUsersArgs<ExtArgs>
   premiseCases?: boolean | Prisma.City$premiseCasesArgs<ExtArgs>
+  rentalPremiseLicenses?: boolean | Prisma.City$rentalPremiseLicensesArgs<ExtArgs>
   locationDrafts?: boolean | Prisma.City$locationDraftsArgs<ExtArgs>
   premiseHistories?: boolean | Prisma.City$premiseHistoriesArgs<ExtArgs>
   locationHistories?: boolean | Prisma.City$locationHistoriesArgs<ExtArgs>
@@ -1788,6 +1962,7 @@ export type $CityPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     users: Prisma.$UserPayload<ExtArgs>[]
     locatedUsers: Prisma.$UserPayload<ExtArgs>[]
     premiseCases: Prisma.$CaseFilePayload<ExtArgs>[]
+    rentalPremiseLicenses: Prisma.$RentalLicensePayload<ExtArgs>[]
     locationDrafts: Prisma.$CaseLocationDraftPayload<ExtArgs>[]
     premiseHistories: Prisma.$CasePremiseHistoryPayload<ExtArgs>[]
     locationHistories: Prisma.$UserLocationHistoryPayload<ExtArgs>[]
@@ -2206,6 +2381,7 @@ export interface Prisma__CityClient<T, Null = never, ExtArgs extends runtime.Typ
   users<T extends Prisma.City$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   locatedUsers<T extends Prisma.City$locatedUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$locatedUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   premiseCases<T extends Prisma.City$premiseCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$premiseCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rentalPremiseLicenses<T extends Prisma.City$rentalPremiseLicensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$rentalPremiseLicensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalLicensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   locationDrafts<T extends Prisma.City$locationDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$locationDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLocationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   premiseHistories<T extends Prisma.City$premiseHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$premiseHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   locationHistories<T extends Prisma.City$locationHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.City$locationHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLocationHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2723,6 +2899,30 @@ export type City$premiseCasesArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
+}
+
+/**
+ * City.rentalPremiseLicenses
+ */
+export type City$rentalPremiseLicensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalLicense
+   */
+  select?: Prisma.RentalLicenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalLicense
+   */
+  omit?: Prisma.RentalLicenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalLicenseInclude<ExtArgs> | null
+  where?: Prisma.RentalLicenseWhereInput
+  orderBy?: Prisma.RentalLicenseOrderByWithRelationInput | Prisma.RentalLicenseOrderByWithRelationInput[]
+  cursor?: Prisma.RentalLicenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalLicenseScalarFieldEnum | Prisma.RentalLicenseScalarFieldEnum[]
 }
 
 /**

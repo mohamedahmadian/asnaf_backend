@@ -24,6 +24,7 @@ const REQUEST_TYPES = [
   CaseRequestType.LOCATION_CHANGE,
   CaseRequestType.STEWARDSHIP,
   CaseRequestType.AUCTION,
+  CaseRequestType.REVOCATION,
 ] as const;
 
 type BucketKey = 'd1' | 'd4' | 'd8' | 'd15';

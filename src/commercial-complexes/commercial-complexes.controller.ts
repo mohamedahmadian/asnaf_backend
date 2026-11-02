@@ -22,6 +22,11 @@ export class CommercialComplexesController {
     return this.complexes.findAll(query);
   }
 
+  @Get(':id/structure')
+  findStructure(@Param('id') id: string) {
+    return this.complexes.findStructure(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.complexes.findOne(id);

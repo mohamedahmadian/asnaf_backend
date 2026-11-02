@@ -27,6 +27,8 @@ export type AggregateDocument = {
 export type DocumentMinAggregateOutputType = {
   id: string | null
   title: string | null
+  description: string | null
+  link: string | null
   code: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -35,6 +37,8 @@ export type DocumentMinAggregateOutputType = {
 export type DocumentMaxAggregateOutputType = {
   id: string | null
   title: string | null
+  description: string | null
+  link: string | null
   code: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,6 +47,8 @@ export type DocumentMaxAggregateOutputType = {
 export type DocumentCountAggregateOutputType = {
   id: number
   title: number
+  description: number
+  link: number
   code: number
   createdAt: number
   updatedAt: number
@@ -53,6 +59,8 @@ export type DocumentCountAggregateOutputType = {
 export type DocumentMinAggregateInputType = {
   id?: true
   title?: true
+  description?: true
+  link?: true
   code?: true
   createdAt?: true
   updatedAt?: true
@@ -61,6 +69,8 @@ export type DocumentMinAggregateInputType = {
 export type DocumentMaxAggregateInputType = {
   id?: true
   title?: true
+  description?: true
+  link?: true
   code?: true
   createdAt?: true
   updatedAt?: true
@@ -69,6 +79,8 @@ export type DocumentMaxAggregateInputType = {
 export type DocumentCountAggregateInputType = {
   id?: true
   title?: true
+  description?: true
+  link?: true
   code?: true
   createdAt?: true
   updatedAt?: true
@@ -150,6 +162,8 @@ export type DocumentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type DocumentGroupByOutputType = {
   id: string
   title: string
+  description: string | null
+  link: string | null
   code: string | null
   createdAt: Date
   updatedAt: Date
@@ -179,6 +193,8 @@ export type DocumentWhereInput = {
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   id?: Prisma.StringFilter<"Document"> | string
   title?: Prisma.StringFilter<"Document"> | string
+  description?: Prisma.StringNullableFilter<"Document"> | string | null
+  link?: Prisma.StringNullableFilter<"Document"> | string | null
   code?: Prisma.StringNullableFilter<"Document"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
@@ -187,11 +203,16 @@ export type DocumentWhereInput = {
   personDocuments?: Prisma.PersonDocumentListRelationFilter
   caseActivityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
   caseIdentityDocument?: Prisma.XOR<Prisma.CaseIdentityDocumentNullableScalarRelationFilter, Prisma.CaseIdentityDocumentWhereInput> | null
+  rentalIdentityDocument?: Prisma.XOR<Prisma.RentalIdentityDocumentNullableScalarRelationFilter, Prisma.RentalIdentityDocumentWhereInput> | null
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementListRelationFilter
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentListRelationFilter
 }
 
 export type DocumentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  link?: Prisma.SortOrderInput | Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -200,6 +221,9 @@ export type DocumentOrderByWithRelationInput = {
   personDocuments?: Prisma.PersonDocumentOrderByRelationAggregateInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentOrderByRelationAggregateInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentOrderByWithRelationInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentOrderByWithRelationInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementOrderByRelationAggregateInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentOrderByRelationAggregateInput
 }
 
 export type DocumentWhereUniqueInput = Prisma.AtLeast<{
@@ -209,6 +233,8 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
   OR?: Prisma.DocumentWhereInput[]
   NOT?: Prisma.DocumentWhereInput | Prisma.DocumentWhereInput[]
+  description?: Prisma.StringNullableFilter<"Document"> | string | null
+  link?: Prisma.StringNullableFilter<"Document"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Document"> | Date | string
   jobs?: Prisma.JobDocumentListRelationFilter
@@ -216,11 +242,16 @@ export type DocumentWhereUniqueInput = Prisma.AtLeast<{
   personDocuments?: Prisma.PersonDocumentListRelationFilter
   caseActivityDocuments?: Prisma.CaseActivityDocumentListRelationFilter
   caseIdentityDocument?: Prisma.XOR<Prisma.CaseIdentityDocumentNullableScalarRelationFilter, Prisma.CaseIdentityDocumentWhereInput> | null
+  rentalIdentityDocument?: Prisma.XOR<Prisma.RentalIdentityDocumentNullableScalarRelationFilter, Prisma.RentalIdentityDocumentWhereInput> | null
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementListRelationFilter
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentListRelationFilter
 }, "id" | "title" | "code">
 
 export type DocumentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
+  link?: Prisma.SortOrderInput | Prisma.SortOrder
   code?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -235,6 +266,8 @@ export type DocumentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DocumentScalarWhereWithAggregatesInput | Prisma.DocumentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Document"> | string
   title?: Prisma.StringWithAggregatesFilter<"Document"> | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
+  link?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   code?: Prisma.StringNullableWithAggregatesFilter<"Document"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Document"> | Date | string
@@ -243,6 +276,8 @@ export type DocumentScalarWhereWithAggregatesInput = {
 export type DocumentCreateInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -251,11 +286,16 @@ export type DocumentCreateInput = {
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -264,11 +304,16 @@ export type DocumentUncheckedCreateInput = {
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -277,11 +322,16 @@ export type DocumentUpdateInput = {
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -290,11 +340,16 @@ export type DocumentUncheckedUpdateInput = {
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateManyInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -303,6 +358,8 @@ export type DocumentCreateManyInput = {
 export type DocumentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -311,6 +368,8 @@ export type DocumentUpdateManyMutationInput = {
 export type DocumentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -324,6 +383,8 @@ export type DocumentScalarRelationFilter = {
 export type DocumentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  link?: Prisma.SortOrder
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -332,6 +393,8 @@ export type DocumentCountOrderByAggregateInput = {
 export type DocumentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  link?: Prisma.SortOrder
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -340,9 +403,53 @@ export type DocumentMaxOrderByAggregateInput = {
 export type DocumentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  description?: Prisma.SortOrder
+  link?: Prisma.SortOrder
   code?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type DocumentCreateNestedOneWithoutRentalIdentityDocumentInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRentalIdentityDocumentInput, Prisma.DocumentUncheckedCreateWithoutRentalIdentityDocumentInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRentalIdentityDocumentInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutRentalIdentityDocumentNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRentalIdentityDocumentInput, Prisma.DocumentUncheckedCreateWithoutRentalIdentityDocumentInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRentalIdentityDocumentInput
+  upsert?: Prisma.DocumentUpsertWithoutRentalIdentityDocumentInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutRentalIdentityDocumentInput, Prisma.DocumentUpdateWithoutRentalIdentityDocumentInput>, Prisma.DocumentUncheckedUpdateWithoutRentalIdentityDocumentInput>
+}
+
+export type DocumentCreateNestedOneWithoutRentalDocumentRequirementsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRentalDocumentRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRentalDocumentRequirementsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRentalDocumentRequirementsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutRentalDocumentRequirementsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRentalDocumentRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRentalDocumentRequirementsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRentalDocumentRequirementsInput
+  upsert?: Prisma.DocumentUpsertWithoutRentalDocumentRequirementsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutRentalDocumentRequirementsInput, Prisma.DocumentUpdateWithoutRentalDocumentRequirementsInput>, Prisma.DocumentUncheckedUpdateWithoutRentalDocumentRequirementsInput>
+}
+
+export type DocumentCreateNestedOneWithoutRentalRequestDocumentsInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRentalRequestDocumentsInput, Prisma.DocumentUncheckedCreateWithoutRentalRequestDocumentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRentalRequestDocumentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+}
+
+export type DocumentUpdateOneRequiredWithoutRentalRequestDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCreateWithoutRentalRequestDocumentsInput, Prisma.DocumentUncheckedCreateWithoutRentalRequestDocumentsInput>
+  connectOrCreate?: Prisma.DocumentCreateOrConnectWithoutRentalRequestDocumentsInput
+  upsert?: Prisma.DocumentUpsertWithoutRentalRequestDocumentsInput
+  connect?: Prisma.DocumentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutRentalRequestDocumentsInput, Prisma.DocumentUpdateWithoutRentalRequestDocumentsInput>, Prisma.DocumentUncheckedUpdateWithoutRentalRequestDocumentsInput>
 }
 
 export type DocumentCreateNestedOneWithoutJobsInput = {
@@ -415,9 +522,263 @@ export type DocumentUpdateOneRequiredWithoutCaseActivityDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentUpdateToOneWithWhereWithoutCaseActivityDocumentsInput, Prisma.DocumentUpdateWithoutCaseActivityDocumentsInput>, Prisma.DocumentUncheckedUpdateWithoutCaseActivityDocumentsInput>
 }
 
+export type DocumentCreateWithoutRentalIdentityDocumentInput = {
+  id?: string
+  title: string
+  description?: string | null
+  link?: string | null
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutRentalIdentityDocumentInput = {
+  id?: string
+  title: string
+  description?: string | null
+  link?: string | null
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutRentalIdentityDocumentInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRentalIdentityDocumentInput, Prisma.DocumentUncheckedCreateWithoutRentalIdentityDocumentInput>
+}
+
+export type DocumentUpsertWithoutRentalIdentityDocumentInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutRentalIdentityDocumentInput, Prisma.DocumentUncheckedUpdateWithoutRentalIdentityDocumentInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRentalIdentityDocumentInput, Prisma.DocumentUncheckedCreateWithoutRentalIdentityDocumentInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutRentalIdentityDocumentInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutRentalIdentityDocumentInput, Prisma.DocumentUncheckedUpdateWithoutRentalIdentityDocumentInput>
+}
+
+export type DocumentUpdateWithoutRentalIdentityDocumentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutRentalIdentityDocumentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentCreateWithoutRentalDocumentRequirementsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  link?: string | null
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutRentalDocumentRequirementsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  link?: string | null
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutRentalDocumentRequirementsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRentalDocumentRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRentalDocumentRequirementsInput>
+}
+
+export type DocumentUpsertWithoutRentalDocumentRequirementsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutRentalDocumentRequirementsInput, Prisma.DocumentUncheckedUpdateWithoutRentalDocumentRequirementsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRentalDocumentRequirementsInput, Prisma.DocumentUncheckedCreateWithoutRentalDocumentRequirementsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutRentalDocumentRequirementsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutRentalDocumentRequirementsInput, Prisma.DocumentUncheckedUpdateWithoutRentalDocumentRequirementsInput>
+}
+
+export type DocumentUpdateWithoutRentalDocumentRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutRentalDocumentRequirementsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentCreateWithoutRentalRequestDocumentsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  link?: string | null
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentUncheckedCreateWithoutRentalRequestDocumentsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  link?: string | null
+  code?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  jobs?: Prisma.JobDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+}
+
+export type DocumentCreateOrConnectWithoutRentalRequestDocumentsInput = {
+  where: Prisma.DocumentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRentalRequestDocumentsInput, Prisma.DocumentUncheckedCreateWithoutRentalRequestDocumentsInput>
+}
+
+export type DocumentUpsertWithoutRentalRequestDocumentsInput = {
+  update: Prisma.XOR<Prisma.DocumentUpdateWithoutRentalRequestDocumentsInput, Prisma.DocumentUncheckedUpdateWithoutRentalRequestDocumentsInput>
+  create: Prisma.XOR<Prisma.DocumentCreateWithoutRentalRequestDocumentsInput, Prisma.DocumentUncheckedCreateWithoutRentalRequestDocumentsInput>
+  where?: Prisma.DocumentWhereInput
+}
+
+export type DocumentUpdateToOneWithWhereWithoutRentalRequestDocumentsInput = {
+  where?: Prisma.DocumentWhereInput
+  data: Prisma.XOR<Prisma.DocumentUpdateWithoutRentalRequestDocumentsInput, Prisma.DocumentUncheckedUpdateWithoutRentalRequestDocumentsInput>
+}
+
+export type DocumentUpdateWithoutRentalRequestDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+}
+
+export type DocumentUncheckedUpdateWithoutRentalRequestDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  jobs?: Prisma.JobDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+}
+
 export type DocumentCreateWithoutJobsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -425,11 +786,16 @@ export type DocumentCreateWithoutJobsInput = {
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutJobsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -437,6 +803,9 @@ export type DocumentUncheckedCreateWithoutJobsInput = {
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutJobsInput = {
@@ -458,6 +827,8 @@ export type DocumentUpdateToOneWithWhereWithoutJobsInput = {
 export type DocumentUpdateWithoutJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -465,11 +836,16 @@ export type DocumentUpdateWithoutJobsInput = {
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutJobsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -477,11 +853,16 @@ export type DocumentUncheckedUpdateWithoutJobsInput = {
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateWithoutCaseIdentityDocumentInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -489,11 +870,16 @@ export type DocumentCreateWithoutCaseIdentityDocumentInput = {
   requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutCaseIdentityDocumentInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -501,6 +887,9 @@ export type DocumentUncheckedCreateWithoutCaseIdentityDocumentInput = {
   requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutCaseIdentityDocumentInput = {
@@ -522,6 +911,8 @@ export type DocumentUpdateToOneWithWhereWithoutCaseIdentityDocumentInput = {
 export type DocumentUpdateWithoutCaseIdentityDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -529,11 +920,16 @@ export type DocumentUpdateWithoutCaseIdentityDocumentInput = {
   requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutCaseIdentityDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -541,11 +937,16 @@ export type DocumentUncheckedUpdateWithoutCaseIdentityDocumentInput = {
   requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateWithoutRequirementsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -553,11 +954,16 @@ export type DocumentCreateWithoutRequirementsInput = {
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutRequirementsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -565,6 +971,9 @@ export type DocumentUncheckedCreateWithoutRequirementsInput = {
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutRequirementsInput = {
@@ -586,6 +995,8 @@ export type DocumentUpdateToOneWithWhereWithoutRequirementsInput = {
 export type DocumentUpdateWithoutRequirementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -593,11 +1004,16 @@ export type DocumentUpdateWithoutRequirementsInput = {
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutRequirementsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -605,11 +1021,16 @@ export type DocumentUncheckedUpdateWithoutRequirementsInput = {
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateWithoutPersonDocumentsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -617,11 +1038,16 @@ export type DocumentCreateWithoutPersonDocumentsInput = {
   requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutPersonDocumentsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -629,6 +1055,9 @@ export type DocumentUncheckedCreateWithoutPersonDocumentsInput = {
   requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutPersonDocumentsInput = {
@@ -650,6 +1079,8 @@ export type DocumentUpdateToOneWithWhereWithoutPersonDocumentsInput = {
 export type DocumentUpdateWithoutPersonDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -657,11 +1088,16 @@ export type DocumentUpdateWithoutPersonDocumentsInput = {
   requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutPersonDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -669,11 +1105,16 @@ export type DocumentUncheckedUpdateWithoutPersonDocumentsInput = {
   requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   caseActivityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentCreateWithoutCaseActivityDocumentsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -681,11 +1122,16 @@ export type DocumentCreateWithoutCaseActivityDocumentsInput = {
   requirements?: Prisma.DocumentRequirementCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentUncheckedCreateWithoutCaseActivityDocumentsInput = {
   id?: string
   title: string
+  description?: string | null
+  link?: string | null
   code?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -693,6 +1139,9 @@ export type DocumentUncheckedCreateWithoutCaseActivityDocumentsInput = {
   requirements?: Prisma.DocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
   personDocuments?: Prisma.PersonDocumentUncheckedCreateNestedManyWithoutDocumentInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedCreateNestedOneWithoutDocumentInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedCreateNestedManyWithoutDocumentInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type DocumentCreateOrConnectWithoutCaseActivityDocumentsInput = {
@@ -714,6 +1163,8 @@ export type DocumentUpdateToOneWithWhereWithoutCaseActivityDocumentsInput = {
 export type DocumentUpdateWithoutCaseActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -721,11 +1172,16 @@ export type DocumentUpdateWithoutCaseActivityDocumentsInput = {
   requirements?: Prisma.DocumentRequirementUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUpdateManyWithoutDocumentNestedInput
 }
 
 export type DocumentUncheckedUpdateWithoutCaseActivityDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -733,6 +1189,9 @@ export type DocumentUncheckedUpdateWithoutCaseActivityDocumentsInput = {
   requirements?: Prisma.DocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
   personDocuments?: Prisma.PersonDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   caseIdentityDocument?: Prisma.CaseIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalIdentityDocument?: Prisma.RentalIdentityDocumentUncheckedUpdateOneWithoutDocumentNestedInput
+  rentalDocumentRequirements?: Prisma.RentalDocumentRequirementUncheckedUpdateManyWithoutDocumentNestedInput
+  rentalRequestDocuments?: Prisma.RentalRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 
@@ -745,6 +1204,8 @@ export type DocumentCountOutputType = {
   requirements: number
   personDocuments: number
   caseActivityDocuments: number
+  rentalDocumentRequirements: number
+  rentalRequestDocuments: number
 }
 
 export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -752,6 +1213,8 @@ export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   requirements?: boolean | DocumentCountOutputTypeCountRequirementsArgs
   personDocuments?: boolean | DocumentCountOutputTypeCountPersonDocumentsArgs
   caseActivityDocuments?: boolean | DocumentCountOutputTypeCountCaseActivityDocumentsArgs
+  rentalDocumentRequirements?: boolean | DocumentCountOutputTypeCountRentalDocumentRequirementsArgs
+  rentalRequestDocuments?: boolean | DocumentCountOutputTypeCountRentalRequestDocumentsArgs
 }
 
 /**
@@ -792,10 +1255,26 @@ export type DocumentCountOutputTypeCountCaseActivityDocumentsArgs<ExtArgs extend
   where?: Prisma.CaseActivityDocumentWhereInput
 }
 
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountRentalDocumentRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalDocumentRequirementWhereInput
+}
+
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountRentalRequestDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalRequestDocumentWhereInput
+}
+
 
 export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  description?: boolean
+  link?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -804,12 +1283,17 @@ export type DocumentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   personDocuments?: boolean | Prisma.Document$personDocumentsArgs<ExtArgs>
   caseActivityDocuments?: boolean | Prisma.Document$caseActivityDocumentsArgs<ExtArgs>
   caseIdentityDocument?: boolean | Prisma.Document$caseIdentityDocumentArgs<ExtArgs>
+  rentalIdentityDocument?: boolean | Prisma.Document$rentalIdentityDocumentArgs<ExtArgs>
+  rentalDocumentRequirements?: boolean | Prisma.Document$rentalDocumentRequirementsArgs<ExtArgs>
+  rentalRequestDocuments?: boolean | Prisma.Document$rentalRequestDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["document"]>
 
 export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  description?: boolean
+  link?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -818,6 +1302,8 @@ export type DocumentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  description?: boolean
+  link?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -826,18 +1312,23 @@ export type DocumentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type DocumentSelectScalar = {
   id?: boolean
   title?: boolean
+  description?: boolean
+  link?: boolean
   code?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "code" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
+export type DocumentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "link" | "code" | "createdAt" | "updatedAt", ExtArgs["result"]["document"]>
 export type DocumentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jobs?: boolean | Prisma.Document$jobsArgs<ExtArgs>
   requirements?: boolean | Prisma.Document$requirementsArgs<ExtArgs>
   personDocuments?: boolean | Prisma.Document$personDocumentsArgs<ExtArgs>
   caseActivityDocuments?: boolean | Prisma.Document$caseActivityDocumentsArgs<ExtArgs>
   caseIdentityDocument?: boolean | Prisma.Document$caseIdentityDocumentArgs<ExtArgs>
+  rentalIdentityDocument?: boolean | Prisma.Document$rentalIdentityDocumentArgs<ExtArgs>
+  rentalDocumentRequirements?: boolean | Prisma.Document$rentalDocumentRequirementsArgs<ExtArgs>
+  rentalRequestDocuments?: boolean | Prisma.Document$rentalRequestDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DocumentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -851,10 +1342,15 @@ export type $DocumentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     personDocuments: Prisma.$PersonDocumentPayload<ExtArgs>[]
     caseActivityDocuments: Prisma.$CaseActivityDocumentPayload<ExtArgs>[]
     caseIdentityDocument: Prisma.$CaseIdentityDocumentPayload<ExtArgs> | null
+    rentalIdentityDocument: Prisma.$RentalIdentityDocumentPayload<ExtArgs> | null
+    rentalDocumentRequirements: Prisma.$RentalDocumentRequirementPayload<ExtArgs>[]
+    rentalRequestDocuments: Prisma.$RentalRequestDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
+    description: string | null
+    link: string | null
     /**
      * کد پایدار مدرک سیستمی؛ اگر پر باشد حذف و تغییر کد ممنوع است
      */
@@ -1260,6 +1756,9 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
   personDocuments<T extends Prisma.Document$personDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$personDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PersonDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseActivityDocuments<T extends Prisma.Document$caseActivityDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$caseActivityDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseActivityDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   caseIdentityDocument<T extends Prisma.Document$caseIdentityDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$caseIdentityDocumentArgs<ExtArgs>>): Prisma.Prisma__CaseIdentityDocumentClient<runtime.Types.Result.GetResult<Prisma.$CaseIdentityDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  rentalIdentityDocument<T extends Prisma.Document$rentalIdentityDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$rentalIdentityDocumentArgs<ExtArgs>>): Prisma.Prisma__RentalIdentityDocumentClient<runtime.Types.Result.GetResult<Prisma.$RentalIdentityDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  rentalDocumentRequirements<T extends Prisma.Document$rentalDocumentRequirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$rentalDocumentRequirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalDocumentRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rentalRequestDocuments<T extends Prisma.Document$rentalRequestDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Document$rentalRequestDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalRequestDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1291,6 +1790,8 @@ export interface Prisma__DocumentClient<T, Null = never, ExtArgs extends runtime
 export interface DocumentFieldRefs {
   readonly id: Prisma.FieldRef<"Document", 'String'>
   readonly title: Prisma.FieldRef<"Document", 'String'>
+  readonly description: Prisma.FieldRef<"Document", 'String'>
+  readonly link: Prisma.FieldRef<"Document", 'String'>
   readonly code: Prisma.FieldRef<"Document", 'String'>
   readonly createdAt: Prisma.FieldRef<"Document", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Document", 'DateTime'>
@@ -1799,6 +2300,73 @@ export type Document$caseIdentityDocumentArgs<ExtArgs extends runtime.Types.Exte
    */
   include?: Prisma.CaseIdentityDocumentInclude<ExtArgs> | null
   where?: Prisma.CaseIdentityDocumentWhereInput
+}
+
+/**
+ * Document.rentalIdentityDocument
+ */
+export type Document$rentalIdentityDocumentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalIdentityDocument
+   */
+  select?: Prisma.RentalIdentityDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalIdentityDocument
+   */
+  omit?: Prisma.RentalIdentityDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalIdentityDocumentInclude<ExtArgs> | null
+  where?: Prisma.RentalIdentityDocumentWhereInput
+}
+
+/**
+ * Document.rentalDocumentRequirements
+ */
+export type Document$rentalDocumentRequirementsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalDocumentRequirement
+   */
+  select?: Prisma.RentalDocumentRequirementSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalDocumentRequirement
+   */
+  omit?: Prisma.RentalDocumentRequirementOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalDocumentRequirementInclude<ExtArgs> | null
+  where?: Prisma.RentalDocumentRequirementWhereInput
+  orderBy?: Prisma.RentalDocumentRequirementOrderByWithRelationInput | Prisma.RentalDocumentRequirementOrderByWithRelationInput[]
+  cursor?: Prisma.RentalDocumentRequirementWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalDocumentRequirementScalarFieldEnum | Prisma.RentalDocumentRequirementScalarFieldEnum[]
+}
+
+/**
+ * Document.rentalRequestDocuments
+ */
+export type Document$rentalRequestDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalRequestDocument
+   */
+  select?: Prisma.RentalRequestDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalRequestDocument
+   */
+  omit?: Prisma.RentalRequestDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalRequestDocumentInclude<ExtArgs> | null
+  where?: Prisma.RentalRequestDocumentWhereInput
+  orderBy?: Prisma.RentalRequestDocumentOrderByWithRelationInput | Prisma.RentalRequestDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.RentalRequestDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalRequestDocumentScalarFieldEnum | Prisma.RentalRequestDocumentScalarFieldEnum[]
 }
 
 /**

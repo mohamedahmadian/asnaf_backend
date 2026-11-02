@@ -503,10 +503,6 @@ export type PersonDocumentVersionUncheckedUpdateManyWithoutPersonDocumentNestedI
   deleteMany?: Prisma.PersonDocumentVersionScalarWhereInput | Prisma.PersonDocumentVersionScalarWhereInput[]
 }
 
-export type EnumDocumentSourceFieldUpdateOperationsInput = {
-  set?: $Enums.DocumentSource
-}
-
 export type PersonDocumentVersionCreateWithoutPersonDocumentInput = {
   id?: string
   version: number

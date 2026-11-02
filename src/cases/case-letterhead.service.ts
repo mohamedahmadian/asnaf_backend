@@ -32,6 +32,7 @@ const IMAGE_USE = {
   letterheadLogos: true,
   letterheadSignatures: true,
   activityLicenseSignatures: true,
+  rentalLicenseSignatures: true,
 } satisfies Prisma.StoredImageCountOutputTypeSelect;
 
 type LetterTarget = 'inquiry' | 'places' | 'revocation';

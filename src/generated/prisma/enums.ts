@@ -301,12 +301,41 @@ export const CaseInquiryChannel = {
 export type CaseInquiryChannel = (typeof CaseInquiryChannel)[keyof typeof CaseInquiryChannel]
 
 
+export const RentalRequestType = {
+  ISSUANCE: 'ISSUANCE',
+  RENEWAL: 'RENEWAL'
+} as const
+
+export type RentalRequestType = (typeof RentalRequestType)[keyof typeof RentalRequestType]
+
+
+export const RentalRequestStatus = {
+  OPEN: 'OPEN',
+  ISSUED: 'ISSUED',
+  COMPLETED: 'COMPLETED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type RentalRequestStatus = (typeof RentalRequestStatus)[keyof typeof RentalRequestStatus]
+
+
+export const RentalLicenseStatus = {
+  DRAFT: 'DRAFT',
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED'
+} as const
+
+export type RentalLicenseStatus = (typeof RentalLicenseStatus)[keyof typeof RentalLicenseStatus]
+
+
 export const CaseRequestType = {
   ISSUANCE: 'ISSUANCE',
   RENEWAL: 'RENEWAL',
   LOCATION_CHANGE: 'LOCATION_CHANGE',
   STEWARDSHIP: 'STEWARDSHIP',
-  AUCTION: 'AUCTION'
+  AUCTION: 'AUCTION',
+  REVOCATION: 'REVOCATION'
 } as const
 
 export type CaseRequestType = (typeof CaseRequestType)[keyof typeof CaseRequestType]
@@ -348,6 +377,14 @@ export const CaseRevokeSource = {
 } as const
 
 export type CaseRevokeSource = (typeof CaseRevokeSource)[keyof typeof CaseRevokeSource]
+
+
+export const CasePremiseFileKind = {
+  DEED: 'DEED',
+  AUTHORIZATION_LETTER: 'AUTHORIZATION_LETTER'
+} as const
+
+export type CasePremiseFileKind = (typeof CasePremiseFileKind)[keyof typeof CasePremiseFileKind]
 
 
 export const CaseSuspensionFileKind = {

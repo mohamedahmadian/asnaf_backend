@@ -345,10 +345,6 @@ export type JobDocumentUncheckedUpdateManyWithoutJobNestedInput = {
   deleteMany?: Prisma.JobDocumentScalarWhereInput | Prisma.JobDocumentScalarWhereInput[]
 }
 
-export type EnumDocumentGenderFieldUpdateOperationsInput = {
-  set?: $Enums.DocumentGender
-}
-
 export type JobDocumentCreateNestedManyWithoutDocumentInput = {
   create?: Prisma.XOR<Prisma.JobDocumentCreateWithoutDocumentInput, Prisma.JobDocumentUncheckedCreateWithoutDocumentInput> | Prisma.JobDocumentCreateWithoutDocumentInput[] | Prisma.JobDocumentUncheckedCreateWithoutDocumentInput[]
   connectOrCreate?: Prisma.JobDocumentCreateOrConnectWithoutDocumentInput | Prisma.JobDocumentCreateOrConnectWithoutDocumentInput[]

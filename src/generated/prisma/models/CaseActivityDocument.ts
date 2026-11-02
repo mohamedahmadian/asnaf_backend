@@ -211,7 +211,6 @@ export type CaseActivityDocumentOrderByWithRelationInput = {
 
 export type CaseActivityDocumentWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  caseRequestId_documentId?: Prisma.CaseActivityDocumentCaseRequestIdDocumentIdCompoundUniqueInput
   AND?: Prisma.CaseActivityDocumentWhereInput | Prisma.CaseActivityDocumentWhereInput[]
   OR?: Prisma.CaseActivityDocumentWhereInput[]
   NOT?: Prisma.CaseActivityDocumentWhereInput | Prisma.CaseActivityDocumentWhereInput[]
@@ -224,7 +223,7 @@ export type CaseActivityDocumentWhereUniqueInput = Prisma.AtLeast<{
   caseRequest?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.DocumentWhereInput>
   versions?: Prisma.CaseActivityDocumentVersionListRelationFilter
-}, "id" | "caseRequestId_documentId">
+}, "id">
 
 export type CaseActivityDocumentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -322,11 +321,6 @@ export type CaseActivityDocumentListRelationFilter = {
 
 export type CaseActivityDocumentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type CaseActivityDocumentCaseRequestIdDocumentIdCompoundUniqueInput = {
-  caseRequestId: string
-  documentId: string
 }
 
 export type CaseActivityDocumentCountOrderByAggregateInput = {

@@ -41,6 +41,7 @@ export type CaseLocationDraftMinAggregateOutputType = {
   premiseComplexId: string | null
   premiseAddress: string | null
   premiseAddressEn: string | null
+  urbanZoneId: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -58,6 +59,7 @@ export type CaseLocationDraftMinAggregateOutputType = {
   leaseExpiresAt: Date | null
   leaseAgency: string | null
   premiseOwnerName: string | null
+  premiseOwnerNationalId: string | null
   updatedAt: Date | null
 }
 
@@ -68,6 +70,7 @@ export type CaseLocationDraftMaxAggregateOutputType = {
   premiseComplexId: string | null
   premiseAddress: string | null
   premiseAddressEn: string | null
+  urbanZoneId: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -85,6 +88,7 @@ export type CaseLocationDraftMaxAggregateOutputType = {
   leaseExpiresAt: Date | null
   leaseAgency: string | null
   premiseOwnerName: string | null
+  premiseOwnerNationalId: string | null
   updatedAt: Date | null
 }
 
@@ -95,6 +99,7 @@ export type CaseLocationDraftCountAggregateOutputType = {
   premiseComplexId: number
   premiseAddress: number
   premiseAddressEn: number
+  urbanZoneId: number
   premisePlaque: number
   premisePlaqueSeries: number
   premiseFloor: number
@@ -112,6 +117,7 @@ export type CaseLocationDraftCountAggregateOutputType = {
   leaseExpiresAt: number
   leaseAgency: number
   premiseOwnerName: number
+  premiseOwnerNationalId: number
   updatedAt: number
   _all: number
 }
@@ -132,6 +138,7 @@ export type CaseLocationDraftMinAggregateInputType = {
   premiseComplexId?: true
   premiseAddress?: true
   premiseAddressEn?: true
+  urbanZoneId?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -149,6 +156,7 @@ export type CaseLocationDraftMinAggregateInputType = {
   leaseExpiresAt?: true
   leaseAgency?: true
   premiseOwnerName?: true
+  premiseOwnerNationalId?: true
   updatedAt?: true
 }
 
@@ -159,6 +167,7 @@ export type CaseLocationDraftMaxAggregateInputType = {
   premiseComplexId?: true
   premiseAddress?: true
   premiseAddressEn?: true
+  urbanZoneId?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -176,6 +185,7 @@ export type CaseLocationDraftMaxAggregateInputType = {
   leaseExpiresAt?: true
   leaseAgency?: true
   premiseOwnerName?: true
+  premiseOwnerNationalId?: true
   updatedAt?: true
 }
 
@@ -186,6 +196,7 @@ export type CaseLocationDraftCountAggregateInputType = {
   premiseComplexId?: true
   premiseAddress?: true
   premiseAddressEn?: true
+  urbanZoneId?: true
   premisePlaque?: true
   premisePlaqueSeries?: true
   premiseFloor?: true
@@ -203,6 +214,7 @@ export type CaseLocationDraftCountAggregateInputType = {
   leaseExpiresAt?: true
   leaseAgency?: true
   premiseOwnerName?: true
+  premiseOwnerNationalId?: true
   updatedAt?: true
   _all?: true
 }
@@ -300,6 +312,7 @@ export type CaseLocationDraftGroupByOutputType = {
   premiseComplexId: string | null
   premiseAddress: string | null
   premiseAddressEn: string | null
+  urbanZoneId: string | null
   premisePlaque: string | null
   premisePlaqueSeries: string | null
   premiseFloor: string | null
@@ -317,6 +330,7 @@ export type CaseLocationDraftGroupByOutputType = {
   leaseExpiresAt: Date | null
   leaseAgency: string | null
   premiseOwnerName: string | null
+  premiseOwnerNationalId: string | null
   updatedAt: Date
   _count: CaseLocationDraftCountAggregateOutputType | null
   _avg: CaseLocationDraftAvgAggregateOutputType | null
@@ -350,6 +364,7 @@ export type CaseLocationDraftWhereInput = {
   premiseComplexId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseAddressEn?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
+  urbanZoneId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
@@ -367,10 +382,12 @@ export type CaseLocationDraftWhereInput = {
   leaseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseLocationDraft"> | Date | string | null
   leaseAgency?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseOwnerName?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"CaseLocationDraft"> | Date | string
   request?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
+  urbanZone?: Prisma.XOR<Prisma.UrbanZoneNullableScalarRelationFilter, Prisma.UrbanZoneWhereInput> | null
   registrationPlace?: Prisma.XOR<Prisma.RegistrationPlaceNullableScalarRelationFilter, Prisma.RegistrationPlaceWhereInput> | null
 }
 
@@ -381,6 +398,7 @@ export type CaseLocationDraftOrderByWithRelationInput = {
   premiseComplexId?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaque?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseFloor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -398,10 +416,12 @@ export type CaseLocationDraftOrderByWithRelationInput = {
   leaseExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   leaseAgency?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   request?: Prisma.CaseRequestOrderByWithRelationInput
   premiseCity?: Prisma.CityOrderByWithRelationInput
   premiseComplex?: Prisma.CommercialComplexOrderByWithRelationInput
+  urbanZone?: Prisma.UrbanZoneOrderByWithRelationInput
   registrationPlace?: Prisma.RegistrationPlaceOrderByWithRelationInput
 }
 
@@ -415,6 +435,7 @@ export type CaseLocationDraftWhereUniqueInput = Prisma.AtLeast<{
   premiseComplexId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseAddressEn?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
+  urbanZoneId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
@@ -432,10 +453,12 @@ export type CaseLocationDraftWhereUniqueInput = Prisma.AtLeast<{
   leaseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseLocationDraft"> | Date | string | null
   leaseAgency?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseOwnerName?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"CaseLocationDraft"> | Date | string
   request?: Prisma.XOR<Prisma.CaseRequestScalarRelationFilter, Prisma.CaseRequestWhereInput>
   premiseCity?: Prisma.XOR<Prisma.CityNullableScalarRelationFilter, Prisma.CityWhereInput> | null
   premiseComplex?: Prisma.XOR<Prisma.CommercialComplexNullableScalarRelationFilter, Prisma.CommercialComplexWhereInput> | null
+  urbanZone?: Prisma.XOR<Prisma.UrbanZoneNullableScalarRelationFilter, Prisma.UrbanZoneWhereInput> | null
   registrationPlace?: Prisma.XOR<Prisma.RegistrationPlaceNullableScalarRelationFilter, Prisma.RegistrationPlaceWhereInput> | null
 }, "requestId">
 
@@ -446,6 +469,7 @@ export type CaseLocationDraftOrderByWithAggregationInput = {
   premiseComplexId?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddress?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrderInput | Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaque?: Prisma.SortOrderInput | Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseFloor?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -463,6 +487,7 @@ export type CaseLocationDraftOrderByWithAggregationInput = {
   leaseExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   leaseAgency?: Prisma.SortOrderInput | Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrderInput | Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CaseLocationDraftCountOrderByAggregateInput
   _avg?: Prisma.CaseLocationDraftAvgOrderByAggregateInput
@@ -481,6 +506,7 @@ export type CaseLocationDraftScalarWhereWithAggregatesInput = {
   premiseComplexId?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
   premiseAddress?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
   premiseAddressEn?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
+  urbanZoneId?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
   premisePlaque?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
   premiseFloor?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
@@ -498,6 +524,7 @@ export type CaseLocationDraftScalarWhereWithAggregatesInput = {
   leaseExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseLocationDraft"> | Date | string | null
   leaseAgency?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
   premiseOwnerName?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableWithAggregatesFilter<"CaseLocationDraft"> | string | null
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CaseLocationDraft"> | Date | string
 }
 
@@ -521,10 +548,12 @@ export type CaseLocationDraftCreateInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
   request: Prisma.CaseRequestCreateNestedOneWithoutLocationDraftInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutLocationDraftsInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutLocationDraftsInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutLocationDraftsInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutLocationDraftsInput
 }
 
@@ -535,6 +564,7 @@ export type CaseLocationDraftUncheckedCreateInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -552,6 +582,7 @@ export type CaseLocationDraftUncheckedCreateInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -575,10 +606,12 @@ export type CaseLocationDraftUpdateInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   request?: Prisma.CaseRequestUpdateOneRequiredWithoutLocationDraftNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutLocationDraftsNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutLocationDraftsNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutLocationDraftsNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutLocationDraftsNestedInput
 }
 
@@ -589,6 +622,7 @@ export type CaseLocationDraftUncheckedUpdateInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -606,6 +640,7 @@ export type CaseLocationDraftUncheckedUpdateInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -616,6 +651,7 @@ export type CaseLocationDraftCreateManyInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -633,6 +669,7 @@ export type CaseLocationDraftCreateManyInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -656,6 +693,7 @@ export type CaseLocationDraftUpdateManyMutationInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -666,6 +704,7 @@ export type CaseLocationDraftUncheckedUpdateManyInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -683,6 +722,7 @@ export type CaseLocationDraftUncheckedUpdateManyInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -708,6 +748,7 @@ export type CaseLocationDraftCountOrderByAggregateInput = {
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -725,6 +766,7 @@ export type CaseLocationDraftCountOrderByAggregateInput = {
   leaseExpiresAt?: Prisma.SortOrder
   leaseAgency?: Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -739,6 +781,7 @@ export type CaseLocationDraftMaxOrderByAggregateInput = {
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -756,6 +799,7 @@ export type CaseLocationDraftMaxOrderByAggregateInput = {
   leaseExpiresAt?: Prisma.SortOrder
   leaseAgency?: Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -766,6 +810,7 @@ export type CaseLocationDraftMinOrderByAggregateInput = {
   premiseComplexId?: Prisma.SortOrder
   premiseAddress?: Prisma.SortOrder
   premiseAddressEn?: Prisma.SortOrder
+  urbanZoneId?: Prisma.SortOrder
   premisePlaque?: Prisma.SortOrder
   premisePlaqueSeries?: Prisma.SortOrder
   premiseFloor?: Prisma.SortOrder
@@ -783,6 +828,7 @@ export type CaseLocationDraftMinOrderByAggregateInput = {
   leaseExpiresAt?: Prisma.SortOrder
   leaseAgency?: Prisma.SortOrder
   premiseOwnerName?: Prisma.SortOrder
+  premiseOwnerNationalId?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -906,6 +952,48 @@ export type CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexNestedInput
   deleteMany?: Prisma.CaseLocationDraftScalarWhereInput | Prisma.CaseLocationDraftScalarWhereInput[]
 }
 
+export type CaseLocationDraftCreateNestedManyWithoutUrbanZoneInput = {
+  create?: Prisma.XOR<Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput[] | Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseLocationDraftCreateManyUrbanZoneInputEnvelope
+  connect?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+}
+
+export type CaseLocationDraftUncheckedCreateNestedManyWithoutUrbanZoneInput = {
+  create?: Prisma.XOR<Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput[] | Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseLocationDraftCreateManyUrbanZoneInputEnvelope
+  connect?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+}
+
+export type CaseLocationDraftUpdateManyWithoutUrbanZoneNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput[] | Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput[]
+  upsert?: Prisma.CaseLocationDraftUpsertWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseLocationDraftUpsertWithWhereUniqueWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseLocationDraftCreateManyUrbanZoneInputEnvelope
+  set?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  disconnect?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  delete?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  connect?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  update?: Prisma.CaseLocationDraftUpdateWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseLocationDraftUpdateWithWhereUniqueWithoutUrbanZoneInput[]
+  updateMany?: Prisma.CaseLocationDraftUpdateManyWithWhereWithoutUrbanZoneInput | Prisma.CaseLocationDraftUpdateManyWithWhereWithoutUrbanZoneInput[]
+  deleteMany?: Prisma.CaseLocationDraftScalarWhereInput | Prisma.CaseLocationDraftScalarWhereInput[]
+}
+
+export type CaseLocationDraftUncheckedUpdateManyWithoutUrbanZoneNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput> | Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput[] | Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput[]
+  connectOrCreate?: Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput | Prisma.CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput[]
+  upsert?: Prisma.CaseLocationDraftUpsertWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseLocationDraftUpsertWithWhereUniqueWithoutUrbanZoneInput[]
+  createMany?: Prisma.CaseLocationDraftCreateManyUrbanZoneInputEnvelope
+  set?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  disconnect?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  delete?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  connect?: Prisma.CaseLocationDraftWhereUniqueInput | Prisma.CaseLocationDraftWhereUniqueInput[]
+  update?: Prisma.CaseLocationDraftUpdateWithWhereUniqueWithoutUrbanZoneInput | Prisma.CaseLocationDraftUpdateWithWhereUniqueWithoutUrbanZoneInput[]
+  updateMany?: Prisma.CaseLocationDraftUpdateManyWithWhereWithoutUrbanZoneInput | Prisma.CaseLocationDraftUpdateManyWithWhereWithoutUrbanZoneInput[]
+  deleteMany?: Prisma.CaseLocationDraftScalarWhereInput | Prisma.CaseLocationDraftScalarWhereInput[]
+}
+
 export type CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput = {
   create?: Prisma.XOR<Prisma.CaseLocationDraftCreateWithoutRegistrationPlaceInput, Prisma.CaseLocationDraftUncheckedCreateWithoutRegistrationPlaceInput> | Prisma.CaseLocationDraftCreateWithoutRegistrationPlaceInput[] | Prisma.CaseLocationDraftUncheckedCreateWithoutRegistrationPlaceInput[]
   connectOrCreate?: Prisma.CaseLocationDraftCreateOrConnectWithoutRegistrationPlaceInput | Prisma.CaseLocationDraftCreateOrConnectWithoutRegistrationPlaceInput[]
@@ -968,9 +1056,11 @@ export type CaseLocationDraftCreateWithoutPremiseCityInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
   request: Prisma.CaseRequestCreateNestedOneWithoutLocationDraftInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutLocationDraftsInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutLocationDraftsInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutLocationDraftsInput
 }
 
@@ -980,6 +1070,7 @@ export type CaseLocationDraftUncheckedCreateWithoutPremiseCityInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -997,6 +1088,7 @@ export type CaseLocationDraftUncheckedCreateWithoutPremiseCityInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1036,6 +1128,7 @@ export type CaseLocationDraftScalarWhereInput = {
   premiseComplexId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseAddress?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseAddressEn?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
+  urbanZoneId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premisePlaque?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premisePlaqueSeries?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseFloor?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
@@ -1053,6 +1146,7 @@ export type CaseLocationDraftScalarWhereInput = {
   leaseExpiresAt?: Prisma.DateTimeNullableFilter<"CaseLocationDraft"> | Date | string | null
   leaseAgency?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   premiseOwnerName?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
+  premiseOwnerNationalId?: Prisma.StringNullableFilter<"CaseLocationDraft"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"CaseLocationDraft"> | Date | string
 }
 
@@ -1076,9 +1170,11 @@ export type CaseLocationDraftCreateWithoutRequestInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
   premiseCity?: Prisma.CityCreateNestedOneWithoutLocationDraftsInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutLocationDraftsInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutLocationDraftsInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutLocationDraftsInput
 }
 
@@ -1088,6 +1184,7 @@ export type CaseLocationDraftUncheckedCreateWithoutRequestInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1105,6 +1202,7 @@ export type CaseLocationDraftUncheckedCreateWithoutRequestInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1144,9 +1242,11 @@ export type CaseLocationDraftUpdateWithoutRequestInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCity?: Prisma.CityUpdateOneWithoutLocationDraftsNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutLocationDraftsNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutLocationDraftsNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutLocationDraftsNestedInput
 }
 
@@ -1156,6 +1256,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutRequestInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1173,6 +1274,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutRequestInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1196,9 +1298,11 @@ export type CaseLocationDraftCreateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
   request: Prisma.CaseRequestCreateNestedOneWithoutLocationDraftInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutLocationDraftsInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutLocationDraftsInput
   registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutLocationDraftsInput
 }
 
@@ -1208,6 +1312,7 @@ export type CaseLocationDraftUncheckedCreateWithoutPremiseComplexInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1225,6 +1330,7 @@ export type CaseLocationDraftUncheckedCreateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1254,6 +1360,88 @@ export type CaseLocationDraftUpdateManyWithWhereWithoutPremiseComplexInput = {
   data: Prisma.XOR<Prisma.CaseLocationDraftUpdateManyMutationInput, Prisma.CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexInput>
 }
 
+export type CaseLocationDraftCreateWithoutUrbanZoneInput = {
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  updatedAt?: Date | string
+  request: Prisma.CaseRequestCreateNestedOneWithoutLocationDraftInput
+  premiseCity?: Prisma.CityCreateNestedOneWithoutLocationDraftsInput
+  premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutLocationDraftsInput
+  registrationPlace?: Prisma.RegistrationPlaceCreateNestedOneWithoutLocationDraftsInput
+}
+
+export type CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput = {
+  requestId: string
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  updatedAt?: Date | string
+}
+
+export type CaseLocationDraftCreateOrConnectWithoutUrbanZoneInput = {
+  where: Prisma.CaseLocationDraftWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput>
+}
+
+export type CaseLocationDraftCreateManyUrbanZoneInputEnvelope = {
+  data: Prisma.CaseLocationDraftCreateManyUrbanZoneInput | Prisma.CaseLocationDraftCreateManyUrbanZoneInput[]
+  skipDuplicates?: boolean
+}
+
+export type CaseLocationDraftUpsertWithWhereUniqueWithoutUrbanZoneInput = {
+  where: Prisma.CaseLocationDraftWhereUniqueInput
+  update: Prisma.XOR<Prisma.CaseLocationDraftUpdateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedUpdateWithoutUrbanZoneInput>
+  create: Prisma.XOR<Prisma.CaseLocationDraftCreateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedCreateWithoutUrbanZoneInput>
+}
+
+export type CaseLocationDraftUpdateWithWhereUniqueWithoutUrbanZoneInput = {
+  where: Prisma.CaseLocationDraftWhereUniqueInput
+  data: Prisma.XOR<Prisma.CaseLocationDraftUpdateWithoutUrbanZoneInput, Prisma.CaseLocationDraftUncheckedUpdateWithoutUrbanZoneInput>
+}
+
+export type CaseLocationDraftUpdateManyWithWhereWithoutUrbanZoneInput = {
+  where: Prisma.CaseLocationDraftScalarWhereInput
+  data: Prisma.XOR<Prisma.CaseLocationDraftUpdateManyMutationInput, Prisma.CaseLocationDraftUncheckedUpdateManyWithoutUrbanZoneInput>
+}
+
 export type CaseLocationDraftCreateWithoutRegistrationPlaceInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
@@ -1274,10 +1462,12 @@ export type CaseLocationDraftCreateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
   request: Prisma.CaseRequestCreateNestedOneWithoutLocationDraftInput
   premiseCity?: Prisma.CityCreateNestedOneWithoutLocationDraftsInput
   premiseComplex?: Prisma.CommercialComplexCreateNestedOneWithoutLocationDraftsInput
+  urbanZone?: Prisma.UrbanZoneCreateNestedOneWithoutLocationDraftsInput
 }
 
 export type CaseLocationDraftUncheckedCreateWithoutRegistrationPlaceInput = {
@@ -1287,6 +1477,7 @@ export type CaseLocationDraftUncheckedCreateWithoutRegistrationPlaceInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1303,6 +1494,7 @@ export type CaseLocationDraftUncheckedCreateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1338,6 +1530,7 @@ export type CaseLocationDraftCreateManyPremiseCityInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1355,6 +1548,7 @@ export type CaseLocationDraftCreateManyPremiseCityInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1378,9 +1572,11 @@ export type CaseLocationDraftUpdateWithoutPremiseCityInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   request?: Prisma.CaseRequestUpdateOneRequiredWithoutLocationDraftNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutLocationDraftsNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutLocationDraftsNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutLocationDraftsNestedInput
 }
 
@@ -1390,6 +1586,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutPremiseCityInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1407,6 +1604,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutPremiseCityInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1416,6 +1614,7 @@ export type CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1433,6 +1632,7 @@ export type CaseLocationDraftUncheckedUpdateManyWithoutPremiseCityInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1442,6 +1642,7 @@ export type CaseLocationDraftCreateManyPremiseComplexInput = {
   premiseEstablishment?: $Enums.PremiseEstablishment | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1459,6 +1660,7 @@ export type CaseLocationDraftCreateManyPremiseComplexInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1482,9 +1684,11 @@ export type CaseLocationDraftUpdateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   request?: Prisma.CaseRequestUpdateOneRequiredWithoutLocationDraftNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutLocationDraftsNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutLocationDraftsNestedInput
   registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutLocationDraftsNestedInput
 }
 
@@ -1494,6 +1698,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutPremiseComplexInput = {
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1511,6 +1716,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutPremiseComplexInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1518,6 +1724,91 @@ export type CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexInput = {
   requestId?: Prisma.StringFieldUpdateOperationsInput | string
   premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseLocationDraftCreateManyUrbanZoneInput = {
+  requestId: string
+  premiseCityId?: string | null
+  premiseEstablishment?: $Enums.PremiseEstablishment | null
+  premiseComplexId?: string | null
+  premiseAddress?: string | null
+  premiseAddressEn?: string | null
+  premisePlaque?: string | null
+  premisePlaqueSeries?: string | null
+  premiseFloor?: string | null
+  premiseUnitNo?: string | null
+  premisePostalCode?: string | null
+  premisePhone?: string | null
+  premiseFax?: string | null
+  premiseGeoPosition?: $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: $Enums.PremisePublicAccess | null
+  registrationPlaceId?: string | null
+  premiseOwnership?: $Enums.PremiseOwnership | null
+  premiseDeedNo?: string | null
+  premiseArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Date | string | null
+  leaseExpiresAt?: Date | string | null
+  leaseAgency?: string | null
+  premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
+  updatedAt?: Date | string
+}
+
+export type CaseLocationDraftUpdateWithoutUrbanZoneInput = {
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  request?: Prisma.CaseRequestUpdateOneRequiredWithoutLocationDraftNestedInput
+  premiseCity?: Prisma.CityUpdateOneWithoutLocationDraftsNestedInput
+  premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutLocationDraftsNestedInput
+  registrationPlace?: Prisma.RegistrationPlaceUpdateOneWithoutLocationDraftsNestedInput
+}
+
+export type CaseLocationDraftUncheckedUpdateWithoutUrbanZoneInput = {
+  requestId?: Prisma.StringFieldUpdateOperationsInput | string
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1537,6 +1828,35 @@ export type CaseLocationDraftUncheckedUpdateManyWithoutPremiseComplexInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type CaseLocationDraftUncheckedUpdateManyWithoutUrbanZoneInput = {
+  requestId?: Prisma.StringFieldUpdateOperationsInput | string
+  premiseCityId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseEstablishment?: Prisma.NullableEnumPremiseEstablishmentFieldUpdateOperationsInput | $Enums.PremiseEstablishment | null
+  premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseUnitNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePostalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premisePhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseFax?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseGeoPosition?: Prisma.NullableEnumPremiseGeoPositionFieldUpdateOperationsInput | $Enums.PremiseGeoPosition | null
+  premisePublicAccess?: Prisma.NullableEnumPremisePublicAccessFieldUpdateOperationsInput | $Enums.PremisePublicAccess | null
+  registrationPlaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnership?: Prisma.NullableEnumPremiseOwnershipFieldUpdateOperationsInput | $Enums.PremiseOwnership | null
+  premiseDeedNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  leaseIssuedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1547,6 +1867,7 @@ export type CaseLocationDraftCreateManyRegistrationPlaceInput = {
   premiseComplexId?: string | null
   premiseAddress?: string | null
   premiseAddressEn?: string | null
+  urbanZoneId?: string | null
   premisePlaque?: string | null
   premisePlaqueSeries?: string | null
   premiseFloor?: string | null
@@ -1563,6 +1884,7 @@ export type CaseLocationDraftCreateManyRegistrationPlaceInput = {
   leaseExpiresAt?: Date | string | null
   leaseAgency?: string | null
   premiseOwnerName?: string | null
+  premiseOwnerNationalId?: string | null
   updatedAt?: Date | string
 }
 
@@ -1586,10 +1908,12 @@ export type CaseLocationDraftUpdateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   request?: Prisma.CaseRequestUpdateOneRequiredWithoutLocationDraftNestedInput
   premiseCity?: Prisma.CityUpdateOneWithoutLocationDraftsNestedInput
   premiseComplex?: Prisma.CommercialComplexUpdateOneWithoutLocationDraftsNestedInput
+  urbanZone?: Prisma.UrbanZoneUpdateOneWithoutLocationDraftsNestedInput
 }
 
 export type CaseLocationDraftUncheckedUpdateWithoutRegistrationPlaceInput = {
@@ -1599,6 +1923,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutRegistrationPlaceInput = {
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1615,6 +1940,7 @@ export type CaseLocationDraftUncheckedUpdateWithoutRegistrationPlaceInput = {
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1625,6 +1951,7 @@ export type CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceInput = 
   premiseComplexId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseAddressEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  urbanZoneId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaque?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premisePlaqueSeries?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseFloor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1641,6 +1968,7 @@ export type CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceInput = 
   leaseExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   leaseAgency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   premiseOwnerName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  premiseOwnerNationalId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1653,6 +1981,7 @@ export type CaseLocationDraftSelect<ExtArgs extends runtime.Types.Extensions.Int
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -1670,10 +1999,12 @@ export type CaseLocationDraftSelect<ExtArgs extends runtime.Types.Extensions.Int
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   updatedAt?: boolean
   request?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs>
 }, ExtArgs["result"]["caseLocationDraft"]>
 
@@ -1684,6 +2015,7 @@ export type CaseLocationDraftSelectCreateManyAndReturn<ExtArgs extends runtime.T
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -1701,10 +2033,12 @@ export type CaseLocationDraftSelectCreateManyAndReturn<ExtArgs extends runtime.T
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   updatedAt?: boolean
   request?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs>
 }, ExtArgs["result"]["caseLocationDraft"]>
 
@@ -1715,6 +2049,7 @@ export type CaseLocationDraftSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -1732,10 +2067,12 @@ export type CaseLocationDraftSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   updatedAt?: boolean
   request?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs>
 }, ExtArgs["result"]["caseLocationDraft"]>
 
@@ -1746,6 +2083,7 @@ export type CaseLocationDraftSelectScalar = {
   premiseComplexId?: boolean
   premiseAddress?: boolean
   premiseAddressEn?: boolean
+  urbanZoneId?: boolean
   premisePlaque?: boolean
   premisePlaqueSeries?: boolean
   premiseFloor?: boolean
@@ -1763,26 +2101,30 @@ export type CaseLocationDraftSelectScalar = {
   leaseExpiresAt?: boolean
   leaseAgency?: boolean
   premiseOwnerName?: boolean
+  premiseOwnerNationalId?: boolean
   updatedAt?: boolean
 }
 
-export type CaseLocationDraftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"requestId" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "updatedAt", ExtArgs["result"]["caseLocationDraft"]>
+export type CaseLocationDraftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"requestId" | "premiseCityId" | "premiseEstablishment" | "premiseComplexId" | "premiseAddress" | "premiseAddressEn" | "urbanZoneId" | "premisePlaque" | "premisePlaqueSeries" | "premiseFloor" | "premiseUnitNo" | "premisePostalCode" | "premisePhone" | "premiseFax" | "premiseGeoPosition" | "premisePublicAccess" | "registrationPlaceId" | "premiseOwnership" | "premiseDeedNo" | "premiseArea" | "leaseIssuedAt" | "leaseExpiresAt" | "leaseAgency" | "premiseOwnerName" | "premiseOwnerNationalId" | "updatedAt", ExtArgs["result"]["caseLocationDraft"]>
 export type CaseLocationDraftInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   request?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs>
 }
 export type CaseLocationDraftIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   request?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs>
 }
 export type CaseLocationDraftIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   request?: boolean | Prisma.CaseRequestDefaultArgs<ExtArgs>
   premiseCity?: boolean | Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs>
   premiseComplex?: boolean | Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs>
+  urbanZone?: boolean | Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs>
   registrationPlace?: boolean | Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs>
 }
 
@@ -1792,6 +2134,7 @@ export type $CaseLocationDraftPayload<ExtArgs extends runtime.Types.Extensions.I
     request: Prisma.$CaseRequestPayload<ExtArgs>
     premiseCity: Prisma.$CityPayload<ExtArgs> | null
     premiseComplex: Prisma.$CommercialComplexPayload<ExtArgs> | null
+    urbanZone: Prisma.$UrbanZonePayload<ExtArgs> | null
     registrationPlace: Prisma.$RegistrationPlacePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1801,6 +2144,7 @@ export type $CaseLocationDraftPayload<ExtArgs extends runtime.Types.Extensions.I
     premiseComplexId: string | null
     premiseAddress: string | null
     premiseAddressEn: string | null
+    urbanZoneId: string | null
     premisePlaque: string | null
     premisePlaqueSeries: string | null
     premiseFloor: string | null
@@ -1818,6 +2162,7 @@ export type $CaseLocationDraftPayload<ExtArgs extends runtime.Types.Extensions.I
     leaseExpiresAt: Date | null
     leaseAgency: string | null
     premiseOwnerName: string | null
+    premiseOwnerNationalId: string | null
     updatedAt: Date
   }, ExtArgs["result"]["caseLocationDraft"]>
   composites: {}
@@ -2216,6 +2561,7 @@ export interface Prisma__CaseLocationDraftClient<T, Null = never, ExtArgs extend
   request<T extends Prisma.CaseRequestDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequestDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseRequestClient<runtime.Types.Result.GetResult<Prisma.$CaseRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   premiseCity<T extends Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseLocationDraft$premiseCityArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   premiseComplex<T extends Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseLocationDraft$premiseComplexArgs<ExtArgs>>): Prisma.Prisma__CommercialComplexClient<runtime.Types.Result.GetResult<Prisma.$CommercialComplexPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  urbanZone<T extends Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseLocationDraft$urbanZoneArgs<ExtArgs>>): Prisma.Prisma__UrbanZoneClient<runtime.Types.Result.GetResult<Prisma.$UrbanZonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   registrationPlace<T extends Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseLocationDraft$registrationPlaceArgs<ExtArgs>>): Prisma.Prisma__RegistrationPlaceClient<runtime.Types.Result.GetResult<Prisma.$RegistrationPlacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2252,6 +2598,7 @@ export interface CaseLocationDraftFieldRefs {
   readonly premiseComplexId: Prisma.FieldRef<"CaseLocationDraft", 'String'>
   readonly premiseAddress: Prisma.FieldRef<"CaseLocationDraft", 'String'>
   readonly premiseAddressEn: Prisma.FieldRef<"CaseLocationDraft", 'String'>
+  readonly urbanZoneId: Prisma.FieldRef<"CaseLocationDraft", 'String'>
   readonly premisePlaque: Prisma.FieldRef<"CaseLocationDraft", 'String'>
   readonly premisePlaqueSeries: Prisma.FieldRef<"CaseLocationDraft", 'String'>
   readonly premiseFloor: Prisma.FieldRef<"CaseLocationDraft", 'String'>
@@ -2269,6 +2616,7 @@ export interface CaseLocationDraftFieldRefs {
   readonly leaseExpiresAt: Prisma.FieldRef<"CaseLocationDraft", 'DateTime'>
   readonly leaseAgency: Prisma.FieldRef<"CaseLocationDraft", 'String'>
   readonly premiseOwnerName: Prisma.FieldRef<"CaseLocationDraft", 'String'>
+  readonly premiseOwnerNationalId: Prisma.FieldRef<"CaseLocationDraft", 'String'>
   readonly updatedAt: Prisma.FieldRef<"CaseLocationDraft", 'DateTime'>
 }
     
@@ -2706,6 +3054,25 @@ export type CaseLocationDraft$premiseComplexArgs<ExtArgs extends runtime.Types.E
    */
   include?: Prisma.CommercialComplexInclude<ExtArgs> | null
   where?: Prisma.CommercialComplexWhereInput
+}
+
+/**
+ * CaseLocationDraft.urbanZone
+ */
+export type CaseLocationDraft$urbanZoneArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UrbanZone
+   */
+  select?: Prisma.UrbanZoneSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UrbanZone
+   */
+  omit?: Prisma.UrbanZoneOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UrbanZoneInclude<ExtArgs> | null
+  where?: Prisma.UrbanZoneWhereInput
 }
 
 /**

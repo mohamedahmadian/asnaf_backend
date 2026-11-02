@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  Matches,
   MaxLength,
   MinLength,
   ValidateIf,
@@ -13,6 +14,13 @@ import { emptyToNull } from '../../common/dto-transform';
 
 function trimString(value: unknown) {
   return typeof value === 'string' ? value.trim() : value;
+}
+
+function normalizeOptionalLink(value: unknown) {
+  const trimmed = emptyToNull(trimString(value));
+  if (trimmed == null) return null;
+  if (typeof trimmed !== 'string') return trimmed;
+  return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 }
 
 export class CreateJobDto {
@@ -39,6 +47,14 @@ export class CreateJobDto {
   @IsString()
   @MaxLength(2000)
   description?: string | null;
+
+  @IsOptional()
+  @Transform(({ value }) => normalizeOptionalLink(value))
+  @ValidateIf((_, value) => value != null)
+  @IsString()
+  @MaxLength(500)
+  @Matches(/^https?:\/\/.+/i, { message: 'لینک ویدئو معتبر نیست' })
+  videoUrl?: string | null;
 
   @Transform(({ value }) => trimString(value))
   @IsString()

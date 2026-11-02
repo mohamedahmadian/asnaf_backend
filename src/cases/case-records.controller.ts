@@ -19,6 +19,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { assertCanIssue } from './case-action-access';
 import { CaseAuctionService } from './case-auction.service';
 import { CaseStewardshipService } from './case-stewardship.service';
+import { CaseGuildHistoryLetterService } from './case-guild-history-letter.service';
 import { CasesService } from './cases.service';
 import { AdvanceStewardshipDto, CreateStewardshipDto, IssueStewardshipCardDto, RevokeStewardshipDto } from './dto/create-stewardship.dto';
 import { DecideCaseAuctionDto } from './dto/decide-case-auction.dto';
@@ -68,6 +69,7 @@ export class CaseRecordsController {
     private readonly cases: CasesService,
     private readonly auctions: CaseAuctionService,
     private readonly stewardship: CaseStewardshipService,
+    private readonly guildHistoryLetters: CaseGuildHistoryLetterService,
   ) {}
 
   @Get()
@@ -137,6 +139,11 @@ export class CaseRecordsController {
   @Get(':id/license')
   license(@Param('id') id: string) {
     return this.cases.licenseDocument(id);
+  }
+
+  @Get(':id/guild-history-letter')
+  guildHistoryLetter(@Param('id') id: string) {
+    return this.guildHistoryLetters.letters(id);
   }
 
   @Get(':id/process')

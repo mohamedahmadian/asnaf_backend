@@ -29,7 +29,9 @@ import { SmsModule } from './sms/sms.module';
 import { UsersModule } from './users/users.module';
 import { ViolationTypesModule } from './violation-types/violation-types.module';
 import { ViolationsModule } from './violations/violations.module';
+import { UrbanZonesModule } from './urban-zones/urban-zones.module';
 import { WorkUnitsModule } from './work-units/work-units.module';
+import { RequestsModule } from './requests/requests.module';
 
 @Module({
   imports: [
@@ -43,6 +45,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     GeoModule,
     BankAccountsModule,
     CasesModule,
+    RequestsModule,
     CaseFinanceModule,
     MunicipalFeesModule,
     DiscountsModule,
@@ -54,6 +57,7 @@ import { WorkUnitsModule } from './work-units/work-units.module';
     RegistrationPlacesModule,
     DocumentsModule,
     WorkUnitsModule,
+    UrbanZonesModule,
     StaffPostsModule,
     ViolationTypesModule,
     ViolationsModule,

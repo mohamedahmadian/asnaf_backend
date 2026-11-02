@@ -165,6 +165,61 @@ export type CaseLetterhead = Prisma.CaseLetterheadModel
  */
 export type CaseActivityLicenseSettings = Prisma.CaseActivityLicenseSettingsModel
 /**
+ * Model RentalLicenseSettings
+ * تنظیمات مجوز اجاره‌داری؛ یک ردیف ثابت
+ */
+export type RentalLicenseSettings = Prisma.RentalLicenseSettingsModel
+/**
+ * Model RentalIdentityDocument
+ * مدارک هویتی مرحلهٔ اول درخواست مجوز اجاره‌داری
+ */
+export type RentalIdentityDocument = Prisma.RentalIdentityDocumentModel
+/**
+ * Model RentalDocumentRequirement
+ * مدارک لازم برای درخواست/تمدید مجوز اجاره‌داری
+ */
+export type RentalDocumentRequirement = Prisma.RentalDocumentRequirementModel
+/**
+ * Model RentalProcessManagementRole
+ * نقش‌های تایید مدیریتی مجوز اجاره‌داری
+ */
+export type RentalProcessManagementRole = Prisma.RentalProcessManagementRoleModel
+/**
+ * Model RentalLicense
+ * مجوز اجاره‌داری یک شخص؛ تمدید روی همین ردیف است
+ */
+export type RentalLicense = Prisma.RentalLicenseModel
+/**
+ * Model RentalPremiseFile
+ * 
+ */
+export type RentalPremiseFile = Prisma.RentalPremiseFileModel
+/**
+ * Model RentalRequest
+ * 
+ */
+export type RentalRequest = Prisma.RentalRequestModel
+/**
+ * Model RentalRequestDocument
+ * 
+ */
+export type RentalRequestDocument = Prisma.RentalRequestDocumentModel
+/**
+ * Model RentalRequestDocumentVersion
+ * 
+ */
+export type RentalRequestDocumentVersion = Prisma.RentalRequestDocumentVersionModel
+/**
+ * Model RentalManagementReview
+ * 
+ */
+export type RentalManagementReview = Prisma.RentalManagementReviewModel
+/**
+ * Model RentalManagementReviewFile
+ * 
+ */
+export type RentalManagementReviewFile = Prisma.RentalManagementReviewFileModel
+/**
  * Model CasePlacesOffice
  * تنظیمات ثابت اداره اماکن؛ یک مسئول برای اعلام نظر روی پرونده‌ها
  */
@@ -230,6 +285,16 @@ export type CaseManagementReviewFile = Prisma.CaseManagementReviewFileModel
  */
 export type CaseFile = Prisma.CaseFileModel
 /**
+ * Model CaseAssetAccount
+ * حساب دارایی متقاضی روی پرونده (نام بانک و شبا)
+ */
+export type CaseAssetAccount = Prisma.CaseAssetAccountModel
+/**
+ * Model CasePremiseFile
+ * پیوست سند ملک یا اجازه نامه روی پرونده. خود فایل در File Storage است.
+ */
+export type CasePremiseFile = Prisma.CasePremiseFileModel
+/**
  * Model CaseStewardRevokeFile
  * پیوست درخواست ابطال کارت مباشرت. خود فایل در File Storage است.
  */
@@ -239,6 +304,11 @@ export type CaseStewardRevokeFile = Prisma.CaseStewardRevokeFileModel
  * فرایند سه‌مرحله‌ای ابطال مجوز اقتصادی
  */
 export type CaseRevocationProcess = Prisma.CaseRevocationProcessModel
+/**
+ * Model CaseRevocationProcessFile
+ * پیوست فرایند مدیریتی ابطال. خود فایل در File Storage است.
+ */
+export type CaseRevocationProcessFile = Prisma.CaseRevocationProcessFileModel
 /**
  * Model CaseRevocationLetter
  * نسخهٔ ثابت نامهٔ هر سازمان برای یک فرایند ابطال
@@ -260,6 +330,16 @@ export type CaseSuspensionFile = Prisma.CaseSuspensionFileModel
  * شمارهٔ درخواست با باز شدن درخواست زده می‌شود. شمارهٔ مجوز فعالیت اقتصادی روی پرونده ثابت می‌ماند.
  */
 export type CaseRequest = Prisma.CaseRequestModel
+/**
+ * Model CaseRevocationRequest
+ * درخواست ابطال مجوز از پورتال متقاضی
+ */
+export type CaseRevocationRequest = Prisma.CaseRevocationRequestModel
+/**
+ * Model CaseRevocationRequestFile
+ * پیوست درخواست ابطال متقاضی. خود فایل در File Storage است.
+ */
+export type CaseRevocationRequestFile = Prisma.CaseRevocationRequestFileModel
 /**
  * Model CaseRequestFinance
  * حساب و هزینه‌های همین درخواست. با اولین باز شدن از تنظیمات مالی همان نوع درخواست پر می‌شود.
@@ -580,6 +660,11 @@ export type WorkUnit = Prisma.WorkUnitModel
  * 
  */
 export type StaffPost = Prisma.StaffPostModel
+/**
+ * Model UrbanZone
+ * 
+ */
+export type UrbanZone = Prisma.UrbanZoneModel
 /**
  * Model ViolationType
  * 

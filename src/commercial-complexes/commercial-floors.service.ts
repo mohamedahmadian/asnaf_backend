@@ -131,12 +131,6 @@ export class CommercialFloorsService {
 
   async remove(complexId: string, id: string) {
     await this.findOne(complexId, id);
-    const lanes = await this.prisma.commercialLane.count({
-      where: { floorId: id },
-    });
-    if (lanes > 0) {
-      throw new ConflictException('ابتدا لاین‌های این طبقه را حذف کنید');
-    }
     await this.prisma.commercialFloor.delete({ where: { id } });
     return { ok: true };
   }

@@ -267,6 +267,8 @@ export type CaseRequestWhereInput = {
   locationDraft?: Prisma.XOR<Prisma.CaseLocationDraftNullableScalarRelationFilter, Prisma.CaseLocationDraftWhereInput> | null
   replacedPremise?: Prisma.XOR<Prisma.CasePremiseHistoryNullableScalarRelationFilter, Prisma.CasePremiseHistoryWhereInput> | null
   auction?: Prisma.XOR<Prisma.CaseAuctionNullableScalarRelationFilter, Prisma.CaseAuctionWhereInput> | null
+  revocation?: Prisma.XOR<Prisma.CaseRevocationRequestNullableScalarRelationFilter, Prisma.CaseRevocationRequestWhereInput> | null
+  revocationProcess?: Prisma.XOR<Prisma.CaseRevocationProcessNullableScalarRelationFilter, Prisma.CaseRevocationProcessWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
   finance?: Prisma.XOR<Prisma.CaseRequestFinanceNullableScalarRelationFilter, Prisma.CaseRequestFinanceWhereInput> | null
 }
@@ -292,6 +294,8 @@ export type CaseRequestOrderByWithRelationInput = {
   locationDraft?: Prisma.CaseLocationDraftOrderByWithRelationInput
   replacedPremise?: Prisma.CasePremiseHistoryOrderByWithRelationInput
   auction?: Prisma.CaseAuctionOrderByWithRelationInput
+  revocation?: Prisma.CaseRevocationRequestOrderByWithRelationInput
+  revocationProcess?: Prisma.CaseRevocationProcessOrderByWithRelationInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
   finance?: Prisma.CaseRequestFinanceOrderByWithRelationInput
 }
@@ -320,6 +324,8 @@ export type CaseRequestWhereUniqueInput = Prisma.AtLeast<{
   locationDraft?: Prisma.XOR<Prisma.CaseLocationDraftNullableScalarRelationFilter, Prisma.CaseLocationDraftWhereInput> | null
   replacedPremise?: Prisma.XOR<Prisma.CasePremiseHistoryNullableScalarRelationFilter, Prisma.CasePremiseHistoryWhereInput> | null
   auction?: Prisma.XOR<Prisma.CaseAuctionNullableScalarRelationFilter, Prisma.CaseAuctionWhereInput> | null
+  revocation?: Prisma.XOR<Prisma.CaseRevocationRequestNullableScalarRelationFilter, Prisma.CaseRevocationRequestWhereInput> | null
+  revocationProcess?: Prisma.XOR<Prisma.CaseRevocationProcessNullableScalarRelationFilter, Prisma.CaseRevocationProcessWhereInput> | null
   payments?: Prisma.PaymentListRelationFilter
   finance?: Prisma.XOR<Prisma.CaseRequestFinanceNullableScalarRelationFilter, Prisma.CaseRequestFinanceWhereInput> | null
 }, "id" | "number">
@@ -378,6 +384,8 @@ export type CaseRequestCreateInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -402,6 +410,8 @@ export type CaseRequestUncheckedCreateInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -426,6 +436,8 @@ export type CaseRequestUpdateInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -450,6 +462,8 @@ export type CaseRequestUncheckedUpdateInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -659,8 +673,38 @@ export type CaseRequestUncheckedUpdateManyWithoutCaseFileNestedInput = {
   deleteMany?: Prisma.CaseRequestScalarWhereInput | Prisma.CaseRequestScalarWhereInput[]
 }
 
+export type CaseRequestCreateNestedOneWithoutRevocationProcessInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationProcessInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationProcessInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutRevocationProcessInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneWithoutRevocationProcessNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationProcessInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationProcessInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutRevocationProcessInput
+  upsert?: Prisma.CaseRequestUpsertWithoutRevocationProcessInput
+  disconnect?: Prisma.CaseRequestWhereInput | boolean
+  delete?: Prisma.CaseRequestWhereInput | boolean
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutRevocationProcessInput, Prisma.CaseRequestUpdateWithoutRevocationProcessInput>, Prisma.CaseRequestUncheckedUpdateWithoutRevocationProcessInput>
+}
+
 export type EnumCaseRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.CaseRequestStatus
+}
+
+export type CaseRequestCreateNestedOneWithoutRevocationInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutRevocationInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+}
+
+export type CaseRequestUpdateOneRequiredWithoutRevocationNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationInput>
+  connectOrCreate?: Prisma.CaseRequestCreateOrConnectWithoutRevocationInput
+  upsert?: Prisma.CaseRequestUpsertWithoutRevocationInput
+  connect?: Prisma.CaseRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRequestUpdateToOneWithWhereWithoutRevocationInput, Prisma.CaseRequestUpdateWithoutRevocationInput>, Prisma.CaseRequestUncheckedUpdateWithoutRevocationInput>
 }
 
 export type CaseRequestCreateNestedOneWithoutFinanceInput = {
@@ -783,6 +827,8 @@ export type CaseRequestCreateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
 
@@ -806,6 +852,8 @@ export type CaseRequestUncheckedCreateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
 
@@ -845,6 +893,8 @@ export type CaseRequestUpdateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
 
@@ -868,6 +918,8 @@ export type CaseRequestUncheckedUpdateWithoutPaymentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
 
@@ -890,6 +942,8 @@ export type CaseRequestCreateWithoutInquiriesInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -913,6 +967,8 @@ export type CaseRequestUncheckedCreateWithoutInquiriesInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -952,6 +1008,8 @@ export type CaseRequestUpdateWithoutInquiriesInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -975,6 +1033,8 @@ export type CaseRequestUncheckedUpdateWithoutInquiriesInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -998,6 +1058,8 @@ export type CaseRequestCreateWithoutPlacesReviewInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1021,6 +1083,8 @@ export type CaseRequestUncheckedCreateWithoutPlacesReviewInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1060,6 +1124,8 @@ export type CaseRequestUpdateWithoutPlacesReviewInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -1083,6 +1149,8 @@ export type CaseRequestUncheckedUpdateWithoutPlacesReviewInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -1106,6 +1174,8 @@ export type CaseRequestCreateWithoutManagementReviewsInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1129,6 +1199,8 @@ export type CaseRequestUncheckedCreateWithoutManagementReviewsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1168,6 +1240,8 @@ export type CaseRequestUpdateWithoutManagementReviewsInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -1191,6 +1265,8 @@ export type CaseRequestUncheckedUpdateWithoutManagementReviewsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -1214,6 +1290,8 @@ export type CaseRequestCreateWithoutCaseFileInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1237,6 +1315,8 @@ export type CaseRequestUncheckedCreateWithoutCaseFileInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1283,6 +1363,238 @@ export type CaseRequestScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"CaseRequest"> | Date | string
 }
 
+export type CaseRequestCreateWithoutRevocationProcessInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  intakeSubmittedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutRevocationProcessInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  intakeSubmittedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutRevocationProcessInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationProcessInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationProcessInput>
+}
+
+export type CaseRequestUpsertWithoutRevocationProcessInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutRevocationProcessInput, Prisma.CaseRequestUncheckedUpdateWithoutRevocationProcessInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationProcessInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationProcessInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutRevocationProcessInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutRevocationProcessInput, Prisma.CaseRequestUncheckedUpdateWithoutRevocationProcessInput>
+}
+
+export type CaseRequestUpdateWithoutRevocationProcessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutRevocationProcessInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestCreateWithoutRevocationInput = {
+  id?: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  intakeSubmittedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRequestsInput
+  inquiries?: Prisma.CaseInquiryCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestUncheckedCreateWithoutRevocationInput = {
+  id?: string
+  caseFileId: string
+  type: $Enums.CaseRequestType
+  number: string
+  status?: $Enums.CaseRequestStatus
+  formationStep?: number
+  intakeSubmittedAt?: Date | string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedCreateNestedManyWithoutCaseRequestInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedCreateNestedOneWithoutCaseRequestInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedCreateNestedManyWithoutCaseRequestInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedCreateNestedManyWithoutCaseRequestInput
+  events?: Prisma.CaseRequestEventUncheckedCreateNestedManyWithoutRequestInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
+  finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
+}
+
+export type CaseRequestCreateOrConnectWithoutRevocationInput = {
+  where: Prisma.CaseRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationInput>
+}
+
+export type CaseRequestUpsertWithoutRevocationInput = {
+  update: Prisma.XOR<Prisma.CaseRequestUpdateWithoutRevocationInput, Prisma.CaseRequestUncheckedUpdateWithoutRevocationInput>
+  create: Prisma.XOR<Prisma.CaseRequestCreateWithoutRevocationInput, Prisma.CaseRequestUncheckedCreateWithoutRevocationInput>
+  where?: Prisma.CaseRequestWhereInput
+}
+
+export type CaseRequestUpdateToOneWithWhereWithoutRevocationInput = {
+  where?: Prisma.CaseRequestWhereInput
+  data: Prisma.XOR<Prisma.CaseRequestUpdateWithoutRevocationInput, Prisma.CaseRequestUncheckedUpdateWithoutRevocationInput>
+}
+
+export type CaseRequestUpdateWithoutRevocationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRequestsNestedInput
+  inquiries?: Prisma.CaseInquiryUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
+}
+
+export type CaseRequestUncheckedUpdateWithoutRevocationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCaseRequestTypeFieldUpdateOperationsInput | $Enums.CaseRequestType
+  number?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumCaseRequestStatusFieldUpdateOperationsInput | $Enums.CaseRequestStatus
+  formationStep?: Prisma.IntFieldUpdateOperationsInput | number
+  intakeSubmittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.CaseInquiryUncheckedUpdateManyWithoutCaseRequestNestedInput
+  placesReview?: Prisma.CasePlacesReviewUncheckedUpdateOneWithoutCaseRequestNestedInput
+  managementReviews?: Prisma.CaseManagementReviewUncheckedUpdateManyWithoutCaseRequestNestedInput
+  activityDocuments?: Prisma.CaseActivityDocumentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  events?: Prisma.CaseRequestEventUncheckedUpdateManyWithoutRequestNestedInput
+  renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
+  locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
+  replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
+  finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
+}
+
 export type CaseRequestCreateWithoutFinanceInput = {
   id?: string
   type: $Enums.CaseRequestType
@@ -1303,6 +1615,8 @@ export type CaseRequestCreateWithoutFinanceInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
 }
 
@@ -1326,6 +1640,8 @@ export type CaseRequestUncheckedCreateWithoutFinanceInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
 }
 
@@ -1365,6 +1681,8 @@ export type CaseRequestUpdateWithoutFinanceInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
 }
 
@@ -1388,6 +1706,8 @@ export type CaseRequestUncheckedUpdateWithoutFinanceInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
 }
 
@@ -1410,6 +1730,8 @@ export type CaseRequestCreateWithoutEventsInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1433,6 +1755,8 @@ export type CaseRequestUncheckedCreateWithoutEventsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1472,6 +1796,8 @@ export type CaseRequestUpdateWithoutEventsInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -1495,6 +1821,8 @@ export type CaseRequestUncheckedUpdateWithoutEventsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -1518,6 +1846,8 @@ export type CaseRequestCreateWithoutRenewalTermsInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1541,6 +1871,8 @@ export type CaseRequestUncheckedCreateWithoutRenewalTermsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1580,6 +1912,8 @@ export type CaseRequestUpdateWithoutRenewalTermsInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -1603,6 +1937,8 @@ export type CaseRequestUncheckedUpdateWithoutRenewalTermsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -1626,6 +1962,8 @@ export type CaseRequestCreateWithoutLocationDraftInput = {
   renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1649,6 +1987,8 @@ export type CaseRequestUncheckedCreateWithoutLocationDraftInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1688,6 +2028,8 @@ export type CaseRequestUpdateWithoutLocationDraftInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -1711,6 +2053,8 @@ export type CaseRequestUncheckedUpdateWithoutLocationDraftInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -1734,6 +2078,8 @@ export type CaseRequestCreateWithoutReplacedPremiseInput = {
   renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1757,6 +2103,8 @@ export type CaseRequestUncheckedCreateWithoutReplacedPremiseInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1796,6 +2144,8 @@ export type CaseRequestUpdateWithoutReplacedPremiseInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -1819,6 +2169,8 @@ export type CaseRequestUncheckedUpdateWithoutReplacedPremiseInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -1842,6 +2194,8 @@ export type CaseRequestCreateWithoutAuctionInput = {
   renewalTerms?: Prisma.CaseRenewalTermsCreateNestedOneWithoutRequestInput
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1865,6 +2219,8 @@ export type CaseRequestUncheckedCreateWithoutAuctionInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUncheckedCreateNestedOneWithoutRequestInput
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -1904,6 +2260,8 @@ export type CaseRequestUpdateWithoutAuctionInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUpdateOneWithoutRequestNestedInput
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -1927,6 +2285,8 @@ export type CaseRequestUncheckedUpdateWithoutAuctionInput = {
   renewalTerms?: Prisma.CaseRenewalTermsUncheckedUpdateOneWithoutRequestNestedInput
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -1950,6 +2310,8 @@ export type CaseRequestCreateWithoutActivityDocumentsInput = {
   locationDraft?: Prisma.CaseLocationDraftCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceCreateNestedOneWithoutRequestInput
 }
@@ -1973,6 +2335,8 @@ export type CaseRequestUncheckedCreateWithoutActivityDocumentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedCreateNestedOneWithoutRequestInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedCreateNestedOneWithoutReplacedByRequestInput
   auction?: Prisma.CaseAuctionUncheckedCreateNestedOneWithoutRequestInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedCreateNestedOneWithoutRequestInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutCaseRequestInput
   finance?: Prisma.CaseRequestFinanceUncheckedCreateNestedOneWithoutRequestInput
 }
@@ -2012,6 +2376,8 @@ export type CaseRequestUpdateWithoutActivityDocumentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -2035,6 +2401,8 @@ export type CaseRequestUncheckedUpdateWithoutActivityDocumentsInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -2070,6 +2438,8 @@ export type CaseRequestUpdateWithoutCaseFileInput = {
   locationDraft?: Prisma.CaseLocationDraftUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUpdateOneWithoutRequestNestedInput
 }
@@ -2093,6 +2463,8 @@ export type CaseRequestUncheckedUpdateWithoutCaseFileInput = {
   locationDraft?: Prisma.CaseLocationDraftUncheckedUpdateOneWithoutRequestNestedInput
   replacedPremise?: Prisma.CasePremiseHistoryUncheckedUpdateOneWithoutReplacedByRequestNestedInput
   auction?: Prisma.CaseAuctionUncheckedUpdateOneWithoutRequestNestedInput
+  revocation?: Prisma.CaseRevocationRequestUncheckedUpdateOneWithoutRequestNestedInput
+  revocationProcess?: Prisma.CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutCaseRequestNestedInput
   finance?: Prisma.CaseRequestFinanceUncheckedUpdateOneWithoutRequestNestedInput
 }
@@ -2197,6 +2569,8 @@ export type CaseRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   locationDraft?: boolean | Prisma.CaseRequest$locationDraftArgs<ExtArgs>
   replacedPremise?: boolean | Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>
   auction?: boolean | Prisma.CaseRequest$auctionArgs<ExtArgs>
+  revocation?: boolean | Prisma.CaseRequest$revocationArgs<ExtArgs>
+  revocationProcess?: boolean | Prisma.CaseRequest$revocationProcessArgs<ExtArgs>
   payments?: boolean | Prisma.CaseRequest$paymentsArgs<ExtArgs>
   finance?: boolean | Prisma.CaseRequest$financeArgs<ExtArgs>
   _count?: boolean | Prisma.CaseRequestCountOutputTypeDefaultArgs<ExtArgs>
@@ -2255,6 +2629,8 @@ export type CaseRequestInclude<ExtArgs extends runtime.Types.Extensions.Internal
   locationDraft?: boolean | Prisma.CaseRequest$locationDraftArgs<ExtArgs>
   replacedPremise?: boolean | Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>
   auction?: boolean | Prisma.CaseRequest$auctionArgs<ExtArgs>
+  revocation?: boolean | Prisma.CaseRequest$revocationArgs<ExtArgs>
+  revocationProcess?: boolean | Prisma.CaseRequest$revocationProcessArgs<ExtArgs>
   payments?: boolean | Prisma.CaseRequest$paymentsArgs<ExtArgs>
   finance?: boolean | Prisma.CaseRequest$financeArgs<ExtArgs>
   _count?: boolean | Prisma.CaseRequestCountOutputTypeDefaultArgs<ExtArgs>
@@ -2279,6 +2655,8 @@ export type $CaseRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
     locationDraft: Prisma.$CaseLocationDraftPayload<ExtArgs> | null
     replacedPremise: Prisma.$CasePremiseHistoryPayload<ExtArgs> | null
     auction: Prisma.$CaseAuctionPayload<ExtArgs> | null
+    revocation: Prisma.$CaseRevocationRequestPayload<ExtArgs> | null
+    revocationProcess: Prisma.$CaseRevocationProcessPayload<ExtArgs> | null
     payments: Prisma.$PaymentPayload<ExtArgs>[]
     finance: Prisma.$CaseRequestFinancePayload<ExtArgs> | null
   }
@@ -2703,6 +3081,8 @@ export interface Prisma__CaseRequestClient<T, Null = never, ExtArgs extends runt
   locationDraft<T extends Prisma.CaseRequest$locationDraftArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$locationDraftArgs<ExtArgs>>): Prisma.Prisma__CaseLocationDraftClient<runtime.Types.Result.GetResult<Prisma.$CaseLocationDraftPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   replacedPremise<T extends Prisma.CaseRequest$replacedPremiseArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$replacedPremiseArgs<ExtArgs>>): Prisma.Prisma__CasePremiseHistoryClient<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   auction<T extends Prisma.CaseRequest$auctionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$auctionArgs<ExtArgs>>): Prisma.Prisma__CaseAuctionClient<runtime.Types.Result.GetResult<Prisma.$CaseAuctionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  revocation<T extends Prisma.CaseRequest$revocationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$revocationArgs<ExtArgs>>): Prisma.Prisma__CaseRevocationRequestClient<runtime.Types.Result.GetResult<Prisma.$CaseRevocationRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  revocationProcess<T extends Prisma.CaseRequest$revocationProcessArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$revocationProcessArgs<ExtArgs>>): Prisma.Prisma__CaseRevocationProcessClient<runtime.Types.Result.GetResult<Prisma.$CaseRevocationProcessPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   payments<T extends Prisma.CaseRequest$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   finance<T extends Prisma.CaseRequest$financeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRequest$financeArgs<ExtArgs>>): Prisma.Prisma__CaseRequestFinanceClient<runtime.Types.Result.GetResult<Prisma.$CaseRequestFinancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
@@ -3333,6 +3713,44 @@ export type CaseRequest$auctionArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.CaseAuctionInclude<ExtArgs> | null
   where?: Prisma.CaseAuctionWhereInput
+}
+
+/**
+ * CaseRequest.revocation
+ */
+export type CaseRequest$revocationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRevocationRequest
+   */
+  select?: Prisma.CaseRevocationRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRevocationRequest
+   */
+  omit?: Prisma.CaseRevocationRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRevocationRequestInclude<ExtArgs> | null
+  where?: Prisma.CaseRevocationRequestWhereInput
+}
+
+/**
+ * CaseRequest.revocationProcess
+ */
+export type CaseRequest$revocationProcessArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRevocationProcess
+   */
+  select?: Prisma.CaseRevocationProcessSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRevocationProcess
+   */
+  omit?: Prisma.CaseRevocationProcessOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRevocationProcessInclude<ExtArgs> | null
+  where?: Prisma.CaseRevocationProcessWhereInput
 }
 
 /**

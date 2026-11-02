@@ -2,8 +2,10 @@ import {
   BadRequestException,
   ConflictException,
   ForbiddenException,
+  Inject,
   Injectable,
   NotFoundException,
+  forwardRef,
 } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import {
@@ -23,6 +25,7 @@ import {
 } from './dto/find-management-reviews-query.dto';
 import { managementResponseCutoff } from './management-review-deadline';
 import { CaseAuctionService } from './case-auction.service';
+import type { CaseRevocationProcessService } from './case-revocation-process.service';
 import { PersonFileStorage } from './person-file.storage';
 import {
   assertRequestMutable,
@@ -74,6 +77,14 @@ export class CaseManagementApproversService {
     private readonly prisma: PrismaService,
     private readonly files: PersonFileStorage,
     private readonly auction: CaseAuctionService,
+    @Inject(
+      forwardRef(
+        () =>
+          require('./case-revocation-process.service')
+            .CaseRevocationProcessService as typeof import('./case-revocation-process.service').CaseRevocationProcessService,
+      ),
+    )
+    private readonly revocation: CaseRevocationProcessService,
   ) {}
 
   async findAll(query: FindCaseManagementApproversQueryDto) {
@@ -177,7 +188,7 @@ export class CaseManagementApproversService {
 
   private async targetRequest(caseFileId: string) {
     const open = await findOpenRequest(this.prisma, caseFileId);
-    if (open && (isProcessType(open.type) || open.type === 'STEWARDSHIP')) return open;
+    if (open && (isProcessType(open.type) || open.type === 'STEWARDSHIP' || open.type === 'REVOCATION')) return open;
     return this.prisma.caseRequest.findFirst({
       where: { caseFileId, type: 'ISSUANCE' },
       orderBy: { createdAt: 'desc' },
@@ -328,6 +339,16 @@ export class CaseManagementApproversService {
       include: reviewInclude,
     });
     await this.auction.syncPhase(saved.caseRequestId);
+    if (input.status === CaseInquiryStatus.REJECTED) {
+      await this.prisma.caseRequest.updateMany({
+        where: {
+          id: saved.caseRequestId,
+          type: CaseRequestType.REVOCATION,
+          status: CaseRequestStatus.OPEN,
+        },
+        data: { status: CaseRequestStatus.REJECTED, completedAt: new Date() },
+      });
+    }
     return this.mapReview(saved, await this.peopleFor(saved));
   }
 
@@ -352,6 +373,16 @@ export class CaseManagementApproversService {
     });
     const phase = owner ? managementRewindPhase(owner.type) : null;
     if (phase != null) await rewindRequestPhase(this.prisma, saved.caseRequestId, phase);
+    if (owner?.type === CaseRequestType.REVOCATION) {
+      await this.prisma.caseRequest.updateMany({
+        where: {
+          id: saved.caseRequestId,
+          type: CaseRequestType.REVOCATION,
+          status: CaseRequestStatus.REJECTED,
+        },
+        data: { status: CaseRequestStatus.OPEN, completedAt: null },
+      });
+    }
     await this.auction.syncPhase(saved.caseRequestId);
     return this.mapReview(saved, await this.peopleFor(saved));
   }
@@ -594,6 +625,23 @@ export class CaseManagementApproversService {
         data: { formationStep: 5 },
       });
       return { formationStep: 5 };
+    }
+    if (request.type === CaseRequestType.REVOCATION) {
+      const rejected = await this.prisma.caseManagementReview.count({
+        where: {
+          caseRequestId: request.id,
+          roleId: { in: configuredRoleIds },
+          status: CaseInquiryStatus.REJECTED,
+        },
+      });
+      if (rejected > 0) {
+        await this.prisma.caseRequest.updateMany({
+          where: { id: request.id, status: CaseRequestStatus.OPEN },
+          data: { status: CaseRequestStatus.REJECTED, completedAt: new Date() },
+        });
+        return null;
+      }
+      return this.revocation.startFromApprovedRequest(request.id);
     }
     return null;
   }

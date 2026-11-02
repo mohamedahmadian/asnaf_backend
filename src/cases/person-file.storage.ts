@@ -206,6 +206,119 @@ export class PersonFileStorage {
     };
   }
 
+  async savePremise(input: {
+    personId: string;
+    caseFileId: string;
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = await this.prepare(input.buffer, input.mimeType);
+    const storageKey = [
+      'persons',
+      input.personId,
+      'cases',
+      input.caseFileId,
+      'premise',
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
+  async saveRevocationRequest(input: {
+    personId: string;
+    caseFileId: string;
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = await this.prepare(input.buffer, input.mimeType);
+    const storageKey = [
+      'persons',
+      input.personId,
+      'cases',
+      input.caseFileId,
+      'revocation-request',
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
+  async saveRevocationProcess(input: {
+    personId: string;
+    caseFileId: string;
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = await this.prepare(input.buffer, input.mimeType);
+    const storageKey = [
+      'persons',
+      input.personId,
+      'cases',
+      input.caseFileId,
+      'revocation-process',
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
+  async saveRental(input: {
+    personId: string;
+    licenseId: string;
+    folder: 'documents' | 'premise' | 'reviews';
+    fileId: string;
+    buffer: Buffer;
+    mimeType: string;
+    originalName: string;
+  }): Promise<StoredPersonFile> {
+    const prepared = await this.prepare(input.buffer, input.mimeType);
+    const storageKey = [
+      'persons',
+      input.personId,
+      'rental',
+      input.licenseId,
+      input.folder,
+      `${input.fileId}.${prepared.ext}`,
+    ].join('/');
+    const absolute = this.resolve(storageKey);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, prepared.data);
+    return {
+      storageKey,
+      mimeType: prepared.mimeType,
+      byteSize: prepared.data.length,
+      originalName: input.originalName,
+    };
+  }
+
   async saveManagementReview(input: {
     personId: string;
     reviewId: string;

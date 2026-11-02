@@ -199,6 +199,7 @@ export type RegistrationPlaceWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   premiseCases?: Prisma.CaseFileListRelationFilter
+  rentalPremiseLicenses?: Prisma.RentalLicenseListRelationFilter
   locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
   premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
 }
@@ -212,6 +213,7 @@ export type RegistrationPlaceOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   premiseCases?: Prisma.CaseFileOrderByRelationAggregateInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseOrderByRelationAggregateInput
   locationDrafts?: Prisma.CaseLocationDraftOrderByRelationAggregateInput
   premiseHistories?: Prisma.CasePremiseHistoryOrderByRelationAggregateInput
 }
@@ -228,6 +230,7 @@ export type RegistrationPlaceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RegistrationPlace"> | Date | string
   premiseCases?: Prisma.CaseFileListRelationFilter
+  rentalPremiseLicenses?: Prisma.RentalLicenseListRelationFilter
   locationDrafts?: Prisma.CaseLocationDraftListRelationFilter
   premiseHistories?: Prisma.CasePremiseHistoryListRelationFilter
 }, "id" | "title" | "isDefault">
@@ -267,6 +270,7 @@ export type RegistrationPlaceCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutRegistrationPlaceInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutRegistrationPlaceInput
 }
@@ -280,6 +284,7 @@ export type RegistrationPlaceUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutRegistrationPlaceInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutRegistrationPlaceInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
@@ -293,6 +298,7 @@ export type RegistrationPlaceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutRegistrationPlaceNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutRegistrationPlaceNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutRegistrationPlaceNestedInput
 }
@@ -306,6 +312,7 @@ export type RegistrationPlaceUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
@@ -375,6 +382,22 @@ export type RegistrationPlaceMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type RegistrationPlaceCreateNestedOneWithoutRentalPremiseLicensesInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutRentalPremiseLicensesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutRentalPremiseLicensesInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutRentalPremiseLicensesInput
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+}
+
+export type RegistrationPlaceUpdateOneWithoutRentalPremiseLicensesNestedInput = {
+  create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutRentalPremiseLicensesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutRentalPremiseLicensesInput>
+  connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutRentalPremiseLicensesInput
+  upsert?: Prisma.RegistrationPlaceUpsertWithoutRentalPremiseLicensesInput
+  disconnect?: Prisma.RegistrationPlaceWhereInput | boolean
+  delete?: Prisma.RegistrationPlaceWhereInput | boolean
+  connect?: Prisma.RegistrationPlaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutRentalPremiseLicensesInput, Prisma.RegistrationPlaceUpdateWithoutRentalPremiseLicensesInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutRentalPremiseLicensesInput>
+}
+
 export type RegistrationPlaceCreateNestedOneWithoutPremiseCasesInput = {
   create?: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutPremiseCasesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput>
   connectOrCreate?: Prisma.RegistrationPlaceCreateOrConnectWithoutPremiseCasesInput
@@ -423,6 +446,74 @@ export type RegistrationPlaceUpdateOneWithoutPremiseHistoriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RegistrationPlaceUpdateToOneWithWhereWithoutPremiseHistoriesInput, Prisma.RegistrationPlaceUpdateWithoutPremiseHistoriesInput>, Prisma.RegistrationPlaceUncheckedUpdateWithoutPremiseHistoriesInput>
 }
 
+export type RegistrationPlaceCreateWithoutRentalPremiseLicensesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  isDefault?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
+  locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutRegistrationPlaceInput
+}
+
+export type RegistrationPlaceUncheckedCreateWithoutRentalPremiseLicensesInput = {
+  id?: string
+  title: string
+  description?: string | null
+  isActive?: boolean
+  isDefault?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+}
+
+export type RegistrationPlaceCreateOrConnectWithoutRentalPremiseLicensesInput = {
+  where: Prisma.RegistrationPlaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutRentalPremiseLicensesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutRentalPremiseLicensesInput>
+}
+
+export type RegistrationPlaceUpsertWithoutRentalPremiseLicensesInput = {
+  update: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutRentalPremiseLicensesInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutRentalPremiseLicensesInput>
+  create: Prisma.XOR<Prisma.RegistrationPlaceCreateWithoutRentalPremiseLicensesInput, Prisma.RegistrationPlaceUncheckedCreateWithoutRentalPremiseLicensesInput>
+  where?: Prisma.RegistrationPlaceWhereInput
+}
+
+export type RegistrationPlaceUpdateToOneWithWhereWithoutRentalPremiseLicensesInput = {
+  where?: Prisma.RegistrationPlaceWhereInput
+  data: Prisma.XOR<Prisma.RegistrationPlaceUpdateWithoutRentalPremiseLicensesInput, Prisma.RegistrationPlaceUncheckedUpdateWithoutRentalPremiseLicensesInput>
+}
+
+export type RegistrationPlaceUpdateWithoutRentalPremiseLicensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutRegistrationPlaceNestedInput
+}
+
+export type RegistrationPlaceUncheckedUpdateWithoutRentalPremiseLicensesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+}
+
 export type RegistrationPlaceCreateWithoutPremiseCasesInput = {
   id?: string
   title: string
@@ -431,6 +522,7 @@ export type RegistrationPlaceCreateWithoutPremiseCasesInput = {
   isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutRegistrationPlaceInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutRegistrationPlaceInput
 }
@@ -443,6 +535,7 @@ export type RegistrationPlaceUncheckedCreateWithoutPremiseCasesInput = {
   isDefault?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutRegistrationPlaceInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutRegistrationPlaceInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
@@ -471,6 +564,7 @@ export type RegistrationPlaceUpdateWithoutPremiseCasesInput = {
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutRegistrationPlaceNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutRegistrationPlaceNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutRegistrationPlaceNestedInput
 }
@@ -483,6 +577,7 @@ export type RegistrationPlaceUncheckedUpdateWithoutPremiseCasesInput = {
   isDefault?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
@@ -496,6 +591,7 @@ export type RegistrationPlaceCreateWithoutLocationDraftsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutRegistrationPlaceInput
   premiseHistories?: Prisma.CasePremiseHistoryCreateNestedManyWithoutRegistrationPlaceInput
 }
 
@@ -508,6 +604,7 @@ export type RegistrationPlaceUncheckedCreateWithoutLocationDraftsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutRegistrationPlaceInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
 
@@ -536,6 +633,7 @@ export type RegistrationPlaceUpdateWithoutLocationDraftsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutRegistrationPlaceNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
@@ -548,6 +646,7 @@ export type RegistrationPlaceUncheckedUpdateWithoutLocationDraftsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
   premiseHistories?: Prisma.CasePremiseHistoryUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
@@ -560,6 +659,7 @@ export type RegistrationPlaceCreateWithoutPremiseHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileCreateNestedManyWithoutRegistrationPlaceInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseCreateNestedManyWithoutRegistrationPlaceInput
   locationDrafts?: Prisma.CaseLocationDraftCreateNestedManyWithoutRegistrationPlaceInput
 }
 
@@ -572,6 +672,7 @@ export type RegistrationPlaceUncheckedCreateWithoutPremiseHistoriesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   premiseCases?: Prisma.CaseFileUncheckedCreateNestedManyWithoutRegistrationPlaceInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedCreateNestedManyWithoutRegistrationPlaceInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedCreateNestedManyWithoutRegistrationPlaceInput
 }
 
@@ -600,6 +701,7 @@ export type RegistrationPlaceUpdateWithoutPremiseHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUpdateManyWithoutRegistrationPlaceNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUpdateManyWithoutRegistrationPlaceNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
@@ -612,6 +714,7 @@ export type RegistrationPlaceUncheckedUpdateWithoutPremiseHistoriesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   premiseCases?: Prisma.CaseFileUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
+  rentalPremiseLicenses?: Prisma.RentalLicenseUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
   locationDrafts?: Prisma.CaseLocationDraftUncheckedUpdateManyWithoutRegistrationPlaceNestedInput
 }
 
@@ -622,12 +725,14 @@ export type RegistrationPlaceUncheckedUpdateWithoutPremiseHistoriesInput = {
 
 export type RegistrationPlaceCountOutputType = {
   premiseCases: number
+  rentalPremiseLicenses: number
   locationDrafts: number
   premiseHistories: number
 }
 
 export type RegistrationPlaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   premiseCases?: boolean | RegistrationPlaceCountOutputTypeCountPremiseCasesArgs
+  rentalPremiseLicenses?: boolean | RegistrationPlaceCountOutputTypeCountRentalPremiseLicensesArgs
   locationDrafts?: boolean | RegistrationPlaceCountOutputTypeCountLocationDraftsArgs
   premiseHistories?: boolean | RegistrationPlaceCountOutputTypeCountPremiseHistoriesArgs
 }
@@ -647,6 +752,13 @@ export type RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs extends runtime.
  */
 export type RegistrationPlaceCountOutputTypeCountPremiseCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CaseFileWhereInput
+}
+
+/**
+ * RegistrationPlaceCountOutputType without action
+ */
+export type RegistrationPlaceCountOutputTypeCountRentalPremiseLicensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RentalLicenseWhereInput
 }
 
 /**
@@ -673,6 +785,7 @@ export type RegistrationPlaceSelect<ExtArgs extends runtime.Types.Extensions.Int
   createdAt?: boolean
   updatedAt?: boolean
   premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
+  rentalPremiseLicenses?: boolean | Prisma.RegistrationPlace$rentalPremiseLicensesArgs<ExtArgs>
   locationDrafts?: boolean | Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs>
   premiseHistories?: boolean | Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
@@ -711,6 +824,7 @@ export type RegistrationPlaceSelectScalar = {
 export type RegistrationPlaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "isActive" | "isDefault" | "createdAt" | "updatedAt", ExtArgs["result"]["registrationPlace"]>
 export type RegistrationPlaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   premiseCases?: boolean | Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>
+  rentalPremiseLicenses?: boolean | Prisma.RegistrationPlace$rentalPremiseLicensesArgs<ExtArgs>
   locationDrafts?: boolean | Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs>
   premiseHistories?: boolean | Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.RegistrationPlaceCountOutputTypeDefaultArgs<ExtArgs>
@@ -722,6 +836,7 @@ export type $RegistrationPlacePayload<ExtArgs extends runtime.Types.Extensions.I
   name: "RegistrationPlace"
   objects: {
     premiseCases: Prisma.$CaseFilePayload<ExtArgs>[]
+    rentalPremiseLicenses: Prisma.$RentalLicensePayload<ExtArgs>[]
     locationDrafts: Prisma.$CaseLocationDraftPayload<ExtArgs>[]
     premiseHistories: Prisma.$CasePremiseHistoryPayload<ExtArgs>[]
   }
@@ -1128,6 +1243,7 @@ readonly fields: RegistrationPlaceFieldRefs;
 export interface Prisma__RegistrationPlaceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   premiseCases<T extends Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$premiseCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rentalPremiseLicenses<T extends Prisma.RegistrationPlace$rentalPremiseLicensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$rentalPremiseLicensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalLicensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   locationDrafts<T extends Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$locationDraftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseLocationDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   premiseHistories<T extends Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegistrationPlace$premiseHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CasePremiseHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1580,6 +1696,30 @@ export type RegistrationPlace$premiseCasesArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.CaseFileScalarFieldEnum | Prisma.CaseFileScalarFieldEnum[]
+}
+
+/**
+ * RegistrationPlace.rentalPremiseLicenses
+ */
+export type RegistrationPlace$rentalPremiseLicensesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RentalLicense
+   */
+  select?: Prisma.RentalLicenseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RentalLicense
+   */
+  omit?: Prisma.RentalLicenseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RentalLicenseInclude<ExtArgs> | null
+  where?: Prisma.RentalLicenseWhereInput
+  orderBy?: Prisma.RentalLicenseOrderByWithRelationInput | Prisma.RentalLicenseOrderByWithRelationInput[]
+  cursor?: Prisma.RentalLicenseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RentalLicenseScalarFieldEnum | Prisma.RentalLicenseScalarFieldEnum[]
 }
 
 /**

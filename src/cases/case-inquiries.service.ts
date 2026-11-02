@@ -570,6 +570,17 @@ export class CaseInquiriesService {
         leaseExpiresAt: true,
         leaseAgency: true,
         premiseOwnerName: true,
+        premiseOwnerNationalId: true,
+        premiseFiles: {
+          orderBy: [{ createdAt: 'asc' as const }, { id: 'asc' as const }],
+          select: {
+            id: true,
+            kind: true,
+            originalName: true,
+            mimeType: true,
+            byteSize: true,
+          },
+        },
         activityJobId: true,
         activityJob: {
           select: {
@@ -647,6 +658,8 @@ export class CaseInquiriesService {
       leaseExpiresAt: dossier.leaseExpiresAt,
       leaseAgency: dossier.leaseAgency,
       premiseOwnerName: dossier.premiseOwnerName,
+      premiseOwnerNationalId: dossier.premiseOwnerNationalId,
+      premiseFiles: dossier.premiseFiles,
       activityJob: dossier.activityJob,
       premiseCity: dossier.premiseCity,
       premiseComplex: dossier.premiseComplex,
@@ -665,8 +678,10 @@ export class CaseInquiriesService {
         : Promise.resolve([]),
       this.prisma.caseActivityDocument.findMany({
         where: { caseRequestId: request?.id ?? 'none' },
+        orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
         select: {
           documentId: true,
+          document: { select: { title: true } },
           versions: {
             orderBy: { version: 'desc' },
             take: 1,
@@ -676,15 +691,21 @@ export class CaseInquiriesService {
       }),
     ]);
 
-    const currentFile = (documentId: string) => {
-      const version = stored.find((row) => row.documentId === documentId)?.versions[0];
-      if (!version) return null;
-      return {
+    const filesByType = new Map<
+      string,
+      { id: string; originalName: string | null; mimeType: string }[]
+    >();
+    for (const row of stored) {
+      const version = row.versions[0];
+      if (!version) continue;
+      const list = filesByType.get(row.documentId) ?? [];
+      list.push({
         id: version.id,
         originalName: version.originalName,
         mimeType: version.mimeType,
-      };
-    };
+      });
+      filesByType.set(row.documentId, list);
+    }
     const seen = new Set<string>();
     const documents: {
       id: string;
@@ -693,25 +714,53 @@ export class CaseInquiriesService {
       isRequired: boolean;
       file: { id: string; originalName: string | null; mimeType: string } | null;
     }[] = [];
+    const pushType = (
+      typeId: string,
+      title: string,
+      isRequired: boolean,
+      group: 'FIXED' | 'JOB',
+    ) => {
+      const files = filesByType.get(typeId) ?? [];
+      if (files.length === 0) {
+        documents.push({
+          id: typeId,
+          title,
+          group,
+          isRequired,
+          file: null,
+        });
+        return;
+      }
+      for (const file of files) {
+        documents.push({
+          id: file.id,
+          title,
+          group,
+          isRequired,
+          file,
+        });
+      }
+    };
     let fixedTotal = 0;
     const jobTotal = requiredDocs.length;
     for (const doc of requiredDocs) {
       if (seen.has(doc.id)) continue;
       seen.add(doc.id);
-      documents.push({
-        id: doc.id,
-        title: doc.title,
-        group: 'JOB',
-        isRequired: doc.isRequired,
-        file: currentFile(doc.id),
-      });
+      pushType(doc.id, doc.title, doc.isRequired, 'JOB');
+    }
+    for (const row of stored) {
+      if (seen.has(row.documentId) || !row.versions[0]) continue;
+      seen.add(row.documentId);
+      pushType(row.documentId, row.document.title, false, 'JOB');
     }
     documents.sort((left, right) => {
       if (left.group !== right.group) return left.group === 'FIXED' ? -1 : 1;
       return left.title.localeCompare(right.title, 'fa');
     });
     const uploaded = documents.filter((item) => item.file).length;
-    const remaining = documents.filter((item) => item.isRequired && !item.file).length;
+    const remaining = requiredDocs.filter(
+      (item) => item.isRequired && !(filesByType.get(item.id)?.length),
+    ).length;
 
     return {
       person: {
@@ -771,6 +820,8 @@ export class CaseInquiriesService {
         leaseExpiresAt: dateOnly(user.leaseExpiresAt),
         leaseAgency: user.leaseAgency,
         ownerName: user.premiseOwnerName,
+        ownerNationalId: user.premiseOwnerNationalId,
+        files: user.premiseFiles ?? [],
       },
     };
   }

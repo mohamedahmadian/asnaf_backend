@@ -37,6 +37,7 @@ export type CaseRevocationProcessSumAggregateOutputType = {
 export type CaseRevocationProcessMinAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  requestId: string | null
   amount: runtime.Decimal | null
   revocationDate: Date | null
   createdAt: Date | null
@@ -46,6 +47,7 @@ export type CaseRevocationProcessMinAggregateOutputType = {
 export type CaseRevocationProcessMaxAggregateOutputType = {
   id: string | null
   caseFileId: string | null
+  requestId: string | null
   amount: runtime.Decimal | null
   revocationDate: Date | null
   createdAt: Date | null
@@ -55,6 +57,7 @@ export type CaseRevocationProcessMaxAggregateOutputType = {
 export type CaseRevocationProcessCountAggregateOutputType = {
   id: number
   caseFileId: number
+  requestId: number
   amount: number
   revocationDate: number
   createdAt: number
@@ -74,6 +77,7 @@ export type CaseRevocationProcessSumAggregateInputType = {
 export type CaseRevocationProcessMinAggregateInputType = {
   id?: true
   caseFileId?: true
+  requestId?: true
   amount?: true
   revocationDate?: true
   createdAt?: true
@@ -83,6 +87,7 @@ export type CaseRevocationProcessMinAggregateInputType = {
 export type CaseRevocationProcessMaxAggregateInputType = {
   id?: true
   caseFileId?: true
+  requestId?: true
   amount?: true
   revocationDate?: true
   createdAt?: true
@@ -92,6 +97,7 @@ export type CaseRevocationProcessMaxAggregateInputType = {
 export type CaseRevocationProcessCountAggregateInputType = {
   id?: true
   caseFileId?: true
+  requestId?: true
   amount?: true
   revocationDate?: true
   createdAt?: true
@@ -188,6 +194,7 @@ export type CaseRevocationProcessGroupByArgs<ExtArgs extends runtime.Types.Exten
 export type CaseRevocationProcessGroupByOutputType = {
   id: string
   caseFileId: string
+  requestId: string | null
   amount: runtime.Decimal
   revocationDate: Date | null
   createdAt: Date
@@ -220,28 +227,35 @@ export type CaseRevocationProcessWhereInput = {
   NOT?: Prisma.CaseRevocationProcessWhereInput | Prisma.CaseRevocationProcessWhereInput[]
   id?: Prisma.StringFilter<"CaseRevocationProcess"> | string
   caseFileId?: Prisma.StringFilter<"CaseRevocationProcess"> | string
+  requestId?: Prisma.StringNullableFilter<"CaseRevocationProcess"> | string | null
   amount?: Prisma.DecimalFilter<"CaseRevocationProcess"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Prisma.DateTimeNullableFilter<"CaseRevocationProcess"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"CaseRevocationProcess"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseRevocationProcess"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  request?: Prisma.XOR<Prisma.CaseRequestNullableScalarRelationFilter, Prisma.CaseRequestWhereInput> | null
   letters?: Prisma.CaseRevocationLetterListRelationFilter
+  files?: Prisma.CaseRevocationProcessFileListRelationFilter
 }
 
 export type CaseRevocationProcessOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  requestId?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
   revocationDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   caseFile?: Prisma.CaseFileOrderByWithRelationInput
+  request?: Prisma.CaseRequestOrderByWithRelationInput
   letters?: Prisma.CaseRevocationLetterOrderByRelationAggregateInput
+  files?: Prisma.CaseRevocationProcessFileOrderByRelationAggregateInput
 }
 
 export type CaseRevocationProcessWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   caseFileId?: string
+  requestId?: string
   AND?: Prisma.CaseRevocationProcessWhereInput | Prisma.CaseRevocationProcessWhereInput[]
   OR?: Prisma.CaseRevocationProcessWhereInput[]
   NOT?: Prisma.CaseRevocationProcessWhereInput | Prisma.CaseRevocationProcessWhereInput[]
@@ -250,12 +264,15 @@ export type CaseRevocationProcessWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"CaseRevocationProcess"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CaseRevocationProcess"> | Date | string
   caseFile?: Prisma.XOR<Prisma.CaseFileScalarRelationFilter, Prisma.CaseFileWhereInput>
+  request?: Prisma.XOR<Prisma.CaseRequestNullableScalarRelationFilter, Prisma.CaseRequestWhereInput> | null
   letters?: Prisma.CaseRevocationLetterListRelationFilter
-}, "id" | "caseFileId">
+  files?: Prisma.CaseRevocationProcessFileListRelationFilter
+}, "id" | "caseFileId" | "requestId">
 
 export type CaseRevocationProcessOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  requestId?: Prisma.SortOrderInput | Prisma.SortOrder
   amount?: Prisma.SortOrder
   revocationDate?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -273,6 +290,7 @@ export type CaseRevocationProcessScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CaseRevocationProcessScalarWhereWithAggregatesInput | Prisma.CaseRevocationProcessScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CaseRevocationProcess"> | string
   caseFileId?: Prisma.StringWithAggregatesFilter<"CaseRevocationProcess"> | string
+  requestId?: Prisma.StringNullableWithAggregatesFilter<"CaseRevocationProcess"> | string | null
   amount?: Prisma.DecimalWithAggregatesFilter<"CaseRevocationProcess"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Prisma.DateTimeNullableWithAggregatesFilter<"CaseRevocationProcess"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CaseRevocationProcess"> | Date | string
@@ -286,17 +304,21 @@ export type CaseRevocationProcessCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutRevocationProcessInput
+  request?: Prisma.CaseRequestCreateNestedOneWithoutRevocationProcessInput
   letters?: Prisma.CaseRevocationLetterCreateNestedManyWithoutProcessInput
+  files?: Prisma.CaseRevocationProcessFileCreateNestedManyWithoutProcessInput
 }
 
 export type CaseRevocationProcessUncheckedCreateInput = {
   id?: string
   caseFileId: string
+  requestId?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   letters?: Prisma.CaseRevocationLetterUncheckedCreateNestedManyWithoutProcessInput
+  files?: Prisma.CaseRevocationProcessFileUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type CaseRevocationProcessUpdateInput = {
@@ -306,22 +328,27 @@ export type CaseRevocationProcessUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRevocationProcessNestedInput
+  request?: Prisma.CaseRequestUpdateOneWithoutRevocationProcessNestedInput
   letters?: Prisma.CaseRevocationLetterUpdateManyWithoutProcessNestedInput
+  files?: Prisma.CaseRevocationProcessFileUpdateManyWithoutProcessNestedInput
 }
 
 export type CaseRevocationProcessUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   letters?: Prisma.CaseRevocationLetterUncheckedUpdateManyWithoutProcessNestedInput
+  files?: Prisma.CaseRevocationProcessFileUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 export type CaseRevocationProcessCreateManyInput = {
   id?: string
   caseFileId: string
+  requestId?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Date | string | null
   createdAt?: Date | string
@@ -339,6 +366,7 @@ export type CaseRevocationProcessUpdateManyMutationInput = {
 export type CaseRevocationProcessUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -353,6 +381,7 @@ export type CaseRevocationProcessNullableScalarRelationFilter = {
 export type CaseRevocationProcessCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  requestId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   revocationDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -366,6 +395,7 @@ export type CaseRevocationProcessAvgOrderByAggregateInput = {
 export type CaseRevocationProcessMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  requestId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   revocationDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -375,6 +405,7 @@ export type CaseRevocationProcessMaxOrderByAggregateInput = {
 export type CaseRevocationProcessMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   caseFileId?: Prisma.SortOrder
+  requestId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
   revocationDate?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -422,6 +453,20 @@ export type CaseRevocationProcessUncheckedUpdateOneWithoutCaseFileNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRevocationProcessUpdateToOneWithWhereWithoutCaseFileInput, Prisma.CaseRevocationProcessUpdateWithoutCaseFileInput>, Prisma.CaseRevocationProcessUncheckedUpdateWithoutCaseFileInput>
 }
 
+export type CaseRevocationProcessCreateNestedOneWithoutFilesInput = {
+  create?: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutFilesInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutFilesInput>
+  connectOrCreate?: Prisma.CaseRevocationProcessCreateOrConnectWithoutFilesInput
+  connect?: Prisma.CaseRevocationProcessWhereUniqueInput
+}
+
+export type CaseRevocationProcessUpdateOneRequiredWithoutFilesNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutFilesInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutFilesInput>
+  connectOrCreate?: Prisma.CaseRevocationProcessCreateOrConnectWithoutFilesInput
+  upsert?: Prisma.CaseRevocationProcessUpsertWithoutFilesInput
+  connect?: Prisma.CaseRevocationProcessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRevocationProcessUpdateToOneWithWhereWithoutFilesInput, Prisma.CaseRevocationProcessUpdateWithoutFilesInput>, Prisma.CaseRevocationProcessUncheckedUpdateWithoutFilesInput>
+}
+
 export type CaseRevocationProcessCreateNestedOneWithoutLettersInput = {
   create?: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutLettersInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutLettersInput>
   connectOrCreate?: Prisma.CaseRevocationProcessCreateOrConnectWithoutLettersInput
@@ -436,22 +481,58 @@ export type CaseRevocationProcessUpdateOneRequiredWithoutLettersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRevocationProcessUpdateToOneWithWhereWithoutLettersInput, Prisma.CaseRevocationProcessUpdateWithoutLettersInput>, Prisma.CaseRevocationProcessUncheckedUpdateWithoutLettersInput>
 }
 
+export type CaseRevocationProcessCreateNestedOneWithoutRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutRequestInput>
+  connectOrCreate?: Prisma.CaseRevocationProcessCreateOrConnectWithoutRequestInput
+  connect?: Prisma.CaseRevocationProcessWhereUniqueInput
+}
+
+export type CaseRevocationProcessUncheckedCreateNestedOneWithoutRequestInput = {
+  create?: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutRequestInput>
+  connectOrCreate?: Prisma.CaseRevocationProcessCreateOrConnectWithoutRequestInput
+  connect?: Prisma.CaseRevocationProcessWhereUniqueInput
+}
+
+export type CaseRevocationProcessUpdateOneWithoutRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutRequestInput>
+  connectOrCreate?: Prisma.CaseRevocationProcessCreateOrConnectWithoutRequestInput
+  upsert?: Prisma.CaseRevocationProcessUpsertWithoutRequestInput
+  disconnect?: Prisma.CaseRevocationProcessWhereInput | boolean
+  delete?: Prisma.CaseRevocationProcessWhereInput | boolean
+  connect?: Prisma.CaseRevocationProcessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRevocationProcessUpdateToOneWithWhereWithoutRequestInput, Prisma.CaseRevocationProcessUpdateWithoutRequestInput>, Prisma.CaseRevocationProcessUncheckedUpdateWithoutRequestInput>
+}
+
+export type CaseRevocationProcessUncheckedUpdateOneWithoutRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutRequestInput>
+  connectOrCreate?: Prisma.CaseRevocationProcessCreateOrConnectWithoutRequestInput
+  upsert?: Prisma.CaseRevocationProcessUpsertWithoutRequestInput
+  disconnect?: Prisma.CaseRevocationProcessWhereInput | boolean
+  delete?: Prisma.CaseRevocationProcessWhereInput | boolean
+  connect?: Prisma.CaseRevocationProcessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CaseRevocationProcessUpdateToOneWithWhereWithoutRequestInput, Prisma.CaseRevocationProcessUpdateWithoutRequestInput>, Prisma.CaseRevocationProcessUncheckedUpdateWithoutRequestInput>
+}
+
 export type CaseRevocationProcessCreateWithoutCaseFileInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  request?: Prisma.CaseRequestCreateNestedOneWithoutRevocationProcessInput
   letters?: Prisma.CaseRevocationLetterCreateNestedManyWithoutProcessInput
+  files?: Prisma.CaseRevocationProcessFileCreateNestedManyWithoutProcessInput
 }
 
 export type CaseRevocationProcessUncheckedCreateWithoutCaseFileInput = {
   id?: string
+  requestId?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   letters?: Prisma.CaseRevocationLetterUncheckedCreateNestedManyWithoutProcessInput
+  files?: Prisma.CaseRevocationProcessFileUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type CaseRevocationProcessCreateOrConnectWithoutCaseFileInput = {
@@ -476,11 +557,75 @@ export type CaseRevocationProcessUpdateWithoutCaseFileInput = {
   revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  request?: Prisma.CaseRequestUpdateOneWithoutRevocationProcessNestedInput
   letters?: Prisma.CaseRevocationLetterUpdateManyWithoutProcessNestedInput
+  files?: Prisma.CaseRevocationProcessFileUpdateManyWithoutProcessNestedInput
 }
 
 export type CaseRevocationProcessUncheckedUpdateWithoutCaseFileInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  letters?: Prisma.CaseRevocationLetterUncheckedUpdateManyWithoutProcessNestedInput
+  files?: Prisma.CaseRevocationProcessFileUncheckedUpdateManyWithoutProcessNestedInput
+}
+
+export type CaseRevocationProcessCreateWithoutFilesInput = {
+  id?: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRevocationProcessInput
+  request?: Prisma.CaseRequestCreateNestedOneWithoutRevocationProcessInput
+  letters?: Prisma.CaseRevocationLetterCreateNestedManyWithoutProcessInput
+}
+
+export type CaseRevocationProcessUncheckedCreateWithoutFilesInput = {
+  id?: string
+  caseFileId: string
+  requestId?: string | null
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  letters?: Prisma.CaseRevocationLetterUncheckedCreateNestedManyWithoutProcessInput
+}
+
+export type CaseRevocationProcessCreateOrConnectWithoutFilesInput = {
+  where: Prisma.CaseRevocationProcessWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutFilesInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutFilesInput>
+}
+
+export type CaseRevocationProcessUpsertWithoutFilesInput = {
+  update: Prisma.XOR<Prisma.CaseRevocationProcessUpdateWithoutFilesInput, Prisma.CaseRevocationProcessUncheckedUpdateWithoutFilesInput>
+  create: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutFilesInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutFilesInput>
+  where?: Prisma.CaseRevocationProcessWhereInput
+}
+
+export type CaseRevocationProcessUpdateToOneWithWhereWithoutFilesInput = {
+  where?: Prisma.CaseRevocationProcessWhereInput
+  data: Prisma.XOR<Prisma.CaseRevocationProcessUpdateWithoutFilesInput, Prisma.CaseRevocationProcessUncheckedUpdateWithoutFilesInput>
+}
+
+export type CaseRevocationProcessUpdateWithoutFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRevocationProcessNestedInput
+  request?: Prisma.CaseRequestUpdateOneWithoutRevocationProcessNestedInput
+  letters?: Prisma.CaseRevocationLetterUpdateManyWithoutProcessNestedInput
+}
+
+export type CaseRevocationProcessUncheckedUpdateWithoutFilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -495,15 +640,19 @@ export type CaseRevocationProcessCreateWithoutLettersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   caseFile: Prisma.CaseFileCreateNestedOneWithoutRevocationProcessInput
+  request?: Prisma.CaseRequestCreateNestedOneWithoutRevocationProcessInput
+  files?: Prisma.CaseRevocationProcessFileCreateNestedManyWithoutProcessInput
 }
 
 export type CaseRevocationProcessUncheckedCreateWithoutLettersInput = {
   id?: string
   caseFileId: string
+  requestId?: string | null
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  files?: Prisma.CaseRevocationProcessFileUncheckedCreateNestedManyWithoutProcessInput
 }
 
 export type CaseRevocationProcessCreateOrConnectWithoutLettersInput = {
@@ -529,15 +678,79 @@ export type CaseRevocationProcessUpdateWithoutLettersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRevocationProcessNestedInput
+  request?: Prisma.CaseRequestUpdateOneWithoutRevocationProcessNestedInput
+  files?: Prisma.CaseRevocationProcessFileUpdateManyWithoutProcessNestedInput
 }
 
 export type CaseRevocationProcessUncheckedUpdateWithoutLettersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
+  requestId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  files?: Prisma.CaseRevocationProcessFileUncheckedUpdateManyWithoutProcessNestedInput
+}
+
+export type CaseRevocationProcessCreateWithoutRequestInput = {
+  id?: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  caseFile: Prisma.CaseFileCreateNestedOneWithoutRevocationProcessInput
+  letters?: Prisma.CaseRevocationLetterCreateNestedManyWithoutProcessInput
+  files?: Prisma.CaseRevocationProcessFileCreateNestedManyWithoutProcessInput
+}
+
+export type CaseRevocationProcessUncheckedCreateWithoutRequestInput = {
+  id?: string
+  caseFileId: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  letters?: Prisma.CaseRevocationLetterUncheckedCreateNestedManyWithoutProcessInput
+  files?: Prisma.CaseRevocationProcessFileUncheckedCreateNestedManyWithoutProcessInput
+}
+
+export type CaseRevocationProcessCreateOrConnectWithoutRequestInput = {
+  where: Prisma.CaseRevocationProcessWhereUniqueInput
+  create: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutRequestInput>
+}
+
+export type CaseRevocationProcessUpsertWithoutRequestInput = {
+  update: Prisma.XOR<Prisma.CaseRevocationProcessUpdateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedUpdateWithoutRequestInput>
+  create: Prisma.XOR<Prisma.CaseRevocationProcessCreateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedCreateWithoutRequestInput>
+  where?: Prisma.CaseRevocationProcessWhereInput
+}
+
+export type CaseRevocationProcessUpdateToOneWithWhereWithoutRequestInput = {
+  where?: Prisma.CaseRevocationProcessWhereInput
+  data: Prisma.XOR<Prisma.CaseRevocationProcessUpdateWithoutRequestInput, Prisma.CaseRevocationProcessUncheckedUpdateWithoutRequestInput>
+}
+
+export type CaseRevocationProcessUpdateWithoutRequestInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  caseFile?: Prisma.CaseFileUpdateOneRequiredWithoutRevocationProcessNestedInput
+  letters?: Prisma.CaseRevocationLetterUpdateManyWithoutProcessNestedInput
+  files?: Prisma.CaseRevocationProcessFileUpdateManyWithoutProcessNestedInput
+}
+
+export type CaseRevocationProcessUncheckedUpdateWithoutRequestInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   caseFileId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   revocationDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  letters?: Prisma.CaseRevocationLetterUncheckedUpdateManyWithoutProcessNestedInput
+  files?: Prisma.CaseRevocationProcessFileUncheckedUpdateManyWithoutProcessNestedInput
 }
 
 
@@ -547,10 +760,12 @@ export type CaseRevocationProcessUncheckedUpdateWithoutLettersInput = {
 
 export type CaseRevocationProcessCountOutputType = {
   letters: number
+  files: number
 }
 
 export type CaseRevocationProcessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   letters?: boolean | CaseRevocationProcessCountOutputTypeCountLettersArgs
+  files?: boolean | CaseRevocationProcessCountOutputTypeCountFilesArgs
 }
 
 /**
@@ -570,70 +785,92 @@ export type CaseRevocationProcessCountOutputTypeCountLettersArgs<ExtArgs extends
   where?: Prisma.CaseRevocationLetterWhereInput
 }
 
+/**
+ * CaseRevocationProcessCountOutputType without action
+ */
+export type CaseRevocationProcessCountOutputTypeCountFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CaseRevocationProcessFileWhereInput
+}
+
 
 export type CaseRevocationProcessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  requestId?: boolean
   amount?: boolean
   revocationDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.CaseRevocationProcess$requestArgs<ExtArgs>
   letters?: boolean | Prisma.CaseRevocationProcess$lettersArgs<ExtArgs>
+  files?: boolean | Prisma.CaseRevocationProcess$filesArgs<ExtArgs>
   _count?: boolean | Prisma.CaseRevocationProcessCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["caseRevocationProcess"]>
 
 export type CaseRevocationProcessSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  requestId?: boolean
   amount?: boolean
   revocationDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.CaseRevocationProcess$requestArgs<ExtArgs>
 }, ExtArgs["result"]["caseRevocationProcess"]>
 
 export type CaseRevocationProcessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   caseFileId?: boolean
+  requestId?: boolean
   amount?: boolean
   revocationDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.CaseRevocationProcess$requestArgs<ExtArgs>
 }, ExtArgs["result"]["caseRevocationProcess"]>
 
 export type CaseRevocationProcessSelectScalar = {
   id?: boolean
   caseFileId?: boolean
+  requestId?: boolean
   amount?: boolean
   revocationDate?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CaseRevocationProcessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "amount" | "revocationDate" | "createdAt" | "updatedAt", ExtArgs["result"]["caseRevocationProcess"]>
+export type CaseRevocationProcessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "caseFileId" | "requestId" | "amount" | "revocationDate" | "createdAt" | "updatedAt", ExtArgs["result"]["caseRevocationProcess"]>
 export type CaseRevocationProcessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.CaseRevocationProcess$requestArgs<ExtArgs>
   letters?: boolean | Prisma.CaseRevocationProcess$lettersArgs<ExtArgs>
+  files?: boolean | Prisma.CaseRevocationProcess$filesArgs<ExtArgs>
   _count?: boolean | Prisma.CaseRevocationProcessCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CaseRevocationProcessIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.CaseRevocationProcess$requestArgs<ExtArgs>
 }
 export type CaseRevocationProcessIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   caseFile?: boolean | Prisma.CaseFileDefaultArgs<ExtArgs>
+  request?: boolean | Prisma.CaseRevocationProcess$requestArgs<ExtArgs>
 }
 
 export type $CaseRevocationProcessPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "CaseRevocationProcess"
   objects: {
     caseFile: Prisma.$CaseFilePayload<ExtArgs>
+    request: Prisma.$CaseRequestPayload<ExtArgs> | null
     letters: Prisma.$CaseRevocationLetterPayload<ExtArgs>[]
+    files: Prisma.$CaseRevocationProcessFilePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     caseFileId: string
+    requestId: string | null
     amount: runtime.Decimal
     revocationDate: Date | null
     createdAt: Date
@@ -1033,7 +1270,9 @@ readonly fields: CaseRevocationProcessFieldRefs;
 export interface Prisma__CaseRevocationProcessClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   caseFile<T extends Prisma.CaseFileDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseFileDefaultArgs<ExtArgs>>): Prisma.Prisma__CaseFileClient<runtime.Types.Result.GetResult<Prisma.$CaseFilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  request<T extends Prisma.CaseRevocationProcess$requestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRevocationProcess$requestArgs<ExtArgs>>): Prisma.Prisma__CaseRequestClient<runtime.Types.Result.GetResult<Prisma.$CaseRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   letters<T extends Prisma.CaseRevocationProcess$lettersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRevocationProcess$lettersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseRevocationLetterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  files<T extends Prisma.CaseRevocationProcess$filesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CaseRevocationProcess$filesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CaseRevocationProcessFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1065,6 +1304,7 @@ export interface Prisma__CaseRevocationProcessClient<T, Null = never, ExtArgs ex
 export interface CaseRevocationProcessFieldRefs {
   readonly id: Prisma.FieldRef<"CaseRevocationProcess", 'String'>
   readonly caseFileId: Prisma.FieldRef<"CaseRevocationProcess", 'String'>
+  readonly requestId: Prisma.FieldRef<"CaseRevocationProcess", 'String'>
   readonly amount: Prisma.FieldRef<"CaseRevocationProcess", 'Decimal'>
   readonly revocationDate: Prisma.FieldRef<"CaseRevocationProcess", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"CaseRevocationProcess", 'DateTime'>
@@ -1470,6 +1710,25 @@ export type CaseRevocationProcessDeleteManyArgs<ExtArgs extends runtime.Types.Ex
 }
 
 /**
+ * CaseRevocationProcess.request
+ */
+export type CaseRevocationProcess$requestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRequest
+   */
+  select?: Prisma.CaseRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRequest
+   */
+  omit?: Prisma.CaseRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRequestInclude<ExtArgs> | null
+  where?: Prisma.CaseRequestWhereInput
+}
+
+/**
  * CaseRevocationProcess.letters
  */
 export type CaseRevocationProcess$lettersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1491,6 +1750,30 @@ export type CaseRevocationProcess$lettersArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.CaseRevocationLetterScalarFieldEnum | Prisma.CaseRevocationLetterScalarFieldEnum[]
+}
+
+/**
+ * CaseRevocationProcess.files
+ */
+export type CaseRevocationProcess$filesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CaseRevocationProcessFile
+   */
+  select?: Prisma.CaseRevocationProcessFileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CaseRevocationProcessFile
+   */
+  omit?: Prisma.CaseRevocationProcessFileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CaseRevocationProcessFileInclude<ExtArgs> | null
+  where?: Prisma.CaseRevocationProcessFileWhereInput
+  orderBy?: Prisma.CaseRevocationProcessFileOrderByWithRelationInput | Prisma.CaseRevocationProcessFileOrderByWithRelationInput[]
+  cursor?: Prisma.CaseRevocationProcessFileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CaseRevocationProcessFileScalarFieldEnum | Prisma.CaseRevocationProcessFileScalarFieldEnum[]
 }
 
 /**

@@ -34,6 +34,7 @@ const SETTINGS_REQUEST_TYPES = [
   CaseRequestType.LOCATION_CHANGE,
   CaseRequestType.AUCTION,
   CaseRequestType.STEWARDSHIP,
+  CaseRequestType.REVOCATION,
 ] as const;
 
 export type ProcessType = (typeof PROCESS_TYPES)[number];
@@ -135,12 +136,20 @@ export async function resolveDocumentRequirements(
     select: {
       gender: true,
       isRequired: true,
-      document: { select: { id: true, code: true, title: true } },
+      document: { select: { id: true, code: true, title: true, description: true, link: true } },
     },
   });
   const byId = new Map<
     string,
-    { id: string; code: string | null; title: string; gender: DocumentGender; isRequired: boolean }
+    {
+      id: string;
+      code: string | null;
+      title: string;
+      description: string | null;
+      link: string | null;
+      gender: DocumentGender;
+      isRequired: boolean;
+    }
   >();
   for (const row of rows) {
     if (row.document.code === PERSONNEL_PHOTO_CODE) continue;
@@ -151,6 +160,8 @@ export async function resolveDocumentRequirements(
         id: row.document.id,
         code: row.document.code,
         title: row.document.title,
+        description: row.document.description,
+        link: row.document.link,
         gender: row.gender,
         isRequired: row.isRequired,
       });
@@ -301,6 +312,7 @@ export function managementReachedWhere(): Prisma.CaseRequestWhereInput {
       { type: CaseRequestType.LOCATION_CHANGE, formationStep: { gte: 4 } },
       { type: CaseRequestType.AUCTION, formationStep: { gte: 1 } },
       { type: CaseRequestType.STEWARDSHIP, formationStep: { gte: STEWARDSHIP_MANAGEMENT_STEP } },
+      { type: CaseRequestType.REVOCATION },
     ],
   };
 }
@@ -476,6 +488,7 @@ export async function completeOpenRequest(
         premiseComplexId: true,
         premiseAddress: true,
         premiseAddressEn: true,
+        urbanZoneId: true,
         premisePlaque: true,
         premisePlaqueSeries: true,
         premiseFloor: true,
@@ -493,6 +506,7 @@ export async function completeOpenRequest(
         leaseExpiresAt: true,
         leaseAgency: true,
         premiseOwnerName: true,
+        premiseOwnerNationalId: true,
         user: { select: { gender: true } },
       },
     });
@@ -560,6 +574,7 @@ export async function completeOpenRequest(
           premiseComplexId: file.premiseComplexId,
           premiseAddress: file.premiseAddress,
           premiseAddressEn: file.premiseAddressEn,
+          urbanZoneId: file.urbanZoneId,
           premisePlaque: file.premisePlaque,
           premisePlaqueSeries: file.premisePlaqueSeries,
           premiseFloor: file.premiseFloor,
@@ -577,6 +592,7 @@ export async function completeOpenRequest(
           leaseExpiresAt: file.leaseExpiresAt,
           leaseAgency: file.leaseAgency,
           premiseOwnerName: file.premiseOwnerName,
+          premiseOwnerNationalId: file.premiseOwnerNationalId,
         },
       });
       await tx.caseFile.update({
@@ -587,6 +603,7 @@ export async function completeOpenRequest(
           premiseComplexId: draft.premiseComplexId,
           premiseAddress: draft.premiseAddress,
           premiseAddressEn: draft.premiseAddressEn,
+          urbanZoneId: draft.urbanZoneId,
           premisePlaque: draft.premisePlaque,
           premisePlaqueSeries: draft.premisePlaqueSeries,
           premiseFloor: draft.premiseFloor,
@@ -603,6 +620,7 @@ export async function completeOpenRequest(
           leaseExpiresAt: draft.leaseExpiresAt,
           leaseAgency: draft.leaseAgency,
           premiseOwnerName: draft.premiseOwnerName,
+          premiseOwnerNationalId: draft.premiseOwnerNationalId,
         },
       });
     }

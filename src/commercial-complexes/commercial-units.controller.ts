@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { CommercialUnitsService } from './commercial-units.service';
 import { CreateCommercialUnitDto } from './dto/create-commercial-unit.dto';
+import { CreateCommercialUnitSeriesDto } from './dto/create-commercial-unit-series.dto';
 import { FindCommercialUnitsQueryDto } from './dto/find-commercial-units-query.dto';
 import { UpdateCommercialUnitDto } from './dto/update-commercial-unit.dto';
 
@@ -27,6 +28,16 @@ export class CommercialUnitsController {
     @Query() query: FindCommercialUnitsQueryDto,
   ) {
     return this.units.findAll(complexId, floorId, laneId, query);
+  }
+
+  @Post('series')
+  createSeries(
+    @Param('complexId') complexId: string,
+    @Param('floorId') floorId: string,
+    @Param('laneId') laneId: string,
+    @Body() dto: CreateCommercialUnitSeriesDto,
+  ) {
+    return this.units.createSeries(complexId, floorId, laneId, dto);
   }
 
   @Post()

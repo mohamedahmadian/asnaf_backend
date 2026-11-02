@@ -76,6 +76,17 @@ export const ModelName = {
   CaseGeneralSettings: 'CaseGeneralSettings',
   CaseLetterhead: 'CaseLetterhead',
   CaseActivityLicenseSettings: 'CaseActivityLicenseSettings',
+  RentalLicenseSettings: 'RentalLicenseSettings',
+  RentalIdentityDocument: 'RentalIdentityDocument',
+  RentalDocumentRequirement: 'RentalDocumentRequirement',
+  RentalProcessManagementRole: 'RentalProcessManagementRole',
+  RentalLicense: 'RentalLicense',
+  RentalPremiseFile: 'RentalPremiseFile',
+  RentalRequest: 'RentalRequest',
+  RentalRequestDocument: 'RentalRequestDocument',
+  RentalRequestDocumentVersion: 'RentalRequestDocumentVersion',
+  RentalManagementReview: 'RentalManagementReview',
+  RentalManagementReviewFile: 'RentalManagementReviewFile',
   CasePlacesOffice: 'CasePlacesOffice',
   CaseRevocationSettings: 'CaseRevocationSettings',
   CaseRevocationOrganization: 'CaseRevocationOrganization',
@@ -89,12 +100,17 @@ export const ModelName = {
   CaseManagementReview: 'CaseManagementReview',
   CaseManagementReviewFile: 'CaseManagementReviewFile',
   CaseFile: 'CaseFile',
+  CaseAssetAccount: 'CaseAssetAccount',
+  CasePremiseFile: 'CasePremiseFile',
   CaseStewardRevokeFile: 'CaseStewardRevokeFile',
   CaseRevocationProcess: 'CaseRevocationProcess',
+  CaseRevocationProcessFile: 'CaseRevocationProcessFile',
   CaseRevocationLetter: 'CaseRevocationLetter',
   CaseSuspension: 'CaseSuspension',
   CaseSuspensionFile: 'CaseSuspensionFile',
   CaseRequest: 'CaseRequest',
+  CaseRevocationRequest: 'CaseRevocationRequest',
+  CaseRevocationRequestFile: 'CaseRevocationRequestFile',
   CaseRequestFinance: 'CaseRequestFinance',
   CaseRequestFee: 'CaseRequestFee',
   CaseRequestEvent: 'CaseRequestEvent',
@@ -159,6 +175,7 @@ export const ModelName = {
   CommercialUnit: 'CommercialUnit',
   WorkUnit: 'WorkUnit',
   StaffPost: 'StaffPost',
+  UrbanZone: 'UrbanZone',
   ViolationType: 'ViolationType',
   RegistrationPlace: 'RegistrationPlace',
   Violation: 'Violation',
@@ -484,6 +501,7 @@ export const JobScalarFieldEnum = {
   titleEn: 'titleEn',
   taxIntaCode: 'taxIntaCode',
   description: 'description',
+  videoUrl: 'videoUrl',
   code: 'code',
   jobTypeId: 'jobTypeId',
   annualFee: 'annualFee',
@@ -580,6 +598,179 @@ export const CaseActivityLicenseSettingsScalarFieldEnum = {
 export type CaseActivityLicenseSettingsScalarFieldEnum = (typeof CaseActivityLicenseSettingsScalarFieldEnum)[keyof typeof CaseActivityLicenseSettingsScalarFieldEnum]
 
 
+export const RentalLicenseSettingsScalarFieldEnum = {
+  id: 'id',
+  contractYears: 'contractYears',
+  signerName: 'signerName',
+  signerTitle: 'signerTitle',
+  signatureId: 'signatureId',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalLicenseSettingsScalarFieldEnum = (typeof RentalLicenseSettingsScalarFieldEnum)[keyof typeof RentalLicenseSettingsScalarFieldEnum]
+
+
+export const RentalIdentityDocumentScalarFieldEnum = {
+  documentId: 'documentId',
+  gender: 'gender',
+  isRequired: 'isRequired',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalIdentityDocumentScalarFieldEnum = (typeof RentalIdentityDocumentScalarFieldEnum)[keyof typeof RentalIdentityDocumentScalarFieldEnum]
+
+
+export const RentalDocumentRequirementScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  gender: 'gender',
+  isRequired: 'isRequired',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalDocumentRequirementScalarFieldEnum = (typeof RentalDocumentRequirementScalarFieldEnum)[keyof typeof RentalDocumentRequirementScalarFieldEnum]
+
+
+export const RentalProcessManagementRoleScalarFieldEnum = {
+  id: 'id',
+  roleId: 'roleId',
+  title: 'title',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalProcessManagementRoleScalarFieldEnum = (typeof RentalProcessManagementRoleScalarFieldEnum)[keyof typeof RentalProcessManagementRoleScalarFieldEnum]
+
+
+export const RentalLicenseScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  formationStep: 'formationStep',
+  trackingCode: 'trackingCode',
+  licenseNumber: 'licenseNumber',
+  licenseIssuedAt: 'licenseIssuedAt',
+  firstIssuedAt: 'firstIssuedAt',
+  licenseExpiresAt: 'licenseExpiresAt',
+  premiseCityId: 'premiseCityId',
+  premiseEstablishment: 'premiseEstablishment',
+  premiseComplexId: 'premiseComplexId',
+  premiseAddress: 'premiseAddress',
+  premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
+  premisePlaque: 'premisePlaque',
+  premisePlaqueSeries: 'premisePlaqueSeries',
+  premiseFloor: 'premiseFloor',
+  premiseUnitNo: 'premiseUnitNo',
+  premisePostalCode: 'premisePostalCode',
+  premisePhone: 'premisePhone',
+  premiseFax: 'premiseFax',
+  premiseGeoPosition: 'premiseGeoPosition',
+  premisePublicAccess: 'premisePublicAccess',
+  registrationPlaceId: 'registrationPlaceId',
+  premiseOwnership: 'premiseOwnership',
+  premiseDeedNo: 'premiseDeedNo',
+  premiseArea: 'premiseArea',
+  leaseIssuedAt: 'leaseIssuedAt',
+  leaseExpiresAt: 'leaseExpiresAt',
+  leaseAgency: 'leaseAgency',
+  premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalLicenseScalarFieldEnum = (typeof RentalLicenseScalarFieldEnum)[keyof typeof RentalLicenseScalarFieldEnum]
+
+
+export const RentalPremiseFileScalarFieldEnum = {
+  id: 'id',
+  licenseId: 'licenseId',
+  kind: 'kind',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalPremiseFileScalarFieldEnum = (typeof RentalPremiseFileScalarFieldEnum)[keyof typeof RentalPremiseFileScalarFieldEnum]
+
+
+export const RentalRequestScalarFieldEnum = {
+  id: 'id',
+  licenseId: 'licenseId',
+  type: 'type',
+  number: 'number',
+  status: 'status',
+  formationStep: 'formationStep',
+  intakeSubmittedAt: 'intakeSubmittedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalRequestScalarFieldEnum = (typeof RentalRequestScalarFieldEnum)[keyof typeof RentalRequestScalarFieldEnum]
+
+
+export const RentalRequestDocumentScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  documentId: 'documentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalRequestDocumentScalarFieldEnum = (typeof RentalRequestDocumentScalarFieldEnum)[keyof typeof RentalRequestDocumentScalarFieldEnum]
+
+
+export const RentalRequestDocumentVersionScalarFieldEnum = {
+  id: 'id',
+  documentRowId: 'documentRowId',
+  version: 'version',
+  source: 'source',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalRequestDocumentVersionScalarFieldEnum = (typeof RentalRequestDocumentVersionScalarFieldEnum)[keyof typeof RentalRequestDocumentVersionScalarFieldEnum]
+
+
+export const RentalManagementReviewScalarFieldEnum = {
+  id: 'id',
+  licenseId: 'licenseId',
+  requestId: 'requestId',
+  roleId: 'roleId',
+  status: 'status',
+  channel: 'channel',
+  note: 'note',
+  decidedById: 'decidedById',
+  decidedAt: 'decidedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RentalManagementReviewScalarFieldEnum = (typeof RentalManagementReviewScalarFieldEnum)[keyof typeof RentalManagementReviewScalarFieldEnum]
+
+
+export const RentalManagementReviewFileScalarFieldEnum = {
+  id: 'id',
+  reviewId: 'reviewId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalManagementReviewFileScalarFieldEnum = (typeof RentalManagementReviewFileScalarFieldEnum)[keyof typeof RentalManagementReviewFileScalarFieldEnum]
+
+
 export const CasePlacesOfficeScalarFieldEnum = {
   id: 'id',
   phone: 'phone',
@@ -662,6 +853,8 @@ export type JobDocumentScalarFieldEnum = (typeof JobDocumentScalarFieldEnum)[key
 export const DocumentScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  description: 'description',
+  link: 'link',
   code: 'code',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -763,6 +956,7 @@ export const CaseFileScalarFieldEnum = {
   premiseComplexId: 'premiseComplexId',
   premiseAddress: 'premiseAddress',
   premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
   premisePlaque: 'premisePlaque',
   premisePlaqueSeries: 'premisePlaqueSeries',
   premiseFloor: 'premiseFloor',
@@ -780,11 +974,39 @@ export const CaseFileScalarFieldEnum = {
   leaseExpiresAt: 'leaseExpiresAt',
   leaseAgency: 'leaseAgency',
   premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type CaseFileScalarFieldEnum = (typeof CaseFileScalarFieldEnum)[keyof typeof CaseFileScalarFieldEnum]
+
+
+export const CaseAssetAccountScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  bankName: 'bankName',
+  iban: 'iban',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseAssetAccountScalarFieldEnum = (typeof CaseAssetAccountScalarFieldEnum)[keyof typeof CaseAssetAccountScalarFieldEnum]
+
+
+export const CasePremiseFileScalarFieldEnum = {
+  id: 'id',
+  caseFileId: 'caseFileId',
+  kind: 'kind',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CasePremiseFileScalarFieldEnum = (typeof CasePremiseFileScalarFieldEnum)[keyof typeof CasePremiseFileScalarFieldEnum]
 
 
 export const CaseStewardRevokeFileScalarFieldEnum = {
@@ -803,6 +1025,7 @@ export type CaseStewardRevokeFileScalarFieldEnum = (typeof CaseStewardRevokeFile
 export const CaseRevocationProcessScalarFieldEnum = {
   id: 'id',
   caseFileId: 'caseFileId',
+  requestId: 'requestId',
   amount: 'amount',
   revocationDate: 'revocationDate',
   createdAt: 'createdAt',
@@ -810,6 +1033,20 @@ export const CaseRevocationProcessScalarFieldEnum = {
 } as const
 
 export type CaseRevocationProcessScalarFieldEnum = (typeof CaseRevocationProcessScalarFieldEnum)[keyof typeof CaseRevocationProcessScalarFieldEnum]
+
+
+export const CaseRevocationProcessFileScalarFieldEnum = {
+  id: 'id',
+  processId: 'processId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  uploadedById: 'uploadedById',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseRevocationProcessFileScalarFieldEnum = (typeof CaseRevocationProcessFileScalarFieldEnum)[keyof typeof CaseRevocationProcessFileScalarFieldEnum]
 
 
 export const CaseRevocationLetterScalarFieldEnum = {
@@ -875,6 +1112,29 @@ export const CaseRequestScalarFieldEnum = {
 export type CaseRequestScalarFieldEnum = (typeof CaseRequestScalarFieldEnum)[keyof typeof CaseRequestScalarFieldEnum]
 
 
+export const CaseRevocationRequestScalarFieldEnum = {
+  requestId: 'requestId',
+  reason: 'reason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CaseRevocationRequestScalarFieldEnum = (typeof CaseRevocationRequestScalarFieldEnum)[keyof typeof CaseRevocationRequestScalarFieldEnum]
+
+
+export const CaseRevocationRequestFileScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  storageKey: 'storageKey',
+  originalName: 'originalName',
+  mimeType: 'mimeType',
+  byteSize: 'byteSize',
+  createdAt: 'createdAt'
+} as const
+
+export type CaseRevocationRequestFileScalarFieldEnum = (typeof CaseRevocationRequestFileScalarFieldEnum)[keyof typeof CaseRevocationRequestFileScalarFieldEnum]
+
+
 export const CaseRequestFinanceScalarFieldEnum = {
   requestId: 'requestId',
   bankAccountId: 'bankAccountId',
@@ -931,6 +1191,7 @@ export const CaseLocationDraftScalarFieldEnum = {
   premiseComplexId: 'premiseComplexId',
   premiseAddress: 'premiseAddress',
   premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
   premisePlaque: 'premisePlaque',
   premisePlaqueSeries: 'premisePlaqueSeries',
   premiseFloor: 'premiseFloor',
@@ -948,6 +1209,7 @@ export const CaseLocationDraftScalarFieldEnum = {
   leaseExpiresAt: 'leaseExpiresAt',
   leaseAgency: 'leaseAgency',
   premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId',
   updatedAt: 'updatedAt'
 } as const
 
@@ -965,6 +1227,7 @@ export const CasePremiseHistoryScalarFieldEnum = {
   premiseComplexId: 'premiseComplexId',
   premiseAddress: 'premiseAddress',
   premiseAddressEn: 'premiseAddressEn',
+  urbanZoneId: 'urbanZoneId',
   premisePlaque: 'premisePlaque',
   premisePlaqueSeries: 'premisePlaqueSeries',
   premiseFloor: 'premiseFloor',
@@ -981,7 +1244,8 @@ export const CasePremiseHistoryScalarFieldEnum = {
   leaseIssuedAt: 'leaseIssuedAt',
   leaseExpiresAt: 'leaseExpiresAt',
   leaseAgency: 'leaseAgency',
-  premiseOwnerName: 'premiseOwnerName'
+  premiseOwnerName: 'premiseOwnerName',
+  premiseOwnerNationalId: 'premiseOwnerNationalId'
 } as const
 
 export type CasePremiseHistoryScalarFieldEnum = (typeof CasePremiseHistoryScalarFieldEnum)[keyof typeof CasePremiseHistoryScalarFieldEnum]
@@ -1872,6 +2136,18 @@ export const StaffPostScalarFieldEnum = {
 } as const
 
 export type StaffPostScalarFieldEnum = (typeof StaffPostScalarFieldEnum)[keyof typeof StaffPostScalarFieldEnum]
+
+
+export const UrbanZoneScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UrbanZoneScalarFieldEnum = (typeof UrbanZoneScalarFieldEnum)[keyof typeof UrbanZoneScalarFieldEnum]
 
 
 export const ViolationTypeScalarFieldEnum = {

@@ -31,6 +31,18 @@ export const PERMISSION_TREE: PermissionNode[] = [
     ],
   },
   {
+    code: 'requests',
+    kind: 'MODULE',
+    nameKey: 'modules.requests',
+    children: [
+      { code: 'requests.rental', kind: 'MENU', nameKey: 'menus.rentalLicenseRequest' },
+      { code: 'requests.rental-management', kind: 'MENU', nameKey: 'menus.rentalLicenseManagement' },
+      { code: 'requests.settings', kind: 'MENU', nameKey: 'menus.requestSettings' },
+      { code: 'requests.fuel', kind: 'MENU', nameKey: 'menus.fuelQuotaRequest' },
+      { code: 'requests.fuel-management', kind: 'MENU', nameKey: 'menus.fuelRequestManagement' },
+    ],
+  },
+  {
     code: 'finance',
     kind: 'MODULE',
     nameKey: 'modules.finance',
@@ -102,6 +114,7 @@ export const PERMISSION_TREE: PermissionNode[] = [
       { code: 'base-info.countries', kind: 'MENU', nameKey: 'menus.countries' },
       { code: 'base-info.provinces', kind: 'MENU', nameKey: 'menus.provinces' },
       { code: 'base-info.cities', kind: 'MENU', nameKey: 'menus.cities' },
+      { code: 'base-info.urban-zones', kind: 'MENU', nameKey: 'menus.urbanZones' },
       {
         code: 'base-info.commercial-complexes',
         kind: 'MENU',

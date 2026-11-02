@@ -35,6 +35,7 @@ import { CaseRecordsController } from './case-records.controller';
 import { CaseReportsController } from './case-reports.controller';
 import { ExpiringCasesService } from './expiring-cases.service';
 import { CaseStatusService } from './case-status.service';
+import { CaseGuildHistoryLetterService } from './case-guild-history-letter.service';
 import { CasesController } from './cases.controller';
 import { CasesService } from './cases.service';
 import { PersonFileStorage } from './person-file.storage';
@@ -83,6 +84,7 @@ import { PersonFileStorage } from './person-file.storage';
     CaseProcessManagementRolesService,
     CaseRevocationSettingsService,
     CaseRevocationProcessService,
+    CaseGuildHistoryLetterService,
     PersonFileStorage,
   ],
 })

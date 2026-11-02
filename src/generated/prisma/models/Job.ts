@@ -41,6 +41,7 @@ export type JobMinAggregateOutputType = {
   titleEn: string | null
   taxIntaCode: string | null
   description: string | null
+  videoUrl: string | null
   code: string | null
   jobTypeId: string | null
   annualFee: runtime.Decimal | null
@@ -56,6 +57,7 @@ export type JobMaxAggregateOutputType = {
   titleEn: string | null
   taxIntaCode: string | null
   description: string | null
+  videoUrl: string | null
   code: string | null
   jobTypeId: string | null
   annualFee: runtime.Decimal | null
@@ -71,6 +73,7 @@ export type JobCountAggregateOutputType = {
   titleEn: number
   taxIntaCode: number
   description: number
+  videoUrl: number
   code: number
   jobTypeId: number
   annualFee: number
@@ -96,6 +99,7 @@ export type JobMinAggregateInputType = {
   titleEn?: true
   taxIntaCode?: true
   description?: true
+  videoUrl?: true
   code?: true
   jobTypeId?: true
   annualFee?: true
@@ -111,6 +115,7 @@ export type JobMaxAggregateInputType = {
   titleEn?: true
   taxIntaCode?: true
   description?: true
+  videoUrl?: true
   code?: true
   jobTypeId?: true
   annualFee?: true
@@ -126,6 +131,7 @@ export type JobCountAggregateInputType = {
   titleEn?: true
   taxIntaCode?: true
   description?: true
+  videoUrl?: true
   code?: true
   jobTypeId?: true
   annualFee?: true
@@ -228,6 +234,7 @@ export type JobGroupByOutputType = {
   titleEn: string | null
   taxIntaCode: string | null
   description: string | null
+  videoUrl: string | null
   code: string
   jobTypeId: string
   annualFee: runtime.Decimal | null
@@ -266,6 +273,7 @@ export type JobWhereInput = {
   titleEn?: Prisma.StringNullableFilter<"Job"> | string | null
   taxIntaCode?: Prisma.StringNullableFilter<"Job"> | string | null
   description?: Prisma.StringNullableFilter<"Job"> | string | null
+  videoUrl?: Prisma.StringNullableFilter<"Job"> | string | null
   code?: Prisma.StringFilter<"Job"> | string
   jobTypeId?: Prisma.StringFilter<"Job"> | string
   annualFee?: Prisma.DecimalNullableFilter<"Job"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -289,6 +297,7 @@ export type JobOrderByWithRelationInput = {
   titleEn?: Prisma.SortOrderInput | Prisma.SortOrder
   taxIntaCode?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  videoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   code?: Prisma.SortOrder
   jobTypeId?: Prisma.SortOrder
   annualFee?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -318,6 +327,7 @@ export type JobWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"Job"> | string
   titleEn?: Prisma.StringNullableFilter<"Job"> | string | null
   description?: Prisma.StringNullableFilter<"Job"> | string | null
+  videoUrl?: Prisma.StringNullableFilter<"Job"> | string | null
   code?: Prisma.StringFilter<"Job"> | string
   jobTypeId?: Prisma.StringFilter<"Job"> | string
   annualFee?: Prisma.DecimalNullableFilter<"Job"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -341,6 +351,7 @@ export type JobOrderByWithAggregationInput = {
   titleEn?: Prisma.SortOrderInput | Prisma.SortOrder
   taxIntaCode?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  videoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   code?: Prisma.SortOrder
   jobTypeId?: Prisma.SortOrder
   annualFee?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -364,6 +375,7 @@ export type JobScalarWhereWithAggregatesInput = {
   titleEn?: Prisma.StringNullableWithAggregatesFilter<"Job"> | string | null
   taxIntaCode?: Prisma.StringNullableWithAggregatesFilter<"Job"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Job"> | string | null
+  videoUrl?: Prisma.StringNullableWithAggregatesFilter<"Job"> | string | null
   code?: Prisma.StringWithAggregatesFilter<"Job"> | string
   jobTypeId?: Prisma.StringWithAggregatesFilter<"Job"> | string
   annualFee?: Prisma.DecimalNullableWithAggregatesFilter<"Job"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -378,6 +390,7 @@ export type JobCreateInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -400,6 +413,7 @@ export type JobUncheckedCreateInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -420,6 +434,7 @@ export type JobUpdateInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -442,6 +457,7 @@ export type JobUncheckedUpdateInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -463,6 +479,7 @@ export type JobCreateManyInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -477,6 +494,7 @@ export type JobUpdateManyMutationInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -491,6 +509,7 @@ export type JobUncheckedUpdateManyInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -531,6 +550,7 @@ export type JobCountOrderByAggregateInput = {
   titleEn?: Prisma.SortOrder
   taxIntaCode?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   code?: Prisma.SortOrder
   jobTypeId?: Prisma.SortOrder
   annualFee?: Prisma.SortOrder
@@ -550,6 +570,7 @@ export type JobMaxOrderByAggregateInput = {
   titleEn?: Prisma.SortOrder
   taxIntaCode?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   code?: Prisma.SortOrder
   jobTypeId?: Prisma.SortOrder
   annualFee?: Prisma.SortOrder
@@ -565,6 +586,7 @@ export type JobMinOrderByAggregateInput = {
   titleEn?: Prisma.SortOrder
   taxIntaCode?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  videoUrl?: Prisma.SortOrder
   code?: Prisma.SortOrder
   jobTypeId?: Prisma.SortOrder
   annualFee?: Prisma.SortOrder
@@ -769,6 +791,7 @@ export type JobCreateWithoutJobTypeInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -790,6 +813,7 @@ export type JobUncheckedCreateWithoutJobTypeInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -839,6 +863,7 @@ export type JobScalarWhereInput = {
   titleEn?: Prisma.StringNullableFilter<"Job"> | string | null
   taxIntaCode?: Prisma.StringNullableFilter<"Job"> | string | null
   description?: Prisma.StringNullableFilter<"Job"> | string | null
+  videoUrl?: Prisma.StringNullableFilter<"Job"> | string | null
   code?: Prisma.StringFilter<"Job"> | string
   jobTypeId?: Prisma.StringFilter<"Job"> | string
   annualFee?: Prisma.DecimalNullableFilter<"Job"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -853,6 +878,7 @@ export type JobCreateWithoutGroupInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -873,6 +899,7 @@ export type JobUncheckedCreateWithoutGroupInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -919,6 +946,7 @@ export type JobCreateWithoutInquiryCentersInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -940,6 +968,7 @@ export type JobUncheckedCreateWithoutInquiryCentersInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -975,6 +1004,7 @@ export type JobUpdateWithoutInquiryCentersInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -996,6 +1026,7 @@ export type JobUncheckedUpdateWithoutInquiryCentersInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1015,6 +1046,7 @@ export type JobCreateWithoutDocumentsInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -1036,6 +1068,7 @@ export type JobUncheckedCreateWithoutDocumentsInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1071,6 +1104,7 @@ export type JobUpdateWithoutDocumentsInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1092,6 +1126,7 @@ export type JobUncheckedUpdateWithoutDocumentsInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1111,6 +1146,7 @@ export type JobCreateWithoutActivityCasesInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -1132,6 +1168,7 @@ export type JobUncheckedCreateWithoutActivityCasesInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1167,6 +1204,7 @@ export type JobUpdateWithoutActivityCasesInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1188,6 +1226,7 @@ export type JobUncheckedUpdateWithoutActivityCasesInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1207,6 +1246,7 @@ export type JobCreateWithoutDocumentRequirementsInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -1228,6 +1268,7 @@ export type JobUncheckedCreateWithoutDocumentRequirementsInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1263,6 +1304,7 @@ export type JobUpdateWithoutDocumentRequirementsInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1284,6 +1326,7 @@ export type JobUncheckedUpdateWithoutDocumentRequirementsInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1303,6 +1346,7 @@ export type JobCreateWithoutInquiryRequirementsInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -1324,6 +1368,7 @@ export type JobUncheckedCreateWithoutInquiryRequirementsInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1359,6 +1404,7 @@ export type JobUpdateWithoutInquiryRequirementsInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1380,6 +1426,7 @@ export type JobUncheckedUpdateWithoutInquiryRequirementsInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1399,6 +1446,7 @@ export type JobCreateWithoutIdentityUsersInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -1420,6 +1468,7 @@ export type JobUncheckedCreateWithoutIdentityUsersInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1455,6 +1504,7 @@ export type JobUpdateWithoutIdentityUsersInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1476,6 +1526,7 @@ export type JobUncheckedUpdateWithoutIdentityUsersInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1496,6 +1547,7 @@ export type JobCreateManyJobTypeInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: boolean
@@ -1509,6 +1561,7 @@ export type JobUpdateWithoutJobTypeInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1530,6 +1583,7 @@ export type JobUncheckedUpdateWithoutJobTypeInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1550,6 +1604,7 @@ export type JobUncheckedUpdateManyWithoutJobTypeInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1563,6 +1618,7 @@ export type JobCreateManyGroupInput = {
   titleEn?: string | null
   taxIntaCode?: string | null
   description?: string | null
+  videoUrl?: string | null
   code: string
   jobTypeId: string
   annualFee?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1577,6 +1633,7 @@ export type JobUpdateWithoutGroupInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1597,6 +1654,7 @@ export type JobUncheckedUpdateWithoutGroupInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1617,6 +1675,7 @@ export type JobUncheckedUpdateManyWithoutGroupInput = {
   titleEn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   taxIntaCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  videoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   code?: Prisma.StringFieldUpdateOperationsInput | string
   jobTypeId?: Prisma.StringFieldUpdateOperationsInput | string
   annualFee?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1708,6 +1767,7 @@ export type JobSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   titleEn?: boolean
   taxIntaCode?: boolean
   description?: boolean
+  videoUrl?: boolean
   code?: boolean
   jobTypeId?: boolean
   annualFee?: boolean
@@ -1732,6 +1792,7 @@ export type JobSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   titleEn?: boolean
   taxIntaCode?: boolean
   description?: boolean
+  videoUrl?: boolean
   code?: boolean
   jobTypeId?: boolean
   annualFee?: boolean
@@ -1749,6 +1810,7 @@ export type JobSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   titleEn?: boolean
   taxIntaCode?: boolean
   description?: boolean
+  videoUrl?: boolean
   code?: boolean
   jobTypeId?: boolean
   annualFee?: boolean
@@ -1766,6 +1828,7 @@ export type JobSelectScalar = {
   titleEn?: boolean
   taxIntaCode?: boolean
   description?: boolean
+  videoUrl?: boolean
   code?: boolean
   jobTypeId?: boolean
   annualFee?: boolean
@@ -1774,7 +1837,7 @@ export type JobSelectScalar = {
   updatedAt?: boolean
 }
 
-export type JobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "groupId" | "title" | "titleEn" | "taxIntaCode" | "description" | "code" | "jobTypeId" | "annualFee" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["job"]>
+export type JobOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "groupId" | "title" | "titleEn" | "taxIntaCode" | "description" | "videoUrl" | "code" | "jobTypeId" | "annualFee" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["job"]>
 export type JobInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   group?: boolean | Prisma.Job$groupArgs<ExtArgs>
   jobType?: boolean | Prisma.JobTypeDefaultArgs<ExtArgs>
@@ -1816,7 +1879,14 @@ export type $JobPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     title: string
     titleEn: string | null
     taxIntaCode: string | null
+    /**
+     * توضیحات تکمیلی شغل
+     */
     description: string | null
+    /**
+     * لینک ویدئوی راهنما یا معرفی شغل
+     */
+    videoUrl: string | null
     code: string
     jobTypeId: string
     /**
@@ -2263,6 +2333,7 @@ export interface JobFieldRefs {
   readonly titleEn: Prisma.FieldRef<"Job", 'String'>
   readonly taxIntaCode: Prisma.FieldRef<"Job", 'String'>
   readonly description: Prisma.FieldRef<"Job", 'String'>
+  readonly videoUrl: Prisma.FieldRef<"Job", 'String'>
   readonly code: Prisma.FieldRef<"Job", 'String'>
   readonly jobTypeId: Prisma.FieldRef<"Job", 'String'>
   readonly annualFee: Prisma.FieldRef<"Job", 'Decimal'>

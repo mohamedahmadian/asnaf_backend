@@ -101,6 +101,50 @@ export class CasesController {
     return this.cases.saveLocationDraft(dto, user?.id);
   }
 
+  @Post('premise-files')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: memoryStorage(),
+      limits: { fileSize: 8 * 1024 * 1024 },
+    }),
+  )
+  uploadPremiseFile(
+    @UploadedFile() file: UploadFile,
+    @Body('caseId') caseId: string,
+    @Body('kind') kind: string,
+    @CurrentUser() user?: RequestUser,
+  ) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.cases.uploadPremiseFile({
+      caseId,
+      kind,
+      actorId: user.id,
+      buffer: file?.buffer,
+      mimeType: file?.mimetype,
+      originalName: file?.originalname,
+    });
+  }
+
+  @Delete('premise-files/:id')
+  removePremiseFile(@Param('id') id: string, @CurrentUser() user: RequestUser | undefined) {
+    if (!user?.id) throw new UnauthorizedException();
+    return this.cases.removePremiseFile(id, user.id);
+  }
+
+  @Get('premise-files/:id/file')
+  async premiseFile(@Param('id') id: string, @Res() res: Response) {
+    const file = await this.cases.readPremiseFile(id);
+    res.setHeader('Content-Type', file.mimeType);
+    res.setHeader('Content-Length', String(file.byteSize));
+    if (file.originalName) {
+      res.setHeader(
+        'Content-Disposition',
+        `inline; filename="${encodeURIComponent(file.originalName)}"`,
+      );
+    }
+    res.send(file.data);
+  }
+
   @Post('renewal-dates')
   saveRenewalDates(@Body() dto: SaveRenewalDatesDto, @CurrentUser() user: RequestUser | undefined) {
     return this.cases.saveRenewalDates(dto.caseId, dto.nextIssuedAt, dto.nextExpiresAt, user?.id, dto.requestId);
