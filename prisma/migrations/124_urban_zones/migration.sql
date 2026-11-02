@@ -1,4 +1,4 @@
-CREATE TABLE "urban_zones" (
+CREATE TABLE IF NOT EXISTS "urban_zones" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
@@ -9,7 +9,7 @@ CREATE TABLE "urban_zones" (
     CONSTRAINT "urban_zones_pkey" PRIMARY KEY ("id")
 );
 
-CREATE UNIQUE INDEX "urban_zones_title_key" ON "urban_zones"("title");
-CREATE INDEX "urban_zones_title_idx" ON "urban_zones"("title");
-CREATE INDEX "urban_zones_isActive_idx" ON "urban_zones"("isActive");
-CREATE INDEX "urban_zones_createdAt_idx" ON "urban_zones"("createdAt");
+CREATE UNIQUE INDEX IF NOT EXISTS "urban_zones_title_key" ON "urban_zones"("title");
+CREATE INDEX IF NOT EXISTS "urban_zones_title_idx" ON "urban_zones"("title");
+CREATE INDEX IF NOT EXISTS "urban_zones_isActive_idx" ON "urban_zones"("isActive");
+CREATE INDEX IF NOT EXISTS "urban_zones_createdAt_idx" ON "urban_zones"("createdAt");
